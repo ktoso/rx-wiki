@@ -4,10 +4,10 @@ In the Rx (reactive) pattern an _observer_ closure _subscribes_ to an object tha
 
 This page explains what the reactive pattern is, what Observables and Observers are (and how Observers subscribe to Observables), and how you use utility methods to link Observables together and change their behaviors.
 
-```
-This guide accompanies its explanations with "marble diagrams." Here is how marble diagrams represent Observables and transformations of Observables:
-```
-<img src="images/marble-legend.png" width="100" height"100">
+
+> This guide accompanies its explanations with "marble diagrams." Here is how marble diagrams represent Observables and transformations of Observables:
+
+> <img src="images/marble-legend.png" width="100" height"100">
 
 
 # Background
@@ -42,8 +42,6 @@ And rather than a sequence diagram, a marble diagram will be used to illustrate 
 
 <img src="images/jeans-marble1.png" width="100" height"100">
 
-```
-There are many terms used to describe this model of asynchronous programming and design. This document will use the following terms: An _observer_ is a closure that you _subscribe_ to an object that implements the _Observable_ interface; that is, you _subscribe_ an _observer_ to an _Observable_.
+> There are many terms used to describe this model of asynchronous programming and design. This document will use the following terms: An _observer_ is a closure that you _subscribe_ to an object that implements the _Observable_ interface; that is, you _subscribe_ an _observer_ to an _Observable_.
 
-In other documents and other contexts, what we are calling a "observer" is sometimes called a "reactor." This model in general is often referred to as the ["reactor pattern"|http://en.wikipedia.org/wiki/Reactor_pattern].
-```
+> In other documents and other contexts, what we are calling a "observer" is sometimes called a "reactor." This model in general is often referred to as the ["reactor pattern"|http://en.wikipedia.org/wiki/Reactor_pattern].
