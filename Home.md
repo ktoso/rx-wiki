@@ -7,7 +7,7 @@ This page explains what the reactive pattern is, what Observables and Observers 
 
 > This guide accompanies its explanations with "marble diagrams." Here is how marble diagrams represent Observables and transformations of Observables:
 
-<img src="images/operation-legend.png" width="100" height"100">
+<img src="images/operation-legend.png" width="920" height"100">
 
 
 # Background
@@ -23,7 +23,7 @@ if( availableCash >= jeans.getPurchasePrice() ) catalog.purchase( jeans ); // if
 
 The sequence of events would, predictably and dependably, look like this: 
 
-<img src="images/jeans-activity1.png" width="100" height"100">
+<img src="images/jeans-activity1.png" width="920" height"100">
 
 But in the Rx paradigm, many instructions execute in parallel and their results are later captured, in arbitrary order, by closures called "observers." In these cases, rather than _calling_ a method, you _define_ a method call in the form of a "Observable," and then _subscribe_ an observer to it, at which point the call takes place in the background with the observer standing sentry to capture and respond to its return values whenever they arrive.
 
@@ -40,7 +40,7 @@ catalogObservable.mapMany( catalog -> catalog.findJeans("38W", "38L", "blue" ) )
 
 And rather than a sequence diagram, a marble diagram will be used to illustrate its behavior:
 
-<img src="images/jeans-marble1.png" width="100" height"100">
+<img src="images/jeans-marble1.png" width="920" height"100">
 
 > There are many terms used to describe this model of asynchronous programming and design. This document will use the following terms: An _observer_ is a closure that you _subscribe_ to an object that implements the _Observable_ interface; that is, you _subscribe_ an _observer_ to an _Observable_.
 
@@ -109,7 +109,7 @@ When you use the various Observable utility functions to chain Observables toget
 
 ## Making any iterable into a Observable --- `Observable.toObservable( )`
 
-<img src="images/operation-toObservable.png" width="100" height"100">
+<img src="images/operation-toObservable.png" width="920" height"100">
 
 Any object that supports the `Iterable<>` interface can be converted into a Observable that emits each iterable item in the object, simply by passing the object into the `Observable.toObservable( )` method, for example:
 
@@ -128,7 +128,7 @@ This converts the sequence of values in the iterable object or array into a sequ
 
 ## Making any object into a Observable --- `Observable.just( )`
 
-<img src="images/marble.just.png" width="100" height"100">
+<img src="images/marble.just.png" width="920" height"100">
 
 To convert any object into a Observable that emits that object, pass that object into the `Observable.just()` method.
 
@@ -151,10 +151,10 @@ def myObservable = Observable.create({ m ->
   m.onNext('Four');
   m.onCompleted();
 })
-{code}
+```
 {note}A well-formed Observable _must_ call either the observer’s `onCompleted( )` method exactly once or its `onError( )` method exactly once.{note}
 
-h1. Observable utility methods
+# Observable utility methods
 
 The following methods allow you to change the default behavior of a Observable:
 | `Observable.onErrorResumeNext( )`|http://go/apidoc/com/netflix/api/platform/reactive/operations/ObservableExtensions.html#onErrorResumeNext(com.netflix.api.platform.reactive.Observable, com.netflix.api.platform.functions.Func1)]^ | instructs a Observable to attempt to continue emitting values after it encounters an error |
@@ -193,9 +193,9 @@ These utility methods are as follows:
 
 The following sections will describe these methods in greater detail.
 
-## `Observable.concat( )` {anchor:concat}
+## `Observable.concat( )`
 
-<img src="images/operation-concat.png" width="100" height"100">
+<img src="images/operation-concat.png" width="920" height"100">
 
 You can concatenate the output of multiple Observables so that they act like a single Observable, with all of the items emitted by the first Observable being emitted before any of the items emitted by the second Observable, by using the `Observable.concat( )` method:
 
@@ -229,7 +229,7 @@ Instead of passing multiple Observables into `Observable.concat( )`, you could
 
 ## `Observable.filter( )` {anchor:filter}
 
-<img src="images/operation-filter.png" width="100" height"100">
+<img src="images/operation-filter.png" width="920" height"100">
 
 You can filter a Observable, discarding any values that do not meet some test, by passing a filtering closure into the `Observable.filter( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
@@ -261,7 +261,7 @@ numbers.filter( { 0 == (it % 2) } )…
 
 ## `Observable.last( )`
 
-<img src="images/operation-last.png" width="100" height"100">
+<img src="images/operation-last.png" width="920" height"100">
 
 To convert a Observable that emits several objects into one that only emits the last of these objects before completing, use the `last( )` method. For instance, in the following code, `last( )` emits only the last integer in the list of integers represented by `numbers`:
 
@@ -291,7 +291,7 @@ numbers.last()…
 
 ## `Observable.map( )`
 
-<img src="images/operation-map.png" width="100" height"100">
+<img src="images/operation-map.png" width="920" height"100">
 
 The `map( )` method applies a closure of your choosing to every object emitted by a Observable, and returns this transformation as a new Observable sequence. For example, the following code maps a closure that squares the incoming value onto the values in `numbers`:
 
@@ -324,7 +324,7 @@ numbers.map( { it * it } )…
 
 ## `Observable.mapMany( )` and `Observable.mapManyDelayError( )`
 
-<img src="images/operation-mapMany.png" width="100" height"100">
+<img src="images/operation-mapMany.png" width="920" height"100">
 
 The `mapMany( )` method creates a new Observable sequence by applying a closure that you supply to each object in the original Observable sequence, where that closure is itself a Observable that emits objects, and then merges the results of that closure applied to every item emitted by the original Observable, emitting these merged results as its own sequence.
 
@@ -358,7 +358,7 @@ Because it is possible that more than one of the individual observables encounte
 
 ## `Observable.materialize( )`
 
-<img src="images/operation-materialize.png" width="100" height"100">
+<img src="images/operation-materialize.png" width="920" height"100">
 
 A well-formed Observable will call its observer’s `onNext` closure zero or more times, and then will call either the `onCompleted` or `onError` closure exactly once. The `Observable.materialize( )` method converts this series of calls into a series of emissions from a Observable, where it represents each such call as a `ObservableNotification` object.
 
@@ -386,7 +386,7 @@ In addition to calling `materialize( )` as a stand-alone method, you can also 
 
 ## `Observable.merge( )`
 
-<img src="images/operation-merge.png" width="100" height"100">
+<img src="images/operation-merge.png" width="920" height"100">
 
 You can combine the output of multiple Observables so that they act like a single Observable, by using the `merge( )` method:
 
@@ -424,7 +424,7 @@ If any of the individual Observables passed into `Observable.merge( )` aborts 
 
 ## `Observable.mergeDelayError( )`
 
-<img src="images/operation-mergeDelayError.png" width="100" height"100">
+<img src="images/operation-mergeDelayError.png" width="920" height"100">
 
 `Observable.mergeDelayError( )` works much like `Observable.merge( )`. The exception is when one of the Observables being merged throws an error. If this happens with `Observable.merge( )`, the merged Observable will immediately throw an error itself (that is, it will call the `onError` closure of its observer). `Observable.mergeDelayError( )`, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables being merged a chance to finish emitting their items, and will emit those itself, only calling `onError` when all of the other merged Observables have finished.
 
@@ -433,7 +433,7 @@ Because it is possible that more than one of the merged observables encountered 
 
 ## `Observable.reduce( )`
 
-<img src="images/operation-reduce.png" width="100" height"100">
+<img src="images/operation-reduce.png" width="920" height"100">
 
 The `reduce( )` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of _that_ closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your closure as the sole output from the returned Observable.
 
@@ -475,7 +475,7 @@ or
 
 ## `Observable.scan( )`
 
-<img src="images/operation-scan.png" width="100" height"100">
+<img src="images/operation-scan.png" width="920" height"100">
 
 The `scan( )` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of that closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. It emits the result of each of these iterations as a sequence from the returned Observable. This sort of closure is sometimes called an _accumulator_.
 
@@ -520,7 +520,7 @@ Note that if you pass a seed value to `scan( )`, it will emit the seed itself 
 
 ## `Observable.skip( )`
 
-<img src="images/operation-skip.png" width="100" height"100">
+<img src="images/operation-skip.png" width="920" height"100">
 
 You can ignore the first *n* items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip( *n* )` method.
 
@@ -554,7 +554,7 @@ numbers.skip(3)…
 
 ## `Observable.take( )`
 
-<img src="images/operation-take.png" width="100" height"100">
+<img src="images/operation-take.png" width="920" height"100">
 
 You can choose to pay attention only to the first *n* values emitted by a Observable by calling its `take( *n* )` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of *n* times before calling `onCompleted`. For example,
 
@@ -587,7 +587,7 @@ If you call `take( *n* )` on a Observable, and that Observable emits _fewer_
 
 ## `Observable.toList( )`
 
-<img src="images/operation-toList.png" width="100" height"100">
+<img src="images/operation-toList.png" width="920" height"100">
 
 Normally, a Observable that emits multiple items will do so by calling its observer’s `onNext` closure for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to call the observer’s `onNext` closure _once_, passing it the entire list, by calling the Observable object’s `toList( )` method prior to calling its `subscribe( )` method. For example:
 
@@ -621,7 +621,7 @@ numbers.toList( )…
 
 ## `Observable.toSortedList( )`
 
-<img src="images/operation-toSortedList.png" width="100" height"100">
+<img src="images/operation-toSortedList.png" width="920" height"100">
 
 The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list numerically, from lowest to highest, but you can also pass in a function that takes two values and returns a number, and `toSortedList( )` will use that number instead of the numerical difference between the two values to sort the values.
 
@@ -644,7 +644,7 @@ In addition to calling `toList( )` as a stand-alone method, you can also call 
 
 ## `Observable.zip( )`
 
-<img src="images/operation-zip.png" width="100" height"100">
+<img src="images/operation-zip.png" width="920" height"100">
 
 The `zip( )` method returns a Observable that applies a closure of your choosing to the combination of items emitted, in sequence, by two (or more) other Observables, with the results of this closure becoming the sequence emitted by the returned Observable. It applies this closure in strict sequence, so the first object emitted by the new Observable will be the result of the closure applied to the first object emitted by Observable #1 and the first object emitted by Observable #2; the second object emitted by the new Observable will be the result of the closure applied to the second object emitted by Observable #1 and the second object emitted by Observable #2; and so forth.
 
