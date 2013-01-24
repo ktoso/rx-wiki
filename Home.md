@@ -1,1 +1,1 @@
-asdf
+[blog](techlog.com)
