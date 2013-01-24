@@ -4,6 +4,14 @@ It extends the [observer pattern](http://en.wikipedia.org/wiki/Observer_pattern)
 
 It supports Java 5 or higher and JVM based languages such as [Groovy](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy), [Clojure](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure), [Scala](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala) and [JRuby](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-jruby).
 
+# Why?
+
+futures ... easy to compose but not efficient (blocking)
+
+callbacks ... efficient (non-blocking) but hard to compose (nested callbacks, error handling, etc)
+
+reactive ... efficient (non-blocking) and composable
+
 # More Information
 
 * [Optimizing the Netflix API](http://techblog.netflix.com/2013/01/optimizing-netflix-api.html)
