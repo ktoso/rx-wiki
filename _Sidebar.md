@@ -1,7 +1,7 @@
 * [[Getting Started]]
 * [[How To Use]]
 
-* [[Observable & Observer]]
+* [[Observer Pattern]]
 * [[Observable Operations]]
 * [[Observable APIs]]
 
