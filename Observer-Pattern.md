@@ -128,7 +128,7 @@ This converts the sequence of values in the iterable object or array into a sequ
 
 ## Making any object into a Observable --- `Observable.just( )`
 
-[[images/marble.just.png]]
+[[images/operation-just.png]]
 
 To convert any object into a Observable that emits that object, pass that object into the `Observable.just()` method.
 
