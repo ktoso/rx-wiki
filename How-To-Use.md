@@ -49,7 +49,7 @@ Hello George!
 ```
 
 ```
-=> (hello ["Ben" "George"])
+(hello ["Ben" "George"])
 Hello Ben!
 Hello George!
 ```
