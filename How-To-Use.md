@@ -56,9 +56,13 @@ Hello George!
 
 # Creating Observable Sequences
 
+An observable sequence can 
+
   - from existing data
   - as an API for async
        - Give control of blocking/non-blocking to API
+   - blocking
+   - non-blocking
 
 More information can be found on the [[Observer Pattern]] page.
 
