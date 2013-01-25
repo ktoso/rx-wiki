@@ -9,7 +9,6 @@
   * [[Error Handling|Observable-Operators-ErrorHandling]]
   * [[Utility|Observable-Operators-Utility]]
 
-* [[Observable Operations]]
 * [[Observable APIs]]
 
 * [[Language Adaptors]]
