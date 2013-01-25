@@ -48,7 +48,7 @@ And rather than a sequence diagram, a marble diagram will be used to illustrate 
 
 > There are many terms used to describe this model of asynchronous programming and design. This document will use the following terms: An _observer_ is a closure that you _subscribe_ to an object that implements the _Observable_ interface; that is, you _subscribe_ an _observer_ to an _Observable_.
 
-> In other documents and other contexts, what we are calling a "observer" is sometimes called a "reactor." This model in general is often referred to as the ["reactor pattern"|http://en.wikipedia.org/wiki/Reactor_pattern].
+> In other documents and other contexts, what we are calling a "observer" is sometimes called a "reactor." This model in general is often referred to as the ["reactor pattern"](http://en.wikipedia.org/wiki/Reactor_pattern).
 
 
 # Setting up Observers
@@ -74,7 +74,7 @@ returnVal = someMethod(itsParameters);
 In the asynchronous model the flow goes more like this:
 
 1) Define a closure that does something useful with the return value from the asynchronous call, this is called the _observer_.  
-2) Define the asynchronous call itself as an object that inherits from [Observable|http://netflix.github.com/RxJava/rx/observables/Observable.html].  
+2) Define the asynchronous call itself as an object that inherits from [Observable\(http://netflix.github.com/RxJava/rx/observables/Observable.html).  
 3) Attach the observer to that Observable asynchronous call by subscribing it (this also initiates the call).  
 4) Go on with your business; whenever the call returns, the _observer_ will begin to operate on its return value.  
 
