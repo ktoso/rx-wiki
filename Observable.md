@@ -66,7 +66,7 @@ Or, something like this:
 
 ```groovy
 // make the call, assign its return value to `returnVal`
-returnVal = someMethod(*itsParameters*);
+returnVal = someMethod(itsParameters);
 // do something useful with returnVal
 ```
 
@@ -81,12 +81,12 @@ Which looks something like this:
 
 ```groovy
 // defines, but does not invoke, the observer
-def myObserver = { it -> *do something useful with* it };
+def myObserver = { it -> do something useful with it };
 // defines, but does not invoke, the Observable
 def myObservable = someObservableMethod(itsParameters);
 // subscribes the observer to the Observable, and invokes the Observable
 myObservable.subscribe([ onNext:myObserver ]);
-// *go on about my business*
+// go on about my business
 ```
 
 ## onNext, onCompleted, and onError
@@ -108,9 +108,9 @@ An Observable will invoke this closure to indicate that it has failed to generat
 A more complete `subscribe()` example would therefore look like this:
 
 ```groovy
-def myObserver   = { it -> *do something useful with* it };
-def myComplete  = { *clean up after the final response* };
-def myError     = { exception -> *react sensibly to a failed call* };
+def myObserver   = { it -> do something useful with it };
+def myComplete  = { clean up after the final response };
+def myError     = { exception -> react sensibly to a failed call };
 def myObservable = someMethod(itsParameters);
 myObservable.subscribe([ onNext:myObserver, onCompleted:myComplete, onError:myError ]);
 // go on about my business
