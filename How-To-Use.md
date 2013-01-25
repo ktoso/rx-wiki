@@ -6,16 +6,16 @@ A requisite "Hello World!" which creates an Observable from a list of Strings, s
 ### java
 
 ```java
-    public static void hello(String... names) {
-        Observable.toObservable(names).subscribe(new Action1<String>() {
+public static void hello(String... names) {
+    Observable.toObservable(names).subscribe(new Action1<String>() {
 
-            @Override
-            public void call(String s) {
-                System.out.println("Hello " + s + "!");
-            }
+        @Override
+        public void call(String s) {
+            System.out.println("Hello " + s + "!");
+        }
 
-        });
-    }
+    });
+}
 ```
 
 ```java
