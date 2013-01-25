@@ -2,14 +2,13 @@
 * [[How To Use]]
 
 * [[Observable]]
-  * Combine
-  * Transform
-  * Filter
-  * Create
-  * Error Handling
-  * Utility
+  * [[Combinatorial|Observable-Operators-Combinatorial]]
+  * [[Transformative|Observable-Operators-Transformative]]
+  * [[Filtering|Observable-Operators-Filtering]]
+  * [[Creation|Observable-Operators-Creation]]
+  * [[Error Handling|Observable-Operators-ErrorHandling]]
+  * [[Utility|Observable-Operators-Utility]]
 
-* [[Observer Pattern]]
 * [[Observable Operations]]
 * [[Observable APIs]]
 
