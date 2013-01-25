@@ -74,7 +74,7 @@ returnVal = someMethod(itsParameters);
 In the asynchronous model the flow goes more like this:
 
 1) Define a closure that does something useful with the return value from the asynchronous call, this is called the _observer_.  
-2) Define the asynchronous call itself as an object that inherits from [Observable\(http://netflix.github.com/RxJava/rx/observables/Observable.html).  
+2) Define the asynchronous call itself as an object that inherits from [Observable](http://netflix.github.com/RxJava/rx/observables/Observable.html).  
 3) Attach the observer to that Observable asynchronous call by subscribing it (this also initiates the call).  
 4) Go on with your business; whenever the call returns, the _observer_ will begin to operate on its return value.  
 
