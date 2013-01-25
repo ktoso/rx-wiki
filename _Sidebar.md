@@ -1,6 +1,14 @@
 * [[Getting Started]]
 * [[How To Use]]
 
+* [[Observable]]
+  * Combine
+  * Transform
+  * Filter
+  * Create
+  * Error Handling
+  * Utility
+
 * [[Observer Pattern]]
 * [[Observable Operations]]
 * [[Observable APIs]]
