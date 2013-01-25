@@ -1,28 +1,28 @@
-Combine
+Combine   
 	- combineLatest
 	- merge
 	- zip
 
-Transform
+Transform   
 	-map
 	- scan
 	- reduce
 
-Filter
+Filter   
 	- filter
 	- last
 	- skip
 	- take
 
-Create
+Create   
 	- create
 	- toObservable
 
 
-Error Handling
+Error Handling   
 	- onErrorResumeNext
 	- onErrorReturn
 
-Utility
+Utility   
 	- materialize
 	- synchronize
