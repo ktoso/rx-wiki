@@ -3,6 +3,8 @@
 
 A requisite "Hello World!" which creates an Observable from a list of Strings, subscribes to the Observable with a function that will print "Hello %!" for each string.
 
+### Clojure
+
 ```clojure
 (defn hello
   [&rest]
@@ -12,6 +14,21 @@ A requisite "Hello World!" which creates an Observable from a list of Strings, s
 
 ```
 => (hello ["Ben" "George"])
+Hello Ben!
+Hello George!
+```
+
+### Groovy
+
+```groovy
+def hello(String[] names) {
+    Observable.toObservable(names)
+        .subscribe({ println "Hello " + it + "!"})
+}
+```
+
+```groovy
+hello("Ben", "George")
 Hello Ben!
 Hello George!
 ```
