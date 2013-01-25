@@ -54,6 +54,7 @@ And rather than a sequence diagram, a marble diagram will be used to illustrate 
 # Setting up Observers
 
 > Groovy will be used for code examples in this document but any JVM language can be used such as Clojure, Scala, JRuby, Javascript or Java itself.  
+
 > For Java itself, anywhere 'closure' is mentioned consider it an anonymous inner class.
 
 In an ordinary method call --- that is, _not_ the sort of asynchronous, parallel calls typical in reactive programming --- the flow is something like this:
