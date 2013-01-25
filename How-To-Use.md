@@ -53,3 +53,15 @@ Hello George!
 Hello Ben!
 Hello George!
 ```
+
+# Creating Observable Sequences
+
+  - from existing data
+  - as an API for async
+       - Give control of blocking/non-blocking to API
+
+# Composition
+
+# Error Handling
+
+OnError subscribe, resume next, delay
