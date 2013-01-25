@@ -3,6 +3,27 @@
 
 A requisite "Hello World!" which creates an Observable from a list of Strings, subscribes to the Observable with a function that will print "Hello %!" for each string.
 
+### java
+
+```java
+    public static void hello(String... names) {
+        Observable.toObservable(names).subscribe(new Action1<String>() {
+
+            @Override
+            public void call(String s) {
+                System.out.println("Hello " + s + "!");
+            }
+
+        });
+    }
+```
+
+```java
+hello("Ben", "George");
+Hello Ben!
+Hello George!
+```
+
 ### Groovy
 
 ```groovy
