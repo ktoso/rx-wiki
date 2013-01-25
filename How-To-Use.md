@@ -3,7 +3,7 @@
 
 A requisite "Hello World!" which creates an Observable from a list of Strings, subscribes to the Observable with a function that will print "Hello %!" for each string.
 
-### java
+### Java
 
 ```java
 public static void hello(String... names) {
