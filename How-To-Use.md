@@ -1,7 +1,11 @@
 <a name='Hello-World'/>
 # Hello World!
 
-A requisite "Hello World!" which creates an Observable from a list of Strings, subscribes to the Observable with a function that will print "Hello %!" for each string.
+Requisite first example which creates an Observable from a list of Strings, subscribes to the Observable with a function that will print "Hello [arg]!" for each string.
+
+> This example is given first in Java and then other languages to provide comparison.
+
+> Subsequent examples will use a mixture of languages all of which can be found in the [rxjava-examples](https://github.com/Netflix/RxJava/tree/master/rxjava-examples) submodule.
 
 ### Java
 
@@ -56,6 +60,33 @@ Hello George!
 
 # Creating Observable Sequences
 
+An Observable sequence originates from two sources, an existing data structure or an Observable implementation which synchronously or asynchronously executes and passes data via `onNext()`.
+
+## Existing Data
+
+The Observable `toObservable`, `from` and `just` methods allow converting any object, list or array of objects into an observable sequence:
+
+```groovy
+Observable<Integer> o = Observable.toObservable(1, 2, 3, 4, 5, 6);
+
+Observable<String> o = Observable.from("a", "b", "c");
+
+def list = [5, 6, 7, 8]
+Observable<Integer> o = Observable.toObservable(list);
+
+Observable<String> o = Observable.just("one object");
+```
+
+These sequences will synchronously invoke `onNext()` on an Observer when subscribed to for each object and then call `onCompleted()`.
+
+## Observable Implementation
+
+Asynchronous IO or computational operations or "infinite" streams of data can be implemented using the Observable class.
+
+This can be done either by extending the Observable class or by using the `Observable.create()` factory method. 
+
+
+
 An observable sequence can 
 
   - from existing data
@@ -64,7 +95,7 @@ An observable sequence can
    - blocking
    - non-blocking
 
-More information can be found on the [[Observer Pattern]] page.
+More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
 
 # Composition
 
