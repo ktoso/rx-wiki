@@ -60,6 +60,8 @@ Hello George!
   - as an API for async
        - Give control of blocking/non-blocking to API
 
+More information can be found on the [Observer Pattern] page.
+
 # Composition
 
 # Error Handling
