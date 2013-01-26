@@ -85,8 +85,77 @@ Asynchronous IO or computational operations or "infinite" streams of data can be
 
 This can be done either by extending the Observable class or by using the `Observable.create()` factory method. 
 
-### asdf
+### Synchronous Observable
 
+```groovy
+/**
+ * This example shows a custom Observable that blocks 
+ * when subscribed to (does not spawn an extra thread).
+ * 
+ * @return Observable<String>
+ */
+def customObservableBlocking() {
+    return Observable.create(new Func1<Observer<String>, Subscription>() {
+        def Subscription call(Observer<String> observer) {
+            for(int i=0; i<50; i++) {
+                observer.onNext("value_" + i);
+            }
+            // after sending all values we complete the sequence
+            observer.onCompleted();
+            // return a NoOpSubsription since this blocks and thus
+            // can't be unsubscribed from
+            return Observable.noOpSubscription();
+        };
+    });
+}
+
+// To see output:
+customObservableBlocking().subscribe({ println(it)});
+```
+
+### Asynchronous Observable
+
+```groovy
+/**
+ * This example shows a custom Observable that does not block
+ * when subscribed to as it spawns a separate thread.
+ *
+ * @return Observable<String>
+ */
+def customObservableNonBlocking() {
+    return Observable.create(new Func1<Observer<String>, Subscription>() {
+        /**
+         * This 'call' method will be invoked with the Observable is subscribed to.
+         * 
+         * It spawns a thread to do it asynchronously.
+         */
+        def Subscription call(Observer<String> observer) {
+            // For simplicity this example uses a Thread instead of an ExecutorService/ThreadPool
+            final Thread t = new Thread(new Runnable() {
+                void run() {
+                    for(int i=0; i<75; i++) {
+                        observer.onNext("anotherValue_" + i);
+                    }
+                    // after sending all values we complete the sequence
+                    observer.onCompleted();
+                };
+            });
+            t.start();
+        
+            return new Subscription() {
+                public void unsubscribe() {
+                    // Ask the thread to stop doing work.
+                    // For this simple example it just interrupts.
+                    t.interrupt();
+                }
+            };
+        };
+    });
+}
+
+// To see output:
+customObservableNonBlocking().subscribe({ println(it)});
+```
 
 More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
 
