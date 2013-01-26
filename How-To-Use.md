@@ -85,15 +85,8 @@ Asynchronous IO or computational operations or "infinite" streams of data can be
 
 This can be done either by extending the Observable class or by using the `Observable.create()` factory method. 
 
+### asdf
 
-
-An observable sequence can 
-
-  - from existing data
-  - as an API for async
-       - Give control of blocking/non-blocking to API
-   - blocking
-   - non-blocking
 
 More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
 
