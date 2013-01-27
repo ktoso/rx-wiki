@@ -157,6 +157,33 @@ def customObservableNonBlocking() {
 customObservableNonBlocking().subscribe({ println(it)});
 ```
 
+Here is another example in Clojure that uses a Future and executes on a thread-pool:
+
+```clojure
+(defn customObservableNonBlocking []
+  "This example shows a custom Observable that does not block 
+   when subscribed to as it spawns a separate thread.
+   
+  returns Observable<String>"
+  (Observable/create 
+    (fn [observer]
+      (let [f (future 
+                (doseq [x (range 50)] (-> observer (.onNext (str "anotherValue_" x))))
+                ; after sending all values we complete the sequence
+                (-> observer .onCompleted))
+            ; a subscription that cancels the future if unsubscribed
+            subscription (Observable/createSubscription #(-> f (.cancel true)))]
+        ))
+      ))
+```
+
+```clojure
+; To see output
+(.subscribe (customObservableNonBlocking) #(println %))
+```
+
+
+
 More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
 
 # Composition
