@@ -182,6 +182,30 @@ Here is another example in Clojure that uses a Future and executes on a thread-p
 (.subscribe (customObservableNonBlocking) #(println %))
 ```
 
+Here is an example that fetches articles from Wikipedia and calls onNext with each one:
+
+```clojure
+(defn fetchWikipediaArticleAsynchronously [wikipediaArticleNames]
+  "Fetch a Wikipedia article asynchronously.
+  
+   return Observable<String> of HTML"
+  (Observable/create 
+    (fn [observer]
+      (let [f (future
+                (doseq [articleName wikipediaArticleNames]
+                  (-> observer (.onNext (http/get (str "http://en.wikipedia.org/wiki/" articleName)))))
+                ; after sending response to onnext we complete the sequence
+                (-> observer .onCompleted))
+            ; a subscription that cancels the future if unsubscribed
+            subscription (Observable/createSubscription #(-> f (.cancel true)))]
+        ))
+      ))
+```
+
+```clojure
+(-> (fetchWikipediaArticleAsynchronously ["Tiger" "Elephant"]) 
+  (.subscribe #(println "--- Article ---\n" (subs (:body %) 0 125) "...")))
+```
 
 
 More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
