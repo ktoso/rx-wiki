@@ -252,4 +252,39 @@ More information can be found on the [[Observable]] and [[Creation Operators|Obs
 
 # Error Handling
 
-OnError subscribe, resume next, delay
+Here is a revised version of the Wikipedia example above with error handling:
+
+```groovy
+/**
+ * Fetch a list of Wikipedia articles asynchronously with error handling.
+ *
+ * @param wikipediaArticleName
+ * @return Observable<String> of HTML
+ */
+def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArticleNames) {
+    return Observable.create({ Observer<String> observer ->
+        Thread.start {
+            try {
+                for(articleName in wikipediaArticleNames) {
+                    observer.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
+                }
+                observer.onCompleted();
+            } catch(Exception e) {
+                observer.onError(e);
+            }
+        }
+            return Observable.noOpSubscription();
+    });
+}
+```
+
+Notice how it now calls `onError(Exception e)` if an exception occurs and in the following it passes a second closure that handles onError.
+
+```groovy
+fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle", "Elephant")
+    .subscribe(
+        { println "--- Article ---\n" + it.substring(0, 125)}, 
+        { println "--- Error ---\n" + it.getMessage()})
+```
+
+See more information on [[Error Handling|Observable-Operators-ErrorHandling]] including functions such as `onErrorResumeNext()` which allows providing default sequences to continue with in event of error.
