@@ -256,6 +256,32 @@ More information can be found on the [[Observable]] and [[Creation Operators|Obs
 
 # Composition
 
+Rx allows chaining operators together to transform and compose sequences.
+
+Using Groovy this first example uses a previously defined asynchronous sequence that emits 75 elements, skips the first 10 then takes the next 5 and transforms them before subscribing and printing the values:
+
+```groovy
+/**
+ * Asynchronously calls 'customObservableNonBlocking' and defines
+ * a chain of operators to apply to the callback sequence.
+ */
+def simpleComposition() {
+    customObservableNonBlocking().skip(10).take(5)
+        .map({ stringValue -> return stringValue + "_transformed"})
+        .subscribe({ println "onNext => " + it})
+}
+```
+
+This results in:
+
+```text
+onNext => anotherValue_10_transformed
+onNext => anotherValue_11_transformed
+onNext => anotherValue_12_transformed
+onNext => anotherValue_13_transformed
+onNext => anotherValue_14_transformed
+```
+
 
 
 # Error Handling
