@@ -206,6 +206,50 @@ Here is an example that fetches articles from Wikipedia and calls onNext with ea
   (.subscribe #(println "--- Article ---\n" (subs (:body %) 0 125) "...")))
 ```
 
+Same functionality in Groovy:
+
+```groovy
+/**
+ * Fetch a list of Wikipedia articles asynchronously.
+ * 
+ * @param wikipediaArticleName
+ * @return Observable<String> of HTML
+ */
+def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
+    return Observable.create(new Func1<Observer<String>, Subscription>() {
+        def Subscription call(Observer<String> observer) {
+            Thread.start {
+                try {
+                    for(articleName in wikipediaArticleNames) {
+                        observer.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
+                    }
+                    observer.onCompleted();
+                } catch(Exception e) {
+                    observer.onError(e);
+                }
+            }
+            return Observable.noOpSubscription();
+        }
+    });
+}
+
+fetchWikipediaArticleAsynchronously("Tiger", "Elephant").subscribe({ println "--- Article ---\n" + it.substring(0, 125)})
+```
+
+Results
+
+```
+--- Article ---
+ <!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Tiger - Wikipedia, the free encyclopedia</title> ...
+--- Article ---
+ <!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Elephant - Wikipedia, the free encyclopedia</tit ...
+```
 
 More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
 
