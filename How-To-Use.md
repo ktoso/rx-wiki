@@ -186,7 +186,7 @@ Here is an example that fetches articles from Wikipedia and calls onNext with ea
 
 ```clojure
 (defn fetchWikipediaArticleAsynchronously [wikipediaArticleNames]
-  "Fetch a Wikipedia article asynchronously.
+  "Fetch a list of Wikipedia articles asynchronously.
   
    return Observable<String> of HTML"
   (Observable/create 
