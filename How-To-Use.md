@@ -115,6 +115,10 @@ customObservableBlocking().subscribe({ println(it)});
 
 ### Asynchronous Observable
 
+This first examples uses Groovy to create an Observable that emits a sequence of 75 strings.
+
+It is purposefully written verbosely with static typing and implementation of the Func1 anonymous inner class for clarity around what's happening:
+
 ```groovy
 /**
  * This example shows a custom Observable that does not block
@@ -157,7 +161,7 @@ def customObservableNonBlocking() {
 customObservableNonBlocking().subscribe({ println(it)});
 ```
 
-Here is another example in Clojure that uses a Future and executes on a thread-pool:
+Here is the same code in Clojure that uses a Future (instead of raw thread) and implemented more consisely:
 
 ```clojure
 (defn customObservableNonBlocking []
@@ -206,7 +210,7 @@ Here is an example that fetches articles from Wikipedia and calls onNext with ea
   (.subscribe #(println "--- Article ---\n" (subs (:body %) 0 125) "...")))
 ```
 
-Same functionality in Groovy:
+Back to Groovy, the same Wikipedia functionality but using closures instead of anonymous inner classes:
 
 ```groovy
 /**
@@ -246,9 +250,13 @@ Results
 <title>Elephant - Wikipedia, the free encyclopedia</tit ...
 ```
 
+Note that all of the above examples ignore error handling for brevity, see below for examples including error handling.
+
 More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
 
 # Composition
+
+
 
 # Error Handling
 
