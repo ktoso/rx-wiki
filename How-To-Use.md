@@ -239,7 +239,7 @@ fetchWikipediaArticleAsynchronously("Tiger", "Elephant")
 
 Results
 
-```
+```text
 --- Article ---
  <!DOCTYPE html>
 <html lang="en" dir="ltr" class="client-nojs">
