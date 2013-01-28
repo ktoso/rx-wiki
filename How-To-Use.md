@@ -216,20 +216,18 @@ Same functionality in Groovy:
  * @return Observable<String> of HTML
  */
 def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
-    return Observable.create(new Func1<Observer<String>, Subscription>() {
-        def Subscription call(Observer<String> observer) {
-            Thread.start {
-                try {
-                    for(articleName in wikipediaArticleNames) {
-                        observer.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
-                    }
-                    observer.onCompleted();
-                } catch(Exception e) {
-                    observer.onError(e);
+    return Observable.create({ Observer<String> observer ->
+        Thread.start {
+            try {
+                for(articleName in wikipediaArticleNames) {
+                    observer.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
                 }
+                observer.onCompleted();
+            } catch(Exception e) {
+                observer.onError(e);
             }
-            return Observable.noOpSubscription();
         }
+            return Observable.noOpSubscription();
     });
 }
 
