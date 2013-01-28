@@ -198,8 +198,7 @@ Here is an example that fetches articles from Wikipedia and calls onNext with ea
                 (-> observer .onCompleted))
             ; a subscription that cancels the future if unsubscribed
             subscription (Observable/createSubscription #(-> f (.cancel true)))]
-        ))
-      ))
+        ))))
 ```
 
 ```clojure
