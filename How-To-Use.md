@@ -282,7 +282,49 @@ onNext => anotherValue_13_transformed
 onNext => anotherValue_14_transformed
 ```
 
+This next example in Clojure consumes 3 asynchronous Observable sequences including a dependency from one to another and composes them into a single response object:
 
+```clojure
+(defn getVideoForUser [userId videoId]
+  "Get video metadata for a given userId
+   - video metadata
+   - video bookmark position
+   - user data
+  return Observable<Map>"
+    (let [user-observable (-> (getUser userId)
+              (.map (fn [user] {:user-name (:name user) :language (:preferred-language user)})))
+          bookmark-observable (-> (getVideoBookmark userId videoId)
+              (.map (fn [bookmark] {:viewed-position (:position bookmark)})))
+          ; getVideoMetadata requires :language from user-observable so nest inside map function
+          video-metadata-observable (-> user-observable 
+              (.mapMany
+                ; fetch metadata after a response from user-observable is received
+                (fn [user-map] 
+                  (getVideoMetadata videoId (:language user-map)))))]
+          ; now combine 3 async sequences using zip
+          (-> (Observable/zip bookmark-observable video-metadata-observable user-observable 
+                (fn [bookmark-map metadata-map user-map]
+                  {:bookmark-map bookmark-map 
+                  :metadata-map metadata-map
+                  :user-map user-map}))
+            ; and transform into a single response object
+            (.map (fn [data]
+                  {:video-id videoId
+                   :video-metadata (:metadata-map data)
+                   :user-id userId
+                   :language (:language (:user-map data))
+                   :bookmark (:viewed-position (:bookmark-map data))
+                  })))))
+```
+
+The response looks like this:
+
+```clojure
+{:video-id 78965, 
+ :video-metadata {:video-id 78965, :title House of Cards: Episode 1, 
+                  :director David Fincher, :duration 3365}, 
+ :user-id 12345, :language es-us, :bookmark 0}
+```
 
 # Error Handling
 
