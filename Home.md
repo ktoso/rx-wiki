@@ -50,6 +50,7 @@ def simpleComposition() {
 * [Optimizing the Netflix API](http://techblog.netflix.com/2013/01/optimizing-netflix-api.html)
 * [Reactive Programming at Netflix](http://techblog.netflix.com/2013/01/reactive-programming-at-netflix.html)
 * [rx.codeplex.com](https://rx.codeplex.com)
+* [Rx Design Guidelines (PDF)](http://go.microsoft.com/fwlink/?LinkID=205219)
 * [Channel 9 MSDN videos on Reactive Extensions](http://channel9.msdn.com/Tags/reactive+extensions)
 * [Your Mouse is a Database](http://queue.acm.org/detail.cfm?id=2169076)
 * [Beginner's Guide to the Reactive Extensions](http://msdn.microsoft.com/en-us/data/gg577611)
