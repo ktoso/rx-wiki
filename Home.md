@@ -31,7 +31,19 @@ The Observable type adds two missing semantics to the Gang of Four's <a href="ht
 
 With these two simple additions, we have unified the Iterable and Observable types. The only difference between them is the direction in which the data flows. This is very important because now any operation we perform on an Iterable, can also be performed on an Observable. Let's take a look at an example…
 
-<script src="https://gist.github.com/4676544.js"></script>
+```groovy
+/**
+ * Asynchronously calls 'customObservableNonBlocking' and defines
+ * a chain of operators to apply to the callback sequence.
+ */
+def simpleComposition() {
+  customObservableNonBlocking()
+    .skip(10)
+    .take(5)
+    .map({ stringValue -> return stringValue + "_transformed"})
+    .subscribe({ println "onNext => " + it})
+}
+```
 
 # More Information
 
