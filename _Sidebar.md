@@ -9,9 +9,7 @@
   * [[Error Handling|Observable-Operators-ErrorHandling]]
   * [[Utility|Observable-Operators-Utility]]
 
-* [[Observable APIs]]
-
-* [[Language Adaptors]]
+* [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
   * Clojure
   * Scala
