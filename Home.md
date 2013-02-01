@@ -20,7 +20,7 @@ Similar to Futures though, they are easy to use with a single level of asynchron
 
 # Functional Reactive Programming (FRP)
 
-Functional reactive offers efficient execution and composition by providing a collection of operators capable of filtering, selecting, transforming, combining and composing Observable's.
+Rx offers efficient execution and composition by providing a collection of operators capable of filtering, selecting, transforming, combining and composing Observable's.
 
 The Observable data type can be thought of as a "push" equivalent to <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html">Iterable</a> which is "pull". With an Iterable, the consumer pulls values from the producer and the thread blocks until those values arrive. By contrast with the observable type, the producer pushes values to the consumer whenever values are available.  This approach is more flexible, because values can arrive synchronously or asynchronously.
 
