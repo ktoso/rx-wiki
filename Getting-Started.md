@@ -53,6 +53,7 @@ You need Java 6 or later.
 
 The simplest use of RxJava is as follows:
 
+In Java =>
 ```java
     public static void hello(String... names) {
         Observable.toObservable(names).subscribe(new Action1<String>() {
@@ -66,6 +67,7 @@ The simplest use of RxJava is as follows:
     }
 ```
 
+In Groovy =>
 ```groovy
 def hello(String[] names) {
     Observable.toObservable(names)
@@ -73,6 +75,7 @@ def hello(String[] names) {
 }
 ```
 
+In Clojure =>
 ```clojure
 (defn hello
   [&rest]
