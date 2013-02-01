@@ -63,7 +63,8 @@ In addition to calling `last()` as a stand-alone method, you can also call it as
 
 ```groovy
 Observable.last(numbers) ...
-``` 
+```
+ 
 you could instead write
 
 ```groovy
