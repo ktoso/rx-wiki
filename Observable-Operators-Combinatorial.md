@@ -1,2 +1,0 @@
-# Observable Operators: Combinatorial
-
