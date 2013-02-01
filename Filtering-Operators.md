@@ -104,7 +104,7 @@ In addition to calling `skip()` as a stand-alone method, you can also call it as
 
 ```groovy
 Observable.skip(numbers, 3) ...
-``` 
+```
 
 you could instead write 
 
