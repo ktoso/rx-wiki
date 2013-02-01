@@ -54,33 +54,34 @@ You need Java 6 or later.
 The simplest use of RxJava is as follows:
 
 ```java
-public class CommandHelloWorld extends HystrixCommand<String> {
+    public static void hello(String... names) {
+        Observable.toObservable(names).subscribe(new Action1<String>() {
 
-    private final String name;
+            @Override
+            public void call(String s) {
+                System.out.println("Hello " + s + "!");
+            }
 
-    public CommandHelloWorld(String name) {
-        super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
-        this.name = name;
+        });
     }
+```
 
-    @Override
-    protected String run() {
-        return "Hello " + name + "!";
-    }
+```groovy
+def hello(String[] names) {
+    Observable.toObservable(names)
+        .subscribe({ println "Hello " + it + "!"})
 }
 ```
-[View Source](../blob/master/hystrix-examples/src/main/java/com/netflix/hystrix/examples/basic/CommandHelloWorld.java)
 
-This command could be used like this:
-
-```java
-String s = new CommandHelloWorld("Bob").execute();
-Future<String> s = new CommandHelloWorld("Bob").queue();
+```clojure
+(defn hello
+  [&rest]
+  (-> (Observable/toObservable &rest)
+    (.subscribe #(println (str "Hello " % "!")))))
 ```
-
 More examples and information can be found in the [[How To Use]] section.
 
-Example source code can be found in the [hystrix-examples](../tree/master/hystrix-examples/src/main/java/com/netflix/hystrix/examples) module.
+Example source code can be found in the [rxjava-examples](../tree/master/rxjava-examples/src/main/) module.
 
 ## Building
 
