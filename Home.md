@@ -18,7 +18,7 @@ Callbacks offer a solution to the tendency to block on Future.get() by not allow
 
 Similar to Futures though, they are easy to use with a single level of asynchronous execution but <a href="https://gist.github.com/4677544">become unwieldy with nested composition</a>.
 
-### Reactive
+# Functional Reactive Programming (FRP)
 
 Functional reactive offers efficient execution and composition by providing a collection of operators capable of filtering, selecting, transforming, combining and composing Observable's.
 
