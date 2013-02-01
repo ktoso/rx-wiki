@@ -23,7 +23,7 @@ myArrayObservable = Observable.toObservable(myArray);
 
 This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by a Observable.
 
-##  --- `Observable.just( )`
+## Observable.just()
 
 #### Make any object into a Observable.
 
