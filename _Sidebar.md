@@ -2,12 +2,12 @@
 * [[How To Use]]
 
 * [[Observable]]
-  * [[Combinatorial|Observable-Operators-Combinatorial]]
-  * [[Transformative|Observable-Operators-Transformative]]
-  * [[Filtering|Observable-Operators-Filtering]]
-  * [[Creation|Observable-Operators-Creation]]
-  * [[Error Handling|Observable-Operators-ErrorHandling]]
-  * [[Utility|Observable-Operators-Utility]]
+  * [[Combinatorial|Combinatorial-Operators]]
+  * [[Transformative|Transformative-Operators]]
+  * [[Filtering|Filtering-Operators]]
+  * [[Creation|Creation-Operators]]
+  * [[Error Handling|ErrorHandling-Operators]]
+  * [[Utility|Utility-Operators]]
 
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
