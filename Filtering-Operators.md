@@ -74,69 +74,76 @@ numbers.last() ...
 
 
 
-## `Observable.skip( )`
+## skip()
+
+#### Ignore first *n* elements
 
 [[images/operation-skip.png]]
 
-You can ignore the first *n* items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip( *n* )` method.
+You can ignore the first *n* items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip(*n*)` method.
 
 ```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.skip(numbers, 3).subscribe(
-  [ onNext:{ response.getWriter().println( it ); },
-    onCompleted:{ response.getWriter().println( "Sequence complete" ); },
-    onError:{ response.getWriter().println( "Error encountered" ); } ]
+  [ onNext:{ response.getWriter().println(it); },
+    onCompleted:{ response.getWriter().println("Sequence complete"); },
+    onError:{ response.getWriter().println("Error encountered"); } ]
 );
 
-`4`
-`5`
-`6`
-`7`
-`8`
-`9`
-`Sequence complete{`}
+4
+5
+6
+7
+8
+9
+Sequence complete
 ```
 
-In addition to calling skip( ) as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
+In addition to calling `skip()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
 
 ```groovy
-Observable.skip( numbers, 3 )…
-``` you could instead write 
+Observable.skip(numbers, 3) ...
+``` 
+
+you could instead write 
 
 ```groovy
-numbers.skip(3)…
+numbers.skip(3) ...
 ```
 
-## `Observable.take( )`
+## take()
+
+#### Take *n* elements then unsubscribe from the sequence
 
 [[images/operation-take.png]]
 
-You can choose to pay attention only to the first *n* values emitted by a Observable by calling its `take( *n* )` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of *n* times before calling `onCompleted`. For example,
+You can choose to pay attention only to the first *n* values emitted by a Observable by calling its `take(*n*)` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of *n* times before calling `onCompleted`. For example,
 
 ```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.take(numbers, 3).subscribe(
-  [ onNext:{ response.getWriter().println( it ); },
-    onCompleted:{ response.getWriter().println( "Sequence complete" ); },
-    onError:{ response.getWriter().println( "Error encountered" ); } ]
+  [ onNext:{ response.getWriter().println(it); },
+    onCompleted:{ response.getWriter().println("Sequence complete"); },
+    onError:{ response.getWriter().println("Error encountered"); } ]
 );
 
-`1`
-`2`
-`3`
-`Sequence complete`
+1
+2
+3
+Sequence complete
 ```
 
-In addition to calling `take( )` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
+In addition to calling `take()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
 
 ```groovy
-Observable.take( numbers, 3 )…
+Observable.take(numbers, 3) ...
 ```
 you could instead write 
+
 ```groovy
-numbers.take(3)…
+numbers.take(3) ...
 ```
 
-If you call `take( *n* )` on a Observable, and that Observable emits _fewer_ than *n* items before completing, the new, `take`\-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
+If you call `take(*n*)` on a Observable, and that Observable emits _fewer_ than *n* items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
