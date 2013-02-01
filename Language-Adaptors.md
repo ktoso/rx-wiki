@@ -1,1 +1,0 @@
-Information about languages, language adaptors, implementing them and existing ones.
