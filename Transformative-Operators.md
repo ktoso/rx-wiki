@@ -132,7 +132,7 @@ observable.reduce(initial_seed, accumulator_closure)
 
 The `scan()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of that closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. It emits the result of each of these iterations as a sequence from the returned Observable. This sort of closure is sometimes called an _accumulator_.
 
-For example, the following code takes a Observable that emits a consecutive sequence of *n* integers starting with 1 and converts it into a Observable that emits the first *n* [triangular numbers|http://en.wikipedia.org/wiki/Triangular_number]:
+For example, the following code takes a Observable that emits a consecutive sequence of *n* integers starting with 1 and converts it into a Observable that emits the first *n* [triangular numbers](http://en.wikipedia.org/wiki/Triangular_number):
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5]);
