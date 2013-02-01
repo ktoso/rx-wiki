@@ -33,16 +33,29 @@ With these two simple additions, we have unified the Iterable and Observable typ
 
 ```groovy
 /**
- * Asynchronously calls 'customObservableNonBlocking' and defines
+ * Asynchronously calls 'customObservableNonBlocking' and defines 
  * a chain of operators to apply to the callback sequence.
  */
 def simpleComposition() {
+  // fetch an asynchronous Observable<String> 
+  // that emits 75 Strings of 'anotherValue_#'
   customObservableNonBlocking()
+    // skip the first 10
     .skip(10)
+    // take the next 5
     .take(5)
+    // transform each String with the provided function
     .map({ stringValue -> return stringValue + "_transformed"})
+    // subscribe to the sequence and print each transformed String
     .subscribe({ println "onNext => " + it})
 }
+ 
+// output
+onNext => anotherValue_10_transformed
+onNext => anotherValue_11_transformed
+onNext => anotherValue_12_transformed
+onNext => anotherValue_13_transformed
+onNext => anotherValue_14_transformed
 ```
 
 # More Information
