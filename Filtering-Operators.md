@@ -80,7 +80,7 @@ numbers.last() ...
 
 [[images/operation-skip.png]]
 
-You can ignore the first *n* items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip(*n*)` method.
+You can ignore the first *n* items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip(n)` method.
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -118,7 +118,7 @@ numbers.skip(3) ...
 
 [[images/operation-take.png]]
 
-You can choose to pay attention only to the first *n* values emitted by a Observable by calling its `take(*n*)` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of *n* times before calling `onCompleted`. For example,
+You can choose to pay attention only to the first *n* values emitted by a Observable by calling its `take(n)` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of *n* times before calling `onCompleted`. For example,
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -146,4 +146,4 @@ you could instead write
 numbers.take(3) ...
 ```
 
-If you call `take(*n*)` on a Observable, and that Observable emits _fewer_ than *n* items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
+If you call `take(n)` on a Observable, and that Observable emits _fewer_ than *n* items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
