@@ -2,10 +2,10 @@
 * [[How To Use]]
 
 * [[Observable]]
-  * [[Combinatorial|Combinatorial-Operators]]
+  * [[Creation|Creation-Operators]]
   * [[Transformative|Transformative-Operators]]
   * [[Filtering|Filtering-Operators]]
-  * [[Creation|Creation-Operators]]
+  * [[Combinatorial|Combinatorial-Operators]]
   * [[Error Handling|ErrorHandling-Operators]]
   * [[Utility|Utility-Operators]]
 

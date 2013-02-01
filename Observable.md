@@ -127,9 +127,9 @@ The Rx operators allow composing asynchronous sequences together in a declarativ
 
 Information about the various operators and examples of their usage has been grouped into the following pages (also listed in the sidebar):
 
-  * [[Combinatorial|Combinatorial-Operators]]
+  * [[Creation|Creation-Operators]]
   * [[Transformative|Transformative-Operators]]
   * [[Filtering|Filtering-Operators]]
-  * [[Creation|Creation-Operators]]
+  * [[Combinatorial|Combinatorial-Operators]]
   * [[Error Handling|ErrorHandling-Operators]]
   * [[Utility|Utility-Operators]]
