@@ -363,4 +363,4 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
         { println "--- Error ---\n" + it.getMessage()})
 ```
 
-See more information on [[Error Handling|Observable-Operators-ErrorHandling]] including functions such as `onErrorResumeNext()` which allows providing default sequences to continue with in event of error.
+See more information on [[Error Handling|ErrorHandling-Operators]] including functions such as `onErrorResumeNext()` which allows providing default sequences to continue with in event of error.
