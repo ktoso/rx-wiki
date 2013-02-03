@@ -6,7 +6,7 @@ This page explains what the reactive pattern is and what Observables and Observe
 
 > This documentation accompanies its explanations with "marble diagrams." Here is how marble diagrams represent Observables and transformations of Observables:
 
-[[images/operation-legend.png]]
+[[images/rx-operators/legend.png]]
 
 # Background
 
