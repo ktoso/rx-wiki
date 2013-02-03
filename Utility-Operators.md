@@ -5,7 +5,7 @@ This section explains various utility operators for working with Observables.
 
 #### Collect all elements and emit as a single List
 
-[[images/operation-toList.png]]
+[[images/rx-operators/toList.png]]
 
 Normally, a Observable that emits multiple items will do so by calling its observer’s `onNext` closure for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to call the observer’s `onNext` closure _once_, passing it the entire list, by calling the Observable object’s `toList()` method prior to calling its `subscribe()` method. For example:
 
@@ -44,7 +44,7 @@ numbers.toList() ...
 
 #### Collect all elements and emit as a single sorted List
 
-[[images/operation-toSortedList.png]]
+[[images/rx-operators/toSortedList.png]]
 
 The `toSortedList()` method behaves much like `toList()` except that it sorts the resulting list. By default it sorts the list naturally in ascending order, but you can also pass in a function that takes two values and returns a number, and `toSortedList()` will use that number instead of the numerical difference between the two values to sort the values.
 
@@ -81,7 +81,7 @@ numbers.toSortedList( ) ...
 
 #### Convert an Observable into a list of Notifications
 
-[[images/operation-materialize.png]]
+[[images/rx-operators/materialize.png]]
 
 A well-formed Observable will call its observer’s `onNext` closure zero or more times, and then will call either the `onCompleted` or `onError` closure exactly once. The `Observable.materialize()` method converts this series of calls into a series of emissions from a Observable, where it represents each such call as a `Notification` object.
 
@@ -115,6 +115,5 @@ in the above example, you could also write
 ```groovy
 numbers.materialize() ...
 ```
-
 
 
