@@ -6,7 +6,7 @@ This section explains how to create Observables either explicitly or by wrapping
 
 #### Make an Observable from an Iterable.
 
-[[images/operation-toObservable.png]]
+[[images/rx-operators/toObservable.png]]
 
 Any object that supports the `Iterable<>` interface can be converted into a Observable that emits each iterable item in the object, simply by passing the object into the `Observable.toObservable( )` method, for example:
 
@@ -27,7 +27,7 @@ This converts the sequence of values in the iterable object or array into a sequ
 
 #### Make any object into a Observable.
 
-[[images/operation-just.png]]
+[[images/rx-operators/just.png]]
 
 To convert any object into a Observable that emits that object, pass that object into the `Observable.just()` method.
 
