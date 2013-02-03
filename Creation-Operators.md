@@ -44,6 +44,8 @@ This is similar to the `Observable.toObservable()` method, except that `Observab
 
 #### Create an explicit Observable
 
+[[images/rx-operators/create.png]]
+
 You can create an Observable from scratch, by using the `Observable.create()` method. You pass this method a closure that accepts as a parameter the Observer that is passed to a Observable’s `subscribe()` method. Write the closure you pass to `Observable.create()` so that it behaves as an Observable --- calling the passed-in `onNext`, `onError`, and `onCompleted` methods appropriately. For example:
 
 ```groovy
