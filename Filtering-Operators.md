@@ -5,7 +5,7 @@ This section explains operators for filtering and selecting elements.
 
 #### Filter elements from an Observable sequence
 
-[[images/operation-filter.png]]
+[[images/rx-operators/filter.png]]
 
 You can filter a Observable, discarding any values that do not meet some test, by passing a filtering closure into the `Observable.filter()` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
@@ -42,7 +42,7 @@ numbers.filter({ 0 == (it % 2) }) ...
 
 #### Only emit the last element
 
-[[images/operation-last.png]]
+[[images/rx-operators/last.png]]
 
 To convert a Observable that emits several objects into one that only emits the last of these objects before completing, use the `last()` method. For instance, in the following code, `last()` emits only the last integer in the list of integers represented by `numbers`:
 
@@ -78,7 +78,7 @@ numbers.last() ...
 
 #### Ignore first *n* elements
 
-[[images/operation-skip.png]]
+[[images/rx-operators/skip.png]]
 
 You can ignore the first *n* items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip(n)` method.
 
@@ -116,7 +116,7 @@ numbers.skip(3) ...
 
 #### Take *n* elements then unsubscribe from the sequence
 
-[[images/operation-take.png]]
+[[images/rx-operators/take.png]]
 
 You can choose to pay attention only to the first *n* values emitted by a Observable by calling its `take(n)` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of *n* times before calling `onCompleted`. For example,
 
