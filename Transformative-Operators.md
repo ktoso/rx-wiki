@@ -4,7 +4,7 @@ This section explains operators used for transforming elements of a sequence.
 
 #### Transform an element via a given function
 
-[[images/operation-map.png]]
+[[images/rx-operators/map.png]]
 
 The `map()` method applies a closure of your choosing to every object emitted by a Observable, and returns this transformation as a new Observable sequence. For example, the following code maps a closure that squares the incoming value onto the values in `numbers`:
 
@@ -43,7 +43,7 @@ numbers.map({ it * it }) ...
 
 #### Transform elements into Observables then flatten into a sequence
 
-[[images/operation-mapMany.png]]
+[[images/rx-operators/mapMany.png]]
 
 The `mapMany()` method creates a new Observable sequence by applying a closure that you supply to each object in the original Observable sequence, where that closure is itself a Observable that emits objects, and then merges the results of that closure applied to every item emitted by the original Observable, emitting these merged results as its own sequence.
 
@@ -84,7 +84,7 @@ Because it is possible that more than one of the individual observables encounte
 
 #### Apply a function to each element and emit the final accumulated value
 
-[[images/operation-reduce.png]]
+[[images/rx-operators/reduce.png]]
 
 The `reduce()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of _that_ closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your closure as the sole output from the returned Observable.
 
@@ -128,7 +128,7 @@ observable.reduce(initial_seed, accumulator_closure)
 
 #### Apply a function to each element of a sequence and emit each successive value
 
-[[images/operation-scan.png]]
+[[images/rx-operators/scan.png]]
 
 The `scan()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of that closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. It emits the result of each of these iterations as a sequence from the returned Observable. This sort of closure is sometimes called an _accumulator_.
 
@@ -171,5 +171,4 @@ observable.scan(initial_seed, accumulator_closure)
 ```
 
 Note that if you pass a seed value to `scan()`, it will emit the seed itself as its first value.
-
 
