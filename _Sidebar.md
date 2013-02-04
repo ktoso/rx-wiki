@@ -6,7 +6,6 @@
   * [[Transformative|Transformative-Operators]]
   * [[Filtering|Filtering-Operators]]
   * [[Combinatorial|Combinatorial-Operators]]
-  * [[Error Handling|Error-Handling-Operators]]
   * [[Utility|Utility-Operators]]
 
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
