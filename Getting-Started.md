@@ -1,5 +1,7 @@
 ## Getting Binaries
 
+*NOTE: The binaries are not yet on Maven Central but will be shortly.*
+
 Binaries and dependency information for Maven, Ivy, Gradle and others can be found at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.netflix.rx%22%20AND%20a%3A%22rxjava-core%22).
 
 Example for Maven:
