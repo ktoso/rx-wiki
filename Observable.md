@@ -23,11 +23,6 @@ jeans         = catalog.findJeans("38W", "38L", "blue" );
 if( availableCash >= jeans.getPurchasePrice() ) catalog.purchase( jeans );
 ```
 
-The sequence of events would, predictably and dependably, look like this: 
-
-**missing image**
-[[images/jeans-activity1.png]]
-
 But in the Rx paradigm, many instructions execute in parallel and their results are later captured, in arbitrary order, by closures called "observers." In these cases, rather than _calling_ a method, you _define_ a method call in the form of an "Observable," and then _subscribe_ an "Observer" to it, at which point the call takes place in the background with the observer standing sentry to capture and respond to its return values whenever they arrive.
 
 An advantage of this approach is that when you have a bunch of tasks to do that are not dependent on each other, you can start them all at the same time rather than waiting for each one to finish before starting the next one --- that way, your entire bundle of tasks only takes as long to complete as the longest task in the bundle.
@@ -40,11 +35,6 @@ catalogObservable
    .zip(myBankAccount.getBalance(),
         {product, cash -> if(cash > product.getPurchasePrice()) product.purchase() });
 ```
-
-And rather than a sequence diagram, a marble diagram will be used to illustrate its behavior:
-
-**missing image**
-[[images/jeans-marble1.png]]
 
 > There are many terms used to describe this model of asynchronous programming and design. This document will use the following terms: An _observer_ is a closure that you _subscribe_ to an object that implements the _Observable_ interface; that is, you _subscribe_ an _observer_ to an _Observable_.
 
