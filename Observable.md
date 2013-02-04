@@ -121,5 +121,4 @@ Information about the various operators and examples of their usage has been gro
   * [[Transformative|Transformative-Operators]]
   * [[Filtering|Filtering-Operators]]
   * [[Combinatorial|Combinatorial-Operators]]
-  * [[Error Handling|Error-Handling-Operators]]
   * [[Utility|Utility-Operators]]
