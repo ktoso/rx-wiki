@@ -8,7 +8,7 @@ Example for Maven:
 
 ```xml
 <dependency>
-    <groupId>com.netflix.rx</groupId>
+    <groupId>com.netflix.rxjava</groupId>
     <artifactId>rxjava-core</artifactId>
     <version>0.5.0</version>
 </dependency>
@@ -16,7 +16,7 @@ Example for Maven:
 and for Ivy:
 
 ```xml
-<dependency org="com.netflix.rx" name="rxjava-core" rev="0.5.0" />
+<dependency org="com.netflix.rxjava" name="rxjava-core" rev="0.5.0" />
 ```
 
 If you need to download the jars instead of using a build system, create a Maven pom file like this with the desired version:
@@ -25,14 +25,14 @@ If you need to download the jars instead of using a build system, create a Maven
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.netflix.rx.download</groupId>
+	<groupId>com.netflix.rxjava.download</groupId>
 	<artifactId>rxjava-download</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>Simple POM to download rxjava-core and dependencies</name>
 	<url>http://github.com/Netflix/RxJava</url>
 	<dependencies>
 		<dependency>
-			<groupId>com.netflix.rx</groupId>
+			<groupId>com.netflix.rxjava</groupId>
 			<artifactId>rxjava-core</artifactId>
 			<version>0.5.0</version>
 			<scope/>
