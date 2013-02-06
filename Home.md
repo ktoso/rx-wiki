@@ -60,6 +60,7 @@ onNext => anotherValue_14_transformed
 
 # More Information
 
+* [Functional Reactive in the Netflix API with RxJava](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html)
 * [Optimizing the Netflix API](http://techblog.netflix.com/2013/01/optimizing-netflix-api.html)
 * [Reactive Programming at Netflix](http://techblog.netflix.com/2013/01/reactive-programming-at-netflix.html)
 * [rx.codeplex.com](https://rx.codeplex.com)
