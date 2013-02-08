@@ -8,7 +8,7 @@ It supports Java 5 or higher and JVM based languages such as [Groovy](https://gi
 
 ### Futures are Expensive to Compose
 
-<a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html">Futures</a> are straight-forward to use for a <a href="https://gist.github.com/4670979">single level of asynchronous execution</a> but they start to add <a href="https://gist.github.com/4671081">non-trivial complexity</a> when they're nested.
+<a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html">Java Futures</a> are straight-forward to use for a <a href="https://gist.github.com/4670979">single level of asynchronous execution</a> but they start to add <a href="https://gist.github.com/4671081">non-trivial complexity</a> when they're nested.
 
 Conditional asynchronous execution flows become <a href="https://gist.github.com/4671081#file-futuresb-java-L163">difficult to optimally compose</a> (or impossible as latencies of each request vary at runtime) using Futures. It <a href="http://www.amazon.com/gp/product/0321349601?ie=UTF8&tag=none0b69&linkCode=as2&camp=1789&creative=9325&creativeASIN=0321349601">can be done</a> of course, but it quickly becomes complicated (and thus error prone) or prematurely blocks on 'future.get()' - eliminating the benefit of asynchronous execution.
 
