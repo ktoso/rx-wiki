@@ -5,7 +5,7 @@ Requisite first example which creates an Observable from a list of Strings, subs
 
 > This example is given first in Java and then other languages to provide comparison.
 
-> Subsequent examples will use a mixture of languages all of which can be found in the [rxjava-examples](https://github.com/Netflix/RxJava/tree/master/rxjava-examples) submodule.
+> Subsequent examples will use a mixture of languages all of which can be found in the /src/examples folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors).
 
 ### Java
 
