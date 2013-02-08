@@ -252,7 +252,7 @@ Results
 
 Note that all of the above examples ignore error handling for brevity, see below for examples including error handling.
 
-More information can be found on the [[Observable]] and [[Creation Operators|Observable-Operators-Creation]] pages.
+More information can be found on the [[Observable]] and [[Creation Operators|Creation-Operators]] pages.
 
 # Composition
 
