@@ -73,3 +73,9 @@ onNext => anotherValue_14_transformed
 * [Tutorial: Functional Programming in Javascript](http://jhusain.github.com/learnrx/index.html)
 * [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [Rx Is now Open Source](http://www.hanselman.com/blog/ReactiveExtensionsRxIsNowOpenSource.aspx)
+
+# RXJava Libraries
+
+The following external libraries can work with RxJava:
+
+* [Camel RX](http://camel.apache.org/rx.html) provides an easy way to reuse any of the [Apache Camel components, protocols, transports and data formats](http://camel.apache.org/components.html) with the RXJava API
