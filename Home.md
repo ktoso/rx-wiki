@@ -74,8 +74,8 @@ onNext => anotherValue_14_transformed
 * [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [Rx Is now Open Source](http://www.hanselman.com/blog/ReactiveExtensionsRxIsNowOpenSource.aspx)
 
-# RXJava Libraries
+# RxJava Libraries
 
 The following external libraries can work with RxJava:
 
-* [Camel RX](http://camel.apache.org/rx.html) provides an easy way to reuse any of the [Apache Camel components, protocols, transports and data formats](http://camel.apache.org/components.html) with the RXJava API
+* [Camel RX](http://camel.apache.org/rx.html) provides an easy way to reuse any of the [Apache Camel components, protocols, transports and data formats](http://camel.apache.org/components.html) with the RxJava API
