@@ -60,6 +60,7 @@ onNext => anotherValue_14_transformed
 
 # More Information
 
+* QCon London 2013 presentation: [Functional Reactive Programming in the Netflix API](http://www.infoq.com/presentations/netflix-functional-rx) and [interview](http://www.infoq.com/interviews/christensen-hystrix-rxjava)
 * [Functional Reactive in the Netflix API with RxJava](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html)
 * [Optimizing the Netflix API](http://techblog.netflix.com/2013/01/optimizing-netflix-api.html)
 * [Reactive Programming at Netflix](http://techblog.netflix.com/2013/01/reactive-programming-at-netflix.html)
@@ -73,6 +74,7 @@ onNext => anotherValue_14_transformed
 * [Tutorial: Functional Programming in Javascript](http://jhusain.github.com/learnrx/index.html)
 * [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [Rx Is now Open Source](http://www.hanselman.com/blog/ReactiveExtensionsRxIsNowOpenSource.aspx)
+* [What is FRP? - Elm Language](http://elm-lang.org/learn/What-is-FRP.elm)
 
 # RxJava Libraries
 
