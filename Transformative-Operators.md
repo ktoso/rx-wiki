@@ -1,6 +1,6 @@
 This section explains Rx operators you can use to transform elements emitted by an Observable sequence.
 
-## map() & select()
+## map() or select()
 
 #### Transform the elements emitted by an Observable by applying a closure to each of them
 
@@ -37,7 +37,7 @@ you could instead write
 numbers.map({ it * it }) ...
 ```
 
-## mapMany()/selectMany() & mapManyDelayError()
+## mapMany() or selectMany() or flatMap() & mapManyDelayError()
 
 #### Transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence
 
