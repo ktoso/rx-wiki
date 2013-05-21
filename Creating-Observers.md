@@ -6,8 +6,8 @@ This section explains methods that create Observables.
 * **`just()`** — convert an object into an Observable that emits that object
 * **`create()`** — create an Observable from scratch by means of a closure
 * **`range()`** — create an Observable that emits a range of sequential integers
-* **`empty()`** — create an Observable that emits nothing and then calls `onCompleted()`
-* **`error()`** — create an Observable that emits nothing and then calls `onError()`
+* **`empty()`** — create an Observable that emits nothing and then calls `onCompleted()` 
+* **`error()`** — create an Observable that emits nothing and then calls `onError()` 
 * **`never()`** — create an Observable that emits nothing at all
 
 ## toObservable() & from()
