@@ -75,7 +75,7 @@ If any of the individual Observables mapped to the emissions from the source Obs
 
 Because it is possible for more than one of the individual Observables to encounter an error, `Observable.mapManyDelayError()` may pass information about multiple errors to the `onError` closure of its subscribers (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
 
-## reduce()
+## reduce() or aggregate()
 
 #### Apply a closure to each emitted element, sequentially, and emit only the final accumulated value
 
@@ -83,7 +83,7 @@ Because it is possible for more than one of the individual Observables to encoun
 
 The `reduce()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of _that_ closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your closure as the sole output from the returned Observable.
 
-This technique, which is called “reduce” here, is sometimes called “fold,” “accumulate,” “compress,” or “inject” in other programming contexts. 
+This technique, which is called “reduce” or “aggregate” here, is sometimes called “fold,” “accumulate,” “compress,” or “inject” in other programming contexts. 
 
 For example, the following code uses `reduce()` to compute, and then emit as an Observable, the sum of the numbers emitted by the source Observable:
 
