@@ -1,6 +1,6 @@
 This section explains operators you can use to filter and select elements from Observables.
 
-## filter()
+## filter() or where()
 
 #### Filter elements from an Observable sequence
 
