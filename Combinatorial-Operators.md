@@ -1,4 +1,4 @@
-This section explains operators used for combining sequences together.
+This section explains operators you can use to combine multiple Observable sequences.
 
 ## concat()
 
@@ -35,8 +35,6 @@ Sequence complete
 ```
 
 Instead of passing multiple Observables into `Observable.concat()`, you could also pass in a `List<>` of Observables, or even a Observable that emits Observables, and `Observable.concat()` will concatenate their output into the output of a single Observable.
-
-
 
 
 ## merge()
@@ -85,17 +83,17 @@ If any of the individual Observables passed into `Observable.merge()` aborts by 
 
 [[images/rx-operators/mergeDelayError.png]]
 
-`Observable.mergeDelayError()` works much like `Observable.merge()`. The exception is when one of the Observables being merged throws an error. If this happens with `Observable.merge()`, the merged Observable will immediately throw an error itself (that is, it will call the `onError` closure of its observer). `Observable.mergeDelayError()`, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables being merged a chance to finish emitting their items, and will emit those itself, only calling `onError` when all of the other merged Observables have finished.
+`Observable.mergeDelayError()` works much like `Observable.merge()`. The exception is when one of the Observables being merged throws an error. If this happens with `Observable.merge()`, the merged Observable will immediately throw an error itself (that is, it will call the `onError` closure of its observer). `Observable.mergeDelayError()`, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables that it is merging a chance to finish emitting their items, and it will emit those itself, and will only call `onError` when all of the other merged Observables have finished.
 
-Because it is possible that more than one of the merged observables encountered an error, `Observable.mergeDelayError()` may pass information about multiple errors to the `onError` closure, which it will never call more than once. For this reason, if you want to know the nature of these errors, you should write the `onError` closure so that it accepts a parameter of the class `CompositeException`.
+Because it is possible that more than one of the merged observables encountered an error, `Observable.mergeDelayError()` may pass information about multiple errors to the `onError` closure (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
 
 ## zip()
 
-#### Combines sequences together via a provided function and emits values
+#### Combines sequences together via a provided closure and emits values based on the results of this closure
 
 [[images/rx-operators/zip.png]]
 
-The `zip()` method returns a Observable that applies a closure of your choosing to the combination of items emitted, in sequence, by two (or more) other Observables, with the results of this closure becoming the sequence emitted by the returned Observable. It applies this closure in strict sequence, so the first object emitted by the new Observable will be the result of the closure applied to the first object emitted by Observable #1 and the first object emitted by Observable #2; the second object emitted by the new Observable will be the result of the closure applied to the second object emitted by Observable #1 and the second object emitted by Observable #2; and so forth.
+The `zip()` method returns a Observable that applies a closure of your choosing to the combination of items emitted, in sequence, by two (or more) other Observables, with the results of this closure becoming the sequence emitted by the returned Observable. It applies this closure in strict sequence, so the first object emitted by the new zip-Observable will be the result of the closure applied to the first object emitted by Observable #1 and the first object emitted by Observable #2; the second object emitted by the new zip-Observable will be the result of the closure applied to the second object emitted by Observable #1 and the second object emitted by Observable #2; and so forth.
 
 ```groovy
 myZipObservable = Observable.zip(observable1, observable2, { response1, response2 -> some operation on those responses } );
@@ -104,8 +102,8 @@ myZipObservable = Observable.zip(observable1, observable2, { response1, response
 There are also versions of `zip()` that accept three or four Observables:
 
 ```groovy
-myZipObservable = Observable.zip(observable1, observable2, observable3 { response1, response2, response3 -> some operation on those responses });
-myZipObservable = Observable.zip(observable1, observable2, observable3, observable4 { response1, response2, response3, response4 -> some operation on those responses });
+myZip3Observable = Observable.zip(observable1, observable2, observable3 { response1, response2, response3 -> some operation on those responses });
+myZip4Observable = Observable.zip(observable1, observable2, observable3, observable4 { response1, response2, response3, response4 -> some operation on those responses });
 ```
 
 For example, the following code zips together two Observables, one of which emits a series of odd integers and the other of which emits a series of even integers:
