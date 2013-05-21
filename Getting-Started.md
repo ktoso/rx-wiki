@@ -17,7 +17,7 @@ and for Ivy:
 <dependency org="com.netflix.rxjava" name="rxjava-core" rev="0.5.0" />
 ```
 
-If you need to download the jars instead of using a build system, create a Maven pom file like this with the desired version:
+If you need to download the jars instead of using a build system, create a Maven `pom` file like this with the desired version:
 
 ```xml
 <?xml version="1.0"?>
@@ -45,7 +45,7 @@ Then execute:
 $ mvn -f download-rxjava-pom.xml dependency:copy-dependencies
 ```
 
-That command downloads rxjava-core-*.jar and its dependencies into ./target/dependency/.
+That command downloads `rxjava-core-*.jar` and its dependencies into `./target/dependency/`.
 
 You need Java 6 or later.
 
