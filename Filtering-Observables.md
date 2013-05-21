@@ -151,6 +151,26 @@ If you call `take(n)` on a Observable, and that Observable emits _fewer_ than _n
 
 ## takeWhile()
 #### emit items emitted an Observable as long as a specified condition is true
+The `takeWhile()` method returns an Observable that mirrors the behavior of the source Observable until such time as a closure applied to an object emitted by that observable returns `false`, whereupon the new Observable calls `onCompleted()`.
+
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
+  [onNext:{ response.getWriter().println( it ); },
+   onCompleted:{ response.getWriter().println( "Sequence complete" ); },
+   onError:{ response.getWriter().println( "Error encountered" ); } ]
+);
+```
+```
+1
+2
+3
+4
+5
+6
+Sequence complete
+```
 
 ## takeWhileWithIndex()
 #### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
