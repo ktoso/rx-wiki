@@ -1,9 +1,17 @@
 This section explains various utility operators for working with Observables.
 
+* **`toList()`** — collect all elements from an Observable and emit as a single List
+* **`toSortedList()`** — collect all elements from an Observable and emit as a single, sorted List
+* **`materialize()`** — convert an Observable into a list of Notifications
+* **`dematerialize()`** — convert a materialized Observable back into its non-materialized form
+* **`all()`** — determine whether all items emitted by an Observable meet some criteria
+* **`finallyDo()`** — register an action to take when an Observable completes
+* **`sequenceEqual()`** — determine whether two Observable sequences are identical
+* **`synchronize()`** — force a poorly-behaving Observable to be well-behaved
+* **`timestamp()`** — attach a timestamp to every object emitted by an Observable
 
 ## toList()
-
-#### Collect all elements and emit as a single List
+#### collect all elements from an Observable and emit as a single List
 
 [[images/rx-operators/toList.png]]
 
@@ -41,8 +49,7 @@ numbers.toList() ...
 ```
 
 ## toSortedList()
-
-#### Collect all elements and emit as a single sorted List
+#### collect all elements emitted by an Observable and emit this as a single sorted List
 
 [[images/rx-operators/toSortedList.png]]
 
@@ -75,11 +82,8 @@ you could instead write
 numbers.toSortedList( ) ...
 ```
 
-
-
 ## materialize()
-
-#### Convert an Observable into a list of Notifications
+#### convert an Observable into a list of Notifications
 
 [[images/rx-operators/materialize.png]]
 
@@ -116,4 +120,20 @@ in the above example, you could also write
 numbers.materialize() ...
 ```
 
+## dematerialize()
+#### convert a materialized Observable back into its non-materialized form
 
+## all()
+#### determine whether all items emitted by an Observable meet some criteria
+
+## finallyDo()
+#### register an action to take when an Observable completes
+
+## sequenceEqual()
+#### determine whether two Observable sequences are identical
+
+## synchronize()
+#### force a poorly-behaving Observable to be well-behaved
+
+## timestamp()
+#### attach a timestamp to every object emitted by an Observable
