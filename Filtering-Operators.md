@@ -36,18 +36,18 @@ numbers.filter({ 0 == (it % 2) }) ...
 ```
 
 
-## last()
+## takeLast()
 
-#### Only emit the last element emitted by an Observable
+#### Only emit the last _n_ elements emitted by an Observable
 
 [[images/rx-operators/last.png]]
 
-To convert a Observable that emits several objects into one that only emits the last of these objects before completing, use the `last()` method. For instance, in the following code, `last()` emits only the last integer in the list of integers represented by `numbers`:
+To convert a Observable that emits several objects into one that only emits the last _n_ of these objects before completing, use the `takeLast()` method. For instance, in the following code, `takeLast()` emits only the last integer in the list of integers represented by `numbers`:
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-Observable.last(numbers).subscribe(
+Observable.takeLast(numbers,1).subscribe(
   [ onNext:{ response.getWriter().println(it); },
     onCompleted:{ response.getWriter().println("Sequence complete"); },
     onError:{ response.getWriter().println("Error encountered"); } ]
@@ -57,18 +57,17 @@ Observable.last(numbers).subscribe(
 Sequence complete
 ```
 
-In addition to calling `last()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
+In addition to calling `takeLast()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
 
 ```groovy
-Observable.last(numbers) ...
+Observable.takeLast(numbers,1) ...
 ```
  
 you could instead write
 
 ```groovy
-numbers.last() ...
+numbers.takeLast(1) ...
 ```
-
 
 ## skip()
 
