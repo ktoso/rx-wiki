@@ -167,6 +167,8 @@ The `timestamp()` method converts an Observable that emits objects of type _T_ i
 ## onErrorResumeNext()
 #### instructs an Observable to attempt to continue emitting values after it encounters an error
 [[images/rx-operators/onErrorResumeNext.png]]
+The `onErrorResumeNext()` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError()` in which case, rather than propagating that error to the Observer, `onErrorResumeNext()` will instead begin mirroring a second, backup Observable.
 
 ## onErrorReturn()
 #### instructs an Observable to emit a particular value to an observer’s onNext closure when it encounters an error
+The `onErrorReturn()` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError()` in which case, rather than propagating that error to the Observer, `onErrorReturn()` will instead emit a specified object and call the Observer's `onCompleted()` closure.
