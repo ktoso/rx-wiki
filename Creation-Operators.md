@@ -1,14 +1,14 @@
 # Creating Observables
 
-This section explains how to create Observables either explicitly (`Observable.create()`) or by converting an existing data structure into an Observable (`Observable.toObservable()`, `Observable.from()`, or `Observable.just()`).
+This section explains how to create Observables either explicitly (`create()`) or by converting an existing data structure into an Observable (`toObservable()`, `from()`, or `just()`).
 
-## Observable.toObservable() & Observable.from()
+## toObservable() & from()
 
 #### Make an Observable from an Iterable.
 
 [[images/rx-operators/toObservable.png]]
 
-Any object that supports the `Iterable<>` interface can be converted into a Observable that emits each iterable item in the object, simply by passing the object into the `Observable.toObservable( )` method, for example:
+Any object that supports the `Iterable<>` interface can be converted into a Observable that emits each iterable item in the object, simply by passing the object into the `toObservable( )` method, for example:
 
 ```groovy
 myObservable = Observable.toObservable(myIterable);
@@ -23,13 +23,13 @@ myArrayObservable = Observable.toObservable(myArray);
 
 This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by a Observable.
 
-## Observable.just()
+## just()
 
 #### Make any object into a Observable.
 
 [[images/rx-operators/just.png]]
 
-To convert any object into a Observable that emits that object, pass that object into the `Observable.just()` method.
+To convert any object into a Observable that emits that object, pass that object into the `just()` method.
 
 ```groovy
 // Observable emits "some string" as a single item
@@ -38,15 +38,15 @@ def observableThatEmitsAString = Observable.just("some string");
 def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
 ```
 
-This is similar to the `Observable.toObservable()` method, except that `Observable.toObservable()` will convert an iterable object into a Observable that emits each of the items in the iterable, one at a time, while the `Observable.just()` method would convert the iterable into a Observable that emits the entire iterable as a single item.
+This is similar to the `toObservable()` method, except that `toObservable()` will convert an iterable object into a Observable that emits each of the items in the iterable, one at a time, while the `just()` method would convert the iterable into a Observable that emits the entire iterable as a single item.
 
-## Observable.create( )
+## create( )
 
 #### Create an explicit Observable
 
 [[images/rx-operators/create.png]]
 
-You can create an Observable from scratch, by using the `Observable.create()` method. You pass this method a closure that accepts as a parameter the Observer that is passed to a Observable’s `subscribe()` method. Write the closure you pass to `Observable.create()` so that it behaves as an Observable --- calling the passed-in Observer’s `onNext()`, `onError()`, and `onCompleted()` methods appropriately. For example:
+You can create an Observable from scratch, by using the `create()` method. You pass this method a closure that accepts as a parameter the Observer that is passed to a Observable’s `subscribe()` method. Write the closure you pass to `create()` so that it behaves as an Observable --- calling the passed-in Observer’s `onNext()`, `onError()`, and `onCompleted()` methods appropriately. For example:
 
 ```groovy
 def myObservable = Observable.create({ anObserver ->
