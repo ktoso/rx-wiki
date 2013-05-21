@@ -5,8 +5,7 @@ This section explains operators you can use to filter and select elements from O
 * **`skip()`** — ignore the first _n_ elements emitted by an Observable
 * **`take()`** — emit only the first _n_ elements emitted by an Observable
 * **`sample()`** — emit items emitted by an Observable at a particular time interval
-* **`takeWhile()`** — emit items emitted an Observable as long as a specified condition is true
-* **`takeWhileWithIndex()`** — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
+* **`takeWhile()` and `takeWhileWithIndex()`** — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
 
 ## filter() or where()
 #### filter elements from an Observable sequence
@@ -149,8 +148,8 @@ If you call `take(n)` on a Observable, and that Observable emits _fewer_ than _n
 ## sample()
 #### emit items emitted by an Observable at a particular time interval
 
-## takeWhile()
-#### emit items emitted an Observable as long as a specified condition is true
+## takeWhile() and takeWhileWithIndex()
+#### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
 The `takeWhile()` method returns an Observable that mirrors the behavior of the source Observable until such time as a closure applied to an object emitted by that observable returns `false`, whereupon the new Observable calls `onCompleted()`.
 
 ```groovy
@@ -172,5 +171,21 @@ numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
 Sequence complete
 ```
 
-## takeWhileWithIndex()
-#### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
+The `takeWhileWithIndex()` method is similar, but your closure takes an additional parameter: the (zero-based) index of the object being emitted by the source Observable.
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.takeWhileWithIndex({ it, index -> ((it < 6) && (index < 5)) }).subscribe(
+  [onNext:{ response.getWriter().println( it ); },
+   onCompleted:{ response.getWriter().println( "Sequence complete" ); },
+   onError:{ response.getWriter().println( "Error encountered" ); } ]
+);
+```
+```
+1
+2
+3
+4
+5
+Sequence complete
+```
