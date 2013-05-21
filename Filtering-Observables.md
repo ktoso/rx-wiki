@@ -1,8 +1,15 @@
 This section explains operators you can use to filter and select elements from Observables.
 
-## filter() or where()
+* **`filter()` or `where()`** — filter elements emitted by an Observable
+* **`takeLast()`** — only emit the last _n_ elements emitted by an Observable
+* **`skip()`** — ignore the first _n_ elements emitted by an Observable
+* **`take()`** — emit only the first _n_ elements emitted by an Observable
+* **`sample()`** — emit items emitted by an Observable at a particular time interval
+* **`takeWhile()`** — emit items emitted an Observable as long as a specified condition is true
+* **`takeWhileWithIndex()`** — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
 
-#### Filter elements from an Observable sequence
+## filter() or where()
+#### filter elements from an Observable sequence
 
 [[images/rx-operators/filter.png]]
 
@@ -35,10 +42,8 @@ you could instead write
 numbers.filter({ 0 == (it % 2) }) ...
 ```
 
-
 ## takeLast()
-
-#### Only emit the last _n_ elements emitted by an Observable
+#### only emit the last _n_ elements emitted by an Observable
 
 [[images/rx-operators/last.png]]
 
@@ -70,8 +75,7 @@ numbers.takeLast(1) ...
 ```
 
 ## skip()
-
-#### Ignore the first _n_ elements emitted by an Observable
+#### ignore the first _n_ elements emitted by an Observable
 
 [[images/rx-operators/skip.png]]
 
@@ -108,8 +112,7 @@ numbers.skip(3) ...
 ```
 
 ## take()
-
-#### Emit only the first _n_ elements from an Observable sequence before completing
+#### emit only the first _n_ elements from an Observable sequence
 
 [[images/rx-operators/take.png]]
 
@@ -142,3 +145,12 @@ numbers.take(3) ...
 ```
 
 If you call `take(n)` on a Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
+
+## sample()
+#### emit items emitted by an Observable at a particular time interval
+
+## takeWhile()
+#### emit items emitted an Observable as long as a specified condition is true
+
+## takeWhileWithIndex()
+#### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
