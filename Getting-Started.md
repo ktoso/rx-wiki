@@ -1,6 +1,6 @@
 ## Getting Binaries
 
-Binaries and dependency information for Maven, Ivy, Gradle and others can be found at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.netflix.rxjava%22%20AND%20a%3A%22rxjava-core%22).
+You can find binaries and dependency information for Maven, Ivy, Gradle, and others at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.netflix.rxjava%22%20AND%20a%3A%22rxjava-core%22).
 
 Example for Maven:
 
@@ -42,16 +42,16 @@ If you need to download the jars instead of using a build system, create a Maven
 Then execute:
 
 ```
-mvn -f download-rxjava-pom.xml dependency:copy-dependencies
+$ mvn -f download-rxjava-pom.xml dependency:copy-dependencies
 ```
 
-It will download rxjava-core-*.jar and its dependencies into ./target/dependency/.
+That command downloads rxjava-core-*.jar and its dependencies into ./target/dependency/.
 
 You need Java 6 or later.
 
 ## Hello World!
 
-The simplest use of RxJava is as follows:
+The following are RxJava implementations of “Hello World” in Java, Groovy, and Clojure:
 
 In Java =>
 ```java
@@ -82,13 +82,13 @@ In Clojure =>
   (-> (Observable/toObservable &rest)
     (.subscribe #(println (str "Hello " % "!")))))
 ```
-More examples and information can be found in the [[How To Use]] section.
+You can find more examples and information in the [[How To Use]] section.
 
-Example source code can be found in the [rxjava-examples](../tree/master/rxjava-examples/src/main/) module.
+You can find example source code in the [rxjava-examples](../tree/master/rxjava-examples/src/main/) module.
 
 ## Building
 
-To checkout the source and build:
+To check out and build the RxJava source, issue the following commands:
 
 ```
 $ git clone git@github.com:Netflix/RxJava.git
@@ -96,7 +96,7 @@ $ cd RxJava/
 $ ./gradlew build
 ```
 
-To do a clean build:
+To do a clean build, issue the following command:
 
 ```
 $ ./gradlew clean build
@@ -127,7 +127,7 @@ BUILD SUCCESSFUL
 Total time: 30.758 secs
 ```
 
-On a clean build you will see the unit tests be run and look something like this:
+On a clean build you will see the unit tests run. They will look something like this:
 
 ```
 > Building > :rxjava-core:test > 91 tests completed
