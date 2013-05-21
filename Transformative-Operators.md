@@ -1,8 +1,8 @@
-This section explains operators used for transforming elements of a sequence.
+This section explains Rx operators you can use to transform elements emitted by an Observable sequence.
 
 ## map() & select()
 
-#### Transform an element via a given function
+#### Transform the elements emitted by an Observable by applying a closure to each of them
 
 [[images/rx-operators/map.png]]
 
@@ -37,17 +37,15 @@ you could instead write
 numbers.map({ it * it }) ...
 ```
 
-
-
 ## mapMany()/selectMany() & mapManyDelayError()
 
-#### Transform elements into Observables then flatten into a sequence
+#### Transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence
 
 [[images/rx-operators/mapMany.png]]
 
-The `mapMany()` method creates a new Observable sequence by applying a closure that you supply to each object in the original Observable sequence, where that closure is itself a Observable that emits objects, and then merges the results of that closure applied to every item emitted by the original Observable, emitting these merged results as its own sequence.
+The `mapMany()` method creates a new Observable sequence by applying a closure that you supply to each object in the original Observable sequence, where that closure is itself a Observable that emits elements, and then merges the results of that closure applied to every item emitted by the original Observable, emitting these merged results as its own sequence.
 
-It is useful, for example, when you have a Observable that emits a series of objects that themselves have Observable members or are in other ways transformable into Observables, so that you can create a new Observable that emits the complete collection of items emitted by the sub-Observables of these objects.
+This method is useful, for example, when you have a Observable that emits a series of objects that themselves have Observable members or are in other ways transformable into Observables, so that you can create a new Observable that emits the complete collection of items emitted by the sub-Observables of these objects.
 
 ```groovy
 // this closure is a Observable that emits three numbers
@@ -73,22 +71,19 @@ numbers.mapMany(multiples).subscribe(
 Sequence complete
 ```
 
-If any of the individual Observables mapped to the emissions from the source Observable in `Observable.mapMany()` aborts by calling `onError`, the `Observable.mapMany()` call itself will immediately abort and call `onError`. If you would prefer that the map-many continue emitting the results of the remaining, error-free Observables before reporting the error, use `Observable.mapManyDelayError()` instead.
+If any of the individual Observables mapped to the emissions from the source Observable in `Observable.mapMany()` aborts by calling `onError`, the `Observable.mapMany()` call itself will immediately abort and call `onError`. If you would prefer that the map-many operation continue emitting the results of the remaining, error-free Observables before reporting the error, use `Observable.mapManyDelayError()` instead.
 
-Because it is possible that more than one of the individual observables encountered an error, `Observable.mapManyDelayError()` may pass information about multiple errors to the `onError` closure, which it will never call more than once. For this reason, if you want to know the nature of these errors, you should write the `onError` closure so that it accepts a parameter of the class `CompositeException`.
-
-
-
+Because it is possible for more than one of the individual Observables to encounter an error, `Observable.mapManyDelayError()` may pass information about multiple errors to the `onError` closure of its subscribers (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
 
 ## reduce()
 
-#### Apply a function to each element and emit the final accumulated value
+#### Apply a closure to each emitted element, sequentially, and emit only the final accumulated value
 
 [[images/rx-operators/reduce.png]]
 
 The `reduce()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of _that_ closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your closure as the sole output from the returned Observable.
 
-This technique, which is called "reduce" here, is sometimes called "fold," "accumulate," "compress," or "inject" in other programming contexts. 
+This technique, which is called “reduce” here, is sometimes called “fold,” “accumulate,” “compress,” or “inject” in other programming contexts. 
 
 For example, the following code uses `reduce()` to compute, and then emit as an Observable, the sum of the numbers emitted by the source Observable:
 
@@ -119,20 +114,20 @@ numbers.reduce({ a, b -> a+b }) ...
 There is also a version of `reduce()` to which you can pass a seed value in addition to an accumulator function:
 
 ```groovy
-Observable.reduce(observable, initial_seed, accumulator_closure)
+Observable.reduce(my_observable, initial_seed, accumulator_closure)
 or
-observable.reduce(initial_seed, accumulator_closure)
+my_observable.reduce(initial_seed, accumulator_closure)
 ```
 
 ## scan()
 
-#### Apply a function to each element of a sequence and emit each successive value
+#### Apply a closure to each element of a sequence and emit each successive value
 
 [[images/rx-operators/scan.png]]
 
-The `scan()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of that closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. It emits the result of each of these iterations as a sequence from the returned Observable. This sort of closure is sometimes called an _accumulator_.
+The `scan()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of that closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. It emits the result of each of these iterations as a sequence from the returned Observable. This sort of closure is sometimes called an “accumulator.”
 
-For example, the following code takes a Observable that emits a consecutive sequence of *n* integers starting with 1 and converts it into a Observable that emits the first *n* [triangular numbers](http://en.wikipedia.org/wiki/Triangular_number):
+For example, the following code takes a Observable that emits a consecutive sequence of _n_ integers starting with 1 and converts it into a Observable that emits the first _n_ [triangular numbers](http://en.wikipedia.org/wiki/Triangular_number):
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5]);
@@ -165,10 +160,9 @@ numbers.scan({ a, b -> a+b }) ...
 There is also a version of `scan()` to which you can pass a seed value in addition to an accumulator function:
 
 ```groovy
-Observable.scan(observable, initial_seed, accumulator_closure)
+Observable.scan(my_observable, initial_seed, accumulator_closure)
 or
-observable.scan(initial_seed, accumulator_closure)
+my_observable.scan(initial_seed, accumulator_closure)
 ```
 
 Note that if you pass a seed value to `scan()`, it will emit the seed itself as its first value.
-
