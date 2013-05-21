@@ -9,6 +9,12 @@ This section explains various utility operators for working with Observables.
 * **`sequenceEqual()`** — determine whether two Observable sequences are identical
 * **`synchronize()`** — force a poorly-behaving Observable to be well-behaved
 * **`timestamp()`** — attach a timestamp to every object emitted by an Observable
+* **`cache()`** — 
+* **`defer()`** — 
+* **`observeOn()`** — 
+* **`subscribeOn()`** — 
+* **`onErrorResumeNext()`** — instructs an Observable to continue emitting values after it encounters an error
+* **`onErrorReturn()`** — instructs an Observable to emit a particular value when it encounters an error
 
 ## toList()
 #### collect all elements from an Observable and emit as a single List
@@ -137,3 +143,21 @@ numbers.materialize() ...
 
 ## timestamp()
 #### attach a timestamp to every object emitted by an Observable
+
+## cache()
+####
+
+## defer()
+####
+
+## observeOn()
+####
+
+## subscribeOn()
+####
+
+## onErrorResumeNext()
+#### instructs an Observable to attempt to continue emitting values after it encounters an error
+
+## onErrorReturn()
+#### instructs an Observable to emit a particular value to an observer’s onNext closure when it encounters an error

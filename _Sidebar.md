@@ -7,6 +7,8 @@
   * [[Filtering Observables]]
   * [[Combining Observables]]
   * [[Observable Utility Operators]]
+  * [[Connectable Observable Operators]]
+  * [[Blocking Observable Operators]]
 
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
