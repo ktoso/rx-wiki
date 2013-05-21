@@ -1,5 +1,4 @@
-This section explains operators for filtering and selecting elements.
-
+This section explains operators you can use to filter and select elements from Observables.
 
 ## filter()
 
@@ -7,7 +6,7 @@ This section explains operators for filtering and selecting elements.
 
 [[images/rx-operators/filter.png]]
 
-You can filter a Observable, discarding any values that do not meet some test, by passing a filtering closure into the `Observable.filter()` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
+You can filter a Observable, discarding any values that do not meet some test, by passing a filtering closure into the `filter()` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -37,10 +36,9 @@ numbers.filter({ 0 == (it % 2) }) ...
 ```
 
 
-
 ## last()
 
-#### Only emit the last element
+#### Only emit the last element emitted by an Observable
 
 [[images/rx-operators/last.png]]
 
@@ -72,15 +70,13 @@ numbers.last() ...
 ```
 
 
-
-
 ## skip()
 
-#### Ignore first *n* elements
+#### Ignore the first _n_ elements emitted by an Observable
 
 [[images/rx-operators/skip.png]]
 
-You can ignore the first *n* items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip(n)` method.
+You can ignore the first _n_ items emitted by a Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip(n)` method.
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -114,11 +110,11 @@ numbers.skip(3) ...
 
 ## take()
 
-#### Take *n* elements then unsubscribe from the sequence
+#### Emit only the first _n_ elements from an Observable sequence before completing
 
 [[images/rx-operators/take.png]]
 
-You can choose to pay attention only to the first *n* values emitted by a Observable by calling its `take(n)` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of *n* times before calling `onCompleted`. For example,
+You can choose to pay attention only to the first _n_ values emitted by a Observable by calling its `take(n)` method. That method returns a Observable that will call a subscribing observer’s `onNext` closure a maximum of _n_ times before calling `onCompleted`. For example,
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -146,4 +142,4 @@ you could instead write
 numbers.take(3) ...
 ```
 
-If you call `take(n)` on a Observable, and that Observable emits _fewer_ than *n* items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
+If you call `take(n)` on a Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
