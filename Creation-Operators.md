@@ -1,8 +1,8 @@
 # Creating Observables
 
-This section explains how to create Observables either explicitly or by wrapping an existing data structure.
+This section explains how to create Observables either explicitly (`Observable.create()`) or by converting an existing data structure into an Observable (`Observable.toObservable()`, `Observable.from()`, or `Observable.just()`).
 
-## toObservable() & from()
+## Observable.toObservable() & Observable.from()
 
 #### Make an Observable from an Iterable.
 
@@ -46,16 +46,16 @@ This is similar to the `Observable.toObservable()` method, except that `Observab
 
 [[images/rx-operators/create.png]]
 
-You can create an Observable from scratch, by using the `Observable.create()` method. You pass this method a closure that accepts as a parameter the Observer that is passed to a Observable’s `subscribe()` method. Write the closure you pass to `Observable.create()` so that it behaves as an Observable --- calling the passed-in `onNext`, `onError`, and `onCompleted` methods appropriately. For example:
+You can create an Observable from scratch, by using the `Observable.create()` method. You pass this method a closure that accepts as a parameter the Observer that is passed to a Observable’s `subscribe()` method. Write the closure you pass to `Observable.create()` so that it behaves as an Observable --- calling the passed-in Observer’s `onNext()`, `onError()`, and `onCompleted()` methods appropriately. For example:
 
 ```groovy
-def myObservable = Observable.create({ m ->
-  m.onNext('One');
-  m.onNext('Two');
-  m.onNext('Three');
-  m.onNext('Four');
-  m.onCompleted();
+def myObservable = Observable.create({ anObserver ->
+  anObserver.onNext('One');
+  anObserver.onNext('Two');
+  anObserver.onNext('Three');
+  anObserver.onNext('Four');
+  anObserver.onCompleted();
 })
 ```
 
-NOTE: A well-formed Observable _must_ call either the observer’s `onCompleted()` method exactly once or its `onError()` method exactly once.
+**NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted()` method exactly once or its `onError()` method exactly once.
