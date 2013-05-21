@@ -128,21 +128,29 @@ numbers.materialize() ...
 
 ## dematerialize()
 #### convert a materialized Observable back into its non-materialized form
+You can undo the effects of `materialize()` by means of the `dematerialize()` method, which will emit the items from the Observable as though `materialize()` had not been applied to it.
 
 ## all()
 #### determine whether all items emitted by an Observable meet some criteria
+Pass an closure to `all()` that accepts an object emitted by the source Observable and returns a boolean value based on an evaluation of that object, and `all()` will return `true` if and only if that closure returned true for every object emitted by the source Observable.
 
 ## finallyDo()
 #### register an action to take when an Observable completes
+You can use the `finallyDo()` method of an Observable to register an action (a closure that implements `Action0`) that RxJava will invoke when that Observable calls either the `onCompleted()` or `onError()` method of its Observer.
 
 ## sequenceEqual()
 #### determine whether two Observable sequences are identical
+Pass `sequenceEqual()` two Observables, and it will compare the objects emitted by each Observable, and return `true` if and only if both Observables emit the same objects in the same order. You can optionally pass a third parameter: a closure that accepts two objects and returns `true` if they are equal according to a standard of your choosing.
 
 ## synchronize()
 #### force a poorly-behaving Observable to be well-behaved
+The Observables implemented by RxJava are well-behaved (except for the test observable returned by `never()`), which is to say they call an observer's `onNext()` closure zero or more times, and then call either the observer's `onCompleted()` closure or the observer's `onError()` closure (but never both) exactly once, and then call none of these closures thereafter.
+
+It is possible that you may encounter a poorly-behaved Observable. If so, you can force it to be well-behaved by applying the `synchronize()` method to it.
 
 ## timestamp()
 #### attach a timestamp to every object emitted by an Observable
+The `timestamp()` method converts an Observable that emits objects of type _T_ into one that emits objects of type `Timestamped<T>`, where each such object is stamped with the time at which it was emitted.
 
 ## cache()
 ####
@@ -158,6 +166,7 @@ numbers.materialize() ...
 
 ## onErrorResumeNext()
 #### instructs an Observable to attempt to continue emitting values after it encounters an error
+[[images/rx-operators/onErrorResumeNext.png]]
 
 ## onErrorReturn()
 #### instructs an Observable to emit a particular value to an observer’s onNext closure when it encounters an error
