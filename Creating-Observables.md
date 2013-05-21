@@ -67,6 +67,15 @@ def myObservable = Observable.create({ anObserver ->
 
 ## `range()`
 #### create an Observable that emits a range of sequential integers
+To create an Observable that emits a range of sequential integers, pass the starting integer and the number of integers to emit to the `range()` method.
+```groovy
+def myObservable = Observable.range(5, 3);
+// myObservable will emit the integers 5, 6, and 7 before completing
+```
 
 ## `empty()`, `error()`, and `never()`
 #### Observables that can be useful for testing purposes
+
+* `empty()` creates an Observable that does not emit any objects but instead immediately calls the observer's `onCompleted()` closure.
+* `error()` creates an Observable that does not emit any objects but instead immediately calls the observer's `onError()` closure.
+* `never()` creates an Observable that does not emit any objects, nor does it call either the observer's `onCompleted()` or `onError()` closures.
