@@ -63,7 +63,7 @@ def myObservable = Observable.create({ anObserver ->
 })
 ```
 
-**NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted()` method exactly once or its `onError()` method exactly once.
+**NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted()` method exactly once or its `onError()` method exactly once, and must not thereafter call any of the observer’s other methods.
 
 ## `range()`
 #### create an Observable that emits a range of sequential integers
@@ -78,6 +78,6 @@ def myObservable = Observable.range(5, 3);
 
 [[images/rx-operators/empty.png]]
 
-* `empty()` creates an Observable that does not emit any objects but instead immediately calls the observer's `onCompleted()` closure.
-* `error()` creates an Observable that does not emit any objects but instead immediately calls the observer's `onError()` closure.
-* `never()` creates an Observable that does not emit any objects, nor does it call either the observer's `onCompleted()` or `onError()` closures.
+* `empty()` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onCompleted()` closure.
+* `error()` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onError()` closure.
+* `never()` creates an Observable that does not emit any objects, nor does it call either the observer’s `onCompleted()` or `onError()` closures.
