@@ -2,11 +2,11 @@
 * [[How To Use]]
 
 * [[Observable]]
-  * [[Creation|Creation-Operators]]
-  * [[Transformative|Transformative-Operators]]
-  * [[Filtering|Filtering-Operators]]
-  * [[Combinatorial|Combinatorial-Operators]]
-  * [[Utility|Utility-Operators]]
+  * [[Creating Observables]]
+  * [[Transforming Observables]]
+  * [[Filtering Observables]]
+  * [[Combining Observables]]
+  * [[Observable Utility Operators]]
 
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
