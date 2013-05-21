@@ -1,10 +1,17 @@
 # Creating Observables
 
-This section explains how to create Observables either explicitly (`create()`) or by converting an existing data structure into an Observable (`toObservable()`, `from()`, or `just()`).
+This section explains methods that create Observables.
+
+* **`toObservable()` or `from()`** — convert an Iterable into an Observable
+* **`just()`** — convert an object into an Observable that emits that object
+* **`create()`** — create an Observable from scratch by means of a closure
+* **`range()`** — create an Observable that emits a range of sequential integers
+* **`empty()`** — create an Observable that emits nothing and then calls `onCompleted()`
+* **`error()`** — create an Observable that emits nothing and then calls `onError()`
+* **`never()`** — create an Observable that emits nothing at all
 
 ## toObservable() & from()
-
-#### Make an Observable from an Iterable.
+#### convert an Iterable into an Observable
 
 [[images/rx-operators/toObservable.png]]
 
@@ -24,8 +31,7 @@ myArrayObservable = Observable.toObservable(myArray);
 This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by a Observable.
 
 ## just()
-
-#### Make any object into a Observable.
+#### convert an object into an Observable that emits that object
 
 [[images/rx-operators/just.png]]
 
@@ -41,8 +47,7 @@ def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]);
 This is similar to the `toObservable()` method, except that `toObservable()` will convert an iterable object into a Observable that emits each of the items in the iterable, one at a time, while the `just()` method would convert the iterable into a Observable that emits the entire iterable as a single item.
 
 ## create( )
-
-#### Create an explicit Observable
+#### create an Observable from scratch by means of a closure
 
 [[images/rx-operators/create.png]]
 
@@ -59,3 +64,9 @@ def myObservable = Observable.create({ anObserver ->
 ```
 
 **NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted()` method exactly once or its `onError()` method exactly once.
+
+## `range()`
+#### create an Observable that emits a range of sequential integers
+
+## `empty()`, `error()`, and `never()`
+#### Observables that can be useful for testing purposes
