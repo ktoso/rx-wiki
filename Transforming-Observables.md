@@ -1,8 +1,14 @@
 This section explains Rx operators you can use to transform elements emitted by an Observable sequence.
 
-## map() or select()
+* **`map()`** — transform the elements emitted by an Observable by applying a closure to each of them
+* **`mapMany()` or `flatMap()`** — transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence
+* **`mapManyDelayError()`** — transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence, waiting to report errors until all error-free observables have a chance to complete
+* **`reduce()` or `aggregate()`** — apply a closure to each emitted element, sequentially, and emit only the final accumulated value
+* **`scan()`** — apply a closure to each element of a sequence, sequentially, and emit each successive value
+* **`groupBy()`** — divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
 
-#### Transform the elements emitted by an Observable by applying a closure to each of them
+## map()
+#### transform the elements emitted by an Observable by applying a closure to each of them
 
 [[images/rx-operators/map.png]]
 
@@ -37,8 +43,7 @@ you could instead write
 numbers.map({ it * it }) ...
 ```
 
-## mapMany() or selectMany() or flatMap() & mapManyDelayError()
-
+## mapMany() or flatMap() & mapManyDelayError()
 #### Transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence
 
 [[images/rx-operators/mapMany.png]]
@@ -76,7 +81,6 @@ If any of the individual Observables mapped to the emissions from the source Obs
 Because it is possible for more than one of the individual Observables to encounter an error, `Observable.mapManyDelayError()` may pass information about multiple errors to the `onError` closure of its subscribers (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
 
 ## reduce() or aggregate()
-
 #### Apply a closure to each emitted element, sequentially, and emit only the final accumulated value
 
 [[images/rx-operators/reduce.png]]
@@ -120,7 +124,6 @@ my_observable.reduce(initial_seed, accumulator_closure)
 ```
 
 ## scan()
-
 #### Apply a closure to each element of a sequence and emit each successive value
 
 [[images/rx-operators/scan.png]]
@@ -165,4 +168,7 @@ or
 my_observable.scan(initial_seed, accumulator_closure)
 ```
 
-Note that if you pass a seed value to `scan()`, it will emit the seed itself as its first value.
+**Note:** if you pass a seed value to `scan()`, it will emit the seed itself as its first value.
+
+## groupBy()
+#### divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
