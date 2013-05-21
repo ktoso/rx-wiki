@@ -1,8 +1,14 @@
 This section explains operators you can use to combine multiple Observable sequences.
 
-## concat()
+* **`concat()`** — concatenate two or more Observables sequentially
+* **`merge()`** — combine multiple Observables into one
+* **`mergeDelayError()`** — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
+* **`zip()`** — combine Observables together via a provided closure and emit values based on the results of this closure
+* **`switchDo()`** — convert a set of Observables into an Observable that represents the most-recently published of the set
+* **`takeUntil()`** — emits the values from the source Observable until another Observable emits a value
 
-#### Concatenate two or more Observables sequentially
+## concat()
+#### concatenate two or more Observables sequentially
 
 [[images/rx-operators/concat.png]]
 
@@ -36,10 +42,8 @@ Sequence complete
 
 Instead of passing multiple Observables into `Observable.concat()`, you could also pass in a `List<>` of Observables, or even a Observable that emits Observables, and `Observable.concat()` will concatenate their output into the output of a single Observable.
 
-
 ## merge()
-
-#### Combine multiple Observables into one
+#### combine multiple Observables into one
 
 [[images/rx-operators/merge.png]]
 
@@ -78,8 +82,7 @@ Instead of passing multiple Observables into `Observable.merge()`, you could als
 If any of the individual Observables passed into `Observable.merge()` aborts by calling `onError`, the `Observable.merge()` call itself will immediately abort and call `onError`. If you would prefer a merge that continues emitting the results of the remaining, error-free Observables before reporting the error, use `Observable.mergeDelayError()` instead.
 
 ## mergeDelayError()
-
-#### Combine multiple Observables into one but delay errors until completion
+#### combine multiple Observables into one but delay errors until completion
 
 [[images/rx-operators/mergeDelayError.png]]
 
@@ -88,8 +91,7 @@ If any of the individual Observables passed into `Observable.merge()` aborts by 
 Because it is possible that more than one of the merged observables encountered an error, `Observable.mergeDelayError()` may pass information about multiple errors to the `onError` closure (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
 
 ## zip()
-
-#### Combines sequences together via a provided closure and emits values based on the results of this closure
+#### combine Observables together via a provided closure and emit values based on the results of this closure
 
 [[images/rx-operators/zip.png]]
 
@@ -124,4 +126,10 @@ odd: 5, even: 6
 Sequence complete
 ```
 
-Note that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
+**Note:** that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
+
+## switchDo()
+#### convert a set of Observables into an Observable that represents the most-recently published of the set
+
+## takeUntil()
+#### emits the values from the source Observable until another Observable emits a value
