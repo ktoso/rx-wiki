@@ -1,11 +1,9 @@
 <a name='Hello-World'/>
 # Hello World!
 
-Requisite first example which creates an Observable from a list of Strings, subscribes to the Observable with a function that will print "Hello [arg]!" for each string.
+These example implementations of “Hello World” in Java, Groovy, and Clojure create an Observable from a list of Strings, and then subscribe to this Observable with a closure that prints “Hello _String_!” for each string emitted by the Observable.
 
-> This example is given first in Java and then other languages to provide comparison.
-
-> Subsequent examples will use a mixture of languages all of which can be found in the /src/examples folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors).
+> Subsequent examples will use a mixture of languages all of which can be found in the `/src/examples` folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors).
 
 ### Java
 
@@ -33,7 +31,7 @@ Hello George!
 ```groovy
 def hello(String[] names) {
     Observable.toObservable(names)
-        .subscribe({ println "Hello " + it + "!"})
+        .subscribe({ println "Hello " + it + "!" })
 }
 ```
 
@@ -60,11 +58,11 @@ Hello George!
 
 # Creating Observable Sequences
 
-An Observable sequence originates from two sources, an existing data structure or an Observable implementation which synchronously or asynchronously executes and passes data via `onNext()`.
+To create an Observable sequence, you can either implement an Observable object that (synchronously or asynchronously) executes and emits data by calling an observer's `onNext()` method, or you can convert an existing data structure into an Observable sequence by using some Observable methods that are designed for this purpose.
 
-## Existing Data
+## Creating Observable Sequences from Existing Data Structures
 
-The Observable `toObservable`, `from` and `just` methods allow converting any object, list or array of objects into an observable sequence:
+You use the Observable `toObservable()`, `from()`, and `just()` methods to convert objects, lists, or arrays of objects into Observable sequences:
 
 ```groovy
 Observable<Integer> o = Observable.toObservable(1, 2, 3, 4, 5, 6);
@@ -77,13 +75,13 @@ Observable<Integer> o = Observable.toObservable(list);
 Observable<String> o = Observable.just("one object");
 ```
 
-These sequences will synchronously invoke `onNext()` on an Observer when subscribed to for each object and then call `onCompleted()`.
+These converted Observables will synchronously invoke the `onNext()` method of any Observer that subscribes to them, for each object emitted by the Observable, and will then call the Observer’s `onCompleted()` method.
 
-## Observable Implementation
+## Implementing an Observable
 
-Asynchronous IO or computational operations or "infinite" streams of data can be implemented using the Observable class.
+You can implement asynchronous IO, computational operations, or “infinite” streams of data by using the Observable class.
 
-This can be done either by extending the Observable class or by using the `Observable.create()` factory method. 
+You can do this either by extending the Observable class or by using the `Observable.create()` factory method. 
 
 ### Synchronous Observable
 
@@ -115,9 +113,9 @@ customObservableBlocking().subscribe({ println(it)});
 
 ### Asynchronous Observable
 
-This first examples uses Groovy to create an Observable that emits a sequence of 75 strings.
+This first example uses Groovy to create an Observable that emits a sequence of 75 strings.
 
-It is purposefully written verbosely with static typing and implementation of the Func1 anonymous inner class for clarity around what's happening:
+It is written verbosely, with static typing and implementation of the `Func1` anonymous inner class, to make the example more clear:
 
 ```groovy
 /**
@@ -158,10 +156,10 @@ def customObservableNonBlocking() {
 }
 
 // To see output:
-customObservableNonBlocking().subscribe({ println(it)});
+customObservableNonBlocking().subscribe({ println(it) });
 ```
 
-Here is the same code in Clojure that uses a Future (instead of raw thread) and implemented more consisely:
+Here is the same code in Clojure that uses a Future (instead of raw thread) and is implemented more consisely:
 
 ```clojure
 (defn customObservableNonBlocking []
@@ -235,7 +233,7 @@ fetchWikipediaArticleAsynchronously("Tiger", "Elephant")
     .subscribe({ println "--- Article ---\n" + it.substring(0, 125)})
 ```
 
-Results
+Results:
 
 ```text
 --- Article ---
@@ -250,15 +248,15 @@ Results
 <title>Elephant - Wikipedia, the free encyclopedia</tit ...
 ```
 
-Note that all of the above examples ignore error handling for brevity, see below for examples including error handling.
+Note that all of the above examples ignore error handling, for brevity. See below for examples that include error handling.
 
 More information can be found on the [[Observable]] and [[Creation Operators|Creation-Operators]] pages.
 
 # Composition
 
-Rx allows chaining operators together to transform and compose sequences.
+RxJava allows you to chain operators together to transform and compose sequences.
 
-Using Groovy this first example uses a previously defined asynchronous sequence that emits 75 elements, skips the first 10 then takes the next 5 and transforms them before subscribing and printing the values:
+This first example, in Groovy, uses a previously defined, asynchronous sequence that emits 75 elements, skips the first 10 of these, then takes the next 5 and transforms them before subscribing and printing the values:
 
 ```groovy
 /**
@@ -282,7 +280,7 @@ onNext => anotherValue_13_transformed
 onNext => anotherValue_14_transformed
 ```
 
-This next example in Clojure consumes 3 asynchronous Observable sequences including a dependency from one to another and composes them into a single response object:
+This next example, in Clojure, consumes three asynchronous Observable sequences, including a dependency from one to another, and composes them into a single response object:
 
 ```clojure
 (defn getVideoForUser [userId videoId]
@@ -328,11 +326,11 @@ The response looks like this:
 
 # Error Handling
 
-Here is a revised version of the Wikipedia example above with error handling:
+Here is a revised version of the Wikipedia example shown above, but with error handling:
 
 ```groovy
 /**
- * Fetch a list of Wikipedia articles asynchronously with error handling.
+ * Fetch a list of Wikipedia articles asynchronously, with error handling.
  *
  * @param wikipediaArticleName
  * @return Observable<String> of HTML
@@ -354,7 +352,7 @@ def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArti
 }
 ```
 
-Notice how it now calls `onError(Exception e)` if an exception occurs and in the following it passes a second closure that handles onError.
+Notice how it now calls `onError(Exception e)` if an exception occurs and note that the following code passes `subscribe()` a second closure that handles `onError`:
 
 ```groovy
 fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle", "Elephant")
@@ -363,4 +361,4 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
         { println "--- Error ---\n" + it.getMessage()})
 ```
 
-See more information on [[Error Handling|ErrorHandling-Operators]] including functions such as `onErrorResumeNext()` which allows providing default sequences to continue with in event of error.
+See [[Error Handling|ErrorHandling-Operators]] for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` which allows sequences to continue with fallbacks in the event of error.
