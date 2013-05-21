@@ -172,3 +172,9 @@ my_observable.scan(initial_seed, accumulator_closure)
 
 ## groupBy()
 #### divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
+The `groupBy()` method creates or extracts a key from all of the objects emitted by a source Observable. For each unique key created in this way, `groupBy()` creates an Observable that emits all of the objects from the source Observable that match that key. `groupBy()` then emits each of these Observables, as an Observable.
+
+There are two versions of `groupBy()`:
+
+1. One version takes two parameters: the source Observable and a closure that takes as its parameter an object emitted by the source Observable and returns the key.
+1. The second version adds a third parameter: a closure that takes as its parameter an object emitted by the source Observable and returns an object to be emitted by the resulting Observable (the first version just emits the source Observable's emissions unchanged).
