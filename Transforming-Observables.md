@@ -18,11 +18,12 @@ The `map()` method applies a closure of your choosing to every object emitted by
 numbers = Observable.toObservable([1, 2, 3, 4, 5]);
 
 Observable.map(numbers, {it * it}).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 1
 4
 9
@@ -55,22 +56,20 @@ This method is useful, for example, when you have a Observable that emits a seri
 ```groovy
 // this closure is a Observable that emits three numbers
 numbers   = Observable.toObservable([1, 2, 3]);
-// this closure is a Observable that emits three numbers based on what number it is passed
-multiples = { n -> Observable.toObservable([ n*1, n*2, n*3 ]) };   
+// this closure is a Observable that emits two numbers based on what number it is passed
+multiples = { n -> Observable.toObservable([ n*2, n*3 ]) };   
 
 numbers.mapMany(multiples).subscribe(
-  [ onNext:{ response.getWriter().println(it.toString()); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it.toString()); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
-1
+```
+```
 2
 3
-2
 4
 6
-3
 6
 9
 Sequence complete
@@ -95,11 +94,12 @@ For example, the following code uses `reduce()` to compute, and then emit as an 
 numbers = Observable.toObservable([1, 2, 3, 4, 5]);
 
 Observable.reduce(numbers, { a, b -> a+b }).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 15
 Sequence complete
 ```
@@ -119,7 +119,9 @@ There is also a version of `reduce()` to which you can pass a seed value in addi
 
 ```groovy
 Observable.reduce(my_observable, initial_seed, accumulator_closure)
+```
 or
+```groovy
 my_observable.reduce(initial_seed, accumulator_closure)
 ```
 
@@ -136,11 +138,12 @@ For example, the following code takes a Observable that emits a consecutive sequ
 numbers = Observable.toObservable([1, 2, 3, 4, 5]);
 
 Observable.scan(numbers, { a, b -> a+b }).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 1
 3
 6
@@ -155,7 +158,6 @@ In addition to calling `scan()` as a stand-alone method, you can also call it as
 Observable.scan(numbers, { a, b -> a+b }) ...
 ```
 you could instead write 
-
 ```groovy
 numbers.scan({ a, b -> a+b }) ...
 ```
@@ -164,7 +166,9 @@ There is also a version of `scan()` to which you can pass a seed value in additi
 
 ```groovy
 Observable.scan(my_observable, initial_seed, accumulator_closure)
+```
 or
+```groovy
 my_observable.scan(initial_seed, accumulator_closure)
 ```
 
@@ -176,13 +180,11 @@ The `groupBy()` method creates or extracts a key from all of the objects emitted
 
 There are two versions of `groupBy()`:
 
-1. One version takes two parameters: the source Observable and a closure that takes as its parameter an object emitted by the source Observable and returns the key.
-1. The second version adds a third parameter: a closure that takes as its parameter an object emitted by the source Observable and returns an object to be emitted by the resulting GroupedObservable (the first version just emits the source Observable's emissions unchanged).
+1. One version takes two parameters: the source Observable and a function that takes as its parameter an object emitted by the source Observable and returns the key.
+1. The second version adds a third parameter: a function that takes as its parameter an object emitted by the source Observable and returns an object to be emitted by the resulting GroupedObservable (the first version just emits the source Observable's emissions unchanged).
 
 The following sample code uses `groupBy()` to transform a list of numbers into two lists, grouped by whether or not the numbers are even:
 ```groovy
-import rx.Observable
-
 class isEven implements rx.util.functions.Func1
 {
   java.lang.Object call(java.lang.Object T) { return(0 == (T % 2)); }
