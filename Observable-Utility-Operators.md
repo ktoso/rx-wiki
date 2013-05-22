@@ -291,7 +291,36 @@ Note that in the second example the timestamps are identical for both of the obs
 ## onErrorResumeNext()
 #### instructs an Observable to attempt to continue emitting values after it encounters an error
 [[images/rx-operators/onErrorResumeNext.png]]
-The `onErrorResumeNext()` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError()` in which case, rather than propagating that error to the Observer, `onErrorResumeNext()` will instead begin mirroring a second, backup Observable.
+The `onErrorResumeNext()` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError()` in which case, rather than propagating that error to the Observer, `onErrorResumeNext()` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
+```groovy
+def myObservable = Observable.create({ anObserver ->
+  anObserver.onNext('Three');
+  anObserver.onNext('Two');
+  anObserver.onNext('One');
+  anObserver.onError();
+});
+def myFallback = Observable.create({ anObserver ->
+  anObserver.onNext('0');
+  anObserver.onNext('1');
+  anObserver.onNext('2');
+  anObserver.onCompleted();
+});
+
+myObservable.onErrorResumeNext(myFallback).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+Three
+Two
+One
+0
+1
+2
+Sequence complete
+```
 
 ## onErrorReturn()
 #### instructs an Observable to emit a particular value to an observer’s onNext closure when it encounters an error
