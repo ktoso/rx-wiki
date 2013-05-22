@@ -33,11 +33,12 @@ For example, the following rather pointless code takes a list of integers, conve
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.toList(numbers).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 Sequence complete
 ```
@@ -47,9 +48,7 @@ In addition to calling `toList()` as a stand-alone method, you can also call it 
 ```groovy
 Observable.toList(numbers) ...
 ```
- 
 you could instead write 
-
 ```groovy
 numbers.toList() ...
 ```
@@ -67,11 +66,12 @@ For example, the following code takes a list of unsorted integers, converts it i
 numbers = Observable.toObservable([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
 Observable.toSortedList(numbers).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
-)
-
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 Sequence complete
 ```
@@ -81,9 +81,7 @@ In addition to calling `toList()` as a stand-alone method, you can also call it 
 ```groovy
 Observable.toSortedList(numbers) ...
 ```
-
 you could instead write
-
 ```groovy
 numbers.toSortedList( ) ...
 ```
@@ -101,13 +99,14 @@ For example:
 numbers = Observable.toObservable([1, 2, 3]);
 
 Observable.materialize(numbers).subscribe(
-  [ onNext: { if(Kind.OnNext == it.kind) response.getWriter().println("Next: " + it.value);
-              else if(Kind.OnCompleted == it.kind) response.getWriter().println("Completed");
-              else if(Kind.OnError == it.kind) response.getWriter().println("Error: " + it.exception); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext: { if(rx.Notification.Kind.OnNext == it.kind) { myWriter.println("Next: " + it.value); }
+              else if(rx.Notification.Kind.OnCompleted == it.kind) { myWriter.println("Completed"); }
+              else if(rx.Notification.Kind.OnError == it.kind) { myWriter.println("Error: " + it.exception); } },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 Next: 1
 Next: 2
 Next: 3
@@ -128,11 +127,42 @@ numbers.materialize() ...
 
 ## dematerialize()
 #### convert a materialized Observable back into its non-materialized form
-You can undo the effects of `materialize()` by means of the `dematerialize()` method, which will emit the items from the Observable as though `materialize()` had not been applied to it.
+You can undo the effects of `materialize()` by means of the `dematerialize()` method, which will emit the items from the Observable as though `materialize()` had not been applied to it. The following example dematerializes the materialized Observable from the previous section:
+```groovy
+numbers = Observable.toObservable([1, 2, 3]);
+
+Observable.materialize(numbers).dematerialize().subscribe(
+  [ onNext: { myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+1
+2
+3
+Sequence complete
+```
 
 ## all()
 #### determine whether all items emitted by an Observable meet some criteria
-Pass an closure to `all()` that accepts an object emitted by the source Observable and returns a boolean value based on an evaluation of that object, and `all()` will return `true` if and only if that closure returned true for every object emitted by the source Observable.
+Pass an closure to `all()` that accepts an object emitted by the source Observable and returns a boolean value based on an evaluation of that object, and `all()` will emit `true` if and only if that closure returned true for every object emitted by the source Observable.
+
+```groovy
+numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+
+myWriter.println("all even?" )
+numbers.all({ 0 == (it % 2) }).subscribe([onNext:{ myWriter.println(it); }]);
+
+myWriter.println("all positive?");
+numbers.all({ 0 < it }).subscribe([onNext:{ myWriter.println(it); }]);
+```
+```
+all even? 
+false
+all positive? 
+true
+```
 
 ## finallyDo()
 #### register an action to take when an Observable completes
