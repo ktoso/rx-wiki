@@ -6,7 +6,7 @@ This section explains various utility operators for working with Observables.
 * **`dematerialize()`** — convert a materialized Observable back into its non-materialized form
 * **`all()`** — determine whether all items emitted by an Observable meet some criteria
 * **`finallyDo()`** — register an action to take when an Observable completes
-* **`sequenceEqual()`** — determine whether two Observable sequences are identical
+* **`sequenceEqual()`** — test the equality of pairs of items emitted by two Observables
 * **`synchronize()`** — force a poorly-behaving Observable to be well-behaved
 * **`timestamp()`** — attach a timestamp to every object emitted by an Observable
 * **`cache()`** — 
@@ -211,6 +211,24 @@ It is possible that you may encounter a poorly-behaved Observable. If so, you ca
 ## timestamp()
 #### attach a timestamp to every object emitted by an Observable
 The `timestamp()` method converts an Observable that emits objects of type _T_ into one that emits objects of type `Timestamped<T>`, where each such object is stamped with the time at which it was emitted.
+
+```groovy
+def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 200000) });
+
+myObservable.timestamp().subscribe(
+  [ onNext: { myWriter.println(it.toString()); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+Timestamped(timestampMillis = 1369252582698, value = 200000)
+Timestamped(timestampMillis = 1369252582740, value = 400000)
+Timestamped(timestampMillis = 1369252582782, value = 600000)
+Timestamped(timestampMillis = 1369252582823, value = 800000)
+Timestamped(timestampMillis = 1369252582864, value = 1000000)
+Sequence complete
+```
 
 ## cache()
 ####
