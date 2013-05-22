@@ -170,7 +170,37 @@ You can use the `finallyDo()` method of an Observable to register an action (a c
 
 ## sequenceEqual()
 #### determine whether two Observable sequences are identical
-Pass `sequenceEqual()` two Observables, and it will compare the objects emitted by each Observable, and return `true` if and only if both Observables emit the same objects in the same order. You can optionally pass a third parameter: a closure that accepts two objects and returns `true` if they are equal according to a standard of your choosing.
+Pass `sequenceEqual()` two Observables, and it will compare the objects emitted by each Observable, and emit `true` for each pair of objects if and only if both objects are the same. You can optionally pass a third parameter: a closure that accepts two objects and returns `true` if they are equal according to a standard of your choosing.
+```groovy
+def firstfour = Observable.toObservable([1, 2, 3, 4]);
+def firstfouragain = Observable.toObservable([1, 2, 3, 4]);
+def firstfive = Observable.toObservable([1, 2, 3, 4, 5]);
+def firstfourscrambled = Observable.toObservable([3, 2, 1, 4]);
+
+myWriter.println('firstfour == firstfive?');
+Observable.sequenceEqual(firstfour, firstfive).subscribe([onNext:{ myWriter.println(it); }]);
+myWriter.println('firstfour == firstfouragain?');
+Observable.sequenceEqual(firstfour, firstfouragain).subscribe([onNext:{ myWriter.println(it); }]);
+myWriter.println('firstfour == firstfourscrambled?');
+Observable.sequenceEqual(firstfour, firstfourscrambled).subscribe([onNext:{ myWriter.println(it); }]);
+````
+````
+firstfour == firstfive?
+true
+true
+true
+true
+firstfour == firstfouragain?
+true
+true
+true
+true
+firstfour == firstfourscrambled?
+false
+true
+false
+true
+````
 
 ## synchronize()
 #### force a poorly-behaving Observable to be well-behaved
