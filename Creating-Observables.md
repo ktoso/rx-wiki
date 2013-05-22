@@ -69,8 +69,8 @@ def myObservable = Observable.create({ anObserver ->
 #### create an Observable that emits a range of sequential integers
 To create an Observable that emits a range of sequential integers, pass the starting integer and the number of integers to emit to the `range()` method.
 ```groovy
+// myObservable emits the integers 5, 6, and 7 before completing:
 def myObservable = Observable.range(5, 3);
-// myObservable will emit the integers 5, 6, and 7 before completing
 ```
 
 ## `empty()`, `error()`, and `never()`
@@ -81,3 +81,35 @@ def myObservable = Observable.range(5, 3);
 * `empty()` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onCompleted()` closure.
 * `error()` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onError()` closure.
 * `never()` creates an Observable that does not emit any objects, nor does it call either the observer’s `onCompleted()` or `onError()` closures.
+
+```groovy
+myWriter.println("*** empty() ***");
+Observable.empty().subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+
+myWriter.println("*** error() ***");
+Observable.error().subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+
+myWriter.println("*** never() ***");
+Observable.never().subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+myWriter.println("*** END ***");
+```
+```
+*** empty() ***
+Sequence complete
+*** error() ***
+Error encountered
+*** never() ***
+*** END ***
+```
