@@ -15,10 +15,14 @@ This section explains methods that create Observables.
 
 [[images/rx-operators/toObservable.png]]
 
-Any object that supports the `Iterable<>` interface can be converted into a Observable that emits each iterable item in the object, simply by passing the object into the `toObservable( )` method, for example:
+Any object that supports the `Iterable<>` interface can be converted into a Observable that emits each iterable item in the object, simply by passing the object into the `toObservable( )` or `from()` methods, for example:
 
 ```groovy
 myObservable = Observable.toObservable(myIterable);
+```
+or
+```groovy
+myObservable = Observable.from(myIterable)
 ```
 
 You can also do this with arrays, for example:
@@ -26,6 +30,10 @@ You can also do this with arrays, for example:
 ```groovy
 myArray = [1, 2, 3, 4, 5];
 myArrayObservable = Observable.toObservable(myArray);
+```
+or
+```
+myArrayObservable = Observable.from(myArray);
 ```
 
 This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by a Observable.
