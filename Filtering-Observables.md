@@ -41,6 +41,23 @@ you could instead write
 numbers.filter({ 0 == (it % 2) }) ...
 ```
 
+The `where()` method has the same purpose as `filter()` but accepts a `Func1` evaluator function instead of a closure. Here is the same sample, but implemented with `where()` instead of `filter()`:
+```groovy
+class isEven implements rx.util.functions.Func1 {
+  Boolean call( Object it ) { return(0 == (it % 2)); }
+}
+
+myisEven = new isEven();
+
+numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+numbers.where(myisEven).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+
 ## takeLast()
 #### only emit the last _n_ elements emitted by an Observable
 
