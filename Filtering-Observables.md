@@ -145,6 +145,24 @@ If you call `take(n)` on a Observable, and that Observable emits _fewer_ than _n
 
 ## sample()
 #### emit items emitted by an Observable at a particular time interval
+Use the `sample()` method to periodically look at an Observable to see what object it is emitting at a particular time.
+
+The following code constructs an Observable that emits the numbers between one and a million, and then samples that Observable every ten milliseconds to see what number it is emitting at that moment.
+```groovy
+def numbers = Observable.range( 1, 1000000 );
+ 
+numbers.sample(10, java.util.concurrent.TimeUnit.MILLISECONDS).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+339707
+547810
+891282
+Sequence complete
+```
 
 ## takeWhile() and takeWhileWithIndex()
 #### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
