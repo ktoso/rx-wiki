@@ -18,11 +18,12 @@ You can filter a Observable, discarding any values that do not meet some test, b
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.filter(numbers, { 0 == (it % 2) }).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 2
 4
 6
@@ -36,7 +37,6 @@ In addition to calling `filter()` as a stand-alone method, you can also call it 
 Observable.filter(numbers, { 0 == (it %2) }) ...
 ```
 you could instead write 
-
 ```groovy
 numbers.filter({ 0 == (it % 2) }) ...
 ```
@@ -52,11 +52,12 @@ To convert a Observable that emits several objects into one that only emits the 
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.takeLast(numbers,1).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 9
 Sequence complete
 ```
@@ -66,9 +67,7 @@ In addition to calling `takeLast()` as a stand-alone method, you can also call i
 ```groovy
 Observable.takeLast(numbers,1) ...
 ```
- 
 you could instead write
-
 ```groovy
 numbers.takeLast(1) ...
 ```
@@ -84,11 +83,12 @@ You can ignore the first _n_ items emitted by a Observable and attend only to th
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.skip(numbers, 3).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 4
 5
 6
@@ -103,9 +103,7 @@ In addition to calling `skip()` as a stand-alone method, you can also call it as
 ```groovy
 Observable.skip(numbers, 3) ...
 ```
-
 you could instead write 
-
 ```groovy
 numbers.skip(3) ...
 ```
@@ -121,11 +119,12 @@ You can choose to pay attention only to the first _n_ values emitted by a Observ
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.take(numbers, 3).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 1
 2
 3
@@ -138,7 +137,6 @@ In addition to calling `take()` as a stand-alone method, you can also call it as
 Observable.take(numbers, 3) ...
 ```
 you could instead write 
-
 ```groovy
 numbers.take(3) ...
 ```
@@ -156,9 +154,9 @@ The `takeWhile()` method returns an Observable that mirrors the behavior of the 
 numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
-  [onNext:{ response.getWriter().println( it ); },
-   onCompleted:{ response.getWriter().println( "Sequence complete" ); },
-   onError:{ response.getWriter().println( "Error encountered" ); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
 ```
 ```
@@ -175,10 +173,10 @@ The `takeWhileWithIndex()` method is similar, but your closure takes an addition
 ```groovy
 numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
-numbers.takeWhileWithIndex({ it, index -> ((it < 6) && (index < 5)) }).subscribe(
-  [onNext:{ response.getWriter().println( it ); },
-   onCompleted:{ response.getWriter().println( "Sequence complete" ); },
-   onError:{ response.getWriter().println( "Error encountered" ); } ]
+numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
 ```
 ```
