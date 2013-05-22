@@ -9,7 +9,7 @@ This section explains various utility operators for working with Observables.
 * **`sequenceEqual()`** — test the equality of pairs of items emitted by two Observables
 * **`synchronize()`** — force a poorly-behaving Observable to be well-behaved
 * **`timestamp()`** — attach a timestamp to every object emitted by an Observable
-* **`cache()`** — 
+* **`cache()`** — generate the sequence once, and remember it for future subscribers
 * **`defer()`** — 
 * **`observeOn()`** — 
 * **`subscribeOn()`** — 
@@ -183,8 +183,8 @@ myWriter.println('firstfour == firstfouragain?');
 Observable.sequenceEqual(firstfour, firstfouragain).subscribe([onNext:{ myWriter.println(it); }]);
 myWriter.println('firstfour == firstfourscrambled?');
 Observable.sequenceEqual(firstfour, firstfourscrambled).subscribe([onNext:{ myWriter.println(it); }]);
-````
-````
+```
+```
 firstfour == firstfive?
 true
 true
@@ -200,7 +200,7 @@ false
 true
 false
 true
-````
+```
 
 ## synchronize()
 #### force a poorly-behaving Observable to be well-behaved
@@ -246,6 +246,7 @@ myObservable.subscribe(
     onCompleted:{ myWriter.println("Sequence complete"); },
     onError:{ myWriter.println("Error encountered"); } ]
 );
+```
 ```
 Timestamped(timestampMillis = 1369252832871, value = 400000)
 Timestamped(timestampMillis = 1369252832951, value = 800000)
