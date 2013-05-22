@@ -32,7 +32,7 @@ myArray = [1, 2, 3, 4, 5];
 myArrayObservable = Observable.toObservable(myArray);
 ```
 or
-```
+```groovy
 myArrayObservable = Observable.from(myArray);
 ```
 
