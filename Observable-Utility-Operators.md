@@ -231,7 +231,52 @@ Sequence complete
 ```
 
 ## cache()
-####
+#### generate the sequence once, and remember it for future subscribers
+By default, an Observable will generate its sequence afresh for each subscriber. You can force it to generate its sequence only once and then to serve this identical sequence to every subscriber by using the `cache()` method. Compare the behavior of the following two sets of sample code, the first of which does _not_ use `cache()` and the second of which does:
+```groovy
+def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp();
+
+myObservable.subscribe(
+  [ onNext: { myWriter.println(it.toString()); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+myObservable.subscribe(
+  [ onNext: { myWriter.println(it.toString()); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+Timestamped(timestampMillis = 1369252832871, value = 400000)
+Timestamped(timestampMillis = 1369252832951, value = 800000)
+Sequence complete
+Timestamped(timestampMillis = 1369252833074, value = 400000)
+Timestamped(timestampMillis = 1369252833154, value = 800000)
+Sequence complete
+```
+```groovy
+def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp().cache();
+
+myObservable.subscribe(
+  [ onNext: { myWriter.println(it.toString()); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+myObservable.subscribe(
+  [ onNext: { myWriter.println(it.toString()); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+Timestamped(timestampMillis = 1369252924548, value = 400000)
+Timestamped(timestampMillis = 1369252924630, value = 800000)
+Sequence complete
+Timestamped(timestampMillis = 1369252924548, value = 400000)
+Timestamped(timestampMillis = 1369252924630, value = 800000)
+Sequence complete
+```
+Note that in the second example the timestamps are identical for both of the observers, whereas in the first example they differ.
 
 ## defer()
 ####
