@@ -172,9 +172,33 @@ my_observable.scan(initial_seed, accumulator_closure)
 
 ## groupBy()
 #### divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
-The `groupBy()` method creates or extracts a key from all of the objects emitted by a source Observable. For each unique key created in this way, `groupBy()` creates an Observable that emits all of the objects from the source Observable that match that key. `groupBy()` then emits each of these Observables, as an Observable.
+The `groupBy()` method creates or extracts a key from all of the objects emitted by a source Observable. For each unique key created in this way, `groupBy()` creates a `GroupedObservable` that emits all of the objects from the source Observable that match that key. `groupBy()` then emits each of these Observables, as an Observable. A `GroupedObservable` has a method, `getKey()` with which you can retrieve the key that defines the `GroupedObservable`.
 
 There are two versions of `groupBy()`:
 
 1. One version takes two parameters: the source Observable and a closure that takes as its parameter an object emitted by the source Observable and returns the key.
-1. The second version adds a third parameter: a closure that takes as its parameter an object emitted by the source Observable and returns an object to be emitted by the resulting Observable (the first version just emits the source Observable's emissions unchanged).
+1. The second version adds a third parameter: a closure that takes as its parameter an object emitted by the source Observable and returns an object to be emitted by the resulting GroupedObservable (the first version just emits the source Observable's emissions unchanged).
+
+The following sample code uses `groupBy()` to transform a list of numbers into two lists, grouped by whether or not the numbers are even:
+```groovy
+import rx.Observable
+
+class isEven implements rx.util.functions.Func1
+{
+  java.lang.Object call(java.lang.Object T) { return(0 == (T % 2)); }
+}
+
+def numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+def groupFunc = new isEven();
+  
+numbers.groupBy(groupFunc).mapMany({ Observable.reduce(it, [it.getKey()], {a, b -> a << b}) }).subscribe(
+  [onNext:{ api.servletResponse.getWriter().println(it) },
+   onCompleted:{ api.servletResponse.getWriter().println("Sequence complete"); },
+   onError:{ api.servletResponse.getWriter().println("Error encountered"); } ]
+)
+```
+```
+[false, 1, 3, 5, 7, 9]
+[true, 2, 4, 6, 8]
+Sequence complete
+```
