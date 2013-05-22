@@ -49,7 +49,7 @@ numbers.map({ it * it }) ...
 
 [[images/rx-operators/mapMany.png]]
 
-The `mapMany()` method creates a new Observable sequence by applying a closure that you supply to each object in the original Observable sequence, where that closure is itself a Observable that emits elements, and then merges the results of that closure applied to every item emitted by the original Observable, emitting these merged results as its own sequence.
+The `mapMany()` (or `flatMap()`, which has identical behavior) method creates a new Observable sequence by applying a closure that you supply to each object in the original Observable sequence, where that closure is itself a Observable that emits elements, and then merges the results of that closure applied to every item emitted by the original Observable, emitting these merged results as its own sequence.
 
 This method is useful, for example, when you have a Observable that emits a series of objects that themselves have Observable members or are in other ways transformable into Observables, so that you can create a new Observable that emits the complete collection of items emitted by the sub-Observables of these objects.
 
@@ -75,16 +75,16 @@ numbers.mapMany(multiples).subscribe(
 Sequence complete
 ```
 
-If any of the individual Observables mapped to the emissions from the source Observable in `Observable.mapMany()` aborts by calling `onError`, the `Observable.mapMany()` call itself will immediately abort and call `onError`. If you would prefer that the map-many operation continue emitting the results of the remaining, error-free Observables before reporting the error, use `Observable.mapManyDelayError()` instead.
+If any of the individual Observables mapped to the emissions from the source Observable in `mapMany()` aborts by calling `onError`, the `mapMany()` call itself will immediately abort and call `onError`. If you would prefer that the map-many operation continue emitting the results of the remaining, error-free Observables before reporting the error, use `mapManyDelayError()` instead.
 
-Because it is possible for more than one of the individual Observables to encounter an error, `Observable.mapManyDelayError()` may pass information about multiple errors to the `onError` closure of its subscribers (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
+Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError()` may pass information about multiple errors to the `onError` closure of its subscribers (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
 
 ## reduce() or aggregate()
 #### Apply a closure to each emitted element, sequentially, and emit only the final accumulated value
 
 [[images/rx-operators/reduce.png]]
 
-The `reduce()` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of _that_ closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your closure as the sole output from the returned Observable.
+The `reduce()` (or `aggregate()`, which has the same behavior) method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of _that_ closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your closure as the sole output from the returned Observable.
 
 This technique, which is called “reduce” or “aggregate” here, is sometimes called “fold,” “accumulate,” “compress,” or “inject” in other programming contexts. 
 
