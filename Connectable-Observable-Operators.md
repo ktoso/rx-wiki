@@ -70,12 +70,14 @@ Sequence #1 complete
 
 ## ConnectableObservable.connect()
 #### instructs a Connectable Observable to begin emitting values
+Call a Connectable Observable's `connect()` method to instruct it to begin emitting the objects from its underlying Observable to its subscribing observers.
 
 ## Observable.publish()
 #### represents an Observable as a Connectable Observable
+To represent an Observable as a Connectable Observable, use the Observable's `publish()` method.
 
 ## Observable.multicast()
-####
+#### 
 
 ## Observable.replay()
 ####
