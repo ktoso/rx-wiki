@@ -204,9 +204,9 @@ true
 
 ## synchronize()
 #### force a poorly-behaving Observable to be well-behaved
-The Observables implemented by RxJava are well-behaved (except for the test observable returned by `never()`), which is to say they call an observer's `onNext()` closure zero or more times, and then call either the observer's `onCompleted()` closure or the observer's `onError()` closure (but never both) exactly once, and then call none of these closures thereafter.
+The Observables implemented by RxJava are themselves well-behaved (except for the test observable returned by `never()`), which is to say they call an observer's `onNext()` closure zero or more times, and then call either the observer's `onCompleted()` closure or the observer's `onError()` closure (but never both) exactly once, and then call none of these closures thereafter.
 
-It is possible that you may encounter a poorly-behaved Observable. If so, you can force it to be well-behaved by applying the `synchronize()` method to it.
+It is possible that you may encounter a poorly-behaved Observable, perhaps because it emits values on different threads and one thread continues calling `onNext()` after another thread has terminated with `onError()`. You can force such an Observable to be well-behaved by applying the `synchronize()` method to it.
 
 ## timestamp()
 #### attach a timestamp to every object emitted by an Observable
