@@ -11,8 +11,8 @@ This section explains various utility operators for working with Observables.
 * **`timestamp()`** — attach a timestamp to every object emitted by an Observable
 * **`cache()`** — generate the sequence once, and remember it for future subscribers
 * **`defer()`** — 
-* **`observeOn()`** — 
-* **`subscribeOn()`** — 
+* **`observeOn()`** — specify on which Scheduler an Observer should observe the Observable
+* **`subscribeOn()`** — specify which Scheduler an Observable should use when its subscription is invoked
 * **`onErrorResumeNext()`** — instructs an Observable to continue emitting values after it encounters an error
 * **`onErrorReturn()`** — instructs an Observable to emit a particular value when it encounters an error
 
@@ -283,10 +283,12 @@ Note that in the second example the timestamps are identical for both of the obs
 ####
 
 ## observeOn()
-####
+#### specify on which Scheduler an Observer should observe the Observable
+To specify in which Scheduler (thread) the Observable should invoke the Observers' `onNext()`, `onCompleted()`, and `onError()` closures, call the Observable's `observeOn()` method, passing it the appropriate `Scheduler`.
 
 ## subscribeOn()
-####
+#### specify which Scheduler an Observable should use when its subscription is invoked
+To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn()` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn()`) the Observable will invoke the Observers' `onNext()`, `onCompleted()`, and `onError()` closures in this same thread.
 
 ## onErrorResumeNext()
 #### instructs an Observable to attempt to continue emitting values after it encounters an error
