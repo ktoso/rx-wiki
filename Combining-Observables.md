@@ -4,8 +4,8 @@ This section explains operators you can use to combine multiple Observable seque
 * **`merge()`** — combine multiple Observables into one
 * **`mergeDelayError()`** — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * **`zip()`** — combine Observables together via a provided closure and emit values based on the results of this closure
-* **`switchDo()`** — convert a set of Observables into an Observable that represents the most-recently published of the set
-* **`takeUntil()`** — emits the values from the source Observable until another Observable emits a value
+* **`switchDo()`** — convert an Observable sequence of Observables into a single Observable that emits the emissions of the most-recently emitted of the Observables in the sequence
+* **`takeUntil()`** — emits the values from the source Observable until a second Observable emits a value
 
 ## concat()
 #### concatenate two or more Observables sequentially
@@ -129,7 +129,8 @@ Sequence complete
 **Note:** that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
 
 ## switchDo()
-#### convert a set of Observables into an Observable that represents the most-recently published of the set
+#### convert an Observable sequence of Observables into a single Observable that emits the emissions of the most-recently emitted of the Observables in the sequence
+`switchDo()` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchDo()` begins emitting objects from that Observable. When a new Observable is emitted, `switchDo()` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
 
 ## takeUntil()
 #### emits the values from the source Observable until another Observable emits a value
