@@ -1,11 +1,34 @@
 This section explains operators you can use to combine multiple Observable sequences.
 
+* **`startWith()`** — emit a specified sequence of values before beginning to emit the Observable sequence
 * **`concat()`** — concatenate two or more Observables sequentially
 * **`merge()`** — combine multiple Observables into one
 * **`mergeDelayError()`** — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * **`zip()`** — combine Observables together via a provided closure and emit values based on the results of this closure
 * **`switchDo()`** — convert an Observable sequence of Observables into a single Observable that emits the emissions of the most-recently emitted of the Observables in the sequence
 * **`takeUntil()`** — emits the values from the source Observable until a second Observable emits a value
+
+## startWith()
+#### emit a specified sequence of values before beginning to emit the Observable sequence
+If you want an Observable to immediately begin emitting a specific sequence of values before it begins emitting the values normally expected from it, pass that specific sequence of values into that Observable's `startWith` method, as in the following example:
+```groovy
+def myObservable = Observable.toObservable([1, 2, 3]);
+
+myObservable.startWith(-3, -2, -1, 0).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+-3
+-2
+-1
+0
+1
+2
+3
+```
 
 ## concat()
 #### concatenate two or more Observables sequentially
@@ -25,11 +48,12 @@ odds  = Observable.toObservable([1, 3, 5, 7]);
 evens = Observable.toObservable([2, 4, 6]);
 
 Observable.concat(odds, evens).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 )
-
+```
+```
 1
 3
 5
@@ -60,11 +84,12 @@ odds  = Observable.toObservable([1, 3, 5, 7]);
 evens = Observable.toObservable([2, 4, 6]);
 
 Observable.merge(odds,evens).subscribe(
-  [ onNext:{ response.getWriter().println(it); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 );
-
+```
+```
 1
 3
 2
@@ -115,11 +140,12 @@ odds  = Observable.toObservable([1, 3, 5, 7, 9]);
 evens = Observable.toObservable([2, 4, 6]);
 
 Observable.zip(odds, evens, {o, e -> [o, e]}).subscribe(
-  [ onNext:{ odd, even -> response.getWriter().println("odd: " + odd + ", even: " + even); },
-    onCompleted:{ response.getWriter().println("Sequence complete"); },
-    onError:{ response.getWriter().println("Error encountered"); } ]
+  [ onNext:{ odd, even -> myWriter.println("odd: " + odd + ", even: " + even); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
 )
-
+```
+```
 odd: 1, even: 2
 odd: 3, even: 4
 odd: 5, even: 6
