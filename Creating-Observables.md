@@ -36,7 +36,9 @@ or
 myArrayObservable = Observable.from(myArray);
 ```
 
-This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by a Observable.
+This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by an Observable.
+
+The `from()` method is also capable of transforming a `Future` into an Observable. (This is not true of its `toObservable()` cousin.)
 
 ## just()
 #### convert an object into an Observable that emits that object
