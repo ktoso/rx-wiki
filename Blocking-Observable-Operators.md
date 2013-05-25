@@ -1,6 +1,6 @@
 This section explains the `BlockingObservable` subclass.
 
-> To transform an `Observable` into a `BlockingObservable`, use the `Observable.toBlockingObservable()` method.
+> To transform an `Observable` into a `BlockingObservable`, use the `Observable.toBlockingObservable()` method or the `BlockingObservable.from()` method.
 
 * **`forEach()`** — 
 * **`from()`** — 
