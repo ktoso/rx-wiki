@@ -78,6 +78,9 @@ def myObservable = Observable.create({ anObserver ->
 
 ## range( )
 #### create an Observable that emits a range of sequential integers
+
+[[images/rx-operators/range.png]]
+
 To create an Observable that emits a range of sequential integers, pass the starting integer and the number of integers to emit to the `range( )` method.
 ```groovy
 // myObservable emits the integers 5, 6, and 7 before completing:
@@ -87,11 +90,12 @@ def myObservable = Observable.range(5, 3);
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
 
-[[images/rx-operators/empty.png]]
-
 * `empty( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onCompleted( )` closure.
-* `error( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onError( )` closure.
+[[images/rx-operators/empty.png]]
+'* `error( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onError( )` closure.
+[[images/rx-operators/error.png]]
 * `never( )` creates an Observable that does not emit any objects, nor does it call either the observer’s `onCompleted( )` or `onError( )` closures.
+[[images/rx-operators/never.png]]
 
 ```groovy
 myWriter.println("*** empty() ***");
