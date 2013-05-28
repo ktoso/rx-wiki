@@ -74,6 +74,10 @@ Sequence #1 complete
 #### instructs a Connectable Observable to begin emitting values
 Call a Connectable Observable's `connect( )` method to instruct it to begin emitting the objects from its underlying Observable to its subscribing observers.
 
+The `connect( )` method returns a `Subscription`. You can call that object's `unsubscribe( )` method to instruct the Observable to stop emitting values to its subscribers.
+
+You can also use the `connect( )` method to instruct an Observable to begin emitting values (or, to begin generating values that would be emitted anyway) even before any observer has subscribed to it.
+
 ## Observable.publish( )
 #### represents an Observable as a Connectable Observable
 To represent an Observable as a Connectable Observable, use the Observable's `publish( )` method.
@@ -82,4 +86,4 @@ To represent an Observable as a Connectable Observable, use the Observable's `pu
 #### 
 
 ## Observable.replay( )
-####
+#### ensures that all observers see the same sequence, even if they subscribe after the Observable begins emitting the sequence
