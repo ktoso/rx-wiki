@@ -1,40 +1,47 @@
 This section explains the `BlockingObservable` subclass.
 
-> To transform an `Observable` into a `BlockingObservable`, use the `Observable.toBlockingObservable()` method or the `BlockingObservable.from()` method.
+> To transform an `Observable` into a `BlockingObservable`, use the `Observable.toBlockingObservable( )` method or the `BlockingObservable.from( )` method.
 
-* **`forEach()`** — 
-* **`from()`** — 
-* **`getIterator()`** — 
-* **`last()`** — 
-* **`lastOrDefault()`** — 
-* **`mostRecent()`** — 
-* **`next()`** — 
-* **`single()`** — 
-* **`singleOrDefault()`** — 
-* **`toFuture()`** — 
-* **`toIterable()`** — 
-* **`toIterator()`** — 
+* **`forEach( )`** — 
+* **`from( )`** — 
+* **`getIterator( )`** — 
+* **`last( )`** — 
+* **`lastOrDefault( )`** — 
+* **`mostRecent( )`** — 
+* **`next( )`** — 
+* **`single( )`** — 
+* **`singleOrDefault( )`** — 
+* **`toFuture( )`** — 
+* **`toIterable( )`** — 
+* **`toIterator( )`** — 
 
-## forEach()
+## forEach( )
+####
+[[images/rx-operators/B.forEach.png]]
+
+## from( )
 ####
 
-## from()
+## getIterator( )
 ####
+[[images/rx-operators/B.getIterator.png]]
 
-## getIterator()
+## last( ) and lastOrDefault( )
 ####
+[[images/rx-operators/B.last.png]]
 
-## last() and lastOrDefault()
+## mostRecent( )
 ####
+[[images/rx-operators/B.mostRecent.png]]
 
-## mostRecent()
+## next( )
 ####
+[[images/rx-operators/B.next.png]]
 
-## next()
+## single( ) and singleOrDefault( )
 ####
+[[images/rx-operators/B.single.png]]
 
-## single() and singleOrDefault()
+## transformations: toFuture( ), toIterable( ), and toIterator( )
 ####
-
-## transformations: toFuture(), toIterable(), and toIterator()
-####
+[[images/rx-operators/B.toIterator.png]]
