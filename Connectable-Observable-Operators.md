@@ -1,11 +1,13 @@
 This section explains the `ConnectableObservable` subclass and its operators:
 
-* **`ConnectableObservable.connect()`** — instructs a Connectable Observable to begin emitting values
-* **`Observable.publish()`** — represents an Observable as a Connectable Observable
-* **`Observable.multicast()`** — 
-* **`Observable.replay()`** — 
+* **`ConnectableObservable.connect( )`** — instructs a Connectable Observable to begin emitting values
+* **`Observable.publish( )`** — represents an Observable as a Connectable Observable
+* **`Observable.multicast( )`** — 
+* **`Observable.replay( )`** — 
 
 A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting a sequence of values when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended observers to subscribe to the Observable before the Observable begins emitting values.
+
+[[images/rx-operators/publishConnect.png]]
 
 The following example code shows two observers subscribing to the same Observable. In the first case, they subscribe to an ordinary Observable; in the second case, they subscribe to a Connectable Observable that only connects after both observers subscribe. Note the difference in the output:
 
@@ -68,16 +70,16 @@ Sequence #2 complete
 Sequence #1 complete
 ```
 
-## ConnectableObservable.connect()
+## ConnectableObservable.connect( )
 #### instructs a Connectable Observable to begin emitting values
-Call a Connectable Observable's `connect()` method to instruct it to begin emitting the objects from its underlying Observable to its subscribing observers.
+Call a Connectable Observable's `connect( )` method to instruct it to begin emitting the objects from its underlying Observable to its subscribing observers.
 
-## Observable.publish()
+## Observable.publish( )
 #### represents an Observable as a Connectable Observable
-To represent an Observable as a Connectable Observable, use the Observable's `publish()` method.
+To represent an Observable as a Connectable Observable, use the Observable's `publish( )` method.
 
-## Observable.multicast()
+## Observable.multicast( )
 #### 
 
-## Observable.replay()
+## Observable.replay( )
 ####

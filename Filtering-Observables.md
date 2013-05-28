@@ -1,18 +1,18 @@
 This section explains operators you can use to filter and select elements from Observables.
 
-* **`filter()` or `where()`** — filter elements emitted by an Observable
-* **`takeLast()`** — only emit the last _n_ elements emitted by an Observable
-* **`skip()`** — ignore the first _n_ elements emitted by an Observable
-* **`take()`** — emit only the first _n_ elements emitted by an Observable
-* **`sample()`** — emit items emitted by an Observable at a particular time interval
-* **`takeWhile()` and `takeWhileWithIndex()`** — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
+* **`filter( )` or `where( )`** — filter elements emitted by an Observable
+* **`takeLast( )`** — only emit the last _n_ elements emitted by an Observable
+* **`skip( )`** — ignore the first _n_ elements emitted by an Observable
+* **`take( )`** — emit only the first _n_ elements emitted by an Observable
+* **`sample( )`** — emit items emitted by an Observable at a particular time interval
+* **`takeWhile( )` and `takeWhileWithIndex( )`** — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
 
-## filter() or where()
+## filter( ) or where( )
 #### filter elements from an Observable sequence
 
 [[images/rx-operators/filter.png]]
 
-You can filter a Observable, discarding any values that do not meet some test, by passing a filtering closure into the `filter()` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
+You can filter a Observable, discarding any values that do not meet some test, by passing a filtering closure into the `filter( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -31,7 +31,7 @@ Observable.filter(numbers, { 0 == (it % 2) }).subscribe(
 Sequence complete
 ```
 
-In addition to calling `filter()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
+In addition to calling `filter( )` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
 
 ```groovy
 Observable.filter(numbers, { 0 == (it %2) }) ...
@@ -41,7 +41,7 @@ you could instead write
 numbers.filter({ 0 == (it % 2) }) ...
 ```
 
-The `where()` method has the same purpose as `filter()` but accepts a `Func1` evaluator function instead of a closure. Here is the same sample, but implemented with `where()` instead of `filter()`:
+The `where( )` method has the same purpose as `filter( )` but accepts a `Func1` evaluator function instead of a closure. Here is the same sample, but implemented with `where( )` instead of `filter( )`:
 ```groovy
 class isEven implements rx.util.functions.Func1 {
   Boolean call( Object it ) { return(0 == (it % 2)); }
@@ -58,12 +58,12 @@ numbers.where(myisEven).subscribe(
 );
 ```
 
-## takeLast()
+## takeLast( )
 #### only emit the last _n_ elements emitted by an Observable
 
 [[images/rx-operators/last.png]]
 
-To convert a Observable that emits several objects into one that only emits the last _n_ of these objects before completing, use the `takeLast()` method. For instance, in the following code, `takeLast()` emits only the last integer in the list of integers represented by `numbers`:
+To convert a Observable that emits several objects into one that only emits the last _n_ of these objects before completing, use the `takeLast( )` method. For instance, in the following code, `takeLast( )` emits only the last integer in the list of integers represented by `numbers`:
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -79,7 +79,7 @@ Observable.takeLast(numbers,1).subscribe(
 Sequence complete
 ```
 
-In addition to calling `takeLast()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
+In addition to calling `takeLast( )` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
 
 ```groovy
 Observable.takeLast(numbers,1) ...
@@ -115,7 +115,7 @@ Observable.skip(numbers, 3).subscribe(
 Sequence complete
 ```
 
-In addition to calling `skip()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
+In addition to calling `skip( )` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
 
 ```groovy
 Observable.skip(numbers, 3) ...
@@ -125,7 +125,7 @@ you could instead write
 numbers.skip(3) ...
 ```
 
-## take()
+## take( )
 #### emit only the first _n_ elements from an Observable sequence
 
 [[images/rx-operators/take.png]]
@@ -148,7 +148,7 @@ Observable.take(numbers, 3).subscribe(
 Sequence complete
 ```
 
-In addition to calling `take()` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
+In addition to calling `take( )` as a stand-alone method, you can also call it as a method of a Observable object, so, in the example above, instead of 
 
 ```groovy
 Observable.take(numbers, 3) ...
@@ -160,9 +160,12 @@ numbers.take(3) ...
 
 If you call `take(n)` on a Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
 
-## sample()
+## sample( )
 #### emit items emitted by an Observable at a particular time interval
-Use the `sample()` method to periodically look at an Observable to see what object it is emitting at a particular time.
+
+[[images/rx-operators/sample.png]]
+
+Use the `sample( )` method to periodically look at an Observable to see what object it is emitting at a particular time.
 
 The following code constructs an Observable that emits the numbers between one and a million, and then samples that Observable every ten milliseconds to see what number it is emitting at that moment.
 ```groovy
@@ -181,9 +184,12 @@ numbers.sample(10, java.util.concurrent.TimeUnit.MILLISECONDS).subscribe(
 Sequence complete
 ```
 
-## takeWhile() and takeWhileWithIndex()
+## takeWhile( ) and takeWhileWithIndex( )
 #### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
-The `takeWhile()` method returns an Observable that mirrors the behavior of the source Observable until such time as a closure applied to an object emitted by that observable returns `false`, whereupon the new Observable calls `onCompleted()`.
+
+[[images/rx-operators/takeWhile.png]]
+
+The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a closure applied to an object emitted by that observable returns `false`, whereupon the new Observable calls `onCompleted( )`.
 
 ```groovy
 numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
@@ -204,7 +210,7 @@ numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
 Sequence complete
 ```
 
-The `takeWhileWithIndex()` method is similar, but your closure takes an additional parameter: the (zero-based) index of the object being emitted by the source Observable.
+The `takeWhileWithIndex( )` method is similar, but your closure takes an additional parameter: the (zero-based) index of the object being emitted by the source Observable.
 ```groovy
 numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
