@@ -92,7 +92,7 @@ def myObservable = Observable.range(5, 3);
 
 * `empty( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onCompleted( )` closure.
 [[images/rx-operators/empty.png]]
-'* `error( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onError( )` closure.
+* `error( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onError( )` closure.
 [[images/rx-operators/error.png]]
 * `never( )` creates an Observable that does not emit any objects, nor does it call either the observer’s `onCompleted( )` or `onError( )` closures.
 [[images/rx-operators/never.png]]
