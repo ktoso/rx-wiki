@@ -76,7 +76,7 @@ def myObservable = Observable.create({ anObserver ->
 
 **NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter call any of the observer’s other methods.
 
-## `range( )`
+## range( )
 #### create an Observable that emits a range of sequential integers
 To create an Observable that emits a range of sequential integers, pass the starting integer and the number of integers to emit to the `range( )` method.
 ```groovy
@@ -84,7 +84,7 @@ To create an Observable that emits a range of sequential integers, pass the star
 def myObservable = Observable.range(5, 3);
 ```
 
-## `empty( )`, `error( )`, and `never( )`
+## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
 
 [[images/rx-operators/empty.png]]
