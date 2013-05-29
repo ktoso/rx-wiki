@@ -29,10 +29,12 @@ The `lastOrDefault( )` method is similar, except that instead of returning `nu
 
 ## mostRecent( )
 #### returns an iterable that always returns the item most recently emitted by the Observable
+[[images/rx-operators/B.mostRecent.png]]
 The `mostRecent()` method returns an iterable that on each iteration returns the item that was most recently emitted by the underlying Observable (or `null` if the Observable has not yet emitted an item or has completed without emitting any).
 
 ## next( )
 #### returns an iterable that blocks until the Observable emits another item, then returns that item
+[[images/rx-operators/B.next.png]]
 The `next()` method returns an iterable that on each iteration blocks until the underlying Observable emits another item, then returns that item (or `null` if the Observable finishes without emitting another item).
 
 ## single( ) and singleOrDefault( )
