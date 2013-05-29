@@ -208,7 +208,7 @@ Finally
 ```
 
 ## sequenceEqual( )
-#### determine whether two Observable sequences are identical
+#### test the equality of pairs of items emitted by two Observables
 
 [[images/rx-operators/sequenceEqual.png]]
 
