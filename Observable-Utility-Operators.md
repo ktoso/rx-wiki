@@ -177,8 +177,38 @@ true
 
 You can use the `finallyDo( )` method of an Observable to register an action (a closure that implements `Action0`) that RxJava will invoke when that Observable calls either the `onCompleted( )` or `onError( )` method of its Observer.
 
+```groovy
+class TestFinally
+{
+  static class myActionClass implements rx.util.functions.Action0 {
+    void call() { myWriter.println('Finally'); myWriter.flush(); }
+  }
+  
+  static main() {
+    def myAction = new myActionClass();
+    def numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+    
+    numbers.finallyDo(myAction).subscribe(
+          [ onNext: { myWriter.println(it); },
+            onCompleted:{ myWriter.println("Sequence complete"); },
+            onError:{ myWriter.println("Error encountered"); } ]
+    );
+  }
+}
+new TestFinally().main();
+```
+```
+1
+2
+3
+4
+5
+Sequence complete
+Finally
+```
+
 ## sequenceEqual( )
-#### determine whether two Observable sequences are identical
+#### test the equality of pairs of items emitted by two Observables
 
 [[images/rx-operators/sequenceEqual.png]]
 
