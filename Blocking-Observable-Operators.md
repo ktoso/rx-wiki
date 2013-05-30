@@ -1,6 +1,6 @@
-This section explains the `BlockingObservable` subclass. A Blocking Observable extends the ordinary Observable class by providing a set of operators on the emissions of the Observable that block.
+This section explains the [`BlockingObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html) subclass. A Blocking Observable extends the ordinary Observable class by providing a set of operators on the emissions of the Observable that block.
 
-> To transform an `Observable` into a `BlockingObservable`, use the `Observable.toBlockingObservable( )` method or the `BlockingObservable.from( )` method.
+> To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlockingObservable( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable()) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)) method.
 
 * [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a closure on each element emitted by the Observable; block until the Observable completes
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
