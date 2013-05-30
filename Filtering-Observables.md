@@ -1,11 +1,11 @@
 This section explains operators you can use to filter and select elements from Observables.
 
-* **`filter( )` or `where( )`** — filter elements emitted by an Observable
-* **`takeLast( )`** — only emit the last _n_ elements emitted by an Observable
-* **`skip( )`** — ignore the first _n_ elements emitted by an Observable
-* **`take( )`** — emit only the first _n_ elements emitted by an Observable
-* **`sample( )`** — emit items emitted by an Observable at a particular time interval
-* **`takeWhile( )` and `takeWhileWithIndex( )`** — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
+* [**`filter( )` or `where( )`**](Filtering-Observables#filter-or-where) — filter elements emitted by an Observable
+* [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ elements emitted by an Observable
+* [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ elements emitted by an Observable
+* [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ elements emitted by an Observable
+* [**`sample( )`**](Filtering-Observables#sample) — emit items emitted by an Observable at a particular time interval
+* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
 
 ## filter( ) or where( )
 #### filter elements from an Observable sequence
