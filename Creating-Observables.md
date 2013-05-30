@@ -16,7 +16,7 @@ This section explains methods that create Observables.
 
 [[images/rx-operators/toObservable.png]]
 
-You can convert an object that supports the `Iterable<>` interface into a Observable that emits each iterable item in the object, simply by passing the object into the `toObservable( )` or `from( )` methods, for example:
+You can convert an object that supports the `Iterable<>` interface into an Observable that emits each iterable item in the object, simply by passing the object into the `toObservable( )` or `from( )` methods, for example:
 
 ```groovy
 myObservable = Observable.toObservable(myIterable);
@@ -48,7 +48,7 @@ The `from( )` method is also capable of transforming a `Future` into an Observ
 
 [[images/rx-operators/just.png]]
 
-To convert any object into a Observable that emits that object, pass that object into the `just( )` method.
+To convert any object into an Observable that emits that object, pass that object into the `just( )` method.
 
 ```groovy
 // Observable emits "some string" as a single item
@@ -57,7 +57,7 @@ def observableThatEmitsAString = Observable.just("some string");
 def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
 ```
 
-This has some similarities to the `toObservable( )` method, but note that if you pass an iterable to `toObservable( )`, it will convert an iterable object into a Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into a Observable that emits the entire iterable as a single item.
+This has some similarities to the `toObservable( )` method, but note that if you pass an iterable to `toObservable( )`, it will convert an iterable object into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
 
 If you pass nothing or `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
@@ -66,7 +66,7 @@ If you pass nothing or `null` to `just( )`, the resulting Observable will _not
 
 [[images/rx-operators/create.png]]
 
-You can create an Observable from scratch by using the `create( )` method. You pass this method a closure that accepts as its parameter the Observer that is passed to a Observable’s `subscribe( )` method. Write the closure you pass to `create( )` so that it behaves as an Observable — calling the passed-in Observer’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
+You can create an Observable from scratch by using the `create( )` method. You pass this method a closure that accepts as its parameter the Observer that is passed to an Observable’s `subscribe( )` method. Write the closure you pass to `create( )` so that it behaves as an Observable — calling the passed-in Observer’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
 
 ```groovy
 def myObservable = Observable.create({ anObserver ->
