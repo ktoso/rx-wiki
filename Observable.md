@@ -113,8 +113,10 @@ These Rx operators allow you to compose asynchronous sequences together in a dec
 
 This documentation groups information about the various operators and examples of their usage into the following pages (these are also listed in the sidebar):
 
-  * [[Creating|Creation-Operators]]
-  * [[Transforming|Transformative-Operators]]
-  * [[Filtering|Filtering-Operators]]
-  * [[Combining|Combinatorial-Operators]]
-  * [[Utility|Utility-Operators]]
+  * [[Creating|Creating-Observables]]
+  * [[Transforming|Transforming-Observables]]
+  * [[Filtering|Filtering-Observables]]
+  * [[Combining|Combining-Observables]]
+  * [[Utility|Observable-Utility-Operators]]
+  * [[Connectable Observables|Connectable-Observable-Operators]]
+  * [[Blocking Observables|Blocking-Observable-Operators]]
