@@ -67,7 +67,7 @@ Observable.concat(odds, evens).subscribe(
 Sequence complete
 ```
 
-Instead of passing multiple Observables into `concat( )`, you could also pass in a `List<>` of Observables, or even a Observable that emits Observables, and `concat( )` will concatenate their output into the output of a single Observable.
+Instead of passing multiple Observables into `concat( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `concat( )` will concatenate their output into the output of a single Observable.
 
 ## merge( )
 #### combine multiple Observables into one
@@ -105,7 +105,7 @@ Sequence complete
 
 The items emitted by the merged Observable may appear in any order, regardless of which source Observable they came from.
 
-Instead of passing multiple Observables into `merge( )`, you could also pass in a `List<>` of Observables, or even a Observable that emits Observables, and `merge( )` will merge their output into the output of a single Observable.
+Instead of passing multiple Observables into `merge( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `merge( )` will merge their output into the output of a single Observable.
 
 If any of the individual Observables passed into `merge( )` aborts by calling `onError`, the `merge( )` call itself will immediately abort and call `onError`. If you would prefer a merge that continues emitting the results of the remaining, error-free Observables before reporting the error, use `mergeDelayError( )` instead.
 
@@ -123,7 +123,7 @@ Because it is possible that more than one of the merged observables encountered 
 
 [[images/rx-operators/zip.png]]
 
-The `zip( )` method returns a Observable that applies a closure of your choosing to the combination of items emitted, in sequence, by two (or more) other Observables, with the results of this closure becoming the sequence emitted by the returned Observable. It applies this closure in strict sequence, so the first object emitted by the new zip-Observable will be the result of the closure applied to the first object emitted by Observable #1 and the first object emitted by Observable #2; the second object emitted by the new zip-Observable will be the result of the closure applied to the second object emitted by Observable #1 and the second object emitted by Observable #2; and so forth.
+The `zip( )` method returns an Observable that applies a closure of your choosing to the combination of items emitted, in sequence, by two (or more) other Observables, with the results of this closure becoming the sequence emitted by the returned Observable. It applies this closure in strict sequence, so the first object emitted by the new zip-Observable will be the result of the closure applied to the first object emitted by Observable #1 and the first object emitted by Observable #2; the second object emitted by the new zip-Observable will be the result of the closure applied to the second object emitted by Observable #1 and the second object emitted by Observable #2; and so forth.
 
 ```groovy
 myZipObservable = Observable.zip(observable1, observable2, { response1, response2 -> some operation on those responses } );
