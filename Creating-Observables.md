@@ -39,7 +39,9 @@ myArrayObservable = Observable.from(myArray);
 
 This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by an Observable.
 
-The `from( )` method is also capable of transforming a `Future` into an Observable. (This is not true of its `toObservable( )` cousin.)
+An empty iterable (or array) can be converted to an Observable in this way. The resulting Observable will invoke `onCompleted()` without first invoking `onNext()`.
+
+The `from( )` method is also capable of transforming a `Future` into an Observable. (This is not true of `from()`'s cousin `toObservable( )`.)
 
 ## just( )
 #### convert an object into an Observable that emits that object
