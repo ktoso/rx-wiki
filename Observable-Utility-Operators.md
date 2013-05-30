@@ -53,12 +53,14 @@ you could instead write
 numbers.toList() ...
 ```
 
+If you pass to `toList( )` an Observable that invokes `onCompleted` before emitting any values, `toList( )` will emit an empty list before invoking `onCompleted`. If the Observable you pass to `toList( )` invokes `onError`, `toList( )` will in turn invoke the `onError` of its subscribers.
+
 ## toSortedList( )
 #### collect all elements emitted by an Observable and emit this as a single sorted List
 
 [[images/rx-operators/toSortedList.png]]
 
-The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list naturally in ascending order, but you can also pass in a function that takes two values and returns a number, and `toSortedList( )` will use that number instead of the numerical difference between the two values to sort the values.
+The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list naturally in ascending order by means of the `Comparable` interface. If any of the objects emitted by the Observable does not support `Comparable` with respect to the type of every other object emitted by the Observable, `toSortedList( )` will throw an exception. However, you can change this default behavior by also passing in to `toSortedList( )` a closure that takes as its parameters two objects and returns a number; `toSortedList( )` will then use that closure instead of `Comparable` to sort the values.
 
 For example, the following code takes a list of unsorted integers, converts it into an Observable, then converts that Observable into one that emits the original list in sorted form as a single item:
 
@@ -75,15 +77,37 @@ Observable.toSortedList(numbers).subscribe(
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 Sequence complete
 ```
+Here is an example that provides its own sorting closure, in this case, one that sorts numbers according to how close to the number 5 they are:
+```groovy
+numbers = Observable.toObservable([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
-In addition to calling `toList( )` as a stand-alone method, you can also call it as a method of an Observable object, so, in the example above, instead of 
+Observable.toSortedList(numbers, { n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+[5, 6, 4, 3, 7, 8, 2, 1, 9]
+Sequence complete
+```
+
+In addition to calling `toSortedList( )` as a stand-alone method, you can also call it as a method of an Observable object, so, in the examples above, instead of 
 
 ```groovy
 Observable.toSortedList(numbers) ...
 ```
+or
+```groovy
+Observable.toSortedList(numbers, { n, m -> Math.abs(5-n) - Math.abs(5-m) }) ...
+```
 you could instead write
 ```groovy
 numbers.toSortedList() ...
+```
+or
+```groovy
+numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }) ...
 ```
 
 ## materialize( )
@@ -243,6 +267,8 @@ true
 false
 true
 ```
+
+Note that if either Observable emits a `null` value, `sequenceEqual( )` will throw an exception, even if the other Observable also emits a `null` value.
 
 ## synchronize( )
 #### force a poorly-behaving Observable to be well-behaved
