@@ -1,9 +1,9 @@
 This section explains the `ConnectableObservable` subclass and its operators:
 
-* **`ConnectableObservable.connect( )`** — instructs a Connectable Observable to begin emitting values
-* **`Observable.publish( )`** — represents an Observable as a Connectable Observable
-* **`Observable.multicast( )`** — 
-* **`Observable.replay( )`** — ensures that all observers see the same sequence, even if they subscribe after the Observable begins emitting the sequence
+* [**`ConnectableObservable.connect( )`**](Observable-Utility-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting values
+* [**`Observable.publish( )`**](Observable-Utility-Operators#observablepublish) — represents an Observable as a Connectable Observable
+* [**`Observable.multicast( )`**](Observable-Utility-Operators#observablemulticast) — 
+* [**`Observable.replay( )`**](Observable-Utility-Operators#observablereplay) — ensures that all observers see the same sequence, even if they subscribe after the Observable begins emitting the sequence
 
 A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting a sequence of values when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended observers to subscribe to the Observable before the Observable begins emitting values.
 
