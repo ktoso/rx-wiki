@@ -361,4 +361,4 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
         { println "--- Error ---\n" + it.getMessage()})
 ```
 
-See [[Error Handling|ErrorHandling-Operators]] for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` which allows sequences to continue with fallbacks in the event of error.
+See the [Observable Utility Operators](https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#onerrorresumenext) page for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` and `onErrorReturn()` that allow sequences to continue with fallbacks in the event of error.
