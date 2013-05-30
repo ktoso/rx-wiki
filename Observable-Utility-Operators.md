@@ -1,6 +1,6 @@
 This section explains various utility operators for working with Observables.
 
-* **`toList( )`** — collect all elements from an Observable and emit as a single List
+* [**`toList( )`**](#tolist) — collect all elements from an Observable and emit as a single List
 * **`toSortedList( )`** — collect all elements from an Observable and emit as a single, sorted List
 * **`materialize( )`** — convert an Observable into a list of Notifications
 * **`dematerialize( )`** — convert a materialized Observable back into its non-materialized form
