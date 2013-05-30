@@ -66,7 +66,7 @@ If you pass nothing or `null` to `just( )`, the resulting Observable will _not
 
 [[images/rx-operators/create.png]]
 
-You can create an Observable from scratch, by using the `create( )` method. You pass this method a closure that accepts as a parameter the Observer that is passed to a Observable’s `subscribe( )` method. Write the closure you pass to `create( )` so that it behaves as an Observable --- calling the passed-in Observer’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
+You can create an Observable from scratch by using the `create( )` method. You pass this method a closure that accepts as its parameter the Observer that is passed to a Observable’s `subscribe( )` method. Write the closure you pass to `create( )` so that it behaves as an Observable — calling the passed-in Observer’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
 
 ```groovy
 def myObservable = Observable.create({ anObserver ->
@@ -91,6 +91,8 @@ To create an Observable that emits a range of sequential integers, pass the star
 def myObservable = Observable.range(5, 3);
 ```
 
+In calls to `range(m,n)`, values less than 1 for _n_ will result in no numbers being emitted. _m_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
+
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
 
@@ -104,31 +106,32 @@ def myObservable = Observable.range(5, 3);
 ```groovy
 myWriter.println("*** empty() ***");
 Observable.empty().subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  [ onNext:{ myWriter.println("empty: " + it); },
+    onCompleted:{ myWriter.println("empty: Sequence complete"); },
+    onError:{ myWriter.println("empty: Error encountered"); } ]
 );
 
 myWriter.println("*** error() ***");
 Observable.error().subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  [ onNext:{ myWriter.println("error: " + it); },
+    onCompleted:{ myWriter.println("error: Sequence complete"); },
+    onError:{ myWriter.println("error: Error encountered"); } ]
 );
 
 myWriter.println("*** never() ***");
 Observable.never().subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  [ onNext:{ myWriter.println("never: " + it); },
+    onCompleted:{ myWriter.println("never: Sequence complete"); },
+    onError:{ myWriter.println("never: Error encountered"); } ]
 );
 myWriter.println("*** END ***");
+myWriter.flush();
 ```
 ```
 *** empty() ***
-Sequence complete
+empty: Sequence complete
 *** error() ***
-Error encountered
+error: Error encountered
 *** never() ***
 *** END ***
 ```
