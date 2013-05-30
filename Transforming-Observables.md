@@ -76,7 +76,7 @@ Sequence complete
 
 If any of the individual Observables mapped to the emissions from the source Observable in `mapMany( )` aborts by calling `onError`, the `mapMany( )` call itself will immediately abort and call `onError`. If you would prefer that the map-many operation continue emitting the results of the remaining, error-free Observables before reporting the error, use `mapManyDelayError( )` instead.
 
-Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError( )` may pass information about multiple errors to the `onError` closure of its subscribers (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
+Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError( )` may pass information about multiple errors to the `onError` closure of its subscribers (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class [`CompositeException`](http://netflix.github.io/RxJava/javadoc/rx/util/CompositeException.html).
 
 ## reduce( ) or aggregate( )
 #### Apply a closure to each emitted element, sequentially, and emit only the final accumulated value
@@ -175,7 +175,7 @@ my_observable.scan(initial_seed, accumulator_closure)
 #### divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
 [[images/rx-operators/groupBy.png]]
 
-The `groupBy( )` method creates or extracts a key from all of the objects emitted by a source Observable. For each unique key created in this way, `groupBy( )` creates a `GroupedObservable` that emits all of the objects from the source Observable that match that key. `groupBy( )` then emits each of these Observables, as an Observable. A `GroupedObservable` has a method, `getKey( )` with which you can retrieve the key that defines the `GroupedObservable`.
+The `groupBy( )` method creates or extracts a key from all of the objects emitted by a source Observable. For each unique key created in this way, `groupBy( )` creates a [`GroupedObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html) that emits all of the objects from the source Observable that match that key. `groupBy( )` then emits each of these Observables, as an Observable. A `GroupedObservable` has a method, [`getKey( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html#getKey()) with which you can retrieve the key that defines the `GroupedObservable`.
 
 There are two versions of `groupBy( )`:
 
