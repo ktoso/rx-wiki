@@ -9,7 +9,6 @@ This section explains operators you can use to filter and select elements from O
 
 ## filter( ) or where( )
 #### filter elements from an Observable sequence
-
 [[images/rx-operators/filter.png]]
 
 You can filter an Observable, discarding any values that do not meet some test, by passing a filtering closure into the `filter( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
@@ -60,7 +59,6 @@ numbers.where(myisEven).subscribe(
 
 ## takeLast( )
 #### only emit the last _n_ elements emitted by an Observable
-
 [[images/rx-operators/last.png]]
 
 To convert an Observable that emits several objects into one that only emits the last _n_ of these objects before completing, use the `takeLast( )` method. For instance, in the following code, `takeLast( )` emits only the last integer in the list of integers represented by `numbers`:
@@ -91,10 +89,9 @@ numbers.takeLast(1) ...
 
 ## skip()
 #### ignore the first _n_ elements emitted by an Observable
-
 [[images/rx-operators/skip.png]]
 
-You can ignore the first _n_ items emitted by an Observable and attend only to those items that come after, by modifying the Observable with the `Observable.skip(n)` method.
+You can ignore the first _n_ items emitted by an Observable and attend only to those items that come after, by modifying the Observable with the `skip(n)` method.
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -127,7 +124,6 @@ numbers.skip(3) ...
 
 ## take( )
 #### emit only the first _n_ elements from an Observable sequence
-
 [[images/rx-operators/take.png]]
 
 You can choose to pay attention only to the first _n_ values emitted by an Observable by calling its `take(n)` method. That method returns an Observable that will call a subscribing observer’s `onNext` closure a maximum of _n_ times before calling `onCompleted`. For example,
@@ -158,11 +154,10 @@ you could instead write
 numbers.take(3) ...
 ```
 
-If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an error, but will merely emit this same fewer number of items before it completes.
+If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an exception or invoke `onError()`, but will merely emit this same fewer number of items before it completes.
 
 ## sample( )
 #### emit items emitted by an Observable at a particular time interval
-
 [[images/rx-operators/sample.png]]
 
 Use the `sample( )` method to periodically look at an Observable to see what object it is emitting at a particular time.
@@ -186,7 +181,6 @@ Sequence complete
 
 ## takeWhile( ) and takeWhileWithIndex( )
 #### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
-
 [[images/rx-operators/takeWhile.png]]
 
 The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a closure applied to an object emitted by that observable returns `false`, whereupon the new Observable calls `onCompleted( )`.
