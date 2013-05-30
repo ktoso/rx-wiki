@@ -1,20 +1,20 @@
 This section explains various utility operators for working with Observables.
 
-* [**`toList( )`**](#tolist) — collect all elements from an Observable and emit as a single List
-* **`toSortedList( )`** — collect all elements from an Observable and emit as a single, sorted List
-* **`materialize( )`** — convert an Observable into a list of Notifications
-* **`dematerialize( )`** — convert a materialized Observable back into its non-materialized form
-* **`all( )`** — determine whether all items emitted by an Observable meet some criteria
-* **`finallyDo( )`** — register an action to take when an Observable completes
-* **`sequenceEqual( )`** — test the equality of pairs of items emitted by two Observables
-* **`synchronize( )`** — force a poorly-behaving Observable to be well-behaved
-* **`timestamp( )`** — attach a timestamp to every object emitted by an Observable
-* **`cache( )`** — generate the sequence once, and remember it for future subscribers
-* **`defer( )`** — 
-* **`observeOn( )`** — specify on which Scheduler an Observer should observe the Observable
-* **`subscribeOn( )`** — specify which Scheduler an Observable should use when its subscription is invoked
-* **`onErrorResumeNext( )`** — instructs an Observable to continue emitting values after it encounters an error
-* **`onErrorReturn( )`** — instructs an Observable to emit a particular value when it encounters an error
+* [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all elements from an Observable and emit as a single List
+* [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all elements from an Observable and emit as a single, sorted List
+* [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
+* [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
+* [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
+* [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
+* [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of pairs of items emitted by two Observables
+* [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force a poorly-behaving Observable to be well-behaved
+* [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every object emitted by an Observable
+* [**`cache( )`**](Observable-Utility-Operators#cache) — generate the sequence once, and remember it for future subscribers
+* [**`defer( )`**](Observable-Utility-Operators#defer) — 
+* [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler an Observer should observe the Observable
+* [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
+* [**`onErrorResumeNext( )`**](Observable-Utility-Operators#onerrorresumenext) — instructs an Observable to continue emitting values after it encounters an error
+* [**`onErrorReturn( )`**](Observable-Utility-Operators#onerrorreturn) — instructs an Observable to emit a particular value when it encounters an error
 
 ## toList( )
 #### collect all elements from an Observable and emit as a single List
