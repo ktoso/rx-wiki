@@ -2,14 +2,14 @@
 
 This section explains methods that create Observables.
 
-* **`toObservable( )`** — convert an Iterable into an Observable
-* **`from( )`** — convert an Iterable or a Future into an Observable
-* **`just( )`** — convert an object into an Observable that emits that object
-* **`create( )`** — create an Observable from scratch by means of a closure
-* **`range( )`** — create an Observable that emits a range of sequential integers
-* **`empty( )`** — create an Observable that emits nothing and then completes
-* **`error( )`** — create an Observable that emits nothing and then signals an error
-* **`never( )`** — create an Observable that emits nothing at all
+* [**`toObservable( )`**](Creating-Observables#toobservable--from) — convert an Iterable into an Observable
+* [**`from( )`**](Creating-Observables#toobservable--from) — convert an Iterable or a Future into an Observable
+* [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
+* [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a closure
+* [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
+* [**`empty( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then completes
+* [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
+* [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
 
 ## toObservable( ) & from( )
 #### convert an Iterable (or a Future) into an Observable
