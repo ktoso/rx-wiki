@@ -1,12 +1,12 @@
 This section explains operators you can use to combine multiple Observable sequences.
 
-* **`startWith( )`** — emit a specified sequence of values before beginning to emit the Observable sequence
-* **`concat( )`** — concatenate two or more Observables sequentially
-* **`merge( )`** — combine multiple Observables into one
-* **`mergeDelayError( )`** — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
-* **`zip( )`** — combine Observables together via a provided closure and emit values based on the results of this closure
-* **`switchDo( )`** — convert an Observable sequence of Observables into a single Observable that emits the emissions of the most-recently emitted of the Observables in the sequence
-* **`takeUntil( )`** — emits the values from the source Observable until a second Observable emits a value
+* [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of values before beginning to emit the Observable sequence
+* [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
+* [**`merge( )`**](Combining-Observables#merge) — combine multiple Observables into one
+* [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
+* [**`zip( )`**](Combining-Observables#zip) — combine Observables together via a provided closure and emit values based on the results of this closure
+* [**`switchDo( )`**](Combining-Observables#switchdo) — convert an Observable sequence of Observables into a single Observable that emits the emissions of the most-recently emitted of the Observables in the sequence
+* [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the values from the source Observable until a second Observable emits a value
 
 ## startWith( )
 #### emit a specified sequence of values before beginning to emit the Observable sequence
