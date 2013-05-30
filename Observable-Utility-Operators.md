@@ -284,7 +284,7 @@ It is possible that you may encounter a poorly-behaved Observable, perhaps becau
 
 [[images/rx-operators/timestamp.png]]
 
-The `timestamp( )` method converts an Observable that emits objects of type _T_ into one that emits objects of type `Timestamped<T>`, where each such object is stamped with the time at which it was emitted.
+The `timestamp( )` method converts an Observable that emits objects of type _T_ into one that emits objects of type [`Timestamped<T>`](http://netflix.github.io/RxJava/javadoc/rx/util/Timestamped.html), where each such object is stamped with the time at which it was emitted.
 
 ```groovy
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 200000) });
