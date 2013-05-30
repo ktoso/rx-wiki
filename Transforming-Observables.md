@@ -1,12 +1,12 @@
 This section explains Rx operators with which you can transform elements that are emitted by an Observable.
 
-* **`map( )`** — transform the elements emitted by an Observable by applying a closure to each of them
-* **`mapMany( )` or `flatMap( )`** — transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence
-* **`mapManyDelayError( )`** — transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence, waiting to report errors until all error-free observables have a chance to complete
-* **`reduce( )` or `aggregate( )`** — apply a closure to each emitted element, sequentially, and emit only the final accumulated value
-* **`scan( )`** — apply a closure to each element of a sequence, sequentially, and emit each successive value
-* **`groupBy( )`** — divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
-* **`buffer( )`** — periodically gather emissions from an Observable into bundles and emit these bundles rather than emitting the emissions one at a time 
+* [**`map( )`**](Transforming-Observables#map) — transform the elements emitted by an Observable by applying a closure to each of them
+* [**`mapMany( )` or `flatMap( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence
+* [**`mapManyDelayError( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence, waiting to report errors until all error-free observables have a chance to complete
+* [**`reduce( )` or `aggregate( )`**](Transforming-Observables#reduce-or-aggregate) — apply a closure to each emitted element, sequentially, and emit only the final accumulated value
+* [**`scan( )`**](Transforming-Observables#scan) — apply a closure to each element of a sequence, sequentially, and emit each successive value
+* [**`groupBy( )`**](Transforming-Observables#groupby) — divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
+* [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather emissions from an Observable into bundles and emit these bundles rather than emitting the emissions one at a time 
 
 ## map( )
 #### transform the elements emitted by an Observable by applying a closure to each of them
