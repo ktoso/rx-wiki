@@ -57,7 +57,9 @@ def observableThatEmitsAString = Observable.just("some string");
 def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
 ```
 
-This is similar to the `toObservable( )` method, except that `toObservable( )` will convert an iterable object into a Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into a Observable that emits the entire iterable as a single item.
+This has some similarities to the `toObservable( )` method, but note that if you pass an iterable to `toObservable( )`, it will convert an iterable object into a Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into a Observable that emits the entire iterable as a single item.
+
+If you pass nothing or `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
 ## create( )
 #### create an Observable from scratch by means of a closure
