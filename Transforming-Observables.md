@@ -123,6 +123,8 @@ or
 my_observable.reduce(initial_seed, accumulator_closure)
 ```
 
+Note that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your reduction with the value `null`.
+
 ## scan( )
 #### Apply a closure to each element of a sequence and emit each successive value
 [[images/rx-operators/scan.png]]
@@ -170,6 +172,8 @@ my_observable.scan(initial_seed, accumulator_closure)
 ```
 
 **Note:** if you pass a seed value to `scan( )`, it will emit the seed itself as its first value.
+
+Note also that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your scan with the value `null`, and `scan( )` will emit `null` as its first value.
 
 ## groupBy( )
 #### divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
