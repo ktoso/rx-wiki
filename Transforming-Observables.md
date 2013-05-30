@@ -6,10 +6,10 @@ This section explains Rx operators with which you can transform elements that ar
 * **`reduce( )` or `aggregate( )`** — apply a closure to each emitted element, sequentially, and emit only the final accumulated value
 * **`scan( )`** — apply a closure to each element of a sequence, sequentially, and emit each successive value
 * **`groupBy( )`** — divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
+* **`buffer( )`** — periodically gather emissions from an Observable into bundles and emit these bundles rather than emitting the emissions one at a time 
 
 ## map( )
 #### transform the elements emitted by an Observable by applying a closure to each of them
-
 [[images/rx-operators/map.png]]
 
 The `map( )` method applies a closure of your choosing to every object emitted by a Observable, and returns this transformation as a new Observable sequence. For example, the following code maps a closure that squares the incoming value onto the values in `numbers`:
@@ -46,7 +46,6 @@ numbers.map({ it * it }) ...
 
 ## mapMany( ) or flatMap( ), and mapManyDelayError( )
 #### Transform the elements emitted by an Observable into Observables, then flatten into an Observable sequence
-
 [[images/rx-operators/mapMany.png]]
 
 The `mapMany( )` method (or `flatMap( )`, which has identical behavior) creates a new Observable sequence by applying a closure that you supply to each object in the original Observable sequence, where that closure is itself a Observable that emits elements, and then merges the results of that closure applied to every item emitted by the original Observable, emitting these merged results as its own sequence.
@@ -81,7 +80,6 @@ Because it is possible for more than one of the individual Observables to encoun
 
 ## reduce( ) or aggregate( )
 #### Apply a closure to each emitted element, sequentially, and emit only the final accumulated value
-
 [[images/rx-operators/reduce.png]]
 
 The `reduce( )` method (or `aggregate( )`, which has the same behavior) returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of _that_ closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your closure as the sole output from the returned Observable.
@@ -127,7 +125,6 @@ my_observable.reduce(initial_seed, accumulator_closure)
 
 ## scan( )
 #### Apply a closure to each element of a sequence and emit each successive value
-
 [[images/rx-operators/scan.png]]
 
 The `scan( )` method returns a Observable that applies a closure of your choosing to the first item emitted by a source Observable, then feeds the result of that closure along with the second item emitted by the source Observable into the same closure, then feeds the result of that closure along with the third item into the same closure, and so on until all items have been emitted by the source Observable. It emits the result of each of these iterations as a sequence from the returned Observable. This sort of closure is sometimes called an “accumulator.”
@@ -176,7 +173,6 @@ my_observable.scan(initial_seed, accumulator_closure)
 
 ## groupBy( )
 #### divide an Observable into a set of Observables that emit groups of values from the original Observable, organized by key
-
 [[images/rx-operators/groupBy.png]]
 
 The `groupBy( )` method creates or extracts a key from all of the objects emitted by a source Observable. For each unique key created in this way, `groupBy( )` creates a `GroupedObservable` that emits all of the objects from the source Observable that match that key. `groupBy( )` then emits each of these Observables, as an Observable. A `GroupedObservable` has a method, `getKey( )` with which you can retrieve the key that defines the `GroupedObservable`.
@@ -207,3 +203,7 @@ numbers.groupBy(groupFunc).mapMany({ Observable.reduce(it, [it.getKey()], {a, b 
 [true, 2, 4, 6, 8]
 Sequence complete
 ```
+
+## buffer( )
+#### periodically gather emissions from an Observable into bundles and emit these bundles rather than emitting the emissions one at a time 
+[[images/rx-operators/buffer.png]]
