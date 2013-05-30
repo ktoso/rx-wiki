@@ -2,16 +2,16 @@ This section explains the `BlockingObservable` subclass. A Blocking Observable e
 
 > To transform an `Observable` into a `BlockingObservable`, use the `Observable.toBlockingObservable( )` method or the `BlockingObservable.from( )` method.
 
-* **`forEach( )`** — invoke a closure on each element emitted by the Observable; block until the Observable completes
-* **`last( )`** — block until the Observable completes, then return the last item emitted by the Observable
-* **`lastOrDefault( )`** — block until the Observable completes, then return the last item emitted by the Observable or a default value if there is no last item
-* **`mostRecent( )`** — returns an iterable that always returns the item most recently emitted by the Observable
-* **`next( )`** — returns an iterable that blocks until the Observable emits another item, then returns that item
-* **`single( )`** — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
-* **`singleOrDefault( )`** — if the Observable completes after emitting a single item, return that item, otherwise return a default value
-* **`toFuture( )`** — convert the Observable into a Future
-* **`toIterable( )`** — convert the sequence emitted by the Observable into an Iterable
-* **`getIterator( )` or `toIterator( )`** — convert the sequence emitted by the Observable into an Iterator
+* [**`forEach( )`**](Observable-Utility-Operators#foreach) — invoke a closure on each element emitted by the Observable; block until the Observable completes
+* [**`last( )`**](Observable-Utility-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
+* [**`lastOrDefault( )`**](Observable-Utility-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default value if there is no last item
+* [**`mostRecent( )`**](Observable-Utility-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
+* [**`next( )`**](Observable-Utility-Operators#next) — returns an iterable that blocks until the Observable emits another item, then returns that item
+* [**`single( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
+* [**`singleOrDefault( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default value
+* [**`toFuture( )`**](Observable-Utility-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
+* [**`toIterable( )`**](Observable-Utility-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
+* [**`getIterator( )` or `toIterator( )`**](Observable-Utility-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
 
 ## forEach( )
 #### invoke a closure on each element emitted by the Observable; block until the Observable completes
