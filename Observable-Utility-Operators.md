@@ -7,7 +7,7 @@ This section explains various utility operators for working with Observables.
 * [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of pairs of items emitted by two Observables
-* [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force a poorly-behaving Observable to be well-behaved
+* [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every object emitted by an Observable
 * [**`cache( )`**](Observable-Utility-Operators#cache) — generate the sequence once, and remember it for future subscribers
 * [**`defer( )`**](Observable-Utility-Operators#defer) — 
@@ -269,13 +269,11 @@ true
 ```
 
 ## synchronize( )
-#### force a poorly-behaving Observable to be well-behaved
+#### force an Observable to make synchronous calls and to be well-behaved
 
 [[images/rx-operators/synchronize.png]]
 
-The Observables implemented by RxJava are themselves well-behaved (except for the test observable returned by `never( )`), which is to say they call an observer's `onNext( )` closure zero or more times, and then call either the observer's `onCompleted( )` closure or the observer's `onError( )` closure (but never both) exactly once, and then call none of these closures thereafter.
-
-It is possible that you may encounter a poorly-behaved Observable, perhaps because it emits values on different threads and one thread continues calling `onNext( )` after another thread has terminated with `onError( )`. You can force such an Observable to be well-behaved by applying the `synchronize( )` method to it.
+It is possible for an Observable to invoke its Observers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `synchronize( )` method to it.
 
 ## timestamp( )
 #### attach a timestamp to every object emitted by an Observable
