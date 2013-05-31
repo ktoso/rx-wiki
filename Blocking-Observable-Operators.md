@@ -70,7 +70,7 @@ Use the `single( )` method to retrieve the only item emitted by an Observable.
 
 You can also use this method to retrieve the only item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such item). To do this, pass a closure to `single( )` that returns `true` if the item meets the condition. In such a case, `single( )` will again throw an exception unless the Observable emits exactly one item that meets the condition.
 
-The `singleOrDefault( )` method is similar, except that instead of throwing an exception when there is no unique emitted item (or no item that uniquely meets the specified condition), in such a case it will instead return a default value that you specify. Specify that default value by passing it as the first parameter to `singleOrDefault( )`.
+The `singleOrDefault( )` method is similar, except that while it will still throw an exception if the underlying Observable emits _more than_ one item, if the underlying Observable does not emit any items at all, rather than throwing an exception `singleOrDefault( )` will return a default value that you specify. Specify that default value by passing it as the first parameter to `singleOrDefault( )`.
 
 ## transformations: toFuture( ), toIterable( ), and toIterator( )/getIterator( )
 #### transform an Observable into a Future, an Iterable, or an Iterator
