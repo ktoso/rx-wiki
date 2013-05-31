@@ -268,8 +268,6 @@ false
 true
 ```
 
-Note that if either Observable emits a `null` value, `sequenceEqual( )` will throw an exception, even if the other Observable also emits a `null` value.
-
 ## synchronize( )
 #### force a poorly-behaving Observable to be well-behaved
 
