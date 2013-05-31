@@ -25,7 +25,33 @@ Use the `last( )` method to retrieve the last item emitted by an Observable, a
 
 You can also use this method to retrieve the last item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such items). To do this, pass a closure to `last( )` that returns `true` if the item meets the condition.
 
-The `lastOrDefault( )` method is similar, except that instead of returning `null` when there is no last value (or no last value that meets the specified condition), in such a case it will instead return a default value that you specify. Specify that default value by passing it as the first parameter to `lastOrDefault( )`.
+Note that because `last( )` emits `null` to indicate that no value (or no matching value) was emitted by the underlying Observable, this creates an ambiguity in the case of Observables whose last emitted value (or matching value) _is_ `null`:
+
+```groovy
+def boNull    = Observable.toObservable([null]).toBlockingObservable();
+def boNothing = Observable.toObservable([]).toBlockingObservable();
+myWriter.println('boNull.last(): ' + boNull.last());
+myWriter.println('boNothing.last(): ' + boNothing.last());
+```
+```
+boNull.last(): null
+boNothing.last(): null
+```
+
+The `lastOrDefault( )` method is similar to `last( )`, except that instead of returning `null` when there is no last value (or no last value that meets the specified condition), in such a case it will instead return a default value that you specify. Specify that default value by passing it as the first parameter to `lastOrDefault( )`.
+
+Note that you can use this to guard against the ambiguous-`null` noted above:
+
+```groovy
+def boNull    = Observable.toObservable([null]).toBlockingObservable();
+def boNothing = Observable.toObservable([]).toBlockingObservable();
+myWriter.println('boNull.lastOrDefault("foo"): ' + boNull.lastOrDefault("foo"));
+myWriter.println('boNothing.lastOrDefault("foo"): ' + boNothing.lastOrDefault("foo"));
+```
+```
+boNull.lastOrDefault("foo"): null
+boNothing.lastOrDefault("foo"): foo
+```
 
 ## mostRecent( )
 #### returns an iterable that always returns the item most recently emitted by the Observable
