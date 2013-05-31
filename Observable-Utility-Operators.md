@@ -4,17 +4,17 @@ This section explains various utility operators for working with Observables.
 * [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all elements from an Observable and emit as a single, sorted List
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
+* [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every object emitted by an Observable
 * [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
-* [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of pairs of items emitted by two Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
-* [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every object emitted by an Observable
 * [**`cache( )`**](Observable-Utility-Operators#cache) — generate the sequence once, and remember it for future subscribers
-* [**`defer( )`**](Observable-Utility-Operators#defer) — 
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler an Observer should observe the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
 * [**`onErrorResumeNext( )`**](Observable-Utility-Operators#onerrorresumenext) — instructs an Observable to continue emitting values after it encounters an error
 * [**`onErrorReturn( )`**](Observable-Utility-Operators#onerrorreturn) — instructs an Observable to emit a particular value when it encounters an error
+* [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
+* [**`defer( )`**](Observable-Utility-Operators#defer) — 
 
 ## toList( )
 #### collect all elements from an Observable and emit as a single List
@@ -171,6 +171,30 @@ Observable.materialize(numbers).dematerialize().subscribe(
 Sequence complete
 ```
 
+## timestamp( )
+#### attach a timestamp to every object emitted by an Observable
+[[images/rx-operators/timestamp.png]]
+
+The `timestamp( )` method converts an Observable that emits objects of type _T_ into one that emits objects of type [`Timestamped<T>`](http://netflix.github.io/RxJava/javadoc/rx/util/Timestamped.html), where each such object is stamped with the time at which it was emitted.
+
+```groovy
+def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 200000) });
+
+myObservable.timestamp().subscribe(
+  [ onNext: { myWriter.println(it.toString()); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+Timestamped(timestampMillis = 1369252582698, value = 200000)
+Timestamped(timestampMillis = 1369252582740, value = 400000)
+Timestamped(timestampMillis = 1369252582782, value = 600000)
+Timestamped(timestampMillis = 1369252582823, value = 800000)
+Timestamped(timestampMillis = 1369252582864, value = 1000000)
+Sequence complete
+```
+
 ## all( )
 #### determine whether all items emitted by an Observable meet some criteria
 
@@ -192,43 +216,6 @@ all even?
 false
 all positive? 
 true
-```
-
-## finallyDo( )
-#### register an action to take when an Observable completes
-
-[[images/rx-operators/finallyDo.png]]
-
-You can use the `finallyDo( )` method of an Observable to register an action (a closure that implements `Action0`) that RxJava will invoke when that Observable calls either the `onCompleted( )` or `onError( )` method of its Observer.
-
-```groovy
-class TestFinally
-{
-  static class myActionClass implements rx.util.functions.Action0 {
-    void call() { myWriter.println('Finally'); myWriter.flush(); }
-  }
-  
-  static main() {
-    def myAction = new myActionClass();
-    def numbers = Observable.toObservable([1, 2, 3, 4, 5]);
-    
-    numbers.finallyDo(myAction).subscribe(
-          [ onNext: { myWriter.println(it); },
-            onCompleted:{ myWriter.println("Sequence complete"); },
-            onError:{ myWriter.println("Error encountered"); } ]
-    );
-  }
-}
-new TestFinally().main();
-```
-```
-1
-2
-3
-4
-5
-Sequence complete
-Finally
 ```
 
 ## sequenceEqual( )
@@ -274,31 +261,6 @@ true
 [[images/rx-operators/synchronize.png]]
 
 It is possible for an Observable to invoke its Observers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `synchronize( )` method to it.
-
-## timestamp( )
-#### attach a timestamp to every object emitted by an Observable
-
-[[images/rx-operators/timestamp.png]]
-
-The `timestamp( )` method converts an Observable that emits objects of type _T_ into one that emits objects of type [`Timestamped<T>`](http://netflix.github.io/RxJava/javadoc/rx/util/Timestamped.html), where each such object is stamped with the time at which it was emitted.
-
-```groovy
-def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 200000) });
-
-myObservable.timestamp().subscribe(
-  [ onNext: { myWriter.println(it.toString()); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
-);
-```
-```
-Timestamped(timestampMillis = 1369252582698, value = 200000)
-Timestamped(timestampMillis = 1369252582740, value = 400000)
-Timestamped(timestampMillis = 1369252582782, value = 600000)
-Timestamped(timestampMillis = 1369252582823, value = 800000)
-Timestamped(timestampMillis = 1369252582864, value = 1000000)
-Sequence complete
-```
 
 ## cache( )
 #### generate the sequence once, and remember it for future subscribers
@@ -352,9 +314,6 @@ Sequence complete
 ```
 Note that in the second example the timestamps are identical for both of the observers, whereas in the first example they differ.
 
-## defer( )
-####
-
 ## observeOn( )
 #### specify on which Scheduler an Observer should observe the Observable
 [[images/rx-operators/observeOn.png]]
@@ -369,6 +328,7 @@ To specify that the work done by the Observable should be done on a particular S
 ## onErrorResumeNext( )
 #### instructs an Observable to attempt to continue emitting values after it encounters an error
 [[images/rx-operators/onErrorResumeNext.png]]
+
 The `onErrorResumeNext( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Observer, `onErrorResumeNext( )` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ anObserver ->
@@ -403,6 +363,7 @@ Sequence complete
 ## onErrorReturn( )
 #### instructs an Observable to emit a particular value to an observer’s onNext closure when it encounters an error
 [[images/rx-operators/onErrorReturn.png]]
+
 The `onErrorReturn( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Observer, `onErrorReturn( )` will instead emit a specified object and call the Observer's `onCompleted( )` closure, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ anObserver ->
@@ -427,3 +388,43 @@ One
 Blastoff!
 Sequence complete
 ```
+
+## finallyDo( )
+#### register an action to take when an Observable completes
+
+[[images/rx-operators/finallyDo.png]]
+
+You can use the `finallyDo( )` method of an Observable to register an action (a closure that implements `Action0`) that RxJava will invoke when that Observable calls either the `onCompleted( )` or `onError( )` method of its Observer.
+
+```groovy
+class TestFinally
+{
+  static class myActionClass implements rx.util.functions.Action0 {
+    void call() { myWriter.println('Finally'); myWriter.flush(); }
+  }
+  
+  static main() {
+    def myAction = new myActionClass();
+    def numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+    
+    numbers.finallyDo(myAction).subscribe(
+          [ onNext: { myWriter.println(it); },
+            onCompleted:{ myWriter.println("Sequence complete"); },
+            onError:{ myWriter.println("Error encountered"); } ]
+    );
+  }
+}
+new TestFinally().main();
+```
+```
+1
+2
+3
+4
+5
+Sequence complete
+Finally
+```
+
+## defer( )
+####
