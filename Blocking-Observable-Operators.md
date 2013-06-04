@@ -24,6 +24,7 @@ The `forEach(someClosure)` method is the blocking equivalent of `subscribe([onNe
 Use the `last( )` method to retrieve the last item emitted by an Observable, at the time the Observable completes (or `null` if the Observable emitted no items before completing).
 
 You can also use this method to retrieve the last item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such items). To do this, pass a closure to `last( )` that returns `true` if the item meets the condition.
+[[images/rx-operators/B.last.p.png]]
 
 Note that because `last( )` emits `null` to indicate that no value (or no matching value) was emitted by the underlying Observable, this creates an ambiguity in the case of Observables whose last emitted value (or matching value) _is_ `null`:
 
@@ -39,6 +40,8 @@ boNothing.last(): null
 ```
 
 The `lastOrDefault( )` method is similar to `last( )`, except that instead of returning `null` when there is no last value (or no last value that meets the specified condition), in such a case it will instead return a default value that you specify. Specify that default value by passing it as the first parameter to `lastOrDefault( )`.
+[[images/rx-operators/B.lastOrDefault.png]]
+[[images/rx-operators/B.lastOrDefault.p.png]]
 
 Note that you can use this to guard against the ambiguous-`null` noted above:
 
@@ -69,8 +72,11 @@ The `next()` method returns an iterable that on each iteration blocks until the 
 Use the `single( )` method to retrieve the only item emitted by an Observable. `single( )` will throw an exception if the Observable does not emit exactly one item.
 
 You can also use this method to retrieve the only item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such item). To do this, pass a closure to `single( )` that returns `true` if the item meets the condition. In such a case, `single( )` will again throw an exception unless the Observable emits exactly one item that meets the condition.
+[[images/rx-operators/B.single.p.png]]
 
 The `singleOrDefault( )` method is similar, except that while it will still throw an exception if the underlying Observable emits _more than_ one item, if the underlying Observable does not emit any items at all, rather than throwing an exception `singleOrDefault( )` will return a default value that you specify. Specify that default value by passing it as the first parameter to `singleOrDefault( )`.
+[[images/rx-operators/B.singleOrDefault.png]]
+[[images/rx-operators/B.singleOrDefault.p.png]]
 
 ## transformations: toFuture( ), toIterable( ), and toIterator( )/getIterator( )
 #### transform an Observable into a Future, an Iterable, or an Iterator
