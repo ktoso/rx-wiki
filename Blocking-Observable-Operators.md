@@ -2,7 +2,7 @@ This section explains the [`BlockingObservable`](http://netflix.github.io/RxJava
 
 To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlockingObservable( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable()) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)) method.
 
-* [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a closure on each item emitted by the Observable; block until the Observable completes
+* [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
 * [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
 * [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
@@ -18,9 +18,9 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 [[images/rx-operators/B.legend.png]]
 
 ## forEach( )
-#### invoke a closure on each item emitted by the Observable; block until the Observable completes
+#### invoke a function on each item emitted by the Observable; block until the Observable completes
 [[images/rx-operators/B.forEach.png]]
-The `forEach(someClosure)` method is the blocking equivalent of `subscribe([onNext:someClosure])`. When you pass a closure to this method, `forEach( )` will invoke your closure for each item emitted by the Observable, but will only return control to you once the Observable completes (it will not otherwise indicate that the Observable has completed; there is no `forEach( )` equivalent of the `onError` or `onCompleted` methods).
+The `forEach(someFunction)` method is the blocking equivalent of `subscribe([onNext:someFunction])`. When you pass a function to this method, `forEach( )` will invoke your function for each item emitted by the Observable, but will only return control to you once the Observable completes (it will not otherwise indicate that the Observable has completed; there is no `forEach( )` equivalent of the `onError` or `onCompleted` methods).
 
 ## last( ) and lastOrDefault( )
 #### block until the Observable completes, then return the last item emitted by the Observable
@@ -88,4 +88,4 @@ The `singleOrDefault( )` method is similar, except that while it will still th
 [[images/rx-operators/B.toIterable.png]]
 [[images/rx-operators/B.toFuture.png]]
 
-Use these methods to transform a Blocking Observable into a `Future`, an `Iterable`, or an `Iterator`. Note that `toFuture( )` will only work on Blocking Observables that emit one or fewer items. To convert Blocking Observables that emit two or more items into Futures, instead use `.toList( ).toFuture( )` to reduce the emissions from the Observable to a single (list) item.
+Use these methods to transform a Blocking Observable into a `Future`, an `Iterable`, or an `Iterator`. Note that `toFuture( )` will only work on Blocking Observables that emit one or fewer items. To convert Blocking Observables that emit two or more items into Futures, instead use `.toList( ).toFuture( )` to reduce the items emitted by the Observable to a single (list) item.
