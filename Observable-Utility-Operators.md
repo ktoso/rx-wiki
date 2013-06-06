@@ -14,7 +14,6 @@ This section explains various utility operators for working with Observables.
 * [**`onErrorResumeNext( )`**](Observable-Utility-Operators#onerrorresumenext) — instructs an Observable to continue emitting items after it encounters an error
 * [**`onErrorReturn( )`**](Observable-Utility-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
-* [**`defer( )`**](Observable-Utility-Operators#defer) — 
 
 ## toList( )
 #### collect all items from an Observable and emit them as a single List
@@ -425,6 +424,3 @@ new TestFinally().main();
 Sequence complete
 Finally
 ```
-
-## defer( )
-####
