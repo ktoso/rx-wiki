@@ -5,7 +5,7 @@ This section explains methods that create Observables.
 * [**`toObservable( )`**](Creating-Observables#toobservable--from) — convert an Iterable into an Observable
 * [**`from( )`**](Creating-Observables#toobservable--from) — convert an Iterable or a Future into an Observable
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
-* [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a closure
+* [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
 * [**`empty( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then completes
 * [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
@@ -13,7 +13,6 @@ This section explains methods that create Observables.
 
 ## toObservable( ) & from( )
 #### convert an Iterable (or a Future) into an Observable
-
 [[images/rx-operators/toObservable.png]]
 
 You can convert an object that supports the `Iterable<>` interface into an Observable that emits each iterable item in the object, simply by passing the object into the `toObservable( )` or `from( )` methods, for example:
@@ -37,7 +36,7 @@ or
 myArrayObservable = Observable.from(myArray);
 ```
 
-This converts the sequence of values in the iterable object or array into a sequence of objects emitted, one at a time, by an Observable.
+This converts the sequence of values in the iterable object or array into a sequence of items emitted, one at a time, by an Observable.
 
 An empty iterable (or array) can be converted to an Observable in this way. The resulting Observable will invoke `onCompleted()` without first invoking `onNext()`.
 
@@ -45,7 +44,6 @@ The `from( )` method is also capable of transforming a `Future` into an Observ
 
 ## just( )
 #### convert an object into an Observable that emits that object
-
 [[images/rx-operators/just.png]]
 
 To convert any object into an Observable that emits that object, pass that object into the `just( )` method.
@@ -62,11 +60,10 @@ This has some similarities to the `toObservable( )` method, but note that if y
 If you pass nothing or `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
 ## create( )
-#### create an Observable from scratch by means of a closure
-
+#### create an Observable from scratch by means of a function
 [[images/rx-operators/create.png]]
 
-You can create an Observable from scratch by using the `create( )` method. You pass this method a closure that accepts as its parameter the Observer that is passed to an Observable’s `subscribe( )` method. Write the closure you pass to `create( )` so that it behaves as an Observable — calling the passed-in Observer’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
+You can create an Observable from scratch by using the `create( )` method. You pass this method a function that accepts as its parameter the Observer that is passed to an Observable’s `subscribe( )` method. Write the function you pass to `create( )` so that it behaves as an Observable — calling the passed-in Observer’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
 
 ```groovy
 def myObservable = Observable.create({ anObserver ->
@@ -82,7 +79,6 @@ def myObservable = Observable.create({ anObserver ->
 
 ## range( )
 #### create an Observable that emits a range of sequential integers
-
 [[images/rx-operators/range.png]]
 
 To create an Observable that emits a range of sequential integers, pass the starting integer and the number of integers to emit to the `range( )` method.
@@ -96,11 +92,11 @@ In calls to `range(m,n)`, values less than 1 for _n_ will result in no numbers b
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
 
-* `empty( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onCompleted( )` closure.
+* `empty( )` creates an Observable that does not emit any items but instead immediately calls the observer’s `onCompleted( )` method.
 [[images/rx-operators/empty.png]]
-* `error( )` creates an Observable that does not emit any objects but instead immediately calls the observer’s `onError( )` closure.
+* `error( )` creates an Observable that does not emit any items but instead immediately calls the observer’s `onError( )` method.
 [[images/rx-operators/error.png]]
-* `never( )` creates an Observable that does not emit any objects, nor does it call either the observer’s `onCompleted( )` or `onError( )` closures.
+* `never( )` creates an Observable that does not emit any items, nor does it call either the observer’s `onCompleted( )` or `onError( )` methods.
 [[images/rx-operators/never.png]]
 
 ```groovy

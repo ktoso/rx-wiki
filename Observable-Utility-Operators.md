@@ -1,27 +1,26 @@
 This section explains various utility operators for working with Observables.
 
-* [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all elements from an Observable and emit as a single List
-* [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all elements from an Observable and emit as a single, sorted List
+* [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all items from an Observable and emit them as a single List
+* [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
-* [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every object emitted by an Observable
+* [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
 * [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
 * [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of pairs of items emitted by two Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
-* [**`cache( )`**](Observable-Utility-Operators#cache) — generate the sequence once, and remember it for future subscribers
+* [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler an Observer should observe the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
-* [**`onErrorResumeNext( )`**](Observable-Utility-Operators#onerrorresumenext) — instructs an Observable to continue emitting values after it encounters an error
-* [**`onErrorReturn( )`**](Observable-Utility-Operators#onerrorreturn) — instructs an Observable to emit a particular value when it encounters an error
+* [**`onErrorResumeNext( )`**](Observable-Utility-Operators#onerrorresumenext) — instructs an Observable to continue emitting items after it encounters an error
+* [**`onErrorReturn( )`**](Observable-Utility-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
-* [**`defer( )`**](Observable-Utility-Operators#defer) — 
 
 ## toList( )
-#### collect all elements from an Observable and emit as a single List
+#### collect all items from an Observable and emit them as a single List
 
 [[images/rx-operators/toList.png]]
 
-Normally, an Observable that emits multiple items will do so by calling its observer’s `onNext` closure for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to call the observer’s `onNext` closure _once_, passing it the entire list, by calling the Observable object’s `toList( )` method prior to calling its `subscribe( )` method. For example:
+Normally, an Observable that emits multiple items will do so by invoking its Observer’s `onNext` method for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to invoke the Observer’s `onNext` method _once_, passing it the entire list, by calling the Observable’s `toList( )` method prior to calling its `subscribe( )` method. For example:
 
 ```groovy
 Observable.tolist(myObservable).subscribe([ onNext: { myListOfSomething -> do something useful with the list } ]);
@@ -43,7 +42,7 @@ Observable.toList(numbers).subscribe(
 Sequence complete
 ```
 
-In addition to calling `toList( )` as a stand-alone method, you can also call it as a method of an Observable object, so, in the example above, instead of 
+In addition to calling `toList( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
 
 ```groovy
 Observable.toList(numbers) ...
@@ -53,14 +52,14 @@ you could instead write
 numbers.toList() ...
 ```
 
-If you pass to `toList( )` an Observable that invokes `onCompleted` before emitting any values, `toList( )` will emit an empty list before invoking `onCompleted`. If the Observable you pass to `toList( )` invokes `onError`, `toList( )` will in turn invoke the `onError` of its subscribers.
+If you pass to `toList( )` an Observable that invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the Observable you pass to `toList( )` invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Observers.
 
 ## toSortedList( )
-#### collect all elements emitted by an Observable and emit this as a single sorted List
+#### collect all items emitted by an Observable and emit them as a single sorted List
 
 [[images/rx-operators/toSortedList.png]]
 
-The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list naturally in ascending order by means of the `Comparable` interface. If any of the objects emitted by the Observable does not support `Comparable` with respect to the type of every other object emitted by the Observable, `toSortedList( )` will throw an exception. However, you can change this default behavior by also passing in to `toSortedList( )` a closure that takes as its parameters two objects and returns a number; `toSortedList( )` will then use that closure instead of `Comparable` to sort the values.
+The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list naturally in ascending order by means of the `Comparable` interface. If any of the items emitted by the Observable does not support `Comparable` with respect to the type of every other item emitted by the Observable, `toSortedList( )` will throw an exception. However, you can change this default behavior by also passing in to `toSortedList( )` a function that takes as its parameters two items and returns a number; `toSortedList( )` will then use that function instead of `Comparable` to sort the items.
 
 For example, the following code takes a list of unsorted integers, converts it into an Observable, then converts that Observable into one that emits the original list in sorted form as a single item:
 
@@ -77,7 +76,7 @@ Observable.toSortedList(numbers).subscribe(
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 Sequence complete
 ```
-Here is an example that provides its own sorting closure, in this case, one that sorts numbers according to how close to the number 5 they are:
+Here is an example that provides its own sorting function, in this case, one that sorts numbers according to how close to the number 5 they are:
 ```groovy
 numbers = Observable.toObservable([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
@@ -92,7 +91,7 @@ Observable.toSortedList(numbers, { n, m -> Math.abs(5-n) - Math.abs(5-m) }).subs
 Sequence complete
 ```
 
-In addition to calling `toSortedList( )` as a stand-alone method, you can also call it as a method of an Observable object, so, in the examples above, instead of 
+In addition to calling `toSortedList( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the examples above, instead of 
 
 ```groovy
 Observable.toSortedList(numbers) ...
@@ -115,7 +114,7 @@ numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }) ...
 
 [[images/rx-operators/materialize.png]]
 
-A well-formed Observable will call its observer’s `onNext` closure zero or more times, and then will call either the `onCompleted` or `onError` closure exactly once. The `materialize( )` method converts this series of calls into a series of emissions from an Observable, where it represents each such call as a `Notification` object.
+A well-formed Observable will invoke its Observer’s `onNext` method zero or more times, and then will invoke either the `onCompleted` or `onError` method exactly once. The `materialize( )` method converts this series of invocations into a series of items emitted by an Observable, where it emits each such invocation as a `Notification` object.
 
 For example:
 
@@ -138,7 +137,7 @@ Completed
 Sequence complete
 ```
 
-In addition to calling `materialize( )` as a stand-alone method, you can also call it as a method of an Observable object, so that instead of 
+In addition to calling `materialize( )` as a stand-alone method, you can also call it as a method of an Observable, so that instead of 
 
 ```groovy
 Observable.materialize(numbers) ...
@@ -172,10 +171,10 @@ Sequence complete
 ```
 
 ## timestamp( )
-#### attach a timestamp to every object emitted by an Observable
+#### attach a timestamp to every item emitted by an Observable
 [[images/rx-operators/timestamp.png]]
 
-The `timestamp( )` method converts an Observable that emits objects of type _T_ into one that emits objects of type [`Timestamped<T>`](http://netflix.github.io/RxJava/javadoc/rx/util/Timestamped.html), where each such object is stamped with the time at which it was emitted.
+The `timestamp( )` method converts an Observable that emits items of type _T_ into one that emits objects of type [`Timestamped<T>`](http://netflix.github.io/RxJava/javadoc/rx/util/Timestamped.html), where each such object is stamped with the time at which it was emitted.
 
 ```groovy
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 200000) });
@@ -200,7 +199,7 @@ Sequence complete
 
 [[images/rx-operators/all.png]]
 
-Pass an closure to `all( )` that accepts an object emitted by the source Observable and returns a boolean value based on an evaluation of that object, and `all( )` will emit `true` if and only if that closure returned true for every object emitted by the source Observable.
+Pass an function to `all( )` that accepts an item emitted by the source Observable and returns a boolean value based on an evaluation of that item, and `all( )` will emit `true` if and only if that function returned true for every item emitted by the source Observable.
 
 ```groovy
 numbers = Observable.toObservable([1, 2, 3, 4, 5]);
@@ -223,7 +222,7 @@ true
 
 [[images/rx-operators/sequenceEqual.png]]
 
-Pass `sequenceEqual( )` two Observables, and it will compare the objects emitted by each Observable, and emit `true` for each pair of objects if and only if both objects are the same. You can optionally pass a third parameter: a closure that accepts two objects and returns `true` if they are equal according to a standard of your choosing.
+Pass `sequenceEqual( )` two Observables, and it will compare the items emitted by each Observable, and emit `true` for each pair of items if and only if both items are the same. You can optionally pass a third parameter: a function that accepts two items and returns `true` if they are equal according to a standard of your choosing.
 ```groovy
 def firstfour = Observable.toObservable([1, 2, 3, 4]);
 def firstfouragain = Observable.toObservable([1, 2, 3, 4]);
@@ -263,11 +262,11 @@ true
 It is possible for an Observable to invoke its Observers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `synchronize( )` method to it.
 
 ## cache( )
-#### generate the sequence once, and remember it for future subscribers
+#### remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
 
 [[images/rx-operators/cache.png]]
 
-By default, an Observable will generate its sequence afresh for each subscriber. You can force it to generate its sequence only once and then to serve this identical sequence to every subscriber by using the `cache( )` method. Compare the behavior of the following two sets of sample code, the first of which does _not_ use `cache( )` and the second of which does:
+By default, an Observable will generate its sequence of emitted items afresh for each new Observer that subscribes. You can force it to generate its sequence only once and then to emit this identical sequence to every Observer by using the `cache( )` method. Compare the behavior of the following two sets of sample code, the first of which does _not_ use `cache( )` and the second of which does:
 ```groovy
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp();
 
@@ -317,16 +316,16 @@ Note that in the second example the timestamps are identical for both of the obs
 ## observeOn( )
 #### specify on which Scheduler an Observer should observe the Observable
 [[images/rx-operators/observeOn.png]]
-To specify in which Scheduler (thread) the Observable should invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` closures, call the Observable's `observeOn( )` method, passing it the appropriate `Scheduler`.
+To specify in which Scheduler (thread) the Observable should invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` methods, call the Observable's `observeOn( )` method, passing it the appropriate `Scheduler`.
 
 ## subscribeOn( )
 #### specify which Scheduler an Observable should use when its subscription is invoked
 [[images/rx-operators/subscribeOn.png]]
 
-To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn( )` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn( )`) the Observable will invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` closures in this same thread.
+To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn( )` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn( )`) the Observable will invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` methods in this same thread.
 
 ## onErrorResumeNext( )
-#### instructs an Observable to attempt to continue emitting values after it encounters an error
+#### instructs an Observable to attempt to continue emitting items after it encounters an error
 [[images/rx-operators/onErrorResumeNext.png]]
 
 The `onErrorResumeNext( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Observer, `onErrorResumeNext( )` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
@@ -361,10 +360,10 @@ Sequence complete
 ```
 
 ## onErrorReturn( )
-#### instructs an Observable to emit a particular value to an observer’s onNext closure when it encounters an error
+#### instructs an Observable to emit a particular item to an Observer’s onNext method when it encounters an error
 [[images/rx-operators/onErrorReturn.png]]
 
-The `onErrorReturn( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Observer, `onErrorReturn( )` will instead emit a specified object and call the Observer's `onCompleted( )` closure, as shown in the following sample code:
+The `onErrorReturn( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Observer, `onErrorReturn( )` will instead emit a specified item and invoke the Observer's `onCompleted( )` method, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ anObserver ->
   anObserver.onNext('Four');
@@ -394,7 +393,7 @@ Sequence complete
 
 [[images/rx-operators/finallyDo.png]]
 
-You can use the `finallyDo( )` method of an Observable to register an action (a closure that implements `Action0`) that RxJava will invoke when that Observable calls either the `onCompleted( )` or `onError( )` method of its Observer.
+You can use the `finallyDo( )` method of an Observable to register an action (a function that implements `Action0`) that RxJava will invoke when that Observable invokes either the `onCompleted( )` or `onError( )` method of its Observer.
 
 ```groovy
 class TestFinally
@@ -425,6 +424,3 @@ new TestFinally().main();
 Sequence complete
 Finally
 ```
-
-## defer( )
-####

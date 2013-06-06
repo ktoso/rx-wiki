@@ -1,19 +1,19 @@
-This section explains operators you can use to combine multiple Observable sequences.
+This section explains operators you can use to combine multiple Observables.
 
-* [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of values before beginning to emit the Observable sequence
+* [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
 * [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
 * [**`merge( )`**](Combining-Observables#merge) — combine multiple Observables into one
 * [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
-* [**`zip( )`**](Combining-Observables#zip) — combine Observables together via a provided closure and emit values based on the results of this closure
-* [**`switchDo( )`**](Combining-Observables#switchdo) — convert an Observable sequence of Observables into a single Observable that emits the emissions of the most-recently emitted of the Observables in the sequence
-* [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the values from the source Observable until a second Observable emits a value
+* [**`zip( )`**](Combining-Observables#zip) — combine Observables together via a specified function and emit items based on the results of this function
+* [**`switchDo( )`**](Combining-Observables#switchdo) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
+* [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 
 ## startWith( )
-#### emit a specified sequence of values before beginning to emit the Observable sequence
+#### emit a specified sequence of items before beginning to emit the items from the Observable
 
 [[images/rx-operators/startWith.png]]
 
-If you want an Observable to immediately begin emitting a specific sequence of values before it begins emitting the values normally expected from it, pass that specific sequence of values into that Observable's `startWith( )` method, as in the following example:
+If you want an Observable to immediately begin emitting a specific sequence of items before it begins emitting the items normally expected from it, pass that specific sequence of items into that Observable's `startWith( )` method, as in the following example:
 ```groovy
 def myObservable = Observable.toObservable([1, 2, 3]);
 
@@ -107,23 +107,23 @@ The items emitted by the merged Observable may appear in any order, regardless o
 
 Instead of passing multiple Observables into `merge( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `merge( )` will merge their output into the output of a single Observable.
 
-If any of the individual Observables passed into `merge( )` aborts by calling `onError`, the `merge( )` call itself will immediately abort and call `onError`. If you would prefer a merge that continues emitting the results of the remaining, error-free Observables before reporting the error, use `mergeDelayError( )` instead.
+If any of the individual Observables passed into `merge( )` aborts by invoking `onError`, the `merge( )` call itself will immediately abort and invoke `onError`. If you would prefer a merge that continues emitting the results of the remaining, error-free Observables before reporting the error, use `mergeDelayError( )` instead.
 
 ## mergeDelayError( )
 #### combine multiple Observables into one but delay errors until completion
 
 [[images/rx-operators/mergeDelayError.png]]
 
-`mergeDelayError( )` behaves much like `merge( )`. The exception is when one of the Observables being merged throws an error. If this happens with `merge( )`, the merged Observable will immediately throw an error itself (that is, it will call the `onError` closure of its observer). `mergeDelayError( )`, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables that it is merging a chance to finish emitting their items, and it will emit those itself, and will only call `onError` when all of the other merged Observables have finished.
+`mergeDelayError( )` behaves much like `merge( )`. The exception is when one of the Observables being merged throws an error. If this happens with `merge( )`, the merged Observable will immediately throw an error itself (that is, it will invoke the `onError` method of its Observer). `mergeDelayError( )`, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables that it is merging a chance to finish emitting their items, and it will emit those itself, and will only invoke `onError` when all of the other merged Observables have finished.
 
-Because it is possible that more than one of the merged observables encountered an error, `mergeDelayError( )` may pass information about multiple errors to the `onError` closure (which it will never call more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` closure so that it accepts a parameter of the class `CompositeException`.
+Because it is possible that more than one of the merged observables encountered an error, `mergeDelayError( )` may pass information about multiple errors to the `onError` method (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class `CompositeException`.
 
 ## zip( )
-#### combine Observables together via a provided closure and emit values based on the results of this closure
+#### combine Observables together via a specified function and emit items based on the results of this function
 
 [[images/rx-operators/zip.png]]
 
-The `zip( )` method returns an Observable that applies a closure of your choosing to the combination of items emitted, in sequence, by two (or more) other Observables, with the results of this closure becoming the sequence emitted by the returned Observable. It applies this closure in strict sequence, so the first object emitted by the new zip-Observable will be the result of the closure applied to the first object emitted by Observable #1 and the first object emitted by Observable #2; the second object emitted by the new zip-Observable will be the result of the closure applied to the second object emitted by Observable #1 and the second object emitted by Observable #2; and so forth.
+The `zip( )` method returns an Observable that applies a function of your choosing to the combination of items emitted, in sequence, by two (or more) other Observables, with the results of this function becoming the items emitted by the returned Observable. It applies this function in strict sequence, so the first item emitted by the new zip-Observable will be the result of the function applied to the first item emitted by Observable #1 and the first item emitted by Observable #2; the second item emitted by the new zip-Observable will be the result of the function applied to the second item emitted by Observable #1 and the second item emitted by Observable #2; and so forth.
 
 ```groovy
 myZipObservable = Observable.zip(observable1, observable2, { response1, response2 -> some operation on those responses } );
@@ -158,13 +158,13 @@ Sequence complete
 **Note:** that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
 
 ## switchDo( )
-#### convert an Observable sequence of Observables into a single Observable that emits the emissions of the most-recently emitted of the Observables in the sequence
+#### convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 
 [[images/rx-operators/switchDo.png]]
 
-`switchDo( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchDo( )` begins emitting objects from that Observable. When a new Observable is emitted, `switchDo( )` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
+`switchDo( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchDo( )` begins emitting items from that Observable. When a new Observable is emitted, `switchDo( )` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
 
 ## takeUntil( )
-#### emits the values from the source Observable until another Observable emits a value
+#### emits the items from the source Observable until another Observable emits an item
 
 [[images/rx-operators/takeUntil.png]]
