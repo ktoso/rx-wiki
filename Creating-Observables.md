@@ -6,6 +6,7 @@ This section explains methods that create Observables.
 * [**`from( )`**](Creating-Observables#toobservable--from) — convert an Iterable or a Future into an Observable
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
+* [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
 * [**`empty( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then completes
 * [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
@@ -76,6 +77,12 @@ def myObservable = Observable.create({ anObserver ->
 ```
 
 **NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter call any of the observer’s other methods.
+
+## defer( )
+#### do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
+[[images/rx-operators/defer.png]]
+
+Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Observer subscribes.
 
 ## range( )
 #### create an Observable that emits a range of sequential integers
