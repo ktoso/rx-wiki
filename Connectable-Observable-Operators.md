@@ -1,8 +1,7 @@
 This section explains the [`ConnectableObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html) subclass and its operators:
 
 * [**`ConnectableObservable.connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
-* [**`Observable.publish( )`**](Connectable-Observable-Operators#observablepublish) — represents an Observable as a Connectable Observable
-* [**`Observable.multicast( )`**](Connectable-Observable-Operators#observablemulticast) — 
+* [**`Observable.publish( )` and `Observable.multicast( )`**](Connectable-Observable-Operators#observablepublishandobservablemulticast) — represents an Observable as a Connectable Observable
 * [**`Observable.replay( )`**](Connectable-Observable-Operators#observablereplay) — ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
 
 A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting items when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended Observers to subscribe to the Observable before the Observable begins emitting items.
@@ -78,12 +77,9 @@ The `connect( )` method returns a `Subscription`. You can call that object's `
 
 You can also use the `connect( )` method to instruct an Observable to begin emitting items (or, to begin generating items that would be emitted) even before any Observer has subscribed to it.
 
-## Observable.publish( )
+## Observable.publish( ) and Observable.multicast( )
 #### represents an Observable as a Connectable Observable
-To represent an Observable as a Connectable Observable, use the Observable's `publish( )` method.
-
-## Observable.multicast( )
-#### 
+To represent an Observable as a Connectable Observable, use the `publish( )` or `multicast()` method.
 
 ## Observable.replay( )
 #### ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting items
