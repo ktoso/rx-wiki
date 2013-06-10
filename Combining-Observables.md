@@ -4,7 +4,8 @@ This section explains operators you can use to combine multiple Observables.
 * [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
 * [**`merge( )`**](Combining-Observables#merge) — combine multiple Observables into one
 * [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
-* [**`zip( )`**](Combining-Observables#zip) — combine Observables together via a specified function and emit items based on the results of this function
+* [**`zip( )`**](Combining-Observables#zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
+* [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`switchDo( )`**](Combining-Observables#switchdo) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 
@@ -157,9 +158,14 @@ Sequence complete
 
 **Note:** that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
 
+## combineLatest( )
+#### when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
+[[images/rx-operators/combineLatest.png]]
+
+`combineLatest( )` behaves in a similar way to `zip( )`, but while `zip( )` emits items only when all of the zipped source Observables have emitted a previously unzipped item, `combineLatest( )` emits an item whenever _any_ of the source Observables emits an item (so long as each of the source Observables has emitted at least one item). When any of the source Observables emits an item, `combineLatest( )` combines the most recently emitted items from each other source Observables, using the function you provide, and emits the return value from that function.
+
 ## switchDo( )
 #### convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
-
 [[images/rx-operators/switchDo.png]]
 
 `switchDo( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchDo( )` begins emitting items from that Observable. When a new Observable is emitted, `switchDo( )` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
