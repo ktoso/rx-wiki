@@ -76,6 +76,8 @@ Sequence complete
 
 If any of the individual Observables mapped to the items from the source Observable in `mapMany( )` aborts by invoking `onError`, the `mapMany( )` call itself will immediately abort and invoke `onError`. If you would prefer that the map-many operation continue emitting the results of the remaining, error-free Observables before reporting the error, use `mapManyDelayError( )` instead.
 
+[[images/rx-operators/mapManyDelayError.png]]
+
 Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError( )` may pass information about multiple errors to the `onError` method of its Observers (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class [`CompositeException`](http://netflix.github.io/RxJava/javadoc/rx/util/CompositeException.html).
 
 ## reduce( ) or aggregate( )
