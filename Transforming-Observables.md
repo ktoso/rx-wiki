@@ -213,3 +213,30 @@ Sequence complete
 ## buffer( )
 #### periodically gather items emitted by an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 [[images/rx-operators/buffer.png]]
+
+The `buffer( )` method periodically gathers items emitted by a source `Observable` into bundles, and emits these bundles as its own emissions. There are a number of ways with which you can regulate how `buffer( )` gathers items from the source `Observable` into bundles:
+
+* `buffer(count)`
+
+> This version of `buffer( )` emits a new bundle of items for every *count* items emitted by the source `Observable`.
+
+* `buffer(timespan)` and `buffer(timespan, scheduler)`
+
+> This version of `buffer( )` emits a new bundle of items periodically, every *timespan* amount of time, containing all items emitted by the source `Observable` since the previous bundle emission.
+
+* `buffer(timespan, count)` and `buffer(timespan, count, scheduler)`
+
+> This version of `buffer( )` emits a new bundle of items for every *count* items emitted by the source `Observable`, or, if *timespan* has elapsed since its last bundle emission, it emits a bundle of however many items the source `Observable` has emitted in that span, even if this is less than *count*.
+
+* `buffer(count, skip)`
+
+> This version of `buffer( )` creates a new bundle of items for every *skip* item(s) emitted by the source `Observable`, and fills this bundle with that item and the following *count* -1 items. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example: `toObservable([0, 1, 2, 3, 4, 5]).buffer(3, 1)` will emit the following bundles: `[0, 1, 2]`, `[1, 2, 3]`, `[2, 3, 4]`, `[3, 4, 5]`.
+
+* `buffer(timespan, timeshift)` and `buffer(timespan, timeshift, scheduler)`
+
+> This version of `buffer( )` creates a new bundle of items every *timeshift*, and fills this bundle with every item emitted by the source `Observable` from that time until *timespan* time has passed since the bundle's creation, before emitting the bundle as its own emission. If *timespan* is longer than *timeshift*, the emitted bundles will represent time periods that overlap and so they may contain duplicate items.
+
+* `buffer(bufferOpenings, bufferClosingSelector)`
+
+> This version of `buffer( )` monitors an `Observable`, *bufferOpenings*, that emits `BufferOpening` objects. Each time it observes such an emitted object, it creates a new bundle to begin collecting items emitted by the source `Observable` and it passes the *bufferOpenings* `Observable` into the *bufferClosingSelector* function. That function returns an `Observable` that emits `BufferClosing` objects. `buffer( )` monitors that `Observable` and when it detects an emitted `BufferClosing` object, it closes its bundle and emits it as its own emission.
+
