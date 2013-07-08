@@ -737,7 +737,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-06-21 14:43:48 +0000</string>
+	<string>2013-07-08 14:36:35 +0000</string>
 	<key>Modifier</key>
 	<string>David Gross</string>
 	<key>NotesVisible</key>
@@ -73454,8 +73454,8 @@
 					<integer>478</integer>
 					<key>Points</key>
 					<array>
-						<string>{506.11075779026362, 263.5171727385254}</string>
-						<string>{506.49540685439854, 324.73512390686687}</string>
+						<string>{506.116960611134, 263.51717273852535}</string>
+						<string>{506.52098461282282, 325.98143115013249}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -73507,7 +73507,7 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>Rectangle</string>
+					<string>Pentagon</string>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -73528,30 +73528,21 @@
 							<key>MiddleColor</key>
 							<dict>
 								<key>b</key>
-								<string>1</string>
+								<string>0</string>
 								<key>g</key>
 								<string>1</string>
 								<key>r</key>
-								<string>0</string>
+								<string>1</string>
 							</dict>
 							<key>TrippleBlend</key>
 							<string>YES</string>
 						</dict>
 						<key>stroke</key>
 						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>0</string>
-								<key>g</key>
-								<string>1</string>
-								<key>r</key>
-								<string>1</string>
-							</dict>
 							<key>CornerRadius</key>
 							<real>1</real>
 							<key>Width</key>
-							<real>6</real>
+							<real>4</real>
 						</dict>
 					</dict>
 					<key>Text</key>
@@ -73640,8 +73631,8 @@
 					<integer>475</integer>
 					<key>Points</key>
 					<array>
-						<string>{357.70634859846336, 266.95221225878907}</string>
-						<string>{358.27606295171432, 324.7351928275969}</string>
+						<string>{357.70634859846336, 266.95221225878913}</string>
+						<string>{358.30816282942294, 327.99090615009919}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -73693,7 +73684,9 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>Rectangle</string>
+					<string>AdjustableStar</string>
+					<key>ShapeData</key>
+					<dict/>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -73716,28 +73709,19 @@
 								<key>b</key>
 								<string>1</string>
 								<key>g</key>
-								<string>0</string>
-								<key>r</key>
 								<string>1</string>
+								<key>r</key>
+								<string>0</string>
 							</dict>
 							<key>TrippleBlend</key>
 							<string>YES</string>
 						</dict>
 						<key>stroke</key>
 						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>1</string>
-								<key>g</key>
-								<string>1</string>
-								<key>r</key>
-								<string>0</string>
-							</dict>
 							<key>CornerRadius</key>
 							<real>1</real>
 							<key>Width</key>
-							<real>6</real>
+							<real>4</real>
 						</dict>
 					</dict>
 					<key>Text</key>
@@ -73826,8 +73810,8 @@
 					<integer>472</integer>
 					<key>Points</key>
 					<array>
-						<string>{209.25164389319849, 266.95221225878913}</string>
-						<string>{209.33766394920644, 324.73505030797168}</string>
+						<string>{209.25164358125173, 266.95221225878907}</string>
+						<string>{209.3397691852276, 326.14979397458723}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -73879,7 +73863,7 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>Rectangle</string>
+					<string>Diamond</string>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -73902,7 +73886,7 @@
 								<key>b</key>
 								<string>0</string>
 								<key>g</key>
-								<string>1</string>
+								<string>0.5</string>
 								<key>r</key>
 								<string>1</string>
 							</dict>
@@ -73911,19 +73895,10 @@
 						</dict>
 						<key>stroke</key>
 						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>0</string>
-								<key>g</key>
-								<string>0.5</string>
-								<key>r</key>
-								<string>1</string>
-							</dict>
 							<key>CornerRadius</key>
 							<real>1</real>
 							<key>Width</key>
-							<real>6</real>
+							<real>4</real>
 						</dict>
 					</dict>
 					<key>Text</key>
@@ -74194,8 +74169,8 @@
 							<integer>463</integer>
 							<key>Points</key>
 							<array>
-								<string>{396.41376894054224, 233.38906404242618}</string>
-								<string>{455.10147005446515, 233.38906404242618}</string>
+								<string>{396.41376900905141, 233.38906404242618}</string>
+								<string>{467.2891829472261, 233.38906404242618}</string>
 							</array>
 							<key>Style</key>
 							<dict>
@@ -74238,37 +74213,10 @@
 							<key>ID</key>
 							<integer>464</integer>
 							<key>Shape</key>
-							<string>Rectangle</string>
+							<string>VerticalTriangle</string>
 							<key>Style</key>
 							<dict>
 								<key>fill</key>
-								<dict>
-									<key>FillType</key>
-									<integer>3</integer>
-									<key>GradientCenter</key>
-									<string>{-0.17142858, -0.36190476999999999}</string>
-									<key>GradientColor</key>
-									<dict>
-										<key>b</key>
-										<string>0</string>
-										<key>g</key>
-										<string>0</string>
-										<key>r</key>
-										<string>0</string>
-									</dict>
-									<key>MiddleColor</key>
-									<dict>
-										<key>b</key>
-										<string>0</string>
-										<key>g</key>
-										<string>1</string>
-										<key>r</key>
-										<string>0</string>
-									</dict>
-									<key>TrippleBlend</key>
-									<string>YES</string>
-								</dict>
-								<key>stroke</key>
 								<dict>
 									<key>Color</key>
 									<dict>
@@ -74279,10 +74227,15 @@
 										<key>r</key>
 										<string>1</string>
 									</dict>
+									<key>GradientCenter</key>
+									<string>{-0.17142858, -0.36190476999999999}</string>
+								</dict>
+								<key>stroke</key>
+								<dict>
 									<key>CornerRadius</key>
 									<real>1</real>
 									<key>Width</key>
-									<real>6</real>
+									<real>4</real>
 								</dict>
 							</dict>
 							<key>Text</key>
@@ -74374,6 +74327,8 @@
 							<dict>
 								<key>fill</key>
 								<dict>
+									<key>Draws</key>
+									<string>NO</string>
 									<key>FillType</key>
 									<integer>3</integer>
 									<key>GradientCenter</key>
@@ -74486,8 +74441,8 @@
 					<integer>454</integer>
 					<key>Points</key>
 					<array>
-						<string>{141.30293621573196, 266.95219700000007}</string>
-						<string>{141.35332117119486, 324.7350480486345}</string>
+						<string>{141.30293166018583, 266.95219700000007}</string>
+						<string>{141.35454189222182, 326.14944350157646}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -74534,8 +74489,8 @@
 					<integer>453</integer>
 					<key>Points</key>
 					<array>
-						<string>{299.55742876579455, 263.5171731062012}</string>
-						<string>{299.61736279692798, 324.73506618673804}</string>
+						<string>{299.5262580533435, 263.5171731062012}</string>
+						<string>{299.5262580533435, 326.14926056979732}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -74582,8 +74537,8 @@
 					<integer>452</integer>
 					<key>Points</key>
 					<array>
-						<string>{448.7052418022688, 266.95219700000001}</string>
-						<string>{448.75374112052492, 324.73506066321886}</string>
+						<string>{448.6770871967052, 266.95219700000007}</string>
+						<string>{448.6770871967052, 327.97084524910457}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -74630,8 +74585,8 @@
 					<integer>451</integer>
 					<key>Points</key>
 					<array>
-						<string>{504.00799069496901, 131.35146223783397}</string>
-						<string>{505.25589775798898, 196.39088373852539}</string>
+						<string>{503.95134933434082, 128.39938371602625}</string>
+						<string>{505.25589764185321, 196.39088373852536}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -74726,8 +74681,8 @@
 					<integer>449</integer>
 					<key>Points</key>
 					<array>
-						<string>{358.23350243793362, 131.42092167942704}</string>
-						<string>{357.65606656643723, 199.82592325878909}</string>
+						<string>{358.33786660344725, 119.08298006395313}</string>
+						<string>{357.65796338722333, 199.82592325878909}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -74822,8 +74777,8 @@
 					<integer>447</integer>
 					<key>Points</key>
 					<array>
-						<string>{141.20804091160275, 131.43522071363114}</string>
-						<string>{141.00975686192231, 199.82590800000003}</string>
+						<string>{141.2678555426547, 132.25878064084964}</string>
+						<string>{141.25109902740923, 199.825908}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -74923,7 +74878,9 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>Rectangle</string>
+					<string>AdjustableStar</string>
+					<key>ShapeData</key>
+					<dict/>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -74944,9 +74901,9 @@
 							<key>MiddleColor</key>
 							<dict>
 								<key>b</key>
-								<string>1</string>
-								<key>g</key>
 								<string>0</string>
+								<key>g</key>
+								<string>1</string>
 								<key>r</key>
 								<string>1</string>
 							</dict>
@@ -74955,19 +74912,10 @@
 						</dict>
 						<key>stroke</key>
 						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>0</string>
-								<key>g</key>
-								<string>1</string>
-								<key>r</key>
-								<string>1</string>
-							</dict>
 							<key>CornerRadius</key>
 							<real>1</real>
 							<key>Width</key>
-							<real>6</real>
+							<real>4</real>
 						</dict>
 					</dict>
 					<key>Text</key>
@@ -75002,7 +74950,7 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>Rectangle</string>
+					<string>Diamond</string>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -75023,30 +74971,21 @@
 							<key>MiddleColor</key>
 							<dict>
 								<key>b</key>
-								<string>0</string>
+								<string>1</string>
 								<key>g</key>
 								<string>1</string>
 								<key>r</key>
-								<string>1</string>
+								<string>0</string>
 							</dict>
 							<key>TrippleBlend</key>
 							<string>YES</string>
 						</dict>
 						<key>stroke</key>
 						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>1</string>
-								<key>g</key>
-								<string>1</string>
-								<key>r</key>
-								<string>0</string>
-							</dict>
 							<key>CornerRadius</key>
 							<real>1</real>
 							<key>Width</key>
-							<real>6</real>
+							<real>4</real>
 						</dict>
 					</dict>
 					<key>Text</key>
@@ -75081,7 +75020,7 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>Rectangle</string>
+					<string>Diamond</string>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -75102,9 +75041,9 @@
 							<key>MiddleColor</key>
 							<dict>
 								<key>b</key>
-								<string>0</string>
-								<key>g</key>
 								<string>1</string>
+								<key>g</key>
+								<string>0</string>
 								<key>r</key>
 								<string>1</string>
 							</dict>
@@ -75113,19 +75052,10 @@
 						</dict>
 						<key>stroke</key>
 						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>1</string>
-								<key>g</key>
-								<string>0</string>
-								<key>r</key>
-								<string>1</string>
-							</dict>
 							<key>CornerRadius</key>
 							<real>1</real>
 							<key>Width</key>
-							<real>6</real>
+							<real>4</real>
 						</dict>
 					</dict>
 					<key>Text</key>
@@ -75889,7 +75819,7 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>VerticalTriangle</string>
+					<string>Pentagon</string>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -75914,7 +75844,7 @@
 								<key>g</key>
 								<string>1</string>
 								<key>r</key>
-								<string>0</string>
+								<string>1</string>
 							</dict>
 							<key>TrippleBlend</key>
 							<string>YES</string>
@@ -75959,7 +75889,9 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>VerticalTriangle</string>
+					<string>AdjustableStar</string>
+					<key>ShapeData</key>
+					<dict/>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -75982,7 +75914,7 @@
 								<key>b</key>
 								<string>1</string>
 								<key>g</key>
-								<string>0</string>
+								<string>1</string>
 								<key>r</key>
 								<string>1</string>
 							</dict>
@@ -76029,7 +75961,7 @@
 						<integer>0</integer>
 					</dict>
 					<key>Shape</key>
-					<string>VerticalTriangle</string>
+					<string>Diamond</string>
 					<key>Style</key>
 					<dict>
 						<key>fill</key>
@@ -76050,7 +75982,7 @@
 							<key>MiddleColor</key>
 							<dict>
 								<key>b</key>
-								<string>0</string>
+								<string>1</string>
 								<key>g</key>
 								<string>1</string>
 								<key>r</key>
@@ -161097,7 +161029,7 @@
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>74</integer>
+		<integer>39</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
@@ -161115,7 +161047,7 @@
 		<key>SmallIcons</key>
 		<true/>
 		<key>VisibleRegion</key>
-		<string>{{-504, -321}, {1648, 963}}</string>
+		<string>{{-504, -286}, {1648, 963}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
