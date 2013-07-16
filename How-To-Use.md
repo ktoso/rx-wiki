@@ -343,8 +343,8 @@ def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArti
                     observer.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
                 }
                 observer.onCompleted();
-            } catch(Exception e) {
-                observer.onError(e);
+            } catch(Throwable t) {
+                observer.onError(t);
             }
         }
             return Observable.noOpSubscription();
@@ -352,13 +352,22 @@ def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArti
 }
 ```
 
-Notice how it now invokes `onError(Exception e)` if an exception occurs and note that the following code passes `subscribe()` a second method that handles `onError`:
+Notice how it now invokes `onError(Throwable t)` if an error occurs and note that the following code passes `subscribe()` a second method that handles `onError`:
 
 ```groovy
 fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle", "Elephant")
     .subscribe(
-        { println "--- Article ---\n" + it.substring(0, 125)}, 
-        { println "--- Error ---\n" + it.getMessage()})
+        { println "--- Article ---\n" + it.substring(0, 125) }, 
+        { println "--- Error ---\n" + it.getMessage() })
 ```
 
 See the [Observable Utility Operators](https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#onerrorresumenext) page for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` and `onErrorReturn()` that allow Observables to continue with fallbacks in the event of error.
+
+Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables --- `myObservable` --- and you want to intercept any exceptions that would normally pass through to an Observer's `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the `onErrorResumeNext()` method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called `error()` will generate such an Observable for you):
+
+```groovy
+myModifiedObservable = myObservable.onErrorResumeNext({ t ->
+   Throwable myThrowable = myCustomizedThrowableCreator(t);
+   return(Observable.error(myThrowable));
+});
+```
