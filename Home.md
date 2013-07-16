@@ -18,7 +18,7 @@ RxJava’s Observables support not just the emission of single scalar values (as
 
 ### RxJava is More Lightweight, Less Restrictive than Akka Futures
 
-The RxJava implementation is not biased toward some particular source of concurrency or asynchronocity. It also tries to be very lightweight (a single JAR focused on just the Observable abstraction and related higher-order functions).
+The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. It also tries to be very lightweight (a single JAR focused on just the Observable abstraction and related higher-order functions).
 
 A composable Future could be implemented just as generically, but <a href="http://doc.akka.io/docs/akka/2.2.0/java.html">Akka Futures</a> for example come tied in with an Actor library and a lot of other stuff. RxJava tries not to restrict you in this way. You can choose to implement your Observables using actors, thread-pools, event loops, non-blocking I/O, or whatever implementation suits your needs, your style, or your expertise.
 
