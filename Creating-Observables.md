@@ -1,5 +1,3 @@
-# Creating Observables
-
 This section explains methods that create Observables.
 
 * [**`toObservable( )`**](Creating-Observables#toobservable--from) — convert an Iterable into an Observable
