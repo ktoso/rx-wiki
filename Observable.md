@@ -87,14 +87,14 @@ You can also pass in to the `subscribe()` method two additional Observer methods
 
 **onCompleted**: An Observable will invoke this Observer method after it has called `onNext` for the final time, if it has not encountered any errors.
 
-**onError**: An Observable will invoke this Observer method to indicate that it has failed to generate the expected data. By default this stops the Observable and it will not make further calls to `onNext` or `onCompleted`. The `onError` method takes as its parameter the Exception that caused the error (or a `CompositeException` in those cases where there may have been multiple exceptions).
+**onError**: An Observable will invoke this Observer method to indicate that it has failed to generate the expected data. By default this stops the Observable and it will not make further calls to `onNext` or `onCompleted`. The `onError` method takes as its parameter the Throwable that caused the error (or a `CompositeException` in those cases where there may have been multiple errors).
 
 A more complete `subscribe()` example would therefore look like this:
 
 ```groovy
 def myObserver   = { it -> do something useful with it };
 def myComplete  = { clean up after the final response };
-def myError     = { exception -> react sensibly to a failed call };
+def myError     = { Throwable -> react sensibly to a failed call };
 def myObservable = someMethod(itsParameters);
 myObservable.subscribe([ onNext:myObserver, onCompleted:myComplete, onError:myError ]);
 // go on about my business
