@@ -20,7 +20,7 @@ RxJava’s Observables support not just the emission of single scalar values (as
 
 The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. It also tries to be very lightweight (it is implemented as a single JAR that is focused on just the Observable abstraction and related higher-order functions).
 
-A composable Future could be implemented just as generically, but <a href="http://doc.akka.io/docs/akka/2.2.0/java.html">Akka Futures</a> for example come tied in with an Actor library and a lot of other stuff. RxJava tries not to restrict you in this way. You can choose to implement your Observables using actors, thread-pools, event loops, non-blocking I/O, or whatever implementation suits your needs, your style, or your expertise.
+A composable Future could be implemented just as generically, but <a href="http://doc.akka.io/docs/akka/2.2.0/java.html">Akka Futures</a> for example come tied in with an Actor library and a lot of other stuff. RxJava tries not to restrict you in this way. You can choose to implement your Observables using actors, thread-pools, event loops, non-blocking I/O, or whatever implementation suits your needs, your style, or your expertise. (And you can later change your mind, and your Observable implementation, without breaking the consumers of your Observable.)
 
 ### Callbacks Have Their Own Problems
 
@@ -60,6 +60,8 @@ The Observable type adds two missing semantics to the Gang of Four’s <a href="
 1. the ability for the producer to signal to the consumer that an error has occurred (an Iterable throws an exception if an error takes place during iteration; an Observable calls its observer's ``onError()`` method)
 
 With these additions, RxJava harmonizes the Iterable and Observable types. The only difference between them is the direction in which the data flows. This is very important because now any operation you can perform on an Iterable, you can also perform on an Observable.
+
+We call this approach Functional Reactive Programming because it applies functions (lambdas/closures) in a reactive (asynchronous/push) manner to asynchronous sequences of data. (This is not meant to be an implementation of the similar but more restrictive “functional reactive programming” model used in languages like <a href="http://conal.net/fran/">Fran</a>.)
 
 # More Information
 
