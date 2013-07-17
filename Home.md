@@ -1,8 +1,8 @@
-RxJava is an implementation of [Reactive Extensions](https://rx.codeplex.com) – a library for composing asynchronous and event-based programs that use observable sequences – for the Java VM.
+RxJava is a Java VM implementation of [Reactive Extensions](https://rx.codeplex.com): a library for composing asynchronous and event-based programs that use observable sequences.
 
-It extends the [observer pattern](http://en.wikipedia.org/wiki/Observer_pattern) to support sequences of data/events and adds operators that compose sequences together declaratively while abstracting away low-level threading, synchronization, thread-safety, concurrent data structures, non-blocking IO, and other such concerns.
+It extends the [observer pattern](http://en.wikipedia.org/wiki/Observer_pattern) to support sequences of data/events and adds operators that compose sequences together declaratively while abstracting away concerns about things like low-level threading, synchronization, thread-safety, concurrent data structures, and non-blocking I/O.
 
-It supports Java 5 or higher and JVM based languages such as [Groovy](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy), [Clojure](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure), [Scala](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala) and [JRuby](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-jruby).
+It supports Java 5 or higher and JVM-based languages such as [Groovy](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy), [Clojure](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure), [Scala](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala) and [JRuby](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-jruby).
 
 # Why?
 
@@ -10,67 +10,56 @@ It supports Java 5 or higher and JVM based languages such as [Groovy](https://gi
 
 <a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html">Java Futures</a> are straightforward to use for a <a href="https://gist.github.com/4670979">single level of asynchronous execution</a> but they start to add <a href="https://gist.github.com/4671081">non-trivial complexity</a> when they’re nested.
 
-It is <a href="https://gist.github.com/4671081#file-futuresb-java-L163">difficult to use Futures to optimally compose conditional asynchronous execution flows</a> (or impossible, as latencies of each request vary at runtime). It <a href="http://www.amazon.com/gp/product/0321349601?ie=UTF8&tag=none0b69&linkCode=as2&camp=1789&creative=9325&creativeASIN=0321349601">can be done</a> of course, but it quickly becomes complicated (and thus error prone) or prematurely blocks on “Future.get()” - eliminating the benefit of asynchronous execution.
+It is <a href="https://gist.github.com/4671081#file-futuresb-java-L163">difficult to use Futures to optimally compose conditional asynchronous execution flows</a> (or impossible, since latencies of each request vary at runtime). This <a href="http://www.amazon.com/gp/product/0321349601?ie=UTF8&tag=none0b69&linkCode=as2&camp=1789&creative=9325&creativeASIN=0321349601">can be done</a>, of course, but it quickly becomes complicated (and thus error-prone) or it prematurely blocks on `Future.get()`, which eliminates the benefit of asynchronous execution.
 
 ### Futures are Less-Flexible in terms of the Data They Work With
 
-RxJava’s Observables support not just the emission of single scalar values (as Futures do), but also of sequences of values or even infinite streams. Observable is a single abstraction that can be used for any of these use cases. An Observable has all of the flexibility and elegance associated with its mirror-image cousin the Iterable.
+RxJava’s Observables support not just the emission of single scalar values (as Futures do), but also of sequences of values or even infinite streams. ``Observable`` is a single abstraction that can be used for any of these use cases. An Observable has all of the flexibility and elegance associated with its mirror-image cousin the Iterable.
 
 ### RxJava is More Lightweight, Less Restrictive than Akka Futures
 
-The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. It also tries to be very lightweight (a single JAR focused on just the Observable abstraction and related higher-order functions).
+The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. It also tries to be very lightweight (it is implemented as a single JAR that is focused on just the Observable abstraction and related higher-order functions).
 
 A composable Future could be implemented just as generically, but <a href="http://doc.akka.io/docs/akka/2.2.0/java.html">Akka Futures</a> for example come tied in with an Actor library and a lot of other stuff. RxJava tries not to restrict you in this way. You can choose to implement your Observables using actors, thread-pools, event loops, non-blocking I/O, or whatever implementation suits your needs, your style, or your expertise.
 
 ### Callbacks Have Their Own Problems
 
-Callbacks offer a solution to the tendency to block on Future.get() by not allowing anything to block. They are naturally efficient because they execute when the response is ready.
+Callbacks solve the problem of premature blocking on ``Future.get()`` by not allowing anything to block. They are naturally efficient because they execute when the response is ready.
 
-But as with Futures, while callbacks are easy to use with a single level of asynchronous execution, <a href="https://gist.github.com/4677544">they become unwieldy with nested composition</a>.
+But as with Futures, while callbacks are easy to use with a single level of asynchronous execution, <a href="https://gist.github.com/4677544">with nested composition they become unwieldy</a>.
 
 ### RxJava is a Polyglot Implementation
 
-RxJava is meant for a more polyglot environment than just Java/Scala, and it is being designed to respect the idioms of each language. (<a href="https://github.com/Netflix/RxJava/pull/304">This is something we’re still working on.</a>)
+RxJava is meant for a more polyglot environment than just Java/Scala, and it is being designed to respect the idioms of each JVM-based language. (<a href="https://github.com/Netflix/RxJava/pull/304">This is something we’re still working on.</a>)
 
 # Functional Reactive Programming (FRP)
 
-RxJava offers efficient execution and composition by providing a collection of operators with which you can filter, select, transform, combine, and compose Observables.
+RxJava provides a collection of operators with which you can filter, select, transform, combine, and compose Observables. This allows for efficient execution and composition.
 
-The Observable class can be thought of as a “push” equivalent to <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html">Iterable</a>, which is “pull.” With an Iterable, the consumer pulls values from the producer and the thread blocks until those values arrive. By contrast, with an Observable the producer pushes values to the consumer whenever values are available. This approach is more flexible, because values can arrive synchronously or asynchronously.
+You can think of the Observable class as a “push” equivalent to <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html">Iterable</a>, which is a “pull.” With an Iterable, the consumer pulls values from the producer and the thread blocks until those values arrive. By contrast, with an Observable the producer pushes values to the consumer whenever values are available. This approach is more flexible, because values can arrive synchronously or asynchronously.
+
+```groovy
+// An Iterable uses a pull model, for instance this Iterable<String>:
+getStringsFromMemory()
+  .skip(10)
+  .take(5)
+  .map({ s -> return(s + "_transformed"); })
+  .forEach({ it -> println("next => " + it); });
+
+// You compose an Observable<String> in much the same way, though it uses the push model:
+getStringsFromNetwork()
+  .skip(10)
+  .take(5)
+  .map({ s -> return(s + "_transformed"); })
+  .subscribe({ it -> println("onNext => " + it); });
+```
 
 The Observable type adds two missing semantics to the Gang of Four’s <a href="http://en.wikipedia.org/wiki/Observer_pattern">Observer pattern</a>, to match those that are available in the Iterable type:  
 
-1. the ability for the producer to signal to the consumer that there is no more data available
-1. the ability for the producer to signal to the consumer that an error has occurred
+1. the ability for the producer to signal to the consumer that there is no more data available (a foreach loop on an Iterable completes and returns normally in such a case; an Observable calls its observer's ``onCompleted()`` method)
+1. the ability for the producer to signal to the consumer that an error has occurred (an Iterable throws an exception if an error takes place during iteration; an Observable calls its observer's ``onError()`` method)
 
-With these additions, RxJava unifies the Iterable and Observable types. The only difference between them is the direction in which the data flows. This is very important because now any operation you can perform on an Iterable, you can also perform on an Observable. Here is an example:
-
-```groovy
-/**
- * Asynchronously calls 'customObservableNonBlocking' and defines 
- * a chain of operators to apply to the callback sequence.
- */
-def simpleComposition() {
-  // fetch an asynchronous Observable<String> 
-  // that emits 75 Strings of 'anotherValue_#'
-  customObservableNonBlocking()
-    // skip the first 10
-    .skip(10)
-    // take the next 5
-    .take(5)
-    // transform each String with the provided function
-    .map({ stringValue -> return stringValue + "_transformed" })
-    // subscribe to the sequence and print each transformed String
-    .subscribe({ println "onNext => " + it })
-}
- 
-// output
-onNext => anotherValue_10_transformed
-onNext => anotherValue_11_transformed
-onNext => anotherValue_12_transformed
-onNext => anotherValue_13_transformed
-onNext => anotherValue_14_transformed
-```
+With these additions, RxJava harmonizes the Iterable and Observable types. The only difference between them is the direction in which the data flows. This is very important because now any operation you can perform on an Iterable, you can also perform on an Observable.
 
 # More Information
 
