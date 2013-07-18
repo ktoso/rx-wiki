@@ -9,6 +9,7 @@
   * [[Observable Utility Operators]]
   * [[Connectable Observable Operators]]
   * [[Blocking Observable Operators]]
+* [[Subject]]
 
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
