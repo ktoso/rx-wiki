@@ -39,7 +39,7 @@ This converts the sequence of values in the iterable object or array into a sequ
 
 An empty iterable (or array) can be converted to an Observable in this way. The resulting Observable will invoke `onCompleted()` without first invoking `onNext()`.
 
-The `from( )` method is also capable of transforming a `Future` into an Observable. (This is not true of `from()`'s cousin `toObservable( )`.)
+The `from( )` method is also capable of transforming a `Future` into an Observable. (This is not true of `from()`’s cousin `toObservable( )`.) Note that such an Observable will be effectively blocking, as its underlying `Future` blocks.
 
 ## just( )
 #### convert an object into an Observable that emits that object
