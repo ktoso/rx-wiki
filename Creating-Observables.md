@@ -92,7 +92,7 @@ To create an Observable that emits a range of sequential integers, pass the star
 def myObservable = Observable.range(5, 3);
 ```
 
-In calls to `range(m,n)`, values less than 1 for _n_ will result in no numbers being emitted. _m_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
+In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers being emitted. _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
 
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
