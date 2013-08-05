@@ -89,3 +89,4 @@ The following external libraries can work with RxJava:
 * [Hystrix](https://github.com/Netflix/Hystrix/wiki/How-To-Use#wiki-Reactive-Execution) latency and fault tolerance bulkheading library.
 * [Camel RX](http://camel.apache.org/rx.html) provides an easy way to reuse any of the [Apache Camel components, protocols, transports and data formats](http://camel.apache.org/components.html) with the RxJava API
 * [rxjava-http-tail](https://github.com/myfreeweb/rxjava-http-tail) allows you to follow logs over HTTP, like `tail -f`
+* [mod-rxjava - Extension for VertX](https://github.com/meez/mod-rxjava) that provides support for Reactive Extensions (RX) using the RxJava library
