@@ -68,6 +68,7 @@ We call this approach Functional Reactive Programming because it applies functio
 * LambdaJam Chicago 2013: [Functional Reactive Programming in the Netflix API](https://speakerdeck.com/benjchristensen/functional-reactive-programming-in-the-netflix-api-lambdajam-2013)
 * QCon London 2013 presentation: [Functional Reactive Programming in the Netflix API](http://www.infoq.com/presentations/netflix-functional-rx) and [interview](http://www.infoq.com/interviews/christensen-hystrix-rxjava)
 * [Functional Reactive in the Netflix API with RxJava](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html)
+* [Functional Reactive Programming on Android With RxJava](http://mttkay.github.io/blog/2013/08/25/functional-reactive-programming-on-android-with-rxjava/)
 * [Optimizing the Netflix API](http://techblog.netflix.com/2013/01/optimizing-netflix-api.html)
 * [Reactive Programming at Netflix](http://techblog.netflix.com/2013/01/reactive-programming-at-netflix.html)
 * [rx.codeplex.com](https://rx.codeplex.com)
