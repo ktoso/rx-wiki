@@ -15,7 +15,6 @@
   * Groovy
   * Clojure
   * Scala
-  * JRuby
 
 * [[How to Contribute]]
 * [Javadoc](http://netflix.github.com/RxJava/javadoc/)
