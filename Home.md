@@ -12,7 +12,7 @@ It supports Java 5 or higher and JVM-based languages such as [Groovy](https://gi
 
 It is <a href="https://gist.github.com/4671081#file-futuresb-java-L163">difficult to use Futures to optimally compose conditional asynchronous execution flows</a> (or impossible, since latencies of each request vary at runtime). This <a href="http://www.amazon.com/gp/product/0321349601?ie=UTF8&tag=none0b69&linkCode=as2&camp=1789&creative=9325&creativeASIN=0321349601">can be done</a>, of course, but it quickly becomes complicated (and thus error-prone) or it prematurely blocks on `Future.get()`, which eliminates the benefit of asynchronous execution.
 
-### Java Futures are Less-Flexible in terms of the Data They Work With
+### Java Futures are Less-Flexible
 
 RxJava’s Observables support not just the emission of single scalar values (as Futures do), but also of sequences of values or even infinite streams. ``Observable`` is a single abstraction that can be used for any of these use cases. An Observable has all of the flexibility and elegance associated with its mirror-image cousin the Iterable.
 
