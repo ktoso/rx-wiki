@@ -16,7 +16,7 @@ It is <a href="https://gist.github.com/4671081#file-futuresb-java-L163">difficul
 
 RxJava’s Observables support not just the emission of single scalar values (as Futures do), but also of sequences of values or even infinite streams. ``Observable`` is a single abstraction that can be used for any of these use cases. An Observable has all of the flexibility and elegance associated with its mirror-image cousin the Iterable.
 
-### RxJava is Lightweight and Not Opionated
+### Observables are Less Opinionated
 
 The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. It also tries to be very lightweight (it is implemented as a single JAR that is focused on just the Observable abstraction and related higher-order functions).
 
