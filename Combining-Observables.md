@@ -6,7 +6,7 @@ This section explains operators you can use to combine multiple Observables.
 * [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * [**`zip( )`**](Combining-Observables#zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
-* [**`switchDo( )`**](Combining-Observables#switchdo) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
+* [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 
 ## startWith( )
@@ -164,11 +164,11 @@ Sequence complete
 
 `combineLatest( )` behaves in a similar way to `zip( )`, but while `zip( )` emits items only when all of the zipped source Observables have emitted a previously unzipped item, `combineLatest( )` emits an item whenever _any_ of the source Observables emits an item (so long as each of the source Observables has emitted at least one item). When any of the source Observables emits an item, `combineLatest( )` combines the most recently emitted items from each of the other source Observables, using the function you provide, and emits the return value from that function.
 
-## switchDo( )
+## switchOnNext( )
 #### convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 [[images/rx-operators/switchDo.png]]
 
-`switchDo( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchDo( )` begins emitting items from that Observable. When a new Observable is emitted, `switchDo( )` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
+`switchOnNext( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchOnNext( )` begins emitting items from that Observable. When a new Observable is emitted, `switchOnNext( )` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
 
 ## takeUntil( )
 #### emits the items from the source Observable until another Observable emits an item
