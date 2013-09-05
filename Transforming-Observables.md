@@ -243,7 +243,7 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 
 ## window( )
 #### periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
-(image TBD)
+[[images/rx-operators/window1.png]]
 
 Window is similar to `buffer( )`, but rather than emitting packets of items from the original `Observable`, it emits `Observable`s, each one of which emits a subset of items from the original `Observable` and then terminates with an `onCompleted( )` call.
 
