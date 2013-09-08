@@ -6,6 +6,7 @@ This section explains methods that create Observables.
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
+* [**`interval( )`**](Creating-Observables#interval) — create an Observable that emits a sequence of integers spaced by a given time interval
 * [**`empty( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then completes
 * [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
 * [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
@@ -93,6 +94,12 @@ def myObservable = Observable.range(5, 3);
 ```
 
 In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers being emitted. _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
+
+## interval( )
+#### create an Observable that emits a sequence of integers spaced by a given time interval
+(diagram TBD)
+
+To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
 
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
