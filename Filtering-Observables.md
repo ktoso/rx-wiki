@@ -6,7 +6,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`sample( )`**](Filtering-Observables#sample) — emit items emitted by an Observable at a particular time interval
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-* [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is true, then emit the remainder
+* [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 
 ## filter( ) or where( )
 #### filter items emitted by an Observable
@@ -225,7 +225,7 @@ Sequence complete
 ```
 
 ## skipWhile( ) and skipWhileWithIndex( )
-#### discard items emitted by an Observable until a specified condition is true, then emit the remainder
+#### discard items emitted by an Observable until a specified condition is false, then emit the remainder
 (diagram TBD)
 
 The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
