@@ -7,6 +7,8 @@ This section explains operators you can use to filter and select items emitted b
 * [**`sample( )`**](Filtering-Observables#sample) — emit items emitted by an Observable at a particular time interval
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`first( )`**](Filtering-Observables#first) — emit only the first item emitted by an Observable, or the first item that meets some condition
+* [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 
 ## filter( ) or where( )
 #### filter items emitted by an Observable
@@ -265,3 +267,15 @@ numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe
 9
 Sequence complete
 ```
+
+## first( )
+#### emit only the first item emitted by an Observable, or the first item that meets some condition
+(diagram TBD)
+
+To create an Observable that emits only the first item emitted by a source Observable (if any), use the `first( )` method. You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
+
+## firstOrDefault( )
+#### emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+(diagram TBD)
+
+To create an Observable that emits only the first item emitted by a source Observable (or a default value if the source Observable is empty), use the `firstOrDefault( )` method. You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
