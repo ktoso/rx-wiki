@@ -8,6 +8,7 @@
   * [[Combining Observables]]
   * [[Error Handling Operators]]
   * [[Observable Utility Operators]]
+  * [[Mathematical Operators]]
   * [[Connectable Observable Operators]]
   * [[Blocking Observable Operators]]
 * [[Subject]]
