@@ -6,6 +6,7 @@
   * [[Transforming Observables]]
   * [[Filtering Observables]]
   * [[Combining Observables]]
+  * [[Error Handling Operators]]
   * [[Observable Utility Operators]]
   * [[Connectable Observable Operators]]
   * [[Blocking Observable Operators]]
