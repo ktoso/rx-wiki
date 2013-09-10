@@ -5,7 +5,10 @@ This section explains operators you can use to filter and select items emitted b
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`sample( )`**](Filtering-Observables#sample) — emit items emitted by an Observable at a particular time interval
-* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted an Observable as long as a specified condition is true, then skip the remainder
+* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`first( )`**](Filtering-Observables#first) — emit only the first item emitted by an Observable, or the first item that meets some condition
+* [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 
 ## filter( ) or where( )
 #### filter items emitted by an Observable
@@ -180,10 +183,10 @@ Sequence complete
 ```
 
 ## takeWhile( ) and takeWhileWithIndex( )
-#### emit items emitted an Observable as long as a specified condition is true, then skip the remainder
+#### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 [[images/rx-operators/takeWhile.png]]
 
-The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a function applied to an item emitted by that observable returns `false`, whereupon the new Observable invokes `onCompleted( )`.
+The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable invokes `onCompleted( )`.
 
 ```groovy
 numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
@@ -222,3 +225,57 @@ numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe
 5
 Sequence complete
 ```
+
+## skipWhile( ) and skipWhileWithIndex( )
+#### discard items emitted by an Observable until a specified condition is false, then emit the remainder
+(diagram TBD)
+
+The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
+
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+5
+6
+7
+8
+9
+Sequence complete
+```
+
+The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+6
+7
+8
+9
+Sequence complete
+```
+
+## first( )
+#### emit only the first item emitted by an Observable, or the first item that meets some condition
+(diagram TBD)
+
+To create an Observable that emits only the first item emitted by a source Observable (if any), use the `first( )` method. You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
+
+## firstOrDefault( )
+#### emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+(diagram TBD)
+
+To create an Observable that emits only the first item emitted by a source Observable (or a default value if the source Observable is empty), use the `firstOrDefault( )` method. You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).

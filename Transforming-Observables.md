@@ -237,13 +237,13 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 
 > This version of `buffer( )` creates a new bundle of items every *timeshift*, and fills this bundle with every item emitted by the source `Observable` from that time until *timespan* time has passed since the bundle's creation, before emitting the bundle as its own emission. If *timespan* is longer than *timeshift*, the emitted bundles will represent time periods that overlap and so they may contain duplicate items.
 
-* `buffer(bufferOpenings, bufferClosingSelector)`
+* `buffer(bufferOpenings, closingSelector)`
 
-> This version of `buffer( )` monitors an `Observable`, *bufferOpenings*, that emits `BufferOpening` objects. Each time it observes such an emitted object, it creates a new bundle to begin collecting items emitted by the source `Observable` and it passes the *bufferOpenings* `Observable` into the *bufferClosingSelector* function. That function returns an `Observable` that emits `BufferClosing` objects. `buffer( )` monitors that `Observable` and when it detects an emitted `BufferClosing` object, it closes its bundle and emits it as its own emission.
+> This version of `buffer( )` monitors an `Observable`, *bufferOpenings*, that emits `BufferOpening` objects. Each time it observes such an emitted object, it creates a new bundle to begin collecting items emitted by the source `Observable` and it passes the *bufferOpenings* `Observable` into the *closingSelector* function. That function returns an `Observable` that emits `Closing` objects. `buffer( )` monitors that `Observable` and when it detects an emitted `Closing` object, it closes its bundle and emits it as its own emission.
 
 ## window( )
 #### periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
-(image TBD)
+[[images/rx-operators/window1.png]]
 
 Window is similar to `buffer( )`, but rather than emitting packets of items from the original `Observable`, it emits `Observable`s, each one of which emits a subset of items from the original `Observable` and then terminates with an `onCompleted( )` call.
 
