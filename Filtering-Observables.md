@@ -231,6 +231,7 @@ numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
 Sequence complete
 ```
 
+[[images/rx-operators/takeWhileWithIndex.png]]
 The `takeWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
 ```groovy
 numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
