@@ -4,7 +4,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
-* [**`sample( )`**](Filtering-Observables#sample) — emit items emitted by an Observable at a particular time interval
+* [**`sample( )`**](Filtering-Observables#sample) — emit the most recent items emitted by an Observable within periodic time intervals
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`first( )`**](Filtering-Observables#first) — emit only the first item emitted by an Observable, or the first item that meets some condition
@@ -160,7 +160,7 @@ numbers.take(3) ...
 If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an exception or invoke `onError()`, but will merely emit this same fewer number of items before it completes.
 
 ## sample( )
-#### emit items emitted by an Observable at a particular time interval
+#### emit the most recent items emitted by an Observable within periodic time intervals
 [[images/rx-operators/sample.png]]
 
 Use the `sample( )` method to periodically look at an Observable to see what item it is emitting at a particular time.
@@ -181,6 +181,12 @@ numbers.sample(10, java.util.concurrent.TimeUnit.MILLISECONDS).subscribe(
 891282
 Sequence complete
 ```
+
+## throttleFirst( )
+#### emit the first items emitted by an Observable within periodic time intervals
+[[images/rx-operators/throttleFirst.png]]
+
+Use the `throttleFirst( )` method to periodically look at an Observable to see what item it emitted first during a particular time span.
 
 ## takeWhile( ) and takeWhileWithIndex( )
 #### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
