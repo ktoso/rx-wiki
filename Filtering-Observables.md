@@ -5,6 +5,8 @@ This section explains operators you can use to filter and select items emitted b
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`sample( )`**](Filtering-Observables#sample) — emit the most recent items emitted by an Observable within periodic time intervals
+* [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
+* [**`throttleWithTimeout( )`**](Filtering-Observables#throttlewithtimeout) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`first( )`**](Filtering-Observables#first) — emit only the first item emitted by an Observable, or the first item that meets some condition
@@ -186,7 +188,42 @@ Sequence complete
 #### emit the first items emitted by an Observable within periodic time intervals
 [[images/rx-operators/throttleFirst.png]]
 
-Use the `throttleFirst( )` method to periodically look at an Observable to see what item it emitted first during a particular time span.
+Use the `throttleFirst( )` method to periodically look at an Observable to see what item it emitted first during a particular time span. The following code shows how an Observable can be modified by `throttleFirst( )`:
+
+```groovy
+    PublishSubject<Integer> o = PublishSubject.create();
+    o.throttleFirst(500, TimeUnit.MILLISECONDS, s).subscribe(
+        [ onNext:{ myWriter.println(it); },
+          onCompleted:{ myWriter.println("Sequence complete"); },
+          onError:{ myWriter.println("Error encountered"); } ]
+    );
+    // send events with simulated time increments
+    s.advanceTimeTo(0, TimeUnit.MILLISECONDS);
+    o.onNext(1); // deliver
+    o.onNext(2); // skip
+    s.advanceTimeTo(501, TimeUnit.MILLISECONDS);
+    o.onNext(3); // deliver
+    s.advanceTimeTo(600, TimeUnit.MILLISECONDS);
+    o.onNext(4); // skip
+    s.advanceTimeTo(700, TimeUnit.MILLISECONDS);
+    o.onNext(5); // skip
+    o.onNext(6); // skip
+    s.advanceTimeTo(1001, TimeUnit.MILLISECONDS);
+    o.onNext(7); // deliver
+    s.advanceTimeTo(1501, TimeUnit.MILLISECONDS);
+    o.onCompleted();
+```
+```
+1
+3
+7
+Sequence complete
+```
+
+## throttleWithTimeout( )
+#### only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
+
+Use the `throttleWithTimeout( )` method to select only those items emitted by a source Observable that are not quickly superceded by other items.
 
 ## takeWhile( ) and takeWhileWithIndex( )
 #### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
