@@ -97,7 +97,7 @@ In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers b
 
 ## interval( )
 #### create an Observable that emits a sequence of integers spaced by a given time interval
-(diagram TBD)
+[[images/rx-operators/interval.png]]
 
 To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
 
