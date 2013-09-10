@@ -222,6 +222,7 @@ Sequence complete
 
 ## throttleWithTimeout( )
 #### only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
+[[images/rx-operators/throttleWithTimeout.png]]
 
 Use the `throttleWithTimeout( )` method to select only those items emitted by a source Observable that are not quickly superceded by other items.
 
