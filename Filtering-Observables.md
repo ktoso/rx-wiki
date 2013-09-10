@@ -3,14 +3,15 @@ This section explains operators you can use to filter and select items emitted b
 * [**`filter( )` or `where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
-* [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
-* [**`sample( )`**](Filtering-Observables#sample) — emit the most recent items emitted by an Observable within periodic time intervals
-* [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
-* [**`throttleWithTimeout( )`**](Filtering-Observables#throttlewithtimeout) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
-* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
+* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`first( )`**](Filtering-Observables#first) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+* [**`sample( )` or `throttleLast( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
+* [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
+* [**`throttleWithTimeout( )` or debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
+
 
 ## filter( ) or where( )
 #### filter items emitted by an Observable
@@ -127,6 +128,50 @@ you could instead write
 numbers.skip(3) ...
 ```
 
+## skipWhile( ) and skipWhileWithIndex( )
+#### discard items emitted by an Observable until a specified condition is false, then emit the remainder
+[[images/rx-operators/skipWhile.png]]
+
+The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
+
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+5
+6
+7
+8
+9
+Sequence complete
+```
+
+[[images/rx-operators/skipWhileWithIndex.png]]
+
+The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+6
+7
+8
+9
+Sequence complete
+```
+
 ## take( )
 #### emit only the first _n_ items emitted by an Observable
 [[images/rx-operators/take.png]]
@@ -161,7 +206,69 @@ numbers.take(3) ...
 
 If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an exception or invoke `onError()`, but will merely emit this same fewer number of items before it completes.
 
-## sample( )
+## takeWhile( ) and takeWhileWithIndex( )
+#### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+[[images/rx-operators/takeWhile.png]]
+
+The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable invokes `onCompleted( )`.
+
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+1
+2
+3
+4
+5
+6
+Sequence complete
+```
+
+The `takeWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
+```groovy
+numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+
+numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
+  [ onNext:{ myWriter.println(it); },
+    onCompleted:{ myWriter.println("Sequence complete"); },
+    onError:{ myWriter.println("Error encountered"); } ]
+);
+```
+```
+1
+2
+3
+4
+5
+Sequence complete
+```
+
+## first( )
+#### emit only the first item emitted by an Observable, or the first item that meets some condition
+[[images/rx-operators/first.png]]
+
+To create an Observable that emits only the first item emitted by a source Observable (if any), use the `first( )` method.
+
+[[images/rx-operators/firstN.png]]
+You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
+
+## firstOrDefault( )
+#### emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+[[images/rx-operators/firstOrDefault.png]]
+
+To create an Observable that emits only the first item emitted by a source Observable (or a default value if the source Observable is empty), use the `firstOrDefault( )` method.
+
+[[images/rx-operators/firstOrDefaultN.png]]
+You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
+
+## sample( ) or throttleLast( )
 #### emit the most recent items emitted by an Observable within periodic time intervals
 [[images/rx-operators/sample.png]]
 
@@ -220,114 +327,8 @@ Use the `throttleFirst( )` method to periodically look at an Observable to see
 Sequence complete
 ```
 
-## throttleWithTimeout( )
+## throttleWithTimeout( ) or debounce( )
 #### only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
 [[images/rx-operators/throttleWithTimeout.png]]
 
 Use the `throttleWithTimeout( )` method to select only those items emitted by a source Observable that are not quickly superceded by other items.
-
-## takeWhile( ) and takeWhileWithIndex( )
-#### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-[[images/rx-operators/takeWhile.png]]
-
-The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable invokes `onCompleted( )`.
-
-```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
-);
-```
-```
-1
-2
-3
-4
-5
-6
-Sequence complete
-```
-
-The `takeWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
-```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
-);
-```
-```
-1
-2
-3
-4
-5
-Sequence complete
-```
-
-## skipWhile( ) and skipWhileWithIndex( )
-#### discard items emitted by an Observable until a specified condition is false, then emit the remainder
-[[images/rx-operators/skipWhile.png]]
-
-The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
-
-```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
-);
-```
-```
-5
-6
-7
-8
-9
-Sequence complete
-```
-
-[[images/rx-operators/skipWhileWithIndex.png]]
-
-The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
-```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
-);
-```
-```
-6
-7
-8
-9
-Sequence complete
-```
-
-## first( )
-#### emit only the first item emitted by an Observable, or the first item that meets some condition
-[[images/rx-operators/first.png]]
-
-To create an Observable that emits only the first item emitted by a source Observable (if any), use the `first( )` method.
-
-[[images/rx-operators/firstN.png]]
-You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
-
-## firstOrDefault( )
-#### emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
-[[images/rx-operators/firstOrDefault.png]]
-
-To create an Observable that emits only the first item emitted by a source Observable (or a default value if the source Observable is empty), use the `firstOrDefault( )` method.
-
-[[images/rx-operators/firstOrDefaultN.png]]
-You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
