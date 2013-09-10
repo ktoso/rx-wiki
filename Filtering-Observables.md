@@ -272,7 +272,7 @@ Sequence complete
 
 ## skipWhile( ) and skipWhileWithIndex( )
 #### discard items emitted by an Observable until a specified condition is false, then emit the remainder
-(diagram TBD)
+[[images/rx-operators/skipWhile.png]]
 
 The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
 
@@ -294,6 +294,8 @@ numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
 Sequence complete
 ```
 
+[[images/rx-operators/skipWhileWithIndex.png]]
+
 The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
 ```groovy
 numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
@@ -314,12 +316,18 @@ Sequence complete
 
 ## first( )
 #### emit only the first item emitted by an Observable, or the first item that meets some condition
-(diagram TBD)
+[[images/rx-operators/first.png]]
 
-To create an Observable that emits only the first item emitted by a source Observable (if any), use the `first( )` method. You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
+To create an Observable that emits only the first item emitted by a source Observable (if any), use the `first( )` method.
+
+[[images/rx-operators/firstN.png]]
+You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
 
 ## firstOrDefault( )
 #### emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
-(diagram TBD)
+[[images/rx-operators/firstOrDefault.png]]
 
-To create an Observable that emits only the first item emitted by a source Observable (or a default value if the source Observable is empty), use the `firstOrDefault( )` method. You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
+To create an Observable that emits only the first item emitted by a source Observable (or a default value if the source Observable is empty), use the `firstOrDefault( )` method.
+
+[[images/rx-operators/firstOrDefaultN.png]]
+You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
