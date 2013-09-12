@@ -74,7 +74,7 @@ def myObservable = Observable.create({ anObserver ->
   anObserver.onCompleted();
 });
 
-myObservable.sum().subscribe(
+myObservable.average().subscribe(
   [ onNext:{ myWriter.println(it); },
     onCompleted:{ myWriter.println("Sequence complete"); },
     onError:{ myWriter.println("Error encountered"); } ]
