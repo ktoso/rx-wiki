@@ -342,8 +342,16 @@ Use the `throttleWithTimeout( )` method to select only those items emitted by 
 
 Use the `distinct( )` method to remove duplicate items from a source Observable and only emit single examples of those items.
 
+[[images/rx-operators/distinct.key.png]]
+
+You can also pass a function into `distinct( )` that customizes how it distinguishes between distinct and non-distinct items.
+
 ## distinctUntilChanged( )
 #### suppress duplicate consecutive items emitted by the source Observable
 [[images/rx-operators/distinctUntilChanged.png]]
 
 Use the `distinctUntilChanged( )` method to remove duplicate consecutive items from a source Observable and only emit single examples of such items.
+
+[[images/rx-operators/distinctUntilChanged.key.png]]
+
+You can also pass a function into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
