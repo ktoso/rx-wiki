@@ -344,7 +344,7 @@ Use the `distinct( )` method to remove duplicate items from a source Observabl
 
 [[images/rx-operators/distinct.key.png]]
 
-You can also pass a function into `distinct( )` that customizes how it distinguishes between distinct and non-distinct items.
+You can also pass a function or a comparator into `distinct( )` that customizes how it distinguishes between distinct and non-distinct items.
 
 ## distinctUntilChanged( )
 #### suppress duplicate consecutive items emitted by the source Observable
@@ -354,4 +354,4 @@ Use the `distinctUntilChanged( )` method to remove duplicate consecutive items
 
 [[images/rx-operators/distinctUntilChanged.key.png]]
 
-You can also pass a function into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
+You can also pass a function or a comparator into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
