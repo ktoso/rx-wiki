@@ -16,7 +16,7 @@ This section explains operators you can use to combine multiple Observables.
 
 If you want an Observable to immediately begin emitting a specific sequence of items before it begins emitting the items normally expected from it, pass that specific sequence of items into that Observable's `startWith( )` method, as in the following example:
 ```groovy
-def myObservable = Observable.toObservable([1, 2, 3]);
+def myObservable = Observable.from([1, 2, 3]);
 
 myObservable.startWith(-3, -2, -1, 0).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -48,8 +48,8 @@ myConcatenatedObservable = Observable.concat(observable1, observable2, ... );
 For example, the following code concatenates the 'odds' and 'evens' Observables into a single Observable:
 
 ```groovy
-odds  = Observable.toObservable([1, 3, 5, 7]);
-evens = Observable.toObservable([2, 4, 6]);
+odds  = Observable.from([1, 3, 5, 7]);
+evens = Observable.from([2, 4, 6]);
 
 Observable.concat(odds, evens).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -84,8 +84,8 @@ myMergedObservable = Observable.merge(observable1, observable2, ... )
 For example, the following code merges the `odds` and `evens` Observables into a single Observable:
 
 ```groovy
-odds  = Observable.toObservable([1, 3, 5, 7]);
-evens = Observable.toObservable([2, 4, 6]);
+odds  = Observable.from([1, 3, 5, 7]);
+evens = Observable.from([2, 4, 6]);
 
 Observable.merge(odds,evens).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -140,8 +140,8 @@ myZip4Observable = Observable.zip(observable1, observable2, observable3, observa
 For example, the following code zips together two Observables, one of which emits a series of odd integers and the other of which emits a series of even integers:
 
 ```groovy
-odds  = Observable.toObservable([1, 3, 5, 7, 9]);
-evens = Observable.toObservable([2, 4, 6]);
+odds  = Observable.from([1, 3, 5, 7, 9]);
+evens = Observable.from([2, 4, 6]);
 
 Observable.zip(odds, evens, {o, e -> [o, e]}).subscribe(
   [ onNext:{ odd, even -> myWriter.println("odd: " + odd + ", even: " + even); },
