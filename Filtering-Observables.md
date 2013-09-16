@@ -22,7 +22,7 @@ This section explains operators you can use to filter and select items emitted b
 You can filter an Observable, discarding any items that do not meet some test, by passing a filtering function into the `filter( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.filter(numbers, { 0 == (it % 2) }).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -56,7 +56,7 @@ class isEven implements rx.util.functions.Func1 {
 
 myisEven = new isEven();
 
-numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 numbers.where(myisEven).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -72,7 +72,7 @@ numbers.where(myisEven).subscribe(
 To convert an Observable that emits several items into one that only emits the last _n_ of these itemsbefore completing, use the `takeLast( )` method. For instance, in the following code, `takeLast( )` emits only the last integer in the list of integers represented by `numbers`:
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.takeLast(numbers,1).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -102,7 +102,7 @@ numbers.takeLast(1) ...
 You can ignore the first _n_ items emitted by an Observable and attend only to those items that come after, by modifying the Observable with the `skip(n)` method.
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.skip(numbers, 3).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -137,7 +137,7 @@ numbers.skip(3) ...
 The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
 
 ```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -158,7 +158,7 @@ Sequence complete
 
 The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
 ```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -181,7 +181,7 @@ Sequence complete
 You can choose to pay attention only to the first _n_ items emitted by an Observable by calling its `take(n)` method. That method returns an Observable that will invoke an Observer’s `onNext` method a maximum of _n_ times before invoking `onCompleted`. For example,
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.take(numbers, 3).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -215,7 +215,7 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable invokes `onCompleted( )`.
 
 ```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -236,7 +236,7 @@ Sequence complete
 [[images/rx-operators/takeWhileWithIndex.png]]
 The `takeWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
 ```groovy
-numbers = Observable.toObservable( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
+numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
   [ onNext:{ myWriter.println(it); },
