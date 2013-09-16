@@ -29,7 +29,7 @@ Observable.tolist(myObservable).subscribe([ onNext: { myListOfSomething -> do so
 For example, the following rather pointless code takes a list of integers, converts it into an Observable, then converts that Observable into one that emits the original list as a single item:
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.toList(numbers).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -64,7 +64,7 @@ The `toSortedList( )` method behaves much like `toList( )` except that it so
 For example, the following code takes a list of unsorted integers, converts it into an Observable, then converts that Observable into one that emits the original list in sorted form as a single item:
 
 ```groovy
-numbers = Observable.toObservable([8, 6, 4, 2, 1, 3, 5, 7, 9]);
+numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
 Observable.toSortedList(numbers).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -78,7 +78,7 @@ Sequence complete
 ```
 Here is an example that provides its own sorting function, in this case, one that sorts numbers according to how close to the number 5 they are:
 ```groovy
-numbers = Observable.toObservable([8, 6, 4, 2, 1, 3, 5, 7, 9]);
+numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
 Observable.toSortedList(numbers, { n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -119,7 +119,7 @@ A well-formed Observable will invoke its Observer’s `onNext` method zero or mo
 For example:
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3]);
+numbers = Observable.from([1, 2, 3]);
 
 Observable.materialize(numbers).subscribe(
   [ onNext: { if(rx.Notification.Kind.OnNext == it.kind) { myWriter.println("Next: " + it.value); }
@@ -155,7 +155,7 @@ numbers.materialize() ...
 
 You can undo the effects of `materialize( )` by means of the `dematerialize( )` method, which will emit the items from the Observable as though `materialize( )` had not been applied to it. The following example dematerializes the materialized Observable from the previous section:
 ```groovy
-numbers = Observable.toObservable([1, 2, 3]);
+numbers = Observable.from([1, 2, 3]);
 
 Observable.materialize(numbers).dematerialize().subscribe(
   [ onNext: { myWriter.println(it); },
@@ -201,7 +201,7 @@ Sequence complete
 Pass an function to `all( )` that accepts an item emitted by the source Observable and returns a boolean value based on an evaluation of that item, and `all( )` will emit `true` if and only if that function returned true for every item emitted by the source Observable.
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+numbers = Observable.from([1, 2, 3, 4, 5]);
 
 myWriter.println("all even?" )
 numbers.all({ 0 == (it % 2) }).subscribe([onNext:{ myWriter.println(it); }]);
@@ -229,10 +229,10 @@ When you apply the `any( )` operator to a source Observable, the resulting Obs
 
 Pass `sequenceEqual( )` two Observables, and it will compare the items emitted by each Observable, and emit `true` for each pair of items if and only if both items are the same. You can optionally pass a third parameter: a function that accepts two items and returns `true` if they are equal according to a standard of your choosing.
 ```groovy
-def firstfour = Observable.toObservable([1, 2, 3, 4]);
-def firstfouragain = Observable.toObservable([1, 2, 3, 4]);
-def firstfive = Observable.toObservable([1, 2, 3, 4, 5]);
-def firstfourscrambled = Observable.toObservable([3, 2, 1, 4]);
+def firstfour = Observable.from([1, 2, 3, 4]);
+def firstfouragain = Observable.from([1, 2, 3, 4]);
+def firstfive = Observable.from([1, 2, 3, 4, 5]);
+def firstfourscrambled = Observable.from([3, 2, 1, 4]);
 
 myWriter.println('firstfour == firstfive?');
 Observable.sequenceEqual(firstfour, firstfive).subscribe([onNext:{ myWriter.println(it); }]);
@@ -344,7 +344,7 @@ class TestFinally
   
   static main() {
     def myAction = new myActionClass();
-    def numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+    def numbers = Observable.from([1, 2, 3, 4, 5]);
     
     numbers.finallyDo(myAction).subscribe(
           [ onNext: { myWriter.println(it); },
