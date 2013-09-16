@@ -1,7 +1,6 @@
 This section explains methods that create Observables.
 
-* [**`toObservable( )`**](Creating-Observables#toobservable--from) — convert an Iterable into an Observable
-* [**`from( )`**](Creating-Observables#toobservable--from) — convert an Iterable or a Future into an Observable
+* [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
@@ -11,16 +10,12 @@ This section explains methods that create Observables.
 * [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
 * [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
 
-## toObservable( ) & from( )
-#### convert an Iterable (or a Future) into an Observable
-[[images/rx-operators/toObservable.png]]
+## from( )
+#### convert an Iterable or a Future into an Observable
+[[images/rx-operators/from.png]]
 
-You can convert an object that supports the `Iterable<>` interface into an Observable that emits each iterable item in the object, simply by passing the object into the `toObservable( )` or `from( )` methods, for example:
+You can convert an object that supports `Iterable` into an Observable that emits each iterable item in the object, or an object that supports `Future` into an Observable that emits the result of the `get` call, simply by passing the object into the `from( )` methods, for example:
 
-```groovy
-myObservable = Observable.toObservable(myIterable);
-```
-or
 ```groovy
 myObservable = Observable.from(myIterable);
 ```
@@ -29,10 +24,6 @@ You can also do this with arrays, for example:
 
 ```groovy
 myArray = [1, 2, 3, 4, 5];
-myArrayObservable = Observable.toObservable(myArray);
-```
-or
-```groovy
 myArrayObservable = Observable.from(myArray);
 ```
 
@@ -40,7 +31,7 @@ This converts the sequence of values in the iterable object or array into a sequ
 
 An empty iterable (or array) can be converted to an Observable in this way. The resulting Observable will invoke `onCompleted()` without first invoking `onNext()`.
 
-The `from( )` method is also capable of transforming a `Future` into an Observable. (This is not true of `from()`’s cousin `toObservable( )`.) Note that such an Observable will be effectively blocking, as its underlying `Future` blocks.
+Note that when the `from( )` method transforms a `Future` into an Observable, such an Observable will be effectively blocking, as its underlying `Future` blocks.
 
 ## just( )
 #### convert an object into an Observable that emits that object
@@ -55,7 +46,7 @@ def observableThatEmitsAString = Observable.just("some string");
 def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
 ```
 
-This has some similarities to the `toObservable( )` method, but note that if you pass an iterable to `toObservable( )`, it will convert an iterable object into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
+This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert an iterable object into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
 
 If you pass nothing or `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
