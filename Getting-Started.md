@@ -56,7 +56,7 @@ The following are RxJava implementations of “Hello World” in Java, Groovy, a
 In Java =>
 ```java
     public static void hello(String... names) {
-        Observable.toObservable(names).subscribe(new Action1<String>() {
+        Observable.from(names).subscribe(new Action1<String>() {
 
             @Override
             public void call(String s) {
