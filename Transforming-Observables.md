@@ -17,7 +17,7 @@ This section explains operators with which you can transform items that are emit
 The `map( )` method applies a function of your choosing to every item emitted by an Observable, and returns this transformation as a new Observable. For example, the following code maps a function that squares the incoming value onto the values in `numbers`:
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+numbers = Observable.from([1, 2, 3, 4, 5]);
 
 Observable.map(numbers, {it * it}).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -62,9 +62,9 @@ This method is useful, for example, when you have an Observable that emits a ser
 
 ```groovy
 // this closure is an Observable that emits three numbers
-numbers   = Observable.toObservable([1, 2, 3]);
+numbers   = Observable.from([1, 2, 3]);
 // this closure is an Observable that emits two numbers based on what number it is passed
-multiples = { n -> Observable.toObservable([ n*2, n*3 ]) };   
+multiples = { n -> Observable.from([ n*2, n*3 ]) };   
 
 numbers.mapMany(multiples).subscribe(
   [ onNext:{ myWriter.println(it.toString()); },
@@ -99,7 +99,7 @@ This technique, which is called “reduce” or “aggregate” here, is sometim
 For example, the following code uses `reduce( )` to compute, and then emit as an Observable, the sum of the numbers emitted by the source Observable:
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+numbers = Observable.from([1, 2, 3, 4, 5]);
 
 Observable.reduce(numbers, { a, b -> a+b }).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -144,7 +144,7 @@ The `scan( )` method returns an Observable that applies a function of your cho
 For example, the following code takes an Observable that emits a consecutive sequence of _n_ integers starting with 1 and converts it into an Observable that emits the first _n_ [triangular numbers](http://en.wikipedia.org/wiki/Triangular_number):
 
 ```groovy
-numbers = Observable.toObservable([1, 2, 3, 4, 5]);
+numbers = Observable.from([1, 2, 3, 4, 5]);
 
 Observable.scan(numbers, { a, b -> a+b }).subscribe(
   [ onNext:{ myWriter.println(it); },
@@ -203,7 +203,7 @@ class isEven implements rx.util.functions.Func1
   java.lang.Object call(java.lang.Object T) { return(0 == (T % 2)); }
 }
 
-def numbers = Observable.toObservable([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 def groupFunc = new isEven();
 
 numbers.groupBy(groupFunc).mapMany({ Observable.reduce(it, [it.getKey()], {a, b -> a << b}) }).subscribe(
@@ -234,7 +234,7 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 
 * `buffer(count, skip)`
 [[images/rx-operators/buffer4.png]]
-> This version of `buffer( )` create a new bundle of items for every *skip* item(s) emitted by the source `Observable`, each containing *count* elements. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example: `toObservable([1, 2, 3, 4, 5]).buffer(3, 1)` will emit the following bundles: `[1, 2, 3]`, `[2, 3, 4]`, `[3, 4, 5]`.
+> This version of `buffer( )` create a new bundle of items for every *skip* item(s) emitted by the source `Observable`, each containing *count* elements. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example: `from([1, 2, 3, 4, 5]).buffer(3, 1)` will emit the following bundles: `[1, 2, 3]`, `[2, 3, 4]`, `[3, 4, 5]`.
 
 * `buffer(timespan)` and `buffer(timespan, scheduler)`
 [[images/rx-operators/buffer5.png]]
