@@ -1,6 +1,7 @@
 This section explains operators with which you can transform items that are emitted by an Observable.
 
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
+* [**`mapWithIndex( )`**](Transforming-Observables#mapwithindex) — transform the items emitted by an Observable by applying a function to each of them that takes into account the index value of the item
 * [**`mapMany( )` or `flatMap( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`mapManyDelayError( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, waiting to report errors until all error-free observables have a chance to complete
 * [**`reduce( )` or `aggregate( )`**](Transforming-Observables#reduce-or-aggregate) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
@@ -44,6 +45,12 @@ you could instead write
 ```groovy
 numbers.map({ it * it }) ...
 ```
+
+## mapWithIndex( )
+#### transform the items emitted by an Observable by applying a function to each of them that takes into account the index value of the item
+[[images/rx-operators/mapWithIndex.png]]
+
+This version of `map( )` accepts a function that takes both the emitted item and the numerical index of that item in the sequence of emitted items as parameters, so that you can refer to both when you apply your transformation.
 
 ## mapMany( ) or flatMap( ), and mapManyDelayError( )
 #### Transform the items emitted by an Observable into Observables, then flatten this into a single Observable
