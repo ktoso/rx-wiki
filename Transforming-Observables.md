@@ -224,29 +224,29 @@ Sequence complete
 
 The `buffer( )` method periodically gathers items emitted by a source `Observable` into bundles, and emits these bundles as its own emissions. There are a number of ways with which you can regulate how `buffer( )` gathers items from the source `Observable` into bundles:
 
-* `buffer(count)`
+* `buffer(bufferOpenings, closingSelector)`
+[[images/rx-operators/buffer2.png]]
+> This version of `buffer( )` monitors an `Observable`, *bufferOpenings*, that emits `BufferOpening` objects. Each time it observes such an emitted object, it creates a new bundle to begin collecting items emitted by the source `Observable` and it passes the *bufferOpenings* `Observable` into the *closingSelector* function. That function returns an `Observable` that emits `Closing` objects. `buffer( )` monitors that `Observable` and when it detects an emitted `Closing` object, it closes its bundle and emits it as its own emission.
 
+* `buffer(count)`
+[[images/rx-operators/buffer3.png]]
 > This version of `buffer( )` emits a new bundle of items for every *count* items emitted by the source `Observable`.
 
-* `buffer(timespan)` and `buffer(timespan, scheduler)`
+* `buffer(count, skip)`
+[[images/rx-operators/buffer4.png]]
+> This version of `buffer( )` create a new bundle of items for every *skip* item(s) emitted by the source `Observable`, each containing *count* elements. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example: `toObservable([1, 2, 3, 4, 5]).buffer(3, 1)` will emit the following bundles: `[1, 2, 3]`, `[2, 3, 4]`, `[3, 4, 5]`.
 
+* `buffer(timespan)` and `buffer(timespan, scheduler)`
+[[images/rx-operators/buffer5.png]]
 > This version of `buffer( )` emits a new bundle of items periodically, every *timespan* amount of time, containing all items emitted by the source `Observable` since the previous bundle emission.
 
 * `buffer(timespan, count)` and `buffer(timespan, count, scheduler)`
-
+[[images/rx-operators/buffer6.png]]
 > This version of `buffer( )` emits a new bundle of items for every *count* items emitted by the source `Observable`, or, if *timespan* has elapsed since its last bundle emission, it emits a bundle of however many items the source `Observable` has emitted in that span, even if this is less than *count*.
 
-* `buffer(count, skip)`
-
-> This version of `buffer( )` create a new bundle of items for every *skip* item(s) emitted by the source `Observable`, each containing *count* elements. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example: `toObservable([1, 2, 3, 4, 5]).buffer(3, 1)` will emit the following bundles: `[1, 2, 3]`, `[2, 3, 4]`, `[3, 4, 5]`.
-
 * `buffer(timespan, timeshift)` and `buffer(timespan, timeshift, scheduler)`
-
+[[images/rx-operators/buffer7.png]]
 > This version of `buffer( )` creates a new bundle of items every *timeshift*, and fills this bundle with every item emitted by the source `Observable` from that time until *timespan* time has passed since the bundle's creation, before emitting the bundle as its own emission. If *timespan* is longer than *timeshift*, the emitted bundles will represent time periods that overlap and so they may contain duplicate items.
-
-* `buffer(bufferOpenings, closingSelector)`
-
-> This version of `buffer( )` monitors an `Observable`, *bufferOpenings*, that emits `BufferOpening` objects. Each time it observes such an emitted object, it creates a new bundle to begin collecting items emitted by the source `Observable` and it passes the *bufferOpenings* `Observable` into the *closingSelector* function. That function returns an `Observable` that emits `Closing` objects. `buffer( )` monitors that `Observable` and when it detects an emitted `Closing` object, it closes its bundle and emits it as its own emission.
 
 ## window( )
 #### periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
@@ -277,7 +277,9 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 > This version of `window( )` opens its first window immediately. It closes the currently open window and opens another one every *timespan* period of time (measured in *unit*, and optionally on a particular *scheduler*). It will also close the currently open window if it receives an `onCompleted( )` or `onError( )` call from the *source* `Observable`. This version of `window( )` emits a series of non-overlapping windows whose collective `onNext( )` emissions correspond one-to-one with those of the *source* `Observable`.
 
 * `window(source, timespan, unit, count)` and `window(source, timespan, unit, count, scheduler)`
+[[images/rx-operators/window6.png]]
 > This version of `window( )` opens its first window immediately. It closes the currently open window and opens another one every *timespan* period of time (measured in *unit*, and optionally on a particular *scheduler*) or whenever the currently open window has emitted *count* items. It will also close the currently open window if it receives an `onCompleted( )` or `onError( )` call from the *source* `Observable`. This version of `window( )` emits a series of non-overlapping windows whose collective `onNext( )` emissions correspond one-to-one with those of the *source* `Observable`.
 
 * `window(source, timespan, timeshift, unit)` and `window(source, timespan, timeshift, unit, scheduler)`
+[[images/rx-operators/window7.png]]
 > This version of `window( )` opens its first window immediately, and thereafter opens a new window every *timeshift* period of time (measured in *unit*, and optionally on a particular *scheduler*). It closes a currently open window after *timespan* period of time has passed since that window was opened. It will also close any currently open window if it receives an `onCompleted( )` or `onError( )` call from the *source* `Observable`. Depending on how you set *timespan* and *timeshift* the windows that result from this operation may overlap or have gaps.
