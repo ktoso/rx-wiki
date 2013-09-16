@@ -12,6 +12,7 @@ This section explains various utility operators for working with Observables.
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler an Observer should observe the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
+* [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
 
 ## toList( )
 #### collect all items from an Observable and emit them as a single List
@@ -324,7 +325,6 @@ To specify that the work done by the Observable should be done on a particular S
 
 ## finallyDo( )
 #### register an action to take when an Observable completes
-
 [[images/rx-operators/finallyDo.png]]
 
 You can use the `finallyDo( )` method of an Observable to register an action (a function that implements `Action0`) that RxJava will invoke when that Observable invokes either the `onCompleted( )` or `onError( )` method of its Observer.
@@ -358,3 +358,11 @@ new TestFinally().main();
 Sequence complete
 Finally
 ```
+
+## delay( )
+#### shift the emissions from an Observable forward in time by a specified amount
+[[images/rx-operators/delay.png]]
+
+The `delay( )` operator modifies its source Observable by pausing for a particular increment of time (that you specify) before emitting each of the source Observable's items. This has the effect of shifting the entire sequence of items emitted by the Observable forward in time by that specified increment.
+
+Note that `delay( )` will _not_ time-shift an `onError( )` call in this fashion but it will forward such a call immediately to its subscribers.
