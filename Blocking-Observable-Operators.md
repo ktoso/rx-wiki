@@ -33,8 +33,8 @@ You can also use this method to retrieve the last item emitted by an Observable 
 Note that because `last( )` emits `null` to indicate that no item (or no matching item) was emitted by the underlying Observable, this creates an ambiguity in the case of Observables whose last emitted item (or matching item) _is_ `null`:
 
 ```groovy
-def boNull    = Observable.toObservable([null]).toBlockingObservable();
-def boNothing = Observable.toObservable([]).toBlockingObservable();
+def boNull    = Observable.from([null]).toBlockingObservable();
+def boNothing = Observable.from([]).toBlockingObservable();
 myWriter.println('boNull.last(): ' + boNull.last());
 myWriter.println('boNothing.last(): ' + boNothing.last());
 ```
@@ -50,8 +50,8 @@ The `lastOrDefault( )` method is similar to `last( )`, except that instead o
 Note that you can use this to guard against the ambiguous-`null` noted above:
 
 ```groovy
-def boNull    = Observable.toObservable([null]).toBlockingObservable();
-def boNothing = Observable.toObservable([]).toBlockingObservable();
+def boNull    = Observable.from([null]).toBlockingObservable();
+def boNothing = Observable.from([]).toBlockingObservable();
 myWriter.println('boNull.lastOrDefault("foo"): ' + boNull.lastOrDefault("foo"));
 myWriter.println('boNothing.lastOrDefault("foo"): ' + boNothing.lastOrDefault("foo"));
 ```
