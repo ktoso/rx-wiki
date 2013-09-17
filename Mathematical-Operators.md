@@ -24,9 +24,9 @@ def myObservable = Observable.create({ anObserver ->
 });
 
 myObservable.count().subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -49,9 +49,9 @@ def myObservable = Observable.create({ anObserver ->
 });
 
 myObservable.sum().subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -75,9 +75,9 @@ def myObservable = Observable.create({ anObserver ->
 });
 
 myObservable.average().subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
