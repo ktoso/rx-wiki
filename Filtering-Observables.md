@@ -25,9 +25,9 @@ You can filter an Observable, discarding any items that do not meet some test, b
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.filter(numbers, { 0 == (it % 2) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -59,9 +59,9 @@ myisEven = new isEven();
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 numbers.where(myisEven).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 
@@ -75,9 +75,9 @@ To convert an Observable that emits several items into one that only emits the l
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.takeLast(numbers,1).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -105,9 +105,9 @@ You can ignore the first _n_ items emitted by an Observable and attend only to t
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.skip(numbers, 3).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -140,9 +140,9 @@ The `skipWhile( )` method returns an Observable that discards items emitted by
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -161,9 +161,9 @@ The `skipWhileWithIndex( )` method is similar, but your function takes an addi
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -184,9 +184,9 @@ You can choose to pay attention only to the first _n_ items emitted by an Observ
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.take(numbers, 3).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -218,9 +218,9 @@ The `takeWhile( )` method returns an Observable that mirrors the behavior of t
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -239,9 +239,9 @@ The `takeWhileWithIndex( )` method is similar, but your function takes an addi
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -282,9 +282,9 @@ The following code constructs an Observable that emits the numbers between one a
 def numbers = Observable.range( 1, 1000000 );
  
 numbers.sample(10, java.util.concurrent.TimeUnit.MILLISECONDS).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -301,27 +301,27 @@ Sequence complete
 Use the `throttleFirst( )` method to periodically look at an Observable to see what item it emitted first during a particular time span. The following code shows how an Observable can be modified by `throttleFirst( )`:
 
 ```groovy
-    PublishSubject<Integer> o = PublishSubject.create();
-    o.throttleFirst(500, TimeUnit.MILLISECONDS, s).subscribe(
-        [ onNext:{ myWriter.println(it); },
-          onCompleted:{ myWriter.println("Sequence complete"); },
-          onError:{ myWriter.println("Error encountered"); } ]
-    );
-    // send events with simulated time increments
-    s.advanceTimeTo(0, TimeUnit.MILLISECONDS);
-    o.onNext(1); // deliver
-    o.onNext(2); // skip
-    s.advanceTimeTo(501, TimeUnit.MILLISECONDS);
-    o.onNext(3); // deliver
-    s.advanceTimeTo(600, TimeUnit.MILLISECONDS);
-    o.onNext(4); // skip
-    s.advanceTimeTo(700, TimeUnit.MILLISECONDS);
-    o.onNext(5); // skip
-    o.onNext(6); // skip
-    s.advanceTimeTo(1001, TimeUnit.MILLISECONDS);
-    o.onNext(7); // deliver
-    s.advanceTimeTo(1501, TimeUnit.MILLISECONDS);
-    o.onCompleted();
+PublishSubject<Integer> o = PublishSubject.create();
+o.throttleFirst(500, TimeUnit.MILLISECONDS, s).subscribe(
+    { println(it); },                  // onNext
+    { println("Error encountered"); }, // onError
+    { println("Sequence complete"); }  // onCompleted
+);
+// send events with simulated time increments
+s.advanceTimeTo(0, TimeUnit.MILLISECONDS);
+o.onNext(1); // deliver
+o.onNext(2); // skip
+s.advanceTimeTo(501, TimeUnit.MILLISECONDS);
+o.onNext(3); // deliver
+s.advanceTimeTo(600, TimeUnit.MILLISECONDS);
+o.onNext(4); // skip
+s.advanceTimeTo(700, TimeUnit.MILLISECONDS);
+o.onNext(5); // skip
+o.onNext(6); // skip
+s.advanceTimeTo(1001, TimeUnit.MILLISECONDS);
+o.onNext(7); // deliver
+s.advanceTimeTo(1501, TimeUnit.MILLISECONDS);
+o.onCompleted();
 ```
 ```
 1
