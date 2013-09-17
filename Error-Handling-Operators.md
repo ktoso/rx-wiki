@@ -25,9 +25,9 @@ def myFallback = Observable.create({ anObserver ->
 });
 
 myObservable.onErrorResumeNext(myFallback).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -55,9 +55,9 @@ def myObservable = Observable.create({ anObserver ->
 });
 
 myObservable.onErrorReturn({ return('Blastoff!'); }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
