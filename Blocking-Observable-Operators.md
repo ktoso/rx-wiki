@@ -20,7 +20,7 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 ## forEach( )
 #### invoke a function on each item emitted by the Observable; block until the Observable completes
 [[images/rx-operators/B.forEach.png]]
-The `forEach(someFunction)` method is the blocking equivalent of `subscribe([onNext:someFunction])`. When you pass a function to this method, `forEach( )` will invoke your function for each item emitted by the Observable, but will only return control to you once the Observable completes (it will not otherwise indicate that the Observable has completed; there is no `forEach( )` equivalent of the `onError` or `onCompleted` methods).
+The `forEach(someFunction)` method is the blocking equivalent of `subscribe(someFunction)`. When you pass a function to this method, `forEach( )` will invoke your function for each item emitted by the Observable, but will only return control to you once the Observable completes (it will not otherwise indicate that the Observable has completed; there is no `forEach( )` equivalent of the `onError` or `onCompleted` methods).
 
 ## last( ) and lastOrDefault( )
 #### block until the Observable completes, then return the last item emitted by the Observable
@@ -35,8 +35,8 @@ Note that because `last( )` emits `null` to indicate that no item (or no match
 ```groovy
 def boNull    = Observable.from([null]).toBlockingObservable();
 def boNothing = Observable.from([]).toBlockingObservable();
-myWriter.println('boNull.last(): ' + boNull.last());
-myWriter.println('boNothing.last(): ' + boNothing.last());
+println('boNull.last(): ' + boNull.last());
+println('boNothing.last(): ' + boNothing.last());
 ```
 ```
 boNull.last(): null
@@ -52,8 +52,8 @@ Note that you can use this to guard against the ambiguous-`null` noted above:
 ```groovy
 def boNull    = Observable.from([null]).toBlockingObservable();
 def boNothing = Observable.from([]).toBlockingObservable();
-myWriter.println('boNull.lastOrDefault("foo"): ' + boNull.lastOrDefault("foo"));
-myWriter.println('boNothing.lastOrDefault("foo"): ' + boNothing.lastOrDefault("foo"));
+println('boNull.lastOrDefault("foo"): ' + boNull.lastOrDefault("foo"));
+println('boNothing.lastOrDefault("foo"): ' + boNothing.lastOrDefault("foo"));
 ```
 ```
 boNull.lastOrDefault("foo"): null
