@@ -23,7 +23,7 @@ This section explains various utility operators for working with Observables.
 Normally, an Observable that emits multiple items will do so by invoking its Observer’s `onNext` method for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to invoke the Observer’s `onNext` method _once_, passing it the entire list, by calling the Observable’s `toList( )` method prior to calling its `subscribe( )` method. For example:
 
 ```groovy
-Observable.tolist(myObservable).subscribe([ onNext: { myListOfSomething -> do something useful with the list } ]);
+Observable.tolist(myObservable).subscribe({ myListOfSomething -> do something useful with the list });
 ```
 
 For example, the following rather pointless code takes a list of integers, converts it into an Observable, then converts that Observable into one that emits the original list as a single item:
@@ -32,9 +32,9 @@ For example, the following rather pointless code takes a list of integers, conve
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 Observable.toList(numbers).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -67,9 +67,9 @@ For example, the following code takes a list of unsorted integers, converts it i
 numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
 Observable.toSortedList(numbers).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -81,9 +81,9 @@ Here is an example that provides its own sorting function, in this case, one tha
 numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
 Observable.toSortedList(numbers, { n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -122,11 +122,11 @@ For example:
 numbers = Observable.from([1, 2, 3]);
 
 Observable.materialize(numbers).subscribe(
-  [ onNext: { if(rx.Notification.Kind.OnNext == it.kind) { myWriter.println("Next: " + it.value); }
-              else if(rx.Notification.Kind.OnCompleted == it.kind) { myWriter.println("Completed"); }
-              else if(rx.Notification.Kind.OnError == it.kind) { myWriter.println("Error: " + it.exception); } },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { if(rx.Notification.Kind.OnNext == it.kind) { println("Next: " + it.value); }
+    else if(rx.Notification.Kind.OnCompleted == it.kind) { println("Completed"); }
+    else if(rx.Notification.Kind.OnError == it.kind) { println("Error: " + it.exception); } },
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -158,9 +158,9 @@ You can undo the effects of `materialize( )` by means of the `dematerialize(�
 numbers = Observable.from([1, 2, 3]);
 
 Observable.materialize(numbers).dematerialize().subscribe(
-  [ onNext: { myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -180,9 +180,9 @@ The `timestamp( )` method converts an Observable that emits items of type _T_ 
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 200000) });
 
 myObservable.timestamp().subscribe(
-  [ onNext: { myWriter.println(it.toString()); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it.toString()); },       // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -203,11 +203,11 @@ Pass an function to `all( )` that accepts an item emitted by the source Observ
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5]);
 
-myWriter.println("all even?" )
-numbers.all({ 0 == (it % 2) }).subscribe([onNext:{ myWriter.println(it); }]);
+println("all even?" )
+numbers.all({ 0 == (it % 2) }).subscribe({ println(it); });
 
-myWriter.println("all positive?");
-numbers.all({ 0 < it }).subscribe([onNext:{ myWriter.println(it); }]);
+println("all positive?");
+numbers.all({ 0 < it }).subscribe({ println(it); });
 ```
 ```
 all even? 
@@ -234,12 +234,12 @@ def firstfouragain = Observable.from([1, 2, 3, 4]);
 def firstfive = Observable.from([1, 2, 3, 4, 5]);
 def firstfourscrambled = Observable.from([3, 2, 1, 4]);
 
-myWriter.println('firstfour == firstfive?');
-Observable.sequenceEqual(firstfour, firstfive).subscribe([onNext:{ myWriter.println(it); }]);
-myWriter.println('firstfour == firstfouragain?');
-Observable.sequenceEqual(firstfour, firstfouragain).subscribe([onNext:{ myWriter.println(it); }]);
-myWriter.println('firstfour == firstfourscrambled?');
-Observable.sequenceEqual(firstfour, firstfourscrambled).subscribe([onNext:{ myWriter.println(it); }]);
+println('firstfour == firstfive?');
+Observable.sequenceEqual(firstfour, firstfive).subscribe({ println(it); });
+println('firstfour == firstfouragain?');
+Observable.sequenceEqual(firstfour, firstfouragain).subscribe({ println(it); });
+println('firstfour == firstfourscrambled?');
+Observable.sequenceEqual(firstfour, firstfourscrambled).subscribe({ println(it); });
 ```
 ```
 firstfour == firstfive?
@@ -276,14 +276,14 @@ By default, an Observable will generate its sequence of emitted items afresh for
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp();
 
 myObservable.subscribe(
-  [ onNext: { myWriter.println(it.toString()); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it.toString()); },       // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 myObservable.subscribe(
-  [ onNext: { myWriter.println(it.toString()); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it.toString()); },       // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -298,14 +298,14 @@ Sequence complete
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp().cache();
 
 myObservable.subscribe(
-  [ onNext: { myWriter.println(it.toString()); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it.toString()); },       // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 myObservable.subscribe(
-  [ onNext: { myWriter.println(it.toString()); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it.toString()); },       // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -339,7 +339,7 @@ You can use the `finallyDo( )` method of an Observable to register an action (
 class TestFinally
 {
   static class myActionClass implements rx.util.functions.Action0 {
-    void call() { myWriter.println('Finally'); myWriter.flush(); }
+    void call() { println('Finally'); }
   }
   
   static main() {
@@ -347,9 +347,9 @@ class TestFinally
     def numbers = Observable.from([1, 2, 3, 4, 5]);
     
     numbers.finallyDo(myAction).subscribe(
-          [ onNext: { myWriter.println(it); },
-            onCompleted:{ myWriter.println("Sequence complete"); },
-            onError:{ myWriter.println("Error encountered"); } ]
+      { println(it); },                  // onNext
+      { println("Error encountered"); }, // onError
+      { println("Sequence complete"); }  // onCompleted
     );
   }
 }
