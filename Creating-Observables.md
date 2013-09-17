@@ -103,28 +103,27 @@ To create an Observable that emits items spaced by a particular interval of time
 [[images/rx-operators/never.png]]
 
 ```groovy
-myWriter.println("*** empty() ***");
+println("*** empty() ***");
 Observable.empty().subscribe(
-  { myWriter.println("empty: " + it); },             // onNext
-  { myWriter.println("empty: Error encountered"); }, // onError
-  { myWriter.println("empty: Sequence complete"); }  // onCompleted
+  { println("empty: " + it); },             // onNext
+  { println("empty: Error encountered"); }, // onError
+  { println("empty: Sequence complete"); }  // onCompleted
 );
 
-myWriter.println("*** error() ***");
+println("*** error() ***");
 Observable.error().subscribe(
-  { myWriter.println("error: " + it); },             // onNext
-  { myWriter.println("error: Error encountered"); }, // onError
-  { myWriter.println("error: Sequence complete"); }  // onCompleted
+  { println("error: " + it); },             // onNext
+  { println("error: Error encountered"); }, // onError
+  { println("error: Sequence complete"); }  // onCompleted
 );
 
-myWriter.println("*** never() ***");
+println("*** never() ***");
 Observable.never().subscribe(
-  { myWriter.println("never: " + it); },             // onNext
-  { myWriter.println("never: Error encountered"); }, // onError
-  { myWriter.println("never: Sequence complete"); }  // onCompleted
+  { println("never: " + it); },             // onNext
+  { println("never: Error encountered"); }, // onError
+  { println("never: Sequence complete"); }  // onCompleted
 );
-myWriter.println("*** END ***");
-myWriter.flush();
+println("*** END ***");
 ```
 ```
 *** empty() ***
