@@ -19,9 +19,9 @@ If you want an Observable to immediately begin emitting a specific sequence of i
 def myObservable = Observable.from([1, 2, 3]);
 
 myObservable.startWith(-3, -2, -1, 0).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -52,9 +52,9 @@ odds  = Observable.from([1, 3, 5, 7]);
 evens = Observable.from([2, 4, 6]);
 
 Observable.concat(odds, evens).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 )
 ```
 ```
@@ -88,9 +88,9 @@ odds  = Observable.from([1, 3, 5, 7]);
 evens = Observable.from([2, 4, 6]);
 
 Observable.merge(odds,evens).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -144,9 +144,9 @@ odds  = Observable.from([1, 3, 5, 7, 9]);
 evens = Observable.from([2, 4, 6]);
 
 Observable.zip(odds, evens, {o, e -> [o, e]}).subscribe(
-  [ onNext:{ odd, even -> myWriter.println("odd: " + odd + ", even: " + even); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { odd, even -> println("odd: " + odd + ", even: " + even); }, // onNext
+  { println("Error encountered"); },                            // onError
+  { println("Sequence complete"); }                             // onCompleted
 )
 ```
 ```
