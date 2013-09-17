@@ -68,35 +68,33 @@ In the asynchronous model the flow goes more like this:
 Which looks something like this:
 
 ```groovy
-// defines, but does not invoke, the observer
-def myObserver = { it -> do something useful with it };
+// defines, but does not invoke, the observer's onNext handler
+def myOnNext = { it -> do something useful with it };
 // defines, but does not invoke, the Observable
 def myObservable = someObservable(itsParameters);
 // subscribes the observer to the Observable, and invokes the Observable
-myObservable.subscribe([ onNext:myObserver ]);
+myObservable.subscribe(myOnNext);
 // go on about my business
 ```
 
 ## onNext, onCompleted, and onError
 
-You will notice that the `subscribe()` method does not take a simple method as its parameter, but a Map. In the example above, this maps `onNext` onto the method defined as `myObserver`.
+The `subscribe()` method may accept one to three methods, or it may accept an `Observer` which implements three methods. These methods are as follows:
 
-`onNext` is a keyword particular to `subscribe()`. It defines the method that the Observable will invoke whenever the Observable emits an item. This method takes as a parameter an item emitted by the Observable.
+**onNext** defines the method that the Observable will invoke whenever the Observable emits an item. This method takes as a parameter an item emitted by the Observable.
 
-You can also pass in to the `subscribe()` method two additional Observer methods that the Observable will invoke at different times: `onCompleted` and `onError`.
+**onError**: An Observable will invoke this Observer method to indicate that it has failed to generate the expected data. This stops the Observable and it will not make further calls to `onNext` or `onCompleted`. The `onError` method takes as its parameter the Throwable that caused the error (or a `CompositeException` in those cases where there may have been multiple errors).
 
 **onCompleted**: An Observable will invoke this Observer method after it has called `onNext` for the final time, if it has not encountered any errors.
-
-**onError**: An Observable will invoke this Observer method to indicate that it has failed to generate the expected data. By default this stops the Observable and it will not make further calls to `onNext` or `onCompleted`. The `onError` method takes as its parameter the Throwable that caused the error (or a `CompositeException` in those cases where there may have been multiple errors).
 
 A more complete `subscribe()` example would therefore look like this:
 
 ```groovy
-def myObserver   = { it -> do something useful with it };
-def myComplete  = { clean up after the final response };
+def myOnNext    = { it -> do something useful with it };
 def myError     = { Throwable -> react sensibly to a failed call };
+def myComplete  = { clean up after the final response };
 def myObservable = someMethod(itsParameters);
-myObservable.subscribe([ onNext:myObserver, onCompleted:myComplete, onError:myError ]);
+myObservable.subscribe(myOnNext, myError, myComplete);
 // go on about my business
 ```
 
@@ -114,6 +112,8 @@ This documentation groups information about the various operators and examples o
   * [[Transforming|Transforming-Observables]]
   * [[Filtering|Filtering-Observables]]
   * [[Combining|Combining-Observables]]
+  * [[Error Handling|Error-Handling-Operators]]
   * [[Utility|Observable-Utility-Operators]]
+  * [[Mathematical|Mathematical-Operators]]
   * [[Connectable Observables|Connectable-Observable-Operators]]
   * [[Blocking Observables|Blocking-Observable-Operators]]
