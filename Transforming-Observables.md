@@ -20,9 +20,9 @@ The `map( )` method applies a function of your choosing to every item emitted 
 numbers = Observable.from([1, 2, 3, 4, 5]);
 
 Observable.map(numbers, {it * it}).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -67,9 +67,9 @@ numbers   = Observable.from([1, 2, 3]);
 multiples = { n -> Observable.from([ n*2, n*3 ]) };   
 
 numbers.mapMany(multiples).subscribe(
-  [ onNext:{ myWriter.println(it.toString()); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it.toString()); },       // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -102,9 +102,9 @@ For example, the following code uses `reduce( )` to compute, and then emit as 
 numbers = Observable.from([1, 2, 3, 4, 5]);
 
 Observable.reduce(numbers, { a, b -> a+b }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -147,9 +147,9 @@ For example, the following code takes an Observable that emits a consecutive seq
 numbers = Observable.from([1, 2, 3, 4, 5]);
 
 Observable.scan(numbers, { a, b -> a+b }).subscribe(
-  [ onNext:{ myWriter.println(it); },
-    onCompleted:{ myWriter.println("Sequence complete"); },
-    onError:{ myWriter.println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 );
 ```
 ```
@@ -207,9 +207,9 @@ def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 def groupFunc = new isEven();
 
 numbers.groupBy(groupFunc).mapMany({ Observable.reduce(it, [it.getKey()], {a, b -> a << b}) }).subscribe(
-  [onNext:{ api.servletResponse.getWriter().println(it) },
-   onCompleted:{ api.servletResponse.getWriter().println("Sequence complete"); },
-   onError:{ api.servletResponse.getWriter().println("Error encountered"); } ]
+  { println(it); },                  // onNext
+  { println("Error encountered"); }, // onError
+  { println("Sequence complete"); }  // onCompleted
 )
 ```
 ```
