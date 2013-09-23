@@ -10,6 +10,7 @@ This section explains operators with which you can transform items that are emit
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 * [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
+* [**`defaultIfEmpty( )`**](Transforming-Observables#defaultifempt) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 
 ## map( )
 #### transform the items emitted by an Observable by applying a function to each of them
@@ -288,3 +289,8 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 ## cast( )
 #### cast all items from the source Observable into a particular type before reemitting them
 [[images/rx-operators/cast.png]]
+
+## defaultIfEmpty( )
+#### emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
+[[images/rx-operators/defaultIfEmpty.png]]
+
