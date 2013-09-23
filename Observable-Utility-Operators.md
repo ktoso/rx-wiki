@@ -6,7 +6,7 @@ This section explains various utility operators for working with Observables.
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
 * [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
-* [**`any( )`**](Observable-Utility-Operators#any) — determine whether an Observable emits any items or not
+* [**`exists( )` and `isEmpty( )`**](Observable-Utility-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
 * [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of pairs of items emitted by two Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
@@ -217,11 +217,14 @@ all positive?
 true
 ```
 
-## any( )
+## exists( ) and isEmpty( )
 #### determine whether an Observable emits any items or not
-[[images/rx-operators/any.png]]
+[[images/rx-operators/exists.png]]
 
-When you apply the `any( )` operator to a source Observable, the resulting Observable will emit `true` and complete if the source Observable emits one or more items before completing, or it will emit `false` and complete if the source Observable completes without emitting any items.
+When you apply the `exists( )` operator to a source Observable, the resulting Observable will emit `true` and complete if the source Observable emits one or more items before completing, or it will emit `false` and complete if the source Observable completes without emitting any items.
+
+[[images/rx-operators/isEmpty.png]]
+The inverse of this is the `isEmpty( )` operator. Apply it to a source Observable and the resulting Observable will emit `true` and complete if the source Observable completes without emitting any items, or it will emit `false` and complete if the source Observable emits any item before completing.
 
 ## sequenceEqual( )
 #### test the equality of pairs of items emitted by two Observables
