@@ -15,7 +15,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`throttleWithTimeout( )` or `debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
 * [**`distinct( )`**](Filtering-Observables#distinct) — suppress duplicate items emitted by the source Observable
 * [**`distinctUntilChanged( )`**](Filtering-Observables#distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
-
+* [**`ofClass( )`**](Filtering-Observables#ofclass) — emit only those items from the source Observable that are of a particular class
 
 ## filter( ) or where( )
 #### filter items emitted by an Observable
@@ -369,3 +369,7 @@ Use the `distinctUntilChanged( )` method to remove duplicate consecutive items
 [[images/rx-operators/distinctUntilChanged.key.png]]
 
 You can also pass a function or a comparator into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
+
+## ofClass( )
+#### emit only those items from the source Observable that are of a particular class
+[[images/rx-operators/ofClass.png]]
