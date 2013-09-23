@@ -9,6 +9,7 @@ This section explains operators with which you can transform items that are emit
 * [**`groupBy( )`**](Transforming-Observables#groupby) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 * [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
+* [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
 
 ## map( )
 #### transform the items emitted by an Observable by applying a function to each of them
@@ -283,3 +284,7 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 * `window(source, timespan, timeshift, unit)` and `window(source, timespan, timeshift, unit, scheduler)`
 [[images/rx-operators/window7.png]]
 > This version of `window( )` opens its first window immediately, and thereafter opens a new window every *timeshift* period of time (measured in *unit*, and optionally on a particular *scheduler*). It closes a currently open window after *timespan* period of time has passed since that window was opened. It will also close any currently open window if it receives an `onCompleted( )` or `onError( )` call from the *source* `Observable`. Depending on how you set *timespan* and *timeshift* the windows that result from this operation may overlap or have gaps.
+
+## cast( )
+#### cast all items from the source Observable into a particular type before reemitting them
+[[images/rx-operators/cast.png]]
