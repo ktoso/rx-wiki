@@ -10,6 +10,7 @@ This page explains what the reactive pattern is and what Observables and Observe
 
 #### see also
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Introduction">Rx Workshop: Introduction</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#IObservable">Introduction to Rx: IObservable</a>
 
 # Background
 
@@ -100,6 +101,9 @@ def myObservable = someMethod(itsParameters);
 myObservable.subscribe(myOnNext, myError, myComplete);
 // go on about my business
 ```
+
+#### see also:
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#IObserver">Introduction to Rx: IObserver</a>
 
 # Composition via Observable Operators
 
