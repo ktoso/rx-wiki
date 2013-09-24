@@ -69,6 +69,11 @@ Sequence #2 complete
 Sequence #1 complete
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html">`ConnectableObservable`</a>
+
+***
+
 ## ConnectableObservable.connect( )
 #### instructs a Connectable Observable to begin emitting items
 Call a Connectable Observable's `connect( )` method to instruct it to begin emitting the items from its underlying Observable to its Observers.
@@ -77,10 +82,31 @@ The `connect( )` method returns a `Subscription`. You can call that object's `
 
 You can also use the `connect( )` method to instruct an Observable to begin emitting items (or, to begin generating items that would be emitted) even before any Observer has subscribed to it.
 
+#### see also
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect()">`connect()`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211748(v=vs.103).aspx">`Connect`</a>
+
+***
+
 ## Observable.publish( ) and Observable.multicast( )
 #### represents an Observable as a Connectable Observable
 To represent an Observable as a Connectable Observable, use the `publish( )` or `multicast()` method.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#multicast(rx.subjects.Subject)">`multicast(subject)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#publish()">`publish()`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-multicast">`multicast`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.multicast(v=vs.103).aspx">`Multicast`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish(v=vs.103).aspx">`Publish`</a>
+
+
+***
+
 ## Observable.replay( )
 #### ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting items
 [[images/rx-operators/replay.png]]
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#replay()">`replay()`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-replay">`replay`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.replay(v=vs.103).aspx">`Replay`</a>
