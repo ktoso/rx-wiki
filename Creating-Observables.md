@@ -63,6 +63,9 @@ This has some similarities to the `from( )` method, but note that if you pass 
 
 If you pass nothing or `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(value)`</a>
+
 ***
 
 ## create( )
@@ -82,6 +85,11 @@ def myObservable = Observable.create({ anObserver ->
 ```
 
 **NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter call any of the observer’s other methods.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribeFunc)">`create(func)`</a>
+* RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-create)
+* Linq: [`Create`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.create%28v=vs.103%29.aspx)
 
 ***
 
