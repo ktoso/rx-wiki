@@ -10,6 +10,8 @@ This section explains operators that perform mathematical operations on the item
 * [**`averageFloats( )`**](Mathematical-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
 * [**`averageDoubles( )`**](Mathematical-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
 
+***
+
 ## count( )
 #### counts the number of items emitted by an Observable and emits this count
 [[images/rx-operators/count.png]]
@@ -33,6 +35,12 @@ myObservable.count().subscribe(
 3
 Sequence complete
 ```
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-count">`count`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229470(v=vs.103).aspx">`Count`</a>
+
+***
 
 ## sum( )
 #### adds the numbers emitted by an Observable and emits this sum
@@ -60,6 +68,12 @@ Sequence complete
 ```
 There are also specialized "sum" methods for Longs, Floats, and Doubles (`sumLongs( )`, `sumFloats( )`, and `sumDoubles( )`).
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-sum">`sum`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sum(v=vs.103).aspx">`Sum`</a>
+
+***
+
 ## average( )
 #### calculates the average of numbers emitted by an Observable and emits this average
 [[images/rx-operators/average.png]]
@@ -85,3 +99,7 @@ myObservable.average().subscribe(
 Sequence complete
 ```
 There are also specialized "average" methods for Longs, Floats, and Doubles (`averageLongs( )`, `averageFloats( )`, and `averageDoubles( )`).
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-average">`average`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.average(v=vs.103).aspx">`Average`</a>
