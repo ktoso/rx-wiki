@@ -343,6 +343,7 @@ Pass `elementAt( )` a zero-based index value and it will emit the solitary ite
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#elementat">`elementAt`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229725(v=vs.103).aspx">`ElementAt`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#ElementAt">Introduction to Rx: ElementAt</a>
 
 ***
 
