@@ -318,6 +318,7 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-bufferWithTimeOrCount">`bufferWithTimeOrCount`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.buffer(v=vs.103).aspx">`Buffer`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Buffer">Introduction to Rx: Buffer</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/17_SequencesOfCoincidence.html#BufferRevisted">Introduction to Rx: Buffer revisited</a>
 
 ***
 
@@ -373,6 +374,7 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#windowwithtime">`windowWithTime`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#windowwithtimeorcount">`windowWithTimeOrCount`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.window(v=vs.103).aspx">`Window`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/17_SequencesOfCoincidence.html#Window">Introduction to Rx: Window</a>
 
 ***
 
