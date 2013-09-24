@@ -317,6 +317,7 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-bufferWithTime">`bufferWithTime`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-bufferWithTimeOrCount">`bufferWithTimeOrCount`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.buffer(v=vs.103).aspx">`Buffer`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Buffer">Introduction to Rx: Buffer</a>
 
 ***
 
