@@ -10,6 +10,8 @@ This section explains methods that create Observables.
 * [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
 * [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
 
+***
+
 ## from( )
 #### convert an Iterable or a Future into an Observable
 [[images/rx-operators/from.png]]
@@ -33,6 +35,17 @@ An empty iterable (or array) can be converted to an Observable in this way. The 
 
 Note that when the `from( )` method transforms a `Future` into an Observable, such an Observable will be effectively blocking, as its underlying `Future` blocks.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future)">`from(future)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, long, java.util.concurrent.TimeUnit)">`from(future, timeout, unit)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, rx.Scheduler)">`from(future, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable)">`from(iterable)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T...)">`from(array)`</a>
+* RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-fromArray)
+* Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable%28v=vs.103%29.aspx)
+
+***
+
 ## just( )
 #### convert an object into an Observable that emits that object
 [[images/rx-operators/just.png]]
@@ -49,6 +62,8 @@ def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]);
 This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert an iterable object into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
 
 If you pass nothing or `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
+
+***
 
 ## create( )
 #### create an Observable from scratch by means of a function
@@ -68,11 +83,15 @@ def myObservable = Observable.create({ anObserver ->
 
 **NOTE:** A well-formed Observable _must_ call either the observer’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter call any of the observer’s other methods.
 
+***
+
 ## defer( )
 #### do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 [[images/rx-operators/defer.png]]
 
 Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Observer subscribes.
+
+***
 
 ## range( )
 #### create an Observable that emits a range of sequential integers
@@ -86,11 +105,15 @@ def myObservable = Observable.range(5, 3);
 
 In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers being emitted. _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
 
+***
+
 ## interval( )
 #### create an Observable that emits a sequence of integers spaced by a given time interval
 [[images/rx-operators/interval.png]]
 
 To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
+
+***
 
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
