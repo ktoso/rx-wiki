@@ -84,6 +84,9 @@ We call this approach Functional Reactive Programming because it applies functio
 * [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [Rx Is now Open Source](http://www.hanselman.com/blog/ReactiveExtensionsRxIsNowOpenSource.aspx)
 * [What is FRP? - Elm Language](http://elm-lang.org/learn/What-is-FRP.elm)
+* [Rx Workshop: Observables vs. Events](http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Observables-versus-Events)
+* [Rx Workshop: Unified Programming Model](http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Unified-Programming-Model)
+* [Introduction to Rx: Why Rx?](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)
 
 # RxJava Libraries
 
