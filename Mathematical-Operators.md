@@ -39,6 +39,7 @@ Sequence complete
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-count">`count`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229470(v=vs.103).aspx">`Count`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Count">Introduction to Rx: Count</a>
 
 ***
 
@@ -71,6 +72,7 @@ There are also specialized "sum" methods for Longs, Floats, and Doubles (`sumLon
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-sum">`sum`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sum(v=vs.103).aspx">`Sum`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
 
 ***
 
@@ -103,3 +105,4 @@ There are also specialized "average" methods for Longs, Floats, and Doubles (`av
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-average">`average`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.average(v=vs.103).aspx">`Average`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
