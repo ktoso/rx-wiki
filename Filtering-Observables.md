@@ -73,6 +73,7 @@ numbers.where(myisEven).subscribe(
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.util.functions.Func1)">`filter(predicate)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#where(rx.util.functions.Func1)">its `where` clone</a>)
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-where">`where`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where(v=vs.103).aspx">`Where`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Where">Introduction to Rx: Where</a>
 
 ***
 
@@ -152,6 +153,7 @@ numbers.skip(3) ...
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-single">`skip`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847(v=vs.103).aspx">`Skip`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
 
 ***
 
@@ -202,6 +204,7 @@ Sequence complete
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-skipWhile">`skipWhile`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.skipwhile(v=vs.103).aspx">`SkipWhile`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
 
 ***
 
@@ -243,6 +246,7 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-take">`take`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852(v=vs.103).aspx">`Take`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
 
 ***
 
@@ -296,6 +300,7 @@ Sequence complete
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhileWithIndex(rx.util.functions.Func2)">`takeWhileWithIndex(predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeWhile">`takeWhile`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile(v=vs.103).aspx">`TakeWhile`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
 
 ***
 
@@ -444,6 +449,7 @@ You can also pass a function or a comparator into `distinct( )` that customize
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinct">`distinct`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinct(v=vs.103).aspx">`Distinct`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
 
 ***
 
@@ -460,7 +466,8 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinctUntilChanged">`distinctUntilChanged`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinctuntilchanged(v=vs.103).aspx">`DistinctUntilChanged`</a>
- 
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
+
 ***
 
 ## ofClass( )
