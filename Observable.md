@@ -8,6 +8,9 @@ This page explains what the reactive pattern is and what Observables and Observe
 
 [[images/rx-operators/legend.png]]
 
+#### see also
+* <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Introduction">Rx Workshop: Introduction</a>
+
 # Background
 
 In many software programming tasks, you more or less expect that the instructions you write will execute and complete incrementally, one-at-a-time, in order as you have written them. So for instance, you might write a program something like the following pseudocode:
