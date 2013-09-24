@@ -50,6 +50,11 @@ you could instead write
 numbers.map({ it * it }) ...
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#map(rx.util.functions.Func1)">`map(func)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-select">`select`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.select(v=vs.103).aspx">`Select`</a>
+
 ***
 
 ## mapWithIndex( )
@@ -57,6 +62,9 @@ numbers.map({ it * it }) ...
 [[images/rx-operators/mapWithIndex.png]]
 
 This version of `map( )` accepts a function that takes both the emitted item and the numerical index of that item in the sequence of emitted items as parameters, so that you can refer to both when you apply your transformation.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh244311(v=vs.103).aspx">`Select(source, selector)`</a>
 
 ***
 
@@ -95,6 +103,11 @@ If any of the individual Observables mapped to the items from the source Observa
 [[images/rx-operators/mapManyDelayError.png]]
 
 Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError( )` may pass information about multiple errors to the `onError` method of its Observers (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class [`CompositeException`](http://netflix.github.io/RxJava/javadoc/rx/util/CompositeException.html).
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mapMany(rx.util.functions.Func1)">`mapMany(func)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.util.functions.Func1)">its `flatMap` clone</a>)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#selectmany">`selectMany`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.selectmany(v=vs.103).aspx">`SelectMany`</a>
 
 ***
 
@@ -144,6 +157,12 @@ my_observable.reduce(initial_seed, accumulator_closure)
 ```
 
 Note that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your reduction with the item `null`.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(rx.util.functions.Func2)">`reduce(accumulator)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#aggregate(rx.util.functions.Func2)">its `aggregate` clone</a>)
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(R, rx.util.functions.Func2)">`reduce(initialValue, accumulator)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#aggregate(R, rx.util.functions.Func2)">its `aggregate` clone</a>)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-aggregate">`aggregate`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.aggregate(v=vs.103).aspx">`Aggregate`</a>
 
 ***
 
