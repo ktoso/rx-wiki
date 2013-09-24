@@ -71,6 +71,7 @@ Sequence #1 complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html">`ConnectableObservable`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
 
 ***
 
@@ -85,6 +86,7 @@ You can also use the `connect( )` method to instruct an Observable to begin em
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect()">`connect()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211748(v=vs.103).aspx">`Connect`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
 
 ***
 
@@ -98,7 +100,8 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-multicast">`multicast`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.multicast(v=vs.103).aspx">`Multicast`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish(v=vs.103).aspx">`Publish`</a>
-
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#Multicast">Introduction to Rx: Multicast</a>
 
 ***
 
@@ -110,3 +113,4 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#replay()">`replay()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-replay">`replay`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.replay(v=vs.103).aspx">`Replay`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#Replay">Introduction to Rx: Replay</a>
