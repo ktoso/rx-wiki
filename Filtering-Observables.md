@@ -389,6 +389,7 @@ Sequence complete
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-sample">`sample`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample(v=vs.103).aspx">`Sample`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Sample">Introduction to Rx: Sample</a>
 
 ***
 
@@ -438,6 +439,7 @@ Use the `throttleWithTimeout( )` method to select only those items emitted by 
 
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.throttle(v=vs.103).aspx">`Throttle`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Throttle">Introduction to Rx: Throttle</a>
 
 ***
 
