@@ -122,6 +122,7 @@ In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers b
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#range(int, int)">`range(start, count)`</a>
 * RxJS: [`range`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-range)
 * Linq: [`Range`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.range%28v=vs.103%29.aspx)
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableRange">Introduction to Rx: Range</a>
 
 ***
 
@@ -134,6 +135,7 @@ To create an Observable that emits items spaced by a particular interval of time
 #### see also:
 * RxJS: [`interval`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-interval)
 * Linq: [`Interval`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.interval%28v=vs.103%29.aspx)
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableInterval">Introduction to Rx: Interval</a>
 
 ***
 
@@ -186,3 +188,4 @@ error: Error encountered
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-empty">`empty`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.empty(v=vs.103).aspx">`Empty`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211979(v=vs.103).aspx">`Never`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#SimpleFactoryMethods">Introduction to Rx: Simple factory methods</a>
