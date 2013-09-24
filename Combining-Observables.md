@@ -9,6 +9,8 @@ This section explains operators you can use to combine multiple Observables.
 * [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 
+***
+
 ## startWith( )
 #### emit a specified sequence of items before beginning to emit the items from the Observable
 
@@ -33,6 +35,13 @@ myObservable.startWith(-3, -2, -1, 0).subscribe(
 2
 3
 ```
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#startWith(T...)">`startWith(x, y, ...)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-startWith">`startWith`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.startwith(v=vs.103).aspx">`StartWith`</a>
+
+***
 
 ## concat( )
 #### concatenate two or more Observables sequentially
@@ -69,6 +78,14 @@ Sequence complete
 ```
 
 Instead of passing multiple Observables into `concat( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `concat( )` will concatenate their output into the output of a single Observable.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable...)">`concat(observable1, observable2, ...)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-concat1">`concat`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-concat2">`concat`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.concat(v=vs.103).aspx">`Concat`</a>
+
+***
 
 ## merge( )
 #### combine multiple Observables into one
@@ -110,6 +127,16 @@ Instead of passing multiple Observables into `merge( )`, you could also pass i
 
 If any of the individual Observables passed into `merge( )` aborts by invoking `onError`, the `merge( )` call itself will immediately abort and invoke `onError`. If you would prefer a merge that continues emitting the results of the remaining, error-free Observables before reporting the error, use `mergeDelayError( )` instead.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(java.util.List)">`merge(listOfObservables)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable)">`merge(observableThatEmitsObservables)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable...)">`merge(observable1, observable2, ...)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#merge-1">`merge`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#mergeobservable">`mergeObservable`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.merge(v=vs.103).aspx">`Merge`</a>
+
+***
+
 ## mergeDelayError( )
 #### combine multiple Observables into one but delay errors until completion
 
@@ -118,6 +145,14 @@ If any of the individual Observables passed into `merge( )` aborts by invoking
 `mergeDelayError( )` behaves much like `merge( )`. The exception is when one of the Observables being merged throws an error. If this happens with `merge( )`, the merged Observable will immediately throw an error itself (that is, it will invoke the `onError` method of its Observer). `mergeDelayError( )`, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables that it is merging a chance to finish emitting their items, and it will emit those itself, and will only invoke `onError` when all of the other merged Observables have finished.
 
 Because it is possible that more than one of the merged observables encountered an error, `mergeDelayError( )` may pass information about multiple errors to the `onError` method (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class `CompositeException`.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(java.util.List)">`mergeDelayError(listOfObservables)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable)">`mergeDelayError(observableThatEmitsObservables)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable...)">`mergeDelayError(observable1, observable2, ...)`</a>
+
+
+***
 
 ## zip( )
 #### combine Observables together via a specified function and emit items based on the results of this function
@@ -158,11 +193,25 @@ Sequence complete
 
 **Note:** that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#zip(java.util.Collection, rx.util.functions.FuncN)">`zip()`</a> (several versions)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-zip">`zip`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.zip(v=vs.103).aspx">`Zip`</a>
+
+***
+
 ## combineLatest( )
 #### when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 [[images/rx-operators/combineLatest.png]]
 
 `combineLatest( )` behaves in a similar way to `zip( )`, but while `zip( )` emits items only when all of the zipped source Observables have emitted a previously unzipped item, `combineLatest( )` emits an item whenever _any_ of the source Observables emits an item (so long as each of the source Observables has emitted at least one item). When any of the source Observables emits an item, `combineLatest( )` combines the most recently emitted items from each of the other source Observables, using the function you provide, and emits the return value from that function.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.util.functions.Func2)">`combineLatest(observable1, observable2, combineFunction)`</a> (along with versions that take anywhere from three to nine observables)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-combineLatest">`combineLatest`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211991(v=vs.103).aspx">`CombineLatest`</a>
+
+***
 
 ## switchOnNext( )
 #### convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
@@ -170,7 +219,19 @@ Sequence complete
 
 `switchOnNext( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchOnNext( )` begins emitting items from that Observable. When a new Observable is emitted, `switchOnNext( )` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#switchOnNext(rx.Observable)">`switchOnNext(sequenceOfSequences)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-switchLatest">`switchLatest`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229197(v=vs.103).aspx">`Switch`</a>
+
+***
+
 ## takeUntil( )
 #### emits the items from the source Observable until another Observable emits an item
 
 [[images/rx-operators/takeUntil.png]]
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.Observable)">`takeUntil(other)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeUntil">`takeUntil`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229530(v=vs.103).aspx">`TakeUntil`</a>
