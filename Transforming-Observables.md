@@ -54,6 +54,7 @@ numbers.map({ it * it }) ...
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#map(rx.util.functions.Func1)">`map(func)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-select">`select`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.select(v=vs.103).aspx">`Select`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#Select">Introduction to Rx: Select</a>
 
 ***
 
@@ -379,6 +380,7 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211842(v=vs.103).aspx">`Cast`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#CastAndOfType">Introduction to Rx: Cast and OfType</a>
 
 ***
 
