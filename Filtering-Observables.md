@@ -481,3 +481,4 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229380(v=vs.103).aspx">`OfType`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#CastAndOfType">Introduction to Rx: Cast and OfType</a>
