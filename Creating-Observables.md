@@ -99,6 +99,11 @@ def myObservable = Observable.create({ anObserver ->
 
 Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Observer subscribes.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defer(rx.util.functions.Func0)">`defer(observableFactory)`</a>
+* RxJS: [`defer`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-defer)
+* Linq: [`Defer`](http://msdn.microsoft.com/en-us/library/hh229160%28v=vs.103%29.aspx)
+
 ***
 
 ## range( )
@@ -113,6 +118,11 @@ def myObservable = Observable.range(5, 3);
 
 In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers being emitted. _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#range(int, int)">`range(start, count)`</a>
+* RxJS: [`range`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-range)
+* Linq: [`Range`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.range%28v=vs.103%29.aspx)
+
 ***
 
 ## interval( )
@@ -120,6 +130,10 @@ In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers b
 [[images/rx-operators/interval.png]]
 
 To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
+
+#### see also:
+* RxJS: [`interval`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-interval)
+* Linq: [`Interval`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.interval%28v=vs.103%29.aspx)
 
 ***
 
