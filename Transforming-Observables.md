@@ -109,6 +109,7 @@ Because it is possible for more than one of the individual Observables to encoun
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mapMany(rx.util.functions.Func1)">`mapMany(func)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.util.functions.Func1)">its `flatMap` clone</a>)
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#selectmany">`selectMany`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.selectmany(v=vs.103).aspx">`SelectMany`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#SelectMany">Introduction to Rx: SelectMany</a>
 
 ***
 
