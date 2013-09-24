@@ -16,6 +16,8 @@ This section explains various utility operators for working with Observables.
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
 
+***
+
 ## toList( )
 #### collect all items from an Observable and emit them as a single List
 
@@ -54,6 +56,14 @@ numbers.toList() ...
 ```
 
 If you pass to `toList( )` an Observable that invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the Observable you pass to `toList( )` invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Observers.
+
+#### see also
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-toArray">`toArray`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211848(v=vs.103).aspx">`ToList`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229207(v=vs.103).aspx">`ToArray`</a>
+
+***
 
 ## toSortedList( )
 #### collect all items emitted by an Observable and emit them as a single sorted List
@@ -110,6 +120,12 @@ or
 numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }) ...
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList()">`toSortedList()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList(rx.util.functions.Func2)">`toSortedList(sortingFunction)`</a>
+
+***
+
 ## materialize( )
 #### convert an Observable into a list of Notifications
 
@@ -149,6 +165,12 @@ in the above example, you could also write
 numbers.materialize() ...
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#materialize()">`materialize()`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229453(v=vs.103).aspx">`Materialize`</a>
+
+***
+
 ## dematerialize( )
 #### convert a materialized Observable back into its non-materialized form
 
@@ -170,6 +192,13 @@ Observable.materialize(numbers).dematerialize().subscribe(
 3
 Sequence complete
 ```
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#dematerialize()">`dematerialize()`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-dematerialize">`dematerialize`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229047(v=vs.103).aspx">`Dematerialize`</a>
+
+***
 
 ## timestamp( )
 #### attach a timestamp to every item emitted by an Observable
@@ -195,6 +224,12 @@ Timestamped(timestampMillis = 1369252582864, value = 1000000)
 Sequence complete
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timestamp()">`timestamp()`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timestamp(v=vs.103).aspx">`Timestamp`</a>
+
+***
+
 ## all( )
 #### determine whether all items emitted by an Observable meet some criteria
 [[images/rx-operators/all.png]]
@@ -217,6 +252,13 @@ all positive?
 true
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#all(rx.util.functions.Func1)">`all(predicate)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-all">`all`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229537(v=vs.103).aspx">`All`</a>
+
+***
+
 ## exists( ) and isEmpty( )
 #### determine whether an Observable emits any items or not
 [[images/rx-operators/exists.png]]
@@ -225,6 +267,13 @@ When you apply the `exists( )` operator to a source Observable, the resulting 
 
 [[images/rx-operators/isEmpty.png]]
 The inverse of this is the `isEmpty( )` operator. Apply it to a source Observable and the resulting Observable will emit `true` and complete if the source Observable completes without emitting any items, or it will emit `false` and complete if the source Observable emits any item before completing.
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-any">`any`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-isEmpty">`isEmpty`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.any(v=vs.103).aspx">`Any`</a>
+
+***
 
 ## sequenceEqual( )
 #### test the equality of pairs of items emitted by two Observables
@@ -263,12 +312,25 @@ false
 true
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable)">`sequenceEqual(observable1, observable2)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable, rx.util.functions.Func2)">`sequenceEqual(observable1, observable2, equalityFunction)`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sequenceequal(v=vs.103).aspx">`SequenceEqual`</a>
+
+***
+
 ## synchronize( )
 #### force an Observable to make synchronous calls and to be well-behaved
 
 [[images/rx-operators/synchronize.png]]
 
 It is possible for an Observable to invoke its Observers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `synchronize( )` method to it.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#synchronize(rx.Observable)">`synchronize(observable)`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.synchronize(v=vs.103).aspx">`Synchronize`</a>
+
+***
 
 ## cache( )
 #### remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
@@ -322,10 +384,22 @@ Sequence complete
 ```
 Note that in the second example the timestamps are identical for both of the observers, whereas in the first example they differ.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#cache()">`cache()`</a>
+
+***
+
 ## observeOn( )
 #### specify on which Scheduler an Observer should observe the Observable
 [[images/rx-operators/observeOn.png]]
 To specify in which Scheduler (thread) the Observable should invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` methods, call the Observable's `observeOn( )` method, passing it the appropriate `Scheduler`.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#observeOn(rx.Scheduler)">`observeOn(scheduler)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-observeOn">`observeOn`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.observeon(v=vs.103).aspx">`ObserveOn`</a>
+
+***
 
 ## subscribeOn( )
 #### specify which Scheduler an Observable should use when its subscription is invoked
@@ -333,11 +407,20 @@ To specify in which Scheduler (thread) the Observable should invoke the Observer
 
 To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn( )` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn( )`) the Observable will invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` methods in this same thread.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#subscribeOn(rx.Scheduler)">`subscribeOn(scheduler)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-subscribeOn">`subscribeOn`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.subscribeon(v=vs.103).aspx">`SubscribeOn`</a>
+
+***
+
 ## parallel( )
 #### split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 [[images/rx-operators/parallel.png]]
 
 You can use the `parallel( )` method to split an Observable into as many Observables as there are available processors, and to do work in parallel on each of these Observables. `parallel( )` will then merge the results of these parallel computations back into a single, well-behaved Observable sequence.
+
+***
 
 ## finallyDo( )
 #### register an action to take when an Observable completes
@@ -375,6 +458,13 @@ Sequence complete
 Finally
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#finallyDo(rx.util.functions.Action0)">`finallyDo(action)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-finallyAction">`finallyAction`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212133(v=vs.103).aspx">`Finally`</a>
+
+***
+
 ## delay( )
 #### shift the emissions from an Observable forward in time by a specified amount
 [[images/rx-operators/delay.png]]
@@ -382,3 +472,7 @@ Finally
 The `delay( )` operator modifies its source Observable by pausing for a particular increment of time (that you specify) before emitting each of the source Observable's items. This has the effect of shifting the entire sequence of items emitted by the Observable forward in time by that specified increment.
 
 Note that `delay( )` will _not_ time-shift an `onError( )` call in this fashion but it will forward such a call immediately to its subscribers.
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-delay">`delay`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.delay(v=vs.103).aspx">`Delay`</a>
