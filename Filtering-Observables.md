@@ -17,6 +17,8 @@ This section explains operators you can use to filter and select items emitted b
 * [**`distinctUntilChanged( )`**](Filtering-Observables#distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
 * [**`ofClass( )`**](Filtering-Observables#ofclass) — emit only those items from the source Observable that are of a particular class
 
+***
+
 ## filter( ) or where( )
 #### filter items emitted by an Observable
 [[images/rx-operators/filter.png]]
@@ -67,6 +69,13 @@ numbers.where(myisEven).subscribe(
 );
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.util.functions.Func1)">`filter(predicate)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#where(rx.util.functions.Func1)">its `where` clone</a>)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-where">`where`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where(v=vs.103).aspx">`Where`</a>
+
+***
+
 ## takeLast( )
 #### only emit the last _n_ items emitted by an Observable
 [[images/rx-operators/last.png]]
@@ -96,6 +105,13 @@ you could instead write
 ```groovy
 numbers.takeLast(1) ...
 ```
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeLast">`takeLast`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114(v=vs.103).aspx">`TakeLast`</a>
+
+***
 
 ## skip()
 #### ignore the first _n_ items emitted by an Observable
@@ -131,6 +147,13 @@ you could instead write
 ```groovy
 numbers.skip(3) ...
 ```
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-single">`skip`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847(v=vs.103).aspx">`Skip`</a>
+
+***
 
 ## skipWhile( ) and skipWhileWithIndex( )
 #### discard items emitted by an Observable until a specified condition is false, then emit the remainder
@@ -176,6 +199,12 @@ numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe
 Sequence complete
 ```
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-skipWhile">`skipWhile`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.skipwhile(v=vs.103).aspx">`SkipWhile`</a>
+
+***
+
 ## take( )
 #### emit only the first _n_ items emitted by an Observable
 [[images/rx-operators/take.png]]
@@ -209,6 +238,13 @@ numbers.take(3) ...
 ```
 
 If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an exception or invoke `onError()`, but will merely emit this same fewer number of items before it completes.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-take">`take`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852(v=vs.103).aspx">`Take`</a>
+
+***
 
 ## takeWhile( ) and takeWhileWithIndex( )
 #### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
@@ -255,6 +291,14 @@ numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe
 Sequence complete
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.util.functions.Func1)">`takeWhile(predicate)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhileWithIndex(rx.util.functions.Func2)">`takeWhileWithIndex(predicate)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeWhile">`takeWhile`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile(v=vs.103).aspx">`TakeWhile`</a>
+
+***
+
 ## first( )
 #### emit only the first item emitted by an Observable, or the first item that meets some condition
 [[images/rx-operators/first.png]]
@@ -263,6 +307,12 @@ To create an Observable that emits only the first item emitted by a source Obser
 
 [[images/rx-operators/firstN.png]]
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-first">`first`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.first(v=vs.103).aspx">`First`</a>
+
+***
 
 ## firstOrDefault( )
 #### emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
@@ -273,17 +323,35 @@ To create an Observable that emits only the first item emitted by a source Obser
 [[images/rx-operators/firstOrDefaultN.png]]
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-firstOrDefault">`firstOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault(v=vs.103).aspx">`FirstOrDefault`</a>
+
+***
+
 ## elementAt( )
 #### emit item _n_ emitted by the source Observable
 [[images/rx-operators/elementAt.png]]
 
 Pass `elementAt( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAt( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, or if the source Observable emits fewer than _index value_ + 1 items, `elementAt( )` will throw an <code>IndexOutOfBoundsException</code>.
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#elementat">`elementAt`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229725(v=vs.103).aspx">`ElementAt`</a>
+
+***
+
 ## elementAtOrDefault( )
 #### emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
 [[images/rx-operators/elementAtOrDefault.png]]
 
 Pass `elementAtOrDefault( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAtOrDefault( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, `elementAtOrDefault( )` will throw an <code>IndexOutOfBoundsException</code>. If the source Observable emits fewer than _index value_ + 1 items, `elementAtOrDefault( )` will emit the default value you pass in (you must also pass in a type for this value that is appropriate to what type your Observers expect to observe).
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#elementatordefault">`elementAtOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229845(v=vs.103).aspx">`ElementAtOrDefault`</a>
+
+***
 
 ## sample( ) or throttleLast( )
 #### emit the most recent items emitted by an Observable within periodic time intervals
@@ -307,6 +375,12 @@ numbers.sample(10, java.util.concurrent.TimeUnit.MILLISECONDS).subscribe(
 891282
 Sequence complete
 ```
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-sample">`sample`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample(v=vs.103).aspx">`Sample`</a>
+
+***
 
 ## throttleFirst( )
 #### emit the first items emitted by an Observable within periodic time intervals
@@ -344,11 +418,18 @@ o.onCompleted();
 Sequence complete
 ```
 
+***
+
 ## throttleWithTimeout( ) or debounce( )
 #### only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
 [[images/rx-operators/throttleWithTimeout.png]]
 
 Use the `throttleWithTimeout( )` method to select only those items emitted by a source Observable that are not quickly superceded by other items.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.throttle(v=vs.103).aspx">`Throttle`</a>
+
+***
 
 ## distinct( )
 #### suppress duplicate items emitted by the source Observable
@@ -360,6 +441,12 @@ Use the `distinct( )` method to remove duplicate items from a source Observabl
 
 You can also pass a function or a comparator into `distinct( )` that customizes how it distinguishes between distinct and non-distinct items.
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinct">`distinct`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinct(v=vs.103).aspx">`Distinct`</a>
+
+***
+
 ## distinctUntilChanged( )
 #### suppress duplicate consecutive items emitted by the source Observable
 [[images/rx-operators/distinctUntilChanged.png]]
@@ -370,6 +457,15 @@ Use the `distinctUntilChanged( )` method to remove duplicate consecutive items
 
 You can also pass a function or a comparator into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinctUntilChanged">`distinctUntilChanged`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinctuntilchanged(v=vs.103).aspx">`DistinctUntilChanged`</a>
+ 
+***
+
 ## ofClass( )
 #### emit only those items from the source Observable that are of a particular class
 [[images/rx-operators/ofClass.png]]
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229380(v=vs.103).aspx">`OfType`</a>
