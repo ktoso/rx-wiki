@@ -405,6 +405,7 @@ To specify in which Scheduler (thread) the Observable should invoke the Observer
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-observeOn">`observeOn`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.observeon(v=vs.103).aspx">`ObserveOn`</a>
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Schedulers">Rx Workshop: Schedulers</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html#SubscribeOnObserveOn">Introduction to Rx: SubscribeOn and ObserveOn</a>
 
 ***
 
@@ -419,6 +420,7 @@ To specify that the work done by the Observable should be done on a particular S
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-subscribeOn">`subscribeOn`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.subscribeon(v=vs.103).aspx">`SubscribeOn`</a>
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Schedulers">Rx Workshop: Schedulers</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html#SubscribeOnObserveOn">Introduction to Rx: SubscribeOn and ObserveOn</a>
 
 ***
 
