@@ -178,3 +178,11 @@ error: Error encountered
 *** never() ***
 *** END ***
 ```
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#empty()">`empty()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#error(java.lang.Throwable)">`error(exception)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#never()">`never()`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-empty">`empty`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.empty(v=vs.103).aspx">`Empty`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211979(v=vs.103).aspx">`Never`</a>
