@@ -386,3 +386,4 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-defaultIfEmpty">`defaultIfEmpty`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.defaultifempty(v=vs.103).aspx">`DefaultIfEmpty`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#DefaultIfEmpty">Introduction to Rx: DefaultIfEmpty</a>
