@@ -5,14 +5,30 @@ There are four subclasses of ``Subject`` that are designed for particular use ca
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">``AsyncSubject``</a> emits the last value (and only the last value) emitted by the source Observable(s), and only after that source Observable(s) completes.
 [[images/rx-operators/S.AsyncSubject.png]]
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">`AsyncSubject`</a>
+* Reactive Extensions: <a href="http://msdn.microsoft.com/en-us/library/hh229363(v=vs.103).aspx">`AsyncSubject`</a>
+
 # BehaviorSubject
 When an Observer subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">``BehaviorSubject``</a>, it begins by emitting the item most recently emitted by the source Observable (or a seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
 [[images/rx-operators/S.BehaviorSubject.png]]
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>
+* Reactive Extensions: <a href="http://msdn.microsoft.com/en-us/library/hh211949(v=vs.103).aspx">`BehaviorSubject`</a>
 
 # PublishSubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">``PublishSubject``</a> emits to a subscriber only those items that are emitted by the source Observable(s) subsequent to the time of the subscription.
 [[images/rx-operators/S.PublishSubject.png]]
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">`PublishSubject`</a>
+
+
 # ReplaySubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/ReplaySubject.html">``ReplaySubject``</a> emits to any subscriber all of the items that were emitted by the source Observable(s), regardless of when the subscriber subscribes.
 [[images/rx-operators/S.ReplaySubject.png]]
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/ReplaySubject.html">`ReplaySubject`</a>
+* Reactive Extensions: <a href="http://msdn.microsoft.com/en-us/library/hh211810(v=vs.103).aspx">`ReplaySubject`</a>
