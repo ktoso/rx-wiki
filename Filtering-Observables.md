@@ -111,6 +111,7 @@ numbers.takeLast(1) ...
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeLast">`takeLast`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114(v=vs.103).aspx">`TakeLast`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Last">Introduction to Rx: Last</a>
 
 ***
 
@@ -316,6 +317,7 @@ You can also pass a function to this method that evaluates items as they are emi
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-first">`first`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.first(v=vs.103).aspx">`First`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 
 ***
 
@@ -331,6 +333,8 @@ You can also pass a function to this method that evaluates items as they are emi
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-firstOrDefault">`firstOrDefault`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault(v=vs.103).aspx">`FirstOrDefault`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
+
 
 ***
 
