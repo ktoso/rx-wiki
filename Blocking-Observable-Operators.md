@@ -17,10 +17,23 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 
 [[images/rx-operators/B.legend.png]]
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html">`BlockingObservable`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable()">`toBlockingObservable()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)">`BlockingObservable.from()`</a>
+
+***
+
 ## forEach( )
 #### invoke a function on each item emitted by the Observable; block until the Observable completes
 [[images/rx-operators/B.forEach.png]]
 The `forEach(someFunction)` method is the blocking equivalent of `subscribe(someFunction)`. When you pass a function to this method, `forEach( )` will invoke your function for each item emitted by the Observable, but will only return control to you once the Observable completes (it will not otherwise indicate that the Observable has completed; there is no `forEach( )` equivalent of the `onError` or `onCompleted` methods).
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#forEach(rx.util.functions.Action1)">`forEach(action)`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211815(v=vs.103).aspx">`ForEach`</a>
+
+***
 
 ## last( ) and lastOrDefault( )
 #### block until the Observable completes, then return the last item emitted by the Observable
@@ -60,15 +73,39 @@ boNull.lastOrDefault("foo"): null
 boNothing.lastOrDefault("foo"): foo
 ```
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last()">`last()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#lastOrDefault(T)">`lastOrDefault(default)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#lastOrDefault(T, rx.util.functions.Func1)">`lastOrDefault(default, predicate)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#last">`last`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#lastordefault">`lastOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.last(v=vs.103).aspx">`Last`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.lastordefault(v=vs.103).aspx">`LastOrDefault`</a>
+
+***
+
 ## mostRecent( )
 #### returns an iterable that always returns the item most recently emitted by the Observable
 [[images/rx-operators/B.mostRecent.png]]
 The `mostRecent()` method returns an iterable that on each iteration returns the item that was most recently emitted by the underlying Observable (or `null` if the Observable has not yet emitted an item or has completed without emitting any).
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#mostRecent(T)">`mostRecent(initialValue)`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229751(v=vs.103).aspx">`MostRecent`</a>
+
+***
+
 ## next( )
 #### returns an iterable that blocks until the Observable emits another item, then returns that item
 [[images/rx-operators/B.next.png]]
 The `next()` method returns an iterable that on each iteration blocks until the underlying Observable emits another item, then returns that item (or `null` if the Observable finishes without emitting another item).
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#next()">`next()`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211897(v=vs.103).aspx">`Next`</a>
+
+***
 
 ## single( ) and singleOrDefault( )
 #### if the Observable completes after emitting a single item, return that item, otherwise throw an exception (or return a default item)
@@ -82,6 +119,18 @@ The `singleOrDefault( )` method is similar, except that while it will still th
 [[images/rx-operators/B.singleOrDefault.png]]
 [[images/rx-operators/B.singleOrDefault.p.png]]
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single()">`single()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single(rx.util.functions.Func1)">`single(predicate)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(T)">`singleOrDefault(default)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(T, rx.util.functions.Func1)">`singleOrDefault(default, predicate)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-single">`single`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-singleOrDefault">`singleOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.single(v=vs.103).aspx">`Single`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.singleordefault(v=vs.103).aspx">`SingleOrDefault`</a>
+
+***
+
 ## transformations: toFuture( ), toIterable( ), and toIterator( )/getIterator( )
 #### transform an Observable into a Future, an Iterable, or an Iterator
 [[images/rx-operators/B.toIterator.png]]
@@ -89,3 +138,10 @@ The `singleOrDefault( )` method is similar, except that while it will still th
 [[images/rx-operators/B.toFuture.png]]
 
 Use these methods to transform a Blocking Observable into a `Future`, an `Iterable`, or an `Iterator`. Note that `toFuture( )` will only work on Blocking Observables that emit one or fewer items. To convert Blocking Observables that emit two or more items into Futures, instead use `.toList( ).toFuture( )` to reduce the items emitted by the Observable to a single (list) item.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#toIterable()">`toIterable()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#toFuture()">`toFuture()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#getIterator()">`getIterator()`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212132(v=vs.103).aspx">`toEnumerable`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toevent(v=vs.103).aspx">`toEvent`</a>
