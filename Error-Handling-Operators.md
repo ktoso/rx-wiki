@@ -47,6 +47,7 @@ Sequence complete
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.Observable)">`onErrorResumeNext(sequence)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-onErrorResumeNext2">`onErrorResumeNext`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.onerrorresumenext(v=vs.103).aspx">`OnErrorResumeNext`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/11_AdvancedErrorHandling.html#OnErrorResumeNext">Introduction to Rx: OnErrorResumeNext</a>
 
 ***
 
@@ -104,3 +105,4 @@ The `retry( )` method responds to an `onError( )` call from the source Obser
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-retry">`retry`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.retry(v=vs.103).aspx">`Retry`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/11_AdvancedErrorHandling.html#Retry">Introduction to Rx: Retry</a>
