@@ -256,6 +256,7 @@ true
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#all(rx.util.functions.Func1)">`all(predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-all">`all`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229537(v=vs.103).aspx">`All`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#All">Introduction to Rx: All</a>
 
 ***
 
@@ -272,6 +273,7 @@ The inverse of this is the `isEmpty( )` operator. Apply it to a source Observa
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-any">`any`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-isEmpty">`isEmpty`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.any(v=vs.103).aspx">`Any`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Any">Introduction to Rx: Any</a>
 
 ***
 
@@ -316,6 +318,7 @@ true
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable)">`sequenceEqual(observable1, observable2)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable, rx.util.functions.Func2)">`sequenceEqual(observable1, observable2, equalityFunction)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sequenceequal(v=vs.103).aspx">`SequenceEqual`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#SequenceEqual">Introduction to Rx: SequenceEqual</a>
 
 ***
 
