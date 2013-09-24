@@ -168,6 +168,7 @@ numbers.materialize() ...
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#materialize()">`materialize()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229453(v=vs.103).aspx">`Materialize`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#MaterializeAndDematerialize">Introduction to Rx: Materialize and Dematerialize</a>
 
 ***
 
@@ -197,6 +198,7 @@ Sequence complete
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#dematerialize()">`dematerialize()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-dematerialize">`dematerialize`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229047(v=vs.103).aspx">`Dematerialize`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#MaterializeAndDematerialize">Introduction to Rx: Materialize and Dematerialize</a>
 
 ***
 
@@ -227,6 +229,7 @@ Sequence complete
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timestamp()">`timestamp()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timestamp(v=vs.103).aspx">`Timestamp`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#TimeStampAndTimeInterval">Introduction to Rx: TimeStamp and TimeInterval</a>
 
 ***
 
