@@ -114,6 +114,7 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-publishLast">`publishLast`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publishlast.aspx">`PublishLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishLast">Introduction to Rx: PublishLast</a>
+
 ***
 
 ## Observable.replay( )
