@@ -4,6 +4,17 @@ It extends the [observer pattern](http://en.wikipedia.org/wiki/Observer_pattern)
 
 It supports Java 5 or higher and JVM-based languages such as [Groovy](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy), [Clojure](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure), and [Scala](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala).
 
+<center><table>
+ <thead>
+  <tr><th colspan="3">Observables fill the gap by being the ideal implementation of access to asynchronous sequences of multiple items</th></tr>
+  <tr><th></th><th>single items</th><th>multiple items</th></tr>
+ </thead>
+ <tbody>
+  <tr><th>synchronous</th><td><code>T getData()</code></td><td><code>Iterable&lt;T&gt; getData()</code></td></tr>
+  <tr><th>asynchronous</th><td><code>Future&lt;T&gt; getData()</code></td><td><code>Observable&lt;T&gt; getData()</code></td></tr>
+ </tbody>
+</table></center>
+
 # Why?
 
 ### Observables are Composable
@@ -18,9 +29,9 @@ RxJava Observables on the other hand are intended for [composing flows and seque
 
 RxJava’s Observables support not just the emission of single scalar values (as Futures do), but also of sequences of values or even infinite streams. ``Observable`` is a single abstraction that can be used for any of these use cases. An Observable has all of the flexibility and elegance associated with its mirror-image cousin the Iterable.
 
-<table>
+<center><table>
  <thead>
-  <tr><th colspan="3">How consumers interact with Iterables and Observables</th></tr>
+  <tr><th colspan="3">An Observable is the asynchronous/push <a href="http://en.wikipedia.org/wiki/Dual_(category_theory)">"dual"</a> to the synchronous/pull Iterable</th></tr>
   <tr><th>event</th><th>Iterable (pull)</th><th>Observable (push)</th></tr>
  </thead>
  <tbody>
@@ -28,7 +39,26 @@ RxJava’s Observables support not just the emission of single scalar values (as
   <tr><td>discover error</td><td>throws <code>Exception</code></td><td><code>onError(Exception)</code></td></tr>
   <tr><td>complete</td><td>returns</td><td><code>onCompleted()</code></td></tr>
  <tbody>
-</table>
+</table></center>
+
+<center><table>
+ <thead>
+  <tr><th colspan="2">Example code showing how similar high-order functions can be applied to an Iterable and an Observable</th></tr>
+  <tr><th>Iterable</th><th>Observable</th></tr>
+ </thead>
+ <tbody>
+  <tr><td><pre><code>getDataFromLocalMemory()
+  .skip(10)
+  .take(5)
+  .map({ s -> return s + "_transformed" })
+  .forEach({ println "next => " + it })</code></pre></td>
+  <td><pre><code>getDataFromNetwork()
+  .skip(10)
+  .take(5)
+  .map({ s -> return s + "_transformed" })
+  .subscribe({ println "onNext => " + it })</code></pre></td></tr>
+ </tbody>
+</table></center>
 
 ### Observables are Less Opinionated
 
