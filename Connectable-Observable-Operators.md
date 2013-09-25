@@ -2,6 +2,7 @@ This section explains the [`ConnectableObservable`](http://netflix.github.io/RxJ
 
 * [**`ConnectableObservable.connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * [**`Observable.publish( )` and `Observable.multicast( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
+* [**`Observable.publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`Observable.replay( )`**](Connectable-Observable-Operators#observablereplay) — ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
 
 A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting items when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended Observers to subscribe to the Observable before the Observable begins emitting items.
@@ -85,7 +86,7 @@ You can also use the `connect( )` method to instruct an Observable to begin em
 
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect()">`connect()`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211748(v=vs.103).aspx">`Connect`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211748.aspx">`Connect`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
 
 ***
@@ -98,11 +99,21 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#multicast(rx.subjects.Subject)">`multicast(subject)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#publish()">`publish()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-multicast">`multicast`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.multicast(v=vs.103).aspx">`Multicast`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish(v=vs.103).aspx">`Publish`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.multicast.aspx">`Multicast`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish.aspx">`Publish`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#Multicast">Introduction to Rx: Multicast</a>
 
+***
+
+## Observable.publishLast( )
+#### represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
+[[images/rx-operators/publishLast.png]]
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-publishLast">`publishLast`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publishlast.aspx">`PublishLast`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishLast">Introduction to Rx: PublishLast</a>
 ***
 
 ## Observable.replay( )
@@ -112,5 +123,5 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#replay()">`replay()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-replay">`replay`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.replay(v=vs.103).aspx">`Replay`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.replay.aspx">`Replay`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#Replay">Introduction to Rx: Replay</a>
