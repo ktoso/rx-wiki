@@ -62,11 +62,31 @@ RxJava’s Observables support not just the emission of single scalar values (as
 
 ### Observables are Less Opinionated
 
-The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. It also tries to be very lightweight (it is implemented as a single JAR that is focused on just the Observable abstraction and related higher-order functions).
+The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. Observables in RxJava can be implemented using thread-pools, event loops, non-blocking I/O, actors (such as from Akka), or whatever implementation suits your needs, your style, or your expertise. Client code treats all of its interactions with Observables as asynchronous, whether your underlying implementation is blocking or non-blocking and however you choose to implement it.
 
-A composable Future could be implemented just as generically, but <a href="http://doc.akka.io/docs/akka/2.2.0/java.html">Akka Futures</a> for example come tied in with an Actor library and a lot of other stuff. Observables in RxJava can be implemented using thread-pools, event loops, non-blocking I/O, actors (such as from Akka), or whatever implementation suits your needs, your style, or your expertise.
+(RxJava also tries to be very lightweight. It is implemented as a single JAR that is focused on just the Observable abstraction and related higher-order functions. You could implement a composable Future that is similarly unbiased, but <a href="http://doc.akka.io/docs/akka/2.2.0/java.html">Akka Futures</a> for example come tied in with an Actor library and a lot of other stuff.)
 
-Importantly: with RxJava you can later change your mind, and radically change the underlying nature of your Observable implementation, without breaking the consumers of your Observable.
+<center><table>
+ <thead>
+  <tr><th>How is this Observable implemented?</th></tr>
+  <tr><th><code>public Observable<data> getData();</code></th></tr>
+ </thead>
+ <tfoot>
+  <tr><th>From the Observer's point of view, it doesn't matter!</Th.></tr>
+ </tfoot>
+ <tbody>
+  <tr><td><ul>
+<li>does it work sychronously on the same thread as the caller?</li>
+<li>does it work asynchronously on a distinct thread?</li>
+<li>does it divide its work over multiple threads that may return data to the caller in any order?</li>
+<li>does it use an Actor (or multiple Actors) instead of a thread pool?</li>
+<li>does it use NIO with an event-loop to do asynchronous network access?</li>
+<li>does it use an event-loop to separate the work thread from the callback thread?</li>
+</ul></td></tr>
+ </tbody>
+</table></center>
+
+And importantly: with RxJava you can later change your mind, and radically change the underlying nature of your Observable implementation, without breaking the consumers of your Observable.
 
 ### Callbacks Have Their Own Problems
 
