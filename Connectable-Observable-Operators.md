@@ -4,6 +4,7 @@ This section explains the [`ConnectableObservable`](http://netflix.github.io/RxJ
 * [**`Observable.publish( )` and `Observable.multicast( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`Observable.publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`Observable.replay( )`**](Connectable-Observable-Operators#observablereplay) — ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
+* [**`ConnectableObservable.refCount( )`**](Connectable-Observable-Operators#connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
 
 A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting items when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended Observers to subscribe to the Observable before the Observable begins emitting items.
 
@@ -126,3 +127,16 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-replay">`replay`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.replay.aspx">`Replay`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#Replay">Introduction to Rx: Replay</a>
+
+***
+
+## ConnectableObservable.refCount( )
+#### makes a Connectable Observable behave like an ordinary Observable
+[[images/rx-operators/publishRefCount.png]]
+
+You can represent a Connectable Observable so that it behaves much like an ordinary Observable by using the `refCount( )` operator. This operator keeps track of how many Observers are subscribed to the resulting Observable and refrains from disconnecting from the source ConnectableObservable until all such Observables unsubscribe.
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-refCount">`refCount`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211664.aspx">`RefCount`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#RefCount">Introduction to Rx: RefCount</a>
