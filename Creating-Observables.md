@@ -76,11 +76,15 @@ You can create an Observable from scratch by using the `create( )` method. You
 
 ```groovy
 def myObservable = Observable.create({ anObserver ->
-  anObserver.onNext('One');
-  anObserver.onNext('Two');
-  anObserver.onNext('Three');
-  anObserver.onNext('Four');
-  anObserver.onCompleted();
+  try {
+    anObserver.onNext('One');
+    anObserver.onNext('Two');
+    anObserver.onNext('Three');
+    anObserver.onNext('Four');
+    anObserver.onCompleted();
+  } catch(Throwable t) {
+    anObserver.onError(t);
+  }
 })
 ```
 
