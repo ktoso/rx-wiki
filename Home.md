@@ -41,25 +41,6 @@ RxJava’s Observables support not just the emission of single scalar values (as
  <tbody>
 </table></center>
 
-<center><table>
- <thead>
-  <tr><th colspan="2">Example code showing how similar high-order functions can be applied to an Iterable and an Observable</th></tr>
-  <tr><th>Iterable</th><th>Observable</th></tr>
- </thead>
- <tbody>
-  <tr><td><pre><code>getDataFromLocalMemory()
-  .skip(10)
-  .take(5)
-  .map({ s -> return s + "_transformed" })
-  .forEach({ println "next => " + it })</code></pre></td>
-  <td><pre><code>getDataFromNetwork()
-  .skip(10)
-  .take(5)
-  .map({ s -> return s + "_transformed" })
-  .subscribe({ println "onNext => " + it })</code></pre></td></tr>
- </tbody>
-</table></center>
-
 ### Observables are Less Opinionated
 
 The RxJava implementation is not biased toward some particular source of concurrency or asynchronicity. Observables in RxJava can be implemented using thread-pools, event loops, non-blocking I/O, actors (such as from Akka), or whatever implementation suits your needs, your style, or your expertise. Client code treats all of its interactions with Observables as asynchronous, whether your underlying implementation is blocking or non-blocking and however you choose to implement it.
@@ -104,21 +85,24 @@ RxJava provides a collection of operators with which you can filter, select, tra
 
 You can think of the Observable class as a “push” equivalent to <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html">Iterable</a>, which is a “pull.” With an Iterable, the consumer pulls values from the producer and the thread blocks until those values arrive. By contrast, with an Observable the producer pushes values to the consumer whenever values are available. This approach is more flexible, because values can arrive synchronously or asynchronously.
 
-```groovy
-// An Iterable uses a pull model, for instance this Iterable<String>:
-getStringsFromMemory()
+<center><table>
+ <thead>
+  <tr><th colspan="2">Example code showing how similar high-order functions can be applied to an Iterable and an Observable</th></tr>
+  <tr><th>Iterable</th><th>Observable</th></tr>
+ </thead>
+ <tbody>
+  <tr><td><pre><code>getDataFromLocalMemory()
   .skip(10)
   .take(5)
-  .map({ s -> return(s + "_transformed"); })
-  .forEach({ it -> println("next => " + it); });
-
-// You compose an Observable<String> in much the same way, though it uses the push model:
-getStringsFromNetwork()
+  .map({ s -> return s + "_transformed" })
+  .forEach({ println "next => " + it })</code></pre></td>
+  <td><pre><code>getDataFromNetwork()
   .skip(10)
   .take(5)
-  .map({ s -> return(s + "_transformed"); })
-  .subscribe({ it -> println("onNext => " + it); });
-```
+  .map({ s -> return s + "_transformed" })
+  .subscribe({ println "onNext => " + it })</code></pre></td></tr>
+ </tbody>
+</table></center>
 
 The Observable type adds two missing semantics to the Gang of Four’s <a href="http://en.wikipedia.org/wiki/Observer_pattern">Observer pattern</a>, to match those that are available in the Iterable type:  
 
