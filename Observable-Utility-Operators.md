@@ -7,6 +7,7 @@ This section explains various utility operators for working with Observables.
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
 * [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
 * [**`exists( )` and `isEmpty( )`**](Observable-Utility-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
+* [**`contains( )`**](Observable-Utility-Operators#contains) — determine whether an Observable emits a particular item or not
 * [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of pairs of items emitted by two Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
@@ -60,8 +61,8 @@ If you pass to `toList( )` an Observable that invokes `onCompleted` before emi
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-toArray">`toArray`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211848(v=vs.103).aspx">`ToList`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229207(v=vs.103).aspx">`ToArray`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211848.aspx">`ToList`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229207.aspx">`ToArray`</a>
 
 ***
 
@@ -167,7 +168,7 @@ numbers.materialize() ...
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#materialize()">`materialize()`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229453(v=vs.103).aspx">`Materialize`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229453.aspx">`Materialize`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#MaterializeAndDematerialize">Introduction to Rx: Materialize and Dematerialize</a>
 
 ***
@@ -197,7 +198,7 @@ Sequence complete
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#dematerialize()">`dematerialize()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-dematerialize">`dematerialize`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229047(v=vs.103).aspx">`Dematerialize`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229047.aspx">`Dematerialize`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#MaterializeAndDematerialize">Introduction to Rx: Materialize and Dematerialize</a>
 
 ***
@@ -228,7 +229,7 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timestamp()">`timestamp()`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timestamp(v=vs.103).aspx">`Timestamp`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timestamp.aspx">`Timestamp`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#TimeStampAndTimeInterval">Introduction to Rx: TimeStamp and TimeInterval</a>
 
 ***
@@ -258,7 +259,7 @@ true
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#all(rx.util.functions.Func1)">`all(predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-all">`all`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229537(v=vs.103).aspx">`All`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229537.aspx">`All`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#All">Introduction to Rx: All</a>
 
 ***
@@ -275,14 +276,25 @@ The inverse of this is the `isEmpty( )` operator. Apply it to a source Observa
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-any">`any`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-isEmpty">`isEmpty`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.any(v=vs.103).aspx">`Any`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.any.aspx">`Any`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Any">Introduction to Rx: Any</a>
+
+***
+
+## contains( )
+#### determine whether an Observable emits a particular item or not
+[[images/rx-operators/contains.png]]
+
+Pass the `contains( )` operator a particular item, and it will emit `true` if that item is emitted by the source Observable, or `false` if the source Observable terminates without emitting that item.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.contains.aspx">`Contains`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Contains">Introduction to Rx: Contains</a>
 
 ***
 
 ## sequenceEqual( )
 #### test the equality of pairs of items emitted by two Observables
-
 [[images/rx-operators/sequenceEqual.png]]
 
 Pass `sequenceEqual( )` two Observables, and it will compare the items emitted by each Observable, and emit `true` for each pair of items if and only if both items are the same. You can optionally pass a third parameter: a function that accepts two items and returns `true` if they are equal according to a standard of your choosing.
@@ -320,7 +332,7 @@ true
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable)">`sequenceEqual(observable1, observable2)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable, rx.util.functions.Func2)">`sequenceEqual(observable1, observable2, equalityFunction)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sequenceequal(v=vs.103).aspx">`SequenceEqual`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sequenceequal.aspx">`SequenceEqual`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#SequenceEqual">Introduction to Rx: SequenceEqual</a>
 
 ***
@@ -334,7 +346,7 @@ It is possible for an Observable to invoke its Observers' methods asynchronously
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#synchronize(rx.Observable)">`synchronize(observable)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.synchronize(v=vs.103).aspx">`Synchronize`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.synchronize.aspx">`Synchronize`</a>
 
 ***
 
@@ -403,7 +415,7 @@ To specify in which Scheduler (thread) the Observable should invoke the Observer
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#observeOn(rx.Scheduler)">`observeOn(scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-observeOn">`observeOn`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.observeon(v=vs.103).aspx">`ObserveOn`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.observeon.aspx">`ObserveOn`</a>
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Schedulers">Rx Workshop: Schedulers</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html#SubscribeOnObserveOn">Introduction to Rx: SubscribeOn and ObserveOn</a>
 
@@ -418,7 +430,7 @@ To specify that the work done by the Observable should be done on a particular S
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#subscribeOn(rx.Scheduler)">`subscribeOn(scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-subscribeOn">`subscribeOn`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.subscribeon(v=vs.103).aspx">`SubscribeOn`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.subscribeon.aspx">`SubscribeOn`</a>
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Schedulers">Rx Workshop: Schedulers</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html#SubscribeOnObserveOn">Introduction to Rx: SubscribeOn and ObserveOn</a>
 
@@ -471,7 +483,7 @@ Finally
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#finallyDo(rx.util.functions.Action0)">`finallyDo(action)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-finallyAction">`finallyAction`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212133(v=vs.103).aspx">`Finally`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212133.aspx">`Finally`</a>
 
 ***
 
@@ -485,5 +497,5 @@ Note that `delay( )` will _not_ time-shift an `onError( )` call in this fash
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-delay">`delay`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.delay(v=vs.103).aspx">`Delay`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.delay.aspx">`Delay`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Delay">Introduction to Rx: Delay</a>
