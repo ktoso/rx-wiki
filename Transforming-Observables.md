@@ -160,6 +160,22 @@ my_observable.reduce(initial_seed, accumulator_closure)
 
 Note that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your reduction with the item `null`.
 
+#### example:
+
+Imagine you have access to an Observable that emits a sequence of "Movie" objects that correspond to the "coming soon" movies from a theater. These objects include a number of items of information about the movie, including its title and opening day. You could use `reduce` to convert this sequence of Movie objects into a single list of titles, like this:
+
+```groovy
+getComingSoonSequence()
+    .reduce([], { theList, video ->
+                  theList.add("'" + video.getTitle() + "' (" + video.getOpen() + ")");
+                  return(theList);
+    }).subscribe({ println("Coming Soon: " + it) });
+```
+Which might result in something like this:
+```
+Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Report' (Sept. 27), 'Salinger' (Sept.27), 'In a World' (Sept. 27)]
+```
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(rx.util.functions.Func2)">`reduce(accumulator)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#aggregate(rx.util.functions.Func2)">its `aggregate` clone</a>)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(R, rx.util.functions.Func2)">`reduce(initialValue, accumulator)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#aggregate(R, rx.util.functions.Func2)">its `aggregate` clone</a>)
