@@ -3,6 +3,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`filter( )` or `where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
+* [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
@@ -155,6 +156,19 @@ numbers.skip(3) ...
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-single">`skip`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847(v=vs.103).aspx">`Skip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
+
+
+***
+
+## skipLast()
+#### ignore the last _n_ items emitted by an Observable
+[[images/rx-operators/skipLast.png]]
+
+You can ignore the last _n_ items emitted by an Observable and attend only to those items that preced them, by modifying the Observable with the `skipLast(n)` method. Note that the mechanism by which this is implemented will delay the emission of any item from the source Observable until _n_ additional items have been emitted by that Observable.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211750.aspx">`SkipLast`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipLastTakeLast">Introduction to Rx: SkipLast and TakeLast</a>
 
 ***
 
