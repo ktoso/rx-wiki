@@ -94,12 +94,12 @@ You can think of the Observable class as a “push” equivalent to <a href="htt
   <tr><td><pre><code>getDataFromLocalMemory()
   .skip(10)
   .take(5)
-  .map({ s -> return s + "_transformed" })
+  .map({ s -> return s + " transformed" })
   .forEach({ println "next => " + it })</code></pre></td>
   <td><pre><code>getDataFromNetwork()
   .skip(10)
   .take(5)
-  .map({ s -> return s + "_transformed" })
+  .map({ s -> return s + " transformed" })
   .subscribe({ println "onNext => " + it })</code></pre></td></tr>
  </tbody>
 </table></center>
