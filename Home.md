@@ -135,6 +135,7 @@ We call this approach Functional Reactive Programming because it applies functio
 * [Rx Workshop: Observables vs. Events](http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Observables-versus-Events)
 * [Rx Workshop: Unified Programming Model](http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Unified-Programming-Model)
 * [Introduction to Rx: Why Rx?](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)
+* [The Reactive Manifesto](http://www.reactivemanifesto.org/)
 
 # RxJava Libraries
 
