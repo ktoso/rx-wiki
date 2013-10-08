@@ -17,6 +17,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`distinct( )`**](Filtering-Observables#distinct) — suppress duplicate items emitted by the source Observable
 * [**`distinctUntilChanged( )`**](Filtering-Observables#distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
 * [**`ofClass( )`**](Filtering-Observables#ofclass) — emit only those items from the source Observable that are of a particular class
+* [**`ignoreElements( )`**](Filtering-Observables#ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
 
 ***
 
@@ -73,7 +74,7 @@ numbers.where(myisEven).subscribe(
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.util.functions.Func1)">`filter(predicate)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#where(rx.util.functions.Func1)">its `where` clone</a>)
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-where">`where`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where(v=vs.103).aspx">`Where`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where.aspx">`Where`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Where">Introduction to Rx: Where</a>
 
 ***
@@ -111,7 +112,7 @@ numbers.takeLast(1) ...
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeLast">`takeLast`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114(v=vs.103).aspx">`TakeLast`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114.aspx">`TakeLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Last">Introduction to Rx: Last</a>
 
 ***
@@ -154,7 +155,7 @@ numbers.skip(3) ...
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-single">`skip`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847(v=vs.103).aspx">`Skip`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847.aspx">`Skip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
 
 
@@ -218,7 +219,7 @@ Sequence complete
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-skipWhile">`skipWhile`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.skipwhile(v=vs.103).aspx">`SkipWhile`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.skipwhile.aspx">`SkipWhile`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
 
 ***
@@ -260,7 +261,7 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-take">`take`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852(v=vs.103).aspx">`Take`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852.aspx">`Take`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
 
 ***
@@ -314,7 +315,7 @@ Sequence complete
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.util.functions.Func1)">`takeWhile(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhileWithIndex(rx.util.functions.Func2)">`takeWhileWithIndex(predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeWhile">`takeWhile`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile(v=vs.103).aspx">`TakeWhile`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile.aspx">`TakeWhile`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
 
 ***
@@ -330,7 +331,7 @@ You can also pass a function to this method that evaluates items as they are emi
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-first">`first`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.first(v=vs.103).aspx">`First`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.first.aspx">`First`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 
 ***
@@ -346,7 +347,7 @@ You can also pass a function to this method that evaluates items as they are emi
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-firstOrDefault">`firstOrDefault`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault(v=vs.103).aspx">`FirstOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault.aspx">`FirstOrDefault`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 
 
@@ -360,7 +361,7 @@ Pass `elementAt( )` a zero-based index value and it will emit the solitary ite
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#elementat">`elementAt`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229725(v=vs.103).aspx">`ElementAt`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229725.aspx">`ElementAt`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#ElementAt">Introduction to Rx: ElementAt</a>
 
 ***
@@ -373,7 +374,7 @@ Pass `elementAtOrDefault( )` a zero-based index value and it will emit the sol
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#elementatordefault">`elementAtOrDefault`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229845(v=vs.103).aspx">`ElementAtOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229845.aspx">`ElementAtOrDefault`</a>
 
 ***
 
@@ -402,7 +403,7 @@ Sequence complete
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-sample">`sample`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample(v=vs.103).aspx">`Sample`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample.aspx">`Sample`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Sample">Introduction to Rx: Sample</a>
 
 ***
@@ -452,7 +453,7 @@ Sequence complete
 Use the `throttleWithTimeout( )` method to select only those items emitted by a source Observable that are not quickly superceded by other items.
 
 #### see also:
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.throttle(v=vs.103).aspx">`Throttle`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.throttle.aspx">`Throttle`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Throttle">Introduction to Rx: Throttle</a>
 
 ***
@@ -469,7 +470,7 @@ You can also pass a function or a comparator into `distinct( )` that customize
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinct">`distinct`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinct(v=vs.103).aspx">`Distinct`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinct.aspx">`Distinct`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
 
 ***
@@ -486,7 +487,7 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinctUntilChanged">`distinctUntilChanged`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinctuntilchanged(v=vs.103).aspx">`DistinctUntilChanged`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinctuntilchanged.aspx">`DistinctUntilChanged`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
 
 ***
@@ -496,5 +497,15 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 [[images/rx-operators/ofClass.png]]
 
 #### see also:
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229380(v=vs.103).aspx">`OfType`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229380.aspx">`OfType`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#CastAndOfType">Introduction to Rx: Cast and OfType</a>
+
+***
+
+## ignoreElements( )
+#### discard the items emitted by the source Observable and only pass through the error or completed notification
+[[images/rx-operators/ignoreElements.png]]
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229242.aspx">`IgnoreElements`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#IgnoreElements">Introduction to Rx: IgnoreElements</a>
