@@ -31,7 +31,7 @@ The `forEach(someFunction)` method is the blocking equivalent of `subscribe(some
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#forEach(rx.util.functions.Action1)">`forEach(action)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211815(v=vs.103).aspx">`ForEach`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211815.aspx">`ForEach`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/10_LeavingTheMonad.html#ForEach">Introduction to Rx: ForEach</a>
 
 ***
@@ -79,10 +79,10 @@ boNothing.lastOrDefault("foo"): foo
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#lastOrDefault(T)">`lastOrDefault(default)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#lastOrDefault(T, rx.util.functions.Func1)">`lastOrDefault(default, predicate)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#last">`last`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#lastordefault">`lastOrDefault`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.last(v=vs.103).aspx">`Last`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.lastordefault(v=vs.103).aspx">`LastOrDefault`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypelastpredicate-thisarg">`last`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypelastordefaultpredicate-defaultvalue-thisarg">`lastOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.last.aspx">`Last`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.lastordefault.aspx">`LastOrDefault`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Last">Introduction to Rx: Last</a>
 
 ***
@@ -94,7 +94,7 @@ The `mostRecent()` method returns an iterable that on each iteration returns the
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#mostRecent(T)">`mostRecent(initialValue)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229751(v=vs.103).aspx">`MostRecent`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229751.aspx">`MostRecent`</a>
 
 ***
 
@@ -105,7 +105,7 @@ The `next()` method returns an iterable that on each iteration blocks until the 
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#next()">`next()`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211897(v=vs.103).aspx">`Next`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211897.aspx">`Next`</a>
 
 ***
 
@@ -126,10 +126,10 @@ The `singleOrDefault( )` method is similar, except that while it will still th
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single(rx.util.functions.Func1)">`single(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(T)">`singleOrDefault(default)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(T, rx.util.functions.Func1)">`singleOrDefault(default, predicate)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-single">`single`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-singleOrDefault">`singleOrDefault`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.single(v=vs.103).aspx">`Single`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.singleordefault(v=vs.103).aspx">`SingleOrDefault`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypesinglepredicate-thisarg">`single`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypesingleordefaultpredicate-defaultvalue-thisarg">`singleOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.single.aspx">`Single`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.singleordefault.aspx">`SingleOrDefault`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Single">Introduction to Rx: Single</a>
 
 ***
@@ -146,6 +146,6 @@ Use these methods to transform a Blocking Observable into a `Future`, an `Iterab
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#toIterable()">`toIterable()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#toFuture()">`toFuture()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#getIterator()">`getIterator()`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212132(v=vs.103).aspx">`toEnumerable`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toevent(v=vs.103).aspx">`toEvent`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212132.aspx">`toEnumerable`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toevent.aspx">`toEvent`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/10_LeavingTheMonad.html#LeavingTheMonad">Introduction to Rx: Leaving the monad</a>
