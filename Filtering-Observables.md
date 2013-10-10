@@ -73,7 +73,7 @@ numbers.where(myisEven).subscribe(
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.util.functions.Func1)">`filter(predicate)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#where(rx.util.functions.Func1)">its `where` clone</a>)
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-where">`where`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypefilterpredicate-thisarg">`filter`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypewherepredicate-thisarg">`where`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where.aspx">`Where`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Where">Introduction to Rx: Where</a>
 
@@ -111,7 +111,7 @@ numbers.takeLast(1) ...
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeLast">`takeLast`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetakelastcount">`takeLast`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114.aspx">`TakeLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Last">Introduction to Rx: Last</a>
 
@@ -154,7 +154,7 @@ numbers.skip(3) ...
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-single">`skip`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeskipcount">`skip`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847.aspx">`Skip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
 
@@ -218,7 +218,7 @@ Sequence complete
 ```
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-skipWhile">`skipWhile`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeskipwhilepredicate-thisarg">`skipWhile`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.skipwhile.aspx">`SkipWhile`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
 
@@ -260,7 +260,7 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-take">`take`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetakecount-scheduler">`take`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852.aspx">`Take`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
 
@@ -314,7 +314,7 @@ Sequence complete
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.util.functions.Func1)">`takeWhile(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhileWithIndex(rx.util.functions.Func2)">`takeWhileWithIndex(predicate)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeWhile">`takeWhile`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetakewhilepredicate-thisarg">`takeWhile`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile.aspx">`TakeWhile`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
 
@@ -330,7 +330,7 @@ To create an Observable that emits only the first item emitted by a source Obser
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-first">`first`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypefirstpredicate-thisarg">`first`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.first.aspx">`First`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 
@@ -346,7 +346,7 @@ To create an Observable that emits only the first item emitted by a source Obser
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-firstOrDefault">`firstOrDefault`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypefirstordefaultpredicate-defaultvalue-thisarg">`firstOrDefault`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault.aspx">`FirstOrDefault`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 
@@ -360,7 +360,7 @@ You can also pass a function to this method that evaluates items as they are emi
 Pass `elementAt( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAt( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, or if the source Observable emits fewer than _index value_ + 1 items, `elementAt( )` will throw an <code>IndexOutOfBoundsException</code>.
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#elementat">`elementAt`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeelementatindex">`elementAt`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229725.aspx">`ElementAt`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#ElementAt">Introduction to Rx: ElementAt</a>
 
@@ -373,7 +373,7 @@ Pass `elementAt( )` a zero-based index value and it will emit the solitary ite
 Pass `elementAtOrDefault( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAtOrDefault( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, `elementAtOrDefault( )` will throw an <code>IndexOutOfBoundsException</code>. If the source Observable emits fewer than _index value_ + 1 items, `elementAtOrDefault( )` will emit the default value you pass in (you must also pass in a type for this value that is appropriate to what type your Observers expect to observe).
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#elementatordefault">`elementAtOrDefault`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeelementatordefaultindex-defaultvalue">`elementAtOrDefault`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229845.aspx">`ElementAtOrDefault`</a>
 
 ***
@@ -402,7 +402,7 @@ Sequence complete
 ```
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-sample">`sample`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypesampleinterval--sampleobservable">`sample`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample.aspx">`Sample`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Sample">Introduction to Rx: Sample</a>
 
@@ -469,7 +469,7 @@ Use the `distinct( )` method to remove duplicate items from a source Observabl
 You can also pass a function or a comparator into `distinct( )` that customizes how it distinguishes between distinct and non-distinct items.
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinct">`distinct`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypedistinctkeyselector-keyserializer">`distinct`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinct.aspx">`Distinct`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
 
@@ -486,7 +486,7 @@ Use the `distinctUntilChanged( )` method to remove duplicate consecutive items
 You can also pass a function or a comparator into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-distinctUntilChanged">`distinctUntilChanged`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypedistinctuntilchangedkeyselector-comparer">`distinctUntilChanged`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinctuntilchanged.aspx">`DistinctUntilChanged`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
 
