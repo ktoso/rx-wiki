@@ -38,8 +38,8 @@ myObservable.startWith(-3, -2, -1, 0).subscribe(
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#startWith(T...)">`startWith(x, y, ...)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-startWith">`startWith`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.startwith(v=vs.103).aspx">`StartWith`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypestartwithscheduler-args">`startWith`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.startwith.aspx">`StartWith`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#StartWith">Introduction to Rx: StartWith</a>
 
 ***
@@ -82,9 +82,8 @@ Instead of passing multiple Observables into `concat( )`, you could also pass 
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable...)">`concat(observable1, observable2, ...)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-concat1">`concat`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-concat2">`concat`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.concat(v=vs.103).aspx">`Concat`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeconcatargs">`concat`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.concat.aspx">`Concat`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Concat">Introduction to Rx: Concat</a>
 
 ***
@@ -133,9 +132,9 @@ If any of the individual Observables passed into `merge( )` aborts by invoking
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(java.util.List)">`merge(listOfObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable)">`merge(observableThatEmitsObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable...)">`merge(observable1, observable2, ...)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#merge-1">`merge`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#mergeobservable">`mergeObservable`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.merge(v=vs.103).aspx">`Merge`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypemergemaxconcurrent--other">`merge`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypemergeobservable">`mergeObservable`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.merge.aspx">`Merge`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Merge">Introduction to Rx: Merge</a>
 
 ***
@@ -198,8 +197,8 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#zip(java.util.Collection, rx.util.functions.FuncN)">`zip()`</a> (several versions)
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-zip">`zip`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.zip(v=vs.103).aspx">`Zip`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypezipargs-resultselector">`zip`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.zip.aspx">`Zip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Zip">Introduction to Rx: Zip</a>
 
 ***
@@ -212,8 +211,8 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.util.functions.Func2)">`combineLatest(observable1, observable2, combineFunction)`</a> (along with versions that take anywhere from three to nine observables)
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-combineLatest">`combineLatest`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211991(v=vs.103).aspx">`CombineLatest`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypecombinelatestargs-resultselector">`combineLatest`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211991.aspx">`CombineLatest`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#CombineLatest">Introduction to Rx: CombineLatest</a>
 
 ***
@@ -226,8 +225,8 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#switchOnNext(rx.Observable)">`switchOnNext(sequenceOfSequences)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-switchLatest">`switchLatest`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229197(v=vs.103).aspx">`Switch`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeswitch">`switchLatest`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229197.aspx">`Switch`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Switch">Introduction to Rx: Switch</a>
 
 ***
@@ -239,5 +238,5 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.Observable)">`takeUntil(other)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-takeUntil">`takeUntil`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229530(v=vs.103).aspx">`TakeUntil`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetakeuntilother">`takeUntil`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229530.aspx">`TakeUntil`</a>
