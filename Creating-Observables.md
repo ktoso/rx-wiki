@@ -41,8 +41,8 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, rx.Scheduler)">`from(future, scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable)">`from(iterable)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T...)">`from(array)`</a>
-* RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-fromArray)
-* Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable%28v=vs.103%29.aspx)
+* RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservablefromarrayarray-scheduler)
+* Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
 
 ***
 
@@ -92,8 +92,8 @@ def myObservable = Observable.create({ anObserver ->
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribeFunc)">`create(func)`</a>
-* RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-create)
-* Linq: [`Create`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.create%28v=vs.103%29.aspx)
+* RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservablecreatesubscribe)
+* Linq: [`Create`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.create.aspx)
 
 ***
 
@@ -105,8 +105,8 @@ Pass `defer( )` an Observable factory function (a function that generates Obse
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defer(rx.util.functions.Func0)">`defer(observableFactory)`</a>
-* RxJS: [`defer`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-defer)
-* Linq: [`Defer`](http://msdn.microsoft.com/en-us/library/hh229160%28v=vs.103%29.aspx)
+* RxJS: [`defer`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservabledeferobservablefactory)
+* Linq: [`Defer`](http://msdn.microsoft.com/en-us/library/hh229160.aspx)
 
 ***
 
@@ -124,8 +124,8 @@ In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers b
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#range(int, int)">`range(start, count)`</a>
-* RxJS: [`range`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-range)
-* Linq: [`Range`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.range%28v=vs.103%29.aspx)
+* RxJS: [`range`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservablerangestart-count-scheduler)
+* Linq: [`Range`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.range.aspx)
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableRange">Introduction to Rx: Range</a>
 
 ***
@@ -137,8 +137,8 @@ In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers b
 To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
 
 #### see also:
-* RxJS: [`interval`](https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-interval)
-* Linq: [`Interval`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.interval%28v=vs.103%29.aspx)
+* RxJS: [`interval`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableintervalperiod-scheduler)
+* Linq: [`Interval`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.interval.aspx)
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableInterval">Introduction to Rx: Interval</a>
 
 ***
@@ -189,7 +189,8 @@ error: Error encountered
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#empty()">`empty()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#error(java.lang.Throwable)">`error(exception)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#never()">`never()`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-empty">`empty`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.empty(v=vs.103).aspx">`Empty`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211979(v=vs.103).aspx">`Never`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableemptyscheduler">`empty`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservablenever">`never`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.empty.aspx">`Empty`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211979.aspx">`Never`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#SimpleFactoryMethods">Introduction to Rx: Simple factory methods</a>
