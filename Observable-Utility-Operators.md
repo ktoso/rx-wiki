@@ -60,7 +60,7 @@ If you pass to `toList( )` an Observable that invokes `onCompleted` before emi
 
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-toArray">`toArray`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetoarray">`toArray`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211848.aspx">`ToList`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229207.aspx">`ToArray`</a>
 
@@ -197,7 +197,7 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#dematerialize()">`dematerialize()`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-dematerialize">`dematerialize`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypedematerialize">`dematerialize`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229047.aspx">`Dematerialize`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#MaterializeAndDematerialize">Introduction to Rx: Materialize and Dematerialize</a>
 
@@ -258,7 +258,7 @@ true
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#all(rx.util.functions.Func1)">`all(predicate)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-all">`all`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeallpredicate-thisarg">`all`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229537.aspx">`All`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#All">Introduction to Rx: All</a>
 
@@ -274,8 +274,8 @@ When you apply the `exists( )` operator to a source Observable, the resulting 
 The inverse of this is the `isEmpty( )` operator. Apply it to a source Observable and the resulting Observable will emit `true` and complete if the source Observable completes without emitting any items, or it will emit `false` and complete if the source Observable emits any item before completing.
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-any">`any`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-isEmpty">`isEmpty`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeanypredicate-thisarg">`any`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeisempty">`isEmpty`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.any.aspx">`Any`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Any">Introduction to Rx: Any</a>
 
@@ -414,7 +414,7 @@ To specify in which Scheduler (thread) the Observable should invoke the Observer
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#observeOn(rx.Scheduler)">`observeOn(scheduler)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-observeOn">`observeOn`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeobserveonscheduler">`observeOn`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.observeon.aspx">`ObserveOn`</a>
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Schedulers">Rx Workshop: Schedulers</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html#SubscribeOnObserveOn">Introduction to Rx: SubscribeOn and ObserveOn</a>
@@ -429,7 +429,7 @@ To specify that the work done by the Observable should be done on a particular S
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#subscribeOn(rx.Scheduler)">`subscribeOn(scheduler)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-subscribeOn">`subscribeOn`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypesubscribeonscheduler">`subscribeOn`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.subscribeon.aspx">`SubscribeOn`</a>
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Schedulers">Rx Workshop: Schedulers</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html#SubscribeOnObserveOn">Introduction to Rx: SubscribeOn and ObserveOn</a>
@@ -482,7 +482,7 @@ Finally
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#finallyDo(rx.util.functions.Action0)">`finallyDo(action)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-finallyAction">`finallyAction`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypefinallyaction">`finally` / `finallyAction`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212133.aspx">`Finally`</a>
 
 ***
@@ -496,6 +496,6 @@ The `delay( )` operator modifies its source Observable by pausing for a partic
 Note that `delay( )` will _not_ time-shift an `onError( )` call in this fashion but it will forward such a call immediately to its subscribers.
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-delay">`delay`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypedelayduetime-scheduler">`delay`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.delay.aspx">`Delay`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Delay">Introduction to Rx: Delay</a>
