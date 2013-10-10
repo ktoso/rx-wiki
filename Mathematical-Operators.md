@@ -37,8 +37,8 @@ Sequence complete
 ```
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-count">`count`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229470(v=vs.103).aspx">`Count`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypecountpredicate">`count`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229470.aspx">`Count`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Count">Introduction to Rx: Count</a>
 
 ***
@@ -70,8 +70,8 @@ Sequence complete
 There are also specialized "sum" methods for Longs, Floats, and Doubles (`sumLongs( )`, `sumFloats( )`, and `sumDoubles( )`).
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-sum">`sum`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sum(v=vs.103).aspx">`Sum`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypesumkeyselector-thisarg">`sum`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sum.aspx">`Sum`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
 
 ***
@@ -103,6 +103,6 @@ Sequence complete
 There are also specialized "average" methods for Longs, Floats, and Doubles (`averageLongs( )`, `averageFloats( )`, and `averageDoubles( )`).
 
 #### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/wiki/Observable#wiki-average">`average`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.average(v=vs.103).aspx">`Average`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeaverageselector">`average`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.average.aspx">`Average`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
