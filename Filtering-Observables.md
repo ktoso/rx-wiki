@@ -14,6 +14,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`sample( )` or `throttleLast( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
 * [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
 * [**`throttleWithTimeout( )` or `debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
+* [**`timeout( )`**](Filtering-Observables#timeout) — emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
 * [**`distinct( )`**](Filtering-Observables#distinct) — suppress duplicate items emitted by the source Observable
 * [**`distinctUntilChanged( )`**](Filtering-Observables#distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
 * [**`ofClass( )`**](Filtering-Observables#ofclass) — emit only those items from the source Observable that are of a particular class
@@ -402,6 +403,8 @@ Sequence complete
 ```
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypesampleinterval--sampleobservable">`sample`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample.aspx">`Sample`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Sample">Introduction to Rx: Sample</a>
@@ -455,6 +458,23 @@ Use the `throttleWithTimeout( )` method to select only those items emitted by 
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.throttle.aspx">`Throttle`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Throttle">Introduction to Rx: Throttle</a>
+
+***
+
+## timeout( )
+#### emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
+[[images/rx-operators/timeout.1.png]]
+
+The `timeout( )` operator emits the items emitted by a source Observable unless the source Observable fails to emit an item within a specified period of time since the previous item it emitted, in which case `timeout( )` will call `onError( )` with a `TimeoutException`.
+
+Another version of `timeout( )` does not call `onError( )` but instead switches to emitting items from an alternative Observable if the original Observable fails to emit an item within the specified timeout period:
+
+[[images/rx-operators/timeout.2.png]]
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetimeoutduetime-other-scheduler">`timeout`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timeout(v=vs.103).aspx">`Timeout`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Timeout">Introduction to Rx: Timeout</a>
 
 ***
 

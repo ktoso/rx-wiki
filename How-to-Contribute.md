@@ -3,7 +3,7 @@ RxJava is still a work in progress and has a long list of work documented in the
 Netflix is working on the 0.6 tasks. We would appreciate help on anything scheduled for version 0.7 or later or of course bugs.
 
 If you wish to contribute we would ask that you:
-
+- read [[Rx Design Guidelines|http://blogs.msdn.com/b/rxteam/archive/2010/10/28/rx-design-guidelines.aspx]]
 - review existing code and comply with existing patterns and idioms
 - include unit tests
 - stick to Rx contracts as defined by the Rx.Net implementation when porting operators (each issue attempts to reference the correct documentation from MSDN)
