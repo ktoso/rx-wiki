@@ -101,7 +101,11 @@ The `mostRecent()` method returns an iterable that on each iteration returns the
 ## next( )
 #### returns an iterable that blocks until the Observable emits another item, then returns that item
 [[images/rx-operators/B.next.png]]
-The `next()` method returns an iterable that on each iteration blocks until the underlying Observable emits another item, then returns that item (or `null` if the Observable finishes without emitting another item).
+The `next( )` method returns an iterable that on each iteration blocks in `Iterator.hasNext( )` or `Iterator.next( )` until the underlying Observable emits another item; `Iterator.next( )` then returns that item.
+
+If the Observable emits an error then `Iterator.hasNext( )` will return `true` and `Iterator.next()` will re-throw the exception.
+
+If the Observable finishes without emitting another item then `Iterator.hasNext( )` call will return `false`, and `Iterator.next( )` will throw a `NoSuchElementException`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#next()">`next()`</a>
