@@ -107,7 +107,7 @@ If the Observable emits an error then `Iterator.hasNext( )` will return `true`
 
 If the Observable finishes without emitting another item then `Iterator.hasNext( )` call will return `false`, and `Iterator.next( )` will throw a `NoSuchElementException`.
 
-If you only use the `next( )` method, that method will block until the new value arrives, but if you use `hasNext( )` and next( )` together, `hasNext( )` will block until the first value arrives. After that, however, before you call the corresponding `next( )` method, `hasNext( )` returns the same result without being blocked. After you call the corresponding `next( )` method (which returns the cached value), a subsequent call to `hasNext( )` will block.
+If you only use the `next( )` method, that method will block until the new value arrives, but if you use `hasNext( )` and `next( )` together, `hasNext( )` will block until the first value arrives. After that, however, before you call the corresponding `next( )` method, `hasNext( )` returns the same result without being blocked. After you call the corresponding `next( )` method (which returns the cached value), a subsequent call to `hasNext( )` will block.
 
 If the Iterator reaches the final item emitted by the source Observable, a subsequent call to `hasNext( )` will always return `false`, and a subsequent call to `next( )` will throw `NoSuchElementException`. If the source Observable issues an error, any subsequent `hasNext( )` or `next( )` will throw the error.
 
