@@ -11,6 +11,7 @@
   * [[Mathematical Operators]]
   * [[Connectable Observable Operators]]
   * [[Blocking Observable Operators]]
+  * [[Alphabetical List of Observable Operators]]
 * [[Subject]]
 
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
