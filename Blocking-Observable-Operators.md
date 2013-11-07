@@ -39,40 +39,14 @@ The `forEach(someFunction)` method is the blocking equivalent of `subscribe(some
 ## last( ) and lastOrDefault( )
 #### block until the Observable completes, then return the last item emitted by the Observable
 [[images/rx-operators/B.last.png]]
-Use the `last( )` method to retrieve the last item emitted by an Observable, at the time the Observable completes (or `null` if the Observable emitted no items before completing).
+Use the `last( )` method to retrieve the last item emitted by an Observable, at the time the Observable completes (it will throw an `IllegalArgumentException` if the source Observable completes without emitting any items).
 
-You can also use this method to retrieve the last item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such items). To do this, pass a function to `last( )` that returns `true` if the item meets the condition.
+You can also use this method to retrieve the last item emitted by an Observable that meets some particular condition. To do this, pass a function to `last( )` that returns `true` if the item meets the condition.
 [[images/rx-operators/B.last.p.png]]
 
-Note that because `last( )` emits `null` to indicate that no item (or no matching item) was emitted by the underlying Observable, this creates an ambiguity in the case of Observables whose last emitted item (or matching item) _is_ `null`:
-
-```groovy
-def boNull    = Observable.from([null]).toBlockingObservable();
-def boNothing = Observable.from([]).toBlockingObservable();
-println('boNull.last(): ' + boNull.last());
-println('boNothing.last(): ' + boNothing.last());
-```
-```
-boNull.last(): null
-boNothing.last(): null
-```
-
-The `lastOrDefault( )` method is similar to `last( )`, except that instead of returning `null` when there is no last item (or no last item that meets the specified condition), in such a case it will instead return a default item that you specify. Specify that default item by passing it as the first parameter to `lastOrDefault( )`.
+The `lastOrDefault( )` method is similar to `last( )`, except that instead of throwing an exception when there is no last item (or no last item that meets the specified condition), in such a case it will instead return a default item that you specify. Specify that default item by passing it as the first parameter to `lastOrDefault( )`.
 [[images/rx-operators/B.lastOrDefault.png]]
 [[images/rx-operators/B.lastOrDefault.p.png]]
-
-Note that you can use this to guard against the ambiguous-`null` noted above:
-
-```groovy
-def boNull    = Observable.from([null]).toBlockingObservable();
-def boNothing = Observable.from([]).toBlockingObservable();
-println('boNull.lastOrDefault("foo"): ' + boNull.lastOrDefault("foo"));
-println('boNothing.lastOrDefault("foo"): ' + boNothing.lastOrDefault("foo"));
-```
-```
-boNull.lastOrDefault("foo"): null
-boNothing.lastOrDefault("foo"): foo
-```
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last()">`last()`</a>
