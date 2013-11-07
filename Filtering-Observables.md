@@ -2,6 +2,7 @@ This section explains operators you can use to filter and select items emitted b
 
 * [**`filter( )` or `where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
+* [**`last( )`**](Filtering-Observables#last) — emit only the last item emitted by an Observable
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
@@ -84,7 +85,7 @@ numbers.where(myisEven).subscribe(
 #### only emit the last _n_ items emitted by an Observable
 [[images/rx-operators/last.png]]
 
-To convert an Observable that emits several items into one that only emits the last _n_ of these itemsbefore completing, use the `takeLast( )` method. For instance, in the following code, `takeLast( )` emits only the last integer in the list of integers represented by `numbers`:
+To convert an Observable that emits several items into one that only emits the last _n_ of these items before completing, use the `takeLast( )` method. For instance, in the following code, `takeLast( )` emits only the last integer in the list of integers represented by `numbers`:
 
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -115,6 +116,13 @@ numbers.takeLast(1) ...
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetakelastcount">`takeLast`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114.aspx">`TakeLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Last">Introduction to Rx: Last</a>
+
+***
+
+## last( )
+#### only emit the last item emitted by an Observable
+
+The `last( )` operator is equivalent to `takeLast(1)`. It will throw an `IllegalArgumentException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#last-and-lastordefault).
 
 ***
 
