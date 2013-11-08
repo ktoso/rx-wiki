@@ -5,7 +5,7 @@ A <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/Subject.html">``S
 
 There are four subclasses of ``Subject`` that are designed for particular use cases:
 # AsyncSubject
-<a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">``AsyncSubject``</a> emits the last value (and only the last value) emitted by the source Observable(s), and only after that source Observable(s) completes.
+<a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">``AsyncSubject``</a> emits the last value (and only the last value) emitted by the source Observable(s), and only after that source Observable(s) completes. (If the source Observable does not emit any values, the ``AsyncSubject`` also completes without emitting any values.)
 [[images/rx-operators/S.AsyncSubject.png]]
 
 #### see also:
