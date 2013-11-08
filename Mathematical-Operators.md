@@ -102,6 +102,8 @@ Sequence complete
 ```
 There are also specialized "average" methods for Longs, Floats, and Doubles (`averageLongs( )`, `averageFloats( )`, and `averageDoubles( )`).
 
+Note that these methods will fail with an `IllegalArgumentException` if the source Observable does not emit any items.
+
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeaverageselector">`average`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.average.aspx">`Average`</a>
