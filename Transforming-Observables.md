@@ -119,7 +119,9 @@ Because it is possible for more than one of the individual Observables to encoun
 
 The `reduce( )` method (or `aggregate( )`, which has the same behavior) returns an Observable that applies a function of your choosing to the first item emitted by a source Observable, then feeds the result of that function along with the second item emitted by the source Observable into the same function, then feeds the result of _that_ function along with the third item into the same function, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your function as the sole output from the returned Observable.
 
-This technique, which is called “reduce” or “aggregate” here, is sometimes called “fold,” “accumulate,” “compress,” or “inject” in other programming contexts. 
+Note that if the source Observable does not emit any items, `reduce( )` will fail with an `IllegalArgumentException`.
+
+This technique, which is called “reduce” or “aggregate” in the RxJava context, is sometimes called “fold,” “accumulate,” “compress,” or “inject” in other programming arenas. 
 
 For example, the following code uses `reduce( )` to compute, and then emit as an Observable, the sum of the numbers emitted by the source Observable:
 
