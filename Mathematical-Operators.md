@@ -9,6 +9,10 @@ This section explains operators that perform mathematical operations on the item
 * [**`averageLongs( )`**](Mathematical-Operators#average) — calculates the average of Longs emitted by an Observable and emits this average
 * [**`averageFloats( )`**](Mathematical-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
 * [**`averageDoubles( )`**](Mathematical-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
+* [**`min( )`**](Mathematical-Operators#min) — emits the minimum value emitted by a source Observable
+* [**`minBy( )`**](Mathematical-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value
+* [**`max( )`**](Mathematical-Operators#max) — emits the maximum value emitted by a source Observable
+* [**`maxBy( )`**](Mathematical-Operators#maxby) — emits the item emitted by the source Observable that has the maximum key value
 
 ***
 
@@ -108,3 +112,35 @@ Note that these methods will fail with an `IllegalArgumentException` if the sour
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeaverageselector">`average`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.average.aspx">`Average`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
+
+***
+
+## min( )
+#### emits the minimum value emitted by a source Observable
+[[images/rx-operators/min.png]]
+
+#### see also: 
+
+***
+
+##  minBy( )
+#### emits the item emitted by the source Observable that has the minimum key value
+[[images/rx-operators/minBy.png]]
+
+#### see also: 
+
+***
+
+## max( )
+#### emits the maximum value emitted by a source Observable
+[[images/rx-operators/max.png]]
+
+#### see also: 
+
+***
+
+## maxBy( )
+#### emits the item emitted by the source Observable that has the maximum key value
+[[images/rx-operators/maxBy.png]]
+
+#### see also:
