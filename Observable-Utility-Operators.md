@@ -17,6 +17,7 @@ This section explains various utility operators for working with Observables.
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`timeInterval( )`**](Observable-Utility-Operators#timeinterval) — emit the time lapsed between consecutive emissions of a source Observable
+* [**`using( )`**](Observable-Utility-Operators#using) — create a disposable resource that has the same lifespan as an Observable
 
 ***
 
@@ -502,6 +503,7 @@ Note that `delay( )` will _not_ time-shift an `onError( )` call in this fash
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Delay">Introduction to Rx: Delay</a>
 
 ***
+
 ## timeInterval( )
 #### emit the time lapsed between consecutive emissions of a source Observable
 [[images/rx-operators/timeInterval.png]]
@@ -512,3 +514,11 @@ The `timeInterval( )` operator converts a source Observable into an Observable
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#TimeStampAndTimeInterval">Introduction to Rx: TimeStamp and TimeInterval</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeintervalscheduler">`timeInterval`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timeinterval.aspx">`TimeInterval`</a>
+
+***
+
+## using( )
+#### create a disposable resource that has the same lifespan as an Observable
+[[images/rx-operators/using.png]]
+
+Pass the `using( )` method two factory functions: the first creates a disposable resource, the second creates an Observable. When an observer subscribes to the resulting Observable, `using( )` will use the Observable factory function to create the Observable the observer will observe, while at the same time using the resource factory function to create a resource. When the Observer unsubscribes from the Observable, or when the Observable terminates (normally or with an error), `using( )` will dispose of the resource it created.
