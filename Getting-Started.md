@@ -84,8 +84,6 @@ In Clojure =>
 ```
 You can find more examples and information in the [[How To Use]] section.
 
-You can find example source code in the [rxjava-examples](../tree/master/rxjava-examples/src/main/) module.
-
 ## Building
 
 To check out and build the RxJava source, issue the following commands:
