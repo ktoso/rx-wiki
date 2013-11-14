@@ -455,6 +455,9 @@ You can use the `parallel( )` method to split an Observable into as many Obser
 
 Use the `doOnEach( )` method to register an `Action` that RxJava will perform each time the Observable emits an item. This action takes the item as a parameter.
 
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
+
 ***
 
 ## doOnCompleted( )
@@ -463,6 +466,8 @@ Use the `doOnEach( )` method to register an `Action` that RxJava will perform 
 
 Use the `doOnCompleted( )` method to register an `Action` that RxJava will perform if the Observable completes normally (not by means of an error).
 
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
 
 ***
 
@@ -471,6 +476,9 @@ Use the `doOnCompleted( )` method to register an `Action` that RxJava will per
 [[images/rx-operators/doOnError.png]]
 
 Use the `doOnError( )` method to register an `Action` that RxJava will perform if the Observable terminates with an error. This action takes the Throwable representing the error as a parameter.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
 
 ***
 
