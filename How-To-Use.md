@@ -136,7 +136,7 @@ def customObservableNonBlocking() {
             final Thread t = new Thread(new Runnable() {
                 void run() {
                     for(int i=0; i<75; i++) {
-                        observer.onNext("anotherValue_" + i);
+                        observer.onNext("value_" + i);
                     }
                     // after sending all values we complete the sequence
                     observer.onCompleted();
@@ -170,7 +170,7 @@ Here is the same code in Clojure that uses a Future (instead of raw thread) and 
   (Observable/create 
     (fn [observer]
       (let [f (future 
-                (doseq [x (range 50)] (-> observer (.onNext (str "anotherValue_" x))))
+                (doseq [x (range 50)] (-> observer (.onNext (str "value_" x))))
                 ; after sending all values we complete the sequence
                 (-> observer .onCompleted))
             ; a subscription that cancels the future if unsubscribed
@@ -273,11 +273,11 @@ def simpleComposition() {
 This results in:
 
 ```text
-onNext => anotherValue_10_transformed
-onNext => anotherValue_11_transformed
-onNext => anotherValue_12_transformed
-onNext => anotherValue_13_transformed
-onNext => anotherValue_14_transformed
+onNext => value_10_transformed
+onNext => value_11_transformed
+onNext => value_12_transformed
+onNext => value_13_transformed
+onNext => value_14_transformed
 ```
 
 This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item:
