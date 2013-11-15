@@ -265,7 +265,7 @@ This first example, in Groovy, uses a previously defined, asynchronous Observabl
  */
 def simpleComposition() {
     customObservableNonBlocking().skip(10).take(5)
-        .map({ stringValue -> return stringValue + "_transformed"})
+        .map({ stringValue -> return stringValue + "_xform"})
         .subscribe({ println "onNext => " + it})
 }
 ```
@@ -273,12 +273,15 @@ def simpleComposition() {
 This results in:
 
 ```text
-onNext => value_10_transformed
-onNext => value_11_transformed
-onNext => value_12_transformed
-onNext => value_13_transformed
-onNext => value_14_transformed
+onNext => value_10_xform
+onNext => value_11_xform
+onNext => value_12_xform
+onNext => value_13_xform
+onNext => value_14_xform
 ```
+
+Here is a marble diagram that illustrates this transformation:
+[[images/rx-operators/Composition.1.png]]
 
 This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item:
 
