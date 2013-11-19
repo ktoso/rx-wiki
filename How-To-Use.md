@@ -330,6 +330,22 @@ The response looks like this:
 And here is a marble diagram that illustrates how that code produces that response:
 [[images/rx-operators/Composition.2.png]]
 
+The following example, in Groovy, comes from <a href="https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013">Ben Christensen's QCon presentation on the evolution of the Netflix API</a>:
+
+```groovy
+public Observable getVideoSummary(APIVideo video) {
+   def seed = [id:video.id, title:video.getTitle();
+   def bookmarkObservable = getBookmark(video);
+   def artworkObservable = getArtworkImageUrl(video);
+   return( Observable.merge(bookmarkObservable, artworkObservable)
+      .reduce(seed, { aggregate, current -> aggregate << current })
+      .map({ [(video.id.toString() : it] }))
+}
+```
+
+And here is a marble diagram that illustrates how that code uses the `reduce` operator to bring the results from multiple Observables together in one structure:
+[[images/rx-operators/Composition.3.png]]
+
 # Error Handling
 
 Here is a revised version of the Wikipedia example shown above, but with error handling:
