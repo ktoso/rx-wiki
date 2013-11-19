@@ -2,6 +2,7 @@ This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
+* [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
@@ -65,6 +66,17 @@ If you pass nothing or `null` to `just( )`, the resulting Observable will _not
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(value)`</a>
+
+***
+
+## repeat( )
+#### create an Observable that emits a particular item or sequence of items repeatedly
+[[images/rx-operators/repeat.png]]
+
+There are also versions of `repeat( )` that operate on a particular scheduler, that repeat only a certain number of times before terminating, and that repeat sequences of items emitted by a source Observable rather than one particular item.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.repeat.aspx">`Repeat`</a>
 
 ***
 
