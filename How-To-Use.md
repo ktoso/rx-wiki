@@ -327,6 +327,9 @@ The response looks like this:
  :user-id 12345, :language es-us, :bookmark 0}
 ```
 
+And here is a marble diagram that illustrates how that code produces that response:
+[[images/rx-operators/Composition.2.png]]
+
 # Error Handling
 
 Here is a revised version of the Wikipedia example shown above, but with error handling:
