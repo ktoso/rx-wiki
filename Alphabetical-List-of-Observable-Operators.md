@@ -71,6 +71,7 @@
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
 * [**`reduce( )`**](Transforming-Observables#reduce-or-aggregate) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`refCount( )`**](Connectable-Observable-Operators#connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
+* [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`replay( )`**](Connectable-Observable-Operators#observablereplay) — ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
 * [**`retry( )`**](Error-Handling-Operators#retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
 * [**`sample( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
