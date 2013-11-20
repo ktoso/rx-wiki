@@ -2,6 +2,8 @@ This section explains various utility operators for working with Observables.
 
 * [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all items from an Observable and emit them as a single List
 * [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
+* [**`toMap( )`**](Observable-Utility-Operators#tomapandtomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+* [**`toMultiMap( )`**](Observable-Utility-Operators#tomapandtomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
@@ -132,9 +134,23 @@ numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }) ...
 
 ***
 
+# toMap( ) and toMultiMap( )
+#### convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+[[images/rx-operators/toMap.png]]
+
+The `toMap( )` and `toMultiMap( )` methods collect the items emitted by the source Observable into a map (by default, a `HashMap`, but you can supply a factory function that generates another `Map` variety) and then emit that map. You supply a function that generates the key for each emitted item. You may also optionally supply a function that converts an emitted item into the value to be stored in the map (by default, the item itself is this value).
+
+The `toMultiMap( )` method differs from `toMap( )` in that the map it generates is also an `ArrayList`.
+[[images/rx-operators/toMultiMap.png]]
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.tolookup.aspx">`ToLookup`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.todictionary.aspx">`ToDictionary`</a>
+
+***
+
 ## materialize( )
 #### convert an Observable into a list of Notifications
-
 [[images/rx-operators/materialize.png]]
 
 A well-formed Observable will invoke its Observer’s `onNext` method zero or more times, and then will invoke either the `onCompleted` or `onError` method exactly once. The `materialize( )` method converts this series of invocations into a series of items emitted by an Observable, where it emits each such invocation as a `Notification` object.
