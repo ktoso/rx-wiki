@@ -1,6 +1,7 @@
 This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
+* [**`toAsync( )`**](Creating-Observables#toasync) — convert a function into an Observable that executes the function and emits its return value
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
@@ -44,6 +45,17 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T...)">`from(array)`</a>
 * RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservablefromarrayarray-scheduler)
 * Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
+
+***
+
+## toAsync( )
+#### convert a function into an Observable that executes the function and emits its return value
+[[images/rx-operators/toAsync.png]]
+
+You can create an Observable that, when it is subscribed to, executes a function of your choosing and emits its return value before completing. In the case of an `Action`, it will emit `null` before completing.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toasync.aspx">`ToAsync`</a>
 
 ***
 
