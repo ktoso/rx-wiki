@@ -242,7 +242,7 @@ The combination of `and( )`, `then( )`, and `when( )` methods operate much
 
 ## join( )
 #### combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
-[[images/rx-operators/join.png]]
+[[images/rx-operators/join_.png]]
 
 The `join( )` method combines the items emitted by two Observables, and selects which items to combine based on duration-windows that you define on a per-item basis. You implement these windows as Observables whose lifespans begin with each item emitted by either Observable. When such a window-defining Observable either emits an item or completes, the window for the item it is associated with closes. So long as an item's window is open, it will combine with any item emitted by the other Observable. You define the function by which the items combine.
 
