@@ -52,7 +52,7 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 #### convert a function into an Observable that executes the function and emits its return value
 [[images/rx-operators/toAsync.png]]
 
-You can create an Observable that, when it is subscribed to, executes a function of your choosing and emits its return value before completing. In the case of an `Action`, it will emit `null` before completing.
+With `toAsync( )` you can create an Observable that, when it is subscribed to, executes a function of your choosing and emits its return value before completing. In the case of an `Action`, it will emit `null` before completing. Note that even if the resulting Observable is subscribed to more than once, the function will only be executed once, and its sole return value will be emitted to all future observers.
 
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toasync.aspx">`ToAsync`</a>
