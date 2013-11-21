@@ -15,7 +15,7 @@
 * [**`count( )`**](Mathematical-Operators#count) — counts the number of items emitted by an Observable and emits this count
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * [**`debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
-* [**`defaultIfEmpty( )`**](Transforming-Observables#defaultifempt) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
+* [**`defaultIfEmpty( )`**](Transforming-Observables#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 * [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
