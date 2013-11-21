@@ -6,6 +6,7 @@ This section explains operators you can use to combine multiple Observables.
 * [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * [**`parallelMerge( )`**](Combining-Observables#parallelmerge) — combine multiple Observables into a smaller number of Observables, to facilitate parallelism
 * [**`zip( )`**](Combining-Observables#zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
+* [**`and( )`, `then( )`, and `when( )`**](Combining-Observables#and-then-and-when) — combine sets of items emitted by two or more Observables by means of `Pattern` and `Plan` intermediaries
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the items from the source Observable until a second Observable emits an item
@@ -208,6 +209,19 @@ Sequence complete
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypezipargs-resultselector">`zip`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.zip.aspx">`Zip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Zip">Introduction to Rx: Zip</a>
+
+***
+# and( ), then( ), and when( )
+#### combine sets of items emitted by two or more Observables by means of `Pattern` and `Plan` intermediaries
+[[images/rx-operators/and_then_when.png]]
+
+The combination of `and( )`, `then( )`, and `when( )` methods operate much like `zip( )` but they do so by means of intermediary data structures.  `and( )` accepts two or more Observables and combines the emissions from each, one set at a time, into `Pattern` objects. `then( )` operates on such `Pattern` objects, transforming them in a `Plan`. `when( )` then transforms these various `Plan` objects into emissions from an Observable.
+
+#### see also:
+* Intro to Rx: <a href="http://www.introtorx.com/content/v1.0.10621.0/12_CombiningSequences.html#AndThenWhen">And-Then-When</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229153.aspx">And</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211662.aspx">Then</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229889.aspx">When</a>
 
 ***
 
