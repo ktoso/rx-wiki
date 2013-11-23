@@ -6,7 +6,7 @@ This section explains operators with which you can transform items that are emit
 * [**`mapManyDelayError( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, waiting to report errors until all error-free observables have a chance to complete
 * [**`reduce( )` or `aggregate( )`**](Transforming-Observables#reduce-or-aggregate) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
-* [**`groupBy( )`**](Transforming-Observables#groupby) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
+* [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 * [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
@@ -246,7 +246,7 @@ Note also that passing a `null` seed is not the same as not passing a seed. The 
 
 ***
 
-## groupBy( )
+## groupBy( ) and groupByUntil( )
 #### divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 [[images/rx-operators/groupBy.png]]
 
@@ -278,6 +278,10 @@ numbers.groupBy(groupFunc).mapMany({ Observable.reduce(it, [it.getKey()], {a, b 
 [true, 2, 4, 6, 8]
 Sequence complete
 ```
+
+There is also a `groupByUntil( )` operator. It has the two varieties mentioned above, but adds a third parameter: an Observable that emits duration markers. When a duration marker is emitted by this Observable, any grouped Observables that have been opened are closed, and `groupByUntil( )` will create new grouped Observables for any subsequent emissions by the source Observable.
+
+[[images/rx-operators/groupByUntil.png]]
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.util.functions.Func1)">`groupBy(keySelector)`</a>
