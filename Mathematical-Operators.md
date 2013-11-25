@@ -75,7 +75,7 @@ Sequence complete
 There are also specialized "sum" methods for Longs, Floats, and Doubles (`sumLongs( )`, `sumFloats( )`, and `sumDoubles( )`).
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sum(rx.Observable)">sum()</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumLongs(rx.Observable)">sumLongs()</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumFloats(rx.Observable)">sumFloats()</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumDoubles(rx.Observable)">sumDoubles()</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sum(rx.Observable)">`sum()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumLongs(rx.Observable)">`sumLongs()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumFloats(rx.Observable)">`sumFloats()`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumDoubles(rx.Observable)">`sumDoubles()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesumkeyselector-thisarg">`sum`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sum.aspx">`Sum`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
