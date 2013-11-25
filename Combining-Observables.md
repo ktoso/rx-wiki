@@ -42,7 +42,7 @@ myObservable.startWith(-3, -2, -1, 0).subscribe(
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#startWith(T...)">`startWith(x, y, ...)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypestartwithscheduler-args">`startWith`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypestartwithscheduler-args">`startWith`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.startwith.aspx">`StartWith`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#StartWith">Introduction to Rx: StartWith</a>
 
@@ -86,7 +86,7 @@ Instead of passing multiple Observables into `concat( )`, you could also pass 
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable...)">`concat(observable1, observable2, ...)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeconcatargs">`concat`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeconcatargs">`concat`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.concat.aspx">`Concat`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Concat">Introduction to Rx: Concat</a>
 
@@ -136,8 +136,7 @@ If any of the individual Observables passed into `merge( )` aborts by invoking
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(java.util.List)">`merge(listOfObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable)">`merge(observableThatEmitsObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable...)">`merge(observable1, observable2, ...)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypemergemaxconcurrent--other">`merge`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypemergeobservable">`mergeObservable`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemergemaxconcurrent--other">`merge`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemergeobservable">`mergeObservable`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.merge.aspx">`Merge`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Merge">Introduction to Rx: Merge</a>
 
@@ -207,7 +206,7 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#zip(java.util.Collection, rx.util.functions.FuncN)">`zip()`</a> (several versions)
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypezipargs-resultselector">`zip`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablezipargs">`zip`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.zip.aspx">`Zip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Zip">Introduction to Rx: Zip</a>
 
@@ -219,10 +218,8 @@ Sequence complete
 The combination of `and( )`, `then( )`, and `when( )` methods operate much like `zip( )` but they do so by means of intermediary data structures.  `and( )` accepts two or more Observables and combines the emissions from each, one set at a time, into `Pattern` objects. `then( )` operates on such `Pattern` objects, transforming them in a `Plan`. `when( )` then transforms these various `Plan` objects into emissions from an Observable.
 
 #### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229153.aspx">`And`</a>/<a href="http://msdn.microsoft.com/en-us/library/hh211662.aspx">`Then`</a>/<a href="http://msdn.microsoft.com/en-us/library/hh229889.aspx">`When`</a>
 * Intro to Rx: <a href="http://www.introtorx.com/content/v1.0.10621.0/12_CombiningSequences.html#AndThenWhen">And-Then-When</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229153.aspx">And</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211662.aspx">Then</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229889.aspx">When</a>
 
 ***
 
@@ -234,7 +231,7 @@ The combination of `and( )`, `then( )`, and `when( )` methods operate much
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.util.functions.Func2)">`combineLatest(observable1, observable2, combineFunction)`</a> (along with versions that take anywhere from three to nine observables)
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypecombinelatestargs-resultselector">`combineLatest`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypecombinelatestargs-resultselector">`combineLatest`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211991.aspx">`CombineLatest`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#CombineLatest">Introduction to Rx: CombineLatest</a>
 
@@ -247,8 +244,9 @@ The combination of `and( )`, `then( )`, and `when( )` methods operate much
 The `join( )` method combines the items emitted by two Observables, and selects which items to combine based on duration-windows that you define on a per-item basis. You implement these windows as Observables whose lifespans begin with each item emitted by either Observable. When such a window-defining Observable either emits an item or completes, the window for the item it is associated with closes. So long as an item's window is open, it will combine with any item emitted by the other Observable. You define the function by which the items combine.
 
 #### see also:
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/17_SequencesOfCoincidence.html#Join">Introduction to Rx: Join</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229750.aspx">`Join`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypejoinright-leftdurationselector-rightdurationselector-resultselector">`join`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/17_SequencesOfCoincidence.html#Join">Introduction to Rx: Join</a>
 
 ***
 
@@ -260,7 +258,7 @@ The `join( )` method combines the items emitted by two Observables, and select
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#switchOnNext(rx.Observable)">`switchOnNext(sequenceOfSequences)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypeswitch">`switchLatest`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeswitch">`switchLatest`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229197.aspx">`Switch`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Switch">Introduction to Rx: Switch</a>
 
@@ -272,7 +270,7 @@ The `join( )` method combines the items emitted by two Observables, and select
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.Observable)">`takeUntil(other)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypetakeuntilother">`takeUntil`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakeuntilother">`takeUntil`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229530.aspx">`TakeUntil`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Amb">Introduction to Rx: Amb</a>
 ***
@@ -284,5 +282,6 @@ The `join( )` method combines the items emitted by two Observables, and select
 When you pass a number of source Observables to `amb( )`, it will pass through the emissions and messages of exactly one of these Observables: the first one that emits an item to `amb( )`. It will ignore and discard the emissions of all of the other source Observables.
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(java.lang.Iterable)">`amb()`</a> (several varieties)
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableambargs">`amb`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.amb(v=vs.103).aspx">`Amb`</a>
