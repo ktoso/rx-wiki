@@ -32,8 +32,10 @@
 * [**`exists( )`**](Observable-Utility-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
 * [**`filter( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
-* [**`first( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
-* [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+* [**`first( )`**](Filtering-Observables#first-and-takefirst) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
+* [**`first( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
+* [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+* [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * [**`flatMap( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
