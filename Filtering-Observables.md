@@ -8,7 +8,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-* [**`first( )`**](Filtering-Observables#first) — emit only the first item emitted by an Observable, or the first item that meets some condition
+* [**`first( )` and `takeFirst( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * [**`elementAt( )`**](Filtering-Observables#elementat) — emit item _n_ emitted by the source Observable
 * [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
@@ -329,7 +329,7 @@ Sequence complete
 
 ***
 
-## first( )
+## first( ) and takeFirst( )
 #### emit only the first item emitted by an Observable, or the first item that meets some condition
 [[images/rx-operators/first.png]]
 
@@ -337,6 +337,8 @@ To create an Observable that emits only the first item emitted by a source Obser
 
 [[images/rx-operators/firstN.png]]
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
+
+`takeFirst( )` behaves very similarly to `first( )` with the exception of how they behave when the source Observable emits no items (or no items that match the predicate). In such a case, `first( )` will throw an `IllegalArgumentException` while `takeFirst( )` will return an empty Observable (one that calls `onCompleted( )` but never calls `onNext( )`).
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypefirstpredicate-thisarg">`first`</a>
