@@ -3,6 +3,8 @@ This section explains the [`BlockingObservable`](http://netflix.github.io/RxJava
 To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlockingObservable( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable%28%29) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from%28rx.Observable%29) method.
 
 * [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
+* [**`first( )`**](Blocking-Observable-Operators#first-and-firstordefault) — block until the Observable emits an item, then return the first item emitted by the Observable
+* [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) — block until the Observable emits an item or completes, then return the first item emitted by the Observable or a default item if the Observable did not emit an item
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
 * [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
 * [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
@@ -33,6 +35,31 @@ The `forEach(someFunction)` method is the blocking equivalent of `subscribe(some
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#forEach(rx.util.functions.Action1)">`forEach(action)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211815.aspx">`ForEach`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/10_LeavingTheMonad.html#ForEach">Introduction to Rx: ForEach</a>
+
+***
+
+## first( ) and firstOrDefault( )
+#### block until the Observable emits an item, then return the first item emitted by the Observable
+[[images/rx-operators/B.first.png]]
+Use the `first( )` method to retrieve the first item emitted by an Observable, at the time the Observable emits it (it will throw an `IllegalArgumentException` if the source Observable completes without emitting any items).
+
+You can also use this method to retrieve the first item emitted by an Observable that meets some particular condition. To do this, pass a function to `first( )` that returns `true` if the item meets the condition.
+[[images/rx-operators/B.first.p.png]]
+
+The `firstOrDefault( )` method is similar to `first( )`, except that instead of throwing an exception when there is no first item (or no first item that meets the specified condition), in such a case it will instead return a default item that you specify. Specify that default item by passing it as the first parameter to `firstOrDefault( )`.
+[[images/rx-operators/B.firstOrDefault.png]]
+[[images/rx-operators/B.firstOrDefault.p.png]]
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first()">`first()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first(rx.util.functions.Func1)">`first(predicate)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#firstOrDefault(T, rx.util.functions.Func1)">`firstOrDefault(default, predicate)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypefirstpredicate-thisarg">`first`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/observable.md#rxobservableprototypefirstordefaultpredicate-defaultvalue-thisarg">`firstOrDefault`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.first.aspx">`First`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault.aspx">`FirstOrDefault`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 
 ***
 
