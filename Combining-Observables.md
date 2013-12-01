@@ -8,7 +8,7 @@ This section explains operators you can use to combine multiple Observables.
 * [**`zip( )`**](Combining-Observables#zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
 * [**`and( )`, `then( )`, and `when( )`**](Combining-Observables#and-then-and-when) — combine sets of items emitted by two or more Observables by means of `Pattern` and `Plan` intermediaries
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
-* [**`join( )`**](Combining-Observables#join) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
+* [**`join( )` and `groupJoin( )`**](Combining-Observables#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 * [**`amb( )`**](Combining-Observables#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
@@ -237,16 +237,23 @@ The combination of `and( )`, `then( )`, and `when( )` methods operate much
 
 ***
 
-## join( )
+## join( ) and groupJoin( )
 #### combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 [[images/rx-operators/join_.png]]
 
 The `join( )` method combines the items emitted by two Observables, and selects which items to combine based on duration-windows that you define on a per-item basis. You implement these windows as Observables whose lifespans begin with each item emitted by either Observable. When such a window-defining Observable either emits an item or completes, the window for the item it is associated with closes. So long as an item's window is open, it will combine with any item emitted by the other Observable. You define the function by which the items combine.
 
+[[images/rx-operators/groupJoin.png]]
+
+The `groupJoin( )` method is similar, except that the function you define to combine items emitted by the two Observables pairs individual items emitted by the source Observable with an Observable that emits items from the second Observable that fall in the same window as that item.
+
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229750.aspx">`Join`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh244235.aspx">`GroupJoin`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypejoinright-leftdurationselector-rightdurationselector-resultselector">`join`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypegroupjoinright-leftdurationselector-rightdurationselector-resultselector">`groupJoin`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/17_SequencesOfCoincidence.html#Join">Introduction to Rx: Join</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/17_SequencesOfCoincidence.html#GroupJoin">Introduction to Rx: GroupJoin</a>
 
 ***
 
