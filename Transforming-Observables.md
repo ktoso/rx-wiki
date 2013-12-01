@@ -304,7 +304,7 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 
 * `buffer(bufferOpenings, closingSelector)`
 [[images/rx-operators/buffer2.png]]
-> This version of `buffer( )` monitors an `Observable`, *bufferOpenings*, that emits `BufferOpening` objects. Each time it observes such an emitted object, it creates a new bundle to begin collecting items emitted by the source `Observable` and it passes the *bufferOpenings* `Observable` into the *closingSelector* function. That function returns an `Observable` that emits `Closing` objects. `buffer( )` monitors that `Observable` and when it detects an emitted `Closing` object, it closes its bundle and emits it as its own emission.
+> This version of `buffer( )` monitors an `Observable`, *bufferOpenings*, that emits `BufferOpening` objects. Each time it observes such an emitted object, it creates a new bundle to begin collecting items emitted by the source `Observable` and it passes the *bufferOpenings* `Observable` into the *closingSelector* function. That function returns an `Observable`. `buffer( )` monitors that `Observable` and when it detects an emitted object, it closes its bundle and emits it as its own emission.
 
 * `buffer(count)`
 [[images/rx-operators/buffer3.png]]
@@ -354,11 +354,11 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 
 * `window(source, closingSelector)`
 [[images/rx-operators/window1.png]]
-> This version of `window( )` opens its first window immediately. It closes the currently open window and immediately opens a new one each time it observes a `Closing` object emitted by the `Observable` that is returned from *closingSelector*. In this way, this version of `window( )` emits a series of non-overlapping windows whose collective `onNext( )` emissions correspond one-to-one with those of the *source* `Observable`.
+> This version of `window( )` opens its first window immediately. It closes the currently open window and immediately opens a new one each time it observes an object emitted by the `Observable` that is returned from *closingSelector*. In this way, this version of `window( )` emits a series of non-overlapping windows whose collective `onNext( )` emissions correspond one-to-one with those of the *source* `Observable`.
 
 * `window(source, windowOpenings, closingSelector)`
 [[images/rx-operators/window2.png]]
-> This version of `window( )` opens a window whenever it observes the *windowOpenings* `Observable` emit an `Opening` object and at the same time calls *closingSelector* to generate a closing `Observable` associated with that window. When that closing `Observable` emits a `Closing` object, `window( )` closes that window. Since the closing of currently open windows and the opening of new windows are activities that are regulated by independent `Observable`s, this version of `window( )` may create windows that overlap (duplicating items from the *source* `Observable`) or that leave gaps (discarding items from the *source* `Observable`).
+> This version of `window( )` opens a window whenever it observes the *windowOpenings* `Observable` emit an `Opening` object and at the same time calls *closingSelector* to generate a closing `Observable` associated with that window. When that closing `Observable` emits an object, `window( )` closes that window. Since the closing of currently open windows and the opening of new windows are activities that are regulated by independent `Observable`s, this version of `window( )` may create windows that overlap (duplicating items from the *source* `Observable`) or that leave gaps (discarding items from the *source* `Observable`).
 
 * `window(source, count)`
 [[images/rx-operators/window3.png]]
