@@ -202,24 +202,30 @@ There are also versions of `generate( )` that allow you to do the work of gene
 [[images/rx-operators/never.png]]
 
 ```groovy
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.subscriptions.Subscriptions;
+import rx.util.functions.Func1;
+
 println("*** empty() ***");
 Observable.empty().subscribe(
   { println("empty: " + it); },             // onNext
-  { println("empty: Error encountered"); }, // onError
+  { println("empty: error - " + it.getMessage()); }, // onError
   { println("empty: Sequence complete"); }  // onCompleted
 );
 
 println("*** error() ***");
-Observable.error().subscribe(
+Observable.error(new Throwable("badness")).subscribe(
   { println("error: " + it); },             // onNext
-  { println("error: Error encountered"); }, // onError
+  { println("error: error - " + it.getMessage()); }, // onError
   { println("error: Sequence complete"); }  // onCompleted
 );
 
 println("*** never() ***");
 Observable.never().subscribe(
   { println("never: " + it); },             // onNext
-  { println("never: Error encountered"); }, // onError
+  { println("never: error - " + it.getMessage()); }, // onError
   { println("never: Sequence complete"); }  // onCompleted
 );
 println("*** END ***");
@@ -228,7 +234,7 @@ println("*** END ***");
 *** empty() ***
 empty: Sequence complete
 *** error() ***
-error: Error encountered
+error: error - badness
 *** never() ***
 *** END ***
 ```
