@@ -25,9 +25,9 @@ If you want an Observable to immediately begin emitting a specific sequence of i
 def myObservable = Observable.from([1, 2, 3]);
 
 myObservable.startWith(-3, -2, -1, 0).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -66,10 +66,10 @@ odds  = Observable.from([1, 3, 5, 7]);
 evens = Observable.from([2, 4, 6]);
 
 Observable.concat(odds, evens).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
-)
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
 ```
 ```
 1
@@ -110,9 +110,9 @@ odds  = Observable.from([1, 3, 5, 7]);
 evens = Observable.from([2, 4, 6]);
 
 Observable.merge(odds,evens).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -190,15 +190,15 @@ odds  = Observable.from([1, 3, 5, 7, 9]);
 evens = Observable.from([2, 4, 6]);
 
 Observable.zip(odds, evens, {o, e -> [o, e]}).subscribe(
-  { odd, even -> println("odd: " + odd + ", even: " + even); }, // onNext
-  { println("Error encountered"); },                            // onError
-  { println("Sequence complete"); }                             // onCompleted
-)
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
 ```
 ```
-odd: 1, even: 2
-odd: 3, even: 4
-odd: 5, even: 6
+[1, 2]
+[3, 4]
+[5, 6]
 Sequence complete
 ```
 
