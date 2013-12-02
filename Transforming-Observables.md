@@ -38,18 +38,6 @@ numbers.map({it * it}).subscribe(
 Sequence complete
 ```
 
-In addition to calling `map( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.map(numbers, { it * it }) ...
-```
-
-you could instead write 
-
-```groovy
-numbers.map({ it * it }) ...
-```
-
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#map(rx.util.functions.Func1)">`map(func)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemapselector-thisarg">`map`</a>
@@ -86,9 +74,9 @@ numbers   = Observable.from([1, 2, 3]);
 multiples = { n -> Observable.from([ n*2, n*3 ]) };   
 
 numbers.mapMany(multiples).subscribe(
-  { println(it.toString()); },       // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -130,10 +118,10 @@ For example, the following code uses `reduce( )` to compute, and then emit as 
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5]);
 
-Observable.reduce(numbers, { a, b -> a+b }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.reduce({ a, b -> a+b }).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -141,23 +129,8 @@ Observable.reduce(numbers, { a, b -> a+b }).subscribe(
 Sequence complete
 ```
 
-In addition to calling `reduce( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.reduce(numbers, { a, b -> a+b }) ...
-```
-you could instead write 
-
-```groovy
-numbers.reduce({ a, b -> a+b }) ...
-```
-
 There is also a version of `reduce( )` to which you can pass a seed item in addition to an accumulator function:
 
-```groovy
-Observable.reduce(my_observable, initial_seed, accumulator_closure)
-```
-or
 ```groovy
 my_observable.reduce(initial_seed, accumulator_closure)
 ```
@@ -200,10 +173,10 @@ For example, the following code takes an Observable that emits a consecutive seq
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5]);
 
-Observable.scan(numbers, { a, b -> a+b }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.scan({ a, b -> a+b }).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -215,22 +188,8 @@ Observable.scan(numbers, { a, b -> a+b }).subscribe(
 Sequence complete
 ```
 
-In addition to calling `scan( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.scan(numbers, { a, b -> a+b }) ...
-```
-you could instead write 
-```groovy
-numbers.scan({ a, b -> a+b }) ...
-```
-
 There is also a version of `scan( )` to which you can pass a seed item in addition to an accumulator function:
 
-```groovy
-Observable.scan(my_observable, initial_seed, accumulator_closure)
-```
-or
 ```groovy
 my_observable.scan(initial_seed, accumulator_closure)
 ```
@@ -261,19 +220,14 @@ There are two versions of `groupBy( )`:
 
 The following sample code uses `groupBy( )` to transform a list of numbers into two lists, grouped by whether or not the numbers are even:
 ```groovy
-class isEven implements rx.util.functions.Func1
-{
-  java.lang.Object call(java.lang.Object T) { return(0 == (T % 2)); }
-}
-
 def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-def groupFunc = new isEven();
+def groupFunc = { return(0 == (it % 2)); };
 
-numbers.groupBy(groupFunc).mapMany({ Observable.reduce(it, [it.getKey()], {a, b -> a << b}) }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
-)
+numbers.groupBy(groupFunc).mapMany({ it.reduce([it.getKey()], {a, b -> a << b}) }).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
 ```
 ```
 [false, 1, 3, 5, 7, 9]
