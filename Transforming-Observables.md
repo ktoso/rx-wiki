@@ -23,10 +23,10 @@ The `map( )` method applies a function of your choosing to every item emitted 
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5]);
 
-Observable.map(numbers, {it * it}).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.map({it * it}).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
