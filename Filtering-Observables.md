@@ -28,15 +28,15 @@ This section explains operators you can use to filter and select items emitted b
 #### filter items emitted by an Observable
 [[images/rx-operators/filter.png]]
 
-You can filter an Observable, discarding any items that do not meet some test, by passing a filtering function into the `filter( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
+You can filter an Observable, discarding any items that do not meet some test, by passing a filtering function into the `filter( )` or `where( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-Observable.filter(numbers, { 0 == (it % 2) }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.filter({ 0 == (it % 2) }).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -45,33 +45,6 @@ Observable.filter(numbers, { 0 == (it % 2) }).subscribe(
 6
 8
 Sequence complete
-```
-
-In addition to calling `filter( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.filter(numbers, { 0 == (it %2) }) ...
-```
-you could instead write 
-```groovy
-numbers.filter({ 0 == (it % 2) }) ...
-```
-
-The `where( )` method has the same purpose as `filter( )` but accepts a `Func1` evaluator function instead of a closure. Here is the same sample, but implemented with `where( )` instead of `filter( )`:
-```groovy
-class isEven implements rx.util.functions.Func1 {
-  Boolean call( Object it ) { return(0 == (it % 2)); }
-}
-
-myisEven = new isEven();
-
-numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-
-numbers.where(myisEven).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
-);
 ```
 
 #### see also:
@@ -91,25 +64,15 @@ To convert an Observable that emits several items into one that only emits the l
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-Observable.takeLast(numbers,1).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.takeLast(1).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
 9
 Sequence complete
-```
-
-In addition to calling `takeLast( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.takeLast(numbers,1) ...
-```
-you could instead write
-```groovy
-numbers.takeLast(1) ...
 ```
 
 #### see also:
@@ -136,10 +99,10 @@ You can ignore the first _n_ items emitted by an Observable and attend only to t
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-Observable.skip(numbers, 3).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.skip(3).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -150,16 +113,6 @@ Observable.skip(numbers, 3).subscribe(
 8
 9
 Sequence complete
-```
-
-In addition to calling `skip( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.skip(numbers, 3) ...
-```
-you could instead write 
-```groovy
-numbers.skip(3) ...
 ```
 
 #### see also:
@@ -205,9 +158,9 @@ The `skipWhile( )` method returns an Observable that discards items emitted by
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -226,9 +179,9 @@ The `skipWhileWithIndex( )` method is similar, but your function takes an addi
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -257,10 +210,10 @@ You can choose to pay attention only to the first _n_ items emitted by an Observ
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-Observable.take(numbers, 3).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.take(3).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -268,16 +221,6 @@ Observable.take(numbers, 3).subscribe(
 2
 3
 Sequence complete
-```
-
-In addition to calling `take( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.take(numbers, 3) ...
-```
-you could instead write 
-```groovy
-numbers.take(3) ...
 ```
 
 If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an exception or invoke `onError()`, but will merely emit this same fewer number of items before it completes.
@@ -300,9 +243,9 @@ The `takeWhile( )` method returns an Observable that mirrors the behavior of t
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -321,9 +264,9 @@ The `takeWhileWithIndex( )` method is similar, but your function takes an addi
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
 numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -423,9 +366,9 @@ The following code constructs an Observable that emits the numbers between one a
 def numbers = Observable.range( 1, 1000000 );
  
 numbers.sample(10, java.util.concurrent.TimeUnit.MILLISECONDS).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -451,11 +394,12 @@ Sequence complete
 Use the `throttleFirst( )` method to periodically look at an Observable to see what item it emitted first during a particular time span. The following code shows how an Observable can be modified by `throttleFirst( )`:
 
 ```groovy
+Scheduler s = new TestScheduler();
 PublishSubject<Integer> o = PublishSubject.create();
 o.throttleFirst(500, TimeUnit.MILLISECONDS, s).subscribe(
-    { println(it); },                  // onNext
-    { println("Error encountered"); }, // onError
-    { println("Sequence complete"); }  // onCompleted
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 // send events with simulated time increments
 s.advanceTimeTo(0, TimeUnit.MILLISECONDS);
