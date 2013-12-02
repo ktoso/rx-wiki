@@ -100,9 +100,9 @@ def customObservableBlocking() {
             }
             // after sending all values we complete the sequence
             observer.onCompleted();
-            // return a NoOpSubsription since this blocks and thus
+            // return an empty subscription since this blocks and thus
             // can't be unsubscribed from
-            return Observable.noOpSubscription();
+            return Subscriptions.empty();
         };
     });
 }
@@ -225,7 +225,7 @@ def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
             }
             observer.onCompleted();
         }
-        return Observable.noOpSubscription();
+        return Subscriptions.empty();
     });
 }
 
@@ -369,7 +369,7 @@ def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArti
                 observer.onError(t);
             }
         }
-            return Observable.noOpSubscription();
+            return Subscriptions.empty();
     });
 }
 ```
