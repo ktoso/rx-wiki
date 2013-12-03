@@ -17,15 +17,15 @@ The following example code shows two Observers subscribing to the same Observabl
 def firstMillion  = Observable.range( 1, 1000000 ).sample(7, java.util.concurrent.TimeUnit.MILLISECONDS);
 
 firstMillion.subscribe(
-  { println("Observer #1:" + it); },    // onNext
-  { println("Error encountered"); },    // onError
-  { println("Sequence #1 complete"); }  // onCompleted
+   { println("Observer #1:" + it); },         // onNext
+   { println("Error: " + it.getMessage()); }, // onError
+   { println("Sequence #1 complete"); }       // onCompleted
 );
 
 firstMillion.subscribe(
-  { println("Observer #2:" + it); },    // onNext
-  { println("Error encountered"); },    // onError
-  { println("Sequence #2 complete"); }  // onCompleted
+    { println("Observer #2:" + it); },         // onNext
+    { println("Error: " + it.getMessage()); }, // onError
+    { println("Sequence #2 complete"); }       // onCompleted
 );
 ```
 ```
@@ -45,15 +45,15 @@ Sequence #2 complete
 def firstMillion  = Observable.range( 1, 1000000 ).sample(7, java.util.concurrent.TimeUnit.MILLISECONDS).publish();
 
 firstMillion.subscribe(
-  { println("Observer #1:" + it); },    // onNext
-  { println("Error encountered"); },    // onError
-  { println("Sequence #1 complete"); }  // onCompleted
+   { println("Observer #1:" + it); },         // onNext
+   { println("Error: " + it.getMessage()); }, // onError
+   { println("Sequence #1 complete"); }       // onCompleted
 );
 
 firstMillion.subscribe(
-  { println("Observer #2:" + it); },    // onNext
-  { println("Error encountered"); },    // onError
-  { println("Sequence #2 complete"); }  // onCompleted
+   { println("Observer #2:" + it); },         // onNext
+   { println("Error: " + it.getMessage()); }, // onError
+   { println("Sequence #2 complete"); }       // onCompleted
 );
 
 firstMillion.connect();
