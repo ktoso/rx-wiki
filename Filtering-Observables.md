@@ -157,7 +157,7 @@ The `skipWhile( )` method returns an Observable that discards items emitted by
 ```groovy
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
 
-numbers.skipWhile({ (0 == (it % 5)) }).subscribe(
+numbers.skipWhile({ (5 != it) }).subscribe(
   { println(it); },                          // onNext
   { println("Error: " + it.getMessage()); }, // onError
   { println("Sequence complete"); }          // onCompleted
