@@ -30,9 +30,9 @@ def myObservable = Observable.create({ anObserver ->
 });
 
 myObservable.count().subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+   { println(it); },                          // onNext
+   { println("Error: " + it.getMessage()); }, // onError
+   { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
