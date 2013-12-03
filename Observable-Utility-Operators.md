@@ -42,10 +42,10 @@ For example, the following rather pointless code takes a list of integers, conve
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-Observable.toList(numbers).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.toList().subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -53,17 +53,7 @@ Observable.toList(numbers).subscribe(
 Sequence complete
 ```
 
-In addition to calling `toList( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the example above, instead of 
-
-```groovy
-Observable.toList(numbers) ...
-```
-you could instead write 
-```groovy
-numbers.toList() ...
-```
-
-If you pass to `toList( )` an Observable that invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the Observable you pass to `toList( )` invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Observers.
+If the source Observable invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the source Observable invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Observers.
 
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
@@ -84,10 +74,10 @@ For example, the following code takes a list of unsorted integers, converts it i
 ```groovy
 numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
-Observable.toSortedList(numbers).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.toSortedList().subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -98,33 +88,15 @@ Here is an example that provides its own sorting function, in this case, one tha
 ```groovy
 numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
 
-Observable.toSortedList(numbers, { n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
 [5, 6, 4, 3, 7, 8, 2, 1, 9]
 Sequence complete
-```
-
-In addition to calling `toSortedList( )` as a stand-alone method, you can also call it as a method of an Observable, so, in the examples above, instead of 
-
-```groovy
-Observable.toSortedList(numbers) ...
-```
-or
-```groovy
-Observable.toSortedList(numbers, { n, m -> Math.abs(5-n) - Math.abs(5-m) }) ...
-```
-you could instead write
-```groovy
-numbers.toSortedList() ...
-```
-or
-```groovy
-numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }) ...
 ```
 
 #### see also:
@@ -158,12 +130,12 @@ For example:
 ```groovy
 numbers = Observable.from([1, 2, 3]);
 
-Observable.materialize(numbers).subscribe(
+numbers.materialize().subscribe(
   { if(rx.Notification.Kind.OnNext == it.kind) { println("Next: " + it.value); }
     else if(rx.Notification.Kind.OnCompleted == it.kind) { println("Completed"); }
     else if(rx.Notification.Kind.OnError == it.kind) { println("Error: " + it.exception); } },
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -172,17 +144,6 @@ Next: 2
 Next: 3
 Completed
 Sequence complete
-```
-
-In addition to calling `materialize( )` as a stand-alone method, you can also call it as a method of an Observable, so that instead of 
-
-```groovy
-Observable.materialize(numbers) ...
-```
-in the above example, you could also write 
-
-```groovy
-numbers.materialize() ...
 ```
 
 #### see also:
@@ -201,10 +162,10 @@ You can undo the effects of `materialize( )` by means of the `dematerialize(�
 ```groovy
 numbers = Observable.from([1, 2, 3]);
 
-Observable.materialize(numbers).dematerialize().subscribe(
-  { println(it); },                  // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+numbers.materialize().dematerialize().subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -232,9 +193,9 @@ The `timestamp( )` method converts an Observable that emits items of type _T_ 
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 200000) });
 
 myObservable.timestamp().subscribe(
-  { println(it.toString()); },       // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it.toString()); },               // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
 );
 ```
 ```
@@ -384,14 +345,14 @@ By default, an Observable will generate its sequence of emitted items afresh for
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp();
 
 myObservable.subscribe(
-  { println(it.toString()); },       // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it.toString()); },              // onNext
+  { println("Error:" + it.getMessage()); }, // onError
+  { println("Sequence complete"); }         // onCompleted
 );
 myObservable.subscribe(
-  { println(it.toString()); },       // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it.toString()); },              // onNext
+  { println("Error:" + it.getMessage()); }, // onError
+  { println("Sequence complete"); }         // onCompleted
 );
 ```
 ```
@@ -406,14 +367,14 @@ Sequence complete
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp().cache();
 
 myObservable.subscribe(
-  { println(it.toString()); },       // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it.toString()); },              // onNext
+  { println("Error:" + it.getMessage()); }, // onError
+  { println("Sequence complete"); }         // onCompleted
 );
 myObservable.subscribe(
-  { println(it.toString()); },       // onNext
-  { println("Error encountered"); }, // onError
-  { println("Sequence complete"); }  // onCompleted
+  { println(it.toString()); },              // onNext
+  { println("Error:" + it.getMessage()); }, // onError
+  { println("Sequence complete"); }         // onCompleted
 );
 ```
 ```
@@ -512,27 +473,16 @@ Use the `doOnError( )` method to register an `Action` that RxJava will perform
 #### register an action to take when an Observable completes
 [[images/rx-operators/finallyDo.png]]
 
-You can use the `finallyDo( )` method of an Observable to register an action (a function that implements `Action0`) that RxJava will invoke when that Observable invokes either the `onCompleted( )` or `onError( )` method of its Observer.
+You can use the `finallyDo( )` method of an Observable to register an action that RxJava will invoke after that Observable invokes either the `onCompleted( )` or `onError( )` method of its Observer.
 
 ```groovy
-class TestFinally
-{
-  static class myActionClass implements rx.util.functions.Action0 {
-    void call() { println('Finally'); }
-  }
-  
-  static main() {
-    def myAction = new myActionClass();
-    def numbers = Observable.from([1, 2, 3, 4, 5]);
-    
-    numbers.finallyDo(myAction).subscribe(
-      { println(it); },                  // onNext
-      { println("Error encountered"); }, // onError
-      { println("Sequence complete"); }  // onCompleted
-    );
-  }
-}
-new TestFinally().main();
+def numbers = Observable.from([1, 2, 3, 4, 5]);
+
+numbers.finallyDo({ println('Finally'); }).subscribe(
+   { println(it); },                          // onNext
+   { println("Error: " + it.getMessage()); }, // onError
+   { println("Sequence complete"); }          // onCompleted
+);
 ```
 ```
 1
