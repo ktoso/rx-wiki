@@ -109,7 +109,7 @@ myObservable.subscribe(myOnNext, myError, myComplete);
 
 The names of methods and classes in RxJava hew close to those in <a href="http://msdn.microsoft.com/en-us/data/gg577609.aspx">Microsoft's Reactive Extensions</a>. This has led to some confusion, as some of these names have different implications in other contexts, or seem awkward in the idiom of a particular implementing language.
 
-For example there is the `onEvent` naming pattern (e.g. `onNext`, `onCompleted`, `onError`). In many contexts such names would indicate methods by means of which event handlers are _registered_. In the RxJava Observer context, however, they name the event handlers themselves. (And in the RxJava _Subject_ context, these same names indicate methods that _call_ the Observer's handlers.)
+For example there is the `onEvent` naming pattern (e.g. `onNext`, `onCompleted`, `onError`). In many contexts such names would indicate methods by means of which event handlers are _registered_. In the RxJava Observer context, however, they name the event handlers themselves.
 
 # Composition via Observable Operators
 
