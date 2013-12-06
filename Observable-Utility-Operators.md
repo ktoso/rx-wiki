@@ -378,6 +378,8 @@ Sequence complete
 ```
 Note that in the second example the timestamps are identical for both of the observers, whereas in the first example they differ.
 
+The `cache( )` method will not itself trigger the execution of the source Observable; an initial observer must subscribe to the Observable returned from `cache( )` before it will begin emitting items.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#cache()">`cache()`</a>
 
