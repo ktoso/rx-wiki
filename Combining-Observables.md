@@ -197,14 +197,7 @@ Sequence complete
 
 **Note:** that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
 
-There are also versions of `zip( )` that accept three or four Observables:
-
-```groovy
-myZip3Observable = Observable.zip(observable1, observable2, observable3 { response1, response2, response3 -> some operation on those responses });
-myZip4Observable = Observable.zip(observable1, observable2, observable3, observable4 { response1, response2, response3, response4 -> some operation on those responses });
-```
-
-There are also versions that accept an Observable that _emits_ Observables, zipping together the emissions of these emitted Observables:
+There are also versions of `zip( )` that accept three or more Observables, as well as a version that accepts an Observable that _emits_ Observables and zips together the emissions of these emitted Observables:
 
 [[images/rx-operators/zip.o.png]]
 
