@@ -82,7 +82,11 @@ In Clojure =>
   (-> (Observable/toObservable &rest)
     (.subscribe #(println (str "Hello " % "!")))))
 ```
-You can find more examples and information in the [[How To Use]] section.
+You can find more examples and information in the [[How To Use]] section and in the following source folders:
+
+* Groovy: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy/src/examples
+* Scala: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples
+* Clojure: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure/src/examples
 
 ## Building
 
