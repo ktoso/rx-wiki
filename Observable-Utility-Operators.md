@@ -10,7 +10,7 @@ This section explains various utility operators for working with Observables.
 * [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
 * [**`exists( )` and `isEmpty( )`**](Observable-Utility-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
 * [**`contains( )`**](Observable-Utility-Operators#contains) — determine whether an Observable emits a particular item or not
-* [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of pairs of items emitted by two Observables
+* [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of the sequences emitted by two Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler an Observer should observe the Observable
@@ -278,10 +278,10 @@ Pass the `contains( )` operator a particular item, and it will emit `true` if 
 ***
 
 ## sequenceEqual( )
-#### test the equality of pairs of items emitted by two Observables
+#### test the equality of sequences emitted by two Observables
 [[images/rx-operators/sequenceEqual.png]]
 
-Pass `sequenceEqual( )` two Observables, and it will compare the items emitted by each Observable, and emit `true` for each pair of items if and only if both items are the same. You can optionally pass a third parameter: a function that accepts two items and returns `true` if they are equal according to a standard of your choosing.
+Pass `sequenceEqual( )` two Observables, and it will compare the items emitted by each Observable, and emit `true` only if both sequences are the same. You can optionally pass a third parameter: a function that accepts two items and returns `true` if they are equal according to a standard of your choosing.
 ```groovy
 def firstfour = Observable.from([1, 2, 3, 4]);
 def firstfouragain = Observable.from([1, 2, 3, 4]);
@@ -297,20 +297,11 @@ Observable.sequenceEqual(firstfour, firstfourscrambled).subscribe({ println(it);
 ```
 ```
 firstfour == firstfive?
-true
-true
-true
-true
+false
 firstfour == firstfouragain?
-true
-true
-true
 true
 firstfour == firstfourscrambled?
 false
-true
-false
-true
 ```
 
 #### see also:
