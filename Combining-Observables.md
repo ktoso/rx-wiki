@@ -176,13 +176,6 @@ The `zip( )` method returns an Observable that applies a function of your choo
 myZipObservable = Observable.zip(observable1, observable2, { response1, response2 -> some operation on those responses } );
 ```
 
-There are also versions of `zip( )` that accept three or four Observables:
-
-```groovy
-myZip3Observable = Observable.zip(observable1, observable2, observable3 { response1, response2, response3 -> some operation on those responses });
-myZip4Observable = Observable.zip(observable1, observable2, observable3, observable4 { response1, response2, response3, response4 -> some operation on those responses });
-```
-
 For example, the following code zips together two Observables, one of which emits a series of odd integers and the other of which emits a series of even integers:
 
 ```groovy
@@ -203,6 +196,17 @@ Sequence complete
 ```
 
 **Note:** that the zipped Observable completes normally after emitting three items, which is the number of items emitted by the smaller of the two component Observables (`evens`, which emits three even integers).
+
+There are also versions of `zip( )` that accept three or four Observables:
+
+```groovy
+myZip3Observable = Observable.zip(observable1, observable2, observable3 { response1, response2, response3 -> some operation on those responses });
+myZip4Observable = Observable.zip(observable1, observable2, observable3, observable4 { response1, response2, response3, response4 -> some operation on those responses });
+```
+
+There are also versions that accept an Observable that _emits_ Observables, zipping together the emissions of these emitted Observables:
+
+[[images/rx-operators/zip.o.png]]
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#zip(java.util.Collection, rx.util.functions.FuncN)">`zip()`</a> (several versions)
