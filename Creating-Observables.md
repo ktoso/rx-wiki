@@ -5,6 +5,7 @@ This section explains methods that create Observables.
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
+* [**`start( )`**](Creating-Observables#start) — create an Observable that emits the return value of a function
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
 * [**`interval( )`**](Creating-Observables#interval) — create an Observable that emits a sequence of integers spaced by a given time interval
@@ -123,6 +124,18 @@ def myObservable = Observable.create({ anObserver ->
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribeFunc)">`create(func)`</a>
 * RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablecreatesubscribe)
 * Linq: [`Create`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.create.aspx)
+
+***
+
+## start( )
+#### create an Observable that emits the return value of a function
+[[images/rx-operators/start.png]]
+
+Pass the `start( )` method an Action or a function that returns a value, and `start( )` will execute that Action or function asynchronously and return an Observable that will emit that Action or function's return value (`null` in the case of an Action) to any subsequent Observers.
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablestartfunc-scheduler-context">`start`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229265.aspx">`Start`</a>
 
 ***
 
