@@ -30,7 +30,8 @@ myObservable.onErrorResumeNext(myFallback).subscribe(
   { println(it); },                          // onNext
   { println("Error: " + it.getMessage()); }, // onError
   { println("Sequence complete"); }          // onCompleted
-);```
+);
+```
 ```
 Three
 Two
