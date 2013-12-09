@@ -1,6 +1,6 @@
 This section explains operators that perform mathematical operations on the items emitted by Observables.
 
-* [**`count( )`**](Mathematical-Operators#count) — counts the number of items emitted by an Observable and emits this count
+* [**`count( )` and `longCount( )`**](Mathematical-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`sum( )`**](Mathematical-Operators#sum) — adds the Integers emitted by an Observable and emits this sum
 * [**`sumLongs( )`**](Mathematical-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
 * [**`sumFloats( )`**](Mathematical-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
@@ -16,7 +16,7 @@ This section explains operators that perform mathematical operations on the item
 
 ***
 
-## count( )
+## count( ) and longCount( )
 #### counts the number of items emitted by an Observable and emits this count
 [[images/rx-operators/count.png]]
 
@@ -39,6 +39,8 @@ myObservable.count().subscribe(
 3
 Sequence complete
 ```
+
+`longCount( )` is essentially the same, but emits its item as a Long rather than an Integer.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>

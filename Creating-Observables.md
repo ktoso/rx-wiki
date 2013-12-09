@@ -178,7 +178,12 @@ To create an Observable that emits items spaced by a particular interval of time
 #### create an Observable that emits a single item after a given delay
 [[images/rx-operators/timer.png]]
 
-The `timer( )` method returns an Observable that, when subscribed to, waits for a span of time that you have defined, then emits a single item and completes.
+The `timer( )` method returns an Observable that, when subscribed to, waits for a span of time that you have defined, then emits a single zero and completes.
+
+There is also a version of `timer( )` that emits a single zero after a specified delay, and then emits incrementally increasing numbers periodically thereafter on a specified periodicity:
+[[images/rx-operators/timer.p.png]]
+
+For both of these versions of `timer( )` you can optionally specify a Scheduler on which the timing will take place.
 
 #### see also:
 * RxJS: [`timer`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservabletimerduetime-period-scheduler)
