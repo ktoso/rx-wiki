@@ -239,6 +239,14 @@ There is also a `groupByUntil( )` operator. It has the two varieties mentioned
 
 [[images/rx-operators/groupByUntil.png]]
 
+Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits Observables, it begins to emit items from the source Observable onto these emitted Observables immediately. That is to say, it does not wait for any Observers to subscribe. So if you want to ensure that you see all of the items that are emitted on these new Observables, you should take care to subscribe to them right away.
+
+The following illustration shows how this behavior can cause unexpected behavior:
+[[images/rx-operators/groupBy.anomaly.png]]
+In this illustration, `groupBy( )` is used to separate a source Observable that emits the numbers 1 through 6 into an Observable (in red) that emits two Observables: one that emits the odd numbers from the source Observable, and the other that emits the even numbers.  Then, this Observable of Observables, shown in red, is zipped with another Observable (shown in blue) that emits the strings "odd" and "even", and in the zip function, it applies this string label to all of the items emitted by the associated Observable emitted by the Observable shown in red.
+
+However, `zip( )` does not apply this zip function until it observes an item emitted by each of the red and the blue source Observables.  Since "odd" arrives after the first of these Observables has already emitted "1", when `zip( )` has not yet subscribed to this Observable, it never observes this "1" and does not apply the zip function to it.  A similar thing happens with "even", which arrives after both "2" and "4" are emitted by the Observable emission it is paired with from the red-colored Observable.  For this reason, the transformed Observable emitted by `zip( )` is missing some of the data from the original Observables.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.util.functions.Func1)">`groupBy(keySelector)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.util.functions.Func1, rx.util.functions.Func1)">`groupBy(keySelector, elementSelector)`</a>
