@@ -131,7 +131,7 @@ def myObservable = Observable.create({ anObserver ->
 #### create an Observable that emits the return value of a function
 [[images/rx-operators/start.png]]
 
-Pass the `start( )` method an Action or a function that returns a value, and `start( )` will execute that Action or function asynchronously and return an Observable that will emit that Action or function's return value (`null` in the case of an Action) to any subsequent Observers.
+Pass the `start( )` method a function that returns a value, and `start( )` will execute that function asynchronously and return an Observable that will emit that value to any subsequent Observers.
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablestartfunc-scheduler-context">`start`</a>
