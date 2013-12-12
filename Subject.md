@@ -5,8 +5,10 @@ A <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/Subject.html">``S
 
 There are four subclasses of ``Subject`` that are designed for particular use cases:
 # AsyncSubject
-<a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">``AsyncSubject``</a> emits the last value (and only the last value) emitted by the source Observable(s), and only after that source Observable(s) completes. (If the source Observable does not emit any values, the ``AsyncSubject`` also completes without emitting any values.)
+<a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">`AsyncSubject`</a> emits the last value (and only the last value) emitted by the source Observable, and only after that source Observable completes. (If the source Observable does not emit any values, the `AsyncSubject` also completes without emitting any values.)
 [[images/rx-operators/S.AsyncSubject.png]]
+It will also emit this same final value to any subsequent observers. However, if the source Observable terminates with an error, the `AsyncSubject` will not emit any items, but will simply pass along the error notification from the source Observable.
+[[images/rx-operators/S.AsyncSubject.e.png]]
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">`AsyncSubject`</a>
@@ -14,8 +16,10 @@ There are four subclasses of ``Subject`` that are designed for particular use ca
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#AsyncSubject">Introduction to Rx: AsyncSubject</a>
 
 # BehaviorSubject
-When an Observer subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">``BehaviorSubject``</a>, it begins by emitting the item most recently emitted by the source Observable (or a seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
+When an Observer subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>, it begins by emitting the item most recently emitted by the source Observable (or a seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
 [[images/rx-operators/S.BehaviorSubject.png]]
+However, if the source Observable terminates with an error, the `BehaviorSubject` will not emit any items to subsequent observers, but will simply pass along the error notification from the source Observable.
+[[images/rx-operators/S.BehaviorSubject.e.png]]
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>
@@ -25,6 +29,8 @@ When an Observer subscribes to a <a href="http://netflix.github.io/RxJava/javado
 # PublishSubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">``PublishSubject``</a> emits to a subscriber only those items that are emitted by the source Observable(s) subsequent to the time of the subscription.
 [[images/rx-operators/S.PublishSubject.png]]
+If the source Observable terminates with an error, the `PublishSubject` will not emit any items to subsequent observers, but will simply pass along the error notification from the source Observable.
+[[images/rx-operators/S.PublishSubject.e.png]]
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">`PublishSubject`</a>
