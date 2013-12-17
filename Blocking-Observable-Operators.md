@@ -9,6 +9,7 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 * [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
 * [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
 * [**`next( )`**](Blocking-Observable-Operators#next) — returns an iterable that blocks until the Observable emits another item, then returns that item
+* [**`latest( )`**](Blocking-Observable-Operators#latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns that item
 * [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`toFuture( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
@@ -98,6 +99,7 @@ The `mostRecent()` method returns an iterable that on each iteration returns the
 ## next( )
 #### returns an iterable that blocks until the Observable emits another item, then returns that item
 [[images/rx-operators/B.next.png]]
+
 The `next( )` method returns an iterable that on each iteration blocks in `Iterator.hasNext( )` or `Iterator.next( )` until the underlying Observable emits another item; `Iterator.next( )` then returns that item.
 
 If the Observable emits an error then `Iterator.hasNext( )` will return `true` and `Iterator.next()` will re-throw the exception.
@@ -111,6 +113,17 @@ If the Iterator reaches the final item emitted by the source Observable, a subse
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#next()">`next()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211897.aspx">`Next`</a>
+
+***
+
+## latest( )
+#### returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns that item
+[[images/rx-operators/B.latest.png]]
+
+The `latest( )` operator is very similar to `Observable.next( )` except that when you call `Iterator.next( )` on the resulting Iterator, it will not block if a item has been emitted by the source Observable since the item returned by the previous `Iterator.next( )` -- instead, it will return the most recent such item.
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212115.aspx">`Latest`</a>
 
 ***
 
