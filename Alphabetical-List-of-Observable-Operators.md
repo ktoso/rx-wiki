@@ -1,6 +1,6 @@
 * [**`aggregate( )`**](Transforming-Observables#reduce-or-aggregate) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
-* [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
-* [**`amb( )`**](Combining-Observables#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
+* [**`all( )`**](Conditional-and-Boolean-Operators#all) — determine whether all items emitted by an Observable meet some criteria
+* [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
 * [**`and( )`**](Combining-Observables#and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern`
 * [**`average( )`**](Mathematical-Operators#average) — calculates the average of Integers emitted by an Observable and emits this average
 * [**`averageDoubles( )`**](Mathematical-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
@@ -12,11 +12,11 @@
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
 * [**`connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
-* [**`contains( )`**](Observable-Utility-Operators#contains) — determine whether an Observable emits a particular item or not
+* [**`contains( )`**](Conditional-and-Boolean-Operators#contains) — determine whether an Observable emits a particular item or not
 * [**`count( )`**](Mathematical-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * [**`debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
-* [**`defaultIfEmpty( )`**](Transforming-Observables#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
+* [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 * [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
@@ -29,7 +29,7 @@
 * [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
 * [**`empty( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then completes
 * [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
-* [**`exists( )`**](Observable-Utility-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
+* [**`exists( )`**](Conditional-and-Boolean-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
 * [**`filter( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`first( )`**](Filtering-Observables#first-and-takefirst) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
@@ -47,7 +47,7 @@
 * [**`groupJoin( )`**](Combining-Observables#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * [**`ignoreElements( )`**](Filtering-Observables#ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
 * [**`interval( )`**](Creating-Observables#interval) — create an Observable that emits a sequence of integers spaced by a given time interval
-* [**`isEmpty( )`**](Observable-Utility-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
+* [**`isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
 * [**`join( )`**](Combining-Observables#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
@@ -87,14 +87,14 @@
 * [**`retry( )`**](Error-Handling-Operators#retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
 * [**`sample( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
-* [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of sequences emitted by two Observables
+* [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal) — test the equality of sequences emitted by two Observables
 * [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`skipUntil( )`**](Filtering-Observables#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
-* [**`skipWhile( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
-* [**`skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`start( )`**](Creating-Observables#start) — create an Observable that emits the return value of a function
 * [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
@@ -107,9 +107,9 @@
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`takeFirst( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
-* [**`takeUntil( )`**](Combining-Observables#takeuntil) — emits the items from the source Observable until a second Observable emits an item
-* [**`takeWhile( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-* [**`takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* [**`takeUntil( )`**](Conditional-and-Boolean-Operators#takeuntil) — emits the items from the source Observable until a second Observable emits an item
+* [**`takeWhile( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* [**`takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`then( )`**](Combining-Observables#and-then-and-when) — transform a series of `Pattern` objects via a `Plan` template
 * [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
 * [**`throttleLast( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
