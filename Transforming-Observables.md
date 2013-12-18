@@ -10,7 +10,6 @@ This section explains operators with which you can transform items that are emit
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 * [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
-* [**`defaultIfEmpty( )`**](Transforming-Observables#defaultifempt) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 
 ***
 
@@ -367,15 +366,3 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#cast(java.lang.Class)">`cast(class)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211842(v=vs.103).aspx">`Cast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#CastAndOfType">Introduction to Rx: Cast and OfType</a>
-
-***
-
-## defaultIfEmpty( )
-#### emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
-[[images/rx-operators/defaultIfEmpty.png]]
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defaultIfEmpty(T)">`defaultIfEmpty(default)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedefaultifemptydefaultvalue">`defaultIfEmpty`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.defaultifempty.aspx">`DefaultIfEmpty`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#DefaultIfEmpty">Introduction to Rx: DefaultIfEmpty</a>
