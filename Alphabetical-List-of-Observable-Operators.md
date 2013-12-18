@@ -53,6 +53,7 @@
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
 * [**`last( )`**](Filtering-Observable-Operators#last) (`Observable`) — emit only the last item emitted by the source Observable
 * [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
+* [**`latest( )`**](Blocking-Observable-Operators#latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
 * [**`longCount( )`**](Mathematical-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
 * [**`mapMany( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
