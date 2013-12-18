@@ -6,9 +6,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`skipUntil( )`**](Filtering-Observables#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
-* [**`skipWhile( )` and `skipWhileWithIndex( )`**](Filtering-Observables#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
-* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Filtering-Observables#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`first( )` and `takeFirst( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * [**`elementAt( )`**](Filtering-Observables#elementat) — emit item _n_ emitted by the source Observable
@@ -148,59 +146,6 @@ You can ignore the last _n_ items emitted by an Observable and attend only to th
 
 ***
 
-## skipWhile( ) and skipWhileWithIndex( )
-#### discard items emitted by an Observable until a specified condition is false, then emit the remainder
-[[images/rx-operators/skipWhile.png]]
-
-The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
-
-```groovy
-numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.skipWhile({ (5 != it) }).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-5
-6
-7
-8
-9
-Sequence complete
-```
-
-[[images/rx-operators/skipWhileWithIndex.png]]
-
-The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
-```groovy
-numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-6
-7
-8
-9
-Sequence complete
-```
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipWhile(rx.util.functions.Func1)">`skipWhile(predicate)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipWhileWithIndex(rx.util.functions.Func2)">`skipWhileWithIndex(predicate)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.skipwhile.aspx">`SkipWhile`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipwhilepredicate-thisarg">`skipWhile`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
-
-***
-
 ## take( )
 #### emit only the first _n_ items emitted by an Observable
 [[images/rx-operators/take.png]]
@@ -230,60 +175,6 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852.aspx">`Take`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakecount-scheduler">`take`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
-
-***
-
-## takeWhile( ) and takeWhileWithIndex( )
-#### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-[[images/rx-operators/takeWhile.png]]
-
-The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable invokes `onCompleted( )`.
-
-```groovy
-numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-1
-2
-3
-4
-5
-6
-Sequence complete
-```
-
-[[images/rx-operators/takeWhileWithIndex.png]]
-The `takeWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
-```groovy
-numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-1
-2
-3
-4
-5
-Sequence complete
-```
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.util.functions.Func1)">`takeWhile(predicate)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeWhileWithIndex(rx.util.functions.Func2)">`takeWhileWithIndex(predicate)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile.aspx">`TakeWhile`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakewhilepredicate-thisarg">`takeWhile`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
 
 ***
 
