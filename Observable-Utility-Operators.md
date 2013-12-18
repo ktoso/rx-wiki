@@ -7,10 +7,6 @@ This section explains various utility operators for working with Observables.
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
-* [**`all( )`**](Observable-Utility-Operators#all) — determine whether all items emitted by an Observable meet some criteria
-* [**`exists( )` and `isEmpty( )`**](Observable-Utility-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
-* [**`contains( )`**](Observable-Utility-Operators#contains) — determine whether an Observable emits a particular item or not
-* [**`sequenceEqual( )`**](Observable-Utility-Operators#sequenceequal) — test the equality of the sequences emitted by two Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler an Observer should observe the Observable
@@ -212,104 +208,6 @@ Sequence complete
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timestamp.aspx">`Timestamp`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimestampscheduler">`timestamp`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#TimeStampAndTimeInterval">Introduction to Rx: TimeStamp and TimeInterval</a>
-
-***
-
-## all( )
-#### determine whether all items emitted by an Observable meet some criteria
-[[images/rx-operators/all.png]]
-
-Pass an function to `all( )` that accepts an item emitted by the source Observable and returns a boolean value based on an evaluation of that item, and `all( )` will emit `true` if and only if that function returned true for every item emitted by the source Observable.
-
-```groovy
-numbers = Observable.from([1, 2, 3, 4, 5]);
-
-println("all even?" )
-numbers.all({ 0 == (it % 2) }).subscribe({ println(it); });
-
-println("all positive?");
-numbers.all({ 0 < it }).subscribe({ println(it); });
-```
-```
-all even? 
-false
-all positive? 
-true
-```
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#all(rx.util.functions.Func1)">`all(predicate)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeallpredicate-thisarg">`all`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229537.aspx">`All`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#All">Introduction to Rx: All</a>
-
-***
-
-## exists( ) and isEmpty( )
-#### determine whether an Observable emits any items or not
-[[images/rx-operators/exists.png]]
-
-When you apply the `exists( )` operator to a source Observable, the resulting Observable will emit `true` and complete if the source Observable emits one or more items before completing, or it will emit `false` and complete if the source Observable completes without emitting any items.
-
-[[images/rx-operators/isEmpty.png]]
-The inverse of this is the `isEmpty( )` operator. Apply it to a source Observable and the resulting Observable will emit `true` and complete if the source Observable completes without emitting any items, or it will emit `false` and complete if the source Observable emits any item before completing.
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#exists(rx.util.functions.Func1)">`exists(predicate)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#isEmpty()">`isEmpty()`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeanypredicate-thisarg">`any`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeisempty">`isEmpty`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.any.aspx">`Any`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Any">Introduction to Rx: Any</a>
-
-***
-
-## contains( )
-#### determine whether an Observable emits a particular item or not
-[[images/rx-operators/contains.png]]
-
-Pass the `contains( )` operator a particular item, and it will emit `true` if that item is emitted by the source Observable, or `false` if the source Observable terminates without emitting that item.
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#contains(T)">`contains(item)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.contains.aspx">`Contains`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypecontainsvalue-comparer">`contains`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Contains">Introduction to Rx: Contains</a>
-
-***
-
-## sequenceEqual( )
-#### test the equality of sequences emitted by two Observables
-[[images/rx-operators/sequenceEqual.png]]
-
-Pass `sequenceEqual( )` two Observables, and it will compare the items emitted by each Observable, and emit `true` only if both sequences are the same. You can optionally pass a third parameter: a function that accepts two items and returns `true` if they are equal according to a standard of your choosing.
-```groovy
-def firstfour = Observable.from([1, 2, 3, 4]);
-def firstfouragain = Observable.from([1, 2, 3, 4]);
-def firstfive = Observable.from([1, 2, 3, 4, 5]);
-def firstfourscrambled = Observable.from([3, 2, 1, 4]);
-
-println('firstfour == firstfive?');
-Observable.sequenceEqual(firstfour, firstfive).subscribe({ println(it); });
-println('firstfour == firstfouragain?');
-Observable.sequenceEqual(firstfour, firstfouragain).subscribe({ println(it); });
-println('firstfour == firstfourscrambled?');
-Observable.sequenceEqual(firstfour, firstfourscrambled).subscribe({ println(it); });
-```
-```
-firstfour == firstfive?
-false
-firstfour == firstfouragain?
-true
-firstfour == firstfourscrambled?
-false
-```
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable)">`sequenceEqual(observable1, observable2)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable, rx.util.functions.Func2)">`sequenceEqual(observable1, observable2, equalityFunction)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sequenceequal.aspx">`SequenceEqual`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesequenceequalsecond-comparer">`sequenceEqual`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#SequenceEqual">Introduction to Rx: SequenceEqual</a>
 
 ***
 
