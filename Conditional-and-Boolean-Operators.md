@@ -51,13 +51,19 @@ When you pass a number of source Observables to `amb( )`, it will pass through
 
 The `doWhile( )` operator emits the sequence emitted by the source Observable and then checks to see if a specified condition is true; if so it will resubscribe and reemit the source Observable's sequence, repeating this process until the condition becomes false.
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedowhilecondition-source">`doWhile`</a>
+
 ***
 
 ## ifThen( )
-## only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
+#### only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
 [[images/rx-operators/ifThen.png]]
 
 The `ifThen( )` operator evaluates a function and emits the source Observable's sequence if the function evaluates as true, and otherwise either emits an empty sequence or the sequence from an alternate Observable you specify.
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableifcondition-thensource-elsesource">`if`</a>
 
 ***
 
@@ -131,6 +137,9 @@ Sequence complete
 
 The `switchCase( )` operator evaluates a case and passes control to a particular one of a set of Observables based on the case.
 
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablecaseselector-sources-elsesourcescheduler">`case`</a>
+
 ***
 
 ## takeUntil( )
@@ -203,6 +212,9 @@ Sequence complete
 [[images/rx-operators/whileDo.png]]
 
 If a specified condition evaluates as true, `whileDo( )` will emit the sequence emitted by the source Observable. It will then check to see if the condition remains true and will resubscribe and reemit the source Observable's sequence if so; repeating this process until the condition becomes false.
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablewhilecondition-source">`while`</a>
 
 ***
 
