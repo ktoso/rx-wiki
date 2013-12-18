@@ -127,6 +127,7 @@ This documentation groups information about the various operators and examples o
   * [[Combining|Combining-Observables]]
   * [[Error Handling|Error-Handling-Operators]]
   * [[Utility|Observable-Utility-Operators]]
+  * [[Conditional and Boolean|Conditional-and-Boolean-Operators]]
   * [[Mathematical|Mathematical-Operators]]
   * [[Connectable Observables|Connectable-Observable-Operators]]
   * [[Blocking Observables|Blocking-Observable-Operators]]
