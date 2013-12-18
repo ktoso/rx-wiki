@@ -3,6 +3,7 @@ This section explains operators with which you conditionally emit or transform O
 ### Conditional Operators
 * [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
 * [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
+* [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`takeUntil( )`**](Conditional-and-Boolean-Operators#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
@@ -37,6 +38,17 @@ When you pass a number of source Observables to `amb( )`, it will pass through
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedefaultifemptydefaultvalue">`defaultIfEmpty`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.defaultifempty.aspx">`DefaultIfEmpty`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#DefaultIfEmpty">Introduction to Rx: DefaultIfEmpty</a>
+
+***
+
+## skipUntil( )
+#### discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
+[[images/rx-operators/skipUntil.png]]
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipuntilother">`skipUntil`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229358.aspx">`SkipUntil`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipUntilTakeUntil">Introduction to Rx: SkipUntil and TakeUntil</a>
 
 ***
 
