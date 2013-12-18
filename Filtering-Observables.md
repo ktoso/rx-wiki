@@ -5,7 +5,6 @@ This section explains operators you can use to filter and select items emitted b
 * [**`last( )`**](Filtering-Observables#last) — emit only the last item emitted by an Observable
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
-* [**`skipUntil( )`**](Filtering-Observables#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`first( )` and `takeFirst( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
@@ -132,17 +131,6 @@ You can ignore the last _n_ items emitted by an Observable and attend only to th
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211750.aspx">`SkipLast`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskiplastcount">`skipLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipLastTakeLast">Introduction to Rx: SkipLast and TakeLast</a>
-
-***
-
-## skipUntil( )
-#### discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
-[[images/rx-operators/skipUntil.png]]
-
-#### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipuntilother">`skipUntil`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229358.aspx">`SkipUntil`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipUntilTakeUntil">Introduction to Rx: SkipUntil and TakeUntil</a>
 
 ***
 
