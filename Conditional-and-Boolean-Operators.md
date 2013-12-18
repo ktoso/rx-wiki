@@ -3,10 +3,14 @@ This section explains operators with which you conditionally emit or transform O
 ### Conditional Operators
 * [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
 * [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
+* [**`doWhile( )`**](Conditional-and-Boolean-Operators#dowhile) — emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true
+* [**`ifThen( )`**](Conditional-and-Boolean-Operators#ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
 * [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
 * [**`skipWhile( )` and `skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`switchCase( )`**](Conditional-and-Boolean-Operators#switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
 * [**`takeUntil( )`**](Conditional-and-Boolean-Operators#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* [**`whileDo( )`**](Conditional-and-Boolean-Operators#whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
 
 ### Boolean Operators
 * [**`all( )`**](Conditional-and-Boolean-Operators#all) — determine whether all items emitted by an Observable meet some criteria
@@ -38,6 +42,22 @@ When you pass a number of source Observables to `amb( )`, it will pass through
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedefaultifemptydefaultvalue">`defaultIfEmpty`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.defaultifempty.aspx">`DefaultIfEmpty`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#DefaultIfEmpty">Introduction to Rx: DefaultIfEmpty</a>
+
+***
+
+## doWhile( )
+#### emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true
+[[images/rx-operators/doWhile.png]]
+
+The `doWhile( )` operator emits the sequence emitted by the source Observable and then checks to see if a specified condition is true; if so it will resubscribe and reemit the source Observable's sequence, repeating this process until the condition becomes false.
+
+***
+
+## ifThen( )
+## only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
+[[images/rx-operators/ifThen.png]]
+
+The `ifThen( )` operator evaluates a function and emits the source Observable's sequence if the function evaluates as true, and otherwise either emits an empty sequence or the sequence from an alternate Observable you specify.
 
 ***
 
@@ -105,6 +125,14 @@ Sequence complete
 
 ***
 
+## switchCase( )
+#### emit the sequence from a particular Observable based on the results of an evaluation
+[[images/rx-operators/switchCase.png]]
+
+The `switchCase( )` operator evaluates a case and passes control to a particular one of a set of Observables based on the case.
+
+***
+
 ## takeUntil( )
 #### emits the items from the source Observable until another Observable emits an item
 [[images/rx-operators/takeUntil.png]]
@@ -167,6 +195,14 @@ Sequence complete
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile.aspx">`TakeWhile`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakewhilepredicate-thisarg">`takeWhile`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
+
+***
+
+## whileDo( )
+#### if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
+[[images/rx-operators/whileDo.png]]
+
+If a specified condition evaluates as true, `whileDo( )` will emit the sequence emitted by the source Observable. It will then check to see if the condition remains true and will resubscribe and reemit the source Observable's sequence if so; repeating this process until the condition becomes false.
 
 ***
 
