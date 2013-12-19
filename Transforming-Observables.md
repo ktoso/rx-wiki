@@ -240,8 +240,6 @@ There is also a `groupByUntil( )` operator. It has the two varieties mentioned
 
 Another variety of `groupByUntil( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its observers' `onCompleted` methods and then expires).
 
-There are also versions of `groupByUntil( )` that transform the items emitted by the source Observable before emitting them in the resulting grouped Observables.
-
 Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits Observables, it begins to emit items from the source Observable onto these emitted Observables immediately. That is to say, it does not wait for any Observers to subscribe. So if you want to ensure that you see all of the items that are emitted on these new Observables, you should take care to subscribe to them right away.
 
 The following illustration shows how this can cause unexpected behavior:
