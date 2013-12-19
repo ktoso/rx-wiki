@@ -107,6 +107,7 @@
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
 * [**`takeFirst( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
+* [**`takeLastBuffer( )`**](Filtering-Observables#takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
 * [**`takeUntil( )`**](Conditional-and-Boolean-Operators#takeuntil) — emits the items from the source Observable until a second Observable emits an item
 * [**`takeWhile( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
