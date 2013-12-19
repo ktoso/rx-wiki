@@ -238,9 +238,13 @@ There is also a `groupByUntil( )` operator. It has the two varieties mentioned
 
 [[images/rx-operators/groupByUntil.png]]
 
+Another variety of `groupByUntil( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its observers' `onCompleted` methods and then expires).
+
+There are also versions of `groupByUntil( )` that transform the items emitted by the source Observable before emitting them in the resulting grouped Observables.
+
 Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits Observables, it begins to emit items from the source Observable onto these emitted Observables immediately. That is to say, it does not wait for any Observers to subscribe. So if you want to ensure that you see all of the items that are emitted on these new Observables, you should take care to subscribe to them right away.
 
-The following illustration shows how this behavior can cause unexpected behavior:
+The following illustration shows how this can cause unexpected behavior:
 [[images/rx-operators/groupBy.anomaly.png]]
 In this illustration, `groupBy( )` is used to separate a source Observable that emits the numbers 1 through 6 into an Observable (in red) that emits two Observables: one that emits the odd numbers from the source Observable, and the other that emits the even numbers.  Then, this Observable of Observables, shown in red, is zipped with another Observable (shown in blue) that emits the strings "odd" and "even", and in the zip function, it applies this string label to all of the items emitted by the associated Observable emitted by the Observable shown in red.
 
