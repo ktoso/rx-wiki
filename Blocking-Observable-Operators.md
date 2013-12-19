@@ -52,6 +52,7 @@ The `firstOrDefault( )` method is similar to `first( )`, except that instead
 [[images/rx-operators/B.firstOrDefault.p.png]]
 
 #### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first()">`first()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first(rx.util.functions.Func1)">`first(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
@@ -75,6 +76,7 @@ The `lastOrDefault( )` method is similar to `last( )`, except that instead o
 [[images/rx-operators/B.lastOrDefault.p.png]]
 
 #### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last()">`last()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#lastOrDefault(T)">`lastOrDefault(default)`</a>
@@ -140,6 +142,7 @@ The `singleOrDefault( )` method is similar, except that while it will still th
 [[images/rx-operators/B.singleOrDefault.p.png]]
 
 #### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single()">`single()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single(rx.util.functions.Func1)">`single(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(T)">`singleOrDefault(default)`</a>
@@ -175,10 +178,6 @@ Use these methods to transform a Blocking Observable into a `Future`, an `Iterab
   <tr><th>Observable that emits multiple items</th><th>Observable that emits one item</th><th>Observable that emits no items</th></tr>
  </thead>
  <tbody>
-  <tr><td><code>Observable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>singleAsync</code></td></tr>
-  <tr><td><code>BlockingObservable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>single</code></td></tr>
-  <tr><td><code>Observable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefaultAsync</code></td></tr>
-  <tr><td><code>BlockingObservable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefault</code></td></tr>
   <tr><td><code>Observable.first</code></td><td>the first item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>firstAsync</code></td></tr>
   <tr><td><code>BlockingObservable.first</code></td><td>the first item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>first</code></td></tr>
   <tr><td><code>Observable.firstOrDefault</code></td><td>the first item</td><td>the single item</td><td>the default item</td><td><code>firstOrDefaultAsync</code></td></tr>
@@ -187,5 +186,9 @@ Use these methods to transform a Blocking Observable into a `Future`, an `Iterab
   <tr><td><code>BlockingObservable.last</code></td><td>the last item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>last</code></td></tr>
   <tr><td><code>Observable.lastOrDefault</code></td><td>the last item</td><td>the single item</td><td>the default item</td><td><code>lastOrDefaultAsync</code></td></tr>
   <tr><td><code>BlockingObservable.lastOrDefault</code></td><td>the last item</td><td>the single item</td><td>the default item</td><td><code>lastOrDefault</code></td></tr>
+  <tr><td><code>Observable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>singleAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>single</code></td></tr>
+  <tr><td><code>Observable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefaultAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefault</code></td></tr>
  </tbody>
 </table>
