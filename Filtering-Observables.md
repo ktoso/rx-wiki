@@ -3,6 +3,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`filter( )` or `where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
 * [**`last( )`**](Filtering-Observables#last) — emit only the last item emitted by an Observable
+* [**`takeLastBuffer( )`**](Filtering-Observables#takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
@@ -54,7 +55,7 @@ Sequence complete
 
 ## takeLast( )
 #### only emit the last _n_ items emitted by an Observable
-[[images/rx-operators/last.png]]
+[[images/rx-operators/takeLast.n.png]]
 
 To convert an Observable that emits several items into one that only emits the last _n_ of these items before completing, use the `takeLast( )` method. For instance, in the following code, `takeLast( )` emits only the last integer in the list of integers represented by `numbers`:
 
@@ -72,21 +73,35 @@ numbers.takeLast(1).subscribe(
 Sequence complete
 ```
 
+There are also versions of `takeLast( )` that emit the items that were emitted by the source Observable during a specified window of time before the Observable completed, or that emit a maximum of _n_ items from such a window.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114.aspx">`TakeLast`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastcount">`takeLast`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastcount">`takeLast`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastwithtimeduration-timescheduler-loopscheduler">`takeLastWithTime`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Last">Introduction to Rx: Last</a>
 
 ***
 
 ## last( )
 #### only emit the last item emitted by an Observable
+[[images/rx-operators/last.png]]
 
-The `last( )` operator is equivalent to `takeLast(1)`. It will throw an `IllegalArgumentException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#last-and-lastordefault).
+The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `IllegalArgumentException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#last-and-lastordefault).
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+
+***
+
+## takeLastBuffer( )
+#### emit the last _n_ items emitted by an Observable, as a single list item
+[[images/rx-operators/takeLastBuffer.png]]
+
+To convert an Observable that emits several items into one that emits the last _n_ of these items as a single list before completing, use the `takeLastBuffer( )` method. There are also versions of `takeLastBuffer( )` that emit a list containing the items that were emitted by the source Observable during a specified window of time before the Observable completed, or a maximum of _n_ items from such a window.
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbuffercount">`takeLastBuffer`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbufferwithtimeduration-scheduler">`takeLastBufferWithTime`</a>
 
 ***
 
