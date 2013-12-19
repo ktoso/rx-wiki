@@ -9,6 +9,7 @@
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
+* [**`chunkify( )`**](Blocking-Observable-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
 * [**`connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
