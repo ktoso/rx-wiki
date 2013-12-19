@@ -10,6 +10,7 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 * [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
 * [**`next( )`**](Blocking-Observable-Operators#next) — returns an iterable that blocks until the Observable emits another item, then returns that item
 * [**`latest( )`**](Blocking-Observable-Operators#latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns that item
+* [**`chunkify( )`**](Blocking-Observable-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`toFuture( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
@@ -126,6 +127,14 @@ The `latest( )` operator is very similar to `Observable.next( )` except that
 
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212115.aspx">`Latest`</a>
+
+***
+
+## chunkify( )
+#### returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
+[[images/rx-operators/B.chunkify.png]]
+
+The `chunkify( )` operator represents a blocking observable as an Iterable, that, each time you iterate over it, returns a list of items emitted by the source Observable since the previous iteration. These lists may be empty if there have been no such items emitted.
 
 ***
 
