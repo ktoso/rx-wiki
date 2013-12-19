@@ -164,3 +164,28 @@ Use these methods to transform a Blocking Observable into a `Future`, an `Iterab
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#getIterator()">`getIterator()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212132.aspx">`toEnumerable`</a> and <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toevent.aspx">`toEvent`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/10_LeavingTheMonad.html#LeavingTheMonad">Introduction to Rx: Leaving the monad</a>
+
+***
+
+## Appendix: similar blocking and non-blocking operators
+
+<table>
+ <thead>
+  <tr><th rowspan="2">operator</th><th colspan="3">result when it acts on</th><th rowspan="2">equivalent in Rx.NET</th></tr>
+  <tr><th>Observable that emits multiple items</th><th>Observable that emits one item</th><th>Observable that emits no items</th></tr>
+ </thead>
+ <tbody>
+  <tr><td><code>Observable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>singleAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>single</code></td></tr>
+  <tr><td><code>Observable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefaultAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefault</code></td></tr>
+  <tr><td><code>Observable.first</code></td><td>the first item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>firstAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.first</code></td><td>the first item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>first</code></td></tr>
+  <tr><td><code>Observable.firstOrDefault</code></td><td>the first item</td><td>the single item</td><td>the default item</td><td><code>firstOrDefaultAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.firstOrDefault</code></td><td>the first item</td><td>the single item</td><td>the default item</td><td><code>firstOrDefault</code></td></tr>
+  <tr><td><code>Observable.last</code></td><td>the last item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>lastAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.last</code></td><td>the last item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>last</code></td></tr>
+  <tr><td><code>Observable.lastOrDefault</code></td><td>the last item</td><td>the single item</td><td>the default item</td><td><code>lastOrDefaultAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.lastOrDefault</code></td><td>the last item</td><td>the single item</td><td>the default item</td><td><code>lastOrDefault</code></td></tr>
+ </tbody>
+</table>
