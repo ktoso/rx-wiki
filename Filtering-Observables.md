@@ -85,6 +85,9 @@ Sequence complete
 
 The `last( )` operator is equivalent to `takeLast(1)`. It will throw an `IllegalArgumentException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#last-and-lastordefault).
 
+#### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+
 ***
 
 ## skip()
@@ -179,6 +182,7 @@ You can also pass a function to this method that evaluates items as they are emi
 [[images/rx-operators/first.takeFirst.png]]
 
 #### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first()">`first()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first(rx.util.functions.Func1)">`first(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeFirst()">`takeFirst()`</a>
@@ -199,6 +203,7 @@ To create an Observable that emits only the first item emitted by a source Obser
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
 
 #### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(rx.util.functions.Func1, T)">`firstOrDefault(predicate,default)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault.aspx">`FirstOrDefault`</a>
