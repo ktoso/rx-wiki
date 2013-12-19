@@ -1,6 +1,7 @@
 This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
+* [**`forIterable( )`**](Creating-Observables#foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`toAsync( )`**](Creating-Observables#toasync) — convert a function into an Observable that executes the function and emits its return value
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
@@ -49,6 +50,14 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 * RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefromarrayarray-scheduler)
 * RxJS: [`fromPromise`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefrompromisepromise)
 * Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
+
+***
+
+## forIterable( )
+#### apply a function to the elements of an Iterable to create Observables which are then concatenated
+[[images/rx-operators/forIterable.png]]
+
+`forIterable( )` is similar to `from(Iterable )` but instead of the resulting Observable emitting the elements of the Iterable as its own emitted items, it applies a specified function to each of these elements to generate one Observable per element, and then concatenates the emissions of these Observables to be its own sequence of emitted items.
 
 ***
 
