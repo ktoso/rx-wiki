@@ -1,6 +1,9 @@
 This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
+* [**`fromFuture( )`**](Creating-Observables#fromfuture) — convert a Future into an Observable
+* [**`startFuture( )`**](Creating-Observables#startfuture) — convert a Future into an Observable
+* [**`deferFuture( )`**](Creating-Observables#deferfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
 * [**`forIterable( )`**](Creating-Observables#foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`toAsync( )`**](Creating-Observables#toasync) — convert a function into an Observable that executes the function and emits its return value
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
@@ -50,6 +53,22 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 * RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefromarrayarray-scheduler)
 * RxJS: [`fromPromise`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefrompromisepromise)
 * Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
+
+***
+
+## fromFuture( )
+## startFuture( )
+#### convert a Future into an Observable
+[[images/rx-operators/fromFuture.png]]
+[[images/rx-operators/startFuture.png]]
+
+***
+
+## deferFuture( )
+#### convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+[[images/rx-operators/deferFuture.png]]
+
+You can also choose to convert a Future into an Observable in such a way that the Future is not invoked until an observer subscribes to the resulting Observable, with the `deferFuture( )` operator.
 
 ***
 
