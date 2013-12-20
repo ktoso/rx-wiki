@@ -3,6 +3,7 @@ This section explains the [`BlockingObservable`](http://netflix.github.io/RxJava
 To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlockingObservable( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable%28%29) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from%28rx.Observable%29) method.
 
 * [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
+* [**`forEachFuture( )`**](Blocking-Observable-Operators#foreachfuture) — create a futureTask that will invoke a specified function on each item emitted by an Observable 
 * [**`first( )`**](Blocking-Observable-Operators#first-and-firstordefault) — block until the Observable emits an item, then return the first item emitted by the Observable
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) — block until the Observable emits an item or completes, then return the first item emitted by the Observable or a default item if the Observable did not emit an item
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
@@ -37,6 +38,14 @@ The `forEach(someFunction)` method is the blocking equivalent of `subscribe(some
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#forEach(rx.util.functions.Action1)">`forEach(action)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211815.aspx">`ForEach`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/10_LeavingTheMonad.html#ForEach">Introduction to Rx: ForEach</a>
+
+***
+
+## forEachFuture( )
+#### create a futureTask that will invoke a specified function on each item emitted by an Observable 
+[[images/rx-operators/B.forEachFuture.png]]
+
+The `forEachFuture( )` returns a `FutureTask` for each item emitted by the source Observable (or each item and each notification) that, when executed, will apply a function you specify to each such item (or item and notification).
 
 ***
 
