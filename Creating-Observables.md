@@ -1,6 +1,10 @@
 This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
+* [**`fromFuture( )`**](Creating-Observables#fromfuture) — convert a Future into an Observable
+* [**`startFuture( )`**](Creating-Observables#startfuture) — convert a Future into an Observable
+* [**`deferFuture( )`**](Creating-Observables#deferfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+* [**`fromCancellableFuture( )`, `startCancellableFuture( )`, and `deferCancellableFuture( )`**](Creating-Observables#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
 * [**`forIterable( )`**](Creating-Observables#foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`toAsync( )`**](Creating-Observables#toasync) — convert a function into an Observable that executes the function and emits its return value
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
@@ -50,6 +54,28 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 * RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefromarrayarray-scheduler)
 * RxJS: [`fromPromise`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefrompromisepromise)
 * Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
+
+***
+
+## fromFuture( )
+## startFuture( )
+#### convert a Future into an Observable
+[[images/rx-operators/fromFuture.png]]
+[[images/rx-operators/startFuture.png]]
+
+***
+## fromCancellableFuture( ), startCancellableFuture( ), and deferCancellableFuture( )
+#### versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
+
+If the a subscriber to the Observable that results when a Future is converted to an Observable later unsubscribes from that Observable, it can be useful to have the ability to stop attempting to retrieve items from the Future. The "cancellable" Future enables you do do this. These three methods will return Observables that, when unsubscribed to, will also "unsubscribe" from the underlying Futures.
+
+***
+
+## deferFuture( )
+#### convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+[[images/rx-operators/deferFuture.png]]
+
+You can also choose to convert a Future into an Observable in such a way that the Future is not invoked until an observer subscribes to the resulting Observable, with the `deferFuture( )` operator.
 
 ***
 
