@@ -1,9 +1,9 @@
 This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
-* [**`fromFuture( )`**](Creating-Observables#fromfuture) — convert a Future into an Observable
-* [**`startFuture( )`**](Creating-Observables#startfuture) — convert a Future into an Observable
-* [**`deferFuture( )`**](Creating-Observables#deferfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+* [**`fromFuture( )`**](Creating-Observables#fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+* [**`startFuture( )`**](Creating-Observables#startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
+* [**`deferFuture( )`**](Creating-Observables#deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until an Observer subscribes
 * [**`fromCancellableFuture( )`, `startCancellableFuture( )`, and `deferCancellableFuture( )`**](Creating-Observables#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
 * [**`forIterable( )`**](Creating-Observables#foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`toAsync( )`**](Creating-Observables#toasync) — convert a function into an Observable that executes the function and emits its return value
@@ -58,7 +58,7 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 ***
 
 ## fromFuture( )
-#### convert a Future into an Observable
+#### convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
 [[images/rx-operators/fromFuture.png]]
 
 The `fromFuture( )` method also converts a Future into an Observable, but it obtains this Future indirectly, by means of a function you provide. It creates the Observable immediately, but waits to call the function and to obtain the Future until an Observer subscribes to it.
@@ -66,7 +66,7 @@ The `fromFuture( )` method also converts a Future into an Observable, but it o
 ***
 
 ## startFuture( )
-#### convert a Future into an Observable
+#### convert a function that returns Future into an Observable that emits that Future's return value
 [[images/rx-operators/startFuture.png]]
 
 The `startFuture( )` method is similar to the `fromFuture( )` method except that it calls the function to obtain the Future immediately, and attempts to get its value even before an Observer subscribes to the resulting Observable. It then holds this value and returns it to any future observer.
@@ -74,10 +74,10 @@ The `startFuture( )` method is similar to the `fromFuture( )` method except 
 ***
 
 ## deferFuture( )
-#### convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+#### convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until an Observer subscribes
 [[images/rx-operators/deferFuture.png]]
 
-You can also choose to convert a Future into an Observable in such a way that the Future is not invoked until an observer subscribes to the resulting Observable, with the `deferFuture( )` operator.
+You can use the `deferFuture( )` operator to convert a Future that returns an Observable into an Observable that emits the values of that returned Observable in such a way that the Future is not invoked until an observer subscribes to the resulting Observable.
 
 ***
 ## fromCancellableFuture( ), startCancellableFuture( ), and deferCancellableFuture( )
