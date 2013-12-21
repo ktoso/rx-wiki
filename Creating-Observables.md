@@ -59,7 +59,7 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 
 ## fromFuture( )
 #### convert a Future into an Observable
-[[images/rx-operators/startFuture.png]]
+[[images/rx-operators/fromFuture.png]]
 
 The `fromFuture( )` method also converts a Future into an Observable, but it obtains this Future indirectly, by means of a function you provide. It creates the Observable immediately, but waits to call the function and to obtain the Future until an Observer subscribes to it.
 
@@ -67,7 +67,7 @@ The `fromFuture( )` method also converts a Future into an Observable, but it o
 
 ## startFuture( )
 #### convert a Future into an Observable
-[[images/rx-operators/fromFuture.png]]
+[[images/rx-operators/startFuture.png]]
 
 The `startFuture( )` method is similar to the `fromFuture( )` method except that it calls the function to obtain the Future immediately, and attempts to get its value even before an Observer subscribes to the resulting Observable. It then holds this value and returns it to any future observer.
 
