@@ -130,6 +130,8 @@ numbers.skip(3).subscribe(
 Sequence complete
 ```
 
+There are also versions of `skip()` that ignore the items emitted by an Observable during a specified period of time after the Observable is subscribed to.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847.aspx">`Skip`</a>
@@ -143,6 +145,8 @@ Sequence complete
 [[images/rx-operators/skipLast.png]]
 
 You can ignore the last _n_ items emitted by an Observable and attend only to those items that preced them, by modifying the Observable with the `skipLast(n)` method. Note that the mechanism by which this is implemented will delay the emission of any item from the source Observable until _n_ additional items have been emitted by that Observable.
+
+There are also versions of `skipLast()` that ignore the items emitted by an Observable during a specified period of time before the Observable completes.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(int)">`skipLast(count)`</a>
