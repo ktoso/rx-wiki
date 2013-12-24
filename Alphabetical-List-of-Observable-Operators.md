@@ -111,6 +111,7 @@
 * [**`sumDoubles( )`**](Mathematical-Operators#sum) — adds the Doubles emitted by an Observable and emits this sum
 * [**`sumFloats( )`**](Mathematical-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
 * [**`sumLongs( )`**](Mathematical-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
+* [**`switchCase( )`**](Conditional-and-Boolean-Operators#switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
 * [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
