@@ -1,7 +1,6 @@
 This section explains operators you can use to combine multiple Observables.
 
 * [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
-* [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
 * [**`merge( )`**](Combining-Observables#merge) — combine multiple Observables into one
 * [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * [**`parallelMerge( )`**](Combining-Observables#parallelmerge) — combine multiple Observables into a smaller number of Observables, to facilitate parallelism
@@ -43,50 +42,6 @@ myObservable.startWith(-3, -2, -1, 0).subscribe(
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypestartwithscheduler-args">`startWith`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.startwith.aspx">`StartWith`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#StartWith">Introduction to Rx: StartWith</a>
-
-***
-
-## concat( )
-#### concatenate two or more Observables sequentially
-
-[[images/rx-operators/concat.png]]
-
-You can concatenate the output of multiple Observables so that they act like a single Observable, with all of the items emitted by the first Observable being emitted before any of the items emitted by the second Observable, by using the `concat( )` method:
-
-```groovy
-myConcatenatedObservable = Observable.concat(observable1, observable2, ... );
-```
-
-For example, the following code concatenates the 'odds' and 'evens' Observables into a single Observable:
-
-```groovy
-odds  = Observable.from([1, 3, 5, 7]);
-evens = Observable.from([2, 4, 6]);
-
-Observable.concat(odds, evens).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-1
-3
-5
-7
-2
-4
-6
-Sequence complete
-```
-
-Instead of passing multiple Observables into `concat( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `concat( )` will concatenate their output into the output of a single Observable.
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable...)">`concat(observable1, observable2, ...)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeconcatargs">`concat`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.concat.aspx">`Concat`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Concat">Introduction to Rx: Concat</a>
 
 ***
 
