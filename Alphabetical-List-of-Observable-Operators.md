@@ -133,10 +133,10 @@
 * [**`toFuture( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
 * [**`toIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
-* [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all items from an Observable and emit them as a single List
-* [**`toMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
-* [**`toMultiMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
-* [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
+* [**`toList( )`**](Mathematical-and-Aggregate-Operators#tolist) — collect all items from an Observable and emit them as a single List
+* [**`toMap( )`**](Mathematical-and-Aggregate-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+* [**`toMultiMap( )`**](Mathematical-and-Aggregate-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
+* [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`using( )`**](Observable-Utility-Operators#using) — create a disposable resource that has the same lifespan as an Observable
 * [**`when( )`**](Combining-Observables#and-then-and-when) — convert a series of `Plan` objects into an Observable
 * [**`where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
