@@ -1,18 +1,19 @@
 This section explains operators that perform mathematical or other operations over an entire sequence of items emitted by an Observable. Because these operations must wait for the source Observable to complete emitting items before they can construct their own emissions (and must usually buffer these items), these operators are dangerous to use on Observables that may have very long or infinite sequences.
 
-* [**`average( )`**](Mathematical-Operators#average) — calculates the average of Integers emitted by an Observable and emits this average
-* [**`averageLongs( )`**](Mathematical-Operators#average) — calculates the average of Longs emitted by an Observable and emits this average
-* [**`averageFloats( )`**](Mathematical-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
-* [**`averageDoubles( )`**](Mathematical-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
-* [**`count( )` and `longCount( )`**](Mathematical-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
-* [**`max( )`**](Mathematical-Operators#max) — emits the maximum value emitted by a source Observable
-* [**`maxBy( )`**](Mathematical-Operators#maxby) — emits the item emitted by the source Observable that has the maximum key value
-* [**`min( )`**](Mathematical-Operators#min) — emits the minimum value emitted by a source Observable
-* [**`minBy( )`**](Mathematical-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value
-* [**`sum( )`**](Mathematical-Operators#sum) — adds the Integers emitted by an Observable and emits this sum
-* [**`sumLongs( )`**](Mathematical-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
-* [**`sumFloats( )`**](Mathematical-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
-* [**`sumDoubles( )`**](Mathematical-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
+* [**`average( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Integers emitted by an Observable and emits this average
+* [**`averageLongs( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Longs emitted by an Observable and emits this average
+* [**`averageFloats( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
+* [**`averageDoubles( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
+* [**`count( )` and `longCount( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
+* [**`max( )`**](Mathematical-and-Aggregate-Operators#max) — emits the maximum value emitted by a source Observable
+* [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#maxby) — emits the item emitted by the source Observable that has the maximum key value
+* [**`min( )`**](Mathematical-and-Aggregate-Operators#min) — emits the minimum value emitted by a source Observable
+* [**`minBy( )`**](Mathematical-and-Aggregate-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value
+* [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
+* [**`sum( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Integers emitted by an Observable and emits this sum
+* [**`sumLongs( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
+* [**`sumFloats( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
+* [**`sumDoubles( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
 
 ***
 
@@ -135,6 +136,65 @@ The `minBy( )` operator is similar to `min( )` but instead of emitting the m
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.minby.aspx">`MinBy`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeminbykeyselector-comparer">`minBy`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MinByMaxBy">Intro to Rx: MinBy and MaxBy</a>
+
+***
+
+## reduce( )
+#### Apply a function to each emitted item, sequentially, and emit only the final accumulated value
+[[images/rx-operators/reduce.png]]
+
+The `reduce( )` method returns an Observable that applies a function of your choosing to the first item emitted by a source Observable, then feeds the result of that function along with the second item emitted by the source Observable into the same function, then feeds the result of _that_ function along with the third item into the same function, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your function as the sole output from the returned Observable.
+
+Note that if the source Observable does not emit any items, `reduce( )` will fail with an `IllegalArgumentException`.
+
+For example, the following code uses `reduce( )` to compute, and then emit as an Observable, the sum of the numbers emitted by the source Observable:
+
+```groovy
+numbers = Observable.from([1, 2, 3, 4, 5]);
+
+numbers.reduce({ a, b -> a+b }).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+```
+```
+15
+Sequence complete
+```
+
+This technique, which is called “reduce” in the RxJava context, is sometimes called “aggregate,” “fold,” “accumulate,” “compress,” or “inject” in other programming arenas. 
+
+There is also a version of `reduce( )` to which you can pass a seed item in addition to an accumulator function:
+
+```groovy
+my_observable.reduce(initial_seed, accumulator_closure)
+```
+
+Note that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your reduction with the item `null`. Note also that if you do pass in a seed, and the source Observable emits no items, `reduce` will emit the seed and complete normally without error.
+
+#### example:
+
+Imagine you have access to an Observable that emits a sequence of "Movie" objects that correspond to the "coming soon" movies from a theater. These objects include a number of items of information about the movie, including its title and opening day. You could use `reduce` to convert this sequence of Movie objects into a single list of titles, like this:
+
+```groovy
+getComingSoonSequence()
+    .reduce([], { theList, video ->
+                  theList.add("'" + video.getTitle() + "' (" + video.getOpen() + ")");
+                  return(theList);
+    }).subscribe({ println("Coming Soon: " + it) });
+```
+Which might result in something like this:
+```
+Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Report' (Sept. 27), 'Salinger' (Sept.27), 'In a World' (Sept. 27)]
+```
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(rx.util.functions.Func2)">`reduce(accumulator)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(R, rx.util.functions.Func2)">`reduce(initialValue, accumulator)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeaggregateseed-accumulator">`aggregate`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.aggregate.aspx">`Aggregate`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Aggregate">Introduction to Rx: Aggregate</a>
 
 ***
 
