@@ -11,7 +11,7 @@
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
 * [**`chunkify( )`**](Blocking-Observable-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
-* [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
+* [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat) — concatenate two or more Observables sequentially
 * [**`connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * [**`contains( )`**](Conditional-and-Boolean-Operators#contains) — determine whether an Observable emits a particular item or not
 * [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
