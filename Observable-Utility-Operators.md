@@ -16,6 +16,8 @@ This section explains various utility operators for working with Observables.
 * [**`delaySubscription( )`**](Observable-Utility-Operators#delaysubscription) — hold an Observer's subscription request for a specified amount of time before passing it on to the source Observable
 * [**`timeInterval( )`**](Observable-Utility-Operators#timeinterval) — emit the time lapsed between consecutive emissions of a source Observable
 * [**`using( )`**](Observable-Utility-Operators#using) — create a disposable resource that has the same lifespan as an Observable
+* [**`single( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
+* [**`singleOrDefault( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 
 ***
 
@@ -342,3 +344,24 @@ Pass the `using( )` method two factory functions: the first creates a disposab
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableusingresourcefactory-observablefactory">`using`</a>
+
+***
+
+## single( ) and singleOrDefault( )
+#### if the Observable completes after emitting a single item, return that item, otherwise throw an exception (or return a default item)
+[[images/rx-operators/single.png]]
+
+Use the `single( )` method to retrieve the only item emitted by an Observable. `single( )` will notify of an exception if the source Observable does not emit exactly one item.
+
+You can also use this method to retrieve the only item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such item). To do this, pass a function to `single( )` that returns `true` if the item meets the condition. In such a case, `single( )` will again notify of an exception unless the source Observable emits exactly one item that meets the condition.
+[[images/rx-operators/single.p.png]]
+
+The `singleOrDefault( )` method is similar, except that while it will still notify of an exception if the underlying Observable emits _more than_ one item, if the underlying Observable does not emit any items at all, rather than notifying of an exception, the Observable returned by `singleOrDefault( )` will emit a default item that you specify. Specify that default item by passing it as the first parameter to `singleOrDefault( )`.
+[[images/rx-operators/singleOrDefault.png]]
+[[images/rx-operators/singleOrDefault.p.png]]
+
+#### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesinglepredicate-thisarg">`single`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesingleordefaultpredicate-defaultvalue-thisarg">`singleOrDefault`</a>
+* Linq: `singleAsync` and `singleOrDefaultAsync`
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Single">Introduction to Rx: Single</a>
