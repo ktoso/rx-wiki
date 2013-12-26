@@ -9,7 +9,7 @@
   * [[Error Handling Operators]]
   * [[Observable Utility Operators]]
   * [[Conditional and Boolean Operators]]
-  * [[Mathematical Operators]]
+  * [[Mathematical and Aggregate Operators]]
   * [[Connectable Observable Operators]]
   * [[Blocking Observable Operators]]
   * [[Alphabetical List of Observable Operators]]
