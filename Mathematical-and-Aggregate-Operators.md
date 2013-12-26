@@ -15,6 +15,10 @@ This section explains operators that perform mathematical or other operations ov
 * [**`sumLongs( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
 * [**`sumFloats( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
 * [**`sumDoubles( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
+* [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all items from an Observable and emit them as a single List
+* [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
+* [**`toMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+* [**`toMultiMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
 
 ***
 
@@ -274,3 +278,96 @@ There are also specialized "sum" methods for Longs, Floats, and Doubles (`sumLon
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesumkeyselector-thisarg">`sum`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sum.aspx">`Sum`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
+
+***
+
+## toList( )
+#### collect all items from an Observable and emit them as a single List
+
+[[images/rx-operators/toList.png]]
+
+Normally, an Observable that emits multiple items will do so by invoking its Observer’s `onNext` method for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to invoke the Observer’s `onNext` method _once_, passing it the entire list, by calling the Observable’s `toList( )` method prior to calling its `subscribe( )` method. For example:
+
+```groovy
+Observable.tolist(myObservable).subscribe({ myListOfSomething -> do something useful with the list });
+```
+
+For example, the following rather pointless code takes a list of integers, converts it into an Observable, then converts that Observable into one that emits the original list as a single item:
+
+```groovy
+numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+numbers.toList().subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+```
+```
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+Sequence complete
+```
+
+If the source Observable invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the source Observable invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Observers.
+
+#### see also
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetoarray">`toArray`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211848.aspx">`ToList`</a> and <a href="http://msdn.microsoft.com/en-us/library/hh229207.aspx">`ToArray`</a>
+
+***
+
+## toSortedList( )
+#### collect all items emitted by an Observable and emit them as a single sorted List
+
+[[images/rx-operators/toSortedList.png]]
+
+The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list naturally in ascending order by means of the `Comparable` interface. If any of the items emitted by the Observable does not support `Comparable` with respect to the type of every other item emitted by the Observable, `toSortedList( )` will throw an exception. However, you can change this default behavior by also passing in to `toSortedList( )` a function that takes as its parameters two items and returns a number; `toSortedList( )` will then use that function instead of `Comparable` to sort the items.
+
+For example, the following code takes a list of unsorted integers, converts it into an Observable, then converts that Observable into one that emits the original list in sorted form as a single item:
+
+```groovy
+numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
+
+numbers.toSortedList().subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+```
+```
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+Sequence complete
+```
+Here is an example that provides its own sorting function, in this case, one that sorts numbers according to how close to the number 5 they are:
+```groovy
+numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
+
+numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+```
+```
+[5, 6, 4, 3, 7, 8, 2, 1, 9]
+Sequence complete
+```
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList()">`toSortedList()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList(rx.util.functions.Func2)">`toSortedList(sortingFunction)`</a>
+
+***
+
+# toMap( ) and toMultiMap( )
+#### convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+[[images/rx-operators/toMap.png]]
+
+The `toMap( )` and `toMultiMap( )` methods collect the items emitted by the source Observable into a map (by default, a `HashMap`, but you can supply a factory function that generates another `Map` variety) and then emit that map. You supply a function that generates the key for each emitted item. You may also optionally supply a function that converts an emitted item into the value to be stored in the map (by default, the item itself is this value).
+
+The `toMultiMap( )` method differs from `toMap( )` in that the map it generates is also an `ArrayList`.
+[[images/rx-operators/toMultiMap.png]]
+
+#### see also:
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.tolookup.aspx">`ToLookup`</a> and <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.todictionary.aspx">`ToDictionary`</a>
