@@ -3,6 +3,7 @@ This section explains operators you can use to filter and select items emitted b
 * [**`filter( )` or `where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
 * [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
 * [**`last( )`**](Filtering-Observables#last) — emit only the last item emitted by an Observable
+* [**`lastOrDefault( )`**](Filtering-Observables#lastOrDefault) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
 * [**`takeLastBuffer( )`**](Filtering-Observables#takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
@@ -91,6 +92,21 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastpredicate-thisarg">`last`</a>
+* Linq: `lastAsync`
+
+***
+
+## lastOrDefault( )
+#### emit only the last item emitted by an Observable, or a default value if the source Observable is empty
+[[images/rx-operators/lastOrDefault.png]]
+
+The `lastOrDefault( )` operator returns an Observable that emits the last item emitted by the source Observable, or a default item if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `lastOrDefault( )`](Blocking-Observable-Operators#last-and-lastordefault).
+
+#### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastordefaultpredicate-defaultvalue-thisarg">`lastOrDefault`</a>
+* Linq: `lastOrDefaultAsync`
 
 ***
 
@@ -206,7 +222,7 @@ You can also pass a function to this method that evaluates items as they are emi
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first(rx.util.functions.Func1)">`first(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeFirst()">`takeFirst()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeFirst(rx.util.functions.Func1)">`takeFirst(predicate)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.first.aspx">`First`</a>
+* Linq: `firstAsync`
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefirstpredicate-thisarg">`first`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 
@@ -225,7 +241,7 @@ You can also pass a function to this method that evaluates items as they are emi
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(rx.util.functions.Func1, T)">`firstOrDefault(predicate,default)`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.firstordefault.aspx">`FirstOrDefault`</a>
+* Linq: `firstOrDefaultAsync`
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefirstordefaultpredicate-defaultvalue-thisarg">`firstOrDefault`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
 

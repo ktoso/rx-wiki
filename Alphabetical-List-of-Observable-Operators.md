@@ -2,19 +2,23 @@
 * [**`all( )`**](Conditional-and-Boolean-Operators#all) — determine whether all items emitted by an Observable meet some criteria
 * [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
 * [**`and( )`**](Combining-Observables#and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern`
-* [**`average( )`**](Mathematical-Operators#average) — calculates the average of Integers emitted by an Observable and emits this average
-* [**`averageDoubles( )`**](Mathematical-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
-* [**`averageFloats( )`**](Mathematical-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
-* [**`averageLongs( )`**](Mathematical-Operators#average) — calculates the average of Longs emitted by an Observable and emits this average
+* [**`average( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Integers emitted by an Observable and emits this average
+* [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Doubles that are the result of a function applied to items emitted by an Observable and emits this average
+* [**`averageDoubles( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
+* [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Floats that are the result of a function applied to items emitted by an Observable and emits this average
+* [**`averageFloats( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
+* [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Integers that are the result of a function applied to items emitted by an Observable and emits this average
+* [**`averageLong( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Longs that are the result of a function applied to items emitted by an Observable and emits this average
+* [**`averageLongs( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Longs emitted by an Observable and emits this average
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
 * [**`chunkify( )`**](Blocking-Observable-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
-* [**`concat( )`**](Combining-Observables#concat) — concatenate two or more Observables sequentially
+* [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat) — concatenate two or more Observables sequentially
 * [**`connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * [**`contains( )`**](Conditional-and-Boolean-Operators#contains) — determine whether an Observable emits a particular item or not
-* [**`count( )`**](Mathematical-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
+* [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * [**`debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
 * [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
@@ -59,19 +63,20 @@
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
 * [**`last( )`**](Filtering-Observable-Operators#last) (`Observable`) — emit only the last item emitted by the source Observable
-* [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
+* [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
+* [**`lastOrDefault( )`**](Filtering-Observables#lastOrDefault) (`Observable`) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
 * [**`latest( )`**](Blocking-Observable-Operators#latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
-* [**`longCount( )`**](Mathematical-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
+* [**`longCount( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
 * [**`mapMany( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`mapManyDelayError( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, waiting to report errors until all error-free observables have a chance to complete
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
-* [**`max( )`**](Mathematical-Operators#max) — emits the maximum value emitted by a source Observable
-* [**`maxBy( )`**](Mathematical-Operators#maxby) — emits the item emitted by the source Observable that has the maximum key value
+* [**`max( )`**](Mathematical-and-Aggregate-Operators#max) — emits the maximum value emitted by a source Observable
+* [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#maxby) — emits the item emitted by the source Observable that has the maximum key value
 * [**`merge( )`**](Combining-Observables#merge) — combine multiple Observables into one
 * [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
-* [**`min( )`**](Mathematical-Operators#min) — emits the minimum value emitted by a source Observable
-* [**`minBy( )`**](Mathematical-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value
+* [**`min( )`**](Mathematical-and-Aggregate-Operators#min) — emits the minimum value emitted by a source Observable
+* [**`minBy( )`**](Mathematical-and-Aggregate-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value
 * [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
 * [**`multicast( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
@@ -86,7 +91,7 @@
 * [**`publish( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
-* [**`reduce( )`**](Transforming-Observables#reduce-or-aggregate) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
+* [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`refCount( )`**](Connectable-Observable-Operators#connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
 * [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`replay( )`**](Connectable-Observable-Operators#observablereplay) — ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
@@ -94,8 +99,10 @@
 * [**`sample( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal) — test the equality of sequences emitted by two Observables
-* [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
-* [**`singleOrDefault( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
+* [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise throw an exception
+* [**`single( )`**](Observable-Utility-Operators#single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise notify of an exception
+* [**`singleOrDefault( )`**](Blocking-Observable-Operators#single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise return a default item
+* [**`singleOrDefault( )`**](Observable-Utility-Operators#single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise emit a default item
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
@@ -106,10 +113,14 @@
 * [**`startFuture( )`**](Creating-Observables#startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
 * [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
-* [**`sum( )`**](Mathematical-Operators#sum) — adds the Integers emitted by an Observable and emits this sum
-* [**`sumDoubles( )`**](Mathematical-Operators#sum) — adds the Doubles emitted by an Observable and emits this sum
-* [**`sumFloats( )`**](Mathematical-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
-* [**`sumLongs( )`**](Mathematical-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
+* [**`sum( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Integers emitted by an Observable and emits this sum
+* [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Doubles that are the result of a function applied to items emitted by an Observable and emits this sum
+* [**`sumDoubles( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Doubles emitted by an Observable and emits this sum
+* [**`sumFloat( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats that are the result of a function applied to items emitted by an Observable and emits this sum
+* [**`sumFloats( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
+* [**`sumInteger( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Integers that are the result of a function applied to items emitted by an Observable and emits this sum
+* [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs that are the result of a function applied to items emitted by an Observable and emits this sum
+* [**`sumLongs( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
 * [**`switchCase( )`**](Conditional-and-Boolean-Operators#switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
 * [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
@@ -133,10 +144,10 @@
 * [**`toFuture( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
 * [**`toIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
-* [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all items from an Observable and emit them as a single List
-* [**`toMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
-* [**`toMultiMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
-* [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
+* [**`toList( )`**](Mathematical-and-Aggregate-Operators#tolist) — collect all items from an Observable and emit them as a single List
+* [**`toMap( )`**](Mathematical-and-Aggregate-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+* [**`toMultiMap( )`**](Mathematical-and-Aggregate-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
+* [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`using( )`**](Observable-Utility-Operators#using) — create a disposable resource that has the same lifespan as an Observable
 * [**`when( )`**](Combining-Observables#and-then-and-when) — convert a series of `Plan` objects into an Observable
 * [**`where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable

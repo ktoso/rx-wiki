@@ -1,9 +1,5 @@
 This section explains various utility operators for working with Observables.
 
-* [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all items from an Observable and emit them as a single List
-* [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
-* [**`toMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
-* [**`toMultiMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
@@ -20,99 +16,8 @@ This section explains various utility operators for working with Observables.
 * [**`delaySubscription( )`**](Observable-Utility-Operators#delaysubscription) — hold an Observer's subscription request for a specified amount of time before passing it on to the source Observable
 * [**`timeInterval( )`**](Observable-Utility-Operators#timeinterval) — emit the time lapsed between consecutive emissions of a source Observable
 * [**`using( )`**](Observable-Utility-Operators#using) — create a disposable resource that has the same lifespan as an Observable
-
-***
-
-## toList( )
-#### collect all items from an Observable and emit them as a single List
-
-[[images/rx-operators/toList.png]]
-
-Normally, an Observable that emits multiple items will do so by invoking its Observer’s `onNext` method for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to invoke the Observer’s `onNext` method _once_, passing it the entire list, by calling the Observable’s `toList( )` method prior to calling its `subscribe( )` method. For example:
-
-```groovy
-Observable.tolist(myObservable).subscribe({ myListOfSomething -> do something useful with the list });
-```
-
-For example, the following rather pointless code takes a list of integers, converts it into an Observable, then converts that Observable into one that emits the original list as a single item:
-
-```groovy
-numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-
-numbers.toList().subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-[1, 2, 3, 4, 5, 6, 7, 8, 9]
-Sequence complete
-```
-
-If the source Observable invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the source Observable invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Observers.
-
-#### see also
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetoarray">`toArray`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211848.aspx">`ToList`</a> and <a href="http://msdn.microsoft.com/en-us/library/hh229207.aspx">`ToArray`</a>
-
-***
-
-## toSortedList( )
-#### collect all items emitted by an Observable and emit them as a single sorted List
-
-[[images/rx-operators/toSortedList.png]]
-
-The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list naturally in ascending order by means of the `Comparable` interface. If any of the items emitted by the Observable does not support `Comparable` with respect to the type of every other item emitted by the Observable, `toSortedList( )` will throw an exception. However, you can change this default behavior by also passing in to `toSortedList( )` a function that takes as its parameters two items and returns a number; `toSortedList( )` will then use that function instead of `Comparable` to sort the items.
-
-For example, the following code takes a list of unsorted integers, converts it into an Observable, then converts that Observable into one that emits the original list in sorted form as a single item:
-
-```groovy
-numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
-
-numbers.toSortedList().subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-[1, 2, 3, 4, 5, 6, 7, 8, 9]
-Sequence complete
-```
-Here is an example that provides its own sorting function, in this case, one that sorts numbers according to how close to the number 5 they are:
-```groovy
-numbers = Observable.from([8, 6, 4, 2, 1, 3, 5, 7, 9]);
-
-numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-[5, 6, 4, 3, 7, 8, 2, 1, 9]
-Sequence complete
-```
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList()">`toSortedList()`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList(rx.util.functions.Func2)">`toSortedList(sortingFunction)`</a>
-
-***
-
-# toMap( ) and toMultiMap( )
-#### convert the sequence of items emitted by an Observable into a map keyed by a specified key function
-[[images/rx-operators/toMap.png]]
-
-The `toMap( )` and `toMultiMap( )` methods collect the items emitted by the source Observable into a map (by default, a `HashMap`, but you can supply a factory function that generates another `Map` variety) and then emit that map. You supply a function that generates the key for each emitted item. You may also optionally supply a function that converts an emitted item into the value to be stored in the map (by default, the item itself is this value).
-
-The `toMultiMap( )` method differs from `toMap( )` in that the map it generates is also an `ArrayList`.
-[[images/rx-operators/toMultiMap.png]]
-
-#### see also:
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.tolookup.aspx">`ToLookup`</a> and <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.todictionary.aspx">`ToDictionary`</a>
+* [**`single( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
+* [**`singleOrDefault( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 
 ***
 
@@ -439,3 +344,24 @@ Pass the `using( )` method two factory functions: the first creates a disposab
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableusingresourcefactory-observablefactory">`using`</a>
+
+***
+
+## single( ) and singleOrDefault( )
+#### if the Observable completes after emitting a single item, return that item, otherwise throw an exception (or return a default item)
+[[images/rx-operators/single.png]]
+
+Use the `single( )` method to retrieve the only item emitted by an Observable. `single( )` will notify of an exception if the source Observable does not emit exactly one item.
+
+You can also use this method to retrieve the only item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such item). To do this, pass a function to `single( )` that returns `true` if the item meets the condition. In such a case, `single( )` will again notify of an exception unless the source Observable emits exactly one item that meets the condition.
+[[images/rx-operators/single.p.png]]
+
+The `singleOrDefault( )` method is similar, except that while it will still notify of an exception if the underlying Observable emits _more than_ one item, if the underlying Observable does not emit any items at all, rather than notifying of an exception, the Observable returned by `singleOrDefault( )` will emit a default item that you specify. Specify that default item by passing it as the first parameter to `singleOrDefault( )`.
+[[images/rx-operators/singleOrDefault.png]]
+[[images/rx-operators/singleOrDefault.p.png]]
+
+#### see also:
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesinglepredicate-thisarg">`single`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesingleordefaultpredicate-defaultvalue-thisarg">`singleOrDefault`</a>
+* Linq: `singleAsync` and `singleOrDefaultAsync`
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Single">Introduction to Rx: Single</a>
