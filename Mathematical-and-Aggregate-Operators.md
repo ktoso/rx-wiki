@@ -1,9 +1,13 @@
 This section explains operators that perform mathematical or other operations over an entire sequence of items emitted by an Observable. Because these operations must wait for the source Observable to complete emitting items before they can construct their own emissions (and must usually buffer these items), these operators are dangerous to use on Observables that may have very long or infinite sequences.
 
 * [**`average( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Integers emitted by an Observable and emits this average
+* [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Integers that are the result of a function applied to items emitted by an Observable and emits this average
 * [**`averageLongs( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Longs emitted by an Observable and emits this average
+* [**`averageLong( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Longs that are the result of a function applied to items emitted by an Observable and emits this average
 * [**`averageFloats( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
+* [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Floats that are the result of a function applied to items emitted by an Observable and emits this average
 * [**`averageDoubles( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
+* [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Doubles that are the result of a function applied to items emitted by an Observable and emits this average
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat) — concatenate two or more Observables sequentially
 * [**`count( )` and `longCount( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`max( )`**](Mathematical-and-Aggregate-Operators#max) — emits the maximum value emitted by a source Observable
@@ -12,9 +16,13 @@ This section explains operators that perform mathematical or other operations ov
 * [**`minBy( )`**](Mathematical-and-Aggregate-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value
 * [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`sum( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Integers emitted by an Observable and emits this sum
+* [**`sumInteger( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Integers that are the result of a function applied to items emitted by an Observable and emits this sum
 * [**`sumLongs( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
+* [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs that are the result of a function applied to items emitted by an Observable and emits this sum
 * [**`sumFloats( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
-* [**`sumDoubles( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
+* [**`sumFloat( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats that are the result of a function applied to items emitted by an Observable and emits this sum
+* [**`sumDoubles( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Doubles emitted by an Observable and emits this sum
+* [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Doubles that are the result of a function applied to items emitted by an Observable and emits this sum
 * [**`toList( )`**](Observable-Utility-Operators#tolist) — collect all items from an Observable and emit them as a single List
 * [**`toSortedList( )`**](Observable-Utility-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`toMap( )`**](Observable-Utility-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
@@ -48,7 +56,11 @@ Sequence complete
 ```
 There are also specialized "average" methods for Longs, Floats, and Doubles (`averageLongs( )`, `averageFloats( )`, and `averageDoubles( )`).
 
-Note that these methods will fail with an `IllegalArgumentException` if the source Observable does not emit any items.
+You can also average not the items themselves but the results of a function applied to each item, by passing that function to the methods `averageInteger( )`, `averageLong( )`, `averageFloat( )`, or `averageDouble( )`.
+
+[[images/rx-operators/average.f.png]]
+
+Note that any of these methods will fail with an `IllegalArgumentException` if the source Observable does not emit any items.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#average(rx.Observable)">`average()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#averageLongs(rx.Observable)">`averageLongs()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#averageFloats(rx.Observable)">`averageFloats()`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#averageDoubles(rx.Observable)">`averageDoubles()`</a>
@@ -272,6 +284,10 @@ myObservable.sum().subscribe(
 Sequence complete
 ```
 There are also specialized "sum" methods for Longs, Floats, and Doubles (`sumLongs( )`, `sumFloats( )`, and `sumDoubles( )`).
+
+You can also sum not the items themselves but the results of a function applied to each item, by passing that function to the methods `sumInteger( )`, `sumLong( )`, `sumFloat( )`, or `sumDouble( )`.
+
+[[images/rx-operators/sum.f.png]]
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sum(rx.Observable)">`sum()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumLongs(rx.Observable)">`sumLongs()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumFloats(rx.Observable)">`sumFloats()`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sumDoubles(rx.Observable)">`sumDoubles()`</a>
