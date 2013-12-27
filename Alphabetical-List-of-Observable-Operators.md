@@ -3,8 +3,12 @@
 * [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
 * [**`and( )`**](Combining-Observables#and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern`
 * [**`average( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Integers emitted by an Observable and emits this average
+* [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Doubles that are the result of a function applied to items emitted by an Observable and emits this average
 * [**`averageDoubles( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Doubles emitted by an Observable and emits this average
+* [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Floats that are the result of a function applied to items emitted by an Observable and emits this average
 * [**`averageFloats( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Floats emitted by an Observable and emits this average
+* [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Integers that are the result of a function applied to items emitted by an Observable and emits this average
+* [**`averageLong( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Longs that are the result of a function applied to items emitted by an Observable and emits this average
 * [**`averageLongs( )`**](Mathematical-and-Aggregate-Operators#average) — calculates the average of Longs emitted by an Observable and emits this average
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
@@ -110,8 +114,12 @@
 * [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
 * [**`sum( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Integers emitted by an Observable and emits this sum
+* [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Doubles that are the result of a function applied to items emitted by an Observable and emits this sum
 * [**`sumDoubles( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Doubles emitted by an Observable and emits this sum
+* [**`sumFloat( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats that are the result of a function applied to items emitted by an Observable and emits this sum
 * [**`sumFloats( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Floats emitted by an Observable and emits this sum
+* [**`sumInteger( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Integers that are the result of a function applied to items emitted by an Observable and emits this sum
+* [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs that are the result of a function applied to items emitted by an Observable and emits this sum
 * [**`sumLongs( )`**](Mathematical-and-Aggregate-Operators#sum) — adds the Longs emitted by an Observable and emits this sum
 * [**`switchCase( )`**](Conditional-and-Boolean-Operators#switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
 * [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
