@@ -9,7 +9,7 @@ These example implementations of “Hello World” in Java, Groovy, and Clojure 
 
 ```java
 public static void hello(String... names) {
-    Observable.toObservable(names).subscribe(new Action1<String>() {
+    Observable.from(names).subscribe(new Action1<String>() {
 
         @Override
         public void call(String s) {
@@ -30,7 +30,7 @@ Hello George!
 
 ```groovy
 def hello(String[] names) {
-    Observable.toObservable(names)
+    Observable.from(names)
         .subscribe({ println "Hello " + it + "!" })
 }
 ```
@@ -46,7 +46,7 @@ Hello George!
 ```clojure
 (defn hello
   [&rest]
-  (-> (Observable/toObservable &rest)
+  (-> (Observable/from &rest)
     (.subscribe #(println (str "Hello " % "!")))))
 ```
 
@@ -62,15 +62,13 @@ To create an Observable, you can either implement an Observable that (synchronou
 
 ## Creating Observables from Existing Data Structures
 
-You use the Observable `toObservable()`, `from()`, and `just()` methods to convert objects, lists, or arrays of objects into Observables:
+You use the Observable `from()` and `just()` methods to convert objects, lists, or arrays of objects into Observables:
 
 ```groovy
-Observable<Integer> o = Observable.toObservable(1, 2, 3, 4, 5, 6);
-
 Observable<String> o = Observable.from("a", "b", "c");
 
 def list = [5, 6, 7, 8]
-Observable<Integer> o = Observable.toObservable(list);
+Observable<Integer> o = Observable.from(list);
 
 Observable<String> o = Observable.just("one object");
 ```

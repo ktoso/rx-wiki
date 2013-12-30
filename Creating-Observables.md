@@ -99,7 +99,7 @@ If the a subscriber to the Observable that results when a Future is converted to
 #### convert a function into an Observable that executes the function and emits its return value
 [[images/rx-operators/toAsync.png]]
 
-With `toAsync( )` you can create an Observable that, when it is subscribed to, executes a function of your choosing and emits its return value before completing. In the case of an `Action`, it will emit `null` before completing. Note that even if the resulting Observable is subscribed to more than once, the function will only be executed once, and its sole return value will be emitted to all future observers.
+With `Async.toAsync( )` you can create an Observable that, when it is subscribed to, executes a function of your choosing and emits its return value before completing. In the case of an `Action`, it will emit `null` before completing. Note that even if the resulting Observable is subscribed to more than once, the function will only be executed once, and its sole return value will be emitted to all future observers.
 
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toasync.aspx">`ToAsync`</a>
@@ -174,7 +174,7 @@ def myObservable = Observable.create({ anObserver ->
 #### create an Observable that emits the return value of a function
 [[images/rx-operators/start.png]]
 
-Pass the `start( )` method a function that returns a value, and `start( )` will execute that function asynchronously and return an Observable that will emit that value to any subsequent Observers.
+Pass the `Async.start( )` method a function that returns a value, and `Async.start( )` will execute that function asynchronously and return an Observable that will emit that value to any subsequent Observers.
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablestartfunc-scheduler-context">`start`</a>
