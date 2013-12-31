@@ -128,6 +128,7 @@ This documentation groups information about the various operators and examples o
   * [[Error Handling|Error-Handling-Operators]]
   * [[Utility|Observable-Utility-Operators]]
   * [[Conditional and Boolean|Conditional-and-Boolean-Operators]]
-  * [[Mathematical|Mathematical-Operators]]
+  * [[Mathematical and Aggregate|Mathematical-and-Aggregate-Operators]]
+  * [[Asynchronous Conversion|Async-Operators]]
   * [[Connectable Observables|Connectable-Observable-Operators]]
   * [[Blocking Observables|Blocking-Observable-Operators]]
