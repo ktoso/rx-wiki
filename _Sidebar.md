@@ -10,6 +10,7 @@
   * [[Observable Utility Operators]]
   * [[Conditional and Boolean Operators]]
   * [[Mathematical and Aggregate Operators]]
+  * [[Async Operators]]
   * [[Connectable Observable Operators]]
   * [[Blocking Observable Operators]]
   * [[Alphabetical List of Observable Operators]]

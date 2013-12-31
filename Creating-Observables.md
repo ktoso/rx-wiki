@@ -2,15 +2,10 @@ This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
 * [**`fromFuture( )`**](Creating-Observables#fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
-* [**`startFuture( )`**](Creating-Observables#startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
-* [**`deferFuture( )`**](Creating-Observables#deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until an Observer subscribes
-* [**`fromCancellableFuture( )`, `startCancellableFuture( )`, and `deferCancellableFuture( )`**](Creating-Observables#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
 * [**`forIterable( )`**](Creating-Observables#foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
-* [**`toAsync( )`**](Creating-Observables#toasync) — convert a function into an Observable that executes the function and emits its return value
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
-* [**`start( )`**](Creating-Observables#start) — create an Observable that emits the return value of a function
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
 * [**`interval( )`**](Creating-Observables#interval) — create an Observable that emits a sequence of integers spaced by a given time interval
@@ -65,45 +60,11 @@ The `fromFuture( )` method also converts a Future into an Observable, but it o
 
 ***
 
-## startFuture( )
-#### convert a function that returns Future into an Observable that emits that Future's return value
-[[images/rx-operators/startFuture.png]]
-
-The `startFuture( )` method is similar to the `fromFuture( )` method except that it calls the function to obtain the Future immediately, and attempts to get its value even before an Observer subscribes to the resulting Observable. It then holds this value and returns it to any future observer.
-
-***
-
-## deferFuture( )
-#### convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until an Observer subscribes
-[[images/rx-operators/deferFuture.png]]
-
-You can use the `deferFuture( )` operator to convert a Future that returns an Observable into an Observable that emits the values of that returned Observable in such a way that the Future is not invoked until an observer subscribes to the resulting Observable.
-
-***
-## fromCancellableFuture( ), startCancellableFuture( ), and deferCancellableFuture( )
-#### versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
-
-If the a subscriber to the Observable that results when a Future is converted to an Observable later unsubscribes from that Observable, it can be useful to have the ability to stop attempting to retrieve items from the Future. The "cancellable" Future enables you do do this. These three methods will return Observables that, when unsubscribed to, will also "unsubscribe" from the underlying Futures.
-
-***
-
 ## forIterable( )
 #### apply a function to the elements of an Iterable to create Observables which are then concatenated
 [[images/rx-operators/forIterable.png]]
 
 `forIterable( )` is similar to `from(Iterable )` but instead of the resulting Observable emitting the elements of the Iterable as its own emitted items, it applies a specified function to each of these elements to generate one Observable per element, and then concatenates the emissions of these Observables to be its own sequence of emitted items.
-
-***
-
-## toAsync( )
-#### convert a function into an Observable that executes the function and emits its return value
-[[images/rx-operators/toAsync.png]]
-
-With `Async.toAsync( )` you can create an Observable that, when it is subscribed to, executes a function of your choosing and emits its return value before completing. In the case of an `Action`, it will emit `null` before completing. Note that even if the resulting Observable is subscribed to more than once, the function will only be executed once, and its sole return value will be emitted to all future observers.
-
-#### see also:
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toasync.aspx">`ToAsync`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservabletoasyncfunc-scheduler-context">`toAsync`</a>
 
 ***
 
@@ -167,18 +128,6 @@ def myObservable = Observable.create({ anObserver ->
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribeFunc)">`create(func)`</a>
 * RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablecreatesubscribe)
 * Linq: [`Create`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.create.aspx)
-
-***
-
-## start( )
-#### create an Observable that emits the return value of a function
-[[images/rx-operators/start.png]]
-
-Pass the `Async.start( )` method a function that returns a value, and `Async.start( )` will execute that function asynchronously and return an Observable that will emit that value to any subsequent Observers.
-
-#### see also:
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablestartfunc-scheduler-context">`start`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229265.aspx">`Start`</a>
 
 ***
 
