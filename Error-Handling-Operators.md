@@ -2,7 +2,7 @@ This section explains operators that handle errors and exceptions encountered by
 
 * [**`onErrorResumeNext( )`**](Error-Handling-Operators#onerrorresumenext) — instructs an Observable to continue emitting items after it encounters an error
 * [**`onErrorReturn( )`**](Error-Handling-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
-* [**`onExceptionResumeNextViaObservable( )`**](Error-Handling-Operators#onexceptionresumenextviaobservable) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
+* [**`onExceptionResumeNext( )`**](Error-Handling-Operators#onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
 * [**`retry( )`**](Error-Handling-Operators#retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
 
 ***
@@ -85,11 +85,11 @@ Sequence complete
 
 ***
 
-## onExceptionResumeNextViaObservable( )
+## onExceptionResumeNext( )
 #### instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
 [[images/rx-operators/onExceptionResumeNextViaObservable.png]]
 
-Much like `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Observer, `onExceptionResumeNextViaObservable( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNextViaObservable( )` will propagate it to its observers' `onError( )` method and will not invoke its backup Observable.
+Much like `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Observer, `onExceptionResumeNext( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNext( )` will propagate it to its observers' `onError( )` method and will not invoke its backup Observable.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#onExceptionResumeNext(rx.Observable)">`onExceptionResumeNext(observable)`</a>
