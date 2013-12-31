@@ -2,6 +2,8 @@
 * [**`all( )`**](Conditional-and-Boolean-Operators#all) — determine whether all items emitted by an Observable meet some criteria
 * [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
 * [**`and( )`**](Combining-Observables#and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern`
+* [**`asyncAction( )`**](Async-Operators#toasync-or-asyncaction-or-asyncfunc) — convert an Action into an Observable that executes the Action and emits its return value
+* [**`asyncFunc( )`**](Async-Operators#toasync-or-asyncaction-or-asyncfunc) — convert a function into an Observable that executes the function and emits its return value
 * [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Doubles emitted by an Observable and emits this average
 * [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Floats emitted by an Observable and emits this average
 * [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Integers emitted by an Observable and emits this average
@@ -19,8 +21,8 @@
 * [**`debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
 * [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 * [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
-* [**`deferFuture( )`**](Creating-Observables#deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until an Observer subscribes
-* [**`deferCancellableFuture( )`**](Creating-Observables#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future that returns an Observable into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the returned Observable until an Observer subscribes
+* [**`deferFuture( )`**](Async-Operators#deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until an Observer subscribes
+* [**`deferCancellableFuture( )`**](Async-Operators#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future that returns an Observable into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the returned Observable until an Observer subscribes
 * [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`distinct( )`**](Filtering-Observables#distinct) — suppress duplicate items emitted by the source Observable
@@ -41,11 +43,16 @@
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * [**`flatMap( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
-* [**`forEachFuture( )`**](Blocking-Observable-Operators#foreachfuture) — create a futureTask that will invoke a specified function on each item emitted by an Observable 
+* [**`forEachFuture( )`**](Async-Operators#foreachfuture) (`Async`) — pass observer methods to an Observable but also have it behave like a Future that blocks until it completes
+* [**`forEachFuture( )`**](Blocking-Observable-Operators#foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable 
 * [**`forIterable( )`**](Creating-Observables#foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable or a Future into an Observable
-* [**`fromCancellableFuture( )`**](Creating-Observables#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the Future's value until an Observer subscribes
+* [**`fromAction( )`**](Async-Operators#fromaction) — convert an Action into an Observable that invokes the action and emits its result when an observer subscribes
+* [**`fromCallable( )`**](Async-Operators#fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when an observer subscribes
+* [**`fromCancellableFuture( )`**](Async-Operators#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the Future's value until an Observer subscribes
+* [**`fromFunc0( )`**](Async-Operators#fromfunc0) — convert a Func0 into an Observable that invokes the function and emits its result when an observer subscribes
 * [**`fromFuture( )`**](Creating-Observables#fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+* [**`fromRunnable( )`**](Async-Operators#fromrunnable) — convert a Runnable into an Observable that invokes the runable and emits its result when an observer subscribes
 * [**`generate( )`**](Creating-Observables#generate-and-generateabsolutetime) — create an Observable that emits a sequence of items as generated by a function of your choosing
 * [**`generateAbsoluteTime( )`**](Creating-Observables#generate-and-generateabsolutetime) — create an Observable that emits a sequence of items as generated by a function of your choosing, with each item emitted at an item-specific time
 * [**`getIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
@@ -104,9 +111,9 @@
 * [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
 * [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
-* [**`start( )`**](Creating-Observables#start) — create an Observable that emits the return value of a function
-* [**`startCancellableFuture( )`**](Creating-Observables#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a function that returns Future into an Observable that emits that Future's return value in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future
-* [**`startFuture( )`**](Creating-Observables#startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
+* [**`start( )`**](Async-Operators#start) — create an Observable that emits the return value of a function
+* [**`startCancellableFuture( )`**](Async-Operators#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a function that returns Future into an Observable that emits that Future's return value in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future
+* [**`startFuture( )`**](Async-Operators#startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
 * [**`startWith( )`**](Combining-Observables#startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
 * [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#suminteger-sumlong-sumfloat-and-sumdouble) — adds the Doubles emitted by an Observable and emits this sum
@@ -131,7 +138,7 @@
 * [**`timeout( )`**](Filtering-Observables#timeout) — emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
 * [**`timer( )`**](Creating-Observables#timer) — create an Observable that emits a single item after a given delay
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
-* [**`toAsync( )`**](Creating-Observables#toasync) — convert a function into an Observable that executes the function and emits its return value
+* [**`toAsync( )`**](Async-Operators#toasync-or-asyncaction-or-asyncfunc) — convert a function or Action into an Observable that executes the function and emits its return value
 * [**`toBlockingObservable( )`**](Blocking-Observable-Operators) — transform an Observable into a BlockingObservable
 * [**`toFuture( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
