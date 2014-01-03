@@ -236,6 +236,8 @@ You can use the `parallel( )` method to split an Observable into as many Obser
 
 Use the `doOnEach( )` method to register an `Action` that RxJava will perform each time the Observable emits an item. This action takes the item as a parameter.
 
+There are also `doOnEach( )` variants that allow you to register actions to perform if the Observable completes or informs of a throwable.  The `doOnNext( )` method is equivalent to the version of `doOnEach( )` that registers an action to be performed only for each emitted item.
+
 #### see also:
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedoobserver--onnext-onerror-oncompleted">`do` and `doAction`</a>
