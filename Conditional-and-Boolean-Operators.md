@@ -64,6 +64,7 @@ The `ifThen( )` operator evaluates a function and emits the source Observable'
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableifcondition-thensource-elsesource">`if`</a>
+* <a href="http://weblogs.asp.net/podwysocki/archive/2010/06/18/introduction-to-the-reactive-extensions-for-javascript-conditionals.aspx#content2">Introduction to the Reactive Extensions for JavaScript – Conditionals</a>
 
 ***
 
