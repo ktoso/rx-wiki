@@ -328,6 +328,7 @@ The `delaySubscription( )` operator shifts waits for a specified period of tim
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delaySubscription(long, java.util.concurrent.TimeUnit)">`delaySubscription(delay,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delaySubscription(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`delaySubscription(delay,unit,scheduler)`</a>
+
 ***
 
 ## timeInterval( )
