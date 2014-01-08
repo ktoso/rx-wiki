@@ -172,7 +172,7 @@ The combination of `and( )`, `then( )`, and `when( )` methods operate much
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#and(rx.Observable)">`and( )`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#then(rx.util.functions.Func1)">`then(selector`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#then(rx.util.functions.Func1)">`then(selector)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#when(java.lang.Iterable)">`when( )`</a> (multiple varieties)
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229153.aspx">`And`</a>/<a href="http://msdn.microsoft.com/en-us/library/hh211662.aspx">`Then`</a>/<a href="http://msdn.microsoft.com/en-us/library/hh229889.aspx">`When`</a>
 * Intro to Rx: <a href="http://www.introtorx.com/content/v1.0.10621.0/12_CombiningSequences.html#AndThenWhen">And-Then-When</a>
