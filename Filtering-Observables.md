@@ -92,6 +92,7 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastpredicate-thisarg">`last`</a>
 * Linq: `lastAsync`
 
@@ -105,6 +106,7 @@ The `lastOrDefault( )` operator returns an Observable that emits the last item
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T)">`lastOrDefault(default)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T, rx.util.functions.Func1)">`lastOrDefault(default, predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastordefaultpredicate-defaultvalue-thisarg">`lastOrDefault`</a>
 * Linq: `lastOrDefaultAsync`
 
@@ -117,6 +119,9 @@ The `lastOrDefault( )` operator returns an Observable that emits the last item
 To convert an Observable that emits several items into one that emits the last _n_ of these items as a single list before completing, use the `takeLastBuffer( )` method. There are also versions of `takeLastBuffer( )` that emit a list containing the items that were emitted by the source Observable during a specified window of time before the Observable completed, or a maximum of _n_ items from such a window.
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int)">`takeLastBuffer(count)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit)">`takeLastBuffer(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(time, timeunit, scheduler)`</a>
+* javadoc: <a hrtef="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit)">`takeLastBuffer(count, time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(count, time, timeunit, scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbuffercount">`takeLastBuffer`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbufferwithtimeduration-scheduler">`takeLastBufferWithTime`</a>
 
 ***
@@ -150,6 +155,7 @@ There are also versions of `skip()` that ignore the items emitted by an Observab
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit)">`skip(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skip(time, timeunit, scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847.aspx">`Skip`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipcount">`skip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
@@ -166,6 +172,7 @@ There are also versions of `skipLast()` that ignore the items emitted by an Obse
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(int)">`skipLast(count)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit)">`skipLast(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skipLast(time, timeunit, scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211750.aspx">`SkipLast`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskiplastcount">`skipLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipLastTakeLast">Introduction to Rx: SkipLast and TakeLast</a>
@@ -198,6 +205,7 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit)">`take(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`take(time, timeunit, scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852.aspx">`Take`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakecount-scheduler">`take`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
@@ -298,8 +306,8 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit)">`throttleLast(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleLast(period,unit,scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample.aspx">`Sample`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesampleinterval--sampleobservable">`sample`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Sample">Introduction to Rx: Sample</a>
@@ -374,8 +382,8 @@ Another version of `timeout( )` does not call `onError( )` but instead switc
 [[images/rx-operators/timeout.2.png]]
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit)">`timeout(time,unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timeout(time,unit,scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit)">`timeout(time,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timeout(time,unit,scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable)">`timeout(time,unit,fallback)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable, rx.Scheduler)">`timeout(time,unit,fallback,scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timeout.aspx">`Timeout`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeoutduetime-other-scheduler">`timeout`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeoutwithselectorfirsttimeout-timeoutdurationselector-other">`timeoutWithSelector`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Timeout">Introduction to Rx: Timeout</a>
