@@ -135,6 +135,7 @@ If the Iterator reaches the final item emitted by the source Observable, a subse
 The `latest( )` operator is very similar to `Observable.next( )` except that when you call `Iterator.next( )` on the resulting Iterator, it will not block if a item has been emitted by the source Observable since the item returned by the previous `Iterator.next( )` -- instead, it will return the most recent such item.
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#latest()">`latest( )`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212115.aspx">`Latest`</a>
 
 ***
