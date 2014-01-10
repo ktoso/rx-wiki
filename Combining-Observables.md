@@ -117,6 +117,9 @@ Because it is possible that more than one of the merged observables encountered 
 
 Use the `parallelMerge( )` method to take an Observable that emits a large number of Observables and to reduce it to an Observable that emits a particular, smaller number of Observables that emit the same set of items as the original larger set of Observables: for instance a number of Observables that matches the number of parallel processes that you want to use when processing the emissions from the complete set of Observables.
 
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallelMerge(rx.Observable, int)">`parallelMerge(source,number)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallelMerge(rx.Observable, int, rx.Scheduler)">`parallelMerge(source,number,scheduler)`</a>
+
 ***
 
 ## zip( )
@@ -168,6 +171,9 @@ There are also versions of `zip( )` that accept three or more Observables, as 
 The combination of `and( )`, `then( )`, and `when( )` methods operate much like `zip( )` but they do so by means of intermediary data structures.  `and( )` accepts two or more Observables and combines the emissions from each, one set at a time, into `Pattern` objects. `then( )` operates on such `Pattern` objects, transforming them in a `Plan`. `when( )` then transforms these various `Plan` objects into emissions from an Observable.
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#and(rx.Observable)">`and( )`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#then(rx.util.functions.Func1)">`then(selector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#when(java.lang.Iterable)">`when( )`</a> (multiple varieties)
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229153.aspx">`And`</a>/<a href="http://msdn.microsoft.com/en-us/library/hh211662.aspx">`Then`</a>/<a href="http://msdn.microsoft.com/en-us/library/hh229889.aspx">`When`</a>
 * Intro to Rx: <a href="http://www.introtorx.com/content/v1.0.10621.0/12_CombiningSequences.html#AndThenWhen">And-Then-When</a>
 
@@ -198,6 +204,8 @@ The `join( )` method combines the items emitted by two Observables, and select
 The `groupJoin( )` method is similar, except that the function you define to combine items emitted by the two Observables pairs individual items emitted by the source Observable with an Observable that emits items from the second Observable that fall in the same window as that item.
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#join(rx.Observable, rx.util.functions.Func1, rx.util.functions.Func1, rx.util.functions.Func2)">`join( )`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupJoin(rx.Observable, rx.util.functions.Func1, rx.util.functions.Func1, rx.util.functions.Func2)">`groupJoin( )`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229750.aspx">`Join`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh244235.aspx">`GroupJoin`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypejoinright-leftdurationselector-rightdurationselector-resultselector">`join`</a>

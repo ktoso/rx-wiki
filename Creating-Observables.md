@@ -97,6 +97,7 @@ If you pass nothing or `null` to `just( )`, the resulting Observable will _not
 There are also versions of `repeat( )` that operate on a particular scheduler, that repeat only a certain number of times before terminating, and that repeat sequences of items emitted by a source Observable rather than one particular item.
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat()">`repeat( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat(rx.Scheduler)">`repeat(scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.repeat.aspx">`Repeat`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablerepeatvalue-repeatcount-scheduler">`repeat`</a>
 
@@ -191,6 +192,7 @@ There is also a version of `timer( )` that emits a single zero after a specifi
 For both of these versions of `timer( )` you can optionally specify a Scheduler on which the timing will take place.
 
 #### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timer(long, long, java.util.concurrent.TimeUnit)">timer( )</a>
 * RxJS: [`timer`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservabletimerduetime-period-scheduler)
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timer.aspx">`Timer`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableTimer">Introduction to Rx: Timer</a>

@@ -22,4 +22,4 @@
   * Scala
 
 * [[How to Contribute]]
-* [Javadoc](http://netflix.github.com/RxJava/javadoc/)
+* [Javadoc](http://netflix.github.io/RxJava/javadoc/rx/Observable.html)
