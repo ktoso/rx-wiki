@@ -121,7 +121,15 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 
 ## Observable.replay( )
 #### ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting items
+There are varieties of `replay( )` that return a ConnectableObservable that you then must use the `publish( )` operator on so that observers may connect to it:
+
 [[images/rx-operators/replay.png]]
+
+And there are also varieties of `replay( )` that accept a selector argument and return a simple Observable:
+
+[[images/rx-operators/replay.f.png]]
+
+In each variety there are versions with which you can limit the number of replayable items either by quantity or by whether or not they were emitted within a particular timespan.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#replay()">`replay()`</a>
