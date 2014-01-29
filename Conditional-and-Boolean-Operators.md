@@ -1,22 +1,22 @@
 This section explains operators with which you conditionally emit or transform Observables, or can do boolean evaluations of them:
 
 ### Conditional Operators
-* [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
-* [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
-* [**`doWhile( )`**](Conditional-and-Boolean-Operators#dowhile) — emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true
-* [**`ifThen( )`**](Conditional-and-Boolean-Operators#ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
-* [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
-* [**`skipWhile( )` and `skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
-* [**`switchCase( )`**](Conditional-and-Boolean-Operators#switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
-* [**`takeUntil( )`**](Conditional-and-Boolean-Operators#takeuntil) — emits the items from the source Observable until a second Observable emits an item
-* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-* [**`whileDo( )`**](Conditional-and-Boolean-Operators#whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
+* [**`amb( )`**](Conditional-and-Boolean-Operators#wiki-amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
+* [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#wiki-defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
+* [**`doWhile( )`**](Conditional-and-Boolean-Operators#wiki-dowhile) — emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true
+* [**`ifThen( )`**](Conditional-and-Boolean-Operators#wiki-ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
+* [**`skipUntil( )`**](Conditional-and-Boolean-Operators#wiki-skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
+* [**`skipWhile( )` and `skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`switchCase( )`**](Conditional-and-Boolean-Operators#wiki-switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
+* [**`takeUntil( )`**](Conditional-and-Boolean-Operators#wiki-takeuntil) — emits the items from the source Observable until a second Observable emits an item
+* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* [**`whileDo( )`**](Conditional-and-Boolean-Operators#wiki-whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
 
 ### Boolean Operators
-* [**`all( )`**](Conditional-and-Boolean-Operators#all) — determine whether all items emitted by an Observable meet some criteria
-* [**`contains( )`**](Conditional-and-Boolean-Operators#contains) — determine whether an Observable emits a particular item or not
-* [**`exists( )` and `isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
-* [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal) — test the equality of the sequences emitted by two Observables
+* [**`all( )`**](Conditional-and-Boolean-Operators#wiki-all) — determine whether all items emitted by an Observable meet some criteria
+* [**`contains( )`**](Conditional-and-Boolean-Operators#wiki-contains) — determine whether an Observable emits a particular item or not
+* [**`exists( )` and `isEmpty( )`**](Conditional-and-Boolean-Operators#wiki-exists-and-isempty) — determine whether an Observable emits any items or not
+* [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#wiki-sequenceequal) — test the equality of the sequences emitted by two Observables
 
 ***
 
