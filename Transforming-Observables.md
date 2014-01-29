@@ -1,13 +1,13 @@
 This section explains operators with which you can transform items that are emitted by an Observable.
 
-* [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
-* [**`mapMany( )` or `flatMap( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* [**`mapManyDelayError( )`**](Transforming-Observables#mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, waiting to report errors until all error-free observables have a chance to complete
-* [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
-* [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
-* [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
-* [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
-* [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
+* [**`map( )`**](Transforming-Observables#wiki-map) — transform the items emitted by an Observable by applying a function to each of them
+* [**`mapMany( )` or `flatMap( )`**](Transforming-Observables#wiki-mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
+* [**`mapManyDelayError( )`**](Transforming-Observables#wiki-mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, waiting to report errors until all error-free observables have a chance to complete
+* [**`scan( )`**](Transforming-Observables#wiki-scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
+* [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
+* [**`buffer( )`**](Transforming-Observables#wiki-buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
+* [**`window( )`**](Transforming-Observables#wiki-window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
+* [**`cast( )`**](Transforming-Observables#wiki-cast) — cast all items from the source Observable into a particular type before reemitting them
 
 ***
 
