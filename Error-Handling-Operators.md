@@ -1,9 +1,9 @@
 This section explains operators that handle errors and exceptions encountered by Observables.
 
-* [**`onErrorResumeNext( )`**](Error-Handling-Operators#onerrorresumenext) — instructs an Observable to continue emitting items after it encounters an error
-* [**`onErrorReturn( )`**](Error-Handling-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
-* [**`onExceptionResumeNext( )`**](Error-Handling-Operators#onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
-* [**`retry( )`**](Error-Handling-Operators#retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
+* [**`onErrorResumeNext( )`**](Error-Handling-Operators#wiki-onerrorresumenext) — instructs an Observable to continue emitting items after it encounters an error
+* [**`onErrorReturn( )`**](Error-Handling-Operators#wiki-onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
+* [**`onExceptionResumeNext( )`**](Error-Handling-Operators#wiki-onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
+* [**`retry( )`**](Error-Handling-Operators#wiki-retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
 
 ***
 
