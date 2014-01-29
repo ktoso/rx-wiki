@@ -248,7 +248,7 @@ Results:
 
 Note that all of the above examples ignore error handling, for brevity. See below for examples that include error handling.
 
-More information can be found on the [[Observable]] and [[Creation Operators|Creation-Operators]] pages.
+More information can be found on the [[Observable]] and [[Creation Operators|Creating-Observables]] pages.
 
 # Composition
 
@@ -381,7 +381,7 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
         { println "--- Error ---\n" + it.getMessage() })
 ```
 
-See the [Observable Utility Operators](https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#onerrorresumenext) page for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` and `onErrorReturn()` that allow Observables to continue with fallbacks in the event of error.
+See the [Observable Utility Operators](https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-onerrorresumenext) page for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` and `onErrorReturn()` that allow Observables to continue with fallbacks in the event of error.
 
 Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables --- `myObservable` --- and you want to intercept any exceptions that would normally pass through to an Observer's `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the `onErrorResumeNext()` method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called `error()` will generate such an Observable for you):
 
