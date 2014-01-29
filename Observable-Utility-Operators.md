@@ -1,23 +1,23 @@
 This section explains various utility operators for working with Observables.
 
-* [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
-* [**`dematerialize( )`**](Observable-Utility-Operators#dematerialize) — convert a materialized Observable back into its non-materialized form
-* [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
-* [**`synchronize( )`**](Observable-Utility-Operators#synchronize) — force an Observable to make synchronous calls and to be well-behaved
-* [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
-* [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler an Observer should observe the Observable
-* [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
-* [**`parallel( )`**](Observable-Utility-Operators#parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
-* [**`doOnEach( )`**](Observable-Utility-Operators#dooneach) — register an action to take whenever an Observable emits an item
-* [**`doOnCompleted( )`**](Observable-Utility-Operators#dooncompleted) — register an action to take when an Observable completes successfully
-* [**`doOnError( )`**](Observable-Utility-Operators#doonerror) — register an action to take when an Observable completes with an error
-* [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
-* [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
-* [**`delaySubscription( )`**](Observable-Utility-Operators#delaysubscription) — hold an Observer's subscription request for a specified amount of time before passing it on to the source Observable
-* [**`timeInterval( )`**](Observable-Utility-Operators#timeinterval) — emit the time lapsed between consecutive emissions of a source Observable
-* [**`using( )`**](Observable-Utility-Operators#using) — create a disposable resource that has the same lifespan as an Observable
-* [**`single( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
-* [**`singleOrDefault( )`**](Observable-Utility-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
+* [**`materialize( )`**](Observable-Utility-Operators#wiki-materialize) — convert an Observable into a list of Notifications
+* [**`dematerialize( )`**](Observable-Utility-Operators#wiki-dematerialize) — convert a materialized Observable back into its non-materialized form
+* [**`timestamp( )`**](Observable-Utility-Operators#wiki-timestamp) — attach a timestamp to every item emitted by an Observable
+* [**`synchronize( )`**](Observable-Utility-Operators#wiki-synchronize) — force an Observable to make synchronous calls and to be well-behaved
+* [**`cache( )`**](Observable-Utility-Operators#wiki-cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
+* [**`observeOn( )`**](Observable-Utility-Operators#wiki-observeon) — specify on which Scheduler an Observer should observe the Observable
+* [**`subscribeOn( )`**](Observable-Utility-Operators#wiki-subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
+* [**`parallel( )`**](Observable-Utility-Operators#wiki-parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
+* [**`doOnEach( )`**](Observable-Utility-Operators#wiki-dooneach) — register an action to take whenever an Observable emits an item
+* [**`doOnCompleted( )`**](Observable-Utility-Operators#wiki-dooncompleted) — register an action to take when an Observable completes successfully
+* [**`doOnError( )`**](Observable-Utility-Operators#wiki-doonerror) — register an action to take when an Observable completes with an error
+* [**`finallyDo( )`**](Observable-Utility-Operators#wiki-finallydo) — register an action to take when an Observable completes
+* [**`delay( )`**](Observable-Utility-Operators#wiki-delay) — shift the emissions from an Observable forward in time by a specified amount
+* [**`delaySubscription( )`**](Observable-Utility-Operators#wiki-delaysubscription) — hold an Observer's subscription request for a specified amount of time before passing it on to the source Observable
+* [**`timeInterval( )`**](Observable-Utility-Operators#wiki-timeinterval) — emit the time lapsed between consecutive emissions of a source Observable
+* [**`using( )`**](Observable-Utility-Operators#wiki-using) — create a disposable resource that has the same lifespan as an Observable
+* [**`single( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
+* [**`singleOrDefault( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 
 ***
 
@@ -372,7 +372,7 @@ The `singleOrDefault( )` method is similar, except that while it will still no
 [[images/rx-operators/singleOrDefault.p.png]]
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#single()">`single( )`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#single(rx.util.functions.Func1)">`single(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(T)">`singleOrDefault(default)`</a>
