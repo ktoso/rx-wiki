@@ -1,25 +1,25 @@
 This section explains operators you can use to filter and select items emitted by Observables.
 
-* [**`filter( )` or `where( )`**](Filtering-Observables#filter-or-where) — filter items emitted by an Observable
-* [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
-* [**`last( )`**](Filtering-Observables#last) — emit only the last item emitted by an Observable
-* [**`lastOrDefault( )`**](Filtering-Observables#lastOrDefault) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
-* [**`takeLastBuffer( )`**](Filtering-Observables#takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
-* [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
-* [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
-* [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
-* [**`first( )` and `takeFirst( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
-* [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
-* [**`elementAt( )`**](Filtering-Observables#elementat) — emit item _n_ emitted by the source Observable
-* [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
-* [**`sample( )` or `throttleLast( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
-* [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
-* [**`throttleWithTimeout( )` or `debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
-* [**`timeout( )`**](Filtering-Observables#timeout) — emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
-* [**`distinct( )`**](Filtering-Observables#distinct) — suppress duplicate items emitted by the source Observable
-* [**`distinctUntilChanged( )`**](Filtering-Observables#distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
-* [**`ofType( )`**](Filtering-Observables#oftype) — emit only those items from the source Observable that are of a particular class
-* [**`ignoreElements( )`**](Filtering-Observables#ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
+* [**`filter( )` or `where( )`**](Filtering-Observables#wiki-filter-or-where) — filter items emitted by an Observable
+* [**`takeLast( )`**](Filtering-Observables#wiki-takelast) — only emit the last _n_ items emitted by an Observable
+* [**`last( )`**](Filtering-Observables#wiki-last) — emit only the last item emitted by an Observable
+* [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
+* [**`takeLastBuffer( )`**](Filtering-Observables#wiki-takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
+* [**`skip( )`**](Filtering-Observables#wiki-skip) — ignore the first _n_ items emitted by an Observable
+* [**`skipLast( )`**](Filtering-Observables#wiki-skiplast) — ignore the last _n_ items emitted by an Observable
+* [**`take( )`**](Filtering-Observables#wiki-take) — emit only the first _n_ items emitted by an Observable
+* [**`first( )` and `takeFirst( )`**](Filtering-Observables#wiki-first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
+* [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+* [**`elementAt( )`**](Filtering-Observables#wiki-elementat) — emit item _n_ emitted by the source Observable
+* [**`elementAtOrDefault( )`**](Filtering-Observables#wiki-elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
+* [**`sample( )` or `throttleLast( )`**](Filtering-Observables#wiki-sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
+* [**`throttleFirst( )`**](Filtering-Observables#wiki-throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
+* [**`throttleWithTimeout( )` or `debounce( )`**](Filtering-Observables#wiki-throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
+* [**`timeout( )`**](Filtering-Observables#wiki-timeout) — emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
+* [**`distinct( )`**](Filtering-Observables#wiki-distinct) — suppress duplicate items emitted by the source Observable
+* [**`distinctUntilChanged( )`**](Filtering-Observables#wiki-distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
+* [**`ofType( )`**](Filtering-Observables#wiki-oftype) — emit only those items from the source Observable that are of a particular class
+* [**`ignoreElements( )`**](Filtering-Observables#wiki-ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
 
 ***
 
@@ -88,10 +88,10 @@ There are also versions of `takeLast( )` that emit the items that were emitted
 #### only emit the last item emitted by an Observable
 [[images/rx-operators/last.png]]
 
-The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `IllegalArgumentException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#last-and-lastordefault).
+The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `IllegalArgumentException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastpredicate-thisarg">`last`</a>
 * Linq: `lastAsync`
@@ -102,10 +102,10 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 #### emit only the last item emitted by an Observable, or a default value if the source Observable is empty
 [[images/rx-operators/lastOrDefault.png]]
 
-The `lastOrDefault( )` operator returns an Observable that emits the last item emitted by the source Observable, or a default item if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `lastOrDefault( )`](Blocking-Observable-Operators#last-and-lastordefault).
+The `lastOrDefault( )` operator returns an Observable that emits the last item emitted by the source Observable, or a default item if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `lastOrDefault( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T)">`lastOrDefault(default)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T, rx.util.functions.Func1)">`lastOrDefault(default, predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastordefaultpredicate-defaultvalue-thisarg">`lastOrDefault`</a>
 * Linq: `lastOrDefaultAsync`
@@ -225,7 +225,7 @@ You can also pass a function to this method that evaluates items as they are emi
 [[images/rx-operators/first.takeFirst.png]]
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first()">`first()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first(rx.util.functions.Func1)">`first(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeFirst()">`takeFirst()`</a>
@@ -246,7 +246,7 @@ To create an Observable that emits only the first item emitted by a source Obser
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(rx.util.functions.Func1, T)">`firstOrDefault(predicate,default)`</a>
 * Linq: `firstOrDefaultAsync`
