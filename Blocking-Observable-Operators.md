@@ -2,21 +2,21 @@ This section explains the [`BlockingObservable`](http://netflix.github.io/RxJava
 
 To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlockingObservable( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable%28%29) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from%28rx.Observable%29) method.
 
-* [**`forEach( )`**](Blocking-Observable-Operators#foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
-* [**`forEachFuture( )`**](Blocking-Observable-Operators#foreachfuture) — create a futureTask that will invoke a specified function on each item emitted by an Observable 
-* [**`first( )`**](Blocking-Observable-Operators#first-and-firstordefault) — block until the Observable emits an item, then return the first item emitted by the Observable
-* [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) — block until the Observable emits an item or completes, then return the first item emitted by the Observable or a default item if the Observable did not emit an item
-* [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
-* [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
-* [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
-* [**`next( )`**](Blocking-Observable-Operators#next) — returns an iterable that blocks until the Observable emits another item, then returns that item
-* [**`latest( )`**](Blocking-Observable-Operators#latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns that item
-* [**`chunkify( )`**](Blocking-Observable-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
-* [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
-* [**`singleOrDefault( )`**](Blocking-Observable-Operators#single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
-* [**`toFuture( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
-* [**`toIterable( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
-* [**`getIterator( )` or `toIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
+* [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
+* [**`forEachFuture( )`**](Blocking-Observable-Operators#wiki-foreachfuture) — create a futureTask that will invoke a specified function on each item emitted by an Observable 
+* [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) — block until the Observable emits an item, then return the first item emitted by the Observable
+* [**`firstOrDefault( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) — block until the Observable emits an item or completes, then return the first item emitted by the Observable or a default item if the Observable did not emit an item
+* [**`last( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
+* [**`lastOrDefault( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
+* [**`mostRecent( )`**](Blocking-Observable-Operators#wiki-mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
+* [**`next( )`**](Blocking-Observable-Operators#wiki-next) — returns an iterable that blocks until the Observable emits another item, then returns that item
+* [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns that item
+* [**`chunkify( )`**](Blocking-Observable-Operators#wiki-chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
+* [**`single( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
+* [**`singleOrDefault( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
+* [**`toFuture( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
+* [**`toIterable( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
+* [**`getIterator( )` or `toIterator( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
 
 > This documentation accompanies its explanations with a modified form of "marble diagrams." Here is how these marble diagrams represent Blocking Observables:
 
@@ -62,7 +62,7 @@ The `firstOrDefault( )` method is similar to `first( )`, except that instead
 [[images/rx-operators/B.firstOrDefault.p.png]]
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first()">`first()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first(rx.util.functions.Func1)">`first(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
@@ -86,7 +86,7 @@ The `lastOrDefault( )` method is similar to `last( )`, except that instead o
 [[images/rx-operators/B.lastOrDefault.p.png]]
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last()">`last()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#lastOrDefault(T)">`lastOrDefault(default)`</a>
@@ -161,7 +161,7 @@ The `singleOrDefault( )` method is similar, except that while it will still th
 [[images/rx-operators/B.singleOrDefault.p.png]]
 
 #### see also:
-* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#appendix-similar-blocking-and-non-blocking-operators)
+* [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single()">`single()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single(rx.util.functions.Func1)">`single(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(T)">`singleOrDefault(default)`</a>
