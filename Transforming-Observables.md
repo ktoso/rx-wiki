@@ -77,7 +77,7 @@ If any of the individual Observables mapped to the items from the source Observa
 
 [[images/rx-operators/mapManyDelayError.png]]
 
-Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError( )` may pass information about multiple errors to the `onError` method of its Observers (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class [`CompositeException`](http://netflix.github.io/RxJava/javadoc/rx/util/CompositeException.html).
+Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError( )` may pass information about multiple errors to the `onError` method of its Subscribers (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class [`CompositeException`](http://netflix.github.io/RxJava/javadoc/rx/util/CompositeException.html).
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mapMany(rx.util.functions.Func1)">`mapMany(func)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.util.functions.Func1)">its `flatMap` clone</a>)
@@ -164,9 +164,9 @@ There is also a `groupByUntil( )` operator. It has the two varieties mentioned
 
 [[images/rx-operators/groupByUntil.png]]
 
-Another variety of `groupByUntil( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its observers' `onCompleted` methods and then expires).
+Another variety of `groupByUntil( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its Subscribers' `onCompleted` methods and then expires).
 
-Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits Observables, it begins to emit items from the source Observable onto these emitted Observables immediately. That is to say, it does not wait for any Observers to subscribe. So if you want to ensure that you see all of the items that are emitted on these new Observables, you should take care to subscribe to them right away.
+Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits Observables, it begins to emit items from the source Observable onto these emitted Observables immediately. That is to say, it does not wait for any Subscribers to subscribe. So if you want to ensure that you see all of the items that are emitted on these new Observables, you should take care to subscribe to them right away.
 
 The following illustration shows how this can cause unexpected behavior:
 [[images/rx-operators/groupBy.anomaly.png]]
@@ -241,7 +241,7 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 
 Window is similar to `buffer( )`, but rather than emitting packets of items from the original `Observable`, it emits `Observable`s, each one of which emits a subset of items from the original `Observable` and then terminates with an `onCompleted( )` call.
 
-Like `buffer( )`, `window( )` has many varieties, each with its own way of subdividing the original `Observable` into the resulting `Observable` emissions, each one of which contains a "window" onto the original emitted items. In the terminology of the `window( )` method, when a window "opens," this means that a new `Observable` is emitted and that `Observable` will begin emitting items emitted by the source `Observable`. When a window "closes," this means that the emitted `Observable` stops emitting items from the source `Observable` and calls its Observers' `onCompleted( )` method and terminates.
+Like `buffer( )`, `window( )` has many varieties, each with its own way of subdividing the original `Observable` into the resulting `Observable` emissions, each one of which contains a "window" onto the original emitted items. In the terminology of the `window( )` method, when a window "opens," this means that a new `Observable` is emitted and that `Observable` will begin emitting items emitted by the source `Observable`. When a window "closes," this means that the emitted `Observable` stops emitting items from the source `Observable` and calls its Subscribers' `onCompleted( )` method and terminates.
 
 * `window(source, closingSelector)`
 [[images/rx-operators/window1.png]]
