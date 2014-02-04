@@ -58,7 +58,7 @@ Hello George!
 
 # Creating Observables
 
-To create an Observable, you can either implement an Observable that (synchronously or asynchronously) executes and emits data by invoking an Observer's `onNext()` method, or you can convert an existing data structure into an Observable by using some Observable methods that are designed for this purpose.
+To create an Observable, you can either implement an Observable that (synchronously or asynchronously) executes and emits data by invoking an Subscriber’s `onNext()` method, or you can convert an existing data structure into an Observable by using some Observable methods that are designed for this purpose.
 
 ## Creating Observables from Existing Data Structures
 
@@ -73,7 +73,7 @@ Observable<Integer> o = Observable.from(list);
 Observable<String> o = Observable.just("one object");
 ```
 
-These converted Observables will synchronously invoke the `onNext()` method of any Observer that subscribes to them, for each item emitted by the Observable, and will then invoke the Observer’s `onCompleted()` method.
+These converted Observables will synchronously invoke the `onNext()` method of any Subscriber that subscribes to them, for each item emitted by the Observable, and will then invoke the Subscriber’s `onCompleted()` method.
 
 ## Implementing an Observable
 
@@ -316,7 +316,7 @@ The response looks like this:
 And here is a marble diagram that illustrates how that code produces that response:
 [[images/rx-operators/Composition.2.png]]
 
-The following example, in Groovy, comes from <a href="https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013">Ben Christensen's QCon presentation on the evolution of the Netflix API</a>:
+The following example, in Groovy, comes from <a href="https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013">Ben Christensen’s QCon presentation on the evolution of the Netflix API</a>:
 
 ```groovy
 public Observable getVideoSummary(APIVideo video) {
@@ -373,7 +373,7 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
 
 See the [Observable Utility Operators](https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-onerrorresumenext) page for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` and `onErrorReturn()` that allow Observables to continue with fallbacks in the event of error.
 
-Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables --- `myObservable` --- and you want to intercept any exceptions that would normally pass through to an Observer's `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the `onErrorResumeNext()` method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called `error()` will generate such an Observable for you):
+Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables — `myObservable` — and you want to intercept any exceptions that would normally pass through to an Subscriber’s `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the `onErrorResumeNext()` method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called `error()` will generate such an Observable for you):
 
 ```groovy
 myModifiedObservable = myObservable.onErrorResumeNext({ t ->
