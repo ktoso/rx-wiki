@@ -1,12 +1,12 @@
 This section explains methods that create Observables.
 
 * [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable or a Future into an Observable
-* [**`fromFuture( )`**](Creating-Observables#wiki-fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+* [**`fromFuture( )`**](Creating-Observables#wiki-fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until a Subscriber subscribes
 * [**`forIterable( )`**](Creating-Observables#wiki-foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
 * [**`repeat( )`**](Creating-Observables#wiki-repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`create( )`**](Creating-Observables#wiki-create) — create an Observable from scratch by means of a function
-* [**`defer( )`**](Creating-Observables#wiki-defer) — do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
+* [**`defer( )`**](Creating-Observables#wiki-defer) — do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
 * [**`range( )`**](Creating-Observables#wiki-range) — create an Observable that emits a range of sequential integers
 * [**`interval( )`**](Creating-Observables#wiki-interval) — create an Observable that emits a sequence of integers spaced by a given time interval
 * [**`timer( )`**](Creating-Observables#wiki-timer) — create an Observable that emits a single item after a given delay
@@ -53,10 +53,10 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 ***
 
 ## fromFuture( )
-#### convert a Future into an Observable, but do not attempt to get the Future's value until an Observer subscribes
+#### convert a Future into an Observable, but do not attempt to get the Future's value until a Subscriber subscribes
 [[images/rx-operators/fromFuture.png]]
 
-The `fromFuture( )` method also converts a Future into an Observable, but it obtains this Future indirectly, by means of a function you provide. It creates the Observable immediately, but waits to call the function and to obtain the Future until an Observer subscribes to it.
+The `fromFuture( )` method also converts a Future into an Observable, but it obtains this Future indirectly, by means of a function you provide. It creates the Observable immediately, but waits to call the function and to obtain the Future until a Subscriber subscribes to it.
 
 ***
 
@@ -107,7 +107,7 @@ There are also versions of `repeat( )` that operate on a particular scheduler,
 #### create an Observable from scratch by means of a function
 [[images/rx-operators/create.png]]
 
-You can create an Observable from scratch by using the `create( )` method. You pass this method a function that accepts as its parameter the Subscriber that is passed to an Observable’s `subscribe( )` method (or is derived from the Observer that is passed to that method). Write the function you pass to `create( )` so that it behaves as an Observable — calling the passed-in Subscriber’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
+You can create an Observable from scratch by using the `create( )` method. You pass this method a function that accepts as its parameter the Subscriber that is passed to an Observable’s `subscribe( )` method (or is derived from the Subscriber that is passed to that method). Write the function you pass to `create( )` so that it behaves as an Observable — calling the passed-in Subscriber’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
 
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
@@ -129,7 +129,7 @@ def myObservable = Observable.create({ aSubscriber ->
 })
 ```
 
-**NOTE:** A well-formed finite Observable must attempt to call either the subscriber’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter attempt to call any of the subscriber’s other methods. It is good practice to check the subscriber’s `isUnsubscribed( )` state of the subscriber so that your Observable can stop emitting items or doing expensive calculations when there is no longer an interested observer.
+**NOTE:** A well-formed finite Observable must attempt to call either the Subscriber’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter attempt to call any of the Subscriber’s other methods. It is good practice to check the Subscriber’s `isUnsubscribed( )` state of the Subscriber so that your Observable can stop emitting items or doing expensive calculations when there is no longer an interested Subscriber.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribe)">`create(OnSubscribe)`</a>
@@ -139,10 +139,10 @@ def myObservable = Observable.create({ aSubscriber ->
 ***
 
 ## defer( )
-#### do not create the Observable until an Observer subscribes; create a fresh Observable on each subscription
+#### do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
 [[images/rx-operators/defer.png]]
 
-Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Observer subscribes.
+Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Subscriber subscribes.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defer(rx.util.functions.Func0)">`defer(observableFactory)`</a>
@@ -226,11 +226,11 @@ There are also versions of `generate( )` that allow you to do the work of gene
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
 
-* `empty( )` creates an Observable that does not emit any items but instead immediately calls the observer’s `onCompleted( )` method.
+* `empty( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onCompleted( )` method.
 [[images/rx-operators/empty.png]]
-* `error( )` creates an Observable that does not emit any items but instead immediately calls the observer’s `onError( )` method.
+* `error( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onError( )` method.
 [[images/rx-operators/error.png]]
-* `never( )` creates an Observable that does not emit any items, nor does it call either the observer’s `onCompleted( )` or `onError( )` methods.
+* `never( )` creates an Observable that does not emit any items, nor does it call either the Subscriber’s `onCompleted( )` or `onError( )` methods.
 [[images/rx-operators/never.png]]
 
 ```groovy
