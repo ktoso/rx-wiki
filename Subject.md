@@ -1,6 +1,6 @@
-A <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/Subject.html">`Subject`</a> is a sort of bridge or proxy that acts both as an `Observer` and as an `Observable`. Because it is an Observer, it can subscribe to one or more Observables, and because it is an Observable, it can pass through the items it observes by reemitting them, and it can also emit new items.
+A <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/Subject.html">`Subject`</a> is a sort of bridge or proxy that acts both as an `Subscriber` and as an `Observable`. Because it is a Subscriber, it can subscribe to one or more Observables, and because it is an Observable, it can pass through the items it observes by reemitting them, and it can also emit new items.
 
-If you have a `Subject` and you want to pass it along to some other agent without exposing its `Observer` interface, you can mask it by calling its `asObservable` method, which will return the Subject as a pure Observable.
+If you have a `Subject` and you want to pass it along to some other agent without exposing its `Subscriber` interface, you can mask it by calling its `asObservable` method, which will return the Subject as a pure Observable.
 
 #### see also:
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#Subject">Introduction to Rx: Subject</a>
@@ -9,7 +9,7 @@ There are four subclasses of ``Subject`` that are designed for particular use ca
 # AsyncSubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">`AsyncSubject`</a> emits the last value (and only the last value) emitted by the source Observable, and only after that source Observable completes. (If the source Observable does not emit any values, the `AsyncSubject` also completes without emitting any values.)
 [[images/rx-operators/S.AsyncSubject.png]]
-It will also emit this same final value to any subsequent observers. However, if the source Observable terminates with an error, the `AsyncSubject` will not emit any items, but will simply pass along the error notification from the source Observable.
+It will also emit this same final value to any subsequent Subscribers. However, if the source Observable terminates with an error, the `AsyncSubject` will not emit any items, but will simply pass along the error notification from the source Observable.
 [[images/rx-operators/S.AsyncSubject.e.png]]
 
 #### see also:
@@ -18,9 +18,9 @@ It will also emit this same final value to any subsequent observers. However, if
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#AsyncSubject">Introduction to Rx: AsyncSubject</a>
 
 # BehaviorSubject
-When an Observer subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>, it begins by emitting the item most recently emitted by the source Observable (or a seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
+When an Subscriber subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>, it begins by emitting the item most recently emitted by the source Observable (or a seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
 [[images/rx-operators/S.BehaviorSubject.png]]
-However, if the source Observable terminates with an error, the `BehaviorSubject` will not emit any items to subsequent observers, but will simply pass along the error notification from the source Observable.
+However, if the source Observable terminates with an error, the `BehaviorSubject` will not emit any items to subsequent Subscribers, but will simply pass along the error notification from the source Observable.
 [[images/rx-operators/S.BehaviorSubject.e.png]]
 
 #### see also:
@@ -31,7 +31,7 @@ However, if the source Observable terminates with an error, the `BehaviorSubject
 # PublishSubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">``PublishSubject``</a> emits to a subscriber only those items that are emitted by the source Observable(s) subsequent to the time of the subscription.
 [[images/rx-operators/S.PublishSubject.png]]
-If the source Observable terminates with an error, the `PublishSubject` will not emit any items to subsequent observers, but will simply pass along the error notification from the source Observable.
+If the source Observable terminates with an error, the `PublishSubject` will not emit any items to subsequent Subscribers, but will simply pass along the error notification from the source Observable.
 [[images/rx-operators/S.PublishSubject.e.png]]
 
 #### see also:
