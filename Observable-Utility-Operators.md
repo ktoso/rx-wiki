@@ -4,8 +4,8 @@ This section explains various utility operators for working with Observables.
 * [**`dematerialize( )`**](Observable-Utility-Operators#wiki-dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`timestamp( )`**](Observable-Utility-Operators#wiki-timestamp) — attach a timestamp to every item emitted by an Observable
 * [**`synchronize( )`**](Observable-Utility-Operators#wiki-synchronize) — force an Observable to make synchronous calls and to be well-behaved
-* [**`cache( )`**](Observable-Utility-Operators#wiki-cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
-* [**`observeOn( )`**](Observable-Utility-Operators#wiki-observeon) — specify on which Scheduler an Observer should observe the Observable
+* [**`cache( )`**](Observable-Utility-Operators#wiki-cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
+* [**`observeOn( )`**](Observable-Utility-Operators#wiki-observeon) — specify on which Scheduler a Subscriber should observe the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#wiki-subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
 * [**`parallel( )`**](Observable-Utility-Operators#wiki-parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 * [**`doOnEach( )`**](Observable-Utility-Operators#wiki-dooneach) — register an action to take whenever an Observable emits an item
@@ -13,7 +13,7 @@ This section explains various utility operators for working with Observables.
 * [**`doOnError( )`**](Observable-Utility-Operators#wiki-doonerror) — register an action to take when an Observable completes with an error
 * [**`finallyDo( )`**](Observable-Utility-Operators#wiki-finallydo) — register an action to take when an Observable completes
 * [**`delay( )`**](Observable-Utility-Operators#wiki-delay) — shift the emissions from an Observable forward in time by a specified amount
-* [**`delaySubscription( )`**](Observable-Utility-Operators#wiki-delaysubscription) — hold an Observer's subscription request for a specified amount of time before passing it on to the source Observable
+* [**`delaySubscription( )`**](Observable-Utility-Operators#wiki-delaysubscription) — hold an Subscriber's subscription request for a specified amount of time before passing it on to the source Observable
 * [**`timeInterval( )`**](Observable-Utility-Operators#wiki-timeinterval) — emit the time lapsed between consecutive emissions of a source Observable
 * [**`using( )`**](Observable-Utility-Operators#wiki-using) — create a disposable resource that has the same lifespan as an Observable
 * [**`single( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
@@ -25,7 +25,7 @@ This section explains various utility operators for working with Observables.
 #### convert an Observable into a list of Notifications
 [[images/rx-operators/materialize.png]]
 
-A well-formed Observable will invoke its Observer’s `onNext` method zero or more times, and then will invoke either the `onCompleted` or `onError` method exactly once. The `materialize( )` method converts this series of invocations into a series of items emitted by an Observable, where it emits each such invocation as a `Notification` object.
+A well-formed Observable will invoke its Subscriber’s `onNext` method zero or more times, and then will invoke either the `onCompleted` or `onError` method exactly once. The `materialize( )` method converts this series of invocations into a series of items emitted by an Observable, where it emits each such invocation as a `Notification` object.
 
 For example:
 
@@ -122,7 +122,7 @@ Sequence complete
 
 [[images/rx-operators/synchronize.png]]
 
-It is possible for an Observable to invoke its Observers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `synchronize( )` method to it.
+It is possible for an Observable to invoke its Subscribers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `synchronize( )` method to it.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#synchronize(rx.Observable)">`synchronize(observable)`</a>
@@ -131,11 +131,11 @@ It is possible for an Observable to invoke its Observers' methods asynchronously
 ***
 
 ## cache( )
-#### remember the sequence of items emitted by the Observable and emit the same sequence to future Observers
+#### remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
 
 [[images/rx-operators/cache.png]]
 
-By default, an Observable will generate its sequence of emitted items afresh for each new Observer that subscribes. You can force it to generate its sequence only once and then to emit this identical sequence to every Observer by using the `cache( )` method. Compare the behavior of the following two sets of sample code, the first of which does _not_ use `cache( )` and the second of which does:
+By default, an Observable will generate its sequence of emitted items afresh for each new Subscriber that subscribes. You can force it to generate its sequence only once and then to emit this identical sequence to every Subscriber by using the `cache( )` method. Compare the behavior of the following two sets of sample code, the first of which does _not_ use `cache( )` and the second of which does:
 ```groovy
 def myObservable = Observable.range(1, 1000000).filter({ 0 == (it % 400000) }).timestamp();
 
@@ -180,9 +180,9 @@ Timestamped(timestampMillis = 1369252924548, value = 400000)
 Timestamped(timestampMillis = 1369252924630, value = 800000)
 Sequence complete
 ```
-Note that in the second example the timestamps are identical for both of the observers, whereas in the first example they differ.
+Note that in the second example the timestamps are identical for both of the Subscribers, whereas in the first example they differ.
 
-The `cache( )` method will not itself trigger the execution of the source Observable; an initial observer must subscribe to the Observable returned from `cache( )` before it will begin emitting items.
+The `cache( )` method will not itself trigger the execution of the source Observable; an initial Subscriber must subscribe to the Observable returned from `cache( )` before it will begin emitting items.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#cache()">`cache()`</a>
@@ -190,9 +190,9 @@ The `cache( )` method will not itself trigger the execution of the source Obse
 ***
 
 ## observeOn( )
-#### specify on which Scheduler an Observer should observe the Observable
+#### specify on which Scheduler a Subscriber should observe the Observable
 [[images/rx-operators/observeOn.png]]
-To specify in which Scheduler (thread) the Observable should invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` methods, call the Observable's `observeOn( )` method, passing it the appropriate `Scheduler`.
+To specify in which Scheduler (thread) the Observable should invoke the Subscribers' `onNext( )`, `onCompleted( )`, and `onError( )` methods, call the Observable's `observeOn( )` method, passing it the appropriate `Scheduler`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#observeOn(rx.Scheduler)">`observeOn(scheduler)`</a>
@@ -207,7 +207,7 @@ To specify in which Scheduler (thread) the Observable should invoke the Observer
 #### specify which Scheduler an Observable should use when its subscription is invoked
 [[images/rx-operators/subscribeOn.png]]
 
-To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn( )` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn( )`) the Observable will invoke the Observers' `onNext( )`, `onCompleted( )`, and `onError( )` methods in this same thread.
+To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn( )` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn( )`) the Observable will invoke the Subscribers' `onNext( )`, `onCompleted( )`, and `onError( )` methods in this same thread.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#subscribeOn(rx.Scheduler)">`subscribeOn(scheduler)`</a>
@@ -276,7 +276,7 @@ Use the `doOnError( )` method to register an `Action` that RxJava will perform
 #### register an action to take when an Observable completes
 [[images/rx-operators/finallyDo.png]]
 
-You can use the `finallyDo( )` method of an Observable to register an action that RxJava will invoke after that Observable invokes either the `onCompleted( )` or `onError( )` method of its Observer.
+You can use the `finallyDo( )` method of an Observable to register an action that RxJava will invoke after that Observable invokes either the `onCompleted( )` or `onError( )` method of its Subscriber.
 
 ```groovy
 def numbers = Observable.from([1, 2, 3, 4, 5]);
@@ -321,7 +321,7 @@ Note that `delay( )` will _not_ time-shift an `onError( )` call in this fash
 ***
 
 ## delaySubscription( )
-#### hold an Observer's subscription request for a specified amount of time before passing it on to the source Observable
+#### hold a Subscriber's subscription request for a specified amount of time before passing it on to the source Observable
 [[images/rx-operators/delaySubscription.png]]
 
 The `delaySubscription( )` operator shifts waits for a specified period of time after receiving a subscription request before subscribing to the source Observable.
@@ -335,7 +335,7 @@ The `delaySubscription( )` operator shifts waits for a specified period of tim
 #### emit the time lapsed between consecutive emissions of a source Observable
 [[images/rx-operators/timeInterval.png]]
 
-The `timeInterval( )` operator converts a source Observable into an Observable that emits the amount of time lapsed between consecutive emissions of the source Observable. The first emission is the amount of time lapsed between the time the Observer subscribed to the Observable and the time the source Observable emitted its first item. There is no corresponding emission marking the amount of time lapsed between the last emission of the source Observable and the subsequent call to `onCompleted( )`.
+The `timeInterval( )` operator converts a source Observable into an Observable that emits the amount of time lapsed between consecutive emissions of the source Observable. The first emission is the amount of time lapsed between the time the Subscriber subscribed to the Observable and the time the source Observable emitted its first item. There is no corresponding emission marking the amount of time lapsed between the last emission of the source Observable and the subsequent call to `onCompleted( )`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeInterval()">`timeInterval()`</a>
@@ -350,7 +350,7 @@ The `timeInterval( )` operator converts a source Observable into an Observable
 #### create a disposable resource that has the same lifespan as an Observable
 [[images/rx-operators/using.png]]
 
-Pass the `using( )` method two factory functions: the first creates a disposable resource, the second creates an Observable. When an observer subscribes to the resulting Observable, `using( )` will use the Observable factory function to create the Observable the observer will observe, while at the same time using the resource factory function to create a resource. When the Observer unsubscribes from the Observable, or when the Observable terminates (normally or with an error), `using( )` will dispose of the resource it created.
+Pass the `using( )` method two factory functions: the first creates a disposable resource, the second creates an Observable. When a Subscriber subscribes to the resulting Observable, `using( )` will use the Observable factory function to create the Observable the Subscriber will observe, while at the same time using the resource factory function to create a resource. When the Subscriber unsubscribes from the Observable, or when the Observable terminates (normally or with an error), `using( )` will dispose of the resource it created.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#using(rx.util.functions.Func0, rx.util.functions.Func1)">`using(resourceFactory,observableFactory)`</a>
