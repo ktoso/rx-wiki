@@ -3,41 +3,41 @@ This section explains the [`ConnectableObservable`](http://netflix.github.io/RxJ
 * [**`ConnectableObservable.connect( )`**](Connectable-Observable-Operators#wiki-connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * [**`Observable.publish( )` and `Observable.multicast( )`**](Connectable-Observable-Operators#wiki-observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`Observable.publishLast( )`**](Connectable-Observable-Operators#wiki-observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
-* [**`Observable.replay( )`**](Connectable-Observable-Operators#wiki-observablereplay) — ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
+* [**`Observable.replay( )`**](Connectable-Observable-Operators#wiki-observablereplay) — ensures that all Subscribers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
 * [**`ConnectableObservable.refCount( )`**](Connectable-Observable-Operators#wiki-connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
 
-A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting items when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended Observers to subscribe to the Observable before the Observable begins emitting items.
+A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting items when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended Subscribers to subscribe to the Observable before the Observable begins emitting items.
 
 [[images/rx-operators/publishConnect.png]]
 
-The following example code shows two Observers subscribing to the same Observable. In the first case, they subscribe to an ordinary Observable; in the second case, they subscribe to a Connectable Observable that only connects after both observers subscribe. Note the difference in the output:
+The following example code shows two Subscribers subscribing to the same Observable. In the first case, they subscribe to an ordinary Observable; in the second case, they subscribe to a Connectable Observable that only connects after both Subscribers subscribe. Note the difference in the output:
 
 **Example #1:**
 ```groovy
 def firstMillion  = Observable.range( 1, 1000000 ).sample(7, java.util.concurrent.TimeUnit.MILLISECONDS);
 
 firstMillion.subscribe(
-   { println("Observer #1:" + it); },         // onNext
+   { println("Subscriber #1:" + it); },       // onNext
    { println("Error: " + it.getMessage()); }, // onError
    { println("Sequence #1 complete"); }       // onCompleted
 );
 
 firstMillion.subscribe(
-    { println("Observer #2:" + it); },         // onNext
+    { println("Subscriber #2:" + it); },       // onNext
     { println("Error: " + it.getMessage()); }, // onError
     { println("Sequence #2 complete"); }       // onCompleted
 );
 ```
 ```
-Observer #1:211128
-Observer #1:411633
-Observer #1:629605
-Observer #1:841903
+Subscriber #1:211128
+Subscriber #1:411633
+Subscriber #1:629605
+Subscriber #1:841903
 Sequence #1 complete
-Observer #2:244776
-Observer #2:431416
-Observer #2:621647
-Observer #2:826996
+Subscriber #2:244776
+Subscriber #2:431416
+Subscriber #2:621647
+Subscriber #2:826996
 Sequence #2 complete
 ```
 **Example #2:**
@@ -45,13 +45,13 @@ Sequence #2 complete
 def firstMillion  = Observable.range( 1, 1000000 ).sample(7, java.util.concurrent.TimeUnit.MILLISECONDS).publish();
 
 firstMillion.subscribe(
-   { println("Observer #1:" + it); },         // onNext
+   { println("Subscriber #1:" + it); },       // onNext
    { println("Error: " + it.getMessage()); }, // onError
    { println("Sequence #1 complete"); }       // onCompleted
 );
 
 firstMillion.subscribe(
-   { println("Observer #2:" + it); },         // onNext
+   { println("Subscriber #2:" + it); },       // onNext
    { println("Error: " + it.getMessage()); }, // onError
    { println("Sequence #2 complete"); }       // onCompleted
 );
@@ -59,14 +59,14 @@ firstMillion.subscribe(
 firstMillion.connect();
 ```
 ```
-Observer #2:208683
-Observer #1:208683
-Observer #2:432509
-Observer #1:432509
-Observer #2:644270
-Observer #1:644270
-Observer #2:887885
-Observer #1:887885
+Subscriber #2:208683
+Subscriber #1:208683
+Subscriber #2:432509
+Subscriber #1:432509
+Subscriber #2:644270
+Subscriber #1:644270
+Subscriber #2:887885
+Subscriber #1:887885
 Sequence #2 complete
 Sequence #1 complete
 ```
@@ -79,11 +79,11 @@ Sequence #1 complete
 
 ## ConnectableObservable.connect( )
 #### instructs a Connectable Observable to begin emitting items
-Call a Connectable Observable's `connect( )` method to instruct it to begin emitting the items from its underlying Observable to its Observers.
+Call a Connectable Observable's `connect( )` method to instruct it to begin emitting the items from its underlying Observable to its Subscribers.
 
-The `connect( )` method returns a `Subscription`. You can call that object's `unsubscribe( )` method to instruct the Observable to stop emitting items to its Observers.
+The `connect( )` method returns a `Subscription`. You can call that object's `unsubscribe( )` method to instruct the Observable to stop emitting items to its Subscribers.
 
-You can also use the `connect( )` method to instruct an Observable to begin emitting items (or, to begin generating items that would be emitted) even before any Observer has subscribed to it.
+You can also use the `connect( )` method to instruct an Observable to begin emitting items (or, to begin generating items that would be emitted) even before any Subscriber has subscribed to it.
 
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect()">`connect()`</a>
@@ -120,8 +120,8 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 ***
 
 ## Observable.replay( )
-#### ensures that all Observers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting items
-There are varieties of `replay( )` that return a ConnectableObservable that you then must use the `publish( )` operator on so that observers may connect to it:
+#### ensures that all Subscribers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting items
+There are varieties of `replay( )` that return a ConnectableObservable that you then must use the `publish( )` operator on so that Subscribers may connect to it:
 
 [[images/rx-operators/replay.png]]
 
@@ -143,7 +143,7 @@ In each variety there are versions with which you can limit the number of replay
 #### makes a Connectable Observable behave like an ordinary Observable
 [[images/rx-operators/publishRefCount.png]]
 
-You can represent a Connectable Observable so that it behaves much like an ordinary Observable by using the `refCount( )` operator. This operator keeps track of how many Observers are subscribed to the resulting Observable and refrains from disconnecting from the source ConnectableObservable until all such Observables unsubscribe.
+You can represent a Connectable Observable so that it behaves much like an ordinary Observable by using the `refCount( )` operator. This operator keeps track of how many Subscribers are subscribed to the resulting Observable and refrains from disconnecting from the source ConnectableObservable until all such Observables unsubscribe.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#refCount()">`refCount( )`</a>
