@@ -112,28 +112,19 @@ You can create an Observable from scratch by using the `create( )` method. You
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
   try {
-    if (FALSE == aSubscriber.isUnsubscribed())
-    {
-      aSubscriber.onNext('One');
-      if (FALSE == aSubscriber.isUnsubscribed())
-      {
-        aSubscriber.onNext('Two');
-        if (FALSE == aSubscriber.isUnsubscribed())
-        {
-          aSubscriber.onNext('Three');
-          if (FALSE == aSubscriber.isUnsubscribed())
-          {
-            aSubscriber.onNext('Four');
-            if (FALSE == aSubscriber.isUnsubscribed())
-            {
-              aSubscriber.onCompleted();
-            }
-          }
-        }
+    for (int i = 1; i < 1000000; i++) {
+      if (TRUE == aSubscriber.isUnsubscribed()) {
+        return;
       }
+      subscriber.onNext(i);
+    }
+    if (FALSE == aSubscriber.isUnsubscribed()) {
+      aSubscriber.onCompleted();
     }
   } catch(Throwable t) {
-    if (FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onError(t);
+    if (FALSE == aSubscriber.isUnsubscribed()) {
+      aSubscriber.onError(t);
+    }
   }
 })
 ```
@@ -141,7 +132,7 @@ def myObservable = Observable.create({ aSubscriber ->
 **NOTE:** A well-formed finite Observable must attempt to call either the subscriber’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter attempt to call any of the subscriber’s other methods. It is good practice to check the subscriber’s `isUnsubscribed( )` state of the subscriber so that your Observable can stop emitting items or doing expensive calculations when there is no longer an interested observer.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribeFunc)">`create(func)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribe)">`create(OnSubscribe)`</a>
 * RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablecreatesubscribe)
 * Linq: [`Create`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.create.aspx)
 
