@@ -87,26 +87,24 @@ You can do this either by extending the Observable class or by using the `Observ
 /**
  * This example shows a custom Observable that blocks 
  * when subscribed to (does not spawn an extra thread).
- * 
- * @return Observable<String>
  */
 def customObservableBlocking() {
-    return Observable.create(new Func1<Observer<String>, Subscription>() {
-        def Subscription call(Observer<String> observer) {
+    return Observable.create(new OnSubscribe<String>() {
+        def Subscription call(Subscriber<String> subscriber) {
             for(int i=0; i<50; i++) {
-                observer.onNext("value_" + i);
+                if(TRUE == subscriber.isUnsubscribed()) {
+                    return;
+                }
+                subscriber.onNext("value_" + i);
             }
             // after sending all values we complete the sequence
-            observer.onCompleted();
-            // return an empty subscription since this blocks and thus
-            // can't be unsubscribed from
-            return Subscriptions.empty();
+            subscriber.onCompleted();
         };
     });
 }
 
 // To see output:
-customObservableBlocking().subscribe({ println(it)});
+customObservableBlocking().subscribe({ println(it) });
 ```
 
 ### Asynchronous Observable
@@ -119,36 +117,29 @@ It is written verbosely, with static typing and implementation of the `Func1` an
 /**
  * This example shows a custom Observable that does not block
  * when subscribed to as it spawns a separate thread.
- *
- * @return Observable<String>
  */
 def customObservableNonBlocking() {
-    return Observable.create(new Func1<Observer<String>, Subscription>() {
+    return Observable.create(new onSubscribe<String>() {
         /**
          * This 'call' method will be invoked with the Observable is subscribed to.
          * 
          * It spawns a thread to do it asynchronously.
          */
-        def Subscription call(Observer<String> observer) {
+        def Subscription call(Subscriber<String> subscriber) {
             // For simplicity this example uses a Thread instead of an ExecutorService/ThreadPool
             final Thread t = new Thread(new Runnable() {
                 void run() {
                     for(int i=0; i<75; i++) {
-                        observer.onNext("value_" + i);
+                        if(TRUE == subscriber.isUnsubscribed()) {
+                            return;
+                        }
+                        subscriber.onNext("value_" + i);
                     }
                     // after sending all values we complete the sequence
-                    observer.onCompleted();
+                    subscriber.onCompleted();
                 };
             });
             t.start();
-        
-            return new Subscription() {
-                public void unsubscribe() {
-                    // Ask the thread to stop doing work.
-                    // For this simple example it just interrupts.
-                    t.interrupt();
-                }
-            };
         };
     });
 }
@@ -166,13 +157,11 @@ Here is the same code in Clojure that uses a Future (instead of raw thread) and 
    
   returns Observable<String>"
   (Observable/create 
-    (fn [observer]
+    (fn [subscriber]
       (let [f (future 
-                (doseq [x (range 50)] (-> observer (.onNext (str "value_" x))))
+                (doseq [x (range 50)] (-> subscriber (.onNext (str "value_" x))))
                 ; after sending all values we complete the sequence
-                (-> observer .onCompleted))
-            ; a subscription that cancels the future if unsubscribed
-            subscription (Observable/createSubscription #(-> f (.cancel true)))]
+                (-> subscriber .onCompleted))
         ))
       ))
 ```
@@ -190,14 +179,12 @@ Here is an example that fetches articles from Wikipedia and invokes onNext with 
   
    return Observable<String> of HTML"
   (Observable/create 
-    (fn [observer]
+    (fn [subscriber]
       (let [f (future
                 (doseq [articleName wikipediaArticleNames]
-                  (-> observer (.onNext (http/get (str "http://en.wikipedia.org/wiki/" articleName)))))
+                  (-> subscriber (.onNext (http/get (str "http://en.wikipedia.org/wiki/" articleName)))))
                 ; after sending response to onnext we complete the sequence
-                (-> observer .onCompleted))
-            ; a subscription that cancels the future if unsubscribed
-            subscription (Observable/createSubscription #(-> f (.cancel true)))]
+                (-> subscriber .onCompleted))
         ))))
 ```
 
@@ -213,17 +200,18 @@ Back to Groovy, the same Wikipedia functionality but using closures instead of a
  * Fetch a list of Wikipedia articles asynchronously.
  * 
  * @param wikipediaArticleName
- * @return Observable<String> of HTML
  */
 def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
-    return Observable.create({ Observer<String> observer ->
+    return Observable.create({ Subscriber<String> subscriber ->
         Thread.start {
             for(articleName in wikipediaArticleNames) {
-                observer.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
+                if(TRUE == subscriber.isUnsubscribed()) {
+                    return;
+                }
+                subscriber.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
             }
-            observer.onCompleted();
+            subscriber.onCompleted();
         }
-        return Subscriptions.empty();
     });
 }
 
@@ -356,18 +344,20 @@ Here is a revised version of the Wikipedia example shown above, but with error h
  * @return Observable<String> of HTML
  */
 def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArticleNames) {
-    return Observable.create({ Observer<String> observer ->
+    return Observable.create({ Subscriber<String> subscriber ->
         Thread.start {
             try {
                 for(articleName in wikipediaArticleNames) {
-                    observer.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
+                    if(TRUE == subscriber.isUnsubscribed()) {
+                        return;
+                    }
+                    subscriber.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
                 }
-                observer.onCompleted();
+                subscriber.onCompleted();
             } catch(Throwable t) {
-                observer.onError(t);
+                subscriber.onError(t);
             }
         }
-            return Subscriptions.empty();
     });
 }
 ```
