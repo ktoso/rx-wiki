@@ -11,19 +11,19 @@ This section explains operators that handle errors and exceptions encountered by
 #### instructs an Observable to attempt to continue emitting items after it encounters an error
 [[images/rx-operators/onErrorResumeNext.png]]
 
-The `onErrorResumeNext( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Observer, `onErrorResumeNext( )` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
+The `onErrorResumeNext( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Subscriber, `onErrorResumeNext( )` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
 ```groovy
-def myObservable = Observable.create({ anObserver ->
-  anObserver.onNext('Three');
-  anObserver.onNext('Two');
-  anObserver.onNext('One');
-  anObserver.onError();
+def myObservable = Observable.create({ aSubscriber ->
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onError();
 });
-def myFallback = Observable.create({ anObserver ->
-  anObserver.onNext('0');
-  anObserver.onNext('1');
-  anObserver.onNext('2');
-  anObserver.onCompleted();
+def myFallback = Observable.create({ aSubscriber ->
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('0');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('1');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('2');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.onErrorResumeNext(myFallback).subscribe(
@@ -52,17 +52,17 @@ Sequence complete
 ***
 
 ## onErrorReturn( )
-#### instructs an Observable to emit a particular item to an Observer’s onNext method when it encounters an error
+#### instructs an Observable to emit a particular item to a Subscriber’s onNext method when it encounters an error
 [[images/rx-operators/onErrorReturn.png]]
 
-The `onErrorReturn( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Observer, `onErrorReturn( )` will instead emit a specified item and invoke the Observer's `onCompleted( )` method, as shown in the following sample code:
+The `onErrorReturn( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Subscriber, `onErrorReturn( )` will instead emit a specified item and invoke the Subscriber's `onCompleted( )` method, as shown in the following sample code:
 ```groovy
-def myObservable = Observable.create({ anObserver ->
-  anObserver.onNext('Four');
-  anObserver.onNext('Three');
-  anObserver.onNext('Two');
-  anObserver.onNext('One');
-  anObserver.onError();
+def myObservable = Observable.create({ aSubscriber ->
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Four');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onError();
 });
 
 myObservable.onErrorReturn({ return('Blastoff!'); }).subscribe(
@@ -89,7 +89,7 @@ Sequence complete
 #### instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
 [[images/rx-operators/onExceptionResumeNextViaObservable.png]]
 
-Much like `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Observer, `onExceptionResumeNext( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNext( )` will propagate it to its observers' `onError( )` method and will not invoke its backup Observable.
+Much like `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Subscriber, `onExceptionResumeNext( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNext( )` will propagate it to its Subscriber's `onError( )` method and will not invoke its backup Observable.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#onExceptionResumeNext(rx.Observable)">`onExceptionResumeNext(observable)`</a>
@@ -100,7 +100,7 @@ Much like `onErrorResumeNext( )` method, this returns an Observable that mirro
 #### if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
 [[images/rx-operators/retry.png]]
 
-The `retry( )` method responds to an `onError( )` call from the source Observable by not passing that call through to its observers, but instead resubscribing to the source Observable and giving it another opportunity to complete its sequence without error. You can pass `retry( )` a maximum number of retry-attempts, or you can pass nothing, in which case it will never stop retrying to get an error-free sequence. It always passes `onNext( )` calls through to its observers, even from sequences that terminate with an error, so this can cause duplicate emissions (as shown in the diagram above).
+The `retry( )` method responds to an `onError( )` call from the source Observable by not passing that call through to its Subscribers, but instead resubscribing to the source Observable and giving it another opportunity to complete its sequence without error. You can pass `retry( )` a maximum number of retry-attempts, or you can pass nothing, in which case it will never stop retrying to get an error-free sequence. It always passes `onNext( )` calls through to its Subscribers, even from sequences that terminate with an error, so this can cause duplicate emissions (as shown in the diagram above).
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry()">`retry()`</a>
