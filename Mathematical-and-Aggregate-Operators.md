@@ -29,11 +29,11 @@ This section explains operators that perform mathematical or other operations ov
 The `averageInteger( )` method returns an Observable that calculates the average of the Integers emitted by a source Observable and then emits this average as an Integer, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(4);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(3);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(2);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(1);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onCompleted();
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(4);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(3);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(2);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(1);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.averageInteger().subscribe(
@@ -113,10 +113,10 @@ Instead of passing multiple Observables into `concat( )`, you could also pass 
 The `count( )` method returns an Observable that emits a single item: an Integer that represents the total number of items emitted by the source Observable, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext('Three');
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext('Two');
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext('One');
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onCompleted();
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.count().subscribe(
@@ -267,11 +267,11 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 The `sumInteger( )` method returns an Observable that adds the Integers emitted by a source Observable and then emits this sum as an Integer, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(4);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(3);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(2);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(1);
-  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onCompleted();
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(4);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(3);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(2);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(1);
+  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.sumInteger().subscribe(
