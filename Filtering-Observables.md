@@ -183,7 +183,7 @@ There are also versions of `skipLast()` that ignore the items emitted by an Obse
 #### emit only the first _n_ items emitted by an Observable
 [[images/rx-operators/take.png]]
 
-You can choose to pay attention only to the first _n_ items emitted by an Observable by calling its `take(n)` method. That method returns an Observable that will invoke an Observer’s `onNext` method a maximum of _n_ times before invoking `onCompleted`. For example,
+You can choose to pay attention only to the first _n_ items emitted by an Observable by calling its `take(n)` method. That method returns an Observable that will invoke an Subscriber’s `onNext` method a maximum of _n_ times before invoking `onCompleted`. For example,
 
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -273,7 +273,7 @@ Pass `elementAt( )` a zero-based index value and it will emit the solitary ite
 #### emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
 [[images/rx-operators/elementAtOrDefault.png]]
 
-Pass `elementAtOrDefault( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAtOrDefault( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, `elementAtOrDefault( )` will throw an <code>IndexOutOfBoundsException</code>. If the source Observable emits fewer than _index value_ + 1 items, `elementAtOrDefault( )` will emit the default value you pass in (you must also pass in a type for this value that is appropriate to what type your Observers expect to observe).
+Pass `elementAtOrDefault( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAtOrDefault( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, `elementAtOrDefault( )` will throw an <code>IndexOutOfBoundsException</code>. If the source Observable emits fewer than _index value_ + 1 items, `elementAtOrDefault( )` will emit the default value you pass in (you must also pass in a type for this value that is appropriate to what type your Subscribers expect to observe).
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#elementAtOrDefault(int, T)">`elementAtOrDefault(index,default)`</a>
