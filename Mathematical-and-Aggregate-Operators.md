@@ -28,12 +28,12 @@ This section explains operators that perform mathematical or other operations ov
 
 The `averageInteger( )` method returns an Observable that calculates the average of the Integers emitted by a source Observable and then emits this average as an Integer, as shown in the following sample code:
 ```groovy
-def myObservable = Observable.create({ anObserver ->
-  anObserver.onNext(4);
-  anObserver.onNext(3);
-  anObserver.onNext(2);
-  anObserver.onNext(1);
-  anObserver.onCompleted();
+def myObservable = Observable.create({ aSubscriber ->
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(4);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(3);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(2);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(1);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.averageInteger().subscribe(
@@ -112,11 +112,11 @@ Instead of passing multiple Observables into `concat( )`, you could also pass 
 
 The `count( )` method returns an Observable that emits a single item: an Integer that represents the total number of items emitted by the source Observable, as shown in the following sample code:
 ```groovy
-def myObservable = Observable.create({ anObserver ->
-  anObserver.onNext('Three');
-  anObserver.onNext('Two');
-  anObserver.onNext('One');
-  anObserver.onCompleted();
+def myObservable = Observable.create({ aSubscriber ->
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext('Three');
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext('Two');
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext('One');
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.count().subscribe(
@@ -266,12 +266,12 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 
 The `sumInteger( )` method returns an Observable that adds the Integers emitted by a source Observable and then emits this sum as an Integer, as shown in the following sample code:
 ```groovy
-def myObservable = Observable.create({ anObserver ->
-  anObserver.onNext(4);
-  anObserver.onNext(3);
-  anObserver.onNext(2);
-  anObserver.onNext(1);
-  anObserver.onCompleted();
+def myObservable = Observable.create({ aSubscriber ->
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(4);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(3);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(2);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onNext(1);
+  if(FALSE == aSubscriber.isUnsuscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.sumInteger().subscribe(
@@ -303,7 +303,7 @@ You can also sum not the items themselves but the results of a function applied 
 
 [[images/rx-operators/toList.png]]
 
-Normally, an Observable that emits multiple items will do so by invoking its Observer’s `onNext` method for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to invoke the Observer’s `onNext` method _once_, passing it the entire list, by calling the Observable’s `toList( )` method prior to calling its `subscribe( )` method. For example:
+Normally, an Observable that emits multiple items will do so by invoking its Subscriber’s `onNext` method for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to invoke the Subscriber’s `onNext` method _once_, passing it the entire list, by calling the Observable’s `toList( )` method prior to calling its `subscribe( )` method. For example:
 
 ```groovy
 Observable.tolist(myObservable).subscribe({ myListOfSomething -> do something useful with the list });
@@ -325,7 +325,7 @@ numbers.toList().subscribe(
 Sequence complete
 ```
 
-If the source Observable invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the source Observable invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Observers.
+If the source Observable invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the source Observable invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Subscribers.
 
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
