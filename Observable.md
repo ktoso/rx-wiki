@@ -44,7 +44,7 @@ catalogObservable
 
 > In other documents and other contexts, what we are calling a “Subscriber” (or sometimes “Observer”) is sometimes called a “watcher” or “reactor.” This model in general is often referred to as the [“reactor pattern”](http://en.wikipedia.org/wiki/Reactor_pattern).
 
-# Setting up Observers
+# Establishing Subscribers
 
 > This document usually uses Groovy for code examples, but you can use RxJava in any JVM language — such as Clojure, Scala, JRuby, Javascript, or Java itself.  
 
@@ -113,7 +113,7 @@ TBD
 
 The names of methods and classes in RxJava hew close to those in <a href="http://msdn.microsoft.com/en-us/data/gg577609.aspx">Microsoft’s Reactive Extensions</a>. This has led to some confusion, as some of these names have different implications in other contexts, or seem awkward in the idiom of a particular implementing language.
 
-For example there is the `onEvent` naming pattern (e.g. `onNext`, `onCompleted`, `onError`). In many contexts such names would indicate methods by means of which event handlers are _registered_. In the RxJava Observer context, however, they name the event handlers themselves.
+For example there is the `onEvent` naming pattern (e.g. `onNext`, `onCompleted`, `onError`). In many contexts such names would indicate methods by means of which event handlers are _registered_. In the RxJava Subscriber context, however, they name the event handlers themselves.
 
 # Composition via Observable Operators
 
