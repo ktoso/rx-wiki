@@ -83,7 +83,7 @@ myObservable.subscribe(myOnNext);
 
 ## onNext, onCompleted, and onError
 
-The `subscribe()` method may accept one to three methods, or it may accept an `Observer` or `Subscriber` which is an object that implements three methods. These methods are as follows:
+The `subscribe()` method may accept one to three methods, or it may accept an `Observer` or `Subscriber` which are objects that implement the following three methods:
 
 **onNext** defines the method that the Observable will invoke whenever the Observable emits an item. This method takes as a parameter an item emitted by the Observable.
 
@@ -107,7 +107,9 @@ myObservable.subscribe(myOnNext, myError, myComplete);
 
 ## Unsubscribing
 
-TBD
+A `Subscriber` object also implements the `unsubscribe()` method. You can call this method to indicate that the Subscriber is no longer interested in any of the Observables it is currently subscribed to. Those Observables can then (if they have no other interested subscribers) choose to stop generating new items to emit.
+
+(The results of this unsubscription will cascade back through the chain of operators that applies to the Observable that the Subscriber subscribed to to cause each link in the chain to stop emitting items. This is not guaranteed to be immediate, however, and it is possible for an Observable to generate and attempt to emit items for a while even after no Subscribers remain to observe these emissions.)
 
 ## Some Notes on Naming Conventions
 
