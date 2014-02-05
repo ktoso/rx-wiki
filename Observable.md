@@ -139,4 +139,39 @@ This documentation groups information about the various operators and examples o
 
 ## Implementing Your Own Operators with lift()
 
-TBD
+You can implement your own RxJava operators and then chain them along with those that are already part of RxJava. To do this, define your operator as a public class, like so:
+```java
+public class myOperator<T> implements Operator<T> {
+  public myOperator( /* any necessary params here */ ) {
+    /* any necessary initialization here */
+  }
+
+  @Override
+  public Subscriber<? super T> call(final Subscriber<? super T> s) {
+    return new Subscriber<t>(s) {
+      @Override
+      public void onCompleted() {
+        /* add your own onError behavior here, or just pass the completed notification through */
+        s.onCompleted();
+      }
+
+      @Override
+      public void onError(Throwable t) {
+        /* add your own onError behavior here, or just pass the error notification through */
+        s.onError(t);
+      }
+
+      @Override
+      public void onNext(T item) {
+        /* this example performs some sort of simple transformation on each incoming item and then passes it along */
+        transformedItem = myOperatorTransformOperation(item);
+        s.onNext(transformedItem);
+      }
+    };
+  }
+}
+``` 
+You can then add your custom operator to a chain of operators operating on an Observable by using the `lift()` operator, for example:
+```groovy
+Observable foo = barObservable.ofType(Integer).map({it*2}).lift(new myOperator<T>()).map({"transformed by myOperator: " + it});
+```
