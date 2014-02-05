@@ -151,13 +151,13 @@ public class myOperator<T> implements Operator<T> {
     return new Subscriber<t>(s) {
       @Override
       public void onCompleted() {
-        /* add your own onError behavior here, or just pass the completed notification through */
+        /* add your own onCompleted behavior here, or just pass the completed notification through: */
         s.onCompleted();
       }
 
       @Override
       public void onError(Throwable t) {
-        /* add your own onError behavior here, or just pass the error notification through */
+        /* add your own onError behavior here, or just pass the error notification through: */
         s.onError(t);
       }
 
