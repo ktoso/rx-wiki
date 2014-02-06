@@ -20,6 +20,8 @@
   * Groovy
   * Clojure
   * Scala
+  * JRuby
+  * Kotlin
 
 * [[How to Contribute]]
 * [Javadoc](http://netflix.github.io/RxJava/javadoc/rx/Observable.html)
