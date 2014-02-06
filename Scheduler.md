@@ -77,6 +77,8 @@ Schedulers.newThread().schedule(new Action1<Inner>() {
 
 });
 ```
+The `schedule(&#8239;)` method returns a `Subscription` and so you can call its `unsubscribe(&#8239;)` method to signal that it can halt work.
+
 You can also use a version of `schedule(&#8239;)` that delays your task on the given Scheduler until a certain timespan has passed. The following example schedules `someTask` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
 ```java
 someScheduler.schedule(someTask, 500, TimeUnit.MILLISECONDS);
