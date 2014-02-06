@@ -38,7 +38,7 @@ Other operators do not have a form that permits you to set their Schedulers. Som
 
 ## Using Schedulers
 
-Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work. The following example uses the `schedule(&#8239;)` method of the `Scheduler` class to schedule work on the `newThread` Scheduler:
+Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler:
 
 ```java
 Schedulers.newThread().schedule(new Action1<Inner>() {
@@ -63,7 +63,7 @@ Schedulers.newThread().schedule(new Action1<Inner>() {
 
 });
 ```
-`inner` also implements the `Subscription` interface, and its `isUnsubscribed(&#8239;)` and `unsubscribe(&#8239;)` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
+`inner` also implements the `Subscription` interface, and its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
 ```java
 Schedulers.newThread().schedule(new Action1<Inner>() {
 
@@ -77,9 +77,9 @@ Schedulers.newThread().schedule(new Action1<Inner>() {
 
 });
 ```
-The `schedule(&#8239;)` method returns a `Subscription` and so you can call its `unsubscribe(&#8239;)` method to signal that it can halt work.
+The `schedule( )` method returns a `Subscription` and so you can call its `unsubscribe( )` method to signal that it can halt work.
 
-You can also use a version of `schedule(&#8239;)` that delays your task on the given Scheduler until a certain timespan has passed. The following example schedules `someTask` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
+You can also use a version of `schedule( )` that delays your task on the given Scheduler until a certain timespan has passed. The following example schedules `someTask` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
 ```java
 someScheduler.schedule(someTask, 500, TimeUnit.MILLISECONDS);
 ```
