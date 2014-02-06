@@ -1,6 +1,6 @@
 _Content TBD_
 
-# Default Schedulers for RxJava Observable operators
+## Default Schedulers for RxJava Observable operators
 
 Some Observable operators in RxJava have alternate forms that allow you to set which Scheduler the operator will use for (at least some part of) its operation. For these operators, if you do not set the Scheduler, the operator will use the default `computation` Scheduler.
 
