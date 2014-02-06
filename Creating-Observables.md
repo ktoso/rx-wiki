@@ -91,10 +91,10 @@ If you pass nothing or `null` to `just( )`, the resulting Observable will _not
 ***
 
 ## repeat( )
-#### create an Observable that emits a particular item or sequence of items repeatedly
-[[images/rx-operators/repeat.png]]
+#### create an Observable that emits the sequence of items emitted by the source Observable repeatedly
+[[images/rx-operators/repeat.o.png]]
 
-There are also versions of `repeat( )` that operate on a particular scheduler, that repeat only a certain number of times before terminating, and that repeat sequences of items emitted by a source Observable rather than one particular item.
+There are also versions of `repeat( )` that operate on a scheduler that you specify, and that repeat only a certain number of times before terminating.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat()">`repeat( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat(rx.Scheduler)">`repeat(scheduler)`</a>
