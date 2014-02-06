@@ -2,7 +2,7 @@ RxJava is a Java VM implementation of [Reactive Extensions](https://rx.codeplex.
 
 It extends the [observer pattern](http://en.wikipedia.org/wiki/Observer_pattern) to support sequences of data/events and adds operators that allow you to compose sequences together declaratively while abstracting away concerns about things like low-level threading, synchronization, thread-safety, concurrent data structures, and non-blocking I/O.
 
-It supports Java 5 or higher and JVM-based languages such as [Groovy](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy), [Clojure](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure), and [Scala](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala).
+It supports Java 5 or higher and JVM-based languages such as [Groovy](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy), [Clojure](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure), [JRuby](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-jruby), [Kotlin](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-kotlin) and [Scala](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala).
 
 <center><table>
  <thead>
