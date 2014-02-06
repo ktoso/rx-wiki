@@ -35,3 +35,49 @@ Other operators do not have a form that permits you to set their Schedulers. Som
   <tr><td><code>timestamp</code></td><td><code>immediate</code></td></tr>
  </tbody>
 </table>
+
+## Using Schedulers
+
+Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work. The following example uses the `schedule(&#8239;)` method of the `Scheduler` class to schedule work on the `newThread` Scheduler:
+
+```java
+Schedulers.newThread().schedule(new Action1<Inner>() {
+
+    @Override
+    public void call(Inner inner) {
+        doWork();
+    }
+
+});
+```
+The `inner` parameter allows you to schedule recursive calls:
+```java
+Schedulers.newThread().schedule(new Action1<Inner>() {
+
+    @Override
+    public void call(Inner inner) {
+        doWork();
+        // recurse until unsubscribed (the schedule will do nothing if unsubscribed)
+        inner.schedule(this);
+    }
+
+});
+```
+`inner` also implements the `Subscription` interface, and its `isUnsubscribed(&#8239;)` and `unsubscribe(&#8239;)` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
+```java
+Schedulers.newThread().schedule(new Action1<Inner>() {
+
+    @Override
+    public void call(Inner inner) {
+        while(!inner.isUnsubscribed()) {
+            status = doWork();
+            if(QUIT == status) { inner.unsubscribe(); }
+        }
+    }
+
+});
+```
+You can also use a version of `schedule(&#8239;)` that delays your task on the given Scheduler until a certain timespan has passed. The following example schedules `someTask` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
+```java
+someScheduler.schedule(someTask, 500, TimeUnit.MILLISECONDS);
+```
