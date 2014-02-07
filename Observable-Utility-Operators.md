@@ -310,7 +310,7 @@ Finally
 
 The `delay( )` operator modifies its source Observable by pausing for a particular increment of time (that you specify) before emitting each of the source Observable's items. This has the effect of shifting the entire sequence of items emitted by the Observable forward in time by that specified increment.
 
-Note that `delay( )` will _not_ time-shift an `onError( )` call in this fashion but it will forward such a call immediately to its subscribers.
+Note that `delay( )` will _not_ time-shift an `onError( )` call in this fashion but it will forward such a call immediately to its subscribers. It will however time shift an `onCompleted( )` call.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(long, java.util.concurrent.TimeUnit)">`delay(delay,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`delay(delay,unit,scheduler)`</a>
