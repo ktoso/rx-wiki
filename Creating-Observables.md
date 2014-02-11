@@ -161,7 +161,7 @@ To create an Observable that emits a range of sequential integers, pass the star
 def myObservable = Observable.range(5, 3);
 ```
 
-In calls to `range(n,m)`, values less than 1 for _m_ will result in no numbers being emitted. _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
+In calls to `range(n,m)`, a value of zero for _m_ will result in no numbers being emitted (values less than zero will cause an exception). _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#range(int, int)">`range(start, count)`</a>
