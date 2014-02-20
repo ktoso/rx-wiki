@@ -138,11 +138,6 @@ Note also that passing a `null` seed is not the same as not passing a seed. The 
 
 The `groupBy( )` method creates or extracts a key from all of the items emitted by a source Observable. For each unique key created in this way, `groupBy( )` creates a [`GroupedObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html) that emits all of the items emitted by the source Observable that match that key. `groupBy( )` then emits each of these Observables, as an Observable. A `GroupedObservable` has a method, [`getKey( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html#getKey()) with which you can retrieve the key that defines the `GroupedObservable`.
 
-There are two versions of `groupBy( )`:
-
-1. One version takes two parameters: the source Observable and a function that takes as its parameter an item emitted by the source Observable and returns the key.
-1. The second version adds a third parameter: a function that takes as its parameter an item emitted by the source Observable and returns an item to be emitted by the resulting GroupedObservable (the first version just emits the source Observable's items unchanged).
-
 The following sample code uses `groupBy( )` to transform a list of numbers into two lists, grouped by whether or not the numbers are even:
 ```groovy
 def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -160,7 +155,7 @@ numbers.groupBy(groupFunc).mapMany({ it.reduce([it.getKey()], {a, b -> a << b}) 
 Sequence complete
 ```
 
-There is also a `groupByUntil( )` operator. It has the two varieties mentioned above, but adds a third parameter: an Observable that emits duration markers. When a duration marker is emitted by this Observable, any grouped Observables that have been opened are closed, and `groupByUntil( )` will create new grouped Observables for any subsequent emissions by the source Observable.
+There is also a `groupByUntil( )` operator. It adds another parameter: an Observable that emits duration markers. When a duration marker is emitted by this Observable, any grouped Observables that have been opened are closed, and `groupByUntil( )` will create new grouped Observables for any subsequent emissions by the source Observable.
 
 [[images/rx-operators/groupByUntil.png]]
 
