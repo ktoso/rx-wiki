@@ -11,6 +11,7 @@ This section explains various utility operators for working with Observables.
 * [**`doOnEach( )`**](Observable-Utility-Operators#wiki-dooneach) — register an action to take whenever an Observable emits an item
 * [**`doOnCompleted( )`**](Observable-Utility-Operators#wiki-dooncompleted) — register an action to take when an Observable completes successfully
 * [**`doOnError( )`**](Observable-Utility-Operators#wiki-doonerror) — register an action to take when an Observable completes with an error
+* [**`doOnTerminate( )`**](Observable-Utility-Operators#wiki-doonterminate) — register an action to take when an Observable completes, either successfully or with an error
 * [**`finallyDo( )`**](Observable-Utility-Operators#wiki-finallydo) — register an action to take when an Observable completes
 * [**`delay( )`**](Observable-Utility-Operators#wiki-delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`delaySubscription( )`**](Observable-Utility-Operators#wiki-delaysubscription) — hold an Subscriber's subscription request for a specified amount of time before passing it on to the source Observable
@@ -267,6 +268,19 @@ Use the `doOnError( )` method to register an `Action` that RxJava will perform
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#doOnError(rx.util.functions.Action1)">`doOnError(action)`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedoobserver--onnext-onerror-oncompleted">`do` and `doAction`</a>
+
+***
+
+## doOnTerminate( )
+#### register an action to take when an Observable completes, either successfully or with an error
+[[images/rx-operators/doOnTerminate.png]]
+
+Use the `doOnTerminate( )` method to register an `Action` that RxJava will perform just before the Observable calls `onComplete` or `onError`.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#doOnTerminate(rx.util.functions.Action0)">`doOnCompleted(action)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedoobserver--onnext-onerror-oncompleted">`do` and `doAction`</a>
 
