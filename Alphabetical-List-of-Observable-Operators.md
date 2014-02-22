@@ -30,6 +30,7 @@
 * [**`doOnCompleted( )`**](Observable-Utility-Operators#wiki-dooncompleted) — register an action to take when an Observable completes successfully
 * [**`doOnEach( )`**](Observable-Utility-Operators#wiki-dooneach) — register an action to take whenever an Observable emits an item
 * [**`doOnError( )`**](Observable-Utility-Operators#wiki-doonerror) — register an action to take when an Observable completes with an error
+* [**`doOnTerminate( )`**](Observable-Utility-Operators#wiki-doonterminate) — register an action to take when an Observable completes, either successfully or with an error
 * [**`elementAt( )`**](Filtering-Observables#wiki-elementat) — emit item _n_ emitted by the source Observable
 * [**`elementAtOrDefault( )`**](Filtering-Observables#wiki-elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
 * [**`empty( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then completes
