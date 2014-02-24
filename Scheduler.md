@@ -1,6 +1,10 @@
 ## Introduction
 
-_Content TBD_
+If you want to introduce multithreading into your cascade of Observable operators, you can do so by instructing those operators (or particular Observables) to operate on particular Schedulers.
+
+You can make an Observable act on a particular Scheduler by means of the <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-observeon">`observeOn`</a> and <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-subscribeon">`subscribeOn`</a> operators. You can also split an operator that works on an Observable onto multiple threads with the <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-parallel">`parallel`</a> operator.
+
+Many of the RxJava Observable operators have varieties that take a Scheduler as an operator. These instruct the operator to do some or all of its work on a particular Scheduler.
 
 ## Varieties of Scheduler
 
