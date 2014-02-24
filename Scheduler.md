@@ -6,6 +6,9 @@ You can make an Observable act on a particular Scheduler by means of the <a href
 
 Many of the RxJava Observable operators have varieties that take a Scheduler as an operator. These instruct the operator to do some or all of its work on a particular Scheduler.
 
+#### See also:
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html">Intro to Rx: Scheduling and Threading</a>
+
 ## Varieties of Scheduler
 
 You obtain a Scheduler from the factory methods described in the `Schedulers` class. The following table shows the varieties of Scheduler that are available to you by means of these methods:
