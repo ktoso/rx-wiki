@@ -219,7 +219,7 @@ The `groupJoin( )` method is similar, except that the function you define to c
 #### convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 [[images/rx-operators/switchDo.png]]
 
-`switchOnNext( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchOnNext( )` begins emitting items from that Observable. When a new Observable is emitted, `switchOnNext( )` stops emitting items from the earlier-emitted Observable and begins emitting items from the new one.
+`switchOnNext( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchOnNext( )` unsubscribes from the previously-emitted Observable begins emitting items from the latest Observable. Note that it will unsubscribe from the previously-emitted Observable when a new Observable is *emitted* from the source Observable, not when the new Observable emits an item. This means that items emitted by the previous Observable between the time the subsequent Observable is emitted and the time that subsequent Observable itself begins emitting items will be dropped (as with the yellow circle in the diagram above).
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#switchOnNext(rx.Observable)">`switchOnNext(sequenceOfSequences)`</a>
