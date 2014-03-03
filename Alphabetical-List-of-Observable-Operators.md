@@ -42,7 +42,7 @@
 * [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
-* [**`flatMap( )`**](Transforming-Observables#wiki-mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
+* [**`flatMap( )`**](Transforming-Observables#wiki-flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) (`Async`) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes
 * [**`forEachFuture( )`**](Blocking-Observable-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable 
@@ -72,8 +72,7 @@
 * [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
 * [**`longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#wiki-map) — transform the items emitted by an Observable by applying a function to each of them
-* [**`mapMany( )`**](Transforming-Observables#wiki-mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* [**`mapManyDelayError( )`**](Transforming-Observables#wiki-mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, waiting to report errors until all error-free observables have a chance to complete
+* [**`mapMany( )`**] — _see: `flatMap( )`_
 * [**`materialize( )`**](Observable-Utility-Operators#wiki-materialize) — convert an Observable into a list of Notifications
 * [**`max( )`**](Mathematical-and-Aggregate-Operators#wiki-max) — emits the maximum value emitted by a source Observable
 * [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#wiki-maxby) — emits the item emitted by the source Observable that has the maximum key value
