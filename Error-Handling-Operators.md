@@ -14,16 +14,16 @@ This section explains operators that handle errors and exceptions encountered by
 The `onErrorResumeNext( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Subscriber, `onErrorResumeNext( )` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onError();
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onError();
 });
 def myFallback = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('0');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('1');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('2');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('0');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('1');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('2');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.onErrorResumeNext(myFallback).subscribe(
@@ -58,11 +58,11 @@ Sequence complete
 The `onErrorReturn( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Subscriber, `onErrorReturn( )` will instead emit a specified item and invoke the Subscriber's `onCompleted( )` method, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Four');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onError();
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Four');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onError();
 });
 
 myObservable.onErrorReturn({ return('Blastoff!'); }).subscribe(
