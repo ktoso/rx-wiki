@@ -1,8 +1,7 @@
 This section explains operators with which you can transform items that are emitted by an Observable.
 
 * [**`map( )`**](Transforming-Observables#wiki-map) — transform the items emitted by an Observable by applying a function to each of them
-* [**`mapMany( )` or `flatMap( )`**](Transforming-Observables#wiki-mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* [**`mapManyDelayError( )`**](Transforming-Observables#wiki-mapmany-or-flatmap-and-mapmanydelayerror) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, waiting to report errors until all error-free observables have a chance to complete
+* [**`flatMap( )`**](Transforming-Observables#wiki-flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`scan( )`**](Transforming-Observables#wiki-scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * [**`buffer( )`**](Transforming-Observables#wiki-buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
@@ -43,11 +42,11 @@ Sequence complete
 
 ***
 
-## mapMany( ) or flatMap( ), and mapManyDelayError( )
+## flatMap( )
 #### Transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-[[images/rx-operators/mapMany.png]]
+[[images/rx-operators/flatMap.png]]
 
-The `mapMany( )` method (or `flatMap( )`, which has identical behavior) creates a new Observable by applying a function that you supply to each item emitted by the original Observable, where that function is itself an Observable that emits items, and then merges the results of that function applied to every item emitted by the original Observable, emitting these merged results.
+The `flatMap( )` method creates a new Observable by applying a function that you supply to each item emitted by the original Observable, where that function is itself an Observable that emits items, and then merges the results of that function applied to every item emitted by the original Observable, emitting these merged results.
 
 This method is useful, for example, when you have an Observable that emits a series of items that themselves have Observable members or are in other ways transformable into Observables, so that you can create a new Observable that emits the complete collection of items emitted by the sub-Observables of these items.
 
@@ -57,7 +56,7 @@ numbers   = Observable.from([1, 2, 3]);
 // this closure is an Observable that emits two numbers based on what number it is passed
 multiples = { n -> Observable.from([ n*2, n*3 ]) };   
 
-numbers.mapMany(multiples).subscribe(
+numbers.flatMap(multiples).subscribe(
   { println(it); },                          // onNext
   { println("Error: " + it.getMessage()); }, // onError
   { println("Sequence complete"); }          // onCompleted
@@ -73,14 +72,10 @@ numbers.mapMany(multiples).subscribe(
 Sequence complete
 ```
 
-If any of the individual Observables mapped to the items from the source Observable in `mapMany( )` aborts by invoking `onError`, the `mapMany( )` call itself will immediately abort and invoke `onError`. If you would prefer that the map-many operation continue emitting the results of the remaining, error-free Observables before reporting the error, use `mapManyDelayError( )` instead.
-
-[[images/rx-operators/mapManyDelayError.png]]
-
-Because it is possible for more than one of the individual Observables to encounter an error, `mapManyDelayError( )` may pass information about multiple errors to the `onError` method of its Subscribers (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class [`CompositeException`](http://netflix.github.io/RxJava/javadoc/rx/util/CompositeException.html).
+If any of the individual Observables mapped to the items from the source Observable in `flatMap( )` aborts by invoking `onError`, the `flatMap( )` call itself will immediately abort and invoke `onError`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mapMany(rx.util.functions.Func1)">`mapMany(func)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.util.functions.Func1)">its `flatMap` clone</a>)
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.util.functions.Func1)">`flatMap`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeselectmanyselector-resultselector">`selectMany`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.selectmany.aspx">`SelectMany`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#SelectMany">Introduction to Rx: SelectMany</a>
