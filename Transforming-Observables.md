@@ -138,7 +138,7 @@ The following sample code uses `groupBy( )` to transform a list of numbers int
 def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 def groupFunc = { return(0 == (it % 2)); };
 
-numbers.groupBy(groupFunc).mapMany({ it.reduce([it.getKey()], {a, b -> a << b}) }).subscribe(
+numbers.groupBy(groupFunc).flatMap({ it.reduce([it.getKey()], {a, b -> a << b}) }).subscribe(
   { println(it); },                          // onNext
   { println("Error: " + it.getMessage()); }, // onError
   { println("Sequence complete"); }          // onCompleted
