@@ -72,7 +72,7 @@
 * [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
 * [**`longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#wiki-map) — transform the items emitted by an Observable by applying a function to each of them
-* [**`mapMany( )`**] — _see: `flatMap( )`_
+* **`mapMany( )`** — _see: `flatMap( )`_
 * [**`materialize( )`**](Observable-Utility-Operators#wiki-materialize) — convert an Observable into a list of Notifications
 * [**`max( )`**](Mathematical-and-Aggregate-Operators#wiki-max) — emits the maximum value emitted by a source Observable
 * [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#wiki-maxby) — emits the item emitted by the source Observable that has the maximum key value
