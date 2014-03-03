@@ -274,7 +274,7 @@ def myObservable = Observable.create({ aSubscriber ->
   if(false == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
-myObservable.sumInteger().subscribe(
+Observable.sumInteger(myObservable).subscribe(
   { println(it); },                  // onNext
   { println("Error encountered"); }, // onError
   { println("Sequence complete"); }  // onCompleted
