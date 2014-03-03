@@ -118,11 +118,11 @@ def myObservable = Observable.create({ aSubscriber ->
       }
       subscriber.onNext(i);
     }
-    if (FALSE == aSubscriber.isUnsubscribed()) {
+    if (false == aSubscriber.isUnsubscribed()) {
       aSubscriber.onCompleted();
     }
   } catch(Throwable t) {
-    if (FALSE == aSubscriber.isUnsubscribed()) {
+    if (false == aSubscriber.isUnsubscribed()) {
       aSubscriber.onError(t);
     }
   }
