@@ -36,7 +36,7 @@
 * [**`empty( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then completes
 * [**`error( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then signals an error
 * [**`exists( )`**](Conditional-and-Boolean-Operators#wiki-exists-and-isempty) — determine whether an Observable emits any items or not
-* [**`filter( )`**](Filtering-Observables#wiki-filter-or-where) — filter items emitted by an Observable
+* [**`filter( )`**](Filtering-Observables#wiki-filter) — filter items emitted by an Observable
 * [**`finallyDo( )`**](Observable-Utility-Operators#wiki-finallydo) — register an action to take when an Observable completes
 * [**`first( )`**](Filtering-Observables#wiki-first-and-takefirst) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
@@ -149,6 +149,6 @@
 * [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#wiki-tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`using( )`**](Observable-Utility-Operators#wiki-using) — create a disposable resource that has the same lifespan as an Observable
 * [**`when( )`**](Combining-Observables#wiki-and-then-and-when) — convert a series of `Plan` objects into an Observable
-* [**`where( )`**](Filtering-Observables#wiki-filter-or-where) — filter items emitted by an Observable
+* **`where( )`** — _see: `filter( )`_
 * [**`window( )`**](Transforming-Observables#wiki-window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`zip( )`**](Combining-Observables#wiki-zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
