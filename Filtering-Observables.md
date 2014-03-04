@@ -1,6 +1,6 @@
 This section explains operators you can use to filter and select items emitted by Observables.
 
-* [**`filter( )` or `where( )`**](Filtering-Observables#wiki-filter-or-where) — filter items emitted by an Observable
+* [**`filter( )`**](Filtering-Observables#wiki-filter) — filter items emitted by an Observable
 * [**`takeLast( )`**](Filtering-Observables#wiki-takelast) — only emit the last _n_ items emitted by an Observable
 * [**`last( )`**](Filtering-Observables#wiki-last) — emit only the last item emitted by an Observable
 * [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
@@ -23,11 +23,11 @@ This section explains operators you can use to filter and select items emitted b
 
 ***
 
-## filter( ) or where( )
+## filter( )
 #### filter items emitted by an Observable
 [[images/rx-operators/filter.png]]
 
-You can filter an Observable, discarding any items that do not meet some test, by passing a filtering function into the `filter( )` or `where( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
+You can filter an Observable, discarding any items that do not meet some test, by passing a filtering function into the `filter( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
 ```groovy
 numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -47,7 +47,7 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.util.functions.Func1)">`filter(predicate)`</a> (and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#where(rx.util.functions.Func1)">its `where` clone</a>)
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.util.functions.Func1)">`filter(predicate)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where.aspx">`Where`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefilterpredicate-thisarg">`filter`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Where">Introduction to Rx: Where</a>
