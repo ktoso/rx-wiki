@@ -209,6 +209,7 @@ numbers.buffer(3).subscribe(
 * `buffer(count, skip)`
 [[images/rx-operators/buffer4.png]]
 > This version of `buffer( )` create a new bundle of items for every *skip* item(s) emitted by the source `Observable`, each containing *count* elements. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example, compare the following two uses of `buffer( )` on the same sequence:
+
 ```groovy
 def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8]);
 
