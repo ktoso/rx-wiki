@@ -191,9 +191,49 @@ The `buffer( )` method periodically gathers items emitted by a source `Observa
 [[images/rx-operators/buffer3.png]]
 > This version of `buffer( )` emits a new bundle of items for every *count* items emitted by the source `Observable`.
 
+```groovy
+def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8]);
+
+numbers.buffer(3).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+```
+```
+[1, 2, 3]
+[4, 5, 6]
+[7, 8]
+```
+
 * `buffer(count, skip)`
 [[images/rx-operators/buffer4.png]]
-> This version of `buffer( )` create a new bundle of items for every *skip* item(s) emitted by the source `Observable`, each containing *count* elements. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example: `from([1, 2, 3, 4, 5]).buffer(3, 1)` will emit the following bundles: `[1, 2, 3]`, `[2, 3, 4]`, `[3, 4, 5]`.
+> This version of `buffer( )` create a new bundle of items for every *skip* item(s) emitted by the source `Observable`, each containing *count* elements. If *skip* is less than *count* this means that the bundles will overlap and contain duplicate items. For example, compare the following two uses of `buffer( )` on the same sequence:
+```groovy
+def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8]);
+
+numbers.buffer(2,3).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+numbers.buffer(3,2).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+```
+```
+[1, 2]
+[4, 5]
+[7, 8]
+Sequence complete
+[1, 2, 3]
+[3, 4, 5]
+[5, 6, 7]
+[7, 8]
+Sequence complete
+```
 
 * `buffer(timespan)` and `buffer(timespan, scheduler)`
 [[images/rx-operators/buffer5.png]]
