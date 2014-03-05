@@ -118,6 +118,20 @@ The `lastOrDefault( )` operator returns an Observable that emits the last item
 
 To convert an Observable that emits several items into one that emits the last _n_ of these items as a single list before completing, use the `takeLastBuffer( )` method. There are also versions of `takeLastBuffer( )` that emit a list containing the items that were emitted by the source Observable during a specified window of time before the Observable completed, or a maximum of _n_ items from such a window.
 
+```groovy
+def numbers = Observable.from([1, 2, 3, 4, 5, 6, 7, 8]);
+
+numbers.takeLastBuffer(3).subscribe(
+  { println(it); },                          // onNext
+  { println("Error: " + it.getMessage()); }, // onError
+  { println("Sequence complete"); }          // onCompleted
+);
+```
+```
+[6, 7, 8]
+Sequence complete
+```
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int)">`takeLastBuffer(count)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit)">`takeLastBuffer(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(time, timeunit, scheduler)`</a>
