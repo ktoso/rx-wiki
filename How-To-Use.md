@@ -89,22 +89,17 @@ You can do this either by extending the Observable class or by using the `Observ
  * when subscribed to (does not spawn an extra thread).
  */
 def customObservableBlocking() {
-    return Observable.create(new OnSubscribe<String>() {
-        def Subscription call(Subscriber<String> subscriber) {
-            for(int i=0; i<50; i++) {
-                if(TRUE == subscriber.isUnsubscribed()) {
-                    return;
-                }
-                subscriber.onNext("value_" + i);
-            }
-            // after sending all values we complete the sequence
-            subscriber.onCompleted();
-        };
+    return Observable.create({ aSubscriber ->
+        for(int i=0; i<50; i++) {
+            if(false == aSubscriber.isUnsubscribed()) { aSubscriber.onNext("value_" + i) };
+        }
+        // after sending all values we complete the sequence
+        aSubscriber.onCompleted();
     });
 }
 
 // To see output:
-customObservableBlocking().subscribe({ println(it) });
+customObservableBlocking().subscribe({ it -> println(it); });
 ```
 
 ### Asynchronous Observable
@@ -119,18 +114,18 @@ It is written verbosely, with static typing and implementation of the `Func1` an
  * when subscribed to as it spawns a separate thread.
  */
 def customObservableNonBlocking() {
-    return Observable.create(new onSubscribe<String>() {
+    return Observable.create(
         /**
          * This 'call' method will be invoked with the Observable is subscribed to.
          * 
          * It spawns a thread to do it asynchronously.
          */
-        def Subscription call(Subscriber<String> subscriber) {
+         { subscriber ->
             // For simplicity this example uses a Thread instead of an ExecutorService/ThreadPool
             final Thread t = new Thread(new Runnable() {
                 void run() {
                     for(int i=0; i<75; i++) {
-                        if(TRUE == subscriber.isUnsubscribed()) {
+                        if(true == subscriber.isUnsubscribed()) {
                             return;
                         }
                         subscriber.onNext("value_" + i);
@@ -140,8 +135,8 @@ def customObservableNonBlocking() {
                 };
             });
             t.start();
-        };
-    });
+        }
+    );
 }
 
 // To see output:
@@ -202,21 +197,23 @@ Back to Groovy, the same Wikipedia functionality but using closures instead of a
  * @param wikipediaArticleName
  */
 def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
-    return Observable.create({ Subscriber<String> subscriber ->
-        Thread.start {
+    return Observable.create({ subscriber ->
+        Thread.start( {
             for(articleName in wikipediaArticleNames) {
-                if(TRUE == subscriber.isUnsubscribed()) {
+                if(true == subscriber.isUnsubscribed()) {
                     return;
                 }
                 subscriber.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
             }
             subscriber.onCompleted();
-        }
+        } );
+        return( subscriber );
     });
 }
 
 fetchWikipediaArticleAsynchronously("Tiger", "Elephant")
-    .subscribe({ println "--- Article ---\n" + it.substring(0, 125)})
+    .subscribe({ println "--- Article ---\n" + it.substring(0, 125);},
+               { println "--- Error ---\n" + it.getMessage();});
 ```
 
 Results:
@@ -344,11 +341,11 @@ Here is a revised version of the Wikipedia example shown above, but with error h
  * @return Observable<String> of HTML
  */
 def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArticleNames) {
-    return Observable.create({ Subscriber<String> subscriber ->
+    return Observable.create({ subscriber ->
         Thread.start {
             try {
                 for(articleName in wikipediaArticleNames) {
-                    if(TRUE == subscriber.isUnsubscribed()) {
+                    if(true == subscriber.isUnsubscribed()) {
                         return;
                     }
                     subscriber.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
@@ -357,6 +354,7 @@ def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArti
             } catch(Throwable t) {
                 subscriber.onError(t);
             }
+            return(subscriber);
         }
     });
 }

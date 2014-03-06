@@ -1,20 +1,23 @@
 This section explains operators that perform mathematical or other operations over an entire sequence of items emitted by an Observable. Because these operations must wait for the source Observable to complete emitting items before they can construct their own emissions (and must usually buffer these items), these operators are dangerous to use on Observables that may have very long or infinite sequences.
 
+#### Operators in the `rxjava-math` module
 * [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Integers emitted by an Observable and emits this average
 * [**`averageLong( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Longs emitted by an Observable and emits this average
 * [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Floats emitted by an Observable and emits this average
 * [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Doubles emitted by an Observable and emits this average
-* [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
-* [**`count( )` and `longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`max( )`**](Mathematical-and-Aggregate-Operators#wiki-max) — emits the maximum value emitted by a source Observable
 * [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#wiki-maxby) — emits the item emitted by the source Observable that has the maximum key value
 * [**`min( )`**](Mathematical-and-Aggregate-Operators#wiki-min) — emits the minimum value emitted by a source Observable
 * [**`minBy( )`**](Mathematical-and-Aggregate-Operators#wiki-minby) — emits the item emitted by the source Observable that has the minimum key value
-* [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`sumInteger( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Integers emitted by an Observable and emits this sum
 * [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Longs emitted by an Observable and emits this sum
 * [**`sumFloat( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Floats emitted by an Observable and emits this sum
 * [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Doubles emitted by an Observable and emits this sum
+
+#### Other Aggregate Operators
+* [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
+* [**`count( )` and `longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
+* [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`toList( )`**](Observable-Utility-Operators#wiki-tolist) — collect all items from an Observable and emit them as a single List
 * [**`toSortedList( )`**](Observable-Utility-Operators#wiki-tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`toMap( )`**](Observable-Utility-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
@@ -29,14 +32,14 @@ This section explains operators that perform mathematical or other operations ov
 The `averageInteger( )` method returns an Observable that calculates the average of the Integers emitted by a source Observable and then emits this average as an Integer, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(4);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(3);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(2);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(1);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(4);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(3);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(2);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(1);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
-myObservable.averageInteger().subscribe(
+Observable.averageInteger(myObservable).subscribe(
   { println(it); },                  // onNext
   { println("Error encountered"); }, // onError
   { println("Sequence complete"); }  // onCompleted
@@ -113,10 +116,10 @@ Instead of passing multiple Observables into `concat( )`, you could also pass 
 The `count( )` method returns an Observable that emits a single item: an Integer that represents the total number of items emitted by the source Observable, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Three');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('Two');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext('One');
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
 myObservable.count().subscribe(
@@ -267,14 +270,14 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 The `sumInteger( )` method returns an Observable that adds the Integers emitted by a source Observable and then emits this sum as an Integer, as shown in the following sample code:
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(4);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(3);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(2);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onNext(1);
-  if(FALSE == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(4);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(3);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(2);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onNext(1);
+  if(false == aSubscriber.isUnsubscribed()) aSubscriber.onCompleted();
 });
 
-myObservable.sumInteger().subscribe(
+Observable.sumInteger(myObservable).subscribe(
   { println(it); },                  // onNext
   { println("Error encountered"); }, // onError
   { println("Sequence complete"); }  // onCompleted

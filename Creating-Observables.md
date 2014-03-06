@@ -83,7 +83,7 @@ def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]);
 
 This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert an iterable object into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
 
-If you pass nothing or `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
+Note that if you pass `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(value)`</a>
@@ -113,16 +113,16 @@ You can create an Observable from scratch by using the `create( )` method. You
 def myObservable = Observable.create({ aSubscriber ->
   try {
     for (int i = 1; i < 1000000; i++) {
-      if (TRUE == aSubscriber.isUnsubscribed()) {
+      if (true == aSubscriber.isUnsubscribed()) {
         return;
       }
       subscriber.onNext(i);
     }
-    if (FALSE == aSubscriber.isUnsubscribed()) {
+    if (false == aSubscriber.isUnsubscribed()) {
       aSubscriber.onCompleted();
     }
   } catch(Throwable t) {
-    if (FALSE == aSubscriber.isUnsubscribed()) {
+    if (false == aSubscriber.isUnsubscribed()) {
       aSubscriber.onError(t);
     }
   }
