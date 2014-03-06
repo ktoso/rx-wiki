@@ -1,4 +1,4 @@
-The operators described on this page are part of the `Async` class and are used to convert synchronous methods into Observables.
+The operators described on this page are part of the distinct `rxjava-async` module. They are used to convert synchronous methods into Observables.
 
 * [**`start( )`**](Async-Operators#wiki-start) — create an Observable that emits the return value of a function
 * [**`toAsync( )` or `asyncAction( )` or `asyncFunc( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert a function or Action into an Observable that executes the function and emits its return value
