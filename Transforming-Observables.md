@@ -131,7 +131,7 @@ Note also that passing a `null` seed is not the same as not passing a seed. The 
 #### divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 [[images/rx-operators/groupBy.png]]
 
-The `groupBy( )` method creates or extracts a key from all of the items emitted by a source Observable. For each unique key created in this way, `groupBy( )` creates a [`GroupedObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html) that emits all of the items emitted by the source Observable that match that key. `groupBy( )` then emits each of these Observables, as a variety of Observable of the subclass `GroupedObservable` which has a method, [`getKey( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html#getKey()) with which you can retrieve the key that defines the `GroupedObservable`.
+The `groupBy( )` method creates or extracts a key from all of the items emitted by a source Observable. For each unique key created in this way, `groupBy( )` creates an Observable of the subclass [`GroupedObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html) that emits all of the items emitted by the source Observable that match that key. `groupBy( )` then emits each of these `GroupedObservable` items. Each Observable of this subclass has a method, [`getKey( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/GroupedObservable.html#getKey()) with which you can retrieve the key that defined the `GroupedObservable`.
 
 The following sample code uses `groupBy( )` to transform a list of numbers into two lists, grouped by whether or not the numbers are even:
 ```groovy
