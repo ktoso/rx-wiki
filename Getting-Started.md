@@ -1,6 +1,6 @@
 ## Getting Binaries
 
-You can find binaries and dependency information for Maven, Ivy, Gradle, and others at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.netflix.rxjava%22%20AND%20a%3A%22rxjava-core%22).
+You can find binaries and dependency information for Maven, Ivy, Gradle, SBT, and others at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.netflix.rxjava%22%20AND%20a%3A%22rxjava-core%22).
 
 Example for Maven:
 
@@ -15,6 +15,12 @@ and for Ivy:
 
 ```xml
 <dependency org="com.netflix.rxjava" name="rxjava-core" rev="0.5.0" />
+```
+
+and for SBT:
+
+```scala
+libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.17.0-RC7"
 ```
 
 If you need to download the jars instead of using a build system, create a Maven `pom` file like this with the desired version:
@@ -51,7 +57,7 @@ You need Java 6 or later.
 
 ## Hello World!
 
-The following are RxJava implementations of “Hello World” in Java, Groovy, and Clojure:
+The following are RxJava implementations of “Hello World” in Java, Groovy, Clojure and Scala:
 
 In Java =>
 ```java
@@ -82,11 +88,19 @@ In Clojure =>
   (-> (Observable/toObservable &rest)
     (.subscribe #(println (str "Hello " % "!")))))
 ```
+
+In Scala =>
+```scala
+def hello(args: String*) = Observable.from(args) subscribe { e =>
+  println(e)
+}
+```
+
 You can find more examples and information in the [[How To Use]] section and in the following source folders:
 
 * Groovy: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy/src/examples
-* Scala: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples
 * Clojure: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure/src/examples
+* Scala: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples
 
 ## Building
 
