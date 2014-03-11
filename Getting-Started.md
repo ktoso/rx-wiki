@@ -148,3 +148,11 @@ On a clean build you will see the unit tests run. They will look something like 
 ```
 > Building > :rxjava-core:test > 91 tests completed
 ```
+
+#### Troubleshooting
+
+One developer reported getting the following error:
+
+> Could not resolve all dependencies for configuration ':language-adaptors:rxjava-scala:provided'
+
+He was able to resolve the problem by removing old versions of `scala-library` from `.gradle/caches` and `.m2/repository/org/scala-lang/` and then doing a clean build. <a href="https://gist.github.com/jaceklaskowski/9496058">(See this page for details.)</a>
