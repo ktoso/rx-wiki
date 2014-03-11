@@ -1,5 +1,3 @@
-# Introduction
-
 In the Rx (reactive) pattern a _Subscriber_ object _subscribes_ to an object that implements the _Observable_ interface. Then that Subscriber reacts to whatever item or items the Observable object emits. This pattern facilitates concurrent operations by not blocking while waiting for the Observable to emit objects, but by instead creating a sentry in the form of a Subscriber that stands ready to react appropriately at whatever future time the Observable does so.
 
 This page explains what the reactive pattern is and what Observables and Subscribers are (and how Subscribers subscribe to Observables). Subsequent child pages (as shown in sidebar) show how you use utility methods on the Observable class to link Observables together and change their behaviors.
