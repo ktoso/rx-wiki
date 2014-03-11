@@ -166,8 +166,10 @@ public class myOperator<T> implements Operator<T> {
       @Override
       public void onNext(T item) {
         /* this example performs some sort of simple transformation on each incoming item and then passes it along */
-        transformedItem = myOperatorTransformOperation(item);
-        s.onNext(transformedItem);
+        if(!s.isUnsubscribed()) {
+          transformedItem = myOperatorTransformOperation(item);
+          s.onNext(transformedItem);
+        }
       }
     };
   }
