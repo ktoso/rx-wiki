@@ -98,12 +98,16 @@ Subscription mySubscription = Schedulers.newThread().schedule(new Action1<Inner>
 });
 ```
 The `schedule( )` method returns a `Subscription` and so you can call its `unsubscribe( )` method to signal that it can halt work:
-```
+```java
 mySubscription.unsubscribe();
 ```
 
-### Delayed Schedulers
-You can also use a version of `schedule( )` that delays your task on the given Scheduler until a certain timespan has passed. The following example schedules `someTask` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
+### Delayed and Periodic Schedulers
+You can also use a version of `schedule( )` that delays your action on the given Scheduler until a certain timespan has passed. The following example schedules `someAction` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
 ```java
-someScheduler.schedule(someTask, 500, TimeUnit.MILLISECONDS);
+someScheduler.schedule(someAction, 500, TimeUnit.MILLISECONDS);
+```
+Another `Scheduler` method allows you to schedule an action to take place at regular intervals. The following example schedules `someAction` to be performed on `someScheduler` after 500ms have passed, and then every 250ms thereafter:
+```java
+someScheduler.schedulePeriodically(someAction, 500, 250, TimeUnit.MILLISECONDS);
 ```
