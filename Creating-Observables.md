@@ -107,7 +107,7 @@ There are also versions of `repeat( )` that operate on a scheduler that you sp
 #### create an Observable from scratch by means of a function
 [[images/rx-operators/create.png]]
 
-You can create an Observable from scratch by using the `create( )` method. You pass this method a function that accepts as its parameter the Subscriber that is passed to an Observable’s `subscribe( )` method (or is derived from the Subscriber that is passed to that method). Write the function you pass to `create( )` so that it behaves as an Observable — calling the passed-in Subscriber’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
+You can create an Observable from scratch by using the `create( )` method. You pass this method a function that accepts as its parameter the Subscriber that is passed to an Observable’s `subscribe( )` method (or that is derived from the `Observerer` that is passed to that method). Write the function you pass to `create( )` so that it behaves as an Observable — calling the passed-in Subscriber’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
 
 ```groovy
 def myObservable = Observable.create({ aSubscriber ->
@@ -116,7 +116,7 @@ def myObservable = Observable.create({ aSubscriber ->
       if (true == aSubscriber.isUnsubscribed()) {
         return;
       }
-      subscriber.onNext(i);
+      aSubscriber.onNext(i);
     }
     if (false == aSubscriber.isUnsubscribed()) {
       aSubscriber.onCompleted();
@@ -129,7 +129,7 @@ def myObservable = Observable.create({ aSubscriber ->
 })
 ```
 
-**NOTE:** A well-formed finite Observable must attempt to call either the Subscriber’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter attempt to call any of the Subscriber’s other methods. It is good practice to check the Subscriber’s `isUnsubscribed( )` state of the Subscriber so that your Observable can stop emitting items or doing expensive calculations when there is no longer an interested Subscriber.
+**NOTE:** A well-formed finite Observable must attempt to call either the Subscriber’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter attempt to call any of the Subscriber’s other methods. It is good practice to check the Subscriber’s `isUnsubscribed( )` state so that your Observable can stop emitting items or doing expensive calculations when there is no longer an interested Subscriber.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribe)">`create(OnSubscribe)`</a>
