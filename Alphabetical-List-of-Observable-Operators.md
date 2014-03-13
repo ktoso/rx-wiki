@@ -47,7 +47,7 @@
 * (`rxjava-async`) [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) (`Async`) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes
 * [**`forEachFuture( )`**](Blocking-Observable-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable 
 * [**`forIterable( )`**](Creating-Observables#wiki-foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
-* [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable or a Future into an Observable
+* [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
 * (`rxjava-async`) [**`fromAction( )`**](Async-Operators#wiki-fromaction) — convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes
 * (`rxjava-async`) [**`fromCallable( )`**](Async-Operators#wiki-fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when a Subscriber subscribes
 * (`rxjava-async`) [**`fromCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the Future's value until a Subscriber subscribes
