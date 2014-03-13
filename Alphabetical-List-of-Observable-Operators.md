@@ -11,7 +11,7 @@
 * [**`buffer( )`**](Transforming-Observables#wiki-buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time
 * [**`cache( )`**](Observable-Utility-Operators#wiki-cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
 * [**`cast( )`**](Transforming-Observables#wiki-cast) — cast all items from the source Observable into a particular type before reemitting them
-* [**`chunkify( )`**](Blocking-Observable-Operators#wiki-chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
+* (⁇) [**`chunkify( )`**](Blocking-Observable-Operators#wiki-chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`combineLatest( )`**](Combining-Observables#wiki-combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
 * [**`connect( )`**](Connectable-Observable-Operators#wiki-connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
@@ -46,7 +46,7 @@
 * [**`flatMap( )`**](Transforming-Observables#wiki-flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * (`rxjava-async`) [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) (`Async`) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes
-* [**`forEachFuture( )`**](Blocking-Observable-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable 
+* (⁇) [**`forEachFuture( )`**](Blocking-Observable-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable 
 * (⁇) [**`forIterable( )`**](Creating-Observables#wiki-foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
 * (`rxjava-async`) [**`fromAction( )`**](Async-Operators#wiki-fromaction) — convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes
