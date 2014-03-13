@@ -11,7 +11,7 @@ This section explains various utility operators for working with Observables.
 * [**`doOnEach( )`**](Observable-Utility-Operators#wiki-dooneach) — register an action to take whenever an Observable emits an item
 * [**`doOnCompleted( )`**](Observable-Utility-Operators#wiki-dooncompleted) — register an action to take when an Observable completes successfully
 * [**`doOnError( )`**](Observable-Utility-Operators#wiki-doonerror) — register an action to take when an Observable completes with an error
-* [**`doOnTerminate( )`**](Observable-Utility-Operators#wiki-doonterminate) — register an action to take when an Observable completes, either successfully or with an error
+* ⁇ [**`doOnTerminate( )`**](Observable-Utility-Operators#wiki-doonterminate) — register an action to take when an Observable completes, either successfully or with an error
 * [**`finallyDo( )`**](Observable-Utility-Operators#wiki-finallydo) — register an action to take when an Observable completes
 * [**`delay( )`**](Observable-Utility-Operators#wiki-delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`delaySubscription( )`**](Observable-Utility-Operators#wiki-delaysubscription) — hold an Subscriber's subscription request for a specified amount of time before passing it on to the source Observable
@@ -19,6 +19,8 @@ This section explains various utility operators for working with Observables.
 * [**`using( )`**](Observable-Utility-Operators#wiki-using) — create a disposable resource that has the same lifespan as an Observable
 * [**`single( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`singleOrDefault( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
+
+⁇ — this proposed operator is not part of RxJava as of 0.17.0
 
 ***
 
