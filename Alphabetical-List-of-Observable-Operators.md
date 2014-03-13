@@ -104,6 +104,7 @@
 * [**`sample( )`**](Filtering-Observables#wiki-sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
 * [**`scan( )`**](Transforming-Observables#wiki-scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#wiki-sequenceequal) — test the equality of sequences emitted by two Observables
+* [**`serialize( )`**](Observable-Utility-Operators#wiki-serialize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`single( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`single( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise notify of an exception
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise return a default item
@@ -124,7 +125,7 @@
 * (`rxjava-math`) [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Longs emitted by an Observable and emits this sum
 * (⁇) [**`switchCase( )`**](Conditional-and-Boolean-Operators#wiki-switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
 * [**`switchOnNext( )`**](Combining-Observables#wiki-switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
-* [**`synchronize( )`**](Observable-Utility-Operators#wiki-synchronize) — force an Observable to make synchronous calls and to be well-behaved
+* `synchronize( )` — _see `serialize( )`_
 * [**`take( )`**](Filtering-Observables#wiki-take) — emit only the first _n_ items emitted by an Observable
 * [**`takeFirst( )`**](Filtering-Observables#wiki-first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`takeLast( )`**](Filtering-Observables#wiki-takelast) — only emit the last _n_ items emitted by an Observable
