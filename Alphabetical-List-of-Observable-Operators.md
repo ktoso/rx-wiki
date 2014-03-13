@@ -152,3 +152,5 @@
 * **`where( )`** — _see: `filter( )`_
 * [**`window( )`**](Transforming-Observables#wiki-window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`zip( )`**](Combining-Observables#wiki-zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
+
+⁇ — this proposed operator is not part of RxJava as of 0.17.0
