@@ -4,12 +4,14 @@ The operators described on this page are part of the distinct `rxjava-async` mod
 * [**`toAsync( )` or `asyncAction( )` or `asyncFunc( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert a function or Action into an Observable that executes the function and emits its return value
 * [**`startFuture( )`**](Async-Operators#wiki-startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
 * [**`deferFuture( )`**](Async-Operators#wiki-deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until a Subscriber subscribes
-* [**`fromCancellableFuture( )`, `startCancellableFuture( )`, and `deferCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
+* ⁇ [**`fromCancellableFuture( )`, `startCancellableFuture( )`, and `deferCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
 * [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes
 * [**`fromAction( )`**](Async-Operators#wiki-fromaction) — convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes
 * [**`fromFunc0( )`**](Async-Operators#wiki-fromfunc0) — convert a Func0 into an Observable that invokes the function and emits its result when a Subscriber subscribes
 * [**`fromCallable( )`**](Async-Operators#wiki-fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when a Subscriber subscribes
 * [**`fromRunnable( )`**](Async-Operators#wiki-fromrunnable) — convert a Runnable into an Observable that invokes the runable and emits its result when a Subscriber subscribes
+
+⁇ — these proposed operators are not part of the `rxjava-async` module as of RxJava 0.17.0
 
 ***
 

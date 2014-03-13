@@ -1,10 +1,8 @@
-## Introduction
-
 If you want to introduce multithreading into your cascade of Observable operators, you can do so by instructing those operators (or particular Observables) to operate on particular Schedulers.
 
 You can make an Observable act on a particular Scheduler by means of the <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-observeon">`observeOn`</a> and <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-subscribeon">`subscribeOn`</a> operators. You can also split an operator that works on an Observable onto multiple threads with the <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-parallel">`parallel`</a> operator.
 
-Many of the RxJava Observable operators have varieties that take a Scheduler as an operator. These instruct the operator to do some or all of its work on a particular Scheduler.
+Many of the RxJava Observable operators have varieties that take a Scheduler as a parameter. These instruct the operator to do some or all of its work on a particular Scheduler.
 
 #### See also:
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html">Intro to Rx: Scheduling and Threading</a>
@@ -45,7 +43,7 @@ Other operators do not have a form that permits you to set their Schedulers. Som
 
 ## Using Schedulers
 
-Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler:
+Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work on Subscriptions. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler (`Inner` is a class defined within the `Scheduler` class):
 
 ```java
 Schedulers.newThread().schedule(new Action1<Inner>() {
@@ -57,8 +55,22 @@ Schedulers.newThread().schedule(new Action1<Inner>() {
 
 });
 ```
-The `inner` parameter allows you to schedule recursive calls:
+### Recursive Schedulers
+To schedule recursive calls, you can either use `scheduleRecursive( )` and then `schedule( )` on the `Recurse` parameter (`Recurse` is also a class defined within the `Scheduler` class) for the simple case, or you can use `schedule( )` and then `schedule(this)` on the Inner parameter if you want the outer and inner actions to behave differently:
 ```java
+// scheduleRecursive()/recurse.schedule() version of recursive scheduling
+Schedulers.newThread().scheduleRecursive(new Action1<Recurse>() {
+
+    @Override
+    public void call(Recurse recurse) {
+        doWork();
+        // recurse until unsubscribed (the schedule will do nothing if unsubscribed)
+        recurse.schedule();
+    }
+
+});
+
+// schedule()/inner.schedule(this) version of recursive scheduling
 Schedulers.newThread().schedule(new Action1<Inner>() {
 
     @Override
@@ -70,9 +82,10 @@ Schedulers.newThread().schedule(new Action1<Inner>() {
 
 });
 ```
-`inner` also implements the `Subscription` interface, and its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
+### Checking or Setting Unsubscribed Status
+Objects of the `Inner` class implement the `Subscription` interface, with its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
 ```java
-Schedulers.newThread().schedule(new Action1<Inner>() {
+Subscription mySubscription = Schedulers.newThread().schedule(new Action1<Inner>() {
 
     @Override
     public void call(Inner inner) {
@@ -84,9 +97,17 @@ Schedulers.newThread().schedule(new Action1<Inner>() {
 
 });
 ```
-The `schedule( )` method returns a `Subscription` and so you can call its `unsubscribe( )` method to signal that it can halt work.
-
-You can also use a version of `schedule( )` that delays your task on the given Scheduler until a certain timespan has passed. The following example schedules `someTask` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
+The `schedule( )` method returns a `Subscription` and so you can call its `unsubscribe( )` method to signal that it can halt work:
 ```java
-someScheduler.schedule(someTask, 500, TimeUnit.MILLISECONDS);
+mySubscription.unsubscribe();
+```
+
+### Delayed and Periodic Schedulers
+You can also use a version of `schedule( )` that delays your action on the given Scheduler until a certain timespan has passed. The following example schedules `someAction` to be performed on `someScheduler` after 500ms have passed according to that Scheduler's clock:
+```java
+someScheduler.schedule(someAction, 500, TimeUnit.MILLISECONDS);
+```
+Another `Scheduler` method allows you to schedule an action to take place at regular intervals. The following example schedules `someAction` to be performed on `someScheduler` after 500ms have passed, and then every 250ms thereafter:
+```java
+someScheduler.schedulePeriodically(someAction, 500, 250, TimeUnit.MILLISECONDS);
 ```

@@ -380,13 +380,13 @@ Sequence complete
 
 ***
 
-# toMap( ) and toMultiMap( )
+# toMap( ) and toMultimap( )
 #### convert the sequence of items emitted by an Observable into a map keyed by a specified key function
 [[images/rx-operators/toMap.png]]
 
-The `toMap( )` and `toMultiMap( )` methods collect the items emitted by the source Observable into a map (by default, a `HashMap`, but you can supply a factory function that generates another `Map` variety) and then emit that map. You supply a function that generates the key for each emitted item. You may also optionally supply a function that converts an emitted item into the value to be stored in the map (by default, the item itself is this value).
+The `toMap( )` and `toMultimap( )` methods collect the items emitted by the source Observable into a map (by default, a `HashMap`, but you can supply a factory function that generates another `Map` variety) and then emit that map. You supply a function that generates the key for each emitted item. You may also optionally supply a function that converts an emitted item into the value to be stored in the map (by default, the item itself is this value).
 
-The `toMultiMap( )` method differs from `toMap( )` in that the map it generates is also an `ArrayList`.
+The `toMultimap( )` method differs from `toMap( )` in that the map it generates is also an `ArrayList`.
 [[images/rx-operators/toMultiMap.png]]
 
 #### see also:

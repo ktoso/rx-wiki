@@ -1,7 +1,7 @@
 <a name='Hello-World'/>
 # Hello World!
 
-These example implementations of “Hello World” in Java, Groovy, and Clojure create an Observable from a list of Strings, and then subscribe to this Observable with a method that prints “Hello _String_!” for each string emitted by the Observable.
+These sample implementations of “Hello World” in Java, Groovy, Clojure and Scala create an Observable from a list of Strings, and then subscribe to this Observable with a method that prints “Hello _String_!” for each string emitted by the Observable.
 
 > Subsequent examples will use a mixture of languages all of which can be found in the `/src/examples` folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors).
 
@@ -52,6 +52,23 @@ Hello George!
 
 ```
 (hello ["Ben" "George"])
+Hello Ben!
+Hello George!
+```
+### Scala
+
+```scala
+import rx.lang.scala.Observable
+
+def hello(names: String*) {
+  Observable.from(names) subscribe { n =>
+    println(s"Hello $n!")
+  }
+}
+```
+
+```scala
+hello("Ben", "George")
 Hello Ben!
 Hello George!
 ```

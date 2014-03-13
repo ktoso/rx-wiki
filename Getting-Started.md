@@ -1,6 +1,6 @@
 ## Getting Binaries
 
-You can find binaries and dependency information for Maven, Ivy, Gradle, and others at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.netflix.rxjava%22%20AND%20a%3A%22rxjava-core%22).
+You can find binaries and dependency information for Maven, Ivy, Gradle, SBT, and others at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.netflix.rxjava%22%20AND%20a%3A%22rxjava-core%22).
 
 Example for Maven:
 
@@ -8,13 +8,19 @@ Example for Maven:
 <dependency>
     <groupId>com.netflix.rxjava</groupId>
     <artifactId>rxjava-core</artifactId>
-    <version>0.5.0</version>
+    <version>0.17.0</version>
 </dependency>
 ```
 and for Ivy:
 
 ```xml
-<dependency org="com.netflix.rxjava" name="rxjava-core" rev="0.5.0" />
+<dependency org="com.netflix.rxjava" name="rxjava-core" rev="0.17.0" />
+```
+
+and for SBT:
+
+```scala
+libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.17.0"
 ```
 
 If you need to download the jars instead of using a build system, create a Maven `pom` file like this with the desired version:
@@ -32,7 +38,7 @@ If you need to download the jars instead of using a build system, create a Maven
 		<dependency>
 			<groupId>com.netflix.rxjava</groupId>
 			<artifactId>rxjava-core</artifactId>
-			<version>0.5.0</version>
+			<version>0.17.0</version>
 			<scope/>
 		</dependency>
 	</dependencies>
@@ -51,7 +57,7 @@ You need Java 6 or later.
 
 ## Hello World!
 
-The following are RxJava implementations of “Hello World” in Java, Groovy, and Clojure:
+The following are RxJava implementations of “Hello World” in Java, Groovy, Clojure and Scala:
 
 In Java =>
 ```java
@@ -82,11 +88,19 @@ In Clojure =>
   (-> (Observable/toObservable &rest)
     (.subscribe #(println (str "Hello " % "!")))))
 ```
+
+In Scala =>
+```scala
+def hello(args: String*) = Observable.from(args) subscribe { e =>
+  println(e)
+}
+```
+
 You can find more examples and information in the [[How To Use]] section and in the following source folders:
 
 * Groovy: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy/src/examples
-* Scala: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples
 * Clojure: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure/src/examples
+* Scala: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples
 
 ## Building
 
@@ -134,3 +148,11 @@ On a clean build you will see the unit tests run. They will look something like 
 ```
 > Building > :rxjava-core:test > 91 tests completed
 ```
+
+#### Troubleshooting
+
+One developer reported getting the following error:
+
+> Could not resolve all dependencies for configuration ':language-adaptors:rxjava-scala:provided'
+
+He was able to resolve the problem by removing old versions of `scala-library` from `.gradle/caches` and `.m2/repository/org/scala-lang/` and then doing a clean build. <a href="https://gist.github.com/jaceklaskowski/9496058">(See this page for details.)</a>
