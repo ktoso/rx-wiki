@@ -1,6 +1,6 @@
 This section explains methods that create Observables.
 
-* [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable or a Future into an Observable
+* [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
 * [**`fromFuture( )`**](Creating-Observables#wiki-fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until a Subscriber subscribes
 * [**`forIterable( )`**](Creating-Observables#wiki-foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
@@ -18,7 +18,7 @@ This section explains methods that create Observables.
 ***
 
 ## from( )
-#### convert an Iterable or a Future into an Observable
+#### convert an Iterable, a Future, or an Array into an Observable
 [[images/rx-operators/from.png]]
 
 You can convert an object that supports `Iterable` into an Observable that emits each iterable item in the object, or an object that supports `Future` into an Observable that emits the result of the `get` call, simply by passing the object into the `from( )` methods, for example:
