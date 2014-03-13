@@ -3,7 +3,7 @@ This section explains various utility operators for working with Observables.
 * [**`materialize( )`**](Observable-Utility-Operators#wiki-materialize) — convert an Observable into a list of Notifications
 * [**`dematerialize( )`**](Observable-Utility-Operators#wiki-dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`timestamp( )`**](Observable-Utility-Operators#wiki-timestamp) — attach a timestamp to every item emitted by an Observable
-* [**`synchronize( )`**](Observable-Utility-Operators#wiki-synchronize) — force an Observable to make synchronous calls and to be well-behaved
+* [**`serialize( )`**](Observable-Utility-Operators#wiki-serialize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`cache( )`**](Observable-Utility-Operators#wiki-cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
 * [**`observeOn( )`**](Observable-Utility-Operators#wiki-observeon) — specify on which Scheduler a Subscriber should observe the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#wiki-subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
@@ -118,15 +118,15 @@ Sequence complete
 
 ***
 
-## synchronize( )
+## serialize( )
 #### force an Observable to make synchronous calls and to be well-behaved
 
 [[images/rx-operators/synchronize.png]]
 
-It is possible for an Observable to invoke its Subscribers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `synchronize( )` method to it.
+It is possible for an Observable to invoke its Subscribers' methods asynchronously, perhaps in different threads. This could make an Observable poorly-behaved, in that it might invoke `onCompleted` or `onError` before one of its `onNext` invocations. You can force such an Observable to be well-behaved and synchronous by applying the `serialize( )` method to it.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#synchronize(rx.Observable)">`synchronize(observable)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#serialize()">`serialize()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.synchronize.aspx">`Synchronize`</a>
 
 ***
