@@ -88,7 +88,7 @@ There are also versions of `takeLast( )` that emit the items that were emitted
 #### only emit the last item emitted by an Observable
 [[images/rx-operators/last.png]]
 
-The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `IllegalArgumentException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
+The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `NoSuchElementException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
@@ -235,7 +235,7 @@ To create an Observable that emits only the first item emitted by a source Obser
 [[images/rx-operators/firstN.png]]
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
 
-`takeFirst( )` behaves very similarly to `first( )` with the exception of how they behave when the source Observable emits no items (or no items that match the predicate). In such a case, `first( )` will throw an `IllegalArgumentException` while `takeFirst( )` will return an empty Observable (one that calls `onCompleted( )` but never calls `onNext( )`).
+`takeFirst( )` behaves very similarly to `first( )` with the exception of how they behave when the source Observable emits no items (or no items that match the predicate). In such a case, `first( )` will throw an `NoSuchElementException` while `takeFirst( )` will return an empty Observable (one that calls `onCompleted( )` but never calls `onNext( )`).
 [[images/rx-operators/first.takeFirst.png]]
 
 #### see also:
