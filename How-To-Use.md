@@ -75,7 +75,7 @@ Hello George!
 
 # Creating Observables
 
-To create an Observable, you can either implement an Observable that (synchronously or asynchronously) executes and emits data by invoking an Subscriber’s `onNext()` method, or you can convert an existing data structure into an Observable by using some Observable methods that are designed for this purpose.
+To create an Observable, you can either implement an Observable that (synchronously or asynchronously) executes and emits data by invoking a Subscriber’s `onNext()` method, or you can convert an existing data structure into an Observable by using some Observable methods that are designed for this purpose.
 
 ## Creating Observables from Existing Data Structures
 
