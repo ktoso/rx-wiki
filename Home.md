@@ -57,7 +57,7 @@ RxJava also tries to be very lightweight. It is implemented as a single JAR that
  </tfoot>
  <tbody>
   <tr><td><ul>
-<li>does it work sychronously on the same thread as the caller?</li>
+<li>does it work synchronously on the same thread as the caller?</li>
 <li>does it work asynchronously on a distinct thread?</li>
 <li>does it divide its work over multiple threads that may return data to the caller in any order?</li>
 <li>does it use an Actor (or multiple Actors) instead of a thread pool?</li>
