@@ -381,9 +381,9 @@ Pass the `using( )` method two factory functions: the first creates a disposab
 #### if the Observable completes after emitting a single item, return that item, otherwise throw an exception (or return a default item)
 [[images/rx-operators/single.png]]
 
-Use the `single( )` method to retrieve the only item emitted by an Observable. `single( )` will notify of an exception if the source Observable does not emit exactly one item.
+Use the `single( )` method to retrieve the only item emitted by an Observable. `single( )` will notify of a `NoSuchElementException` if the source Observable does not emit exactly one item.
 
-You can also use this method to retrieve the only item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such item). To do this, pass a function to `single( )` that returns `true` if the item meets the condition. In such a case, `single( )` will again notify of an exception unless the source Observable emits exactly one item that meets the condition.
+You can also use this method to retrieve the only item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such item). To do this, pass a function to `single( )` that returns `true` if the item meets the condition. In such a case, `single( )` will again notify of a `NoSuchElementException` unless the source Observable emits exactly one item that meets the condition.
 [[images/rx-operators/single.p.png]]
 
 The `singleOrDefault( )` method is similar, except that while it will still notify of an exception if the underlying Observable emits _more than_ one item, if the underlying Observable does not emit any items at all, rather than notifying of an exception, the Observable returned by `singleOrDefault( )` will emit a default item that you specify. Specify that default item by passing it as the first parameter to `singleOrDefault( )`.
