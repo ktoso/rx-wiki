@@ -140,6 +140,7 @@ We call this approach Functional Reactive Programming because it applies functio
 * [Introduction to Rx: Why Rx?](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)
 * [The Reactive Manifesto](http://www.reactivemanifesto.org/)
 * [RxJava Observables and Akka Actors](http://onoffswitch.net/rxjava-observables-akka-actors/)
+* [Vert.x and RxJava](http://slid.es/petermd/eclipsecon2014)
 
 # RxJava Libraries
 
