@@ -93,6 +93,7 @@
 * [**`onExceptionResumeNext( )`**](Error-Handling-Operators#wiki-onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
 * [**`parallel( )`**](Observable-Utility-Operators#wiki-parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 * [**`parallelMerge( )`**](Combining-Observables#wiki-parallelmerge) — combine multiple Observables into smaller number of Observables
+* [**`pivot( )`**](Transforming-Observables#wiki-pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
 * [**`publish( )`**](Connectable-Observable-Operators#wiki-observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`publishLast( )`**](Connectable-Observable-Operators#wiki-observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`range( )`**](Creating-Observables#wiki-range) — create an Observable that emits a range of sequential integers
