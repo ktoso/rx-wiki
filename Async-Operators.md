@@ -7,7 +7,6 @@ The operators described on this page are part of the distinct `rxjava-async` mod
 * ⁇ [**`fromCancellableFuture( )`, `startCancellableFuture( )`, and `deferCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
 * [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes
 * [**`fromAction( )`**](Async-Operators#wiki-fromaction) — convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes
-* [**`fromFunc0( )`**](Async-Operators#wiki-fromfunc0) — convert a Func0 into an Observable that invokes the function and emits its result when a Subscriber subscribes
 * [**`fromCallable( )`**](Async-Operators#wiki-fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when a Subscriber subscribes
 * [**`fromRunnable( )`**](Async-Operators#wiki-fromrunnable) — convert a Runnable into an Observable that invokes the runable and emits its result when a Subscriber subscribes
 
@@ -73,12 +72,6 @@ You pass `forEachFuture( )` some subset of the Subscriber methods (`onNext`, `
 # fromAction( )
 #### convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes
 [[images/rx-operators/fromAction.png]]
-
-***
-
-# fromFunc0( )
-#### convert a Func0 into an Observable that invokes the function and emits its result when a Subscriber subscribes
-[[images/rx-operators/fromFunc0.png]]
 
 ***
 
