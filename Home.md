@@ -141,6 +141,7 @@ We call this approach Functional Reactive Programming because it applies functio
 * [The Reactive Manifesto](http://www.reactivemanifesto.org/)
 * [RxJava Observables and Akka Actors](http://onoffswitch.net/rxjava-observables-akka-actors/)
 * [Vert.x and RxJava](http://slid.es/petermd/eclipsecon2014)
+* [Netflix JavaScript Talks - Async JavaScript with Reactive Extensions](https://www.youtube.com/watch?v=XRYN2xt11Ek) video of a talk by Jafar Husain about the Rx way of programming
 
 # RxJava Libraries
 
