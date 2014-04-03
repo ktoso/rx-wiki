@@ -56,32 +56,20 @@ Schedulers.newThread().schedule(new Action1<Inner>() {
 });
 ```
 ### Recursive Schedulers
-To schedule recursive calls, you can either use `scheduleRecursive( )` and then `schedule( )` on the `Recurse` parameter (`Recurse` is also a class defined within the `Scheduler` class) for the simple case, or you can use `schedule( )` and then `schedule(this)` on the Inner parameter if you want the outer and inner actions to behave differently:
+To schedule recursive calls, you can use `schedule( )` and then `schedule(this)` on the Inner parameter if you want the outer and inner actions to behave differently:
 ```java
-// scheduleRecursive()/recurse.schedule() version of recursive scheduling
-Schedulers.newThread().scheduleRecursive(new Action1<Recurse>() {
+Schedulers.newThread().schedule(new Action1<Recurse>() {
 
     @Override
     public void call(Recurse recurse) {
         doWork();
         // recurse until unsubscribed (the schedule will do nothing if unsubscribed)
-        recurse.schedule();
-    }
-
-});
-
-// schedule()/inner.schedule(this) version of recursive scheduling
-Schedulers.newThread().schedule(new Action1<Inner>() {
-
-    @Override
-    public void call(Inner inner) {
-        doWork();
-        // recurse until unsubscribed (the schedule will do nothing if unsubscribed)
-        inner.schedule(this);
+        recurse.schedule(this);
     }
 
 });
 ```
+
 ### Checking or Setting Unsubscribed Status
 Objects of the `Inner` class implement the `Subscription` interface, with its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
 ```java
