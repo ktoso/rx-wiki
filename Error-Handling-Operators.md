@@ -1,6 +1,7 @@
 This section explains operators that handle errors and exceptions encountered by Observables.
 
-* [**`onErrorResumeNext( )`**](Error-Handling-Operators#wiki-onerrorresumenext) — instructs an Observable to continue emitting items after it encounters an error
+* [**`onErrorResumeNext( )`**](Error-Handling-Operators#wiki-onerrorresumenext) — instructs an Observable to emit a sequence of items if it encounters an error
+* [**`onErrorFlatMap( )`**](Error-Handling-Operators#wiki-onerrorflatmap) — instructs an Observable to emit a sequence of items whenever it encounters an error
 * [**`onErrorReturn( )`**](Error-Handling-Operators#wiki-onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
 * [**`onExceptionResumeNext( )`**](Error-Handling-Operators#wiki-onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
 * [**`retry( )`**](Error-Handling-Operators#wiki-retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
@@ -8,7 +9,7 @@ This section explains operators that handle errors and exceptions encountered by
 ***
 
 ## onErrorResumeNext( )
-#### instructs an Observable to attempt to continue emitting items after it encounters an error
+#### instructs an Observable to emit a sequence of items if it encounters an error
 [[images/rx-operators/onErrorResumeNext.png]]
 
 The `onErrorResumeNext( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Subscriber, `onErrorResumeNext( )` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
@@ -48,6 +49,18 @@ Sequence complete
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeonerrorresumenextsecond">`onErrorResumeNext`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.onerrorresumenext.aspx">`OnErrorResumeNext`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/11_AdvancedErrorHandling.html#OnErrorResumeNext">Introduction to Rx: OnErrorResumeNext</a>
+
+***
+
+## onErrorFlatMap( )
+#### instructs an Observable to emit a sequence of items whenever it encounters an error
+[[images/rx-operators/onErrorFlatMap.png]]
+
+The `onErrorFlatMap( )` method is similar to `onErrorResumeNext( )` except that it does not assume the source Observable will correctly terminate when it issues an error. Because of this, after emitting its backup sequence of items, `onErrorFlatMap( )` relinquishes control of the emitted sequence back to the source Observable. If that Observable again issues an error, `onErrorFlatMap( )` will again emit its backup sequence.
+
+The backup sequence is an Observable that is returned from a function that you pass to `onErrorFlatMap( )`. This function takes the Throwable issued by the source Observable as its argument, and so you can customize the sequence based on the nature of the Throwable.
+
+Because `onErrorFlatMap( )` is designed to work with pathological source Observables that do not terminate after issuing an error, it is mostly useful in debugging/testing scenarios. Note that you should apply it directly to the pathological source Observable, and not to that Observable after it has been modified by additional operators, as such operators may effectively renormalize the source Observable by unsubscribing from it immediately after it issues an error.
 
 ***
 
