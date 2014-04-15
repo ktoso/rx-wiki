@@ -41,6 +41,7 @@ If the source Observable terminates with an error, the `PublishSubject` will not
 # ReplaySubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/ReplaySubject.html">``ReplaySubject``</a> emits to any subscriber all of the items that were emitted by the source Observable(s), regardless of when the subscriber subscribes.
 [[images/rx-operators/S.ReplaySubject.png]]
+When using ``ReplaySubject`` as a Subscriber, take care not to call its ``onNext( )`` method (or its other ``on`` methods) from multiple threads, as this could lead to coincident (non-sequential) calls, which violates the Observable contract, and will create an ambiguity in the resulting Subject as to which item or emission should be replayed first.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/ReplaySubject.html">`ReplaySubject`</a>
