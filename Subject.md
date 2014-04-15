@@ -33,6 +33,7 @@ However, if the source Observable terminates with an error, the `BehaviorSubject
 [[images/rx-operators/S.PublishSubject.png]]
 If the source Observable terminates with an error, the `PublishSubject` will not emit any items to subsequent Subscribers, but will simply pass along the error notification from the source Observable.
 [[images/rx-operators/S.PublishSubject.e.png]]
+Note: In RxJava's Scala language adaptor, you instantiate a `PublishSubject` via `Subject`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">`PublishSubject`</a>
