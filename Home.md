@@ -79,7 +79,7 @@ But as with Futures, while callbacks are easy to use with a single level of asyn
 
 RxJava is meant for a more polyglot environment than just Java/Scala, and it is being designed to respect the idioms of each JVM-based language. (<a href="https://github.com/Netflix/RxJava/pull/304">This is something we’re still working on.</a>)
 
-# Functional Reactive Programming (FRP)
+# Reactive Programming
 
 RxJava provides a collection of operators with which you can filter, select, transform, combine, and compose Observables. This allows for efficient execution and composition.
 
@@ -111,7 +111,7 @@ The Observable type adds two missing semantics to the Gang of Four’s <a href="
 
 With these additions, RxJava harmonizes the Iterable and Observable types. The only difference between them is the direction in which the data flows. This is very important because now any operation you can perform on an Iterable, you can also perform on an Observable.
 
-We call this approach Functional Reactive Programming because it applies functions (lambdas/closures) in a reactive (asynchronous/push) manner to asynchronous sequences of data. (This is not meant to be an implementation of the similar but more restrictive “functional reactive programming” model used in languages like <a href="http://conal.net/fran/">Fran</a>.)
+We sometimes call this approach Functional Reactive Programming because it applies functions (lambdas/closures) in a reactive (asynchronous/push) manner to asynchronous sequences of data. (This is not meant to be an implementation of the similar but more restrictive “functional reactive programming” model used in languages like <a href="http://conal.net/fran/">Fran</a>.)
 
 # More Information
 
