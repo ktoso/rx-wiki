@@ -300,7 +300,7 @@ Pass `elementAtOrDefault( )` a zero-based index value and it will emit the sol
 #### emit the most recent items emitted by an Observable within periodic time intervals
 [[images/rx-operators/sample.png]]
 
-Use the `sample( )` method to periodically look at an Observable to see what item it is emitting at a particular time.
+Use the `sample( )` method to periodically look at an Observable to see what item it has most recently emitted since the previous sampling.  Note that if the source Observable has emitted no items since the last time it was sampled, the Observable that results from the `sample( )` operator will emit no item for that sampling period.
 
 The following code constructs an Observable that emits the numbers between one and a million, and then samples that Observable every ten milliseconds to see what number it is emitting at that moment.
 ```groovy
