@@ -46,7 +46,7 @@ Other operators do not have a form that permits you to set their Schedulers. Som
 Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work on Subscriptions. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler (`Inner` is a class defined within the `Scheduler` class):
 
 ```java
-inside = Schedulers.newThread().inner();
+inside = Schedulers.newThread().createInner();
 inside.schedule(new Action0() {
 
     @Override
@@ -59,7 +59,7 @@ inside.schedule(new Action0() {
 ### Recursive Schedulers
 To schedule recursive calls, you can use `schedule( )` and then `schedule(this)` on the Inner object:
 ```java
-inside = Schedulers.newThread().inner();
+inside = Schedulers.newThread().createInner();
 inside.schedule(new Action0() {
 
     @Override
@@ -75,7 +75,7 @@ inside.schedule(new Action0() {
 ### Checking or Setting Unsubscribed Status
 Objects of the `Inner` class implement the `Subscription` interface, with its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
 ```java
-Inner inside = Schedulers.newThread.inner();
+Inner inside = Schedulers.newThread.createInner();
 Subscription mySubscription = inside.schedule(new Action0() {
 
     @Override
