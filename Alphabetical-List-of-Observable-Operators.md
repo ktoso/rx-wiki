@@ -1,7 +1,7 @@
 * `aggregate( )` — _see `reduce( )`_
 * [**`all( )`**](Conditional-and-Boolean-Operators#wiki-all) — determine whether all items emitted by an Observable meet some criteria
 * [**`amb( )`**](Conditional-and-Boolean-Operators#wiki-amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
-* [**`and( )`**](Combining-Observables#wiki-and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern`
+* (`rxjava-joins`) [**`and( )`**](Combining-Observables#wiki-and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern`
 * (`rxjava-async`) [**`asyncAction( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert an Action into an Observable that executes the Action and emits its return value
 * (`rxjava-async`) [**`asyncFunc( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert a function into an Observable that executes the function and emits its return value
 * (`rxjava-math`) [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Doubles emitted by an Observable and emits this average
@@ -135,7 +135,7 @@
 * [**`takeUntil( )`**](Conditional-and-Boolean-Operators#wiki-takeuntil) — emits the items from the source Observable until a second Observable emits an item
 * [**`takeWhile( )`**](Conditional-and-Boolean-Operators#wiki-takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * [**`takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-* [**`then( )`**](Combining-Observables#wiki-and-then-and-when) — transform a series of `Pattern` objects via a `Plan` template
+* (`rxjava-joins`) [**`then( )`**](Combining-Observables#wiki-and-then-and-when) — transform a series of `Pattern` objects via a `Plan` template
 * [**`throttleFirst( )`**](Filtering-Observables#wiki-throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
 * [**`throttleLast( )`**](Filtering-Observables#wiki-sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
 * [**`throttleWithTimeout( )`**](Filtering-Observables#wiki-throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
@@ -153,7 +153,7 @@
 * [**`toMultimap( )`**](Mathematical-and-Aggregate-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
 * [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#wiki-tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`using( )`**](Observable-Utility-Operators#wiki-using) — create a disposable resource that has the same lifespan as an Observable
-* [**`when( )`**](Combining-Observables#wiki-and-then-and-when) — convert a series of `Plan` objects into an Observable
+* (`rxjava-joins`) [**`when( )`**](Combining-Observables#wiki-and-then-and-when) — convert a series of `Plan` objects into an Observable
 * **`where( )`** — _see: `filter( )`_
 * (⁇) [**`whileDo( )`**](Conditional-and-Boolean-Operators#wiki-whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
 * [**`window( )`**](Transforming-Observables#wiki-window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
