@@ -45,25 +45,27 @@ Other operators do not have a form that permits you to set their Schedulers. Som
 Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work on Subscriptions. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler (`Inner` is a class defined within the `Scheduler` class):
 
 ```java
-Schedulers.newThread().schedule(new Action1<Inner>() {
+inside = Schedulers.newThread().inner();
+inside.schedule(new Action0() {
 
     @Override
-    public void call(Inner inner) {
-        doWork();
+    public void call() {
+        yourWork();
     }
 
 });
 ```
 ### Recursive Schedulers
-To schedule recursive calls, you can use `schedule( )` and then `schedule(this)` on the Inner parameter if you want the outer and inner actions to behave differently:
+To schedule recursive calls, you can use `schedule( )` and then `schedule(this)` on the Inner object:
 ```java
-Schedulers.newThread().schedule(new Action1<Recurse>() {
+inside = Schedulers.newThread().inner();
+inside.schedule(new Action0() {
 
     @Override
-    public void call(Recurse recurse) {
-        doWork();
-        // recurse until unsubscribed (the schedule will do nothing if unsubscribed)
-        recurse.schedule(this);
+    public void call() {
+        yourWork();
+        // recurse until unsubscribed (schedule will do nothing if unsubscribed)
+        inside.schedule(this);
     }
 
 });
@@ -72,13 +74,14 @@ Schedulers.newThread().schedule(new Action1<Recurse>() {
 ### Checking or Setting Unsubscribed Status
 Objects of the `Inner` class implement the `Subscription` interface, with its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
 ```java
-Subscription mySubscription = Schedulers.newThread().schedule(new Action1<Inner>() {
+Inner inside = Schedulers.newThread.inner();
+Subscription mySubscription = inside.schedule(new Action0() {
 
     @Override
-    public void call(Inner inner) {
-        while(!inner.isUnsubscribed()) {
+    public void call() {
+        while(!inside.isUnsubscribed()) {
             status = doWork();
-            if(QUIT == status) { inner.unsubscribe(); }
+            if(QUIT == status) { inside.unsubscribe(); }
         }
     }
 
@@ -86,7 +89,7 @@ Subscription mySubscription = Schedulers.newThread().schedule(new Action1<Inner>
 ```
 The `schedule( )` method returns a `Subscription` and so you can call its `unsubscribe( )` method to signal that it can halt work:
 ```java
-mySubscription.unsubscribe();
+inside.unsubscribe();
 ```
 
 ### Delayed and Periodic Schedulers
