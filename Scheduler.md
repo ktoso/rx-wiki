@@ -18,7 +18,6 @@ You obtain a Scheduler from the factory methods described in the `Schedulers` cl
  <tbody>
   <tr><td><code>Schedulers.computation(&#8239;)</code></td><td>meant for computational work such as event-loops and callback processing; do not use this scheduler for I/O (use <code>Schedulers.io(&#8239;)</code> instead)</td></tr>
   <tr><td><code>Schedulers.trampoline(&#8239;)</code></td><td>queues work to begin on the current thread after any already-queued work</td></tr>
-  <tr><td><code>Schedulers.executor(&#8239;)</code></td><td>queues work to be done on either an <code>Executor</code> or <code>ScheduledExecutorService</code> (Note that if you use an <code>Executor</code> instead of a <code>ScheduledExecutorService</code> then the Scheduler will use a system-wide <code>Timer</code> to handle delayed events.)</td></tr>
   <tr><td><code>Schedulers.immediate(&#8239;)</code></td><td>schedules work to begin immediately in the current thread</td></tr>
   <tr><td><code>Schedulers.io(&#8239;)</code></td><td>meant for I/O-bound work such as asynchronous performance of blocking I/O, this scheduler is backed by an Executor thread-pool that will grow as needed; for ordinary computational work, switch to <code>Schedulers.computation(&#8239;)</code></td></tr>
   <tr><td><code>Schedulers.newThread(&#8239;)</code></td><td>creates a new thread for each unit of work</td></tr>
