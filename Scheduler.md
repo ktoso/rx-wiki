@@ -42,7 +42,7 @@ Other operators do not have a form that permits you to set their Schedulers. Som
 
 ## Using Schedulers
 
-Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work on Subscriptions. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler (`Inner` is a class defined within the `Scheduler` class):
+Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work on Subscriptions. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler:
 
 ```java
 inside = Schedulers.newThread().createInner();
@@ -91,7 +91,7 @@ Subscription mySubscription = inside.schedule(new Action0() {
 
 });
 ```
-The `schedule( )` method returns a `Subscription` and so you can (and should, eventually) call its `unsubscribe( )` method to signal that it can halt work:
+The `schedule( )` method returns a `Subscription` and so you can (and should, eventually) call its `unsubscribe( )` method to signal that it can halt work and release resources:
 ```java
 inside.unsubscribe();
 ```
