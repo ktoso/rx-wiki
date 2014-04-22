@@ -76,7 +76,7 @@ worker.unsubscribe();
 ```
 
 ### Checking or Setting Unsubscribed Status
-Objects of the `Inner` class implement the `Subscription` interface, with its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
+Objects of the `Worker` class implement the `Subscription` interface, with its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
 ```java
 Worker worker = Schedulers.newThread.createWorker();
 Subscription mySubscription = worker.schedule(new Action0() {
