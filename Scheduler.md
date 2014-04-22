@@ -45,8 +45,8 @@ Other operators do not have a form that permits you to set their Schedulers. Som
 Aside from passing these Schedulers in to RxJava Observable operators, you can also use them to schedule your own work on Subscriptions. The following example uses the `schedule( )` method of the `Scheduler` class to schedule work on the `newThread` Scheduler:
 
 ```java
-inside = Schedulers.newThread().createInner();
-inside.schedule(new Action0() {
+worker = Schedulers.newThread().createWorker();
+worker.schedule(new Action0() {
 
     @Override
     public void call() {
@@ -55,45 +55,45 @@ inside.schedule(new Action0() {
 
 });
 // some time later...
-inside.unsubscribe();
+worker.unsubscribe();
 ```
 ### Recursive Schedulers
-To schedule recursive calls, you can use `schedule( )` and then `schedule(this)` on the Inner object:
+To schedule recursive calls, you can use `schedule( )` and then `schedule(this)` on the Worker object:
 ```java
-inside = Schedulers.newThread().createInner();
-inside.schedule(new Action0() {
+worker = Schedulers.newThread().createWorker();
+worker.schedule(new Action0() {
 
     @Override
     public void call() {
         yourWork();
         // recurse until unsubscribed (schedule will do nothing if unsubscribed)
-        inside.schedule(this);
+        worker.schedule(this);
     }
 
 });
 // some time later...
-inside.unsubscribe();
+worker.unsubscribe();
 ```
 
 ### Checking or Setting Unsubscribed Status
 Objects of the `Inner` class implement the `Subscription` interface, with its `isUnsubscribed( )` and `unsubscribe( )` methods, so you can stop work when a subscription is cancelled, or you can cancel the subscription from within the scheduled task:
 ```java
-Inner inside = Schedulers.newThread.createInner();
-Subscription mySubscription = inside.schedule(new Action0() {
+Worker worker = Schedulers.newThread.createWorker();
+Subscription mySubscription = worker.schedule(new Action0() {
 
     @Override
     public void call() {
-        while(!inside.isUnsubscribed()) {
-            status = doWork();
-            if(QUIT == status) { inside.unsubscribe(); }
+        while(!worker.isUnsubscribed()) {
+            status = yourWork();
+            if(QUIT == status) { worker.unsubscribe(); }
         }
     }
 
 });
 ```
-The `schedule( )` method returns a `Subscription` and so you can (and should, eventually) call its `unsubscribe( )` method to signal that it can halt work and release resources:
+The `Worker` is also a `Subscription` and so you can (and should, eventually) call its `unsubscribe( )` method to signal that it can halt work and release resources:
 ```java
-inside.unsubscribe();
+worker.unsubscribe();
 ```
 
 ### Delayed and Periodic Schedulers
