@@ -12,7 +12,7 @@ This section explains operators with which you conditionally emit or transform O
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * (`contrib-computation-expressions`) [**`whileDo( )`**](Conditional-and-Boolean-Operators#wiki-whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
 
-⁇ — this proposed operator is not part of RxJava as of 0.17.0
+> (`contrib-computation-expressions`) — indicates that this operator is currently part of the optional `contrib-computation-expressions` package and is not included with the standard RxJava set of operators
 
 ### Boolean Operators
 * [**`all( )`**](Conditional-and-Boolean-Operators#wiki-all) — determine whether all items emitted by an Observable meet some criteria
