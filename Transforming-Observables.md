@@ -198,7 +198,11 @@ The result will be a grouped observable that emits two groups: the grouped obser
 #### periodically gather items emitted by an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 [[images/rx-operators/buffer.png]]
 
-The `buffer( )` method periodically gathers items emitted by a source `Observable` into bundles, and emits these bundles as its own emissions. There are a number of ways with which you can regulate how `buffer( )` gathers items from the source `Observable` into bundles:
+The `buffer( )` method periodically gathers items emitted by a source `Observable` into bundles, and emits these bundles as its own emissions.
+
+Note that if the source `Observable` issues an `onError` notification, `buffer( )` will pass on this notification immediately without first emitting the buffer it is in the process of assembling, even if that buffer contains items that were emitted by the source `Observable` before it issued the error notification.
+
+There are a number of ways with which you can regulate how `buffer( )` gathers items from the source `Observable` into bundles:
 
 * `buffer(bufferOpenings, closingSelector)`
 [[images/rx-operators/buffer2.png]]
