@@ -199,16 +199,16 @@ Use these methods to transform a Blocking Observable into a `Future`, an `Iterab
   <tr><th>Observable that emits multiple items</th><th>Observable that emits one item</th><th>Observable that emits no items</th></tr>
  </thead>
  <tbody>
-  <tr><td><code>Observable.first</code></td><td>the first item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>firstAsync</code></td></tr>
-  <tr><td><code>BlockingObservable.first</code></td><td>the first item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>first</code></td></tr>
+  <tr><td><code>Observable.first</code></td><td>the first item</td><td>the single item</td><td><i>NoSuchElement</i></td><td><code>firstAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.first</code></td><td>the first item</td><td>the single item</td><td><i>NoSuchElement</i></td><td><code>first</code></td></tr>
   <tr><td><code>Observable.firstOrDefault</code></td><td>the first item</td><td>the single item</td><td>the default item</td><td><code>firstOrDefaultAsync</code></td></tr>
   <tr><td><code>BlockingObservable.firstOrDefault</code></td><td>the first item</td><td>the single item</td><td>the default item</td><td><code>firstOrDefault</code></td></tr>
-  <tr><td><code>Observable.last</code></td><td>the last item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>lastAsync</code></td></tr>
-  <tr><td><code>BlockingObservable.last</code></td><td>the last item</td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>last</code></td></tr>
+  <tr><td><code>Observable.last</code></td><td>the last item</td><td>the single item</td><td><i>NoSuchElement</i></td><td><code>lastAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.last</code></td><td>the last item</td><td>the single item</td><td><i>NoSuchElement</i></td><td><code>last</code></td></tr>
   <tr><td><code>Observable.lastOrDefault</code></td><td>the last item</td><td>the single item</td><td>the default item</td><td><code>lastOrDefaultAsync</code></td></tr>
   <tr><td><code>BlockingObservable.lastOrDefault</code></td><td>the last item</td><td>the single item</td><td>the default item</td><td><code>lastOrDefault</code></td></tr>
-  <tr><td><code>Observable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>singleAsync</code></td></tr>
-  <tr><td><code>BlockingObservable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>Illegal Argument</i></td><td><code>single</code></td></tr>
+  <tr><td><code>Observable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>NoSuchElement</i></td><td><code>singleAsync</code></td></tr>
+  <tr><td><code>BlockingObservable.single</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td><i>NoSuchElement</i></td><td><code>single</code></td></tr>
   <tr><td><code>Observable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefaultAsync</code></td></tr>
   <tr><td><code>BlockingObservable.singleOrDefault</code></td><td><i>Illegal Argument</i></td><td>the single item</td><td>the default item</td><td><code>singleOrDefault</code></td></tr>
  </tbody>
