@@ -9,8 +9,6 @@ The operators described on this page are part of the distinct `rxjava-async` mod
 * [**`fromCallable( )`**](Async-Operators#wiki-fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when a Subscriber subscribes
 * [**`fromRunnable( )`**](Async-Operators#wiki-fromrunnable) — convert a Runnable into an Observable that invokes the runable and emits its result when a Subscriber subscribes
 
-⁇ — these proposed operators are not part of the `rxjava-async` module as of RxJava 0.17.0
-
 ***
 
 ## start( )
