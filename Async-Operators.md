@@ -4,7 +4,6 @@ The operators described on this page are part of the distinct `rxjava-async` mod
 * [**`toAsync( )` or `asyncAction( )` or `asyncFunc( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert a function or Action into an Observable that executes the function and emits its return value
 * [**`startFuture( )`**](Async-Operators#wiki-startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
 * [**`deferFuture( )`**](Async-Operators#wiki-deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until a Subscriber subscribes
-* ⁇ [**`fromCancellableFuture( )`, `startCancellableFuture( )`, and `deferCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
 * [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes
 * [**`fromAction( )`**](Async-Operators#wiki-fromaction) — convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes
 * [**`fromCallable( )`**](Async-Operators#wiki-fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when a Subscriber subscribes
@@ -51,13 +50,6 @@ The `startFuture( )` method is similar to the `fromFuture( )` method except 
 [[images/rx-operators/deferFuture.png]]
 
 You can use the `deferFuture( )` operator to convert a Future that returns an Observable into an Observable that emits the values of that returned Observable in such a way that the Future is not invoked until a Subscriber subscribes to the resulting Observable.
-
-***
-
-## fromCancellableFuture( ), startCancellableFuture( ), and deferCancellableFuture( )
-#### versions of Future-to-Observable converters that monitor the subscription status of the Observable to determine whether to halt work on the Future
-
-If the a subscriber to the Observable that results when a Future is converted to an Observable later unsubscribes from that Observable, it can be useful to have the ability to stop attempting to retrieve items from the Future. The "cancellable" Future enables you do do this. These three methods will return Observables that, when unsubscribed to, will also "unsubscribe" from the underlying Futures.
 
 ***
 
