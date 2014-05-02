@@ -33,8 +33,8 @@ Other operators do not have a form that permits you to set their Schedulers. Som
   <tr><th>operator</th><th>Scheduler</th></tr>
  </thead>
  <tbody>
-  <tr><td><code>parallelMerge</code></td><td><code>currentThread</code></td></tr>
-  <tr><td><code>repeat</code></td><td><code>currentThread</code></td></tr>
+  <tr><td><code>parallelMerge</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>repeat</code></td><td><code>trampoline</code></td></tr>
   <tr><td><code>timeInterval</code></td><td><code>immediate</code></td></tr>
   <tr><td><code>timestamp</code></td><td><code>immediate</code></td></tr>
  </tbody>
