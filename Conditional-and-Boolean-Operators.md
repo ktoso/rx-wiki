@@ -260,7 +260,7 @@ true
 Pass the `contains( )` operator a particular item, and it will emit `true` if that item is emitted by the source Observable, or `false` if the source Observable terminates without emitting that item.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#contains(T)">`contains(item)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#contains(Object)">`contains(item)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.contains.aspx">`Contains`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypecontainsvalue-comparer">`contains`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Contains">Introduction to Rx: Contains</a>
