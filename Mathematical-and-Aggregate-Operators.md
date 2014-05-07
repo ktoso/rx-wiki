@@ -101,6 +101,8 @@ Sequence complete
 
 Instead of passing multiple Observables into `concat( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `concat( )` will concatenate their output into the output of a single Observable.
 
+> **Note:** in the scala language adaptor for RxJava, you access this functionality with the `++` operator rather than the `concat( )` method.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable...)">`concat(observable1, observable2, ...)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeconcatargs">`concat`</a>
