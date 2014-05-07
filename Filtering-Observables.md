@@ -167,6 +167,8 @@ Sequence complete
 
 There are also versions of `skip()` that ignore the items emitted by an Observable during a specified period of time after the Observable is subscribed to.
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `drop( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit)">`skip(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skip(time, timeunit, scheduler)`</a>
