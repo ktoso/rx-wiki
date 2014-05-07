@@ -137,6 +137,8 @@ Sequence complete
 
 `longCount( )` is essentially the same, but emits its item as a Long rather than an Integer.
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `length( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#longCount()">`longCount()`</a>
