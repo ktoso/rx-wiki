@@ -68,7 +68,7 @@
 * [**`join( )`**](Combining-Observables#wiki-join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
 * [**`last( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
-* [**`last( )`**](Filtering-Observable-Operators#wiki-last) (`Observable`) — emit only the last item emitted by the source Observable
+* [**`last( )`**](Filtering-Observables#wiki-last) (`Observable`) — emit only the last item emitted by the source Observable
 * [**`lastOrDefault( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
 * [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) (`Observable`) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
 * [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
