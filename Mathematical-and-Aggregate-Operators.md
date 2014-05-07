@@ -334,6 +334,8 @@ Sequence complete
 
 If the source Observable invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the source Observable invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Subscribers.
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `toSeq( )`.
+
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetoarray">`toArray`</a>
