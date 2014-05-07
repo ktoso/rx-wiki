@@ -265,6 +265,8 @@ To create an Observable that emits only the first item emitted by a source Obser
 [[images/rx-operators/firstOrDefaultN.png]]
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `firstOrElse( )`.
+
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
