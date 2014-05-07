@@ -11,7 +11,7 @@
 * [**`buffer( )`**](Transforming-Observables#wiki-buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time
 * [**`cache( )`**](Observable-Utility-Operators#wiki-cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
 * [**`cast( )`**](Transforming-Observables#wiki-cast) — cast all items from the source Observable into a particular type before reemitting them
-* (⁇) [**`chunkify( )`**](Blocking-Observable-Operators#wiki-chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
+* (⁇) [**`chunkify( )`**](Phantom-Operators#wiki-chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`combineLatest( )`**](Combining-Observables#wiki-combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
 * [**`connect( )`**](Connectable-Observable-Operators#wiki-connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
@@ -22,7 +22,7 @@
 * [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#wiki-defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 * [**`defer( )`**](Creating-Observables#wiki-defer) — do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
 * (`rxjava-async`) [**`deferFuture( )`**](Async-Operators#wiki-deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until a Subscriber subscribes
-* (⁇)(`rxjava-async`) [**`deferCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future that returns an Observable into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the returned Observable until a Subscriber subscribes
+* (⁇)(`rxjava-async`) [**`deferCancellableFuture( )`**](Phantom-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future that returns an Observable into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the returned Observable until a Subscriber subscribes
 * [**`delay( )`**](Observable-Utility-Operators#wiki-delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`dematerialize( )`**](Observable-Utility-Operators#wiki-dematerialize) — convert a materialized Observable back into its non-materialized form
 * [**`distinct( )`**](Filtering-Observables#wiki-distinct) — suppress duplicate items emitted by the source Observable
@@ -46,17 +46,17 @@
 * [**`flatMap( )`**](Transforming-Observables#wiki-flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * (`rxjava-async`) [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) (`Async`) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes
-* (⁇) [**`forEachFuture( )`**](Blocking-Observable-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable 
-* (⁇) [**`forIterable( )`**](Creating-Observables#wiki-foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
+* (⁇) [**`forEachFuture( )`**](Phantom-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable 
+* (⁇) [**`forIterable( )`**](Phantom-Operators#wiki-foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated
 * [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
 * (`rxjava-async`) [**`fromAction( )`**](Async-Operators#wiki-fromaction) — convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes
 * (`rxjava-async`) [**`fromCallable( )`**](Async-Operators#wiki-fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when a Subscriber subscribes
-* (⁇)(`rxjava-async`) [**`fromCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the Future's value until a Subscriber subscribes
+* (⁇)(`rxjava-async`) [**`fromCancellableFuture( )`**](Phantom-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the Future's value until a Subscriber subscribes
 * (`rxjava-async`) `fromFunc0( )` — _see `fromCallable( )`_
-* (⁇) [**`fromFuture( )`**](Creating-Observables#wiki-fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until a Subscriber subscribes
+* (⁇) [**`fromFuture( )`**](Phantom-Operators#wiki-fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until a Subscriber subscribes
 * (`rxjava-async`) [**`fromRunnable( )`**](Async-Operators#wiki-fromrunnable) — convert a Runnable into an Observable that invokes the runable and emits its result when a Subscriber subscribes
-* (⁇) [**`generate( )`**](Creating-Observables#wiki-generate-and-generateabsolutetime) — create an Observable that emits a sequence of items as generated by a function of your choosing
-* (⁇) [**`generateAbsoluteTime( )`**](Creating-Observables#wiki-generate-and-generateabsolutetime) — create an Observable that emits a sequence of items as generated by a function of your choosing, with each item emitted at an item-specific time
+* (⁇) [**`generate( )`**](Phantom-Operators#wiki-generate-and-generateabsolutetime) — create an Observable that emits a sequence of items as generated by a function of your choosing
+* (⁇) [**`generateAbsoluteTime( )`**](Phantom-Operators#wiki-generate-and-generateabsolutetime) — create an Observable that emits a sequence of items as generated by a function of your choosing, with each item emitted at an item-specific time
 * [**`getIterator( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
 * [**`groupBy( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * [**`groupByUntil( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key, and opening a new set periodically
@@ -117,7 +117,7 @@
 * [**`skipWhile( )`**](Conditional-and-Boolean-Operators#wiki-skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * (`rxjava-async`) [**`start( )`**](Async-Operators#wiki-start) — create an Observable that emits the return value of a function
-* (⁇)(`rxjava-async`) [**`startCancellableFuture( )`**](Async-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a function that returns Future into an Observable that emits that Future's return value in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future
+* (⁇)(`rxjava-async`) [**`startCancellableFuture( )`**](Phantom-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a function that returns Future into an Observable that emits that Future's return value in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future
 * (`rxjava-async`) [**`startFuture( )`**](Async-Operators#wiki-startfuture) — convert a function that returns Future into an Observable that emits that Future's return value
 * [**`startWith( )`**](Combining-Observables#wiki-startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#wiki-subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
@@ -159,4 +159,4 @@
 * [**`window( )`**](Transforming-Observables#wiki-window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`zip( )`**](Combining-Observables#wiki-zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
 
-(⁇) — this proposed operator is not part of RxJava as of 0.17.0
+(⁇) — this proposed operator is not part of RxJava as of 0.18.0
