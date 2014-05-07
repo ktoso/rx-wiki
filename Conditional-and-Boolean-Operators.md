@@ -74,6 +74,8 @@ The `ifThen( )` operator evaluates a function and emits the source Observable'
 #### discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
 [[images/rx-operators/skipUntil.png]]
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `dropUntil( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipUntil(rx.Observable)">`skipUntil(other)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipuntilother">`skipUntil`</a>
