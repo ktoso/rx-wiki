@@ -186,6 +186,8 @@ You can ignore the last _n_ items emitted by an Observable and attend only to th
 
 There are also versions of `skipLast()` that ignore the items emitted by an Observable during a specified period of time before the Observable completes.
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `dropRight( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(int)">`skipLast(count)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit)">`skipLast(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skipLast(time, timeunit, scheduler)`</a>
