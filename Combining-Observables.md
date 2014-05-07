@@ -108,6 +108,8 @@ If any of the individual Observables passed into `merge( )` aborts by invoking
 
 Because it is possible that more than one of the merged Observables encountered an error, `mergeDelayError( )` may pass information about multiple errors to the `onError` method (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class `CompositeException`.
 
+> **Note:** in the scala language adaptor for RxJava, the version of this method that merges a sequence of Observables emitted by a source Observable is called `flattenDelayError( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(java.util.List)">`mergeDelayError(listOfObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable)">`mergeDelayError(observableThatEmitsObservables)`</a>
