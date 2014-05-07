@@ -240,6 +240,8 @@ my_observable.reduce(initial_seed, accumulator_closure)
 
 Note that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your reduction with the item `null`. Note also that if you do pass in a seed, and the source Observable emits no items, `reduce` will emit the seed and complete normally without error.
 
+> **Note:** in the scala language adaptor for RxJava, the `reduce(seed)` variant is called `foldLeft`.
+
 #### example:
 
 Imagine you have access to an Observable that emits a sequence of "Movie" objects that correspond to the "coming soon" movies from a theater. These objects include a number of items of information about the movie, including its title and opening day. You could use `reduce` to convert this sequence of Movie objects into a single list of titles, like this:
