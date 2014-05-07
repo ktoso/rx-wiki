@@ -37,6 +37,8 @@ myObservable.startWith(-3, -2, -1, 0).subscribe(
 3
 ```
 
+> **Note:** in the scala language adaptor for RxJava, you can access this functionality with the `::` operator rather than with the `startWith( )` method when you want to start the resulting sequence with the sequence emitted by another Observable (as opposed to, say, the sequence found in an Iterable).
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#startWith(T...)">`startWith(x, y, ...)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypestartwithscheduler-args">`startWith`</a>
