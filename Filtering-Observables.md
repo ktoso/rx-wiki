@@ -90,6 +90,8 @@ There are also versions of `takeLast( )` that emit the items that were emitted
 
 The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `NoSuchElementException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `takeRight( )`.
+
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
