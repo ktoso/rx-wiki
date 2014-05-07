@@ -106,6 +106,8 @@ numbers.skipWhile({ (5 != it) }).subscribe(
 Sequence complete
 ```
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `dropWhile( )`.
+
 [[images/rx-operators/skipWhileWithIndex.png]]
 
 The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
