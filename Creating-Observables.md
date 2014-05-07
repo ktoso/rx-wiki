@@ -42,7 +42,7 @@ An empty iterable (or array) can be converted to an Observable in this way. The 
 
 Note that when the `from( )` method transforms a `Future` into an Observable, such an Observable will be effectively blocking, as its underlying `Future` blocks.
 
-> **Note:** in the scala language adaptor for RxJava, the version of this method that works with sequences (arrays/iterables) is called `items( )`.
+> **Note:** in the scala language adaptor for RxJava, the version of this method that works with sequences (arrays) is called `items( )`.
 
 
 #### see also:
