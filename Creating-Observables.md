@@ -133,6 +133,8 @@ def myObservable = Observable.create({ aSubscriber ->
 
 **NOTE:** A well-formed finite Observable must attempt to call either the Subscriber’s `onCompleted( )` method exactly once or its `onError( )` method exactly once, and must not thereafter attempt to call any of the Subscriber’s other methods. It is good practice to check the Subscriber’s `isUnsubscribed( )` state so that your Observable can stop emitting items or doing expensive calculations when there is no longer an interested Subscriber.
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `apply( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribe)">`create(OnSubscribe)`</a>
 * RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablecreatesubscribe)
