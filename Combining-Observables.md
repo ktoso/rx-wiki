@@ -37,6 +37,8 @@ myObservable.startWith(-3, -2, -1, 0).subscribe(
 3
 ```
 
+> **Note:** in the scala language adaptor for RxJava, you can access this functionality with the `::` operator rather than with the `startWith( )` method when you want to start the resulting sequence with the sequence emitted by another Observable (as opposed to, say, the sequence found in an Iterable).
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#startWith(T...)">`startWith(x, y, ...)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypestartwithscheduler-args">`startWith`</a>
@@ -85,6 +87,8 @@ Instead of passing multiple Observables into `merge( )`, you could also pass i
 
 If any of the individual Observables passed into `merge( )` aborts by invoking `onError`, the `merge( )` call itself will immediately abort and invoke `onError`. If you would prefer a merge that continues emitting the results of the remaining, error-free Observables before reporting the error, use `mergeDelayError( )` instead.
 
+> **Note:** in the scala language adaptor for RxJava, the version of this method that merges a sequence of Observables emitted by a source Observable is called `flatten( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(java.util.List)">`merge(listOfObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable)">`merge(observableThatEmitsObservables)`</a>
@@ -103,6 +107,8 @@ If any of the individual Observables passed into `merge( )` aborts by invoking
 `mergeDelayError( )` behaves much like `merge( )`. The exception is when one of the Observables being merged throws an error. If this happens with `merge( )`, the merged Observable will immediately throw an error itself (that is, it will invoke the `onError` method of its Subscriber). `mergeDelayError( )`, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables that it is merging a chance to finish emitting their items, and it will emit those itself, and will only invoke `onError` when all of the other merged Observables have finished.
 
 Because it is possible that more than one of the merged Observables encountered an error, `mergeDelayError( )` may pass information about multiple errors to the `onError` method (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class `CompositeException`.
+
+> **Note:** in the scala language adaptor for RxJava, the version of this method that merges a sequence of Observables emitted by a source Observable is called `flattenDelayError( )`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(java.util.List)">`mergeDelayError(listOfObservables)`</a>
@@ -220,6 +226,8 @@ The `groupJoin( )` method is similar, except that the function you define to c
 [[images/rx-operators/switchDo.png]]
 
 `switchOnNext( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchOnNext( )` unsubscribes from the previously-emitted Observable begins emitting items from the latest Observable. Note that it will unsubscribe from the previously-emitted Observable when a new Observable is *emitted* from the source Observable, not when the new Observable emits an item. This means that items emitted by the previous Observable between the time the subsequent Observable is emitted and the time that subsequent Observable itself begins emitting items will be dropped (as with the yellow circle in the diagram above).
+
+> **Note:** in the scala language adaptor for RxJava, this method is called `switch( )`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#switchOnNext(rx.Observable)">`switchOnNext(sequenceOfSequences)`</a>

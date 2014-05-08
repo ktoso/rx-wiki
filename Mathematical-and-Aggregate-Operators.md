@@ -101,6 +101,8 @@ Sequence complete
 
 Instead of passing multiple Observables into `concat( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `concat( )` will concatenate their output into the output of a single Observable.
 
+> **Note:** in the scala language adaptor for RxJava, you access this functionality with the `++` operator rather than the `concat( )` method.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable...)">`concat(observable1, observable2, ...)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeconcatargs">`concat`</a>
@@ -134,6 +136,8 @@ Sequence complete
 ```
 
 `longCount( )` is essentially the same, but emits its item as a Long rather than an Integer.
+
+> **Note:** in the scala language adaptor for RxJava, this method is called `length( )` or `size( )`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>
@@ -238,6 +242,8 @@ my_observable.reduce(initial_seed, accumulator_closure)
 
 Note that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your reduction with the item `null`. Note also that if you do pass in a seed, and the source Observable emits no items, `reduce` will emit the seed and complete normally without error.
 
+> **Note:** in the scala language adaptor for RxJava, the `reduce(seed)` variant is called `foldLeft`.
+
 #### example:
 
 Imagine you have access to an Observable that emits a sequence of "Movie" objects that correspond to the "coming soon" movies from a theater. These objects include a number of items of information about the movie, including its title and opening day. You could use `reduce` to convert this sequence of Movie objects into a single list of titles, like this:
@@ -329,6 +335,8 @@ Sequence complete
 ```
 
 If the source Observable invokes `onCompleted` before emitting any items, `toList( )` will emit an empty list before invoking `onCompleted`. If the source Observable invokes `onError`, `toList( )` will in turn invoke the `onError` methods of its Subscribers.
+
+> **Note:** in the scala language adaptor for RxJava, this method is called `toSeq( )`.
 
 #### see also
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>

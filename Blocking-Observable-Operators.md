@@ -3,7 +3,6 @@ This section explains the [`BlockingObservable`](http://netflix.github.io/RxJava
 To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlockingObservable( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable%28%29) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from%28rx.Observable%29) method.
 
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
-* ⁇ [**`forEachFuture( )`**](Blocking-Observable-Operators#wiki-foreachfuture) — create a futureTask that will invoke a specified function on each item emitted by an Observable 
 * [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) — block until the Observable emits an item, then return the first item emitted by the Observable
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) — block until the Observable emits an item or completes, then return the first item emitted by the Observable or a default item if the Observable did not emit an item
 * [**`last( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) — block until the Observable completes, then return the last item emitted by the Observable
@@ -11,14 +10,11 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 * [**`mostRecent( )`**](Blocking-Observable-Operators#wiki-mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
 * [**`next( )`**](Blocking-Observable-Operators#wiki-next) — returns an iterable that blocks until the Observable emits another item, then returns that item
 * [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns that item
-* ⁇ [**`chunkify( )`**](Blocking-Observable-Operators#wiki-chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`single( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`toFuture( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
 * [**`getIterator( )` or `toIterator( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
-
-⁇ — this proposed operator is not part of RxJava as of 0.17.0
 
 > This documentation accompanies its explanations with a modified form of "marble diagrams." Here is how these marble diagrams represent Blocking Observables:
 
@@ -40,14 +36,6 @@ The `forEach(someFunction)` method is the blocking equivalent of `subscribe(some
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#forEach(rx.util.functions.Action1)">`forEach(action)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211815.aspx">`ForEach`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/10_LeavingTheMonad.html#ForEach">Introduction to Rx: ForEach</a>
-
-***
-
-## forEachFuture( )
-#### create a futureTask that will invoke a specified function on each item emitted by an Observable 
-[[images/rx-operators/B.forEachFuture.png]]
-
-The `forEachFuture( )` returns a `FutureTask` for each item emitted by the source Observable (or each item and each notification) that, when executed, will apply a function you specify to each such item (or item and notification).
 
 ***
 
@@ -139,14 +127,6 @@ The `latest( )` operator is very similar to `Observable.next( )` except that
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#latest()">`latest( )`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212115.aspx">`Latest`</a>
-
-***
-
-## chunkify( )
-#### returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
-[[images/rx-operators/B.chunkify.png]]
-
-The `chunkify( )` operator represents a blocking observable as an Iterable, that, each time you iterate over it, returns a list of items emitted by the source Observable since the previous iteration. These lists may be empty if there have been no such items emitted.
 
 ***
 

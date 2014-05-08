@@ -90,6 +90,8 @@ There are also versions of `takeLast( )` that emit the items that were emitted
 
 The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `NoSuchElementException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `takeRight( )`.
+
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last(rx.util.functions.Func1)">`last(predicate)`</a>
@@ -167,6 +169,8 @@ Sequence complete
 
 There are also versions of `skip()` that ignore the items emitted by an Observable during a specified period of time after the Observable is subscribed to.
 
+> **Note:** in the scala language adaptor for RxJava, this method is called `drop( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit)">`skip(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skip(time, timeunit, scheduler)`</a>
@@ -183,6 +187,8 @@ There are also versions of `skip()` that ignore the items emitted by an Observab
 You can ignore the last _n_ items emitted by an Observable and attend only to those items that preced them, by modifying the Observable with the `skipLast(n)` method. Note that the mechanism by which this is implemented will delay the emission of any item from the source Observable until _n_ additional items have been emitted by that Observable.
 
 There are also versions of `skipLast()` that ignore the items emitted by an Observable during a specified period of time before the Observable completes.
+
+> **Note:** in the scala language adaptor for RxJava, this method is called `dropRight( )`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(int)">`skipLast(count)`</a>
@@ -258,6 +264,8 @@ To create an Observable that emits only the first item emitted by a source Obser
 
 [[images/rx-operators/firstOrDefaultN.png]]
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
+
+> **Note:** in the scala language adaptor for RxJava, this method is called `firstOrElse( )` or `headOrElse( )`.
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
