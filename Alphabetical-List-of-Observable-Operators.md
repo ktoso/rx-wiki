@@ -81,6 +81,7 @@
 * **`group-by( )`** — _see `groupBy( )`_ (clojure)
 * [**`groupByUntil( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key, and opening a new set periodically
 * [**`groupJoin( )`**](Combining-Observables#wiki-join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
+* **`head( )`** — _see `first( )` (`BlockingObservable`)_ (scala)
 * **`headOrElse( )`** — _see `firstOrDefault( )`_ (scala)
 * [**`ifThen( )`**](Conditional-and-Boolean-Operators#wiki-ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence (`contrib-computation-expressions`)
 * [**`ignoreElements( )`**](Filtering-Observables#wiki-ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
@@ -140,6 +141,7 @@
 * [**`serialize( )`**](Observable-Utility-Operators#wiki-serialize) — force an Observable to make synchronous calls and to be well-behaved
 * [**`single( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`single( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise notify of an exception
+* **`singleOption( )`** — _see `singleOrDefault( )` (`BlockingObservable`)_ (scala)
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`singleOrDefault( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise emit a default item
 * **`size( )`** — _see `count( )`_ (scala)
