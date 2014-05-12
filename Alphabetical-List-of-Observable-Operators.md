@@ -94,6 +94,7 @@
 * **`length( )`** — _see `count( )`_ (scala)
 * [**`longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#wiki-map) — transform the items emitted by an Observable by applying a function to each of them
+* **`mapcat( )`** — _see `flatMap( )`_ (clojure)
 * **`mapMany( )`** — _see: `flatMap( )`_
 * [**`materialize( )`**](Observable-Utility-Operators#wiki-materialize) — convert an Observable into a list of Notifications
 * [**`max( )`**](Mathematical-and-Aggregate-Operators#wiki-max) — emits the maximum value emitted by a source Observable (`rxjava-math`)
@@ -107,6 +108,7 @@
 * [**`multicast( )`**](Connectable-Observable-Operators#wiki-observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`never( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing at all
 * [**`next( )`**](Blocking-Observable-Operators#wiki-next) — returns an iterable that blocks until the Observable emits another item, then returns that item
+* **`nth( )`** — _see `elementAt( )` and `elementAtOrDefault( )`_ (clojure)
 * [**`observeOn( )`**](Observable-Utility-Operators#wiki-observeon) — specify on which Scheduler a Subscriber should observe the Observable
 * [**`ofType( )`**](Filtering-Observables#wiki-oftype) — emit only those items from the source Observable that are of a particular class
 * [**`onErrorFlatMap( )`**](Error-Handling-Operators#wiki-onerrorflatmap) — instructs an Observable to emit a sequence of items whenever it encounters an error
@@ -120,9 +122,11 @@
 * [**`publishLast( )`**](Connectable-Observable-Operators#wiki-observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`range( )`**](Creating-Observables#wiki-range) — create an Observable that emits a range of sequential integers
 * [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
+* **`reductions( )`** — _see `scan( )`_ (clojure)
 * [**`refCount( )`**](Connectable-Observable-Operators#wiki-connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
 * [**`repeat( )`**](Creating-Observables#wiki-repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`replay( )`**](Connectable-Observable-Operators#wiki-observablereplay) — ensures that all Subscribers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
+* **`rest( )`** — _see `next( )`_ (clojure)
 * **`return( )`** — _see `just( )`_ (clojure)
 * [**`retry( )`**](Error-Handling-Operators#wiki-retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
 * [**`sample( )`**](Filtering-Observables#wiki-sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
