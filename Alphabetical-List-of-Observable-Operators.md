@@ -3,6 +3,7 @@
 * [**`amb( )`**](Conditional-and-Boolean-Operators#wiki-amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
 * [**`and( )`**](Combining-Observables#wiki-and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern` (`rxjava-joins`)
 * **`apply( )`** — _see `create( )`_ (scala)
+* **`asObservable( )`** — _see `from( )` (et al.)_ (kotlin)
 * [**`asyncAction( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert an Action into an Observable that executes the Action and emits its return value (`rxjava-async`)
 * [**`asyncFunc( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert a function into an Observable that executes the function and emits its return value (`rxjava-async`)
 * [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Doubles emitted by an Observable and emits this average (`rxjava-math`)
