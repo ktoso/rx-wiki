@@ -25,6 +25,7 @@
 * [**`create( )`**](Creating-Observables#wiki-create) — create an Observable from scratch by means of a function
 * **`cycle( )`** (clojure) — _see `repeat( )`_
 * [**`debounce( )`**](Filtering-Observables#wiki-throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
+* [**`decode( )`**](String-Observables#wiki-decode) (`StringObservable`) — convert a stream of multibyte characters into an Observable that emits byte arrays that respect character boundaries
 * [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#wiki-defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 * [**`defer( )`**](Creating-Observables#wiki-defer) — do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
 * [**`deferFuture( )`**](Async-Operators#wiki-deferfuture) — convert a Future that returns an Observable into an Observable, but do not attempt to get the Observable that the Future returns until a Subscriber subscribes (`rxjava-async`)
@@ -48,6 +49,7 @@
 * [**`elementAt( )`**](Filtering-Observables#wiki-elementat) — emit item _n_ emitted by the source Observable
 * [**`elementAtOrDefault( )`**](Filtering-Observables#wiki-elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
 * [**`empty( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then completes
+* [**`encode( )`**](String-Observables#wiki-encode) (`StringObservable`) — transform an Observable that emits strings into an Observable that emits byte arrays that respect character boundaries of multibyte characters in the original strings
 * [**`error( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then signals an error
 * **`every( )`** (clojure) — _see `all( )`_
 * [**`exists( )`**](Conditional-and-Boolean-Operators#wiki-exists-and-isempty) — determine whether an Observable emits any items or not
@@ -69,6 +71,7 @@
 * [**`forEachFuture( )`**](Phantom-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable (⁇)
 * [**`forIterable( )`**](Phantom-Operators#wiki-foriterable) — apply a function to the elements of an Iterable to create Observables which are then concatenated (⁇)
 * [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
+* [**`from( )`**](String-Observables#wiki-from) (`StringObservable`) — convert a stream of characters or a Reader into an Observable that emits byte arrays or Strings
 * [**`fromAction( )`**](Async-Operators#wiki-fromaction) — convert an Action into an Observable that invokes the action and emits its result when a Subscriber subscribes (`rxjava-async`)
 * [**`fromCallable( )`**](Async-Operators#wiki-fromcallable) — convert a Callable into an Observable that invokes the callable and emits its result or exception when a Subscriber subscribes (`rxjava-async`)
 * [**`fromCancellableFuture( )`**](Phantom-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a Future into an Observable in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future, but do not attempt to get the Future's value until a Subscriber subscribes (⁇)(`rxjava-async`)
@@ -92,6 +95,7 @@
 * [**`isEmpty( )`**](Conditional-and-Boolean-Operators#wiki-exists-and-isempty) — determine whether an Observable emits any items or not
 * **`items( )`** (scala) — _see `from( )`_
 * [**`join( )`**](Combining-Observables#wiki-join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
+* [**`join( )`**](String-Observables#wiki-join) (`StringObservable`) — converts an Observable that emits a sequence of strings into an Observable that emits a single string that concatenates them all, separating them by a specified string
 * [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
 * [**`last( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
 * [**`last( )`**](Filtering-Observables#wiki-last) (`Observable`) — emit only the last item emitted by the source Observable
@@ -99,6 +103,7 @@
 * [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) (`Observable`) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
 * [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
 * **`length( )`** (scala) — _see `count( )`_
+* [**`line( )`**](String-Observables#wiki-line) (`StringObservable`) — converts an Observable of Strings into an Observable of Lines by treating the source sequence as a stream and splitting it on line-endings
 * [**`longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#wiki-map) — transform the items emitted by an Observable by applying a function to each of them
 * **`mapcat( )`** (clojure) — _see `flatMap( )`_
@@ -152,10 +157,12 @@
 * [**`skipUntil( )`**](Conditional-and-Boolean-Operators#wiki-skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
 * [**`skipWhile( )`**](Conditional-and-Boolean-Operators#wiki-skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`split( )`**](String-Observables#wiki-split) (`StringObservable`) — converts an Observable of Strings into an Observable of Strings that treats the source sequence as a stream and splits it on a specified regex boundary
 * [**`start( )`**](Async-Operators#wiki-start) — create an Observable that emits the return value of a function (`rxjava-async`)
 * [**`startCancellableFuture( )`**](Phantom-Operators#wiki-fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a function that returns Future into an Observable that emits that Future's return value in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future (⁇)(`rxjava-async`)
 * [**`startFuture( )`**](Async-Operators#wiki-startfuture) — convert a function that returns Future into an Observable that emits that Future's return value (`rxjava-async`)
 * [**`startWith( )`**](Combining-Observables#wiki-startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
+* [**`stringConcat( )`**](String-Observables#wiki-stringconcat) (`StringObservable`) — converts an Observable that emits a sequence of strings into an Observable that emits a single string that concatenates them all
 * [**`subscribeOn( )`**](Observable-Utility-Operators#wiki-subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
 * [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Doubles emitted by an Observable and emits this sum (`rxjava-math`)
 * [**`sumFloat( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Floats emitted by an Observable and emits this sum (`rxjava-math`)
