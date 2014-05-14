@@ -13,6 +13,7 @@
   * [[Async Operators]]
   * [[Connectable Observable Operators]]
   * [[Blocking Observable Operators]]
+  * [[String Observable]]
   * [[Alphabetical List of Observable Operators]]
 
 * [[Subject]]
