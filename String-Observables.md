@@ -32,6 +32,8 @@ The `StringObservable` class contains methods that represent operators particula
 #### convert a stream of characters or a Reader into an Observable that emits byte arrays or Strings
 [[images/rx-operators/St.from.png]]
 
+Note that in the `from(InputStream, size)` and `from(Reader, size)` variants, the resulting Observable is unusual: you can only subscribe to it a single time. This means, for example, that operators like `repeat( )` or `retry( )` will not work on such an Observable.
+
 *** 
 
 ## join( )
