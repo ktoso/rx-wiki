@@ -177,7 +177,7 @@
 * [**`takeFirst( )`**](Filtering-Observables#wiki-first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`takeLast( )`**](Filtering-Observables#wiki-takelast) — only emit the last _n_ items emitted by an Observable
 * [**`takeLastBuffer( )`**](Filtering-Observables#wiki-takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
-* **`takeRight( )`** (scala) — _see `last( )`_
+* **`takeRight( )`** (scala) — _see `last( )` or `takeLast( )`_
 * [**`takeUntil( )`**](Conditional-and-Boolean-Operators#wiki-takeuntil) — emits the items from the source Observable until a second Observable emits an item
 * [**`takeWhile( )`**](Conditional-and-Boolean-Operators#wiki-takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 * **`take-while( )`** (clojure) — _see `takeWhile( )`_
