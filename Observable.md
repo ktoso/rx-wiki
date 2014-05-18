@@ -141,6 +141,7 @@ This documentation groups information about the various operators and examples o
   * [[Asynchronous Conversion|Async-Operators]]
   * [[Connectable Observables|Connectable-Observable-Operators]]
   * [[Blocking Observables|Blocking-Observable-Operators]]
+  * [[String Observables|String-Observables]]
 
 ## Implementing Your Own Operators with lift()
 
