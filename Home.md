@@ -6,7 +6,7 @@ It supports Java 5 or higher and JVM-based languages such as [Groovy](https://gi
 
 <center><table>
  <thead>
-  <tr><th colspan="3">Observables fill the gap by being the ideal implementation of access to asynchronous sequences of multiple items</th></tr>
+  <tr><th colspan="3">Observables fill the gap by being the ideal way to access asynchronous sequences of multiple items</th></tr>
   <tr><th></th><th>single items</th><th>multiple items</th></tr>
  </thead>
  <tbody>
