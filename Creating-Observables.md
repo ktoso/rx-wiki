@@ -33,12 +33,11 @@ myArrayObservable = Observable.from(myArray);
 
 This converts the sequence of values in the iterable object or array into a sequence of items emitted, one at a time, by an Observable.
 
-An empty iterable (or array) can be converted to an Observable in this way. The resulting Observable will invoke `onCompleted()` without first invoking `onNext()`.
+You can convert an empty iterable (or array) into an Observable in this way. The resulting Observable will invoke `onCompleted()` without first invoking `onNext()`.
 
 Note that when the `from( )` method transforms a `Future` into an Observable, such an Observable will be effectively blocking, as its underlying `Future` blocks.
 
 > **Note:** in the scala language adaptor for RxJava, the version of this method that works with sequences (arrays) is called `items( )`.
-
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future)">`from(future)`</a>
@@ -56,7 +55,7 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 #### convert an object into an Observable that emits that object
 [[images/rx-operators/just.png]]
 
-To convert any object into an Observable that emits that object, pass that object into the `just( )` method.
+To convert any object into an Observable that emits that object and then completes, pass that object into the `just( )` method.
 
 ```groovy
 // Observable emits "some string" as a single item
@@ -65,7 +64,7 @@ def observableThatEmitsAString = Observable.just("some string");
 def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
 ```
 
-This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert an iterable object into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
+This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert the iterable into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
 
 Note that if you pass `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
