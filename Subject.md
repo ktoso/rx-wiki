@@ -42,6 +42,9 @@ Note: In RxJava's Scala language adaptor, you instantiate a `PublishSubject` via
 # ReplaySubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/ReplaySubject.html">``ReplaySubject``</a> emits to any subscriber all of the items that were emitted by the source Observable(s), regardless of when the subscriber subscribes.
 [[images/rx-operators/S.ReplaySubject.png]]
+
+There are also versions of `ReplaySubject` that will throw away old items once the replay buffer threatens to grow beyond a certain size, or when a specified timespan has passed since the items were originally emitted.
+
 When using ``ReplaySubject`` as a Subscriber, take care not to call its ``onNext( )`` method (or its other ``on`` methods) from multiple threads, as this could lead to coincident (non-sequential) calls, which violates the Observable contract and creates an ambiguity in the resulting Subject as to which item or emission should be replayed first.
 
 #### see also:
