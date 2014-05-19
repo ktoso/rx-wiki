@@ -172,7 +172,8 @@ There are also versions of `zip( )` that accept three or more Observables, as 
 ***
 # and( ), then( ), and when( )
 #### combine sets of items emitted by two or more Observables by means of `Pattern` and `Plan` intermediaries
-> *Note:* these methods are part of the `rxjava-joins` module in `rxjava-contrib`.
+> **Note:** these methods are part of the `rxjava-joins` module in `rxjava-contrib`.
+
 [[images/rx-operators/and_then_when.png]]
 
 The combination of `and( )`, `then( )`, and `when( )` methods operate much like `zip( )` but they do so by means of intermediary data structures.  `and( )` accepts two or more Observables and combines the emissions from each, one set at a time, into `Pattern` objects. `then( )` operates on such `Pattern` objects, transforming them in a `Plan`. `when( )` then transforms these various `Plan` objects into emissions from an Observable.
