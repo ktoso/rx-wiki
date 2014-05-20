@@ -1,6 +1,6 @@
 This section explains the [`BlockingObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html) subclass. A Blocking Observable extends the ordinary Observable class by providing a set of operators on the items emitted by the Observable that block.
 
-To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlockingObservable( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable%28%29) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from%28rx.Observable%29) method.
+To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlocking( )`](http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlocking%28%29) method or the [`BlockingObservable.from( )`](http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from%28rx.Observable%29) method.
 
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) — block until the Observable emits an item, then return the first item emitted by the Observable
@@ -22,7 +22,7 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html">`BlockingObservable`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlockingObservable()">`toBlockingObservable()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toBlocking()">`toBlocking()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)">`BlockingObservable.from()`</a>
 
 ***
