@@ -67,6 +67,7 @@
 * **`flattenDelayError( )`** (scala) — _see `mergeDelayError( )`_
 * **`foldLeft( )`** (scala) — _see `reduce( )`_
 * **`forall( )`** (scala) — _see `all( )`_
+* **`forEach( )`** — _see_ [`subscribe( )`](Observable#onnext-oncompleted-and-onerror)
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) (`BlockingObservable`) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) (`Async`) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes (`rxjava-async`)
 * [**`forEachFuture( )`**](Phantom-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable (⁇)
