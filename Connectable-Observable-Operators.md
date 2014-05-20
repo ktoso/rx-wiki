@@ -145,6 +145,8 @@ In each variety there are versions with which you can limit the number of replay
 
 You can represent a Connectable Observable so that it behaves much like an ordinary Observable by using the `refCount( )` operator. This operator keeps track of how many Subscribers are subscribed to the resulting Observable and refrains from disconnecting from the source ConnectableObservable until all such Observables unsubscribe.
 
+> *Note:* The `share( )` operator is equivalent to `publish( ).refCount( )`
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#refCount()">`refCount( )`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#connectableobservableprototyperefcount">`refCount`</a>
