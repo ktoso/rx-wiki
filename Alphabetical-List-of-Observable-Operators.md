@@ -10,7 +10,7 @@
 * [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Floats emitted by an Observable and emits this average (`rxjava-math`)
 * [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Integers emitted by an Observable and emits this average (`rxjava-math`)
 * [**`averageLong( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Longs emitted by an Observable and emits this average (`rxjava-math`)
-* **`blocking( )`** (clojure) — _see `toBlockingObservable( )`_
+* **`blocking( )`** (clojure) — _see `toBlocking( )`_
 * [**`buffer( )`**](Transforming-Observables#wiki-buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time
 * [**`byLine( )`**](String-Observables#wiki-byline) (`StringObservable`) — converts an Observable of Strings into an Observable of Lines by treating the source sequence as a stream and splitting it on line-endings
 * [**`cache( )`**](Observable-Utility-Operators#wiki-cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
@@ -194,8 +194,8 @@
 * [**`timer( )`**](Creating-Observables#wiki-timer) — create an Observable that emits a single item after a given delay
 * [**`timestamp( )`**](Observable-Utility-Operators#wiki-timestamp) — attach a timestamp to every item emitted by an Observable
 * [**`toAsync( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert a function or Action into an Observable that executes the function and emits its return value (`rxjava-async`)
-* **`toBlocking( )`**] - _see `toBlockingObservable( )`_
-* [**`toBlockingObservable( )`**](Blocking-Observable-Operators) — transform an Observable into a BlockingObservable
+* [**`toBlocking( )`**](Blocking-Observable-Operators) — transform an Observable into a BlockingObservable
+* **`toBlockingObservable( )`**] - _see `toBlocking( )`_
 * [**`toFuture( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
 * [**`toIterator( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterator
