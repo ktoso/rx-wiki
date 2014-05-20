@@ -21,6 +21,7 @@ You obtain a Scheduler from the factory methods described in the `Schedulers` cl
   <tr><td><code>Schedulers.immediate(&#8239;)</code></td><td>schedules work to begin immediately in the current thread</td></tr>
   <tr><td><code>Schedulers.io(&#8239;)</code></td><td>meant for I/O-bound work such as asynchronous performance of blocking I/O, this scheduler is backed by a thread-pool that will grow as needed; for ordinary computational work, switch to <code>Schedulers.computation(&#8239;)</code></td></tr>
   <tr><td><code>Schedulers.newThread(&#8239;)</code></td><td>creates a new thread for each unit of work</td></tr>
+  <tr><td><code>Schedulers.executor(&#8239;)</code></td><td><span style="color:#f00;">TBD</span></td></tr>
  </tbody>
 </table>
 ## Default Schedulers for RxJava Observable operators
