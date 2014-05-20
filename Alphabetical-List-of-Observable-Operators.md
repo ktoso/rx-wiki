@@ -147,6 +147,7 @@
 * **`seq( )`** (clojure) — _see `getIterator( )`_
 * [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#wiki-sequenceequal) — test the equality of sequences emitted by two Observables
 * [**`serialize( )`**](Observable-Utility-Operators#wiki-serialize) — force an Observable to make synchronous calls and to be well-behaved
+* **`share( )`** — _see `refCount( )`_
 * [**`single( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`single( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise notify of an exception
 * **`singleOption( )`** (scala) — _see `singleOrDefault( )` (`BlockingObservable`)_
