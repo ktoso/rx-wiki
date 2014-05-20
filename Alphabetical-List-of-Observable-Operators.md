@@ -192,6 +192,7 @@
 * [**`timer( )`**](Creating-Observables#wiki-timer) — create an Observable that emits a single item after a given delay
 * [**`timestamp( )`**](Observable-Utility-Operators#wiki-timestamp) — attach a timestamp to every item emitted by an Observable
 * [**`toAsync( )`**](Async-Operators#wiki-toasync-or-asyncaction-or-asyncfunc) — convert a function or Action into an Observable that executes the function and emits its return value (`rxjava-async`)
+* **`toBlocking( )`**] - _see `toBlockingObservable( )`_
 * [**`toBlockingObservable( )`**](Blocking-Observable-Operators) — transform an Observable into a BlockingObservable
 * [**`toFuture( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-toiteratorgetiterator) — convert the sequence emitted by the Observable into an Iterable
