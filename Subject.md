@@ -1,6 +1,8 @@
 A <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/Subject.html">`Subject`</a> is a sort of bridge or proxy that acts both as an `Subscriber` and as an `Observable`. Because it is a Subscriber, it can subscribe to one or more Observables, and because it is an Observable, it can pass through the items it observes by reemitting them, and it can also emit new items.
 
-If you have a `Subject` and you want to pass it along to some other agent without exposing its `Subscriber` interface, you can mask it by calling its `asObservable` method, which will return the Subject as a pure Observable.
+Because a Subject subscribes to an Observable, it will trigger that Observable to begin emitting items (if that Observable is “cold” — that is, if it waits for a subscription before it begins to emit items). This can have the effect of making the resulting Subject a "hot" Observable variant of the original “cold” Observable.
+
+If you have a `Subject` and you want to pass it along to some other agent without exposing its `Subscriber` interface, you can mask it by calling its `asObservable` method, which will return the Subject as a pure `Observable`.
 
 #### see also:
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#Subject">Introduction to Rx: Subject</a>
