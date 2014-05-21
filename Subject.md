@@ -33,13 +33,14 @@ However, if the source Observable terminates with an error, the `BehaviorSubject
 # PublishSubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">``PublishSubject``</a> emits to a subscriber only those items that are emitted by the source Observable(s) subsequent to the time of the subscription.
 [[images/rx-operators/S.PublishSubject.png]]
+Note that a `PublishSubject` may begin emitting items immediately upon creation (unless you have taken steps to prevent this), and so there is a risk that one or more items may be lost between the time the Subject is created and the Subscriber subscribes to it. If you need to guarantee delivery of all items from the source Observable, you'll need either to form that Observable with `create` so that you can manually reintroduce “cold” Observable behavior (checking to see that all subscribers have subscribed before beginning to emit items), or switch to a `ReplaySubject`.
+
 If the source Observable terminates with an error, the `PublishSubject` will not emit any items to subsequent Subscribers, but will simply pass along the error notification from the source Observable.
 [[images/rx-operators/S.PublishSubject.e.png]]
 Note: In RxJava's Scala language adaptor, you instantiate a `PublishSubject` via `Subject`.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">`PublishSubject`</a>
-
 
 # ReplaySubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/ReplaySubject.html">``ReplaySubject``</a> emits to any subscriber all of the items that were emitted by the source Observable(s), regardless of when the subscriber subscribes.
