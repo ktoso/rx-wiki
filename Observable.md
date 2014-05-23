@@ -122,7 +122,7 @@ For example there is the `onEvent` naming pattern (e.g. `onNext`, `onCompleted`,
 
 # &ldquo;Hot&rdquo; and &ldquo;Cold&rdquo; Observables
 
-When does an Observable begin emitting its sequence of items? It depends on the Observable. A &ldquo;hot&rdquo; Observable may begin emitting itemsas soon as it is created, and so any observer who subscribes to that Observable may start observing the sequence somewhere in the middle. A &ldquo;cold&rdquo; Observable, on the other hand, waits until an observer subscribes to it before it begins to emit items.
+When does an Observable begin emitting its sequence of items? It depends on the Observable. A &ldquo;hot&rdquo; Observable may begin emitting items as soon as it is created, and so any observer who subscribes to that Observable may start observing the sequence somewhere in the middle. A &ldquo;cold&rdquo; Observable, on the other hand, waits until an observer subscribes to it before it begins to emit items, and so such an observer is guaranteed to see the whole sequence from the beginning.
 
 In RxJava, there is also something called a &ldquo;Connectable&rdquo; Observable. Such an Observable does not begin emitting items until its `connect( )` method is called, whether or not any observers have subscribed to it.
 
