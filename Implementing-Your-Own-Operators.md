@@ -1,5 +1,7 @@
 You can implement your own Observable operators. This page shows you how.
 
+If your operator is designed to *originate* an Observable, rather than to transform or react to a source Observable, use the [`create( )`](Creating-Observables#wiki-create) method rather than trying to implement `Observable` manually.  Otherwise, follow the instructions below.
+
 # Chaining Your Custom Operators with Standard RxJava Operators
 
 The following example shows how you can chain a custom operator (in this example: `myOperator`) along with standard RxJava operators by using the `lift( )` operator:
@@ -10,7 +12,7 @@ The following section will show how to form the scaffolding of your operator so 
 
 # Implementing Your Operator
 
-Define your operator as a public class, like so:
+Define your operator as a public class that implements the [`Operator`](http://netflix.github.io/RxJava/javadoc/rx/Observable.Operator.html) interface, like so:
 ```java
 public class myOperator<T> implements Operator<T> {
   public myOperator( /* any necessary params here */ ) {
@@ -51,7 +53,15 @@ public class myOperator<T> implements Operator<T> {
 
 # Other Considerations
 
-* Your operator should take care to check its Subscriber's `isUnsubscribed( )` status before it emits any items to (or sends any notifications to) the Subscriber. Do not waste the time to generate an item that no Subscriber is interested in seeing.
+* Your operator should take care to check [its Subscriber's `isUnsubscribed( )` status](Observable#unsubscribing) before it emits any items to (or sends any notifications to) the Subscriber. Do not waste the time to generate an item that no Subscriber is interested in seeing.
 * Your operator should obey the core tenets of the Observable contract:
-** It may call a Subscriber's `onNext( )` method any number of times, but these calls must be non-overlapping.
-** It may call either a Subscriber's `onCompleted( )` or `onError( )` method, but not both, exactly once, and it may not subsequently call a Subscriber's `onNext( )` method.
+  * It may call a Subscriber's [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method any number of times, but these calls must be non-overlapping.
+  * It may call either a Subscriber's [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) or [`onError( )`](Observable#onnext-oncompleted-and-onerror) method, but not both, exactly once, and it may not subsequently call a Subscriber's [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method.
+  * If you are unable to guarantee that your operator conforms to the above two tenets, you can add the [`serialize( )`](Observable-Utility-Operators#serialize) operator to it to force the correct behavior.
+* Do not block within your operator.
+* It is usually best that you compose new operators by combining existing ones, to the extent that this is possible, rather than reinventing the wheel. RxJava itself does this with some of its standard operators, for example:
+  * [`first( )`](Filtering-Observables#wiki-first-and-takefirst) is defined as [`take(1)`](Filtering-Observables#wiki-take)`.`[`single( )`](Observable-Utility-Operators#wiki-single-and-singleordefault)
+  * [`ignoreElements( )`](Filtering-Observables#wiki-ignoreelements) is defined as [`filter(alwaysFalse( ))`](Filtering-Observables#wiki-filter)
+  * [`reduce(a)`](Mathematical-and-Aggregate-Operators#wiki-reduce) is defined as [`scan(a)`](Transforming-Observables#wiki-scan)`.`[`last( )`](Filtering-Observables#wiki-last)
+* If your operator uses functions or lambdas that are passed in as parameters (predicates, for instance), note that these may be sources of exceptions, and be prepared to catch these and notify subscribers via `onError( )` calls.
+* In general, notify subscribers of error conditions immediately, rather than making an effort to emit more items first.
