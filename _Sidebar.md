@@ -15,6 +15,7 @@
   * [[Blocking Observable Operators]]
   * [[String Observables]]
   * [[Alphabetical List of Observable Operators]]
+  * [[Implementing Your Own Operators]]
 
 * [[Subject]]
 * [[Scheduler]]
