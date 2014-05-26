@@ -76,7 +76,7 @@ In Java =>
 In Groovy =>
 ```groovy
 def hello(String[] names) {
-    Observable.toObservable(names)
+    Observable.from(names)
         .subscribe({ println "Hello " + it + "!"})
 }
 ```
