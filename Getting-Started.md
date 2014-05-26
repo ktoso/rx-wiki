@@ -85,7 +85,7 @@ In Clojure =>
 ```clojure
 (defn hello
   [&rest]
-  (-> (Observable/toObservable &rest)
+  (-> (Observable/from &rest)
     (.subscribe #(println (str "Hello " % "!")))))
 ```
 
