@@ -89,6 +89,7 @@
 * [**`groupByUntil( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key, and opening a new set periodically
 * [**`groupJoin( )`**](Combining-Observables#wiki-join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * **`head( )`** (scala) — _see `first( )` (`BlockingObservable`)_
+* **`headOption( )`** (scala) — _see `firstOrDefault( )`_
 * **`headOrElse( )`** (scala) — _see `firstOrDefault( )`_
 * [**`ifThen( )`**](Conditional-and-Boolean-Operators#wiki-ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence (`contrib-computation-expressions`)
 * [**`ignoreElements( )`**](Filtering-Observables#wiki-ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
@@ -101,8 +102,10 @@
 * [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
 * [**`last( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
 * [**`last( )`**](Filtering-Observables#wiki-last) (`Observable`) — emit only the last item emitted by the source Observable
+* **`lastOption( )`** (scala) — _see `lastOrDefault( )`_
 * [**`lastOrDefault( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
 * [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) (`Observable`) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
+* **`lastOrElse( )`** (scala) — _see `lastOrDefault( )`_
 * [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
 * **`length( )`** (scala) — _see `count( )`_
 * **`limit( )`** — _see `take( )`_
@@ -155,6 +158,7 @@
 * **`singleOption( )`** (scala) — _see `singleOrDefault( )` (`BlockingObservable`)_
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`singleOrDefault( )`**](Observable-Utility-Operators#wiki-single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise emit a default item
+* **`singleOrElse( )`** (scala) — _see `singleOrDefault( )`_
 * **`size( )`** (scala) — _see `count( )`_
 * [**`skip( )`**](Filtering-Observables#wiki-skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#wiki-skiplast) — ignore the last _n_ items emitted by an Observable
