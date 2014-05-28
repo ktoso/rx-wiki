@@ -19,6 +19,7 @@
 
 * [[Subject]]
 * [[Scheduler]]
+* [[Plugins]]
 
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
