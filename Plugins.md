@@ -18,4 +18,33 @@ When you do this, RxJava will begin to use the Schedulers returned by your metho
 
 # RxJavaErrorHandler
 
+This plugin allows you to register a function that will handle errors that are raised by RxJava but that cannot be handled by the ordinary RxJava `onError` notification process (for instance, if RxJava tries to propagate an error to a subscriber that has not implemented an `onError` handler). To do this, extend the class `RxJavaErrorHandler` and override this method:
+
+* `void handleError(Throwable e)`
+
+Then follow these steps:
+
+1. Create an object of the new `RxJavaErrorHandler` subclass you have implemented.
+1. Obtain the global `RxJavaPlugins` instance via `RxJavaPlugins.getInstance()`.
+1. Pass your error handler object to the `registerErrorHandler()` method of that instance.
+
+When you do this, RxJava will begin to use your error handler to field errors that cannot be handled in ordinary ways.
+
 # RxJavaObservableExecutionHook
+
+This plugin allows you to register functions that RxJava will call upon certain regular RxJava activities, for instance for logging or metrics-collection purposes. To do this, extend the class `RxJavaObservableExecutionHook` and override any or all of these methods:
+
+||method||when invoked||
+| `onCreate()` | during `Observable.create()` |
+| `onSubscribeStart()` | immediately before `Observable.subscribe()` |
+| `onSubscribeReturn()` | immediately after `Observable.subscribe()` |
+| `onSubscribeError()` | upon a failed execution of `Observable.subscribe()` |
+| `onLift()` | during `Observable.lift()` |
+
+Then follow these steps:
+
+1. Create an object of the new `RxJavaObservableExecutionHook` subclass you have implemented.
+1. Obtain the global `RxJavaPlugins` instance via `RxJavaPlugins.getInstance()`.
+1. Pass your execution hooks object to the `registerObservableExecutionHook()` method of that instance.
+
+When you do this, RxJava will begin to call your functions when it encounters the specific conditions they were designed to take note of.
