@@ -10,11 +10,12 @@ This plugin allows you to override the default computation, i/o, and new thread 
 
 Then follow these steps:
 
-# Create an object of the new `RxJavaDefaultSchedulers` subclass you have implemented.
-# Obtain the global `RxJavaPlugins` instance via `RxJavaPlugins.getInstance()`.
-# Pass your default schedulers object to the `RxJavaPlugins.registerDefaultSchedulers()` method.
+1. Create an object of the new `RxJavaDefaultSchedulers` subclass you have implemented.
+1. Obtain the global `RxJavaPlugins` instance via `RxJavaPlugins.getInstance()`.
+1. Pass your default schedulers object to the `registerDefaultSchedulers()` method of that instance.
 
 When you do this, RxJava will begin to use the Schedulers returned by your methods rather than its built-in defaults.
 
 # RxJavaErrorHandler
+
 # RxJavaObservableExecutionHook
