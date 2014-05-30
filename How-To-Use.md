@@ -281,7 +281,7 @@ onNext => value_14_xform
 ```
 
 Here is a marble diagram that illustrates this transformation:
-[[images/rx-operators/Composition.1.png]]
+<img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.1.png" width="640" height="536" />​
 
 This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item:
 
@@ -328,7 +328,7 @@ The response looks like this:
 ```
 
 And here is a marble diagram that illustrates how that code produces that response:
-[[images/rx-operators/Composition.2.png]]
+<img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.2.png" width="640" height="742" />​
 
 The following example, in Groovy, comes from <a href="https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013">Ben Christensen’s QCon presentation on the evolution of the Netflix API</a>:
 
@@ -344,7 +344,7 @@ public Observable getVideoSummary(APIVideo video) {
 ```
 
 And here is a marble diagram that illustrates how that code uses the `reduce` operator to bring the results from multiple Observables together in one structure:
-[[images/rx-operators/Composition.3.png]]
+<img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.3.png" width="640" height="640" />​
 
 # Error Handling
 
