@@ -24,20 +24,54 @@ You obtain a Scheduler from the factory methods described in the `Schedulers` cl
   <tr><td><code>Schedulers.executor(&#8239;)</code></td><td><span style="color:#f00;">TBD</span></td></tr>
  </tbody>
 </table>
+
 ## Default Schedulers for RxJava Observable operators
 
-Some Observable operators in RxJava have alternate forms that allow you to set which Scheduler the operator will use for (at least some part of) its operation. For these operators, if you do not set the Scheduler, the operator will use the default `computation` Scheduler.
+Some Observable operators in RxJava have alternate forms that allow you to set which Scheduler the operator will use for (at least some part of) its operation. Others do not operate on any particular Scheduler, or operate on a particular default Scheduler. Those that have a particular default Scheduler include:
 
-Other operators do not have a form that permits you to set their Schedulers. Some of these, like `startWith`, `empty`, `error`, `from`, `just`, `merge`, and `range` do not use a Scheduler. A few others use particular schedulers, as in the following table:
 <table>
  <thead>
   <tr><th>operator</th><th>Scheduler</th></tr>
  </thead>
  <tbody>
-  <tr><td><code>parallelMerge</code></td><td><code>currentThread</code></td></tr>
-  <tr><td><code>repeat</code></td><td><code>currentThread</code></td></tr>
+  <tr><td><code>buffer(timespan)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>buffer(timespan,&#8239;count)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>buffer(timespan,&#8239;timeshift)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>debounce(timeout,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>delay(delay,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>delaySubscription(delay,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>interval</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>parallel</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>parallelMerge</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>repeat</code></td><td><code>trampoline</code></td></tr>
+  <tr><td><code>replay(time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>replay(buffersize,&#8239;time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>replay(selector,&#8239;time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>replay(selector,&#8239;buffersize,&#8239;time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>retry</code></td><td><code>trampoline</code></td></tr>
+  <tr><td><code>sample(period,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>skip(time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>skipLast(time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>take(time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>takeLast(time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>takeLast(count,&#8239;time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>takeLastBuffer(time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>takeLastBuffer(count,&#8239;time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>throttleFirst</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>throttleLast</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>throttleWithTimeout</code></td><td><code>computation</code></td></tr>
   <tr><td><code>timeInterval</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>timeout(timeoutSelector)</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>timeout(firstTimeoutSelector,&#8239;timeoutSelector)</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>timeout(timeoutSelector,&#8239;other)</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>timeout(timeout,&#8239;timeUnit)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>timeout(firstTimeoutSelector,&#8239;timeoutSelector,&#8239;other)</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>timeout(timeout,&#8239;timeUnit,&#8239;other)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>timer</code></td><td><code>computation</code></td></tr>
   <tr><td><code>timestamp</code></td><td><code>immediate</code></td></tr>
+  <tr><td><code>window(timespan)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>window(timespan,&#8239;count)</code></td><td><code>computation</code></td></tr>
+  <tr><td><code>window(timespan,&#8239;timeshift)</code></td><td><code>computation</code></td></tr>
  </tbody>
 </table>
 
