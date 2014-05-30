@@ -10,9 +10,12 @@ If you have a `Subject` and you want to pass it along to some other agent withou
 There are four subclasses of ``Subject`` that are designed for particular use cases:
 # AsyncSubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">`AsyncSubject`</a> emits the last value (and only the last value) emitted by the source Observable, and only after that source Observable completes. (If the source Observable does not emit any values, the `AsyncSubject` also completes without emitting any values.)
-[[images/rx-operators/S.AsyncSubject.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/S.AsyncSubject.png" width="640" height="405" />
+
 It will also emit this same final value to any subsequent Subscribers. However, if the source Observable terminates with an error, the `AsyncSubject` will not emit any items, but will simply pass along the error notification from the source Observable.
-[[images/rx-operators/S.AsyncSubject.e.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/S.AsyncSubject.e.png" width="640" height="395" />
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/AsyncSubject.html">`AsyncSubject`</a>
@@ -21,9 +24,12 @@ It will also emit this same final value to any subsequent Subscribers. However, 
 
 # BehaviorSubject
 When an Subscriber subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>, it begins by emitting the item most recently emitted by the source Observable (or a seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
-[[images/rx-operators/S.BehaviorSubject.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/S.BehaviorSubject.png" width="640" height="415" />
+
 However, if the source Observable terminates with an error, the `BehaviorSubject` will not emit any items to subsequent Subscribers, but will simply pass along the error notification from the source Observable.
-[[images/rx-operators/S.BehaviorSubject.e.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/S.BehaviorSubject.e.png" width="640" height="405" />
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>
@@ -32,11 +38,15 @@ However, if the source Observable terminates with an error, the `BehaviorSubject
 
 # PublishSubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/PublishSubject.html">``PublishSubject``</a> emits to a subscriber only those items that are emitted by the source Observable(s) subsequent to the time of the subscription.
-[[images/rx-operators/S.PublishSubject.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/S.PublishSubject.png" width="640" height="405" />
+
 Note that a `PublishSubject` may begin emitting items immediately upon creation (unless you have taken steps to prevent this), and so there is a risk that one or more items may be lost between the time the Subject is created and the Subscriber subscribes to it. If you need to guarantee delivery of all items from the source Observable, you'll need either to form that Observable with `create` so that you can manually reintroduce “cold” Observable behavior (checking to see that all subscribers have subscribed before beginning to emit items), or switch to a `ReplaySubject`.
 
 If the source Observable terminates with an error, the `PublishSubject` will not emit any items to subsequent Subscribers, but will simply pass along the error notification from the source Observable.
-[[images/rx-operators/S.PublishSubject.e.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/S.PublishSubject.e.png" width="640" height="395" />
+
 Note: In RxJava's Scala language adaptor, you instantiate a `PublishSubject` via `Subject`.
 
 #### see also:
@@ -44,7 +54,8 @@ Note: In RxJava's Scala language adaptor, you instantiate a `PublishSubject` via
 
 # ReplaySubject
 <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/ReplaySubject.html">``ReplaySubject``</a> emits to any subscriber all of the items that were emitted by the source Observable(s), regardless of when the subscriber subscribes.
-[[images/rx-operators/S.ReplaySubject.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/S.ReplaySubject.png" width="640" height="405" />
 
 There are also versions of `ReplaySubject` that will throw away old items once the replay buffer threatens to grow beyond a certain size, or when a specified timespan has passed since the items were originally emitted.
 
