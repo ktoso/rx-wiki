@@ -16,7 +16,7 @@ This section explains methods that create Observables.
 
 ## just( )
 #### convert an object into an Observable that emits that object
-[[images/rx-operators/just.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/just.png" width="640" height="310" />
 
 To convert any object into an Observable that emits that object and then completes, pass that object into the `just( )` method.
 
@@ -38,7 +38,7 @@ Note that if you pass `null` to `just( )`, the resulting Observable will _not_
 
 ## from( )
 #### convert an Iterable, a Future, or an Array into an Observable
-[[images/rx-operators/from.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/from.png" width="640" height="315" />
 
 You can convert an object that supports `Iterable` into an Observable that emits each iterable item in the object, or an object that supports `Future` into an Observable that emits the result of the `get` call, simply by passing the object into the `from( )` methods, for example:
 
@@ -75,7 +75,7 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 
 ## repeat( )
 #### create an Observable that emits the sequence of items emitted by the source Observable repeatedly
-[[images/rx-operators/repeat.o.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/repeat.o.png" width="640" height="309" />
 
 There are also versions of `repeat( )` that operate on a scheduler that you specify, and that repeat only a certain number of times before terminating.
 
@@ -88,7 +88,7 @@ There are also versions of `repeat( )` that operate on a scheduler that you sp
 
 ## create( )
 #### create an Observable from scratch by means of a function
-[[images/rx-operators/create.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/create.png" width="640" height="200" />
 
 You can create an Observable from scratch by using the `create( )` method. You pass this method a function that accepts as its parameter the Subscriber that is passed to an Observable’s `subscribe( )` method (or that is derived from the `Observerer` that is passed to that method). Write the function you pass to `create( )` so that it behaves as an Observable — calling the passed-in Subscriber’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
 
@@ -125,7 +125,7 @@ def myObservable = Observable.create({ aSubscriber ->
 
 ## defer( )
 #### do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
-[[images/rx-operators/defer.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/defer.png" width="640" height="340" />
 
 Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Subscriber subscribes.
 
@@ -138,7 +138,7 @@ Pass `defer( )` an Observable factory function (a function that generates Obse
 
 ## range( )
 #### create an Observable that emits a range of sequential integers
-[[images/rx-operators/range.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/range.png" width="640" height="195" />
 
 To create an Observable that emits a range of sequential integers, pass the starting integer and the number of integers to emit to the `range( )` method.
 ```groovy
@@ -158,7 +158,7 @@ In calls to `range(n,m)`, a value of zero for _m_ will result in no numbers bein
 
 ## interval( )
 #### create an Observable that emits a sequence of integers spaced by a given time interval
-[[images/rx-operators/interval.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/interval.png" width="640" height="195" />
 
 To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
 
@@ -173,12 +173,12 @@ To create an Observable that emits items spaced by a particular interval of time
 
 ## timer( )
 #### create an Observable that emits a single item after a given delay
-[[images/rx-operators/timer.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/timer.png" width="640" height="200" />
 
 The `timer( )` method returns an Observable that, when subscribed to, waits for a span of time that you have defined, then emits a single zero and completes.
 
 There is also a version of `timer( )` that emits a single zero after a specified delay, and then emits incrementally increasing numbers periodically thereafter on a specified periodicity:
-[[images/rx-operators/timer.p.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/timer.p.png" width="640" height="200" />
 
 For both of these versions of `timer( )` you can optionally specify a Scheduler on which the timing will take place.
 
@@ -193,12 +193,9 @@ For both of these versions of `timer( )` you can optionally specify a Schedule
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
 
-* `empty( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onCompleted( )` method.
-[[images/rx-operators/empty.png]]
-* `error( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onError( )` method.
-[[images/rx-operators/error.png]]
-* `never( )` creates an Observable that does not emit any items, nor does it call either the Subscriber’s `onCompleted( )` or `onError( )` methods.
-[[images/rx-operators/never.png]]
+* `empty( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onCompleted( )` method.<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/empty.png" width="610" height="181" />
+* `error( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onError( )` method.<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/error.png" width="610" height="181" />
+* `never( )` creates an Observable that does not emit any items, nor does it call either the Subscriber’s `onCompleted( )` or `onError( )` methods.<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/never.png" width="610" height="176" />
 
 ```groovy
 import rx.Observable;
