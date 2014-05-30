@@ -24,7 +24,7 @@ This section explains various utility operators for working with Observables.
 
 ## materialize( )
 #### convert an Observable into a list of Notifications
-[[images/rx-operators/materialize.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/materialize.png" width="640" height="315" />​
 
 A well-formed Observable will invoke its Subscriber’s `onNext` method zero or more times, and then will invoke either the `onCompleted` or `onError` method exactly once. The `materialize( )` method converts this series of invocations into a series of items emitted by an Observable, where it emits each such invocation as a `Notification` object.
 
@@ -58,8 +58,7 @@ Sequence complete
 
 ## dematerialize( )
 #### convert a materialized Observable back into its non-materialized form
-
-[[images/rx-operators/dematerialize.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/dematerialize.png" width="640" height="335" />​
 
 You can undo the effects of `materialize( )` by means of the `dematerialize( )` method, which will emit the items from the Observable as though `materialize( )` had not been applied to it. The following example dematerializes the materialized Observable from the previous section:
 ```groovy
@@ -88,7 +87,7 @@ Sequence complete
 
 ## timestamp( )
 #### attach a timestamp to every item emitted by an Observable
-[[images/rx-operators/timestamp.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/timestamp.png" width="640" height="310" />​
 
 The `timestamp( )` method converts an Observable that emits items of type _T_ into one that emits objects of type [`Timestamped<T>`](http://netflix.github.io/RxJava/javadoc/rx/util/Timestamped.html), where each such object is stamped with the time at which it was emitted.
 
@@ -120,8 +119,7 @@ Sequence complete
 
 ## serialize( )
 #### force an Observable to make serialized calls and to be well-behaved
-
-[[images/rx-operators/synchronize.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/synchronize.png" width="640" height="400" />​
 
 It is possible for an Observable to invoke its Subscribers' methods asynchronously, perhaps from different threads. This could make such an Observable poorly-behaved, in that it might try to invoke`onCompleted` or `onError` before one of its `onNext` invocations, or it might call `onNext` from two different threads concurrently. You can force such an Observable to be well-behaved and synchronous by applying the `serialize( )` method to it.
 
@@ -133,8 +131,7 @@ It is possible for an Observable to invoke its Subscribers' methods asynchronous
 
 ## cache( )
 #### remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
-
-[[images/rx-operators/cache.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/cache.png" width="640" height="410" />​
 
 By default, an Observable will generate its sequence of emitted items afresh for each new Subscriber that subscribes. You can force it to generate its sequence only once and then to emit this identical sequence to every Subscriber by using the `cache( )` method. Compare the behavior of the following two sets of sample code, the first of which does _not_ use `cache( )` and the second of which does:
 ```groovy
@@ -192,7 +189,8 @@ The `cache( )` method will not itself trigger the execution of the source Obse
 
 ## observeOn( )
 #### specify on which Scheduler a Subscriber should observe the Observable
-[[images/rx-operators/observeOn.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/observeOn.png" width="640" height="308" />​
+
 To specify in which Scheduler (thread) the Observable should invoke the Subscribers' `onNext( )`, `onCompleted( )`, and `onError( )` methods, call the Observable's `observeOn( )` method, passing it the appropriate `Scheduler`.
 
 There is a complication with using `observeOn( )` on a <a href="https://github.com/Netflix/RxJava/wiki/Subject#wiki-publishsubject">`PublishSubject`</a> or on one of the Observables emitted as a result of the <a href="https://github.com/Netflix/RxJava/wiki/Transforming-Observables#wiki-groupby-and-groupbyuntil">`groupBy( )`</a> operator: it is possible that such Observables will begin emitting items before the subscription fully takes hold, and therefore that some of those items will never be observed. For this reason, there is a version of `observeOn( )` that takes a `buffersize` parameter; this parameter allows you to establish a buffer that will collect any items emitted between the time of the subscription and the time the scheduled observer begins observing, so that no items will be lost.
@@ -209,7 +207,7 @@ There is a complication with using `observeOn( )` on a <a href="https://github
 
 ## subscribeOn( )
 #### specify which Scheduler an Observable should use when its subscription is invoked
-[[images/rx-operators/subscribeOn.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/subscribeOn.png" width="640" height="305" />​
 
 To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn( )` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn( )`) the Observable will invoke the Subscribers' `onNext( )`, `onCompleted( )`, and `onError( )` methods in this same thread.
 
@@ -224,7 +222,7 @@ To specify that the work done by the Observable should be done on a particular S
 
 ## parallel( )
 #### split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
-[[images/rx-operators/parallel.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/parallel.png" width="640" height="475" />​
 
 You can use the `parallel( )` method to split an Observable into as many Observables as there are available processors, and to do work in parallel on each of these Observables. `parallel( )` will then merge the results of these parallel computations back into a single, well-behaved Observable sequence.
 
@@ -236,7 +234,7 @@ You can use the `parallel( )` method to split an Observable into as many Obser
 
 ## doOnEach( )
 #### register an action to take whenever an Observable emits an item
-[[images/rx-operators/doOnEach.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/doOnEach.png" width="640" height="310" />​
 
 Use the `doOnEach( )` method to register an `Action` that RxJava will perform each time the Observable emits an item. This action takes the item as a parameter.
 
@@ -252,7 +250,7 @@ There are also `doOnEach( )` variants that allow you to register actions to pe
 
 ## doOnCompleted( )
 #### register an action to take when an Observable completes successfully
-[[images/rx-operators/doOnCompleted.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/doOnCompleted.png" width="640" height="305" />​
 
 Use the `doOnCompleted( )` method to register an `Action` that RxJava will perform if the Observable completes normally (not by means of an error).
 
@@ -265,7 +263,7 @@ Use the `doOnCompleted( )` method to register an `Action` that RxJava will per
 
 ## doOnError( )
 #### register an action to take when an Observable completes with an error
-[[images/rx-operators/doOnError.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/doOnError.png" width="640" height="305" />​
 
 Use the `doOnError( )` method to register an `Action` that RxJava will perform if the Observable terminates with an error. This action takes the Throwable representing the error as a parameter.
 
@@ -278,7 +276,7 @@ Use the `doOnError( )` method to register an `Action` that RxJava will perform
 
 ## doOnTerminate( )
 #### register an action to take when an Observable completes, either successfully or with an error
-[[images/rx-operators/doOnTerminate.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/doOnTerminate.png" width="640" height="305" />​
 
 Use the `doOnTerminate( )` method to register an `Action` that RxJava will perform just before the Observable calls `onComplete` or `onError`.
 
@@ -292,7 +290,7 @@ Use the `doOnTerminate( )` method to register an `Action` that RxJava will per
 
 ## finallyDo( )
 #### register an action to take when an Observable completes
-[[images/rx-operators/finallyDo.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/finallyDo.png" width="640" height="310" />​
 
 You can use the `finallyDo( )` method of an Observable to register an action that RxJava will invoke after that Observable invokes either the `onCompleted( )` or `onError( )` method of its Subscriber.
 
@@ -325,7 +323,7 @@ Finally
 
 ## delay( )
 #### shift the emissions from an Observable forward in time by a specified amount
-[[images/rx-operators/delay.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/delay.png" width="640" height="310" />​
 
 The `delay( )` operator modifies its source Observable by pausing for a particular increment of time (that you specify) before emitting each of the source Observable's items. This has the effect of shifting the entire sequence of items emitted by the Observable forward in time by that specified increment.
 
@@ -341,7 +339,7 @@ Note that `delay( )` will _not_ time-shift an `onError( )` call in this fash
 
 ## delaySubscription( )
 #### hold a Subscriber's subscription request for a specified amount of time before passing it on to the source Observable
-[[images/rx-operators/delaySubscription.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/delaySubscription.png" width="640" height="310" />​
 
 The `delaySubscription( )` operator shifts waits for a specified period of time after receiving a subscription request before subscribing to the source Observable.
 
@@ -352,7 +350,7 @@ The `delaySubscription( )` operator shifts waits for a specified period of tim
 
 ## timeInterval( )
 #### emit the time lapsed between consecutive emissions of a source Observable
-[[images/rx-operators/timeInterval.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/timeInterval.png" width="640" height="310" />​
 
 The `timeInterval( )` operator converts a source Observable into an Observable that emits the amount of time lapsed between consecutive emissions of the source Observable. The first emission is the amount of time lapsed between the time the Subscriber subscribed to the Observable and the time the source Observable emitted its first item. There is no corresponding emission marking the amount of time lapsed between the last emission of the source Observable and the subsequent call to `onCompleted( )`.
 
@@ -367,7 +365,7 @@ The `timeInterval( )` operator converts a source Observable into an Observable
 
 ## using( )
 #### create a disposable resource that has the same lifespan as an Observable
-[[images/rx-operators/using.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/using.png" width="640" height="400" />​
 
 Pass the `using( )` method two factory functions: the first creates a disposable resource, the second creates an Observable. When a Subscriber subscribes to the resulting Observable, `using( )` will use the Observable factory function to create the Observable the Subscriber will observe, while at the same time using the resource factory function to create a resource. When the Subscriber unsubscribes from the Observable, or when the Observable terminates (normally or with an error), `using( )` will dispose of the resource it created.
 
@@ -379,16 +377,19 @@ Pass the `using( )` method two factory functions: the first creates a disposab
 
 ## single( ) and singleOrDefault( )
 #### if the Observable completes after emitting a single item, return that item, otherwise throw an exception (or return a default item)
-[[images/rx-operators/single.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/single.png" width="640" height="315" />​
 
 Use the `single( )` method to retrieve the only item emitted by an Observable. `single( )` will notify of a `NoSuchElementException` if the source Observable does not emit exactly one item.
 
 You can also use this method to retrieve the only item emitted by an Observable that meets some particular condition (or `null` if the Observable method emits no such item). To do this, pass a function to `single( )` that returns `true` if the item meets the condition. In such a case, `single( )` will again notify of a `NoSuchElementException` unless the source Observable emits exactly one item that meets the condition.
-[[images/rx-operators/single.p.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/single.p.png" width="640" height="315" />​
 
 The `singleOrDefault( )` method is similar, except that while it will still notify of an exception if the underlying Observable emits _more than_ one item, if the underlying Observable does not emit any items at all, rather than notifying of an exception, the Observable returned by `singleOrDefault( )` will emit a default item that you specify. Specify that default item by passing it as the first parameter to `singleOrDefault( )`.
-[[images/rx-operators/singleOrDefault.png]]
-[[images/rx-operators/singleOrDefault.p.png]]
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/singleOrDefault.png" width="640" height="315" />
+
+​<img src="/Netflix/RxJava/wiki/images/rx-operators/singleOrDefault.p.png" width="640" height="315" />​
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
