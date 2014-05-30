@@ -53,7 +53,7 @@ public class myOperator<T> implements Operator<T> {
 
 # Other Considerations
 
-* Your operator should take care to check [its Subscriber's `isUnsubscribed( )` status](Observable#unsubscribing) before it emits any items to (or sends any notifications to) the Subscriber. Do not waste the time to generate an item that no Subscriber is interested in seeing.
+* Your operator should check [its Subscriber's `isUnsubscribed( )` status](Observable#unsubscribing) before it emits any item to (or sends any notification to) the Subscriber. Do not waste time generating items that no Subscriber is interested in seeing.
 * Your operator should obey the core tenets of the Observable contract:
   * It may call a Subscriber's [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method any number of times, but these calls must be non-overlapping.
   * It may call either a Subscriber's [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) or [`onError( )`](Observable#onnext-oncompleted-and-onerror) method, but not both, exactly once, and it may not subsequently call a Subscriber's [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method.
