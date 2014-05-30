@@ -3,8 +3,7 @@ In RxJava an object of the _Subscriber_ class (or some other object that impleme
 This page explains what the reactive pattern is and what Observables and Subscribers are (and how Subscribers subscribe to Observables). Subsequent child pages (as shown in sidebar) show how you use the variety of Observable operators to link Observables together and change their behaviors.
 
 > This documentation accompanies its explanations with "marble diagrams." Here is how marble diagrams represent Observables and transformations of Observables:
-
-[[images/rx-operators/legend.png]]
+<img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​legend.png" width="640" height="301" />​
 
 #### see also
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Introduction">Rx Workshop: Introduction</a>
