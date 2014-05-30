@@ -24,7 +24,7 @@ This section explains operators with which you conditionally emit or transform O
 
 ## amb( )
 #### given two or more source Observables, emits all of the items from the first of these Observables to emit an item
-[[images/rx-operators/amb.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/amb.png" width="640" height="385" />​
 
 When you pass a number of source Observables to `amb( )`, it will pass through the emissions and messages of exactly one of these Observables: the first one that emits an item to `amb( )`. It will ignore and discard the emissions of all of the other source Observables.
 
@@ -37,7 +37,7 @@ When you pass a number of source Observables to `amb( )`, it will pass through
 
 ## defaultIfEmpty( )
 #### emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
-[[images/rx-operators/defaultIfEmpty.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/defaultIfEmpty.png" width="640" height="305" />​
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defaultIfEmpty(T)">`defaultIfEmpty(default)`</a>
@@ -49,7 +49,7 @@ When you pass a number of source Observables to `amb( )`, it will pass through
 
 ## doWhile( )
 #### emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true
-[[images/rx-operators/doWhile.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/doWhile.png" width="640" height="540" />​
 
 The `doWhile( )` operator emits the sequence emitted by the source Observable and then checks to see if a specified condition is true; if so it will resubscribe and reemit the source Observable's sequence, repeating this process until the condition becomes false.
 
@@ -60,7 +60,7 @@ The `doWhile( )` operator emits the sequence emitted by the source Observable 
 
 ## ifThen( )
 #### only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
-[[images/rx-operators/ifThen.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/ifThen.png" width="640" height="530" />​
 
 The `ifThen( )` operator evaluates a function and emits the source Observable's sequence if the function evaluates as true, and otherwise either emits an empty sequence or the sequence from an alternate Observable you specify.
 
@@ -72,7 +72,7 @@ The `ifThen( )` operator evaluates a function and emits the source Observable'
 
 ## skipUntil( )
 #### discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
-[[images/rx-operators/skipUntil.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/skipUntil.png" width="640" height="375" />​
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `dropUntil( )`.
 
@@ -86,7 +86,7 @@ The `ifThen( )` operator evaluates a function and emits the source Observable'
 
 ## skipWhile( ) and skipWhileWithIndex( )
 #### discard items emitted by an Observable until a specified condition is false, then emit the remainder
-[[images/rx-operators/skipWhile.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/skipWhile.png" width="640" height="305" />​
 
 The `skipWhile( )` method returns an Observable that discards items emitted by the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable emits that item and the remainder of the items emitted by the source Observable.
 
@@ -110,7 +110,7 @@ Sequence complete
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `dropWhile( )`.
 
-[[images/rx-operators/skipWhileWithIndex.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/skipWhileWithIndex.png" width="640" height="305" />​
 
 The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
 ```groovy
@@ -141,7 +141,7 @@ Sequence complete
 
 ## switchCase( )
 #### emit the sequence from a particular Observable based on the results of an evaluation
-[[images/rx-operators/switchCase.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/switchCase.png" width="640" height="290" />​
 
 The `switchCase( )` operator evaluates a case and passes control to a particular one of a set of Observables based on the case.
 
@@ -153,7 +153,7 @@ The `switchCase( )` operator evaluates a case and passes control to a particul
 
 ## takeUntil( )
 #### emits the items from the source Observable until another Observable emits an item or issues a notification
-[[images/rx-operators/takeUntil.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/takeUntil.png" width="640" height="380" />​
 
 Note that the second Observable can cause `takeUntil` to quit emitting items either by emitting an item or by issuing an Error or Completed notification.
 
@@ -166,7 +166,7 @@ Note that the second Observable can cause `takeUntil` to quit emitting items eit
 
 ## takeWhile( ) and takeWhileWithIndex( )
 #### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-[[images/rx-operators/takeWhile.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/takeWhile.png" width="640" height="305" />​
 
 The `takeWhile( )` method returns an Observable that mirrors the behavior of the source Observable until such time as a function applied to an item emitted by that Observable returns `false`, whereupon the new Observable invokes `onCompleted( )`.
 
@@ -189,7 +189,8 @@ numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
 Sequence complete
 ```
 
-[[images/rx-operators/takeWhileWithIndex.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/takeWhileWithIndex.png" width="640" height="305" />​
+
 The `takeWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
 ```groovy
 numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
@@ -220,7 +221,7 @@ Sequence complete
 
 ## whileDo( )
 #### if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
-[[images/rx-operators/whileDo.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/whileDo.png" width="640" height="600" />​
 
 If a specified condition evaluates as true, `whileDo( )` will emit the sequence emitted by the source Observable. It will then check to see if the condition remains true and will resubscribe and reemit the source Observable's sequence if so; repeating this process until the condition becomes false.
 
@@ -231,7 +232,7 @@ If a specified condition evaluates as true, `whileDo( )` will emit the sequenc
 
 ## all( )
 #### determine whether all items emitted by an Observable meet some criteria
-[[images/rx-operators/all.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/all.png" width="640" height="315" />​
 
 Pass an function to `all( )` that accepts an item emitted by the source Observable and returns a boolean value based on an evaluation of that item, and `all( )` will emit `true` if and only if that function returned true for every item emitted by the source Observable.
 
@@ -263,7 +264,7 @@ true
 
 ## contains( )
 #### determine whether an Observable emits a particular item or not
-[[images/rx-operators/contains.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/contains.png" width="640" height="320" />​
 
 Pass the `contains( )` operator a particular item, and it will emit `true` if that item is emitted by the source Observable, or `false` if the source Observable terminates without emitting that item.
 
@@ -277,11 +278,12 @@ Pass the `contains( )` operator a particular item, and it will emit `true` if 
 
 ## exists( ) and isEmpty( )
 #### determine whether an Observable emits any items or not
-[[images/rx-operators/exists.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/exists.png" width="640" height="320" />​
 
 When you apply the `exists( )` operator to a source Observable, the resulting Observable will emit `true` and complete if the source Observable emits one or more items before completing, or it will emit `false` and complete if the source Observable completes without emitting any items.
 
-[[images/rx-operators/isEmpty.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/isEmpty.png" width="640" height="320" />​
+
 The inverse of this is the `isEmpty( )` operator. Apply it to a source Observable and the resulting Observable will emit `true` and complete if the source Observable completes without emitting any items, or it will emit `false` and complete if the source Observable emits any item before completing.
 
 #### see also:
@@ -295,7 +297,7 @@ The inverse of this is the `isEmpty( )` operator. Apply it to a source Observa
 
 ## sequenceEqual( )
 #### test the equality of sequences emitted by two Observables
-[[images/rx-operators/sequenceEqual.png]]
+<img src="/Netflix/RxJava/wiki/images/rx-operators/sequenceEqual.png" width="640" height="385" />​
 
 Pass `sequenceEqual( )` two Observables, and it will compare the items emitted by each Observable, and emit `true` only if both sequences are the same. You can optionally pass a third parameter: a function that accepts two items and returns `true` if they are equal according to a standard of your choosing.
 ```groovy
