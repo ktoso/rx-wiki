@@ -1,7 +1,7 @@
 This section explains methods that create Observables.
 
-* [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
 * [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
+* [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
 * [**`repeat( )`**](Creating-Observables#wiki-repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`create( )`**](Creating-Observables#wiki-create) — create an Observable from scratch by means of a function
 * [**`defer( )`**](Creating-Observables#wiki-defer) — do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
@@ -11,6 +11,28 @@ This section explains methods that create Observables.
 * [**`empty( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then completes
 * [**`error( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then signals an error
 * [**`never( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing at all
+
+***
+
+## just( )
+#### convert an object into an Observable that emits that object
+[[images/rx-operators/just.png]]
+
+To convert any object into an Observable that emits that object and then completes, pass that object into the `just( )` method.
+
+```groovy
+// Observable emits "some string" as a single item
+def observableThatEmitsAString = Observable.just("some string"); 
+// Observable emits the list [1, 2, 3, 4, 5] as a single item
+def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
+```
+
+This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert the iterable into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
+
+Note that if you pass `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(value)`</a>
 
 ***
 
@@ -48,28 +70,6 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 * RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefromarrayarray-scheduler)
 * RxJS: [`fromPromise`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefrompromisepromise)
 * Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
-
-***
-
-## just( )
-#### convert an object into an Observable that emits that object
-[[images/rx-operators/just.png]]
-
-To convert any object into an Observable that emits that object and then completes, pass that object into the `just( )` method.
-
-```groovy
-// Observable emits "some string" as a single item
-def observableThatEmitsAString = Observable.just("some string"); 
-// Observable emits the list [1, 2, 3, 4, 5] as a single item
-def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
-```
-
-This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert the iterable into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
-
-Note that if you pass `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(value)`</a>
 
 ***
 
