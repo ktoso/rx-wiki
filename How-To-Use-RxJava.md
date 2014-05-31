@@ -292,7 +292,7 @@ onNext => value_14_xform
 
 Here is a marble diagram that illustrates this transformation:
 
-<img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.1.png" width="640" height="536" />​
+<img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.1.png" width="640" height="536" />
 
 This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item by combining the items emitted by each of the three Observables with the [`zip`](Combining-Observables#zip) operator and then transforming the result with [`map`](Transforming-Observables#wiki-map):
 
@@ -340,7 +340,7 @@ The response looks like this:
 
 And here is a marble diagram that illustrates how that code produces that response:
 
-<img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.2.png" width="640" height="742" />​
+<img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.2.png" width="640" height="742" />
 
 The following example, in Groovy, comes from [Ben Christensen’s QCon presentation on the evolution of the Netflix API](https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013). It combines two Observables with the [`merge`](Combining-Observables#wiki-merge) operator, then uses the [`reduce`](Mathematical-and-Aggregate-Operators#wiki-reduce) operator to construct a single item out of the resulting sequence, then transforms that item with [`map`](Transforming-Observables#wiki-map) before emitting it:
 
@@ -357,7 +357,7 @@ public Observable getVideoSummary(APIVideo video) {
 
 And here is a marble diagram that illustrates how that code uses the [`reduce`](Mathematical-and-Aggregate-Operators#wiki-reduce) operator to bring the results from multiple Observables together in one structure:
 
-<img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.3.png" width="640" height="640" />​
+<img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.3.png" width="640" height="640" />
 
 ## Error Handling
 
