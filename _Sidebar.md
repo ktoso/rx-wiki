@@ -1,5 +1,5 @@
 * [[Getting Started]]
-* [[How To Use]]
+* [[How To Use RxJava]]
 
 * [[Observable]]
   * [[Creating Observables]]
