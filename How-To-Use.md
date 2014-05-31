@@ -3,7 +3,11 @@
 
 These sample implementations of “Hello World” in Java, Groovy, Clojure and Scala create an Observable from a list of Strings, and then subscribe to this Observable with a method that prints “Hello _String_!” for each string emitted by the Observable.
 
-> Subsequent examples will use a mixture of languages all of which can be found in the `/src/examples` folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors).
+You can find additional code examples in the `/src/examples` folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors).
+
+* Groovy: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy/src/examples
+* Clojure: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure/src/examples
+* Scala: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples
 
 ### Java
 
