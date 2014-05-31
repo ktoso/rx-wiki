@@ -1,13 +1,12 @@
-<a name='Hello-World'/>
 # Hello World!
 
-These sample implementations of “Hello World” in Java, Groovy, Clojure and Scala create an Observable from a list of Strings, and then subscribe to this Observable with a method that prints “Hello _String_!” for each string emitted by the Observable.
+The following sample implementations of “Hello World” in Java, Groovy, Clojure, and Scala create an Observable from a list of Strings, and then subscribe to this Observable with a method that prints “Hello _String_!” for each string emitted by the Observable.
 
-You can find additional code examples in the `/src/examples` folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors).
+You can find additional code examples in the `/src/examples` folders of each [language adaptor](https://github.com/Netflix/RxJava/tree/master/language-adaptors):
 
-* Groovy: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy/src/examples
-* Clojure: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure/src/examples
-* Scala: https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples
+* [Groovy examples](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-groovy/src/examples)
+* [Clojure examples](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-clojure/src/examples)
+* [Scala examples](https://github.com/Netflix/RxJava/tree/master/language-adaptors/rxjava-scala/src/examples)
 
 ### Java
 
@@ -77,13 +76,17 @@ Hello Ben!
 Hello George!
 ```
 
-# Creating Observables
+# How to Design Using RxJava
 
-To create an Observable, you can either implement an Observable that (synchronously or asynchronously) executes and emits data by invoking a Subscriber’s `onNext()` method, or you can convert an existing data structure into an Observable by using some Observable methods that are designed for this purpose.
+To use RxJava you create Observables (which emit data items), transform those Observables in various ways to get the precise data items that interest you (by using Observable operators), and then observe and react to these sequences of interesting items (by implementing Observers or Subscribers and then subscribing them to the resulting transformed Observables).
 
-## Creating Observables from Existing Data Structures
+## Creating Observables
 
-You use the Observable `from()` and `just()` methods to convert objects, lists, or arrays of objects into Observables:
+To create an Observable, you can either implement the Observable's behavior manually by passing a function to [`create( )`](Creating-Observables#create) that exhibits Observable behavior, or you can convert an existing data structure into an Observable by using [some of the Observable operators that are designed for this purpose](Creating-Observables).
+
+### Creating an Observable from an Existing Data Structures
+
+You use the Observable [`just( )`](Creating-Observables#just) and [`from( )`](Creating-Observables#from) methods to convert objects, lists, or arrays of objects into Observables that emit those objects:
 
 ```groovy
 Observable<String> o = Observable.from("a", "b", "c");
@@ -94,15 +97,13 @@ Observable<Integer> o = Observable.from(list);
 Observable<String> o = Observable.just("one object");
 ```
 
-These converted Observables will synchronously invoke the `onNext()` method of any Subscriber that subscribes to them, for each item emitted by the Observable, and will then invoke the Subscriber’s `onCompleted()` method.
+These converted Observables will synchronously invoke the [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method of any subscriber that subscribes to them, for each item to be emitted by the Observable, and will then invoke the subscriber’s [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) method.
 
-## Implementing an Observable
+### Creating an Observable via the `create( )` method
 
-You can implement asynchronous IO, computational operations, or “infinite” streams of data by using the Observable class.
+You can implement asynchronous i/o, computational operations, or even “infinite” streams of data by designing your own Observable and implementing it with the [`create( )`](Creating-Observables#create) method.
 
-You can do this either by extending the Observable class or by using the `Observable.create()` factory method. 
-
-### Synchronous Observable
+#### Synchronous Observable Example
 
 ```groovy
 /**
@@ -111,11 +112,15 @@ You can do this either by extending the Observable class or by using the `Observ
  */
 def customObservableBlocking() {
     return Observable.create({ aSubscriber ->
-        for(int i=0; i<50; i++) {
-            if(false == aSubscriber.isUnsubscribed()) { aSubscriber.onNext("value_" + i) };
+        for (int i=0; i<50; i++) {
+            if (false == aSubscriber.isUnsubscribed()) {
+                aSubscriber.onNext("value_" + i);
+            };
         }
         // after sending all values we complete the sequence
-        aSubscriber.onCompleted();
+        if (false == aSubscriber.isUnsubscribed()) {
+            aSubscriber.onCompleted();
+        }
     });
 }
 
@@ -123,9 +128,9 @@ def customObservableBlocking() {
 customObservableBlocking().subscribe({ it -> println(it); });
 ```
 
-### Asynchronous Observable
+#### Asynchronous Observable Example
 
-This first example uses Groovy to create an Observable that emits 75 strings.
+The following example uses Groovy to create an Observable that emits 75 strings.
 
 It is written verbosely, with static typing and implementation of the `Func1` anonymous inner class, to make the example more clear:
 
@@ -136,7 +141,7 @@ It is written verbosely, with static typing and implementation of the `Func1` an
  */
 def customObservableNonBlocking() {
     return Observable.create(
-        /**
+        /*
          * This 'call' method will be invoked with the Observable is subscribed to.
          * 
          * It spawns a thread to do it asynchronously.
@@ -145,14 +150,16 @@ def customObservableNonBlocking() {
             // For simplicity this example uses a Thread instead of an ExecutorService/ThreadPool
             final Thread t = new Thread(new Runnable() {
                 void run() {
-                    for(int i=0; i<75; i++) {
-                        if(true == subscriber.isUnsubscribed()) {
+                    for (int i=0; i<75; i++) {
+                        if (true == subscriber.isUnsubscribed()) {
                             return;
                         }
                         subscriber.onNext("value_" + i);
                     }
                     // after sending all values we complete the sequence
-                    subscriber.onCompleted();
+                    if (false == subscriber.isUnsubscribed()) {
+                        subscriber.onCompleted();
+                    }
                 };
             });
             t.start();
@@ -212,29 +219,28 @@ Here is an example that fetches articles from Wikipedia and invokes onNext with 
 Back to Groovy, the same Wikipedia functionality but using closures instead of anonymous inner classes:
 
 ```groovy
-/**
+/*
  * Fetch a list of Wikipedia articles asynchronously.
- * 
- * @param wikipediaArticleName
  */
 def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
     return Observable.create({ subscriber ->
         Thread.start( {
-            for(articleName in wikipediaArticleNames) {
-                if(true == subscriber.isUnsubscribed()) {
+            for (articleName in wikipediaArticleNames) {
+                if (true == subscriber.isUnsubscribed()) {
                     return;
                 }
                 subscriber.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
             }
-            subscriber.onCompleted();
+            if (false == subscriber.isUnsubscribed()) {
+                subscriber.onCompleted();
+            }
         } );
         return( subscriber );
     });
 }
 
 fetchWikipediaArticleAsynchronously("Tiger", "Elephant")
-    .subscribe({ println "--- Article ---\n" + it.substring(0, 125);},
-               { println "--- Error ---\n" + it.getMessage();});
+    .subscribe({ println "--- Article ---\n" + it.substring(0, 125); });
 ```
 
 Results:
@@ -254,13 +260,13 @@ Results:
 
 Note that all of the above examples ignore error handling, for brevity. See below for examples that include error handling.
 
-More information can be found on the [[Observable]] and [[Creation Operators|Creating-Observables]] pages.
+More information can be found on the [[Observable]] and [[Creating Observables|Creating-Observables]] pages.
 
-# Composition
+## Transforming Observables with Operators
 
-RxJava allows you to chain operators together to transform and compose Observables.
+RxJava allows you to chain _operators_ together to transform and compose Observables.
 
-This first example, in Groovy, uses a previously defined, asynchronous Observable that emits 75 items, skips the first 10 of these, then takes the next 5 and transforms them before subscribing and printing the items:
+The following example, in Groovy, uses a previously defined, asynchronous Observable that emits 75 items, skips over the first 10 of these ([`skip(10)`](Filtering-Observables#wiki-skip)), then takes the next 5 ([`take(5)`](Filtering-Observables#wiki-take)), and transforms them ([`map(...)`](Transforming-Observables#wiki-map)) before subscribing and printing the items:
 
 ```groovy
 /**
@@ -285,9 +291,10 @@ onNext => value_14_xform
 ```
 
 Here is a marble diagram that illustrates this transformation:
+
 <img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.1.png" width="640" height="536" />​
 
-This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item:
+This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item by combining the items emitted by each of the three Observables with the [`zip`](Combining-Observables#zip) operator and then transforming the result with [`map`](Transforming-Observables#wiki-map):
 
 ```clojure
 (defn getVideoForUser [userId videoId]
@@ -332,13 +339,14 @@ The response looks like this:
 ```
 
 And here is a marble diagram that illustrates how that code produces that response:
+
 <img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.2.png" width="640" height="742" />​
 
-The following example, in Groovy, comes from <a href="https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013">Ben Christensen’s QCon presentation on the evolution of the Netflix API</a>:
+The following example, in Groovy, comes from [Ben Christensen’s QCon presentation on the evolution of the Netflix API](https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013). It combines two Observables with the [`merge`](Combining-Observables#wiki-merge) operator, then uses the [`reduce`](Mathematical-and-Aggregate-Operators#wiki-reduce) operator to construct a single item out of the resulting sequence, then transforms that item with [`map`](Transforming-Observables#wiki-map) before emitting it:
 
 ```groovy
 public Observable getVideoSummary(APIVideo video) {
-   def seed = [id:video.id, title:video.getTitle();
+   def seed = [id:video.id, title:video.getTitle()];
    def bookmarkObservable = getBookmark(video);
    def artworkObservable = getArtworkImageUrl(video);
    return( Observable.merge(bookmarkObservable, artworkObservable)
@@ -347,41 +355,43 @@ public Observable getVideoSummary(APIVideo video) {
 }
 ```
 
-And here is a marble diagram that illustrates how that code uses the `reduce` operator to bring the results from multiple Observables together in one structure:
+And here is a marble diagram that illustrates how that code uses the [`reduce`](Mathematical-and-Aggregate-Operators#wiki-reduce) operator to bring the results from multiple Observables together in one structure:
+
 <img src=​"/​Netflix/​RxJava/​wiki/​images/​rx-operators/​Composition.3.png" width="640" height="640" />​
 
-# Error Handling
+## Error Handling
 
-Here is a revised version of the Wikipedia example shown above, but with error handling:
+Here is a version of the Wikipedia example from above revised to include error handling:
 
 ```groovy
-/**
+/*
  * Fetch a list of Wikipedia articles asynchronously, with error handling.
- *
- * @param wikipediaArticleName
- * @return Observable<String> of HTML
  */
 def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArticleNames) {
     return Observable.create({ subscriber ->
         Thread.start {
             try {
-                for(articleName in wikipediaArticleNames) {
-                    if(true == subscriber.isUnsubscribed()) {
+                for (articleName in wikipediaArticleNames) {
+                    if (true == subscriber.isUnsubscribed()) {
                         return;
                     }
                     subscriber.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
                 }
-                subscriber.onCompleted();
+                if (false == subscriber.isUnsubscribed()) {
+                    subscriber.onCompleted();
+                }
             } catch(Throwable t) {
-                subscriber.onError(t);
+                if (false == subscriber.isUnsubscribed()) {
+                    subscriber.onError(t);
+                }
             }
-            return(subscriber);
+            return (subscriber);
         }
     });
 }
 ```
 
-Notice how it now invokes `onError(Throwable t)` if an error occurs and note that the following code passes `subscribe()` a second method that handles `onError`:
+Notice how it now invokes [`onError(Throwable t)`](Observable#onnext-oncompleted-and-onerror) if an error occurs and note that the following code passes `subscribe()` a second method that handles `onError`:
 
 ```groovy
 fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle", "Elephant")
@@ -390,13 +400,13 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
         { println "--- Error ---\n" + it.getMessage() })
 ```
 
-See the [Observable Utility Operators](https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-onerrorresumenext) page for more information on specialized error handling techniques in RxJava, including methods like `onErrorResumeNext()` and `onErrorReturn()` that allow Observables to continue with fallbacks in the event of error.
+See the [Observable Utility Operators](Observable-Utility-Operators) page for more information on specialized error handling techniques in RxJava, including methods like [`onErrorResumeNext()`](Observable-Utility-Operators#onerrorresumenext) and [`onErrorReturn()`]](Observable-Utility-Operators#onerrorreturn) that allow Observables to continue with fallbacks in the event that they encounter errors.
 
-Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables — `myObservable` — and you want to intercept any exceptions that would normally pass through to an Subscriber’s `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the `onErrorResumeNext()` method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called `error()` will generate such an Observable for you):
+Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables — `myObservable` — and you want to intercept any exceptions that would normally pass through to an Subscriber’s `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the [`onErrorResumeNext()`](Observable-Utility-Operators#onerrorresumenext) method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called [`error()`](Creating-Observables#wiki-empty-error-and-never) will generate such an Observable for you):
 
 ```groovy
 myModifiedObservable = myObservable.onErrorResumeNext({ t ->
    Throwable myThrowable = myCustomizedThrowableCreator(t);
-   return(Observable.error(myThrowable));
+   return (Observable.error(myThrowable));
 });
 ```
