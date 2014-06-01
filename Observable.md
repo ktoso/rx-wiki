@@ -107,7 +107,7 @@ The real power comes with the “reactive extensions” (hence “Rx”) — ope
 
 These Rx operators allow you to compose asynchronous sequences together in a declarative manner with all the efficiency benefits of callbacks but without the drawbacks of nesting callback handlers that are typically associated with asynchronous systems.
 
-This documentation groups information about the various operators and examples of their usage into the following pages (these are also listed in the sidebar):
+This documentation groups information about [the various operators](Alphabetical-List-of-Observable-Operators) and examples of their usage into the following pages (these are also listed in the sidebar):
 
   * [[Creating|Creating-Observables]]
   * [[Transforming|Transforming-Observables]]
@@ -121,3 +121,5 @@ This documentation groups information about the various operators and examples o
   * [[Connectable Observables|Connectable-Observable-Operators]]
   * [[Blocking Observables|Blocking-Observable-Operators]]
   * [[String Observables|String-Observables]]
+
+These pages include information about some operators that are not part of the core of RxJava but are implemented in a variety of contributed modules that you must include separately as part of your project.
