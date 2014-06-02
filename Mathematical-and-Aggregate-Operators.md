@@ -18,6 +18,7 @@ This section explains operators that perform mathematical or other operations ov
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
 * [**`count( )` and `longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
+* [**`collect( )`**](Mathematical-and-Aggregate-Operators#collect) — collect items emitted by the source Observable into a single mutable data structure and return an Observable that emits this structure
 * [**`toList( )`**](Observable-Utility-Operators#wiki-tolist) — collect all items from an Observable and emit them as a single List
 * [**`toSortedList( )`**](Observable-Utility-Operators#wiki-tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
 * [**`toMap( )`**](Observable-Utility-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
@@ -265,6 +266,17 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeaggregateseed-accumulator">`aggregate`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.aggregate.aspx">`Aggregate`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Aggregate">Introduction to Rx: Aggregate</a>
+
+***
+
+## collect( )
+#### Collect items emitted by the source Observable into a single mutable data structure and return an Observable that emits this structure
+<img src="/Netflix/RxJava/wiki/images/rx-operators/collect.png" width="640" height="330" />
+
+This is a simplified version of reduce that does not need to return the state on each pass.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#collect(R, rx.functions.Action2)">`collect( )`</a>
 
 ***
 
