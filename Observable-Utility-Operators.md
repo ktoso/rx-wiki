@@ -110,7 +110,7 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timestamp()">`timestamp()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timestamp()">`timestamp()`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timestamp(rx.Scheduler)">`timestamp(scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timestamp.aspx">`Timestamp`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimestampscheduler">`timestamp`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#TimeStampAndTimeInterval">Introduction to Rx: TimeStamp and TimeInterval</a>
@@ -227,8 +227,7 @@ To specify that the work done by the Observable should be done on a particular S
 You can use the `parallel( )` method to split an Observable into as many Observables as there are available processors, and to do work in parallel on each of these Observables. `parallel( )` will then merge the results of these parallel computations back into a single, well-behaved Observable sequence.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1)">`parallel(function)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1, rx.Scheduler)">`parallel(function,scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1)">`parallel(function)`</a> and <a href=http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1, rx.Scheduler)">`parallel(function,scheduler)`</a>
 
 ***
 
@@ -281,7 +280,7 @@ Use the `doOnError( )` method to register an `Action` that RxJava will perform
 Use the `doOnTerminate( )` method to register an `Action` that RxJava will perform just before the Observable calls `onComplete` or `onError`.
 
 #### see also:
-* <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-finallydo">`finallyDo`</a> - a similar operator that performs the action after calling `onCompleted` or `onError`
+* <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-finallydo">`finallyDo`</a> - a similar operator that performs the action _after_ calling `onCompleted` or `onError`
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#doOnTerminate(rx.functions.Action0)">`doOnTerminate(action)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedoobserver--onnext-onerror-oncompleted">`do` and `doAction`</a>
@@ -314,7 +313,7 @@ Finally
 ```
 
 #### see also:
-* <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-doonterminate">`doOnTerminate`</a> - a similar operator that performs the action before calling `onCompleted` or `onError`
+* <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-doonterminate">`doOnTerminate`</a> - a similar operator that performs the action _before_ calling `onCompleted` or `onError`
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#finallyDo(rx.functions.Action0)">`finallyDo(action)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefinallyaction">`finally` / `finallyAction`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212133.aspx">`Finally`</a>
@@ -331,6 +330,8 @@ Note that `delay( )` will _not_ time-shift an `onError( )` call in this fash
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(long, java.util.concurrent.TimeUnit)">`delay(delay,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`delay(delay,unit,scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(rx.functions.Func0, rx.functions.Func1)">`delay(subscriptionDelay, itemDelay)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defer(rx.functions.Func0)">`delay(observableFactory)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedelayduetime-scheduler">`delay`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.delay.aspx">`Delay`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Delay">Introduction to Rx: Delay</a>
@@ -355,8 +356,7 @@ The `delaySubscription( )` operator shifts waits for a specified period of tim
 The `timeInterval( )` operator converts a source Observable into an Observable that emits the amount of time lapsed between consecutive emissions of the source Observable. The first emission is the amount of time lapsed between the time the Subscriber subscribed to the Observable and the time the source Observable emitted its first item. There is no corresponding emission marking the amount of time lapsed between the last emission of the source Observable and the subsequent call to `onCompleted( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeInterval()">`timeInterval()`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeInterval(rx.Scheduler)">`timeInterval(scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeInterval()">`timeInterval()`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeInterval(rx.Scheduler)">`timeInterval(scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeintervalscheduler">`timeInterval`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timeinterval.aspx">`TimeInterval`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#TimeStampAndTimeInterval">Introduction to Rx: TimeStamp and TimeInterval</a>
@@ -393,10 +393,8 @@ The `singleOrDefault( )` method is similar, except that while it will still no
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#single()">`single( )`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#single(rx.functions.Func1)">`single(predicate)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(T)">`singleOrDefault(default)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(T, rx.functions.Func1)">`singleOrDefault(default,predicate)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#single()">`single( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#single(rx.functions.Func1)">`single(predicate)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(T)">`singleOrDefault(default)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(T, rx.functions.Func1)">`singleOrDefault(default,predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesinglepredicate-thisarg">`single`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesingleordefaultpredicate-defaultvalue-thisarg">`singleOrDefault`</a>
 * Linq: `singleAsync` and `singleOrDefaultAsync`
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Single">Introduction to Rx: Single</a>
