@@ -119,6 +119,7 @@
 * [**`merge( )`**](Combining-Observables#wiki-merge) — combine multiple Observables into one
 * [**`mergeDelayError( )`**](Combining-Observables#wiki-mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * **`merge-delay-error( )`** (clojure) — _see [**`mergeDelayError( )`**](Combining-Observables#wiki-mergedelayerror)_
+* **`mergeMap( )`** and **`mergeMapIterable( )`** — _see [**`flatMap( )`**](Transforming-Observables#wiki-flatmap)_
 * [**`min( )`**](Mathematical-and-Aggregate-Operators#wiki-min) — emits the minimum value emitted by a source Observable (`rxjava-math`)
 * [**`minBy( )`**](Mathematical-and-Aggregate-Operators#wiki-minby) — emits the item emitted by the source Observable that has the minimum key value (`rxjava-math`)
 * [**`mostRecent( )`**](Blocking-Observable-Operators#wiki-mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
