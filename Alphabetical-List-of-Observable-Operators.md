@@ -17,6 +17,7 @@
 * [**`cast( )`**](Transforming-Observables#wiki-cast) — cast all items from the source Observable into a particular type before reemitting them
 * **`catch( )`** (clojure) — _see [**`onErrorResumeNext( )`**](Error-Handling-Operators#wiki-onerrorresumenext)_
 * [**`chunkify( )`**](Phantom-Operators#wiki-chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list (⁇)
+* [**`collect( )`**](Mathematical-and-Aggregate-Operators#collect) — collects items emitted by the source Observable into a single mutable data structure and returns an Observable that emits this structure
 * [**`combineLatest( )`**](Combining-Observables#wiki-combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
 * [**`connect( )`**](Connectable-Observable-Operators#wiki-connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
