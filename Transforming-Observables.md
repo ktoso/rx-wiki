@@ -1,13 +1,14 @@
 This section explains operators with which you can transform items that are emitted by an Observable.
 
-* [**`map( )`**](Transforming-Observables#wiki-map) — transform the items emitted by an Observable by applying a function to each of them
-* [**`flatMap( )`**](Transforming-Observables#wiki-flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* [**`scan( )`**](Transforming-Observables#wiki-scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
-* [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
-* [**`pivot( )`**](Transforming-Observables#wiki-pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
-* [**`buffer( )`**](Transforming-Observables#wiki-buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
-* [**`window( )`**](Transforming-Observables#wiki-window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
-* [**`cast( )`**](Transforming-Observables#wiki-cast) — cast all items from the source Observable into a particular type before reemitting them
+* [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
+* [**`flatMap( )`**](Transforming-Observables#flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
+* [**`mergeMap( )` and `mergeMapIterable( )`**](Transforming-Observables#mergemap-and-mergemapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
+* [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
+* [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
+* [**`pivot( )`**](Transforming-Observables#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
+* [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
+* [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
+* [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
 
 ***
 
@@ -36,7 +37,7 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#map(rx.util.functions.Func1)">`map(func)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#map(rx.functions.Func1)">`map(func)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemapselector-thisarg">`map`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.select.aspx">`Select`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#Select">Introduction to Rx: Select</a>
@@ -76,10 +77,30 @@ Sequence complete
 If any of the individual Observables mapped to the items from the source Observable in `flatMap( )` aborts by invoking `onError`, the `flatMap( )` call itself will immediately abort and invoke `onError`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.util.functions.Func1)">`flatMap`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1)">`flatMap`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeselectmanyselector-resultselector">`selectMany`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.selectmany.aspx">`SelectMany`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#SelectMany">Introduction to Rx: SelectMany</a>
+
+***
+
+## mergeMap( ) and mergeMapIterable( )
+#### create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
+<img width="640" height="410" src="https://raw.github.com/wiki/Netflix/RxJava/images/rx-operators/mergeMap.nce.png" />
+
+`mergeMap( )` at its most basic is an alias for `flatMap( )`, but it also has some variants that `flatMap( )` lacks. For example, one version (the one illustrated in the marble diagram above) creates (and merges) a new Observable for each item _and notification_ from the source Observable.
+
+Another version combines items from the source Observable with the items emitted by an Observable triggered by those source items, and emits these combinations:
+
+<img width="640" height="390" src="https://raw.github.com/wiki/Netflix/RxJava/images/rx-operators/mergeMap.r.png">
+
+The `mergeMapIterable` variants pair up source items and generated Iterables rather than source items and generated Observables, but otherwise work in much the same way.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1)">`mergeMap(observableFactory)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`mergeMap(onNextObservableFactory, onErrorObservableFactory, onCompletedObservableFactory)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func2)">`mergeMap(collectionSelector, resultSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMapIterable(rx.functions.Func1)">`mergeMapIterable(collectionSelector)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMapIterable(rx.functions.Func1, rx.functions.Func2)">`mergeMapIterable(collectionSelector, resultSelector)`</a>
 
 ***
 
@@ -120,8 +141,7 @@ my_observable.scan(initial_seed, accumulator_closure)
 Note also that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your scan with `null`, and `scan( )` will emit `null` as its first item.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#scan(rx.util.functions.Func2)">`scan(accumulator)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#scan(R, rx.util.functions.Func2)">`scan(initialValue, accumulator)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#scan(rx.functions.Func2)">`scan(accumulator)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#scan(R, rx.functions.Func2)">`scan(initialValue, accumulator)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypescanseed-accumulator">`scan`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.scan.aspx">`Scan`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Scan">Introduction to Rx: Scan</a>
@@ -160,10 +180,9 @@ Another variety of `groupByUntil( )` limits the number of groups that can be a
 Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits GroupedObservables, each of these GroupedObservables begins to buffer the items that it will emit upon subscription. For this reason, if you ignore any of these GroupedObservables (you neither subscribe to it or apply an operator to it that subscribes to it), this buffer will present a potential memory leak.  For this reason, rather than ignoring a GroupedObservable that you have no interest in observing, you should instead apply an operator like `take(0)` to it as a way of signalling to it that it may discard its buffer.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.util.functions.Func1)">`groupBy(keySelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.util.functions.Func1, rx.util.functions.Func1)">`groupBy(keySelector, elementSelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.util.functions.Func1, rx.util.functions.Func1)">`groupByUntil(keySelector, durationSelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.util.functions.Func1, rx.util.functions.Func1, rx.util.functions.Func1)">`groupByUntil(keySelector, valueSelector, durationSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1)">`groupBy(keySelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.functions.Func1, rx.functions.Func1)">`groupByUntil(keySelector, durationSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.functions.Func1, rx.functions.Func1, rx.functions.Func1)">`groupByUntil(keySelector, valueSelector, durationSelector)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypegroupbykeyselector-elementselector-keyserializer">`groupBy`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypegroupbyuntilkeyselector-elementselector-durationselector-keyserializer">`groupByUntil`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">`GroupBy`</a>
@@ -183,6 +202,9 @@ An example may make this clearer. Imagine you use `groupBy( )` to group the em
 The result will be a grouped observable that emits two groups: the grouped observable resulting from transforming Observable1, and the grouped observable resulting from transforming Observable2. Each of those grouped observables emit observables that in turn emit the odds and evens from the source observables. You can use `pivot( )` to change this around: by applying `pivot( )` to this grouped observable it will transform into one that emits two different groups: the odds group and the evens group, with each of these groups emitting a separate observable corresponding to which source observable its set of integers came from. Here is an illustration:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/pivot.ex.png" width="640" height="1140" />​
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#pivot(rx.Observable)">`pivot(observable)`</a>
 
 ***
 
@@ -262,16 +284,12 @@ Sequence complete
 > This version of `buffer( )` creates a new bundle of items every *timeshift*, and fills this bundle with every item emitted by the source `Observable` from that time until *timespan* time has passed since the bundle's creation, before emitting the bundle as its own emission. If *timespan* is longer than *timeshift*, the emitted bundles will represent time periods that overlap and so they may contain duplicate items.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(rx.util.functions.Func0)">`buffer(closingSelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(int)">`buffer(count)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(int, int)">`buffer(count, skip)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, long, java.util.concurrent.TimeUnit)">`buffer(timespan, timeshift, unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`buffer(timespan, timeshift, unit, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit)">`buffer(timespan, unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit, int)">`buffer(timespan, unit, count)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit, int, rx.Scheduler)">`buffer(timespan, unit, count, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`buffer(timespan, unit, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(rx.Observable, rx.util.functions.Func1)">`buffer(bufferOpenings, closingSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(rx.functions.Func0)">`buffer(closingSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(int)">`buffer(count)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(int, int)">`buffer(count, skip)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, long, java.util.concurrent.TimeUnit)">`buffer(timespan, timeshift, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`buffer(timespan, timeshift, unit, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit)">`buffer(timespan, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`buffer(timespan, unit, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit, int)">`buffer(timespan, unit, count)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(long, java.util.concurrent.TimeUnit, int, rx.Scheduler)">`buffer(timespan, unit, count, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#buffer(rx.Observable, rx.functions.Func1)">`buffer(bufferOpenings, closingSelector)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypebufferbufferopenings-bufferboundaries-bufferclosingselector">`buffer`</a>, <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypebufferwithcountcount-skip">`bufferWithCount`</a>, <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypebufferwithtimetimespan-timeshift--scheduler-scheduler">`bufferWithTime`</a>, and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypebufferwithtimeorcounttimespan-count-scheduler">`bufferWithTimeOrCount`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.buffer.aspx">`Buffer`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Buffer">Introduction to Rx: Buffer</a>
@@ -316,16 +334,12 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 > This version of `window( )` opens its first window immediately, and thereafter opens a new window every *timeshift* period of time (measured in *unit*, and optionally on a particular *scheduler*). It closes a currently open window after *timespan* period of time has passed since that window was opened. It will also close any currently open window if it receives an `onCompleted( )` or `onError( )` call from the *source* `Observable`. Depending on how you set *timespan* and *timeshift* the windows that result from this operation may overlap or have gaps.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(rx.util.functions.Func0)">`window(closingSelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(int)">`window(count)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(int, int)">`window(count, skip)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, long, java.util.concurrent.TimeUnit)">`window(timespan, timeshift, unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`window(timespan, timeshift, unit, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit)">`window(timespan, unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit, int)">`window(timespan, unit, count)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit, int, rx.Scheduler)">`window(timespan, unit, count, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`window(timespan, unit, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(rx.Observable, rx.util.functions.Func1)">`window(windowOpenings, closingSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(rx.functions.Func0)">`window(closingSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(int)">`window(count)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(int, int)">`window(count, skip)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, long, java.util.concurrent.TimeUnit)">`window(timespan, timeshift, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`window(timespan, timeshift, unit, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit)">`window(timespan, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`window(timespan, unit, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit, int)">`window(timespan, unit, count)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(long, java.util.concurrent.TimeUnit, int, rx.Scheduler)">`window(timespan, unit, count, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#window(rx.Observable, rx.functions.Func1)">`window(windowOpenings, closingSelector)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypewindowwindowopenings-windowboundaries-windowclosingselector">`window`</a>, <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypewindowwithcountcount-skip">`windowWithCount`</a>, <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypewindowwithtimetimespan-timeshift--scheduler">`windowWithTime`</a>, and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypewindowwithtimeorcounttimespan-count-scheduler">`windowWithTimeOrCount`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.window.aspx">`Window`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/17_SequencesOfCoincidence.html#Window">Introduction to Rx: Window</a>
