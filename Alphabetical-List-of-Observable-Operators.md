@@ -68,7 +68,7 @@
 * **`flattenDelayError( )`** (scala) — _see [**`mergeDelayError( )`**](Combining-Observables#wiki-mergedelayerror)_
 * **`foldLeft( )`** (scala) — _see [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce)_
 * **`forall( )`** (scala) — _see [**`all( )`**](Conditional-and-Boolean-Operators#wiki-all)_
-* **`forEach( )`** — _see [**`subscribe( )`**](Observable#onnext-oncompleted-and-onerror)_
+* **`forEach( )`** (`Observable`) — _see [**`subscribe( )`**](Observable#onnext-oncompleted-and-onerror)_
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) (`BlockingObservable`) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * [**`forEachFuture( )`**](Async-Operators#wiki-foreachfuture) (`Async`) — pass Subscriber methods to an Observable but also have it behave like a Future that blocks until it completes (`rxjava-async`)
 * [**`forEachFuture( )`**](Phantom-Operators#wiki-foreachfuture) (`BlockingObservable`)— create a futureTask that will invoke a specified function on each item emitted by an Observable (⁇)
@@ -134,6 +134,7 @@
 * [**`onErrorResumeNext( )`**](Error-Handling-Operators#wiki-onerrorresumenext) — instructs an Observable to emit a sequence of items if it encounters an error
 * [**`onErrorReturn( )`**](Error-Handling-Operators#wiki-onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
 * [**`onExceptionResumeNext( )`**](Error-Handling-Operators#wiki-onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
+* **`orElse( )`** (scala) — _see [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#wiki-defaultifempty)_
 * [**`parallel( )`**](Observable-Utility-Operators#wiki-parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 * [**`parallelMerge( )`**](Combining-Observables#wiki-parallelmerge) — combine multiple Observables into smaller number of Observables
 * [**`pivot( )`**](Transforming-Observables#wiki-pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
