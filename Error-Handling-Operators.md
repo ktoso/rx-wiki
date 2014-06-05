@@ -123,7 +123,7 @@ Much like `onErrorResumeNext( )` method, this returns an Observable that mirro
 The `retry( )` method responds to an `onError( )` call from the source Observable by not passing that call through to its Subscribers, but instead resubscribing to the source Observable and giving it another opportunity to complete its sequence without error. You can pass `retry( )` a maximum number of retry-attempts, or you can pass nothing, in which case it will never stop retrying to get an error-free sequence. It always passes `onNext( )` calls through to its Subscribers, even from sequences that terminate with an error, so this can cause duplicate emissions (as shown in the diagram above).
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry()">`retry()`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry(int)">`retry(count)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry()">`retry()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry(int)">`retry(count)`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry(Func1)">`retry(rx.functions.Func1)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototyperetryretrycount">`retry`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.retry.aspx">`Retry`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/11_AdvancedErrorHandling.html#Retry">Introduction to Rx: Retry</a>
