@@ -62,7 +62,7 @@
 * [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
-* **`firstOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault)_
+* **`firstOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`)_
 * [**`flatMap( )`**](Transforming-Observables#wiki-flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * **`flatten( )`** (scala) — _see [**`merge( )`**](Combining-Observables#wiki-merge)_
 * **`flattenDelayError( )`** (scala) — _see [**`mergeDelayError( )`**](Combining-Observables#wiki-mergedelayerror)_
@@ -90,8 +90,8 @@
 * [**`groupByUntil( )`**](Transforming-Observables#wiki-groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key, and opening a new set periodically
 * [**`groupJoin( )`**](Combining-Observables#wiki-join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * **`head( )`** (scala) — _see [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`)_
-* **`headOption( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault)_
-* **`headOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault)_
+* **`headOption( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`)_
+* **`headOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) (`BlockingObservable`)_
 * [**`ifThen( )`**](Conditional-and-Boolean-Operators#wiki-ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence (`contrib-computation-expressions`)
 * [**`ignoreElements( )`**](Filtering-Observables#wiki-ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
 * [**`interval( )`**](Creating-Observables#wiki-interval) — create an Observable that emits a sequence of integers spaced by a given time interval
@@ -103,10 +103,10 @@
 * [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
 * [**`last( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
 * [**`last( )`**](Filtering-Observables#wiki-last) (`Observable`) — emit only the last item emitted by the source Observable
-* **`lastOption( )`** (scala) — _see [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault)_
+* **`lastOption( )`** (scala) — _see [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) or [**`lastOrDefault( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`)_
 * [**`lastOrDefault( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable or a default item if there is no last item
 * [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) (`Observable`) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
-* **`lastOrElse( )`** (scala) — _see [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault)_
+* **`lastOrElse( )`** (scala) — _see [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) or [**`lastOrDefault( )`**](Blocking-Observable-Operators#wiki-last-and-lastordefault) (`BlockingObservable`)_
 * [**`latest( )`**](Blocking-Observable-Operators#wiki-latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
 * **`length( )`** (scala) — _see [**`count( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount)_
 * **`limit( )`** — _see [**`take( )`**](Filtering-Observables#wiki-take)_
