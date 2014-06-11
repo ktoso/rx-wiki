@@ -8,7 +8,7 @@ Example for Maven:
 <dependency>
     <groupId>com.netflix.rxjava</groupId>
     <artifactId>rxjava-core</artifactId>
-    <version>0.17.0</version>
+    <version>0.19.0</version>
 </dependency>
 ```
 and for Ivy:
