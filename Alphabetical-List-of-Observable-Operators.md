@@ -1,6 +1,7 @@
 * **`aggregate( )`** — _see [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce)_
 * [**`all( )`**](Conditional-and-Boolean-Operators#wiki-all) — determine whether all items emitted by an Observable meet some criteria
 * [**`amb( )`**](Conditional-and-Boolean-Operators#wiki-amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
+* **`ambWith( )`** — _instance version of [**`amb( )`**](Conditional-and-Boolean-Operators#wiki-amb)_
 * [**`and( )`**](Combining-Observables#wiki-and-then-and-when) — combine the emissions from two or more source Observables into a `Pattern` (`rxjava-joins`)
 * **`apply( )`** (scala) — _see [**`create( )`**](Creating-Observables#wiki-create)_
 * **`asObservable( )`** (kotlin) — _see [**`from( )`**](Creating-Observables#wiki-from) (et al.)_
@@ -20,6 +21,7 @@
 * [**`collect( )`**](Mathematical-and-Aggregate-Operators#collect) — collects items emitted by the source Observable into a single mutable data structure and returns an Observable that emits this structure
 * [**`combineLatest( )`**](Combining-Observables#wiki-combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
+* **`concatWith( )`** — _instance version of [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat)_
 * [**`connect( )`**](Connectable-Observable-Operators#wiki-connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * **`cons( )`** (clojure) — _see [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat)_
 * [**`contains( )`**](Conditional-and-Boolean-Operators#wiki-contains) — determine whether an Observable emits a particular item or not
@@ -121,6 +123,7 @@
 * [**`mergeDelayError( )`**](Combining-Observables#wiki-mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * **`merge-delay-error( )`** (clojure) — _see [**`mergeDelayError( )`**](Combining-Observables#wiki-mergedelayerror)_
 * [**`mergeMap( )`** and **`mergeMapIterable( )`**](Transforming-Observables#mergemap-and-mergemapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
+* **`mergeWith( )`** — _instance version of [**`merge( )`**](Combining-Observables#wiki-merge)_
 * [**`min( )`**](Mathematical-and-Aggregate-Operators#wiki-min) — emits the minimum value emitted by a source Observable (`rxjava-math`)
 * [**`minBy( )`**](Mathematical-and-Aggregate-Operators#wiki-minby) — emits the item emitted by the source Observable that has the minimum key value (`rxjava-math`)
 * [**`mostRecent( )`**](Blocking-Observable-Operators#wiki-mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
