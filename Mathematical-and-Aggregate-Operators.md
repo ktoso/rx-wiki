@@ -100,6 +100,8 @@ Sequence complete
 
 Instead of passing multiple Observables into `concat( )`, you could also pass in a `List<>` of Observables, or even an Observable that emits Observables, and `concat( )` will concatenate their output into the output of a single Observable.
 
+The instance version of `concat( )` is `concatWith( )`, so, for example, in the code sample above, instead of writing `Observable.concat(odds,evens)` you could also write `odds.concatWith(evens)`.
+
 > **Note:** in the scala language adaptor for RxJava, you access this functionality with the `++` operator rather than the `concat( )` method.
 
 #### see also:
