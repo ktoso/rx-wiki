@@ -90,6 +90,8 @@ Instead of passing multiple Observables into `merge( )`, you could also pass i
 
 If any of the individual Observables passed into `merge( )` aborts by invoking `onError`, the `merge( )` call itself will immediately abort and invoke `onError`. If you would prefer a merge that continues emitting the results of the remaining, error-free Observables before reporting the error, use `mergeDelayError( )` instead.
 
+The instance version of `merge( )` is `mergeWith( )`, so, for example, in the code sample above, instead of writing `Observable.merge(odds,evens)` you could also write `odds.mergeWith(evens)`.
+
 > **Note:** in the scala language adaptor for RxJava, the version of this method that merges a sequence of Observables emitted by a source Observable is called `flatten( )`.
 
 #### see also:
