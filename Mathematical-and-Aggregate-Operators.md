@@ -19,10 +19,10 @@ This section explains operators that perform mathematical or other operations ov
 * [**`count( )` and `longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`collect( )`**](Mathematical-and-Aggregate-Operators#collect) — collect items emitted by the source Observable into a single mutable data structure and return an Observable that emits this structure
-* [**`toList( )`**](Observable-Utility-Operators#wiki-tolist) — collect all items from an Observable and emit them as a single List
-* [**`toSortedList( )`**](Observable-Utility-Operators#wiki-tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
-* [**`toMap( )`**](Observable-Utility-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
-* [**`toMultiMap( )`**](Observable-Utility-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
+* [**`toList( )`**](Mathematical-and-Aggregate-Operators#wiki-tolist) — collect all items from an Observable and emit them as a single List
+* [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#wiki-tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
+* [**`toMap( )`**](Mathematical-and-Aggregate-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+* [**`toMultiMap( )`**](Mathematical-and-Aggregate-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
 
 ***
 
