@@ -41,6 +41,40 @@ Finally, we want to see the result. This means we must [subscribe](Observable#on
 ````groovy
 summer.subscribe({println(it);});
 ````
+
 # Generate the Fibonacci Sequence
 
 How could you create an Observable that emits [the Fibonacci sequence](http://en.wikipedia.org/wiki/Fibonacci_number)?
+
+The most direct way would be to use the [`create`](Creating-Observables#wiki-create) operator to make an Observable "from scratch," and then use a traditional loop within the closure you pass to that operator to generate the sequence. Something like this:
+````groovy
+def fibonacci = Observable.create({ observer ->
+  def f1=0; f2=1, f=1;
+  while(!observer.isUnsubscribed() {
+    observer.onNext(f);
+    f  = f1+f2;
+    f1 = f2;
+    f2 = f;
+  };
+});
+````
+But this is a little too much like ordinary linear programming. Is there some way we can instead create this sequence by composing together existing Observable operators?
+
+Here's an option that does this:
+````
+def fibonacci = Observable.from(0).repeat().scan([0,1], { a,b -> [a[1], a[0]+a[1]] }).map({it[1]});
+````
+It's a little [janky](http://www.urbandictionary.com/define.php?term=janky). Let's walk through it:
+
+The `Observable.from(0).repeat()` creates an Observable that just emits a series of zeroes. This just serves as grist for the mill to keep [`scan`](Transforming-Observables#scan) operating. The way `scan` usually behaves is that it operates on the emissions from an Observable, one at a time, accumulating the result of operations on each emission in some sort of register, which it emits as its own emissions. The way we're using it here, it ignores the emissions from the source Observable entirely, and simply uses these emissions as an excuse to transform and emit its register. That register gets `[0,1]` as a seed, and with each iteration changes the register from `[a,b]` to `[b,a+b]` and then emits this register.
+
+This has the effect of emitting the following sequence of items: `[0,1], [1,1], [1,2], [2,3], [3,5], [5,8]...`
+
+The second item in this array describes the Fibonacci sequence. We can use `map` to reduce the sequence to just that item.
+
+To print out a portion of this sequence (using either method), you would use code like the following:
+````groovy
+fibonnaci.take(15).subscribe({println(it)})]
+````
+
+Is there a less-janky way to do this? The [`generate`](https://github.com/Netflix/RxJava/wiki/Phantom-Operators#generate-and-generateabsolutetime) operator would avoid the silliness of creating an Observable that does nothing but turn the crank of `seed`, but this operator is not yet part of RxJava.  Perhaps you can think of a more elegant solution?
