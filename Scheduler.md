@@ -24,6 +24,7 @@ You obtain a Scheduler from the factory methods described in the `Schedulers` cl
   <tr><td><code>Schedulers.immediate(&#8239;)</code></td><td>schedules work to begin immediately in the current thread</td></tr>
   <tr><td><code>Schedulers.io(&#8239;)</code></td><td>meant for I/O-bound work such as asynchronous performance of blocking I/O, this scheduler is backed by a thread-pool that will grow as needed; for ordinary computational work, switch to <code>Schedulers.computation(&#8239;)</code></td></tr>
   <tr><td><code>Schedulers.newThread(&#8239;)</code></td><td>creates a new thread for each unit of work</td></tr>
+  <tr><td><code>Schedulers.test(&#8239;)</code></td><td>useful for testing purposes <a href="#testing-schedulers">(see below)</a></td></tr>
   <tr><td><code>Schedulers.trampoline(&#8239;)</code></td><td>queues work to begin on the current thread after any already-queued work</td></tr>
  </tbody>
 </table>
@@ -143,3 +144,18 @@ Another `Scheduler` method allows you to schedule an action to take place at reg
 ```java
 someScheduler.schedulePeriodically(someAction, 500, 250, TimeUnit.MILLISECONDS);
 ```
+
+## Testing Schedulers
+
+A `TestScheduler` allows you to exercise fine-tuned manual control over how the scheduler&#8217;s clock behaves. This can be useful for testing interactions that depend on precise arrangements of actions in time. This scheduler has four additional methods:
+
+<dl>
+ <dt><tt>advanceTimeTo(time,unit)</tt></dt>
+  <dd>advances the Scheduler&#8217;s clock to a particular point in time</dd>
+ <dt><tt>advanceTimeBy(time,unit)</tt></dt>
+  <dd>advances the Scheduler&#8217;s clock forward by a particular amount of time</dd>
+ <dt><tt>triggerActions(&#8239;)</tt></dt>
+  <dd>start any unstarted actions that have been scheduled for a time equal to or earlier than the present time according to the Scheduler&#8217;s clock</dd>
+ <dt><tt>triggerActions(time)</tt> (the time unit is nanoseconds)</dt>
+  <dd>start any unstarted actions that have been scheduled for a time equal to or earlier than the specified time</dd>
+</dl>
