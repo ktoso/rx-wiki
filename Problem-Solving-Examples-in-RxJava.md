@@ -74,7 +74,7 @@ The second item in this array describes the Fibonacci sequence. We can use `map`
 
 To print out a portion of this sequence (using either method), you would use code like the following:
 ````groovy
-fibonnaci.take(15).subscribe({println(it)})]
+fibonnaci.take(15).subscribe({println(it)})];
 ````
 
 Is there a less-janky way to do this? The [`generate`](https://github.com/Netflix/RxJava/wiki/Phantom-Operators#generate-and-generateabsolutetime) operator would avoid the silliness of creating an Observable that does nothing but turn the crank of `seed`, but this operator is not yet part of RxJava.  Perhaps you can think of a more elegant solution?
