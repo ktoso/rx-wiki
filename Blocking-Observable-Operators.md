@@ -176,6 +176,8 @@ The `singleOrDefault( )` method is similar, except that while it will still th
 
 Use these methods to transform a Blocking Observable into a `Future`, an `Iterable`, or an `Iterator`. Note that `toFuture( )` will only work on Blocking Observables that emit one or fewer items. To convert Blocking Observables that emit two or more items into Futures, instead use `.toList( ).toFuture( )` to reduce the items emitted by the Observable to a single (list) item.
 
+> Note: the Scala language adaptor has, in addition, several similar methods such as `toTraversable( )`, `toStream( )`, `toIndexedSeq( )`, `toVector( )`, `toBuffer( )`, `toSet( )`, and `toArray( )`.
+
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#toIterable()">`toIterable()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#toFuture()">`toFuture()`</a>
