@@ -4,11 +4,11 @@ If your operator is designed to *originate* an Observable, rather than to transf
 
 # Chaining Your Custom Operators with Standard RxJava Operators
 
-The following example shows how you can chain a custom operator (in this example: `myOperator`) along with standard RxJava operators by using the `lift( )` operator:
+The following example shows how you can chain a custom operator (in this example: `myOperator`) along with standard RxJava operators like `ofType` and `map` by using the `lift( )` operator:
 ```groovy
-Observable foo = barObservable.ofType(Integer).map({it*2}).lift(new myOperator<T>()).map({"transformed by myOperator: " + it});
+fooObservable = barObservable.ofType(Integer).map({it*2}).lift(new myOperator<T>()).map({"transformed by myOperator: " + it});
 ```
-The following section will show how to form the scaffolding of your operator so that it will work correctly with `lift( )`.
+The following section shows how you form the scaffolding of your operator so that it will work correctly with `lift( )`.
 
 # Implementing Your Operator
 
