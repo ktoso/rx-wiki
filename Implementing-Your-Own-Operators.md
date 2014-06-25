@@ -64,4 +64,5 @@ public class myOperator<T> implements Operator<T> {
   * [`ignoreElements( )`](Filtering-Observables#wiki-ignoreelements) is defined as [`filter(alwaysFalse( ))`](Filtering-Observables#wiki-filter)
   * [`reduce(a)`](Mathematical-and-Aggregate-Operators#wiki-reduce) is defined as [`scan(a)`](Transforming-Observables#wiki-scan)`.`[`last( )`](Filtering-Observables#wiki-last)
 * If your operator uses functions or lambdas that are passed in as parameters (predicates, for instance), note that these may be sources of exceptions, and be prepared to catch these and notify subscribers via `onError( )` calls.
+  * Some exceptions are considered "fatal" and for them there's no point in trying to call `onError( )` because that will either be futile or will just compound the problem. You can use the `Exceptions.throwIfFatal(throwable)` method to filter out such fatal exceptions and rethrow them rather than try to notify about them.
 * In general, notify subscribers of error conditions immediately, rather than making an effort to emit more items first.
