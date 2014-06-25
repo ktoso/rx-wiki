@@ -2,9 +2,9 @@ You can implement your own Observable operators. This page shows you how.
 
 If your operator is designed to *originate* an Observable, rather than to transform or react to a source Observable, use the [`create( )`](Creating-Observables#wiki-create) method rather than trying to implement `Observable` manually.  Otherwise, follow the instructions below.
 
-# Chaining Your Custom Operators with Standard RxJava Operators
+## Chaining Your Custom Operators with Standard RxJava Operators
 
-The following example shows how you can chain a custom operator (in this example: `myOperator`) along with standard RxJava operators like `ofType` and `map` by using the `lift( )` operator:
+The following example shows how you can use the `lift( )` operator to chain your custom operator (in this example: `myOperator`) alongside standard RxJava operators like `ofType` and `map`:
 ```groovy
 fooObservable = barObservable.ofType(Integer).map({it*2}).lift(new myOperator<T>()).map({"transformed by myOperator: " + it});
 ```
