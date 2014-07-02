@@ -140,7 +140,7 @@
 * **`orElse( )`** (scala) — _see [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty)_
 * [**`parallel( )`**](Observable-Utility-Operators#parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 * [**`parallelMerge( )`**](Combining-Observables#parallelmerge) — combine multiple Observables into smaller number of Observables
-* [**`pivot( )`**](Transforming-Observables#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
+* [**`pivot( )`**](Phantom-Operators#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set (⁇)
 * [**`publish( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
