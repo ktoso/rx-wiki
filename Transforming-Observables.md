@@ -5,7 +5,6 @@ This section explains operators with which you can transform items that are emit
 * [**`mergeMap( )` and `mergeMapIterable( )`**](Transforming-Observables#mergemap-and-mergemapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
-* [**`pivot( )`**](Transforming-Observables#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 * [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
@@ -188,23 +187,6 @@ Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observ
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">`GroupBy`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupbyuntil.aspx">`GroupByUntil`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#GroupBy">Introduction to Rx: GroupBy</a>
-
-***
-
-## pivot( )
-#### combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
-<img src="/Netflix/RxJava/wiki/images/rx-operators/pivot.png" width="640" height="580" />​
-
-If you combine multiple sets of grouped observables, such as those created by [`groupBy( )` and `groupByUntil( )`](Transforming-Observables#wiki-groupby-and-groupbyuntil), then even if those grouped observables have been grouped by a similar differentiation function, the resulting grouping will be primarily based on which set the observable came from, not on which group the observable belonged to.
-
-An example may make this clearer. Imagine you use `groupBy( )` to group the emissions of an Observable (Observable1) that emits integers into two grouped observables, one emitting the even integers and the other emitting the odd integers. You then repeat this process on a second Observable (Observable2) that emits another set of integers. You hope then to combine the sets of grouped observables emitted by each of these into a single grouped Observable by means of a operator like `from( Observable1, Observable2 )`.
-
-The result will be a grouped observable that emits two groups: the grouped observable resulting from transforming Observable1, and the grouped observable resulting from transforming Observable2. Each of those grouped observables emit observables that in turn emit the odds and evens from the source observables. You can use `pivot( )` to change this around: by applying `pivot( )` to this grouped observable it will transform into one that emits two different groups: the odds group and the evens group, with each of these groups emitting a separate observable corresponding to which source observable its set of integers came from. Here is an illustration:
-
-<img src="/Netflix/RxJava/wiki/images/rx-operators/pivot.ex.png" width="640" height="1140" />​
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#pivot(rx.Observable)">`pivot(observable)`</a>
 
 ***
 
