@@ -196,6 +196,7 @@ To specify in which Scheduler (thread) the Observable should invoke the Subscrib
 There is a complication with using `observeOn( )` on a <a href="https://github.com/Netflix/RxJava/wiki/Subject#wiki-publishsubject">`PublishSubject`</a> or on one of the Observables emitted as a result of the <a href="https://github.com/Netflix/RxJava/wiki/Transforming-Observables#wiki-groupby-and-groupbyuntil">`groupBy( )`</a> operator: it is possible that such Observables will begin emitting items before the subscription fully takes hold, and therefore that some of those items will never be observed. For this reason, there is a version of `observeOn( )` that takes a `buffersize` parameter; this parameter allows you to establish a buffer that will collect any items emitted between the time of the subscription and the time the scheduled observer begins observing, so that no items will be lost.
 
 #### see also:
+* <a href="http://www.grahamlea.com/2014/07/rxjava-threading-examples/">RxJava Threading Examples</a> by Graham Lea
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#observeOn(rx.Scheduler)">`observeOn(scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#observeOn(rx.Scheduler,%20int)">`observeOn(scheduler, buffersize)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeobserveonscheduler">`observeOn`</a>
@@ -212,6 +213,7 @@ There is a complication with using `observeOn( )` on a <a href="https://github
 To specify that the work done by the Observable should be done on a particular Scheduler (thread), call the Observable's `subscribeOn( )` method, passing it the appropriate `Scheduler`. By default (that is, unless you modify the Observable also with `observeOn( )`) the Observable will invoke the Subscribers' `onNext( )`, `onCompleted( )`, and `onError( )` methods in this same thread.
 
 #### see also:
+* <a href="http://www.grahamlea.com/2014/07/rxjava-threading-examples/">RxJava Threading Examples</a> by Graham Lea
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#subscribeOn(rx.Scheduler)">`subscribeOn(scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesubscribeonscheduler">`subscribeOn`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.subscribeon.aspx">`SubscribeOn`</a>
