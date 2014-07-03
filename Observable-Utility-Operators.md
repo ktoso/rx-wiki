@@ -226,6 +226,7 @@ To specify that the work done by the Observable should be done on a particular S
 You can use the `parallel( )` method to split an Observable into as many Observables as there are available processors, and to do work in parallel on each of these Observables. `parallel( )` will then merge the results of these parallel computations back into a single, well-behaved Observable sequence.
 
 #### see also:
+* <a href="http://www.grahamlea.com/2014/07/rxjava-threading-examples/">RxJava Threading Examples</a> by Graham Lea
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1)">`parallel(function)`</a> and <a href=http://netflix.github.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1, rx.Scheduler)">`parallel(function,scheduler)`</a>
 
 ***
