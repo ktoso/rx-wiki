@@ -96,16 +96,16 @@ You can create an Observable from scratch by using the `create( )` method. You
 def myObservable = Observable.create({ aSubscriber ->
   try {
     for (int i = 1; i < 1000000; i++) {
-      if (true == aSubscriber.isUnsubscribed()) {
+      if (aSubscriber.isUnsubscribed()) {
         return;
       }
       aSubscriber.onNext(i);
     }
-    if (false == aSubscriber.isUnsubscribed()) {
+    if (!aSubscriber.isUnsubscribed()) {
       aSubscriber.onCompleted();
     }
   } catch(Throwable t) {
-    if (false == aSubscriber.isUnsubscribed()) {
+    if (!aSubscriber.isUnsubscribed()) {
       aSubscriber.onError(t);
     }
   }
