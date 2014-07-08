@@ -1,6 +1,5 @@
 * [[Getting Started]]
 * [[How To Use RxJava]]
-
 * [[Observable]]
   * [[Creating Observables]]
   * [[Transforming Observables]]
@@ -16,18 +15,15 @@
   * [[String Observables]]
   * [[Alphabetical List of Observable Operators]]
   * [[Implementing Your Own Operators]]
-
 * [[Backpressure]]
 * [[Subject]]
 * [[Scheduler]]
 * [[Plugins]]
-
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
   * Clojure
   * Scala
   * JRuby
   * Kotlin
-
 * [[How to Contribute]]
 * [Javadoc](http://netflix.github.io/RxJava/javadoc/rx/Observable.html)
