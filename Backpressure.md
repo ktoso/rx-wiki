@@ -10,7 +10,7 @@ You can tell RxJava how you want it to handle cases like these. RxJava is capabl
 
 Your first line of defense against the problems of over-producing Observables is the ordinary set of Observable operators. In particular, operators like [`sample( )` or `throttleLast( )`](Filtering-Observables#wiki-sample-or-throttlelast), [`throttleFirst( )`](Filtering-Observables#wiki-throttlefirst), and [`throttleWithTimeout( )` or `debounce( )`](Filtering-Observables#wiki-throttlewithtimeout-or-debounce) allow you to regulate the rate at which an Observable emits items.
 
-We might, for example, have used one of these operators on each of the two Observables we intended to `zip` together in the conundrum mentioned earlier, and this would have solved our problem.  But the behavior of the resulting `zip` would also have been different. It would no longer necessarily zip together the _n_th from each Observable sequentially.
+We might, for example, have used one of these operators on each of the two Observables we intended to `zip` together in the conundrum mentioned earlier, and this would have solved our problem.  But the behavior of the resulting `zip` would also have been different. It would no longer necessarily zip together the <i>n</i>th from each Observable sequentially.
 
 Backpressure allows us to maintain the ordinary behavior of an operator like `zip` until and unless the buffer of unconsumed items grows too large.
 
