@@ -15,3 +15,16 @@ We might, for example, have used one of these operators on each of the two Obser
 Backpressure allows us to maintain the ordinary behavior of an operator like `zip` until and unless the buffer of unconsumed items grows too large.
 
 _**Work in progress...**_
+
+Things that may need explaining:
+* the `Producer` interface (and its `request` method, and how to request w/o backpressure)
+* the new methods in `Subscriber`
+  * `request(n)`
+  * `setProducer(p)`
+* the new `Observable` operators:
+  * `onBackpressureBuffer`
+  * `onBackpressureDrop`
+* how and when to support producers in custom observables & operators
+  * point here from the "how to make a custom operator" page; maybe also from `create` operator doc
+
+_**Work in progress...**_
