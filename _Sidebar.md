@@ -17,6 +17,7 @@
   * [[Alphabetical List of Observable Operators]]
   * [[Implementing Your Own Operators]]
 
+* [[Backpressure]]
 * [[Subject]]
 * [[Scheduler]]
 * [[Plugins]]
