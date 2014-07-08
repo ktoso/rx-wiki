@@ -20,6 +20,7 @@
 * [**`chunkify( )`**](Phantom-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list (⁇)
 * [**`collect( )`**](Mathematical-and-Aggregate-Operators#collect) — collects items emitted by the source Observable into a single mutable data structure and returns an Observable that emits this structure
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
+* **`combineLatestWith( )`** (scala) — _see [**`combineLatest( )`**](Combining-Observables#combinelatest)_
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat) — concatenate two or more Observables sequentially
 * **`concatWith( )`** — _instance version of [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
 * [**`connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
@@ -66,6 +67,8 @@
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * **`firstOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
 * [**`flatMap( )`**](Transforming-Observables#flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
+* **`flatMapIterableWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap)_
+* **`flatMapWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap)_
 * **`flatten( )`** (scala) — _see [**`merge( )`**](Combining-Observables#merge)_
 * **`flattenDelayError( )`** (scala) — _see [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror)_
 * **`foldLeft( )`** (scala) — _see [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce)_
@@ -157,6 +160,7 @@
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * **`seq( )`** (clojure) — _see [**`getIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator)_
 * [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal) — test the equality of sequences emitted by two Observables
+* **`sequenceEqualWith( )`** (scala) — _see [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal)_
 * [**`serialize( )`**](Observable-Utility-Operators#serialize) — force an Observable to make serialized calls and to be well-behaved
 * **`share( )`** — _see [**`refCount( )`**](Connectable-Observable-Operators#connectableobservablerefcount)_
 * [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise throw an exception
@@ -171,6 +175,8 @@
 * [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
 * [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * [**`skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* **`sliding( )`** (scala) — _see [**`window( )`**](Transforming-Observables#window)_
+* **`slidingBuffer( )`** (scala) — _see [**`buffer( )`**](Transforming-Observables#buffer)_
 * [**`split( )`**](String-Observables#split) (`StringObservable`) — converts an Observable of Strings into an Observable of Strings that treats the source sequence as a stream and splits it on a specified regex boundary
 * [**`start( )`**](Async-Operators#start) — create an Observable that emits the return value of a function (`rxjava-async`)
 * [**`startCancellableFuture( )`**](Phantom-Operators#fromcancellablefuture-startcancellablefuture-and-defercancellablefuture-) — convert a function that returns Future into an Observable that emits that Future's return value in a way that monitors the subscription status of the Observable to determine whether to halt work on the Future (⁇)(`rxjava-async`)
@@ -215,11 +221,13 @@
 * [**`toMultimap( )`**](Mathematical-and-Aggregate-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
 * **`toSeq( )`** (scala) — _see [**`toList( )`**](Mathematical-and-Aggregate-Operators#tolist)_
 * [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
+* **`tumbling( )`** (scala) — _see [**`window( )`**](Transforming-Observables#window)_
+* **`tumblingBuffer( )`** (scala) — _see [**`buffer( )`**](Transforming-Observables#buffer)_
 * [**`using( )`**](Observable-Utility-Operators#using) — create a disposable resource that has the same lifespan as an Observable
 * [**`when( )`**](Combining-Observables#and-then-and-when) — convert a series of `Plan` objects into an Observable (`rxjava-joins`)
 * **`where( )`** — _see: [**`filter( )`**](Filtering-Observables#filter)_
 * [**`whileDo( )`**](Conditional-and-Boolean-Operators#whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true (`contrib-computation-expressions`)
-* [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
+* [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time
 * [**`zip( )`**](Combining-Observables#zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
 * **`zipWith( )`**, **`zipWithIndex( )`** (scala) — _see [**`zip( )`**](Combining-Observables#zip)_
 * **`++`** (scala) — _see [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
