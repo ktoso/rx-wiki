@@ -21,6 +21,8 @@ Things that may need explaining:
 * the new methods in `Subscriber`
   * `request(n)`
   * `setProducer(p)`
+  * `onStart()`
+  * and the new constructors that take a `bufferRequest` parameter
 * the new `Observable` operators:
   * `onBackpressureBuffer`
   * `onBackpressureDrop`
