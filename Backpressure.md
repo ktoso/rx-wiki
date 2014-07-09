@@ -30,9 +30,9 @@ For this to work, though, those Observables (or the Observables that result from
 
 <dl>
  <dt><tt>onBackpressureBuffer</tt></dt>
-  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the `request`s they generate</dd>
+  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the <tt>request</tt>s they generate</dd>
  <dt><tt>onBackpressureDrop</tt></dt>
-  <dd>drops emissions from the source Observable unless there is a pending `request` from a downstream Subscriber, in which case it will emit enough items to fulfill the request</dd>
+  <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request</dd>
 </dl>
 
 _**Work in progress...**_
