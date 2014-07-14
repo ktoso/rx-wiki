@@ -23,6 +23,11 @@ and for SBT:
 libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.17.0"
 ```
 
+and for Gradle:
+```groovy
+compile 'com.netflix.rxjava:rxjava-core:0.19.6'
+```
+
 If you need to download the jars instead of using a build system, create a Maven `pom` file like this with the desired version:
 
 ```xml
