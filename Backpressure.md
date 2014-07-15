@@ -77,7 +77,6 @@ Things that may need explaining:
   * `setProducer(p)`
   * `onStart()`
   * `onSetProducer(p)`
-  * and the new constructors that take a `bufferRequest` parameter
 * the new `Observable` operators:
   * `onBackpressureBuffer`
   * `onBackpressureDrop`
