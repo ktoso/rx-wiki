@@ -71,11 +71,8 @@ _**Work in progress...**_
 
 Things that may need explaining:
 * the `Producer` interface (and its `request` method)
-  * how to request w/o backpressure: `request(Long.MAX_VALUE)`
-* the new methods in `Subscriber`
-  * `request(n)`
+* other new methods in `Subscriber`
   * `setProducer(p)`
-  * `onStart()`
   * `onSetProducer(p)`
 * the new `Observable` operators:
   * `onBackpressureBuffer`
@@ -84,3 +81,6 @@ Things that may need explaining:
   * point here from the "how to make a custom operator" page; maybe also from `create` operator doc
 
 _**Work in progress...**_
+
+## See also
+* [RxJava 0.20.0-RC1 release notes](https://github.com/Netflix/RxJava/releases/tag/0.20.0-RC1)
