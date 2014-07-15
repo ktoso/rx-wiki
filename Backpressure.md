@@ -35,14 +35,48 @@ For this to work, though, _A_ and _B_ (or the Observables that result from opera
   <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request</dd>
 </dl>
 
+## How to request backpressure in a Subscriber
+
+When you subscribe to an `Observable` with a `Subscriber`, you can request backpressure by calling `Subscriber.request(n)` in the `Subscriber`&#8217;s `onStart()` method, where _n_ is the maximum number of items you want the `Observable` to emit before the next `request()` call.
+
+Then, after handling this item (or these items) in `onNext()`, you can call `request()` again to instruct the `Observable` to emit another item (or items).  Here is an example of a `Subscriber` that requests one item at a time from `someObservable`:
+
+````java
+someObservable.subscribe(new Subscriber<t>() {
+    @Override
+    public void onStart() {
+      request(1);
+    }
+
+    @Override
+    public void onCompleted() {
+      // gracefully handle sequence-complete
+    }
+
+    @Override
+    public void onError(Throwable e) {
+      // gracefully handle error
+    }
+
+    @Override
+    public void onNext(t n) {
+      // do something with the emitted item "n"
+      // request another item:
+      request(1);
+    }
+});
+````
+
 _**Work in progress...**_
 
 Things that may need explaining:
-* the `Producer` interface (and its `request` method, and how to request w/o backpressure)
+* the `Producer` interface (and its `request` method)
+  * how to request w/o backpressure: `request(Long.MAX_VALUE)`
 * the new methods in `Subscriber`
   * `request(n)`
   * `setProducer(p)`
   * `onStart()`
+  * `onSetProducer(p)`
   * and the new constructors that take a `bufferRequest` parameter
 * the new `Observable` operators:
   * `onBackpressureBuffer`
