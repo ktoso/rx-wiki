@@ -78,6 +78,8 @@ myObservable.subscribe(myOnNext, myError, myComplete);
 // go on about my business
 ```
 
+There is also an `onStart()` method in the `Subscriber` class in which you can put any code you want to be executed after the `Subscriber` and `Observable` have connected but before the `Observable` has yet emitted any items (or sent any notifications) to the `Subscriber`. This is a useful place to establish [_backpressure_, which is discussed at another page on this wiki](https://github.com/Netflix/RxJava/wiki/Backpressure/).
+
 #### see also:
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#IObserver">Introduction to Rx: IObserver</a>
 
