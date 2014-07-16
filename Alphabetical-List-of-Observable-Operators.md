@@ -60,6 +60,7 @@
 * [**`exists( )`**](Conditional-and-Boolean-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
 * [**`filter( )`**](Filtering-Observables#filter) — filter items emitted by an Observable
 * **`finally( )`** (clojure) — _see [**`finallyDo( )`**](Observable-Utility-Operators#finallydo)_
+* **`filterNot( )`** (scala) — _see [**`filter( )`**](Filtering-Observables#filter)_
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`first( )`**](Filtering-Observables#first-and-takefirst) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
 * [**`first( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition
@@ -133,6 +134,7 @@
 * [**`multicast( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
 * [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
 * [**`next( )`**](Blocking-Observable-Operators#next) — returns an iterable that blocks until the Observable emits another item, then returns that item
+* **`nonEmpty( )`** (scala) — _see [**`isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty)_
 * **`nth( )`** (clojure) — _see [**`elementAt( )`**](Filtering-Observables#elementat) and [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault)_
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler a Subscriber should observe the Observable
 * [**`ofType( )`**](Filtering-Observables#oftype) — emit only those items from the source Observable that are of a particular class
