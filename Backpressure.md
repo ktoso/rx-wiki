@@ -71,9 +71,8 @@ _**Work in progress...**_
 
 Things that may need explaining:
 * the `Producer` interface (and its `request` method)
-* other new methods in `Subscriber`
+* other new method in `Subscriber`:
   * `setProducer(p)`
-  * `onSetProducer(p)`
 * the new `Observable` operators:
   * `onBackpressureBuffer`
   * `onBackpressureDrop`
