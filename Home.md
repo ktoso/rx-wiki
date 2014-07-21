@@ -130,7 +130,7 @@ We sometimes call this approach Functional Reactive Programming because it appli
 * [Reactive Programming at Netflix](http://techblog.netflix.com/2013/01/reactive-programming-at-netflix.html)
 * [rx.codeplex.com](https://rx.codeplex.com)
 * [Rx Design Guidelines (PDF)](http://go.microsoft.com/fwlink/?LinkID=205219)
-* [What Every Hipster Should Know About Functional Reactive Programming](http://www.infoq.com/presentations/game-functional-reactive-programming) presented by Bodil Stokke
+* [What Every Hipster Should Know About Functional Reactive Programming](http://www.infoq.com/presentations/game-functional-reactive-programming) - Bodil Stokke demos the creation of interactive game mechanics in RxJS
 * [Channel 9 MSDN videos on Reactive Extensions](http://channel9.msdn.com/Tags/reactive+extensions)
 * [Your Mouse is a Database](http://queue.acm.org/detail.cfm?id=2169076)
 * [Beginner’s Guide to the Reactive Extensions](http://msdn.microsoft.com/en-us/data/gg577611)
