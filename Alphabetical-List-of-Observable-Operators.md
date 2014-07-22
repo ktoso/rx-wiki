@@ -22,6 +22,7 @@
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
 * **`combineLatestWith( )`** (scala) — _see [**`combineLatest( )`**](Combining-Observables#combinelatest)_
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat) — concatenate two or more Observables sequentially
+* [**`concatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, without interleaving
 * **`concatWith( )`** — _instance version of [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
 * [**`connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * **`cons( )`** (clojure) — _see [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
@@ -67,9 +68,9 @@
 * [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) (`Observable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * **`firstOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
-* [**`flatMap( )`**](Transforming-Observables#flatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* **`flatMapIterableWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap)_
-* **`flatMapWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap)_
+* [**`flatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
+* **`flatMapIterableWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
+* **`flatMapWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
 * **`flatten( )`** (scala) — _see [**`merge( )`**](Combining-Observables#merge)_
 * **`flattenDelayError( )`** (scala) — _see [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror)_
 * **`foldLeft( )`** (scala) — _see [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce)_
@@ -118,8 +119,8 @@
 * **`limit( )`** — _see [**`take( )`**](Filtering-Observables#take)_
 * [**`longCount( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
-* **`mapcat( )`** (clojure) — _see [**`flatMap( )`**](Transforming-Observables#flatmap)_
-* **`mapMany( )`** — _see: [**`flatMap( )`**](Transforming-Observables#flatmap)_
+* **`mapcat( )`** (clojure) — _see [**`flatMap( )`**](Transforming-Observables#flatmap-and-concatmap)_
+* **`mapMany( )`** — _see: [**`flatMap( )`**](Transforming-Observables#flatmap-and-concatmap)_
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
 * [**`max( )`**](Mathematical-and-Aggregate-Operators#max) — emits the maximum value emitted by a source Observable (`rxjava-math`)
 * [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#maxby) — emits the item emitted by the source Observable that has the maximum key value (`rxjava-math`)
