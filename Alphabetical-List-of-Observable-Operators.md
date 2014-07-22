@@ -193,6 +193,7 @@
 * [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#suminteger-sumlong-sumfloat-and-sumdouble) — adds the Longs emitted by an Observable and emits this sum (`rxjava-math`)
 * **`switch( )`** (scala) — _see [**`switchOnNext( )`**](Combining-Observables#switchonnext)_
 * [**`switchCase( )`**](Conditional-and-Boolean-Operators#switchcase) — emit the sequence from a particular Observable based on the results of an evaluation (`contrib-computation-expressions`)
+* [**`switchMap( )`**](Transforming-Observables#switchmap) — transform the items emitted by an Observable into Observables, and mirror those items emitted by the most-recently transformed Observable
 * [**`switchOnNext( )`**](Combining-Observables#switchonnext) — convert an Observable that emits Observables into a single Observable that emits the items emitted by the most-recently emitted of those Observables
 * **`synchronize( )`** — _see [**`serialize( )`**](Observable-Utility-Operators#serialize)_
 * [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
