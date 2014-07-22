@@ -3,6 +3,7 @@ This section explains operators with which you can transform items that are emit
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
 * [**`flatMap( )` and `concatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
 * [**`mergeMap( )` and `mergeMapIterable( )`**](Transforming-Observables#mergemap-and-mergemapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
+* [**`switchMap( )`**](Transforming-Observables#switchmap) — transform the items emitted by an Observable into Observables, and mirror those items emitted by the most-recently transformed Observable
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
@@ -105,6 +106,17 @@ The `mergeMapIterable` variants pair up source items and generated Iterables rat
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`mergeMap(onNextObservableFactory, onErrorObservableFactory, onCompletedObservableFactory)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func2)">`mergeMap(collectionSelector, resultSelector)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMapIterable(rx.functions.Func1)">`mergeMapIterable(collectionSelector)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMapIterable(rx.functions.Func1, rx.functions.Func2)">`mergeMapIterable(collectionSelector, resultSelector)`</a>
+
+***
+
+## switchMap( )
+#### transform the items emitted by an Observable into Observables, and mirror those items emitted by the most-recently transformed Observable
+<img width="640" height="350" src="https://raw.github.com/wiki/Netflix/RxJava/images/rx-operators/switchMap.png" />
+
+The `switchMap( )` operator is similar to the `flatMap( )` and `concatMap( )` methods described above, however, rather than emitting _all_ of the items emitted by all of the Observables that the operator generates by transforming items from the source Observable, `switchMap( )` instead emits items from each such transformed Observable only until the next such Observable is emitted, then it ignores the previous one and begins emitting items emitted by the new one.
+
+#### see also:
+* javadoc: <a href="file:///C:/Users/David/Documents/RxJava/rxjava-core/build/docs/javadoc/rx/Observable.html#switchMap(rx.functions.Func1)">`switchMap( )`</a>
 
 ***
 
