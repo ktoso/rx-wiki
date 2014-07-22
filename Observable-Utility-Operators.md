@@ -183,7 +183,7 @@ Note that in the second example the timestamps are identical for both of the Sub
 The `cache( )` method will not itself trigger the execution of the source Observable; an initial Subscriber must subscribe to the Observable returned from `cache( )` before it will begin emitting items.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#cache()">`cache()`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#cache()">`cache()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#cache(int)">`cache(bufferHint)`</a>
 
 ***
 
