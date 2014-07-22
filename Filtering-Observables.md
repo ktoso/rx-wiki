@@ -1,25 +1,25 @@
 This section explains operators you can use to filter and select items emitted by Observables.
 
-* [**`filter( )`**](Filtering-Observables#wiki-filter) — filter items emitted by an Observable
-* [**`takeLast( )`**](Filtering-Observables#wiki-takelast) — only emit the last _n_ items emitted by an Observable
-* [**`last( )`**](Filtering-Observables#wiki-last) — emit only the last item emitted by an Observable
-* [**`lastOrDefault( )`**](Filtering-Observables#wiki-lastOrDefault) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
-* [**`takeLastBuffer( )`**](Filtering-Observables#wiki-takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
-* [**`skip( )`**](Filtering-Observables#wiki-skip) — ignore the first _n_ items emitted by an Observable
-* [**`skipLast( )`**](Filtering-Observables#wiki-skiplast) — ignore the last _n_ items emitted by an Observable
-* [**`take( )`**](Filtering-Observables#wiki-take) — emit only the first _n_ items emitted by an Observable
-* [**`first( )` and `takeFirst( )`**](Filtering-Observables#wiki-first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
-* [**`firstOrDefault( )`**](Filtering-Observables#wiki-firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
-* [**`elementAt( )`**](Filtering-Observables#wiki-elementat) — emit item _n_ emitted by the source Observable
-* [**`elementAtOrDefault( )`**](Filtering-Observables#wiki-elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
-* [**`sample( )` or `throttleLast( )`**](Filtering-Observables#wiki-sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
-* [**`throttleFirst( )`**](Filtering-Observables#wiki-throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
-* [**`throttleWithTimeout( )` or `debounce( )`**](Filtering-Observables#wiki-throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
-* [**`timeout( )`**](Filtering-Observables#wiki-timeout) — emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
-* [**`distinct( )`**](Filtering-Observables#wiki-distinct) — suppress duplicate items emitted by the source Observable
-* [**`distinctUntilChanged( )`**](Filtering-Observables#wiki-distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
-* [**`ofType( )`**](Filtering-Observables#wiki-oftype) — emit only those items from the source Observable that are of a particular class
-* [**`ignoreElements( )`**](Filtering-Observables#wiki-ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
+* [**`filter( )`**](Filtering-Observables#filter) — filter items emitted by an Observable
+* [**`takeLast( )`**](Filtering-Observables#takelast) — only emit the last _n_ items emitted by an Observable
+* [**`last( )`**](Filtering-Observables#last) — emit only the last item emitted by an Observable
+* [**`lastOrDefault( )`**](Filtering-Observables#lastordefault) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
+* [**`takeLastBuffer( )`**](Filtering-Observables#takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
+* [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
+* [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
+* [**`take( )`**](Filtering-Observables#take) — emit only the first _n_ items emitted by an Observable
+* [**`first( )` and `takeFirst( )`**](Filtering-Observables#first-and-takefirst) — emit only the first item emitted by an Observable, or the first item that meets some condition
+* [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
+* [**`elementAt( )`**](Filtering-Observables#elementat) — emit item _n_ emitted by the source Observable
+* [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
+* [**`sample( )` or `throttleLast( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
+* [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
+* [**`throttleWithTimeout( )` or `debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
+* [**`timeout( )`**](Filtering-Observables#timeout) — emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
+* [**`distinct( )`**](Filtering-Observables#distinct) — suppress duplicate items emitted by the source Observable
+* [**`distinctUntilChanged( )`**](Filtering-Observables#distinctuntilchanged) — suppress duplicate consecutive items emitted by the source Observable
+* [**`ofType( )`**](Filtering-Observables#oftype) — emit only those items from the source Observable that are of a particular class
+* [**`ignoreElements( )`**](Filtering-Observables#ignoreelements) — discard the items emitted by the source Observable and only pass through the error or completed notification
 
 ***
 
