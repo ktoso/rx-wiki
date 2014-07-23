@@ -10,6 +10,8 @@ fooObservable = barObservable.ofType(Integer).map({it*2}).lift(new myOperator<T>
 ```
 The following section shows how you form the scaffolding of your operator so that it will work correctly with `lift( )`.
 
+(**Note:** in Xtend, a Groovy-like language, you can implement your operators as _extension methods_ and can thereby chain them directly without using the `lift( )` operator. See [Android Development Has Its Own Swift](http://blog.futurice.com/android-development-has-its-own-swift) for more information about using RxJava with Xtend.)
+
 # Implementing Your Operator
 
 Define your operator as a public class that implements the [`Operator`](http://netflix.github.io/RxJava/javadoc/rx/Observable.Operator.html) interface, like so:
