@@ -124,6 +124,7 @@ We sometimes call this approach Functional Reactive Programming because it appli
 * [Top 7 Tips for RxJava on Android](http://blog.futurice.com/top-7-tips-for-rxjava-on-android) and [Rx Architectures in Android](http://www.slideshare.net/TimoTuominen1/rxjava-architectures-on-android-8-android-livecode-32531688) by Timo Tuominen
 * [FRP on Android](http://slid.es/yaroslavheriatovych/frponandroid) by Yaroslav Heriatovych
 * [Rx for .NET and RxJava for Android](http://blog.futurice.com/tech-pick-of-the-week-rx-for-net-and-rxjava-for-android) by Olli Salonen
+* [RxJava in Xtend for Android](http://blog.futurice.com/android-development-has-its-own-swift) by Andre Medeiros
 * [Reactive Programming in Java 8 With RxJava](http://pluralsight.com/training/Courses/TableOfContents/reactive-programming-java-8-rxjava) a course designed by Russell Elledge
 * [33rd Degree Reactive Java](http://www.slideshare.net/tkowalcz/33rd-degree-reactive-java) by Tomasz Kowalczewski
 * [Optimizing the Netflix API](http://techblog.netflix.com/2013/01/optimizing-netflix-api.html)
