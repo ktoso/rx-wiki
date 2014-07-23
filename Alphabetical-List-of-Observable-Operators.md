@@ -233,7 +233,8 @@
 * [**`whileDo( )`**](Conditional-and-Boolean-Operators#whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true (`contrib-computation-expressions`)
 * [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time
 * [**`zip( )`**](Combining-Observables#zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
-* **`zipWith( )`**, **`zipWithIndex( )`** (scala) — _see [**`zip( )`**](Combining-Observables#zip)_
+* **`zipWith( )`** — _instance version of [**`zip( )`**](Combining-Observables#zip)_
+* **`zipWithIndex( )`** (scala) — _see [**`zip( )`**](Combining-Observables#zip)_
 * **`++`** (scala) — _see [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
 * **`+:`** (scala) — _see [**`startWith( )`**](Combining-Observables#startwith)_
 
