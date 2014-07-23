@@ -139,7 +139,7 @@
 * **`nth( )`** (clojure) — _see [**`elementAt( )`**](Filtering-Observables#elementat) and [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault)_
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler a Subscriber should observe the Observable
 * [**`ofType( )`**](Filtering-Observables#oftype) — emit only those items from the source Observable that are of a particular class
-* [**`onErrorFlatMap( )`**](Error-Handling-Operators#onerrorflatmap) — instructs an Observable to emit a sequence of items whenever it encounters an error
+* [**`onErrorFlatMap( )`**](Phantom-Operators#onerrorflatmap) — instructs an Observable to emit a sequence of items whenever it encounters an error (⁇)
 * [**`onErrorResumeNext( )`**](Error-Handling-Operators#onerrorresumenext) — instructs an Observable to emit a sequence of items if it encounters an error
 * [**`onErrorReturn( )`**](Error-Handling-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
 * [**`onExceptionResumeNext( )`**](Error-Handling-Operators#onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
