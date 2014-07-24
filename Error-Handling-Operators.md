@@ -1,9 +1,10 @@
 This section explains operators that handle errors and exceptions encountered by Observables.
 
-* [**`onErrorResumeNext( )`**](Error-Handling-Operators#wiki-onerrorresumenext) — instructs an Observable to emit a sequence of items if it encounters an error
-* [**`onErrorReturn( )`**](Error-Handling-Operators#wiki-onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
-* [**`onExceptionResumeNext( )`**](Error-Handling-Operators#wiki-onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
-* [**`retry( )`**](Error-Handling-Operators#wiki-retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
+* [**`onErrorResumeNext( )`**](Error-Handling-Operators#onerrorresumenext) — instructs an Observable to emit a sequence of items if it encounters an error
+* [**`onErrorReturn( )`**](Error-Handling-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
+* [**`onExceptionResumeNext( )`**](Error-Handling-Operators#onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
+* [**`retry( )`**](Error-Handling-Operators#retry) — if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
+* [**`retryWhen( )`**](Error-Handling-Operators#retrywhen) — if a source Observable emits an error, pass that error to another Observable to determine whether to resubscribe to the source
 
 ***
 
@@ -107,3 +108,14 @@ The `retry( )` method responds to an `onError( )` call from the source Obser
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototyperetryretrycount">`retry`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.retry.aspx">`Retry`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/11_AdvancedErrorHandling.html#Retry">Introduction to Rx: Retry</a>
+
+***
+
+## retryWhen( )
+#### if a source Observable emits an error, pass that error to another Observable to determine whether to resubscribe to the source
+<img src="/Netflix/RxJava/wiki/images/rx-operators/retryWhen.f.png" width="640" height="430" />​
+
+The `retryWhen( )` operator is similar to `retry( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onError` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `retryWhen( )` resubscribes to the source and the process repeats; if that result is an `onError` notification, `retryWhen( )` also completes.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1)">`retryWhen(notificationHandler)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1, rx.Scheduler)">`retry(notificationHandler,scheduler)`</a>
