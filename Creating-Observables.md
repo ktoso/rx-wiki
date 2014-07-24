@@ -1,16 +1,17 @@
 This section explains methods that create Observables.
 
-* [**`just( )`**](Creating-Observables#wiki-just) — convert an object into an Observable that emits that object
-* [**`from( )`**](Creating-Observables#wiki-from) — convert an Iterable, a Future, or an Array into an Observable
-* [**`repeat( )`**](Creating-Observables#wiki-repeat) — create an Observable that emits a particular item or sequence of items repeatedly
-* [**`create( )`**](Creating-Observables#wiki-create) — create an Observable from scratch by means of a function
-* [**`defer( )`**](Creating-Observables#wiki-defer) — do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
-* [**`range( )`**](Creating-Observables#wiki-range) — create an Observable that emits a range of sequential integers
-* [**`interval( )`**](Creating-Observables#wiki-interval) — create an Observable that emits a sequence of integers spaced by a given time interval
-* [**`timer( )`**](Creating-Observables#wiki-timer) — create an Observable that emits a single item after a given delay
-* [**`empty( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then completes
-* [**`error( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing and then signals an error
-* [**`never( )`**](Creating-Observables#wiki-empty-error-and-never) — create an Observable that emits nothing at all
+* [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
+* [**`from( )`**](Creating-Observables#from) — convert an Iterable, a Future, or an Array into an Observable
+* [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
+* [**`repeatWhen( )`**](Creating-Observables#repeatwhen) — create an Observable that emits a particular item or sequence of items repeatedly, depending on the emissions of a second Observable
+* [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
+* [**`defer( )`**](Creating-Observables#defer) — do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
+* [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
+* [**`interval( )`**](Creating-Observables#interval) — create an Observable that emits a sequence of integers spaced by a given time interval
+* [**`timer( )`**](Creating-Observables#timer) — create an Observable that emits a single item after a given delay
+* [**`empty( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then completes
+* [**`error( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then signals an error
+* [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
 
 ***
 
@@ -83,6 +84,17 @@ There are also versions of `repeat( )` that operate on a scheduler that you sp
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat(long)">`repeat(count)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat(long, rx.Scheduler)">`repeat(count, scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.repeat.aspx">`Repeat`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablerepeatvalue-repeatcount-scheduler">`repeat`</a>
+
+***
+
+## repeatWhen( )
+#### create an Observable that emits a particular item or sequence of items repeatedly, depending on the emissions of a second Observable
+<img src="/Netflix/RxJava/wiki/images/rx-operators/repeatWhen.f.png" width="640" height="430" />
+
+The `repeatWhen( )` operator is similar to `repeat( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onCompleted` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `repeatWhen( )` resubscribes to the source and the process repeats; if that result is an `onCompleted` notification, `repeatWhen( )` also completes.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1)">`repeatWhen(notificationHandler)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1,rx.Scheduler)">`repeat(notificationHandler,scheduler)`</a>
 
 ***
 
