@@ -1,5 +1,6 @@
 * [[Getting Started]]
 * [[How To Use RxJava]]
+* [[Additional Reading]]
 * [[Observable]]
   * [[Creating Observables]]
   * [[Transforming Observables]]
