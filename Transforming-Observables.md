@@ -116,7 +116,7 @@ The `mergeMapIterable` variants pair up source items and generated Iterables rat
 The `switchMap( )` operator is similar to the `flatMap( )` and `concatMap( )` methods described above, however, rather than emitting _all_ of the items emitted by all of the Observables that the operator generates by transforming items from the source Observable, `switchMap( )` instead emits items from each such transformed Observable only until the next such Observable is emitted, then it ignores the previous one and begins emitting items emitted by the new one.
 
 #### see also:
-* javadoc: <a href="file:///C:/Users/David/Documents/RxJava/rxjava-core/build/docs/javadoc/rx/Observable.html#switchMap(rx.functions.Func1)">`switchMap( )`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#switchMap(rx.functions.Func1)">`switchMap( )`</a>
 
 ***
 
