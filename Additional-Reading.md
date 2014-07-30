@@ -1,5 +1,5 @@
 # Introducing Reactive Programming
-* [Introduction to Rx](http://www.introtorx.com/) a free, on-line book by Lee Campbell
+* [Introduction to Rx](http://www.introtorx.com/): a free, on-line book by Lee Campbell
 * [The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754) by Andre Staltz
 * [Reactive Programming in Java 8 With RxJava](http://pluralsight.com/training/Courses/TableOfContents/reactive-programming-java-8-rxjava), a course designed by Russell Elledge
 * [33rd Degree Reactive Java](http://www.slideshare.net/tkowalcz/33rd-degree-reactive-java) by Tomasz Kowalczewski
@@ -7,6 +7,7 @@
 * [Your Mouse is a Database](http://queue.acm.org/detail.cfm?id=2169076) by Erik Meijer
 * Wikipedia: [Reactive Programming](http://en.wikipedia.org/wiki/Reactive_programming) and [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
 * [What is Reactive Programming?](http://blog.hackhands.com/overview-of-reactive-programming/) a video presentation by Jafar Husain.
+* [2 minute introduction to Rx](https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877) by André Staltz
 * StackOverflow: [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [The Reactive Manifesto](http://www.reactivemanifesto.org/)
 
