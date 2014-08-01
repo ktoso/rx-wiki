@@ -24,6 +24,8 @@ You could also use an operator like [`buffer( )`](Transforming-Observables#buf
 
 Another way of handling an overproductive Observable is to block the callstack (parking the thread that governs the overproductive Observable). This has the disadvantage of going against the “reactive” and non-blocking model of Rx. However this can be a viable option if the problematic Observable is on a thread that can be blocked safely. Currently RxJava does not expose any operators to facilitate this.
 
+If the Observable, all of the operators that operate on it, and the observer that is subscribed to it, are all operating in the same thread, this effectively establishes a form of backpressure by means of callstack blocking. But be aware that many Observable operators do operate in their own threads by default (the javadocs for those operators will indicate this).
+
 ## Backpressure isn’t magic
 
 Backpressure doesn’t make the problem of an overproducing Observable or an underconsuming Subscriber go away. It just moves the problem up the chain of operators to a point where it can be handled better.
@@ -82,6 +84,16 @@ someObservable.subscribe(new Subscriber<t>() {
     }
 });
 ````
+
+# Hot and cold Observables, and multicasted Observables
+
+A _cold_ Observable emits a particular sequence of items, but can begin emitting this sequence at any time its Observer finds convenient, and at whatever rate the Observer finds convenient, without disrupting the integrity of the sequence. For example if you convert a static Iterable into an Observable, that Observable will emit the same sequence of items no matter when it is later subscribed to or how frequently those items are observed.
+
+A _hot_ Observable begins generating items to emit immediately when it is created. Subscribers typically begin observing the sequence of items emitted by a hot Observable from somwhere in the middle of the sequence, beginning with the first item emitted by the Observable subsequent to the establishment of the subscription. Such an Observable emits items at its own pace, and it is up to its Observables to keep up.
+
+When a cold Observable is _multicast_ (when it is converted into a `ConnectableObservable` and its `connect()` method is called), it effectively becomes _hot_ and for the purposes of backpressure and flow-control should be treated as a hot Observable.
+
+Cold observables are ideal subjects for the reactive pull model of backpressure described above. Hot observables are typically not designed to cope well with a reactive pull model, and are better candidates for some of the other strategies discussed on this page, such as the use of the `onBackpressureBuffer` or `onBackpressureDrop` operators, throttling, buffers, or windows.
 
 _**Work in progress...**_
 
