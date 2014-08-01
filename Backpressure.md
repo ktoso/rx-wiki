@@ -20,6 +20,10 @@ We might, for example, have used one of these operators on each of the two Obser
 
 You could also use an operator like [`buffer( )`](Transforming-Observables#buffer) or [`window( )`](Transforming-Observables#window) to collect items from the over-producing Observable and then emit them, less-frequently, as collections (or Observables) of items. The slow consumer can then decide whether to process only one particular item from each collection, to process some combination of those items, or to schedule work to be done on each item in the collection, as appropriate.
 
+## Callstack blocking as a flow-control alternative to backpressure
+
+Another way of handling an overproductive Observable is to block the callstack (parking the thread that governs the overproductive Observable). This has the disadvantage of going against the “reactive” and non-blocking model of Rx. However this can be a viable option if the problematic Observable is on a thread that can be blocked safely. Currently RxJava does not expose any operators to facilitate this.
+
 ## Backpressure isn’t magic
 
 Backpressure doesn’t make the problem of an overproducing Observable or an underconsuming Subscriber go away. It just moves the problem up the chain of operators to a point where it can be handled better.
@@ -30,9 +34,11 @@ You have two Observables, _A_ and _B_, where _B_ is inclined to emit items more 
 
 You could attach a throttling operator to _B_, but this would mean ignoring some of the items _B_ emits, which might not be appropriate. What you’d really like to do is to signal to _B_ that it needs to slow down and then let _B_ decide how to do this in a way that maintains the integrity of its emissions.
 
-Backpressure lets you do this.  The `Subscriber` interface has a method called `request(_n_)` that lets it ask for a specified number of items from the Observable the Subscriber is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items and in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
+The reactive pull backpressure model lets you do this.  The `Subscriber` interface has a method called `request(_n_)` that lets it ask for a specified number of items from the Observable the Subscriber is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items, and in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
 
-The `zip` operator in RxJava uses this technique. It maintains a small buffer of items, and requests no more from its source Observables than would fill that buffer.
+The `zip` operator in RxJava uses this technique. It maintains a small buffer of items, and requests no more from its source Observables than would fill that buffer. Each time `zip` emits an item, it removes that item from its buffer and requests exactly one more item from each of its source Observables.
+
+(Most RxJava operators exercise this variety of backpressure. Some operators do not need to use this variety of backpressure, as they operate in the same thread as the Observable they operate on, and so they exert a form of blocking backpressure simply by not giving the Observable the opportunity to emit another item until they have finished processing the previous one. For other operators, backpressure is inappropriate as they have been explicitly designed to deal with flow control in other ways. The RxJava javadocs for those operators that are methods of the Observable class indicate which ones do not use standard backpressure and why.)
 
 For this to work, though, _A_ and _B_ (or the Observables that result from operators applied to them) must respond correctly to the `request()`.  If an Observable has not been written to support backpressure (such support is not a requirement for Observables), you can apply one of the following operators to it, each of which forces a simple form of backpressure behavior:
 
@@ -43,7 +49,7 @@ For this to work, though, _A_ and _B_ (or the Observables that result from opera
   <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request</dd>
 </dl>
 
-If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError` callback.
+If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
 
 ## How to request backpressure from a subscriber
 
