@@ -8,19 +8,27 @@ You can tell RxJava how you want it to handle cases like these. RxJava is capabl
 
 ## Useful Operators that Avoid the Need for Backpressure
 
-Your first line of defense against the problems of over-producing Observables is the ordinary set of Observable operators. In particular, operators like [`sample( )` or `throttleLast( )`](Filtering-Observables#wiki-sample-or-throttlelast), [`throttleFirst( )`](Filtering-Observables#wiki-throttlefirst), and [`throttleWithTimeout( )` or `debounce( )`](Filtering-Observables#wiki-throttlewithtimeout-or-debounce) allow you to regulate the rate at which an Observable emits items.
+Your first line of defense against the problems of over-producing Observables is the ordinary set of Observable operators.
+
+### Throttling
+
+Operators like [`sample( )` or `throttleLast( )`](Filtering-Observables#wiki-sample-or-throttlelast), [`throttleFirst( )`](Filtering-Observables#wiki-throttlefirst), and [`throttleWithTimeout( )` or `debounce( )`](Filtering-Observables#wiki-throttlewithtimeout-or-debounce) allow you to regulate the rate at which an Observable emits items.
 
 We might, for example, have used one of these operators on each of the two Observables we intended to `zip` together in the conundrum mentioned earlier, and this would have solved our problem.  But the behavior of the resulting `zip` would also have been different. It would no longer necessarily zip together the <i>n</i><sup>th</sup> item from each Observable sequentially.
 
-## Backpressure Isn't Magic
+### Buffers and Windows
 
-Backpressure doesn't make the problem of an overproducing Observable or an underconsuming Subscriber go away. It just moves the problem up the chain of operators to a point where it can be handled better.
+You could also use an operator like [`buffer( )`](Transforming-Observables#buffer) or [`window( )`](Transforming-Observables#window) to collect items from the over-producing Observable and emit them as collections. The slow consumer can then decide whether to process only one particular item from each collections, to process some combination of those items, or to schedule work to be done on each item in the collection as appropriate.
 
-Let's take a closer look at the problem of the uneven `zip`.
+## Backpressure Isn’t Magic
+
+Backpressure doesn’t make the problem of an overproducing Observable or an underconsuming Subscriber go away. It just moves the problem up the chain of operators to a point where it can be handled better.
+
+Let’s take a closer look at the problem of the uneven `zip`.
 
 You have two Observables, _A_ and _B_, where _B_ is inclined to emit items more frequently as _A_. When you try to `zip` these two Observables together, the zip operator combines item _n_ from _A_ and item _n_ from _B_, but meanwhile _B_ has also emitted items _n_+1 to _n_+_m_. The zip operator has to hold on to these items so it can combine them with items _n_+1 to _n_+_m_ from _A_ as they are emitted, but meanwhile _m_ keeps growing and so the size of the buffer needed to hold on to these items keeps increasing.
 
-You could attach a throttling operator to _B_, but this would mean ignoring some of the items _B_ emits, which might not be appropriate. What you'd really like to do is to signal to _B_ that it needs to slow down and then let _B_ decide how to do this in a way that maintains the integrity of its emissions.
+You could attach a throttling operator to _B_, but this would mean ignoring some of the items _B_ emits, which might not be appropriate. What you’d really like to do is to signal to _B_ that it needs to slow down and then let _B_ decide how to do this in a way that maintains the integrity of its emissions.
 
 Backpressure lets you do this.  The `Subscriber` interface has a method called `request(_n_)` that lets it ask for a specified number of items from the Observable the Subscriber is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items and in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
 
@@ -73,9 +81,6 @@ Things that may need explaining:
 * the `Producer` interface (and its `request` method)
 * other new method in `Subscriber`:
   * `setProducer(p)`
-* the new `Observable` operators:
-  * `onBackpressureBuffer`
-  * `onBackpressureDrop`
 * how and when to support producers in custom observables & operators
   * point here from the "how to make a custom operator" page; maybe also from `create` operator doc
 
