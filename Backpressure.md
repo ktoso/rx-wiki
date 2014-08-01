@@ -36,7 +36,7 @@ You have two Observables, _A_ and _B_, where _B_ is inclined to emit items more 
 
 You could attach a throttling operator to _B_, but this would mean ignoring some of the items _B_ emits, which might not be appropriate. What you’d really like to do is to signal to _B_ that it needs to slow down and then let _B_ decide how to do this in a way that maintains the integrity of its emissions.
 
-The reactive pull backpressure model lets you do this.  The `Subscriber` interface has a method called `request(_n_)` that lets it ask for a specified number of items from the Observable the Subscriber is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items, and in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
+The reactive pull backpressure model lets you do this.  The `Subscriber` interface has a method called `request()` that lets it ask for a specified number of items from the Observable the Subscriber is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items, and in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
 
 The `zip` operator in RxJava uses this technique. It maintains a small buffer of items, and requests no more from its source Observables than would fill that buffer. Each time `zip` emits an item, it removes that item from its buffer and requests exactly one more item from each of its source Observables.
 
