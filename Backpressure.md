@@ -2,11 +2,11 @@ _**Work in progress...**_
 
 In RxJava it is not difficult to get into a situation in which an Observable is emitting items more rapidly than an operator or subscriber can consume them. This presents the problem of what to do with such a growing backlog of unconsumed items.
 
-For example, imagine using the [`zip`](Combining-Observables#wiki-zip) operator to zip together two infinite Observables, one of which emits items twice as frequently as the other. The `zip` operator, to perform as advertised, will have to maintain an ever-expanding buffer of items emitted by the faster Observable to combine with items emitted by the slower one. This could cause RxJava to seize an unwieldy amount of system resources.
+For example, imagine using the [`zip`](Combining-Observables#wiki-zip) operator to zip together two infinite Observables, one of which emits items twice as frequently as the other. The `zip` operator, to perform as advertised, will have to maintain an ever-expanding buffer of items emitted by the faster Observable to eventually combine with items emitted by the slower one. This could cause RxJava to seize an unwieldy amount of system resources.
 
-You can tell RxJava how you want it to handle cases like these. RxJava is capable of exerting _backpressure_ on Observables. This page tells you how the backpressure options work, and also how you can design your own Observables and Observable operators to respect backpressure requests.
+There are a variety of strategies with which you can exercise flow control and backpressure in RxJava. This page explains some of these strategies, and also shows you how you can design your own Observables and Observable operators to respect requests for flow control.
 
-## Useful Operators that Avoid the Need for Backpressure
+## Useful operators that avoid the need for backpressure
 
 Your first line of defense against the problems of over-producing Observables is the ordinary set of Observable operators.
 
@@ -16,11 +16,11 @@ Operators like [`sample( )` or `throttleLast( )`](Filtering-Observables#wiki
 
 We might, for example, have used one of these operators on each of the two Observables we intended to `zip` together in the conundrum mentioned earlier, and this would have solved our problem.  But the behavior of the resulting `zip` would also have been different. It would no longer necessarily zip together the <i>n</i><sup>th</sup> item from each Observable sequentially.
 
-### Buffers and Windows
+### Buffers and windows
 
-You could also use an operator like [`buffer( )`](Transforming-Observables#buffer) or [`window( )`](Transforming-Observables#window) to collect items from the over-producing Observable and emit them as collections. The slow consumer can then decide whether to process only one particular item from each collections, to process some combination of those items, or to schedule work to be done on each item in the collection as appropriate.
+You could also use an operator like [`buffer( )`](Transforming-Observables#buffer) or [`window( )`](Transforming-Observables#window) to collect items from the over-producing Observable and then emit them, less-frequently, as collections (or Observables) of items. The slow consumer can then decide whether to process only one particular item from each collection, to process some combination of those items, or to schedule work to be done on each item in the collection, as appropriate.
 
-## Backpressure Isn’t Magic
+## Backpressure isn’t magic
 
 Backpressure doesn’t make the problem of an overproducing Observable or an underconsuming Subscriber go away. It just moves the problem up the chain of operators to a point where it can be handled better.
 
@@ -32,9 +32,9 @@ You could attach a throttling operator to _B_, but this would mean ignoring some
 
 Backpressure lets you do this.  The `Subscriber` interface has a method called `request(_n_)` that lets it ask for a specified number of items from the Observable the Subscriber is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items and in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
 
-In our `zip` example, we could tell `zip` to request one item from both _A_ and _B_ only when `zip` itself emits an item; that way `zip` would never have to buffer items from a more prolific Observable.
+The `zip` operator in RxJava uses this technique. It maintains a small buffer of items, and requests no more from its source Observables than would fill that buffer.
 
-For this to work, though, _A_ and _B_ (or the Observables that result from operators applied to them) must respond correctly to the `request()`.  If an Observable has not been written to support backpressure, you can apply one of the following operators to it, each of which forces a simple form of backpressure behavior:
+For this to work, though, _A_ and _B_ (or the Observables that result from operators applied to them) must respond correctly to the `request()`.  If an Observable has not been written to support backpressure (such support is not a requirement for Observables), you can apply one of the following operators to it, each of which forces a simple form of backpressure behavior:
 
 <dl>
  <dt><tt>onBackpressureBuffer</tt></dt>
@@ -43,7 +43,9 @@ For this to work, though, _A_ and _B_ (or the Observables that result from opera
   <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request</dd>
 </dl>
 
-## How to request backpressure in a Subscriber
+If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError` callback.
+
+## How to request backpressure from a subscriber
 
 When you subscribe to an `Observable` with a `Subscriber`, you can request backpressure by calling `Subscriber.request(n)` in the `Subscriber`&#8217;s `onStart()` method, where _n_ is the maximum number of items you want the `Observable` to emit before the next `request()` call.
 
