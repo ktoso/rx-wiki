@@ -8,6 +8,7 @@
 * Wikipedia: [Reactive Programming](http://en.wikipedia.org/wiki/Reactive_programming) and [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
 * [What is Reactive Programming?](http://blog.hackhands.com/overview-of-reactive-programming/) a video presentation by Jafar Husain.
 * [2 minute introduction to Rx](https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877) by André Staltz
+* [Be Reactive](http://colintheshots.com/blog/?p=85) by ColinTheShots
 * StackOverflow: [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [The Reactive Manifesto](http://www.reactivemanifesto.org/)
 
