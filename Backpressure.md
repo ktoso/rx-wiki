@@ -28,6 +28,9 @@ The `throttleFirst` operator is similar, but emits not the most recently emitted
 #### debounce (or throttleWithTimeout)
 The `debounce` operator only emits those items from the source Observable that are not followed by another item within a specified duration:
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.debounce.png" width="640" height="240" />​
+````groovy
+bursty.debounce(10, TimeUnit.MILLISECONDS)
+````
 
 ### Buffers and windows
 
@@ -44,6 +47,16 @@ You could, for example, close and emit a buffer of items from the bursty Observa
 Or you could get fancy, and collect items in buffers during the bursty periods and emit them at the end of each burst, by using the `debounce` operator to emit a buffer closing indicator to the `buffer` operator:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer1.png" width="640" height="500" />​
+
+````groovy
+// we have to multicast the original bursty Observable so we can use it both as our source and as the
+// ultimate source for our buffer closing selector:
+Observable<Integer> burstyMulticast = bursty().publish().refCount();
+// burstyDebounced will be our buffer closing selector:
+Observable<Integer> burstyDebounced = burstMulticast.debounce(10, TimeUnit.MILLISECONDS);
+// and this, finally, is the Observable of buffers we're interested in:
+Observable<List<Integer>> burstyBuffered = burstyMulticast.buffer(burstyDebounced);
+````
 
 #### window
 
