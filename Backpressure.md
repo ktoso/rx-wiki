@@ -21,19 +21,13 @@ The following diagrams show how you could use each of these operators on the bur
 The `sample` operator periodically "dips" into the sequence and emits only the most recently emitted item during each dip:
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.sample.png" width="640" height="260" />​
 
-* [complete source code and sample output](https://gist.github.com/benjchristensen/609ca956e28b99023533)
-
 #### throttleFirst
 The `throttleFirst` operator is similar, but emits not the most recently emitted item, but the first item that was emitted after the previous "dip":
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.throttleFirst.png" width="640" height="260" />​
 
-* [complete source code and sample output](https://gist.github.com/benjchristensen/60b1b301411612a099a3)
-
 #### debounce (or throttleWithTimeout)
 The `debounce` operator only emits those items from the source Observable that are not followed by another item within a specified duration:
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.debounce.png" width="640" height="240" />​
-
-* [complete source code and sample output](https://gist.github.com/benjchristensen/05f0f7ae149366c69d8c)
 
 ### Buffers and windows
 
@@ -47,13 +41,9 @@ You could, for example, close and emit a buffer of items from the bursty Observa
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer2.png" width="640" height="270" />​
 
-* [complete source code and sample output](https://gist.github.com/benjchristensen/f310cd4329b9e1977714)
-
 Or you could get fancy, and collect items in buffers during the bursty periods and emit them at the end of each burst, by using the `debounce` operator to emit a buffer closing indicator to the `buffer` operator:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer1.png" width="640" height="500" />​
-
-* [complete source code and sample output](https://gist.github.com/benjchristensen/e4524a308456f3c21c0b)
 
 #### window
 
@@ -61,13 +51,9 @@ Or you could get fancy, and collect items in buffers during the bursty periods a
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.window1.png" width="640" height="325" />​
 
-* [complete source code and sample output](https://gist.github.com/benjchristensen/da031a55bb416812f1d0)
-
 You could also choose to emit a new window each time you have collected a particular number of items from the source Observable:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.window2.png" width="640" height="325" />​
-
-* [complete source code and sample output](https://gist.github.com/benjchristensen/da031a55bb416812f1d0)
 
 ## Callstack blocking as a flow-control alternative to backpressure
 
