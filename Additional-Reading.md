@@ -5,6 +5,7 @@
 * [33rd Degree Reactive Java](http://www.slideshare.net/tkowalcz/33rd-degree-reactive-java) by Tomasz Kowalczewski
 * [What Every Hipster Should Know About Functional Reactive Programming](http://www.infoq.com/presentations/game-functional-reactive-programming) - Bodil Stokke demos the creation of interactive game mechanics in RxJS
 * [Your Mouse is a Database](http://queue.acm.org/detail.cfm?id=2169076) by Erik Meijer
+* [A Playful Introduction to Rx](https://www.youtube.com/watch?v=WKore-AkisY) a video lecture by Erik Meijer
 * Wikipedia: [Reactive Programming](http://en.wikipedia.org/wiki/Reactive_programming) and [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
 * [What is Reactive Programming?](http://blog.hackhands.com/overview-of-reactive-programming/) a video presentation by Jafar Husain.
 * [2 minute introduction to Rx](https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877) by André Staltz
