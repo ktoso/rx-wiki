@@ -20,16 +20,22 @@ The following diagrams show how you could use each of these operators on the bur
 #### sample (or throttleLast)
 The `sample` operator periodically "dips" into the sequence and emits only the most recently emitted item during each dip:
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.sample.png" width="640" height="260" />​
+````groovy
+Observable<Integer> burstySampled = bursty.sample(500, TimeUnit.MILLISECONDS);
+````
 
 #### throttleFirst
 The `throttleFirst` operator is similar, but emits not the most recently emitted item, but the first item that was emitted after the previous "dip":
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.throttleFirst.png" width="640" height="260" />​
+````groovy
+Observable<Integer> burstyThrottled = bursty.throttleFirst(500, TimeUnit.MILLISECONDS);
+````
 
 #### debounce (or throttleWithTimeout)
 The `debounce` operator only emits those items from the source Observable that are not followed by another item within a specified duration:
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.debounce.png" width="640" height="240" />​
 ````groovy
-bursty.debounce(10, TimeUnit.MILLISECONDS)
+Observable<Integer> burstyDebounced = bursty.debounce(10, TimeUnit.MILLISECONDS);
 ````
 
 ### Buffers and windows
@@ -41,17 +47,17 @@ The following diagrams show how you could use each of these operators on the bur
 #### buffer
 
 You could, for example, close and emit a buffer of items from the bursty Observable periodically, at a regular interval of time:
-
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer2.png" width="640" height="270" />​
+````groovy
+Observable<List<Integer>> burstyBuffered = bursty.buffer(500, TimeUnit.MILLISECONDS);
+````
 
 Or you could get fancy, and collect items in buffers during the bursty periods and emit them at the end of each burst, by using the `debounce` operator to emit a buffer closing indicator to the `buffer` operator:
-
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer1.png" width="640" height="500" />​
-
 ````groovy
 // we have to multicast the original bursty Observable so we can use it both as our source and as the
 // ultimate source for our buffer closing selector:
-Observable<Integer> burstyMulticast = bursty().publish().refCount();
+Observable<Integer> burstyMulticast = bursty.publish().refCount();
 // burstyDebounced will be our buffer closing selector:
 Observable<Integer> burstyDebounced = burstMulticast.debounce(10, TimeUnit.MILLISECONDS);
 // and this, finally, is the Observable of buffers we're interested in:
@@ -63,10 +69,16 @@ Observable<List<Integer>> burstyBuffered = burstyMulticast.buffer(burstyDebounce
 `window`, like `buffer`, allows you to periodically emit Observable windows of items at a regular interval of time:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.window1.png" width="640" height="325" />​
+````groovy
+Observable<Observable<Integer>> burstyWindowed = bursty.window(500, TimeUnit.MILLISECONDS);
+````
 
 You could also choose to emit a new window each time you have collected a particular number of items from the source Observable:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.window2.png" width="640" height="325" />​
+````groovy
+Observable<Observable<Integer>> burstyWindowed = bursty.window(5);
+````
 
 ## Callstack blocking as a flow-control alternative to backpressure
 
