@@ -16,10 +16,11 @@
   * [[String Observables]]
   * [[Alphabetical List of Observable Operators]]
   * [[Implementing Your Own Operators]]
-* [[Backpressure]]
 * [[Subject]]
 * [[Scheduler]]
 * [[Plugins]]
+* [[Backpressure]]
+* [[Error Handling]]
 * [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
   * Groovy
   * Clojure
