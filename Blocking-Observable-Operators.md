@@ -100,7 +100,7 @@ The `lastOrDefault( )` method is similar to `last( )`, except that instead o
 #### returns an iterable that always returns the item most recently emitted by the Observable
 <img src="/Netflix/RxJava/wiki/images/rx-operators/B.mostRecent.png" width="640" height="490" />
 
-The `mostRecent()` method returns an iterable that on each iteration returns the item that was most recently emitted by the underlying Observable (or `null` if the Observable has not yet emitted an item or has completed without emitting any).
+The `mostRecent()` method returns an iterable that on each iteration returns the item that was most recently emitted by the underlying Observable (or a default value you specify, if the Observable has not yet emitted an item or has completed without emitting any).
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/BlockingObservable.html#mostRecent(T)">`mostRecent(initialValue)`</a>
