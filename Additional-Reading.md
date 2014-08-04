@@ -45,6 +45,7 @@
 * [the RxJS github site](http://reactive-extensions.github.io/RxJS/)
 * An interactive tutorial: [Functional Programming in Javascript](http://jhusain.github.io/learnrx/) and [an accompanying lecture (video)](http://www.youtube.com/watch?v=LB4lhFJBBq0) by Jafar Husain
 * [Netflix JavaScript Talks - Async JavaScript with Reactive Extensions](https://www.youtube.com/watch?v=XRYN2xt11Ek) video of a talk by Jafar Husain about the Rx way of programming
+* [RxJS](https://xgrommx.github.io/rx-book/), an on-line book by @xgrommx
 
 # Miscellany
 * [RxJava Observables and Akka Actors](http://onoffswitch.net/rxjava-observables-akka-actors/) by Anton Kropp
