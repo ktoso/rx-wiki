@@ -23,7 +23,7 @@ It will also emit this same final value to any subsequent Subscribers. However, 
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#AsyncSubject">Introduction to Rx: AsyncSubject</a>
 
 # BehaviorSubject
-When an Subscriber subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>, it begins by emitting the item most recently emitted by the source Observable (or a seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
+When an Subscriber subscribes to a <a href="http://netflix.github.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html">`BehaviorSubject`</a>, it begins by emitting the item most recently emitted by the source Observable (or an optional seed/default value if none has yet been emitted) and then continues to emit any other items emitted later by the source Observable(s).
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/S.BehaviorSubject.png" width="640" height="415" />
 
