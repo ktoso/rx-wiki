@@ -46,7 +46,9 @@
 * An interactive tutorial: [Functional Programming in Javascript](http://jhusain.github.io/learnrx/) and [an accompanying lecture (video)](http://www.youtube.com/watch?v=LB4lhFJBBq0) by Jafar Husain
 * [Netflix JavaScript Talks - Async JavaScript with Reactive Extensions](https://www.youtube.com/watch?v=XRYN2xt11Ek) video of a talk by Jafar Husain about the Rx way of programming
 * [RxJS](https://xgrommx.github.io/rx-book/), an on-line book by @xgrommx
+* [Journey from procedural to reactive Javascript with stops](http://bahmutov.calepin.co/journey-from-procedural-to-reactive-javascript-with-stops.html) by Gleb Bahmutov
 
 # Miscellany
 * [RxJava Observables and Akka Actors](http://onoffswitch.net/rxjava-observables-akka-actors/) by Anton Kropp
 * [Vert.x and RxJava](http://slid.es/petermd/eclipsecon2014) by @petermd
+* [RxJava in Different Flavours of Java](http://instil.co/2014/08/05/rxjava-in-different-flavours-of-java/): Java 7 and Java 8 implementations of the same code
