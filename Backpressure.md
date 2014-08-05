@@ -112,9 +112,9 @@ For this to work, though, _A_ and _B_ must respond correctly to the `request()`.
 
 <dl>
  <dt><tt>onBackpressureBuffer</tt></dt>
-  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the <tt>request</tt>s they generate</dd>
+  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the <tt>request</tt>s they generate<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/bp.obp.buffer.png" width="640" height="300" />​</dd>
  <dt><tt>onBackpressureDrop</tt></dt>
-  <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request</dd>
+  <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/bp.obp.drop.png" width="640" height="245" />​</dd>
 </dl>
 
 If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply reactive pull backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
