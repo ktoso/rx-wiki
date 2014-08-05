@@ -9,6 +9,7 @@ There are a variety of strategies with which you can exercise flow control and b
 ## Useful operators that avoid the need for backpressure
 
 Your first line of defense against the problems of over-producing Observables is the ordinary set of Observable operators. The examples in this section will show how you might use these operators to handle a bursty Observable like the one illustrated in the following marble diagram:
+
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.bursty.png" width="640" height="35" />​
 
 ### Throttling
@@ -19,6 +20,7 @@ The following diagrams show how you could use each of these operators on the bur
 
 #### sample (or throttleLast)
 The `sample` operator periodically "dips" into the sequence and emits only the most recently emitted item during each dip:
+
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.sample.png" width="640" height="260" />​
 ````groovy
 Observable<Integer> burstySampled = bursty.sample(500, TimeUnit.MILLISECONDS);
@@ -26,6 +28,7 @@ Observable<Integer> burstySampled = bursty.sample(500, TimeUnit.MILLISECONDS);
 
 #### throttleFirst
 The `throttleFirst` operator is similar, but emits not the most recently emitted item, but the first item that was emitted after the previous "dip":
+
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.throttleFirst.png" width="640" height="260" />​
 ````groovy
 Observable<Integer> burstyThrottled = bursty.throttleFirst(500, TimeUnit.MILLISECONDS);
@@ -33,6 +36,7 @@ Observable<Integer> burstyThrottled = bursty.throttleFirst(500, TimeUnit.MILLISE
 
 #### debounce (or throttleWithTimeout)
 The `debounce` operator emits only those items from the source Observable that are not followed by another item within a specified duration:
+
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.debounce.png" width="640" height="240" />​
 ````groovy
 Observable<Integer> burstyDebounced = bursty.debounce(10, TimeUnit.MILLISECONDS);
@@ -47,12 +51,14 @@ The following diagrams show how you could use each of these operators on the bur
 #### buffer
 
 You could, for example, close and emit a buffer of items from the bursty Observable periodically, at a regular interval of time:
+
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer2.png" width="640" height="270" />​
 ````groovy
 Observable<List<Integer>> burstyBuffered = bursty.buffer(500, TimeUnit.MILLISECONDS);
 ````
 
 Or you could get fancy, and collect items in buffers during the bursty periods and emit them at the end of each burst, by using the `debounce` operator to emit a buffer closing indicator to the `buffer` operator:
+
 <img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer1.png" width="640" height="500" />​
 ````groovy
 // we have to multicast the original bursty Observable so we can use it
@@ -92,17 +98,17 @@ Backpressure doesn’t make the problem of an overproducing Observable or an und
 
 Let’s take a closer look at the problem of the uneven `zip`.
 
-You have two Observables, _A_ and _B_, where _B_ is inclined to emit items more frequently as _A_. When you try to `zip` these two Observables together, the `zip` operator combines item _n_ from _A_ and item _n_ from _B_, but meanwhile _B_ has also emitted items _n_+1 to _n_+_m_. The `zip` operator has to hold on to these items so it can combine them with items _n_+1 to _n_+_m_ from _A_ as they are emitted, but meanwhile _m_ keeps growing and so the size of the buffer needed to hold on to these items keeps increasing.
+You have two Observables, _A_ and _B_, where _B_ is inclined to emit items more frequently than _A_. When you try to `zip` these two Observables together, the `zip` operator combines item _n_ from _A_ and item _n_ from _B_, but meanwhile _B_ has also emitted items _n_+1 to _n_+_m_. The `zip` operator has to hold on to these items so it can combine them with items _n_+1 to _n_+_m_ from _A_ as they are emitted, but meanwhile _m_ keeps growing and so the size of the buffer needed to hold on to these items keeps increasing.
 
 You could attach a throttling operator to _B_, but this would mean ignoring some of the items _B_ emits, which might not be appropriate. What you’d really like to do is to signal to _B_ that it needs to slow down and then let _B_ decide how to do this in a way that maintains the integrity of its emissions.
 
-The reactive pull backpressure model lets you do this.  The `Subscriber` interface has a method called `request()` that lets it ask for a specified number of items from the Observable the Subscriber is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items, and in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
+The reactive pull backpressure model lets you do this.  The `Subscriber` interface has a method called `request()` that lets it ask for a specified number of items from the `Observable` that the `Subscriber` is subscribed to.  A `Subscriber` can call this method inside its `onStart()` handler to initiate the emission of items, and then in its `onNext()` handler to keep the flow of emissions coming.  This creates a sort of active pull from the Subscriber in contrast to the normal passive push Observable behavior.
 
 The `zip` operator in RxJava uses this technique. It maintains a small buffer of items for each source Observable, and requests no more items from each source Observable than would fill its buffer. Each time `zip` emits an item, it removes the corresponding items from its buffers and requests exactly one more item from each of its source Observables.
 
 (Many RxJava operators exercise this variety of backpressure. Some operators do not need to use this variety of backpressure, as they operate in the same thread as the Observable they operate on, and so they exert a form of blocking backpressure simply by not giving the Observable the opportunity to emit another item until they have finished processing the previous one. For other operators, backpressure is inappropriate as they have been explicitly designed to deal with flow control in other ways. The RxJava javadocs for those operators that are methods of the Observable class indicate which ones do not use standard backpressure and why.)
 
-For this to work, though, _A_ and _B_ (or the Observables that result from operators applied to them) must respond correctly to the `request()`.  If an Observable has not been written to support backpressure (such support is not a requirement for Observables), you can apply one of the following operators to it, each of which forces a simple form of backpressure behavior:
+For this to work, though, _A_ and _B_ must respond correctly to the `request()`.  If an Observable has not been written to support backpressure (such support is not a requirement for Observables), you can apply one of the following operators to it, each of which forces a simple form of backpressure behavior:
 
 <dl>
  <dt><tt>onBackpressureBuffer</tt></dt>
@@ -111,7 +117,7 @@ For this to work, though, _A_ and _B_ (or the Observables that result from opera
   <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request</dd>
 </dl>
 
-If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
+If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply reactive pull backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
 
 ## How to request backpressure from a subscriber
 
