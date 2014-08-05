@@ -334,6 +334,7 @@ Sequence complete
 ```
 
 #### see also:
+* [[Backpressure]]
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(rx.Observable)">`sample(sampler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit)">`throttleLast(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleLast(period,unit,scheduler)`</a>
@@ -380,6 +381,7 @@ o.onCompleted();
 Sequence complete
 ```
 #### see also:
+* [[Backpressure]]
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long, java.util.concurrent.TimeUnit)">`throttleFirst(windowDuration,unit)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleFirst(windowDuration,unit,scheduler)`</a>
 
@@ -394,6 +396,7 @@ Use the `throttleWithTimeout( )` method to select only those items emitted by 
 Note that the last item emitted by the source Observable will be emitted in turn by `throttleWithTimeout( )` even if the source Observable's `onCompleted` notification is issued within the time window you specify since that item's emission. That is to say: an `onCompleted` notification will not trigger a throttle.
 
 #### see also:
+* [[Backpressure]]
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit)">`throttleWithTimeout(timeout,unit)`</a> or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit)">`debounce(timeout,unit)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleWithTimeout(timeout,unit,scheduler)`</a> or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`debounce(timeout,unit,scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(rx.functions.Func1)">`debounce(debounceSelector)`</a>
