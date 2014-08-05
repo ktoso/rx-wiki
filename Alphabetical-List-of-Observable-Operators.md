@@ -20,7 +20,7 @@
 * [**`chunkify( )`**](Phantom-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list (⁇)
 * [**`collect( )`**](Mathematical-and-Aggregate-Operators#collect) — collects items emitted by the source Observable into a single mutable data structure and returns an Observable that emits this structure
 * [**`combineLatest( )`**](Combining-Observables#combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
-* **`combineLatestWith( )`** (scala) — _see [**`combineLatest( )`**](Combining-Observables#combinelatest)_
+* **`combineLatestWith( )`** (scala) — _instance version of [**`combineLatest( )`**](Combining-Observables#combinelatest)_
 * [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat) — concatenate two or more Observables sequentially
 * [**`concatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable, without interleaving
 * **`concatWith( )`** — _instance version of [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
@@ -69,8 +69,8 @@
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * **`firstOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
 * [**`flatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* **`flatMapIterableWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
-* **`flatMapWith( )`** (scala) — _see [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
+* **`flatMapIterableWith( )`** (scala) — _instance version of [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
+* **`flatMapWith( )`** (scala) — _instance version of [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
 * **`flatten( )`** (scala) — _see [**`merge( )`**](Combining-Observables#merge)_
 * **`flattenDelayError( )`** (scala) — _see [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror)_
 * **`foldLeft( )`** (scala) — _see [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce)_
@@ -167,7 +167,7 @@
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * **`seq( )`** (clojure) — _see [**`getIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-toiteratorgetiterator)_
 * [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal) — test the equality of sequences emitted by two Observables
-* **`sequenceEqualWith( )`** (scala) — _see [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal)_
+* **`sequenceEqualWith( )`** (scala) — _instance version of [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal)_
 * [**`serialize( )`**](Observable-Utility-Operators#serialize) — force an Observable to make serialized calls and to be well-behaved
 * **`share( )`** — _see [**`refCount( )`**](Connectable-Observable-Operators#connectableobservablerefcount)_
 * [**`single( )`**](Blocking-Observable-Operators#single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise throw an exception
