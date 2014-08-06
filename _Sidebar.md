@@ -27,5 +27,6 @@
   * Scala
   * JRuby
   * Kotlin
+* [[The RxJava Android Module]]
 * [[How to Contribute]]
 * [Javadoc](http://netflix.github.io/RxJava/javadoc/rx/Observable.html)
