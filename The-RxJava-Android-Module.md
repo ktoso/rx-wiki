@@ -72,7 +72,7 @@ This executes the Observable on a new thread and emits results through `onNext` 
 
 On Android it is tricky for asynchronous actions to access framework objects in their callbacks. That&#8217;s because Android may decide to destroy an `Activity`, for instance, while a background thread is still running. The thread will attempt to access views on the now dead `Activity`, which results in a crash. (This will also create a memory leak, since your background thread holds on to the `Activity` even though it&#8217;s not visible anymore.)
 
-This is still a concern when using RxJava on Android, but you can deal with the problem in a more elegant way by using `Subscription`s and a number of Observable operators. In general, when you runn an `Observable` inside an `Activity` that subscribes to the result (either directly or through an inner class), you must unsubscribe from the sequence in `onDestroy`, as shown in the following example:
+This is still a concern when using RxJava on Android, but you can deal with the problem in a more elegant way by using `Subscription`s and a number of Observable operators. In general, when you run an `Observable` inside an `Activity` that subscribes to the result (either directly or through an inner class), you must unsubscribe from the sequence in `onDestroy`, as shown in the following example:
 
 ```
 // MyActivity
