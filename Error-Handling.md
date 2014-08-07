@@ -1,5 +1,3 @@
-_**Work in progress...**_
-
 An Observable typically does not _throw_ exceptions. Instead it notifies any observers that an unrecoverable error has occurred by terminating the Observable sequence with an `onError` notification.
 
 There are some exceptions to this. For example, if the `onError()` call _itself_ fails, the Observable will not attempt to notify the observer of this by again calling `onError` but will throw a `RuntimeException` or an `OnErrorNotImplementedException`.
@@ -29,5 +27,3 @@ You can use the operators described in [[Error Handling Operators]] to implement
   <tr><td><code>OnErrorThrowable</code></td><td>Observers pass throwables of this sort into their observers&#8217; <code>onError()</code> handlers. A Throwable of this variety contain more information about the error and about the Observable-specific state of the system at the time of the error than does a standard <code>Throwable</code>.</td></tr>
  </tbody>
 </table>
-
-_**Work in progress...**_
