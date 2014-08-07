@@ -1,7 +1,8 @@
 The `rxjava-android` module contains Android-specific bindings for RxJava. It adds a number of classes to RxJava to assist in writing reactive components in Android application.
 
 - It provides a `Scheduler` that schedules an `Observable` on a given Android `Handler` thread, particularly the main UI thread.
-- It provides base `Observer` implementations that make guarantees concerning reliable and thread-safe use throughout `Fragment` and `Activity` life-cycle callbacks. _(coming soon)_
+- It provides operators that make it easier to deal with `Fragment` and `Activity` life-cycle callbacks.
+- It provides wrappers for various Android messaging and notification components so that they can be lifted into an Rx call chain
 - It provides reusable, self-contained, reactive components for common Android use cases and UI concerns. _(coming soon)_
 
 # Binaries
@@ -23,6 +24,8 @@ Here is an example for [Maven](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%2
 ```xml
 <dependency org="com.netflix.rxjava" name="rxjava-android" rev="0.10.1" />
 ```
+
+The currently supported `minSdkVersion` is `10` (Android 2.3/Gingerbread)
 
 # Examples
 
@@ -64,6 +67,32 @@ The previous example is a specialization of a more general concept: binding asyn
 ```
 
 This executes the Observable on a new thread and emits results through `onNext` on `custom-thread-1`. (This example is contrived since you could as well call `observeOn(Schedulers.currentThread())` but it illustrates the idea.)
+
+## Fragment and Activity life-cycle
+
+One thing that's tricky to deal with on Android is running asynchronous actions that access framework objects in their callbacks. That's because Android may decide to destroy an Activity, for instance, while a background thread is still running. An attempt will be made to access views on the now dead Activity, resulting in a crash. (It will also create a memory leak, since your background thread holds on to the Activity even though it's not visible anymore.)
+
+This is no different when using RxJava on Android, but one can deal with the problem in a more elegant way through the use of `Subscription`s, and a number of operators. In general, when running an `Observable` inside an `Activity` which subscribes to the result (either directly or through an inner class), you must ensure to unsubscribe from the sequence in `onDestroy`:
+
+```
+// MyActivity
+private Subscription subscription;
+
+protected void onCreate(Bundle savedInstanceState) {
+    this.subscription = observable.subscribe(this);
+}
+
+...
+
+protected void onDestroy() {
+    this.subscription.unsubscribe();
+    super.onDestroy();
+}
+```
+
+This will ensure that all references to the subscriber (the Activity) will be released as soon as possible, and no more notifications will arrive at the subscriber through `onNext`.
+
+One problem with this is that if the Activity is destroyed because of a change in screen orientation, the observable will fire again in `onCreate`. This can be prevented by using the `cache` or `replay` operators, while making sure the Observable somehow survives the Activity life-cycle (e.g. by storing it in a global cache, in a Fragment, etc.) Using either operator will make sure that when subscribing to an Observable that's already "running", values received during the time of detachment from the Activity will be "played back", and in-flight notifications will be delivered as usual.
 
 # See also
 * [The rxjava-android readme file](https://github.com/Netflix/RxJava/tree/master/rxjava-contrib/rxjava-android)
