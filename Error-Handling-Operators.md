@@ -1,4 +1,11 @@
-This section explains operators that handle errors and exceptions encountered by Observables.
+There are a variety of operators that you can use to react to or recover from `onError` notifications from Observables. For example, you might:
+
+1. swallow the error and switch over to a backup Observable to continue the sequence
+1. swallow the error and emit a default item
+1. swallow the error and immediately try to restart the failed Observable
+1. swallow the error and try to restart the failed Observable after some back-off interval
+
+This section explains these operators.
 
 * [**`onErrorResumeNext( )`**](Error-Handling-Operators#onerrorresumenext) — instructs an Observable to emit a sequence of items if it encounters an error
 * [**`onErrorReturn( )`**](Error-Handling-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
