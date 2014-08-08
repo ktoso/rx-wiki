@@ -2,7 +2,7 @@ This section explains operators with which you can transform items that are emit
 
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
 * [**`flatMap( )` and `concatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* [**`mergeMap( )` and `mergeMapIterable( )`**](Transforming-Observables#mergemap-and-mergemapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
+* [**`mergeMap( )` and `flatMapIterable( )`**](Transforming-Observables#mergemap-and-flatmapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
 * [**`switchMap( )`**](Transforming-Observables#switchmap) — transform the items emitted by an Observable into Observables, and mirror those items emitted by the most-recently transformed Observable
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
@@ -89,7 +89,7 @@ Note that `flatMap( )` may interleave the items emitted by the Observables tha
 
 ***
 
-## mergeMap( ) and mergeMapIterable( )
+## mergeMap( ) and flatMapIterable( )
 #### create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
 <img width="640" height="410" src="https://raw.github.com/wiki/Netflix/RxJava/images/rx-operators/mergeMap.nce.png" />
 
@@ -99,13 +99,13 @@ Another version combines items from the source Observable with the items emitted
 
 <img width="640" height="390" src="https://raw.github.com/wiki/Netflix/RxJava/images/rx-operators/mergeMap.r.png">
 
-The `mergeMapIterable` variants pair up source items and generated Iterables rather than source items and generated Observables, but otherwise work in much the same way.
+The `flatMapIterable` variants pair up source items and generated Iterables rather than source items and generated Observables, but otherwise work in much the same way.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1)">`mergeMap(observableFactory)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`mergeMap(onNextObservableFactory, onErrorObservableFactory, onCompletedObservableFactory)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func2)">`mergeMap(collectionSelector, resultSelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMapIterable(rx.functions.Func1)">`mergeMapIterable(collectionSelector)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMapIterable(rx.functions.Func1, rx.functions.Func2)">`mergeMapIterable(collectionSelector, resultSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMapIterable(rx.functions.Func1)">`flatMapIterable(collectionSelector)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMapIterable(rx.functions.Func1, rx.functions.Func2)">`flatMapIterable(collectionSelector, resultSelector)`</a>
 
 ***
 
