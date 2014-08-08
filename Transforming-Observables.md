@@ -1,8 +1,7 @@
 This section explains operators with which you can transform items that are emitted by an Observable.
 
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
-* [**`flatMap( )` and `concatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* [**`mergeMap( )` and `flatMapIterable( )`**](Transforming-Observables#mergemap-and-flatmapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
+* [**`flatMap( )`, `concatMap( )`, and `flatMapIterable( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable) — transform the items emitted by an Observable into Observables (or Iterables), then flatten this into a single Observable
 * [**`switchMap( )`**](Transforming-Observables#switchmap) — transform the items emitted by an Observable into Observables, and mirror those items emitted by the most-recently transformed Observable
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
 * [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
@@ -44,8 +43,8 @@ Sequence complete
 
 ***
 
-## flatMap( ) and concatMap( )
-#### Transform the items emitted by an Observable into Observables, then flatten this into a single Observable
+## flatMap( ), concatMap( ) and flatMapIterable( )
+#### Transform the items emitted by an Observable into Observables or Iterables, then flatten this into a single Observable
 <img src="/Netflix/RxJava/wiki/images/rx-operators/flatMap.png" width="640" height="310" />​
 
 The `flatMap( )` method creates a new Observable by applying a function that you supply to each item emitted by the original Observable, where that function is itself an Observable that emits items, and then merges the results of that function applied to every item emitted by the original Observable, emitting these merged results.
@@ -76,24 +75,9 @@ Sequence complete
 
 If any of the individual Observables mapped to the items from the source Observable in `flatMap( )` aborts by invoking `onError`, the `flatMap( )` call itself will immediately abort and invoke `onError`.
 
-Note that `flatMap( )` may interleave the items emitted by the Observables that result from transforming the items emitted by the source Observable. If it is important that these items not be interleaved, you can instead use the similar `concatMap( )` method:
+Another version of `flatMap` (illustrated in the following marble diagram) creates (and flattens) a new Observable for each item _and notification_ from the source Observable.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/concatMap.png" width="640" height="305" />​
-
-#### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1)">`flatMap`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concatMap(rx.functions.Func1)">`concatMap`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeselectmanyselector-resultselector">`selectMany`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.selectmany.aspx">`SelectMany`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#SelectMany">Introduction to Rx: SelectMany</a>
-
-***
-
-## mergeMap( ) and flatMapIterable( )
-#### create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
 <img width="640" height="410" src="https://raw.github.com/wiki/Netflix/RxJava/images/rx-operators/mergeMap.nce.png" />
-
-`mergeMap( )` at its most basic is an alias for `flatMap( )`, but it also has some variants that `flatMap( )` lacks. For example, one version (the one illustrated in the marble diagram above) creates (and merges) a new Observable for each item _and notification_ from the source Observable.
 
 Another version combines items from the source Observable with the items emitted by an Observable triggered by those source items, and emits these combinations:
 
@@ -101,11 +85,19 @@ Another version combines items from the source Observable with the items emitted
 
 The `flatMapIterable` variants pair up source items and generated Iterables rather than source items and generated Observables, but otherwise work in much the same way.
 
+Note that `flatMap( )` may interleave the items emitted by the Observables that result from transforming the items emitted by the source Observable. If it is important that these items not be interleaved, you can instead use the similar `concatMap( )` method:
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/concatMap.png" width="640" height="305" />​
+
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1)">`mergeMap(observableFactory)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`mergeMap(onNextObservableFactory, onErrorObservableFactory, onCompletedObservableFactory)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#mergeMap(rx.functions.Func1, rx.functions.Func2)">`mergeMap(collectionSelector, resultSelector)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1)">`flatMap`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concatMap(rx.functions.Func1)">`concatMap`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`flatMap(onNext, onError, onCompleted)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1, rx.functions.Func2)">`flatMap(collectionSelector, resultSelector)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMapIterable(rx.functions.Func1)">`flatMapIterable(collectionSelector)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#flatMapIterable(rx.functions.Func1, rx.functions.Func2)">`flatMapIterable(collectionSelector, resultSelector)`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeselectmanyselector-resultselector">`selectMany`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.selectmany.aspx">`SelectMany`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#SelectMany">Introduction to Rx: SelectMany</a>
 
 ***
 
