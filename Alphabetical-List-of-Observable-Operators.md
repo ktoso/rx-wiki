@@ -69,7 +69,8 @@
 * [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`) — emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 * **`firstOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
 * [**`flatMap( )`**](Transforming-Observables#flatmap-and-concatmap) — transform the items emitted by an Observable into Observables, then flatten this into a single Observable
-* **`flatMapIterableWith( )`** (scala) — _instance version of [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
+* [**`flatMapIterable( )`**](Transforming-Observables#mergemap-and-flatmapiterable) — create Iterables corresponding to each emission from a source Observable and merge the results into a single Observable
+* **`flatMapIterableWith( )`** (scala) — _instance version of [**`flatMapIterable( )`**](Transforming-Observables#mergemap-and-flatmapiterable)_
 * **`flatMapWith( )`** (scala) — _instance version of [**`flatmap( )`**](Transforming-Observables#flatmap-and-concatmap)_
 * **`flatten( )`** (scala) — _see [**`merge( )`**](Combining-Observables#merge)_
 * **`flattenDelayError( )`** (scala) — _see [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror)_
@@ -127,7 +128,8 @@
 * [**`merge( )`**](Combining-Observables#merge) — combine multiple Observables into one
 * [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
 * **`merge-delay-error( )`** (clojure) — _see [**`mergeDelayError( )`**](Combining-Observables#mergedelayerror)_
-* [**`mergeMap( )`** and **`mergeMapIterable( )`**](Transforming-Observables#mergemap-and-mergemapiterable) — create Observables (or Iterables) corresponding to each emission from a source Observable and merge the results into a single Observable
+* [**`mergeMap( )`**](Transforming-Observables#mergemap-and-flatmapiterable) — create Observables corresponding to each emission from a source Observable and merge the results into a single Observable
+* **`mergeMapIterable( )`** — _see: [**`flatMapIterable( )`**](Transforming-Observables#mergemap-and-flatmapiterable)_
 * **`mergeWith( )`** — _instance version of [**`merge( )`**](Combining-Observables#merge)_
 * [**`min( )`**](Mathematical-and-Aggregate-Operators#min) — emits the minimum value emitted by a source Observable (`rxjava-math`)
 * [**`minBy( )`**](Mathematical-and-Aggregate-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value (`rxjava-math`)
