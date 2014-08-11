@@ -120,7 +120,7 @@
 * **`limit( )`** — _see [**`take( )`**](Filtering-Observables#take)_
 * [**`longCount( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
-* **`mapcat( )`** (clojure) — _see [**`flatMap( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable)_
+* **`mapcat( )`** (clojure) — _see [**`concatMap( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable)_
 * **`mapMany( )`** — _see: [**`flatMap( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable)_
 * [**`materialize( )`**](Observable-Utility-Operators#materialize) — convert an Observable into a list of Notifications
 * [**`max( )`**](Mathematical-and-Aggregate-Operators#max) — emits the maximum value emitted by a source Observable (`rxjava-math`)
