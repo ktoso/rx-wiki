@@ -1,12 +1,12 @@
 You can implement your own Observable operators. This page shows you how.
 
-If your operator is designed to *originate* an Observable, rather than to transform or react to a source Observable, use the [`create( )`](Creating-Observables#wiki-create) method rather than trying to implement `Observable` manually.  Otherwise, follow the instructions below.
+If your operator is designed to *originate* an Observable, rather than to transform or react to a source Observable, use the [`create( )`](Creating-Observables#wiki-create) method rather than trying to implement `Observable` manually.  Otherwise, you can create a custom operator by following the instructions on this page.
 
-If your operator is designed to transform the items emitted by a source Observable, follow the instructions under _Transformational Operators_ below. If your operator is designed to alter the source Observable as a whole, follow the instruction under _Compositional Operators_ below.
+If your operator is designed to act on the individual items emitted by a source Observable, follow the instructions under _Sequence Operators_ below. If your operator is designed to transform the source Observable as a whole (for instance, by applying a particular set of existing RxJava operators to it) follow the instructions under _Transformational Operators_ below.
 
 (**Note:** in Xtend, a Groovy-like language, you can implement your operators as _extension methods_ and can thereby chain them directly without using the methods described on this page. See [RxJava and Xtend](http://mnmlst-dvlpr.blogspot.de/2014/07/rxjava-and-xtend.html) for details.)
 
-# Compositional Operators
+# Sequence Operators
 
 The following example shows how you can use the `lift( )` operator to chain your custom operator (in this example: `myOperator`) alongside standard RxJava operators like `ofType` and `map`:
 ```groovy
@@ -14,7 +14,7 @@ fooObservable = barObservable.ofType(Integer).map({it*2}).lift(new myOperator<T>
 ```
 The following section shows how you form the scaffolding of your operator so that it will work correctly with `lift( )`.
 
-# Implementing Your Operator
+## Implementing Your Operator
 
 Define your operator as a public class that implements the [`Operator`](http://netflix.github.io/RxJava/javadoc/rx/Observable.Operator.html) interface, like so:
 ```java
@@ -44,7 +44,7 @@ public class myOperator<T> implements Operator<T> {
 
       @Override
       public void onNext(T item) {
-        /* this example performs some sort of simple transformation on each incoming item and then passes it along */
+        /* this example performs some sort of operation on each incoming item and emits the results */
         if(!s.isUnsubscribed()) {
           transformedItem = myOperatorTransformOperation(item);
           s.onNext(transformedItem);
@@ -73,4 +73,35 @@ public class myOperator<T> implements Operator<T> {
 
 # Transformational Operators
 
-TBD
+The following example shows how you can use the `compose( )` operator to chain your custom operator (in this example, an operator called `myTransformer` that transforms an Observable that emits Integers into one that emits Strings) alongside standard RxJava operators like `ofType` and `map`:
+```groovy
+fooObservable = barObservable.ofType(Integer).map({it*2}).compose(new myTransformer<Integer,String>()).map({"transformed by myOperator: " + it});
+```
+The following section shows how you form the scaffolding of your operator so that it will work correctly with `compose( )`.
+
+## Implementing Your Transformer
+
+Define your transforming function as a public class that implements the [`Transformer`](http://netflix.github.io/RxJava/javadoc/rx/Observable.Transformer.html) interface, like so:
+
+````java
+public class myTransformer<Integer,String> implements Transformer<Integer,String> {
+  public myTransformer( /* any necessary params here */ ) {
+    /* any necessary initialization here */
+  }
+
+  @Override
+  public Observable<String> call(Observable<Integer> source) {
+    /* 
+     * this simple example Transformer applies map() to the source Observable as a whole
+     * in order to transform the "source" observable from one that emits integers to one
+     * that emits the string representations of those integers.
+     */
+    return t1.map( new Func1<Integer,String>() {
+      @Override
+      public String call(Integer t1) {
+        return String.valueOf(t1);
+      }
+    } );
+  }
+}
+````
