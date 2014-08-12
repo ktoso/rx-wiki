@@ -98,10 +98,10 @@ public class myTransformer<Integer,String> implements Transformer<Integer,String
   * It may call either a Subscriber's [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) or [`onError( )`](Observable#onnext-oncompleted-and-onerror) method, but not both, exactly once, and it may not subsequently call a Subscriber's [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method.
   * If you are unable to guarantee that your operator conforms to the above two tenets, you can add the [`serialize( )`](Observable-Utility-Operators#serialize) operator to it to force the correct behavior.
 * Do not block within your operator.
-* It is usually best that you compose new operators by combining existing ones, to the extent that this is possible, rather than reinventing the wheel. RxJava itself does this with some of its standard operators, for example:
-  * [`first( )`](Filtering-Observables#wiki-first-and-takefirst) is defined as [`take(1)`](Filtering-Observables#wiki-take)`.`[`single( )`](Observable-Utility-Operators#wiki-single-and-singleordefault)
-  * [`ignoreElements( )`](Filtering-Observables#wiki-ignoreelements) is defined as [`filter(alwaysFalse( ))`](Filtering-Observables#wiki-filter)
-  * [`reduce(a)`](Mathematical-and-Aggregate-Operators#wiki-reduce) is defined as [`scan(a)`](Transforming-Observables#wiki-scan)`.`[`last( )`](Filtering-Observables#wiki-last)
+* When possible, you should compose new operators by combining existing operators, rather than implementing them with new code. RxJava itself does this with some of its standard operators, for example:
+  * [`first( )`](Filtering-Observables#wiki-first-and-takefirst) is defined as <tt>[take(1)](Filtering-Observables#wiki-take).[single( )](Observable-Utility-Operators#wiki-single-and-singleordefault)</tt>
+  * [`ignoreElements( )`](Filtering-Observables#wiki-ignoreelements) is defined as <tt>[filter(alwaysFalse( ))](Filtering-Observables#wiki-filter)</tt>
+  * [`reduce(a)`](Mathematical-and-Aggregate-Operators#wiki-reduce) is defined as <tt>[scan(a)](Transforming-Observables#wiki-scan).[last( )](Filtering-Observables#wiki-last)</tt>
 * If your operator uses functions or lambdas that are passed in as parameters (predicates, for instance), note that these may be sources of exceptions, and be prepared to catch these and notify subscribers via `onError( )` calls.
   * Some exceptions are considered "fatal" and for them there's no point in trying to call `onError( )` because that will either be futile or will just compound the problem. You can use the `Exceptions.throwIfFatal(throwable)` method to filter out such fatal exceptions and rethrow them rather than try to notify about them.
 * In general, notify subscribers of error conditions immediately, rather than making an effort to emit more items first.
