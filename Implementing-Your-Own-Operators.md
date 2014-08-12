@@ -76,9 +76,9 @@ public class myTransformer<Integer,String> implements Transformer<Integer,String
   @Override
   public Observable<String> call(Observable<Integer> source) {
     /* 
-     * this simple example Transformer applies map() to the source Observable as a whole
-     * in order to transform the "source" observable from one that emits integers to one
-     * that emits the string representations of those integers.
+     * this simple example Transformer applies map() to the source Observable
+     * in order to transform the "source" observable from one that emits
+     * integers to one that emits string representations of those integers.
      */
     return t1.map( new Func1<Integer,String>() {
       @Override
