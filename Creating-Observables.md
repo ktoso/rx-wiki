@@ -1,6 +1,6 @@
 This section explains methods that create Observables.
 
-* [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
+* [**`just( )`**](Creating-Observables#just) — convert an object or several objects into an Observable that emits that object or those objects
 * [**`from( )`**](Creating-Observables#from) — convert an Iterable, a Future, or an Array into an Observable
 * [**`repeat( )`**](Creating-Observables#repeat) — create an Observable that emits a particular item or sequence of items repeatedly
 * [**`repeatWhen( )`**](Creating-Observables#repeatwhen) — create an Observable that emits a particular item or sequence of items repeatedly, depending on the emissions of a second Observable
@@ -16,16 +16,18 @@ This section explains methods that create Observables.
 ***
 
 ## just( )
-#### convert an object into an Observable that emits that object
+#### convert an object or several objects into an Observable that emits that object or those objects
 <img src="/Netflix/RxJava/wiki/images/rx-operators/just.png" width="640" height="310" />
 
-To convert any object into an Observable that emits that object and then completes, pass that object into the `just( )` method.
+To convert any object (or objects) into an Observable that emits that object (or those objects) and then completes, pass that object (or those objects) into the `just( )` method.
 
 ```groovy
 // Observable emits "some string" as a single item
 def observableThatEmitsAString = Observable.just("some string"); 
 // Observable emits the list [1, 2, 3, 4, 5] as a single item
 def observableThatEmitsAList = Observable.just([1, 2, 3, 4, 5]); 
+// Observable emits 1, 2, 3, 4, and 5 as distinct items
+def observableThatEmitsSeveralNumbers = Observable.just( 1, 2, 3, 4, 5 );
 ```
 
 This has some similarities to the `from( )` method, but note that if you pass an iterable to `from( )`, it will convert the iterable into an Observable that emits each of the items in the iterable, one at a time, while the `just( )` method would convert the iterable into an Observable that emits the entire iterable as a single item.
@@ -33,7 +35,7 @@ This has some similarities to the `from( )` method, but note that if you pass 
 Note that if you pass `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(value)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, rx.Scheduler)">`just(value, scheduler)`</a>
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(item)`</a> (or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T)">two</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T)">three</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T)">four</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T)">five</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T)">six</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T)">seven</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T)">eight</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T)">nine</a>, or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T, T)">ten</a> items)
 
 ***
 
@@ -66,7 +68,6 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future)">`from(future)`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, long, java.util.concurrent.TimeUnit)">`from(future, timeout, unit)`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, rx.Scheduler)">`from(future, scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable)">`from(iterable)`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable, rx.Scheduler)">`from(iterable, scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T...)">`from(array)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T[], rx.Scheduler)">`from(array, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T)">`from(item)`</a> (or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T)">two</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T)">three</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T, T)">four</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T, T, T)">five</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T, T, T, T)">six</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T, T, T, T, T)">seven</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T, T, T, T, T, T)">eight</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T, T, T, T, T, T, T)">nine</a>, or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T, T, T, T, T, T, T, T, T, T)">ten</a> items)
 * RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefromarrayarray-scheduler)
 * RxJS: [`fromPromise`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefrompromisepromise)
 * Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
