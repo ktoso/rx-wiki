@@ -12,6 +12,7 @@ This section explains various utility operators for working with Observables.
 * [**`doOnCompleted( )`**](Observable-Utility-Operators#dooncompleted) — register an action to take when an Observable completes successfully
 * [**`doOnError( )`**](Observable-Utility-Operators#doonerror) — register an action to take when an Observable completes with an error
 * [**`doOnTerminate( )`**](Observable-Utility-Operators#doonterminate) — register an action to take when an Observable completes, either successfully or with an error
+* [**`doOnUnsubscribe( )`**](Observable-Utility-Operators#doonunsubscribe) — register an action to take when an observer unsubscribes from an Observable
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
 * [**`delaySubscription( )`**](Observable-Utility-Operators#delaysubscription) — hold an Subscriber's subscription request for a specified amount of time before passing it on to the source Observable
@@ -285,6 +286,16 @@ Use the `doOnTerminate( )` method to register an `Action` that RxJava will per
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedoobserver--onnext-onerror-oncompleted">`do` and `doAction`</a>
 
+***
+
+## doOnUnsubscribe( )
+#### register an action to take when an observer unsubscribes from an Observable
+<img src="/Netflix/RxJava/wiki/images/rx-operators/doOnUnsubscribe.png" width="640" height="310" />​
+
+Use the `doOnUnsubscribe( )` method to register an `Action` that RxJava will perform whenever an observer that is subscribed to this Observer calls `unsubscribe( )` to unsubscribe from it.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#doOnUnsubscribe(rx.functions.Action0)">`doOnUnsubscribe(action)`</a>
 ***
 
 ## finallyDo( )
