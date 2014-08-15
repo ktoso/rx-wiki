@@ -105,7 +105,7 @@
 * [**`interval( )`**](Creating-Observables#interval) — create an Observable that emits a sequence of integers spaced by a given time interval
 * **`into( )`** (clojure) — _see [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce)_
 * [**`isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
-* **`items( )`** (scala) — _see [**`from( )`**](Creating-Observables#from)_
+* **`items( )`** (scala) — _see [**`just( )`**](Creating-Observables#just)_
 * [**`join( )`**](Combining-Observables#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * [**`join( )`**](String-Observables#join) (`StringObservable`) — converts an Observable that emits a sequence of strings into an Observable that emits a single string that concatenates them all, separating them by a specified string
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
