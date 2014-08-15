@@ -12,6 +12,7 @@ This section explains various utility operators for working with Observables.
 * [**`doOnCompleted( )`**](Observable-Utility-Operators#dooncompleted) — register an action to take when an Observable completes successfully
 * [**`doOnError( )`**](Observable-Utility-Operators#doonerror) — register an action to take when an Observable completes with an error
 * [**`doOnTerminate( )`**](Observable-Utility-Operators#doonterminate) — register an action to take when an Observable completes, either successfully or with an error
+* [**`doOnSubscribe( )`**](Observable-Utility-Operators#doonsubscribe) — register an action to take when an observer subscribes to an Observable
 * [**`doOnUnsubscribe( )`**](Observable-Utility-Operators#doonunsubscribe) — register an action to take when an observer unsubscribes from an Observable
 * [**`finallyDo( )`**](Observable-Utility-Operators#finallydo) — register an action to take when an Observable completes
 * [**`delay( )`**](Observable-Utility-Operators#delay) — shift the emissions from an Observable forward in time by a specified amount
@@ -288,11 +289,22 @@ Use the `doOnTerminate( )` method to register an `Action` that RxJava will per
 
 ***
 
+## doOnSubscribe( )
+#### register an action to take when an observer subscribes to an Observable
+<img src="/Netflix/RxJava/wiki/images/rx-operators/doOnSubscribe.png" width="640" height="390" />​
+
+Use the `doOnSubscribe( )` method to register an `Action` that RxJava will perform whenever an observer subscribes to this Observable.
+
+#### see also:
+* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#doOnSubscribe(rx.functions.Action0)">`doOnSubscribe(action)`</a>
+
+***
+
 ## doOnUnsubscribe( )
 #### register an action to take when an observer unsubscribes from an Observable
 <img src="/Netflix/RxJava/wiki/images/rx-operators/doOnUnsubscribe.png" width="640" height="310" />​
 
-Use the `doOnUnsubscribe( )` method to register an `Action` that RxJava will perform whenever an observer that is subscribed to this Observer calls `unsubscribe( )` to unsubscribe from it.
+Use the `doOnUnsubscribe( )` method to register an `Action` that RxJava will perform whenever an observer that is subscribed to this Observable calls `unsubscribe( )` to unsubscribe from it.
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#doOnUnsubscribe(rx.functions.Action0)">`doOnUnsubscribe(action)`</a>
