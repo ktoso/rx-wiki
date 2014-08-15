@@ -296,6 +296,7 @@ Use the `doOnUnsubscribe( )` method to register an `Action` that RxJava will p
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#doOnUnsubscribe(rx.functions.Action0)">`doOnUnsubscribe(action)`</a>
+
 ***
 
 ## finallyDo( )
