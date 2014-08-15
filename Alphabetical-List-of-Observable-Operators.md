@@ -46,6 +46,7 @@
 * [**`doOnError( )`**](Observable-Utility-Operators#doonerror) — register an action to take when an Observable completes with an error
 * **`doOnNext( )`** — _see [**`doOnEach( )`**](Observable-Utility-Operators#dooneach)_
 * [**`doOnTerminate( )`**](Observable-Utility-Operators#doonterminate) — register an action to take when an Observable completes, either successfully or with an error
+* [**`doOnUnsubscribe( )`**](Observable-Utility-Operators#doonunsubscribe) — register an action to take when an observer unsubscribes from an Observable
 * [**`doWhile( )`**](Conditional-and-Boolean-Operators#dowhile) — emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true (`contrib-computation-expressions`)
 * **`drop( )`** (scala/clojure) — _see [**`skip( )`**](Filtering-Observables#skip)_
 * **`dropRight( )`** (scala) — _see [**`skipLast( )`**](Filtering-Observables#skiplast)_
