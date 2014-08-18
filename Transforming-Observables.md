@@ -37,6 +37,7 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#map(rx.functions.Func1)">`map(func)`</a>
+* <a href="http://rxmarbles.com/#map">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemapselector-thisarg">`map`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.select.aspx">`Select`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#Select">Introduction to Rx: Select</a>
@@ -150,6 +151,7 @@ Note also that passing a `null` seed is not the same as not passing a seed. The 
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#scan(rx.functions.Func2)">`scan(accumulator)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#scan(R, rx.functions.Func2)">`scan(initialValue, accumulator)`</a>
+* <a href="http://rxmarbles.com/#scan">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypescanseed-accumulator">`scan`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.scan.aspx">`Scan`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Scan">Introduction to Rx: Scan</a>
