@@ -59,6 +59,7 @@ You can also average not the items themselves but the results of a function appl
 Note that any of these methods will fail with an `IllegalArgumentException` if the source Observable does not emit any items.
 
 #### see also:
+* <a href="http://rxmarbles.com/#average">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeaverageselector">`average`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.average.aspx">`Average`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Introduction to Rx: Min, Max, Sum, and Average</a>
@@ -107,6 +108,7 @@ The instance version of `concat( )` is `concatWith( )`, so, for example, in 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable)">`concat(observableOfObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable)">`concat(two observables)`</a> (and versions that accept <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable)">three</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable)">four</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">five</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">six</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">seven</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">eight</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">nine</a> observables)
+* <a href="http://rxmarbles.com/#concat">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeconcatargs">`concat`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.concat.aspx">`Concat`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/12_CombiningSequences.html#Concat">Introduction to Rx: Concat</a>
@@ -144,6 +146,7 @@ Sequence complete
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#longCount()">`longCount()`</a>
+* <a href="http://rxmarbles.com/#count">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypecountpredicate">`count`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229470.aspx">`Count`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Count">Introduction to Rx: Count</a>
@@ -157,6 +160,7 @@ Sequence complete
 The `max( )` operator waits until the source Observable completes, and then emits the item emitted by the source Observable that had the highest value, before itself completing. If more than one item has this maximum value, `max( )` emits the last such item. You may optionally pass in a comparator that `max( )` will use to determine the maximum of two emitted items.
 
 #### see also: 
+* <a href="http://rxmarbles.com/#max">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.max.aspx">`Max`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemaxcomparer">`max`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Intro to Rx: Max and Min</a>
@@ -183,6 +187,7 @@ The `maxBy( )` operator is similar to `max( )` but instead of emitting the m
 The `min( )` operator waits until the source Observable completes, and then emits the item emitted by the source Observable that had the lowest value, before itself completing.  If more than one item has this minimum value, `min( )` emits the last such item. You may optionally pass in a comparator that `min( )` will use to determine the minimum of two emitted items.
 
 #### see also: 
+* <a href="http://rxmarbles.com/#min">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.min.aspx">`Min`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemincomparer">`min`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#MaxAndMin">Intro to Rx: Max and Min</a>
@@ -257,6 +262,7 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(rx.functions.Func2)">`reduce(accumulator)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(R, rx.functions.Func2)">`reduce(initialValue, accumulator)`</a>
+* <a href="http://rxmarbles.com/#aggregate">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeaggregateseed-accumulator">`aggregate`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.aggregate.aspx">`Aggregate`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Aggregate">Introduction to Rx: Aggregate</a>
