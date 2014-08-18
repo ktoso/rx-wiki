@@ -48,6 +48,7 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.functions.Func1)">`filter(predicate)`</a>
+* <a href="http://rxmarbles.com/#filter">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where.aspx">`Where`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefilterpredicate-thisarg">`filter`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Where">Introduction to Rx: Where</a>
@@ -80,6 +81,7 @@ There are also versions of `takeLast( )` that emit the items that were emitted
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit)">`takeLast(time, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(time, unit, scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit)">`takeLast(count, time, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(count, time, unit, scheduler)`</a>
+* <a href="http://rxmarbles.com/#last">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114.aspx">`TakeLast`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastcount">`takeLast`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastwithtimeduration-timescheduler-loopscheduler">`takeLastWithTime`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#Last">Introduction to Rx: Last</a>
@@ -97,6 +99,7 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last(rx.functions.Func1)">`last(predicate)`</a>
+* <a href="http://rxmarbles.com/#last">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastpredicate-thisarg">`last`</a>
 * Linq: `lastAsync`
 
@@ -176,6 +179,7 @@ There are also versions of `skip()` that ignore the items emitted by an Observab
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit)">`skip(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skip(time, timeunit, scheduler)`</a>
+* <a href="http://rxmarbles.com/#skip">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847.aspx">`Skip`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipcount">`skip`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
@@ -228,6 +232,7 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit)">`take(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`take(time, timeunit, scheduler)`</a>
+* <a href="http://rxmarbles.com/#take">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852.aspx">`Take`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakecount-scheduler">`take`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipAndTake">Introduction to Rx: Skip and Take</a>
@@ -254,6 +259,7 @@ You can also pass a function to this method that evaluates items as they are emi
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first()">`first()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first(rx.functions.Func1)">`first(predicate)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeFirst(rx.functions.Func1)">`takeFirst(predicate)`</a>
+* <a href="http://rxmarbles.com/#first">RxMarbles interactive marble diagram</a>
 * Linq: `firstAsync`
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefirstpredicate-thisarg">`first`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
@@ -291,6 +297,7 @@ Pass `elementAt( )` a zero-based index value and it will emit the solitary ite
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#elementAt(int)">`elementAt(index)`</a>
+* <a href="http://rxmarbles.com/#elementAt">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229725.aspx">`ElementAt`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeelementatindex">`elementAt`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#ElementAt">Introduction to Rx: ElementAt</a>
@@ -338,6 +345,7 @@ Sequence complete
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(rx.Observable)">`sample(sampler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit)">`throttleLast(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleLast(period,unit,scheduler)`</a>
+* <a href="http://rxmarbles.com/#sample">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample.aspx">`Sample`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesampleinterval--sampleobservable">`sample`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Sample">Introduction to Rx: Sample</a>
@@ -400,6 +408,7 @@ Note that the last item emitted by the source Observable will be emitted in turn
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit)">`throttleWithTimeout(timeout,unit)`</a> or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit)">`debounce(timeout,unit)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleWithTimeout(timeout,unit,scheduler)`</a> or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`debounce(timeout,unit,scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(rx.functions.Func1)">`debounce(debounceSelector)`</a>
+* <a href="http://rxmarbles.com/#throttle">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.throttle.aspx">`Throttle`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypethrottleduetime-scheduler">`throttle`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Throttle">Introduction to Rx: Throttle</a>
@@ -438,6 +447,7 @@ You can also pass a function or a comparator into `distinct( )` that customize
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinct()">`distinct()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinct(rx.functions.Func1)">`distinct(keySelector)`</a>
+* <a href="http://rxmarbles.com/#distinct">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinct.aspx">`Distinct`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedistinctkeyselector-keyserializer">`distinct`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
@@ -457,6 +467,7 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged()">`distinctUntilChanged()`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged(rx.functions.Func1)">`distinctUntilChanged(keySelector)`</a>
+* <a href="http://rxmarbles.com/#distinctUntilChanged">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinctuntilchanged.aspx">`DistinctUntilChanged`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedistinctuntilchangedkeyselector-comparer">`distinctUntilChanged`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#Distinct">Introduction to Rx: Distinct and DistinctUntilChanged</a>
