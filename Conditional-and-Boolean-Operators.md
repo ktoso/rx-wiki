@@ -33,6 +33,7 @@ The instance version of `amb( )` is `ambWith( )`, so, for example, instead o
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(java.lang.Iterable)">`amb(iterableOfObservables)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable)">`amb(two observables)`</a> (and versions that take <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable)">three</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable)">four</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">five</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">six</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">seven</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">eight</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">nine</a> observables)
+* <a href="http://rxmarbles.com/#amb">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableambargs">`amb`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.amb(v=vs.103).aspx">`Amb`</a>
 
@@ -85,6 +86,7 @@ The `ifThen( )` operator evaluates a function and emits the source Observable'
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipUntil(rx.Observable)">`skipUntil(other)`</a>
+* <a href="http://rxmarbles.com/#skipUnitl">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipuntilother">`skipUntil`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229358.aspx">`SkipUntil`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipUntilTakeUntil">Introduction to Rx: SkipUntil and TakeUntil</a>
@@ -168,6 +170,7 @@ Note that the second Observable can cause `takeUntil` to quit emitting items eit
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.Observable)">`takeUntil(other)`</a>
+* <a href="http://rxmarbles.com/#takeUntil">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakeuntilother">`takeUntil`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229530.aspx">`TakeUntil`</a>
 
@@ -267,6 +270,7 @@ true
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#all(rx.functions.Func1)">`all(predicate)`</a>
+* <a href="http://rxmarbles.com/#all">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeallpredicate-thisarg">`all`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229537.aspx">`All`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#All">Introduction to Rx: All</a>
@@ -281,6 +285,7 @@ Pass the `contains( )` operator a particular item, and it will emit `true` if 
 
 #### see also:
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#contains(java.lang.Object)">`contains(item)`</a>
+* <a href="http://rxmarbles.com/#contains">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.contains.aspx">`Contains`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypecontainsvalue-comparer">`contains`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/06_Inspection.html#Contains">Introduction to Rx: Contains</a>
