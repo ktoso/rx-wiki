@@ -356,6 +356,7 @@ Note that `delay( )` will _not_ time-shift an `onError( )` call in this fash
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(long, java.util.concurrent.TimeUnit)">`delay(delay,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`delay(delay,unit,scheduler)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#delay(rx.functions.Func0, rx.functions.Func1)">`delay(subscriptionDelay, itemDelay)`</a>
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defer(rx.functions.Func0)">`delay(observableFactory)`</a>
+* <a href="http://rxmarbles.com/#delay">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedelayduetime-scheduler">`delay`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.delay.aspx">`Delay`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Delay">Introduction to Rx: Delay</a>
