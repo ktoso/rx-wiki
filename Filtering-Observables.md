@@ -340,6 +340,10 @@ numbers.sample(10, java.util.concurrent.TimeUnit.MILLISECONDS).subscribe(
 Sequence complete
 ```
 
+There is also a version of `sample` that samples the source Observable not at a regular, periodic interval, but upon each emission of an item (or notification) from a second Observable, called the _sampler_. The following marble diagram illustrates this use of `sample`:
+
+<img src="/Netflix/RxJava/wiki/images/rx-operators/sample.o.png" width="640" height="305" />​
+
 #### see also:
 * [[Backpressure]]
 * javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
