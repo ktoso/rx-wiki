@@ -17,7 +17,7 @@ This section explains these operators.
 
 ## onErrorResumeNext( )
 #### instructs an Observable to emit a sequence of items if it encounters an error
-<img src="/Netflix/RxJava/wiki/images/rx-operators/onErrorResumeNext.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/onErrorResumeNext.png" width="640" height="310" />​
 
 The `onErrorResumeNext( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Subscriber, `onErrorResumeNext( )` will instead begin mirroring a second, backup Observable, as shown in the following sample code:
 ```groovy
@@ -51,8 +51,8 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.functions.Func1)">`onErrorResumeNext(throwable,function)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.Observable)">`onErrorResumeNext(sequence)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.functions.Func1)">`onErrorResumeNext(throwable,function)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.Observable)">`onErrorResumeNext(sequence)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeonerrorresumenextsecond">`onErrorResumeNext`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.onerrorresumenext.aspx">`OnErrorResumeNext`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/11_AdvancedErrorHandling.html#OnErrorResumeNext">Introduction to Rx: OnErrorResumeNext</a>
@@ -61,7 +61,7 @@ Sequence complete
 
 ## onErrorReturn( )
 #### instructs an Observable to emit a particular item to a Subscriber’s onNext method when it encounters an error
-<img src="/Netflix/RxJava/wiki/images/rx-operators/onErrorReturn.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/onErrorReturn.png" width="640" height="310" />​
 
 The `onErrorReturn( )` method returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, rather than propagating that error to the Subscriber, `onErrorReturn( )` will instead emit a specified item and invoke the Subscriber's `onCompleted( )` method, as shown in the following sample code:
 ```groovy
@@ -89,29 +89,29 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#onErrorReturn(rx.functions.Func1)">`onErrorReturn(func)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorReturn(rx.functions.Func1)">`onErrorReturn(func)`</a>
 
 ***
 
 ## onExceptionResumeNext( )
 #### instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
-<img src="/Netflix/RxJava/wiki/images/rx-operators/onExceptionResumeNextViaObservable.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/onExceptionResumeNextViaObservable.png" width="640" height="310" />​
 
 Much like `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Subscriber, `onExceptionResumeNext( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNext( )` will propagate it to its Subscriber's `onError( )` method and will not invoke its backup Observable.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#onExceptionResumeNext(rx.Observable)">`onExceptionResumeNext(observable)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onExceptionResumeNext(rx.Observable)">`onExceptionResumeNext(observable)`</a>
 
 ***
 
 ## retry( )
 #### if a source Observable emits an error, resubscribe to it in the hopes that it will complete without error
-<img src="/Netflix/RxJava/wiki/images/rx-operators/retry.png" width="640" height="315" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/retry.png" width="640" height="315" />​
 
 The `retry( )` method responds to an `onError( )` call from the source Observable by not passing that call through to its Subscribers, but instead resubscribing to the source Observable and giving it another opportunity to complete its sequence without error. You can pass `retry( )` a maximum number of retry-attempts, or you can pass nothing, in which case it will never stop retrying to get an error-free sequence. It always passes `onNext( )` calls through to its Subscribers, even from sequences that terminate with an error, so this can cause duplicate emissions (as shown in the diagram above).
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry()">`retry()`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry(int)">`retry(count)`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retry(Func1)">`retry(rx.functions.Func1)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry()">`retry()`</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry(long)">`retry(count)`</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry(rx.functions.Func2)">`retry(predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototyperetryretrycount">`retry`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.retry.aspx">`Retry`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/11_AdvancedErrorHandling.html#Retry">Introduction to Rx: Retry</a>
@@ -120,9 +120,9 @@ The `retry( )` method responds to an `onError( )` call from the source Obser
 
 ## retryWhen( )
 #### if a source Observable emits an error, pass that error to another Observable to determine whether to resubscribe to the source
-<img src="/Netflix/RxJava/wiki/images/rx-operators/retryWhen.f.png" width="640" height="430" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/retryWhen.f.png" width="640" height="430" />​
 
 The `retryWhen( )` operator is similar to `retry( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onError` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `retryWhen( )` resubscribes to the source and the process repeats; if that result is an `onError` notification, `retryWhen( )` also completes.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1)">`retryWhen(notificationHandler)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1, rx.Scheduler)">`retry(notificationHandler,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1)">`retryWhen(notificationHandler)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1, rx.Scheduler)">`retry(notificationHandler,scheduler)`</a>
