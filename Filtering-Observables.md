@@ -25,7 +25,7 @@ This section explains operators you can use to filter and select items emitted b
 
 ## filter( )
 #### filter items emitted by an Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/filter.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/filter.png" width="640" height="310" />​
 
 You can filter an Observable, discarding any items that do not meet some test, by passing a filtering function into the `filter( )` method. For example, the following code filters a list of integers, emitting only those that are even (that is, where the remainder from dividing the number by two is zero):
 
@@ -47,7 +47,7 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#filter(rx.functions.Func1)">`filter(predicate)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#filter(rx.functions.Func1)">`filter(predicate)`</a>
 * <a href="http://rxmarbles.com/#filter">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.where.aspx">`Where`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefilterpredicate-thisarg">`filter`</a>
@@ -57,7 +57,7 @@ Sequence complete
 
 ## takeLast( )
 #### only emit the last _n_ items emitted by an Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/takeLast.n.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/takeLast.n.png" width="640" height="310" />​
 
 To convert an Observable that emits several items into one that only emits the last _n_ of these items before completing, use the `takeLast( )` method. For instance, in the following code, `takeLast( )` emits only the last integer in the list of integers represented by `numbers`:
 
@@ -78,9 +78,9 @@ Sequence complete
 There are also versions of `takeLast( )` that emit the items that were emitted by the source Observable during a specified window of time before the Observable completed, or that emit a maximum of _n_ items from such a window.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit)">`takeLast(time, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(time, unit, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit)">`takeLast(count, time, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(count, time, unit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit)">`takeLast(time, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(time, unit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit)">`takeLast(count, time, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(count, time, unit, scheduler)`</a>
 * <a href="http://rxmarbles.com/#last">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114.aspx">`TakeLast`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastcount">`takeLast`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastwithtimeduration-timescheduler-loopscheduler">`takeLastWithTime`</a>
@@ -90,7 +90,7 @@ There are also versions of `takeLast( )` that emit the items that were emitted
 
 ## last( )
 #### only emit the last item emitted by an Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/last.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/last.png" width="640" height="305" />​
 
 The `last( )` operator is equivalent to `takeLast(1)` except that it will throw an `NoSuchElementException` if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `last( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
 
@@ -98,7 +98,7 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#last(rx.functions.Func1)">`last(predicate)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#last(rx.functions.Func1)">`last(predicate)`</a>
 * <a href="http://rxmarbles.com/#last">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastpredicate-thisarg">`last`</a>
 * Linq: `lastAsync`
@@ -107,13 +107,13 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 
 ## lastOrDefault( )
 #### emit only the last item emitted by an Observable, or a default value if the source Observable is empty
-<img src="/Netflix/RxJava/wiki/images/rx-operators/lastOrDefault.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/lastOrDefault.png" width="640" height="305" />​
 
 The `lastOrDefault( )` operator returns an Observable that emits the last item emitted by the source Observable, or a default item if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `lastOrDefault( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T)">`lastOrDefault(default)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T, rx.functions.Func1)">`lastOrDefault(default, predicate)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T)">`lastOrDefault(default)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T, rx.functions.Func1)">`lastOrDefault(default, predicate)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypelastordefaultpredicate-defaultvalue-thisarg">`lastOrDefault`</a>
 * Linq: `lastOrDefaultAsync`
 
@@ -121,7 +121,7 @@ The `lastOrDefault( )` operator returns an Observable that emits the last item
 
 ## takeLastBuffer( )
 #### emit the last _n_ items emitted by an Observable, as a single list item
-<img src="/Netflix/RxJava/wiki/images/rx-operators/takeLastBuffer.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/takeLastBuffer.png" width="640" height="310" />​
 
 To convert an Observable that emits several items into one that emits the last _n_ of these items as a single list before completing, use the `takeLastBuffer( )` method. There are also versions of `takeLastBuffer( )` that emit a list containing the items that were emitted by the source Observable during a specified window of time before the Observable completed, or a maximum of _n_ items from such a window.
 
@@ -140,16 +140,16 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int)">`takeLastBuffer(count)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit)">`takeLastBuffer(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(time, timeunit, scheduler)`</a>
-* javadoc: <a hrtef="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit)">`takeLastBuffer(count, time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(count, time, timeunit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int)">`takeLastBuffer(count)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit)">`takeLastBuffer(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(time, timeunit, scheduler)`</a>
+* javadoc: <a hrtef="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit)">`takeLastBuffer(count, time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(count, time, timeunit, scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbuffercount">`takeLastBuffer`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbufferwithtimeduration-scheduler">`takeLastBufferWithTime`</a>
 
 ***
 
 ## skip()
 #### ignore the first _n_ items emitted by an Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/skip.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/skip.png" width="640" height="305" />​
 
 You can ignore the first _n_ items emitted by an Observable and attend only to those items that come after, by modifying the Observable with the `skip(n)` method.
 
@@ -177,8 +177,8 @@ There are also versions of `skip()` that ignore the items emitted by an Observab
 > **Note:** in the scala language adaptor for RxJava, this method is called `drop( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit)">`skip(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skip(time, timeunit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit)">`skip(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skip(time, timeunit, scheduler)`</a>
 * <a href="http://rxmarbles.com/#skip">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229847.aspx">`Skip`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipcount">`skip`</a>
@@ -188,7 +188,7 @@ There are also versions of `skip()` that ignore the items emitted by an Observab
 
 ## skipLast()
 #### ignore the last _n_ items emitted by an Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/skipLast.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/skipLast.png" width="640" height="305" />​
 
 You can ignore the last _n_ items emitted by an Observable and attend only to those items that preced them, by modifying the Observable with the `skipLast(n)` method. Note that the mechanism by which this is implemented will delay the emission of any item from the source Observable until _n_ additional items have been emitted by that Observable.
 
@@ -197,8 +197,8 @@ There are also versions of `skipLast()` that ignore the items emitted by an Obse
 > **Note:** in the scala language adaptor for RxJava, this method is called `dropRight( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(int)">`skipLast(count)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit)">`skipLast(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skipLast(time, timeunit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipLast(int)">`skipLast(count)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit)">`skipLast(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skipLast(time, timeunit, scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211750.aspx">`SkipLast`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskiplastcount">`skipLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipLastTakeLast">Introduction to Rx: SkipLast and TakeLast</a>
@@ -207,7 +207,7 @@ There are also versions of `skipLast()` that ignore the items emitted by an Obse
 
 ## take( )
 #### emit only the first _n_ items emitted by an Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/take.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/take.png" width="640" height="305" />​
 
 You can choose to pay attention only to the first _n_ items emitted by an Observable by calling its `take(n)` method. That method returns an Observable that will invoke an Subscriber’s `onNext` method a maximum of _n_ times before invoking `onCompleted`. For example,
 
@@ -230,8 +230,8 @@ Sequence complete
 If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an exception or invoke `onError()`, but will merely emit this same fewer number of items before it completes.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit)">`take(time, timeunit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`take(time, timeunit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit)">`take(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`take(time, timeunit, scheduler)`</a>
 * <a href="http://rxmarbles.com/#take">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229852.aspx">`Take`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakecount-scheduler">`take`</a>
@@ -242,23 +242,23 @@ If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _
 ## first( ) and takeFirst( )
 #### emit only the first item emitted by an Observable, or the first item that meets some condition
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/first.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/first.png" width="640" height="310" />​
 
 To create an Observable that emits only the first item emitted by a source Observable (if any), use the `first( )` method.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/firstN.png" width="640" height="320" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/firstN.png" width="640" height="320" />​
 
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `first( )` will create an Observable that emits the first such item for which your function returns `true` (if any).
 
 `takeFirst( )` behaves very similarly to `first( )` with the exception of how they behave when the source Observable emits no items (or no items that match the predicate). In such a case, `first( )` will throw an `NoSuchElementException` while `takeFirst( )` will return an empty Observable (one that calls `onCompleted( )` but never calls `onNext( )`).
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/first.takeFirst.png" width="640" height="455" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/first.takeFirst.png" width="640" height="455" />​
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first()">`first()`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#first(rx.functions.Func1)">`first(predicate)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#takeFirst(rx.functions.Func1)">`takeFirst(predicate)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#first()">`first()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#first(rx.functions.Func1)">`first(predicate)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeFirst(rx.functions.Func1)">`takeFirst(predicate)`</a>
 * <a href="http://rxmarbles.com/#first">RxMarbles interactive marble diagram</a>
 * Linq: `firstAsync`
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefirstpredicate-thisarg">`first`</a>
@@ -269,11 +269,11 @@ You can also pass a function to this method that evaluates items as they are emi
 ## firstOrDefault( )
 #### emit only the first item emitted by an Observable, or the first item that meets some condition, or a default value if the source Observable is empty
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/firstOrDefault.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/firstOrDefault.png" width="640" height="305" />​
 
 To create an Observable that emits only the first item emitted by a source Observable (or a default value if the source Observable is empty), use the `firstOrDefault( )` method.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/firstOrDefaultN.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/firstOrDefaultN.png" width="640" height="310" />​
 
 You can also pass a function to this method that evaluates items as they are emitted by the source Observable, in which case `firstOrDefault( )` will create an Observable that emits the first such item for which your function returns `true` (or the supplied default value if no such item is emitted).
 
@@ -281,8 +281,8 @@ You can also pass a function to this method that evaluates items as they are emi
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T, rx.functions.Func1)">`firstOrDefault(default, predicate)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T, rx.functions.Func1)">`firstOrDefault(default, predicate)`</a>
 * Linq: `firstOrDefaultAsync`
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypefirstordefaultpredicate-defaultvalue-thisarg">`firstOrDefault`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/07_Aggregation.html#First">Introduction to Rx: First</a>
@@ -291,12 +291,12 @@ You can also pass a function to this method that evaluates items as they are emi
 
 ## elementAt( )
 #### emit item _n_ emitted by the source Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/elementAt.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/elementAt.png" width="640" height="310" />​
 
 Pass `elementAt( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAt( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, or if the source Observable emits fewer than _index value_ + 1 items, `elementAt( )` will throw an <code>IndexOutOfBoundsException</code>.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#elementAt(int)">`elementAt(index)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#elementAt(int)">`elementAt(index)`</a>
 * <a href="http://rxmarbles.com/#elementAt">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229725.aspx">`ElementAt`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeelementatindex">`elementAt`</a>
@@ -306,12 +306,12 @@ Pass `elementAt( )` a zero-based index value and it will emit the solitary ite
 
 ## elementAtOrDefault( )
 #### emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
-<img src="/Netflix/RxJava/wiki/images/rx-operators/elementAtOrDefault.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/elementAtOrDefault.png" width="640" height="310" />​
 
 Pass `elementAtOrDefault( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAtOrDefault( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, `elementAtOrDefault( )` will throw an <code>IndexOutOfBoundsException</code>. If the source Observable emits fewer than _index value_ + 1 items, `elementAtOrDefault( )` will emit the default value you pass in (you must also pass in a type for this value that is appropriate to what type your Subscribers expect to observe).
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#elementAtOrDefault(int, T)">`elementAtOrDefault(index,default)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#elementAtOrDefault(int, T)">`elementAtOrDefault(index,default)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229845.aspx">`ElementAtOrDefault`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeelementatordefaultindex-defaultvalue">`elementAtOrDefault`</a>
 
@@ -319,7 +319,7 @@ Pass `elementAtOrDefault( )` a zero-based index value and it will emit the sol
 
 ## sample( ) or throttleLast( )
 #### emit the most recent items emitted by an Observable within periodic time intervals
-<img src="/Netflix/RxJava/wiki/images/rx-operators/sample.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/sample.png" width="640" height="305" />​
 
 Use the `sample( )` method to periodically look at an Observable to see what item it has most recently emitted since the previous sampling.  Note that if the source Observable has emitted no items since the last time it was sampled, the Observable that results from the `sample( )` operator will emit no item for that sampling period.
 
@@ -342,13 +342,13 @@ Sequence complete
 
 There is also a version of `sample` that samples the source Observable not at a regular, periodic interval, but upon each emission of an item (or notification) from a second Observable, called the _sampler_. The following marble diagram illustrates this use of `sample`:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/sample.o.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/sample.o.png" width="640" height="305" />​
 
 #### see also:
 * [[Backpressure]]
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#sample(rx.Observable)">`sample(sampler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit)">`throttleLast(period,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleLast(period,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit)">`sample(period,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`sample(period,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(rx.Observable)">`sample(sampler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit)">`throttleLast(period,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleLast(period,unit,scheduler)`</a>
 * <a href="http://rxmarbles.com/#sample">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.sample.aspx">`Sample`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesampleinterval--sampleobservable">`sample`</a>
@@ -358,7 +358,7 @@ There is also a version of `sample` that samples the source Observable not at a 
 
 ## throttleFirst( )
 #### emit the first items emitted by an Observable within periodic time intervals
-<img src="/Netflix/RxJava/wiki/images/rx-operators/throttleFirst.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/throttleFirst.png" width="640" height="305" />​
 
 Use the `throttleFirst( )` method to periodically look at an Observable to see what item it emitted first during a particular time span. The following code shows how an Observable can be modified by `throttleFirst( )`:
 
@@ -394,14 +394,14 @@ Sequence complete
 ```
 #### see also:
 * [[Backpressure]]
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long, java.util.concurrent.TimeUnit)">`throttleFirst(windowDuration,unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleFirst(windowDuration,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long, java.util.concurrent.TimeUnit)">`throttleFirst(windowDuration,unit)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleFirst(windowDuration,unit,scheduler)`</a>
 
 ***
 
 ## throttleWithTimeout( ) or debounce( )
 #### only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
-<img src="/Netflix/RxJava/wiki/images/rx-operators/throttleWithTimeout.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/throttleWithTimeout.png" width="640" height="305" />​
 
 Use the `throttleWithTimeout( )` method to select only those items emitted by a source Observable that are not quickly superceded by other items.
 
@@ -409,9 +409,9 @@ Note that the last item emitted by the source Observable will be emitted in turn
 
 #### see also:
 * [[Backpressure]]
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit)">`throttleWithTimeout(timeout,unit)`</a> or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit)">`debounce(timeout,unit)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleWithTimeout(timeout,unit,scheduler)`</a> or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`debounce(timeout,unit,scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#debounce(rx.functions.Func1)">`debounce(debounceSelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit)">`throttleWithTimeout(timeout,unit)`</a> or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit)">`debounce(timeout,unit)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`throttleWithTimeout(timeout,unit,scheduler)`</a> or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#debounce(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`debounce(timeout,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#debounce(rx.functions.Func1)">`debounce(debounceSelector)`</a>
 * <a href="http://rxmarbles.com/#throttle">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.throttle.aspx">`Throttle`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypethrottleduetime-scheduler">`throttle`</a>
@@ -421,17 +421,17 @@ Note that the last item emitted by the source Observable will be emitted in turn
 
 ## timeout( )
 #### emit items from a source Observable, but issue an exception if no item is emitted in a specified timespan
-<img src="/Netflix/RxJava/wiki/images/rx-operators/timeout.1.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/timeout.1.png" width="640" height="305" />​
 
 The `timeout( )` operator emits the items emitted by a source Observable unless the source Observable fails to emit an item within a specified period of time since the previous item it emitted, in which case `timeout( )` will call `onError( )` with a `TimeoutException`.
 
 Another version of `timeout( )` does not call `onError( )` but instead switches to emitting items from an alternative Observable if the original Observable fails to emit an item within the specified timeout period:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/timeout.2.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/timeout.2.png" width="640" height="305" />​
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit)">`timeout(time,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timeout(time,unit,scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable)">`timeout(time,unit,fallback)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable, rx.Scheduler)">`timeout(time,unit,fallback,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit)">`timeout(time,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timeout(time,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable)">`timeout(time,unit,fallback)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable, rx.Scheduler)">`timeout(time,unit,fallback,scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timeout.aspx">`Timeout`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeoutduetime-other-scheduler">`timeout`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeoutwithselectorfirsttimeout-timeoutdurationselector-other">`timeoutWithSelector`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Timeout">Introduction to Rx: Timeout</a>
@@ -440,17 +440,17 @@ Another version of `timeout( )` does not call `onError( )` but instead switc
 
 ## distinct( )
 #### suppress duplicate items emitted by the source Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/distinct.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/distinct.png" width="640" height="310" />​
 
 Use the `distinct( )` method to remove duplicate items from a source Observable and only emit single examples of those items.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/distinct.key.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/distinct.key.png" width="640" height="310" />​
 
 You can also pass a function or a comparator into `distinct( )` that customizes how it distinguishes between distinct and non-distinct items.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinct()">`distinct()`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinct(rx.functions.Func1)">`distinct(keySelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinct()">`distinct()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinct(rx.functions.Func1)">`distinct(keySelector)`</a>
 * <a href="http://rxmarbles.com/#distinct">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinct.aspx">`Distinct`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedistinctkeyselector-keyserializer">`distinct`</a>
@@ -460,17 +460,17 @@ You can also pass a function or a comparator into `distinct( )` that customize
 
 ## distinctUntilChanged( )
 #### suppress duplicate consecutive items emitted by the source Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/distinctUntilChanged.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/distinctUntilChanged.png" width="640" height="310" />​
 
 Use the `distinctUntilChanged( )` method to remove duplicate consecutive items from a source Observable and only emit single examples of such items.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/distinctUntilChanged.key.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/distinctUntilChanged.key.png" width="640" height="310" />​
 
 You can also pass a function or a comparator into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged()">`distinctUntilChanged()`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged(rx.functions.Func1)">`distinctUntilChanged(keySelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged()">`distinctUntilChanged()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged(rx.functions.Func1)">`distinctUntilChanged(keySelector)`</a>
 * <a href="http://rxmarbles.com/#distinctUntilChanged">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.distinctuntilchanged.aspx">`DistinctUntilChanged`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypedistinctuntilchangedkeyselector-comparer">`distinctUntilChanged`</a>
@@ -480,10 +480,12 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 
 ## ofType( )
 #### emit only those items from the source Observable that are of a particular class
-<img src="/Netflix/RxJava/wiki/images/rx-operators/ofClass.png" width="640" height="310" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/ofClass.png" width="640" height="310" />​
+
+If you only want to be notified of the emission of items from an Observable when those items are of a particular class, you can apply the `ofType` operator to the Observable before subscribing to it.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#ofType(java.lang.Class)">`ofType(class)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#ofType(java.lang.Class)">`ofType(class)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229380.aspx">`OfType`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/08_Transformation.html#CastAndOfType">Introduction to Rx: Cast and OfType</a>
 
@@ -491,10 +493,12 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 
 ## ignoreElements( )
 #### discard the items emitted by the source Observable and only pass through the error or completed notification
-<img src="/Netflix/RxJava/wiki/images/rx-operators/ignoreElements.png" width="640" height="305" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/ignoreElements.png" width="640" height="305" />​
+
+If you do not care about the items being emitted by an Observable, but do want to be notified when it completes or when it terminates with an error, you can apply the `ignoreElements` operator to the Observable, which will ensure that it will never call its observers' `onNext` handlers.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#ignoreElements()">`ignoreElements()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#ignoreElements()">`ignoreElements()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229242.aspx">`IgnoreElements`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeignoreelements">`ignoreElements`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#IgnoreElements">Introduction to Rx: IgnoreElements</a>
