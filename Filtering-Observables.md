@@ -79,8 +79,8 @@ There are also versions of `takeLast( )` that emit the items that were emitted
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit)">`takeLast(time, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(time, unit, scheduler)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit)">`takeLast(count, time, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(count, time, unit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit)">`takeLast(time, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(time, unit, scheduler)`</a>
 * <a href="http://rxmarbles.com/#last">RxMarbles interactive marble diagram</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh212114.aspx">`TakeLast`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastcount">`takeLast`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastwithtimeduration-timescheduler-loopscheduler">`takeLastWithTime`</a>
@@ -141,8 +141,8 @@ Sequence complete
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int)">`takeLastBuffer(count)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit)">`takeLastBuffer(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(time, timeunit, scheduler)`</a>
 * javadoc: <a hrtef="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit)">`takeLastBuffer(count, time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(count, time, timeunit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit)">`takeLastBuffer(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLastBuffer(time, timeunit, scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbuffercount">`takeLastBuffer`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakelastbufferwithtimeduration-scheduler">`takeLastBufferWithTime`</a>
 
 ***
@@ -430,8 +430,10 @@ Another version of `timeout( )` does not call `onError( )` but instead switc
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/timeout.2.png" width="640" height="305" />​
 
 #### see also:
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit)">`timeout(time,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timeout(time,unit,scheduler)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable)">`timeout(time,unit,fallback)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable, rx.Scheduler)">`timeout(time,unit,fallback,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func0, rx.functions.Func1)">`timeout(firstTimeoutSelector, timeoutSelector)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func0, rx.functions.Func1, rx.Observable)">`timeout(firstTimeoutSelector, timeoutSelector, fallback)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func1)">`timeout(timeoutSelector)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func1, rx.Observable)">`timeout(timeoutSelector, fallback)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit)">`timeout(time, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timeout(time, unit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable)">`timeout(time, unit, fallback)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long, java.util.concurrent.TimeUnit, rx.Observable, rx.Scheduler)">`timeout(time, unit, fallback, scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timeout.aspx">`Timeout`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeoutduetime-other-scheduler">`timeout`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetimeoutwithselectorfirsttimeout-timeoutdurationselector-other">`timeoutWithSelector`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/13_TimeShiftedSequences.html#Timeout">Introduction to Rx: Timeout</a>
