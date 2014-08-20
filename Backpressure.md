@@ -4,7 +4,7 @@ _**Work in progress...**_
 
 In RxJava it is not difficult to get into a situation in which an Observable is emitting items more rapidly than an operator or subscriber can consume them. This presents the problem of what to do with such a growing backlog of unconsumed items.
 
-For example, imagine using the [`zip`](Combining-Observables#wiki-zip) operator to zip together two infinite Observables, one of which emits items twice as frequently as the other. A naive implementation of the `zip` operator would have to maintain an ever-expanding buffer of items emitted by the faster Observable to eventually combine with items emitted by the slower one. This could cause RxJava to seize an unwieldy amount of system resources.
+For example, imagine using the [`zip`](Combining-Observables#zip) operator to zip together two infinite Observables, one of which emits items twice as frequently as the other. A naive implementation of the `zip` operator would have to maintain an ever-expanding buffer of items emitted by the faster Observable to eventually combine with items emitted by the slower one. This could cause RxJava to seize an unwieldy amount of system resources.
 
 There are a variety of strategies with which you can exercise flow control and backpressure in RxJava in order to alleviate the problems caused when a quickly-producing Observable meets a slow-consuming observer. This page explains some of these strategies, and also shows you how you can design your own Observables and Observable operators to respect requests for flow control.
 
@@ -22,7 +22,7 @@ Cold Observables are ideal subjects for the reactive pull model of backpressure 
 
 Your first line of defense against the problems of over-producing Observables is to use some of the ordinary set of Observable operators to reduce the number of emitted items to a more manageable number. The examples in this section will show how you might use such operators to handle a bursty Observable like the one illustrated in the following marble diagram:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.bursty.png" width="640" height="35" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.bursty.png" width="640" height="35" />​
 
 By fine-tuning the parameters to these operators you can ensure that a slow-consuming observer is not overwhelmed by a fast-producing Observable.
 
@@ -35,7 +35,7 @@ The following diagrams show how you could use each of these operators on the bur
 ### sample (or throttleLast)
 The `sample` operator periodically "dips" into the sequence and emits only the most recently emitted item during each dip:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.sample.png" width="640" height="260" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.sample.png" width="640" height="260" />​
 ````groovy
 Observable<Integer> burstySampled = bursty.sample(500, TimeUnit.MILLISECONDS);
 ````
@@ -43,7 +43,7 @@ Observable<Integer> burstySampled = bursty.sample(500, TimeUnit.MILLISECONDS);
 ### throttleFirst
 The `throttleFirst` operator is similar, but emits not the most recently emitted item, but the first item that was emitted after the previous "dip":
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.throttleFirst.png" width="640" height="260" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.throttleFirst.png" width="640" height="260" />​
 ````groovy
 Observable<Integer> burstyThrottled = bursty.throttleFirst(500, TimeUnit.MILLISECONDS);
 ````
@@ -51,7 +51,7 @@ Observable<Integer> burstyThrottled = bursty.throttleFirst(500, TimeUnit.MILLISE
 ### debounce (or throttleWithTimeout)
 The `debounce` operator emits only those items from the source Observable that are not followed by another item within a specified duration:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.debounce.png" width="640" height="240" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.debounce.png" width="640" height="240" />​
 ````groovy
 Observable<Integer> burstyDebounced = bursty.debounce(10, TimeUnit.MILLISECONDS);
 ````
@@ -66,14 +66,14 @@ The following diagrams show how you could use each of these operators on the bur
 
 You could, for example, close and emit a buffer of items from the bursty Observable periodically, at a regular interval of time:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer2.png" width="640" height="270" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.buffer2.png" width="640" height="270" />​
 ````groovy
 Observable<List<Integer>> burstyBuffered = bursty.buffer(500, TimeUnit.MILLISECONDS);
 ````
 
 Or you could get fancy, and collect items in buffers during the bursty periods and emit them at the end of each burst, by using the `debounce` operator to emit a buffer closing indicator to the `buffer` operator:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.buffer1.png" width="640" height="500" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.buffer1.png" width="640" height="500" />​
 ````groovy
 // we have to multicast the original bursty Observable so we can use it
 // both as our source and as the source for our buffer closing selector:
@@ -88,14 +88,14 @@ Observable<List<Integer>> burstyBuffered = burstyMulticast.buffer(burstyDebounce
 
 `window` is similar to `buffer`. One variant of `window` allows you to periodically emit Observable windows of items at a regular interval of time:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.window1.png" width="640" height="325" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.window1.png" width="640" height="325" />​
 ````groovy
 Observable<Observable<Integer>> burstyWindowed = bursty.window(500, TimeUnit.MILLISECONDS);
 ````
 
 You could also choose to emit a new window each time you have collected a particular number of items from the source Observable:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/bp.window2.png" width="640" height="325" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.window2.png" width="640" height="325" />​
 ````groovy
 Observable<Observable<Integer>> burstyWindowed = bursty.window(5);
 ````
@@ -158,9 +158,9 @@ For this to work, though, Observables _A_ and _B_ must respond correctly to the 
 
 <dl>
  <dt><tt>onBackpressureBuffer</tt></dt>
-  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the <tt>request</tt>s they generate<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/bp.obp.buffer.png" width="640" height="300" />​</dd>
+  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the <tt>request</tt>s they generate<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.obp.buffer.png" width="640" height="300" />​</dd>
  <dt><tt>onBackpressureDrop</tt></dt>
-  <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/bp.obp.drop.png" width="640" height="245" />​</dd>
+  <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.obp.drop.png" width="640" height="245" />​</dd>
 </dl>
 
 If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply reactive pull backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
@@ -177,4 +177,4 @@ Things that may need explaining:
 _**Work in progress...**_
 
 # See also
-* [RxJava 0.20.0-RC1 release notes](https://github.com/Netflix/RxJava/releases/tag/0.20.0-RC1)
+* [RxJava 0.20.0-RC1 release notes](https://github.com/ReactiveX/RxJava/releases/tag/0.20.0-RC1)
