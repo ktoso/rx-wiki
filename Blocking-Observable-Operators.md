@@ -1,6 +1,6 @@
 This section explains the [`BlockingObservable`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html) subclass. A Blocking Observable extends the ordinary Observable class by providing a set of operators on the items emitted by the Observable that block.
 
-To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlocking( )`](http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking() method or the [`BlockingObservable.from( )`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable) method.
+To transform an `Observable` into a `BlockingObservable`, use the [`Observable.toBlocking( )`](http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking()) method or the [`BlockingObservable.from( )`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)) method.
 
 * [**`forEach( )`**](Blocking-Observable-Operators#wiki-foreach) — invoke a function on each item emitted by the Observable; block until the Observable completes
 * [**`first( )`**](Blocking-Observable-Operators#wiki-first-and-firstordefault) — block until the Observable emits an item, then return the first item emitted by the Observable
