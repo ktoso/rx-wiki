@@ -17,7 +17,7 @@ This section explains methods that create Observables.
 
 ## just( )
 #### convert an object or several objects into an Observable that emits that object or those objects
-<img src="/Netflix/RxJava/wiki/images/rx-operators/just.png" width="640" height="310" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/just.png" width="640" height="310" />
 
 To convert any object (or objects) into an Observable that emits that object (or those objects) and then completes, pass that object (or those objects) into the `just( )` method.
 
@@ -35,13 +35,13 @@ This has some similarities to the `from( )` method, but note that if you pass 
 Note that if you pass `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(item)`</a> (or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T)">two</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T)">three</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T)">four</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T)">five</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T)">six</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T)">seven</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T)">eight</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T)">nine</a>, or <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T, T)">ten</a> items)
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(item)`</a> (or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T)">two</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T)">three</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T)">four</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T)">five</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T)">six</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T)">seven</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T)">eight</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T)">nine</a>, or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T, T)">ten</a> items)
 
 ***
 
 ## from( )
 #### convert an Iterable, a Future, or an Array into an Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/from.png" width="640" height="315" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/from.png" width="640" height="315" />
 
 You can convert an object that supports `Iterable` into an Observable that emits each iterable item in the object, or an object that supports `Future` into an Observable that emits the result of the `get` call, simply by passing the object into the `from( )` methods, for example:
 
@@ -65,9 +65,9 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 > **Note:** in the scala language adaptor for RxJava, the version of this method that works with sequences (arrays) is called `items( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future)">`from(future)`</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, long, java.util.concurrent.TimeUnit)">`from(future, timeout, unit)`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, rx.Scheduler)">`from(future, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable)">`from(iterable)`</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable, rx.Scheduler)">`from(iterable, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T...)">`from(array)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#from(T[], rx.Scheduler)">`from(array, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future)">`from(future)`</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, long, java.util.concurrent.TimeUnit)">`from(future, timeout, unit)`</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, rx.Scheduler)">`from(future, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable)">`from(iterable)`</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable, rx.Scheduler)">`from(iterable, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(T[])">`from(array)`</a>
 * RxJS: [`fromArray`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefromarrayarray-scheduler)
 * RxJS: [`fromPromise`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablefrompromisepromise)
 * Linq: [`ToObservable`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.toobservable.aspx)
@@ -76,13 +76,13 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 
 ## repeat( )
 #### create an Observable that emits the sequence of items emitted by the source Observable repeatedly
-<img src="/Netflix/RxJava/wiki/images/rx-operators/repeat.o.png" width="640" height="309" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/repeat.o.png" width="640" height="309" />
 
 There are also versions of `repeat( )` that operate on a scheduler that you specify, and that repeat only a certain number of times before terminating.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat()">`repeat( )`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat(rx.Scheduler)">`repeat(scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat(long)">`repeat(count)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeat(long, rx.Scheduler)">`repeat(count, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeat()">`repeat( )`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeat(rx.Scheduler)">`repeat(scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeat(long)">`repeat(count)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeat(long, rx.Scheduler)">`repeat(count, scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.repeat.aspx">`Repeat`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablerepeatvalue-repeatcount-scheduler">`repeat`</a>
 
@@ -90,18 +90,18 @@ There are also versions of `repeat( )` that operate on a scheduler that you sp
 
 ## repeatWhen( )
 #### create an Observable that emits a particular item or sequence of items repeatedly, depending on the emissions of a second Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/repeatWhen.f.png" width="640" height="430" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/repeatWhen.f.png" width="640" height="430" />
 
 The `repeatWhen( )` operator is similar to `repeat( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onCompleted` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `repeatWhen( )` resubscribes to the source and the process repeats; if that result is an `onCompleted` notification, `repeatWhen( )` also completes.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1)">`repeatWhen(notificationHandler)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1,rx.Scheduler)">`repeat(notificationHandler,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1)">`repeatWhen(notificationHandler)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1, rx.Scheduler)">`repeat(notificationHandler, scheduler)`</a>
 
 ***
 
 ## create( )
 #### create an Observable from scratch by means of a function
-<img src="/Netflix/RxJava/wiki/images/rx-operators/create.png" width="640" height="200" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/create.png" width="640" height="200" />
 
 You can create an Observable from scratch by using the `create( )` method. You pass this method a function that accepts as its parameter the Subscriber that is passed to an Observable’s `subscribe( )` method (or that is derived from the `Observerer` that is passed to that method). Write the function you pass to `create( )` so that it behaves as an Observable — calling the passed-in Subscriber’s `onNext( )`, `onError( )`, and `onCompleted( )` methods appropriately. For example:
 
@@ -130,7 +130,7 @@ def myObservable = Observable.create({ aSubscriber ->
 > **Note:** in the scala language adaptor for RxJava, this method is called `apply( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribe)">`create(OnSubscribe)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribe)">`create(OnSubscribe)`</a>
 * RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablecreatesubscribe)
 * Linq: [`Create`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.create.aspx)
 
@@ -138,12 +138,12 @@ def myObservable = Observable.create({ aSubscriber ->
 
 ## defer( )
 #### do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
-<img src="/Netflix/RxJava/wiki/images/rx-operators/defer.png" width="640" height="340" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/defer.png" width="640" height="340" />
 
 Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Subscriber subscribes.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#defer(rx.functions.Func0)">`defer(observableFactory)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#defer(rx.functions.Func0)">`defer(observableFactory)`</a>
 * RxJS: [`defer`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservabledeferobservablefactory)
 * Linq: [`Defer`](http://msdn.microsoft.com/en-us/library/hh229160.aspx)
 
@@ -151,7 +151,7 @@ Pass `defer( )` an Observable factory function (a function that generates Obse
 
 ## range( )
 #### create an Observable that emits a range of sequential integers
-<img src="/Netflix/RxJava/wiki/images/rx-operators/range.png" width="640" height="195" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/range.png" width="640" height="195" />
 
 To create an Observable that emits a range of sequential integers, pass the starting integer and the number of integers to emit to the `range( )` method.
 ```groovy
@@ -162,7 +162,7 @@ def myObservable = Observable.range(5, 3);
 In calls to `range(n,m)`, a value of zero for _m_ will result in no numbers being emitted (values less than zero will cause an exception). _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#range(int, int)">`range(start, count)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#range(int, int, rx.Scheduler)">`range(start, count, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#range(int, int)">`range(start, count)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#range(int, int, rx.Scheduler)">`range(start, count, scheduler)`</a>
 * RxJS: [`range`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablerangestart-count-scheduler)
 * Linq: [`Range`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.range.aspx)
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableRange">Introduction to Rx: Range</a>
@@ -171,12 +171,12 @@ In calls to `range(n,m)`, a value of zero for _m_ will result in no numbers bein
 
 ## interval( )
 #### create an Observable that emits a sequence of integers spaced by a given time interval
-<img src="/Netflix/RxJava/wiki/images/rx-operators/interval.png" width="640" height="195" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/interval.png" width="640" height="195" />
 
 To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#interval(long, java.util.concurrent.TimeUnit)">`interval(interval,unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#interval(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`interval(interval,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long, java.util.concurrent.TimeUnit)">`interval(interval, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`interval(interval, unit, scheduler)`</a>
 * RxJS: [`interval`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableintervalperiod-scheduler)
 * Linq: [`Interval`](http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.interval.aspx)
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableInterval">Introduction to Rx: Interval</a>
@@ -185,18 +185,18 @@ To create an Observable that emits items spaced by a particular interval of time
 
 ## timer( )
 #### create an Observable that emits a single item after a given delay
-<img src="/Netflix/RxJava/wiki/images/rx-operators/timer.png" width="640" height="200" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/timer.png" width="640" height="200" />
 
 The `timer( )` method returns an Observable that, when subscribed to, waits for a span of time that you have defined, then emits a single zero and completes.
 
 There is also a version of `timer( )` that emits a single zero after a specified delay, and then emits incrementally increasing numbers periodically thereafter on a specified periodicity:
-<img src="/Netflix/RxJava/wiki/images/rx-operators/timer.p.png" width="640" height="200" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/timer.p.png" width="640" height="200" />
 
 For both of these versions of `timer( )` you can optionally specify a Scheduler on which the timing will take place.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timer(long, java.util.concurrent.TimeUnit)">`timer(delay, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timer(delay, unit, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timer(long, long, java.util.concurrent.TimeUnit)">`timer(delay, period, unit)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#timer(long, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timer(delay, period, unit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long, java.util.concurrent.TimeUnit)">`timer(delay, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timer(delay, unit, scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long, long, java.util.concurrent.TimeUnit)">`timer(delay, period, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timer(delay, period, unit, scheduler)`</a>
 * RxJS: [`timer`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservabletimerduetime-period-scheduler)
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timer.aspx">`Timer`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#ObservableTimer">Introduction to Rx: Timer</a>
@@ -206,9 +206,9 @@ For both of these versions of `timer( )` you can optionally specify a Schedule
 ## empty( ), error( ), and never( )
 #### Observables that can be useful for testing purposes
 
-* `empty( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onCompleted( )` method.<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/empty.png" width="610" height="181" />
-* `error( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onError( )` method.<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/error.png" width="610" height="181" />
-* `never( )` creates an Observable that does not emit any items, nor does it call either the Subscriber’s `onCompleted( )` or `onError( )` methods.<br /><img src="/Netflix/RxJava/wiki/images/rx-operators/never.png" width="610" height="176" />
+* `empty( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onCompleted( )` method.<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/empty.png" width="610" height="181" />
+* `error( )` creates an Observable that does not emit any items but instead immediately calls the Subscriber’s `onError( )` method.<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/error.png" width="610" height="181" />
+* `never( )` creates an Observable that does not emit any items, nor does it call either the Subscriber’s `onCompleted( )` or `onError( )` methods.<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/never.png" width="610" height="176" />
 
 ```groovy
 import rx.Observable;
@@ -249,9 +249,9 @@ error: error - badness
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#empty()">`empty()`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#empty(rx.Scheduler)">`empty(scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#error(java.lang.Throwable)">`error(throwable)`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#error(java.lang.Throwable, rx.Scheduler)">`error(throwable, scheduler)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#never()">`never()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#empty()">`empty()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#error(java.lang.Throwable)">`error(throwable)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#never()">`never()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableemptyscheduler">`empty`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablenever">`never`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.empty.aspx">`Empty`</a> and <a href="http://msdn.microsoft.com/en-us/library/hh211979.aspx">`Never`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/04_CreatingObservableSequences.html#SimpleFactoryMethods">Introduction to Rx: Simple factory methods</a>
