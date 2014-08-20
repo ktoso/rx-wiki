@@ -2,9 +2,9 @@ If you want to introduce multithreading into your cascade of Observable operator
 
 Many of the RxJava Observable operators have varieties that take a Scheduler as a parameter. These instruct the operator to do some or all of its work on a particular Scheduler.
 
-You can make an Observable act on a particular Scheduler by means of the <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-observeon">`observeOn`</a> or <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-subscribeon">`subscribeOn`</a> operators.  `observeOn` instructs an Observable to call its observer's `onNext`, `onError`, and `onCompleted` methods on a particular Scheduler; `subscribeOn` takes this a step further and instructs the Observable to do all of its processing (including the sending of items and notifications to observers) on a particular Scheduler.
+You can make an Observable act on a particular Scheduler by means of the [`observeOn`](Observable-Utility-Operators#observeon) or [`subscribeOn`](Observable-Utility-Operators#subscribeon) operators.  `observeOn` instructs an Observable to call its observer's `onNext`, `onError`, and `onCompleted` methods on a particular Scheduler; `subscribeOn` takes this a step further and instructs the Observable to do all of its processing (including the sending of items and notifications to observers) on a particular Scheduler.
 
-You can also split an operator that works on an Observable onto multiple threads with the <a href="https://github.com/Netflix/RxJava/wiki/Observable-Utility-Operators#wiki-parallel">`parallel`</a> operator.
+You can also split an operator that works on an Observable onto multiple threads with the [`parallel`](Observable-Utility-Operators#parallel) operator.
 
 #### See also:
 * <a href="http://www.grahamlea.com/2014/07/rxjava-threading-examples/">RxJava Threading Examples</a>
