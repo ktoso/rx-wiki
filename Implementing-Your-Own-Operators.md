@@ -16,7 +16,7 @@ The following section shows how you form the scaffolding of your operator so tha
 
 ## Implementing Your Operator
 
-Define your operator as a public class that implements the [`Operator`](http://netflix.github.io/RxJava/javadoc/rx/Observable.Operator.html) interface, like so:
+Define your operator as a public class that implements the [`Operator`](http://reactivex.io/RxJava/javadoc/rx/Observable.Operator.html) interface, like so:
 ```java
 public class myOperator<T> implements Operator<T> {
   public myOperator( /* any necessary params here */ ) {
@@ -65,7 +65,7 @@ The following section shows how you form the scaffolding of your operator so tha
 
 ## Implementing Your Transformer
 
-Define your transforming function as a public class that implements the [`Transformer`](http://netflix.github.io/RxJava/javadoc/rx/Observable.Transformer.html) interface, like so:
+Define your transforming function as a public class that implements the [`Transformer`](http://reactivex.io/RxJava/javadoc/rx/Observable.Transformer.html) interface, like so:
 
 ````java
 public class myTransformer<Integer,String> implements Transformer<Integer,String> {
