@@ -21,12 +21,6 @@
 * [[Plugins]]
 * [[Backpressure]]
 * [[Error Handling]]
-* [[Language Adaptors|https://github.com/Netflix/RxJava/tree/master/language-adaptors]]
-  * Groovy
-  * Clojure
-  * Scala
-  * JRuby
-  * Kotlin
 * [[The RxJava Android Module]]
 * [[How to Contribute]]
 * [Javadoc](http://reactivex.io/RxJava/javadoc/rx/Observable.html)
