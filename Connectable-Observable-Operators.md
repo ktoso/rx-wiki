@@ -1,4 +1,4 @@
-This section explains the [`ConnectableObservable`](http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html) subclass and its operators:
+This section explains the [`ConnectableObservable`](http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html) subclass and its operators:
 
 * [**`ConnectableObservable.connect( )`**](Connectable-Observable-Operators#wiki-connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * [**`Observable.publish( )` and `Observable.multicast( )`**](Connectable-Observable-Operators#wiki-observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
@@ -8,7 +8,7 @@ This section explains the [`ConnectableObservable`](http://netflix.github.io/RxJ
 
 A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting items when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended Subscribers to subscribe to the Observable before the Observable begins emitting items.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/publishConnect.png" width="640" height="510" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/publishConnect.png" width="640" height="510" />
 
 The following example code shows two Subscribers subscribing to the same Observable. In the first case, they subscribe to an ordinary Observable; in the second case, they subscribe to a Connectable Observable that only connects after both Subscribers subscribe. Note the difference in the output:
 
@@ -72,7 +72,7 @@ Sequence #1 complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html">`ConnectableObservable`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html">`ConnectableObservable`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
 
 ***
@@ -86,7 +86,8 @@ The `connect( )` method returns a `Subscription`. You can call that object's `
 You can also use the `connect( )` method to instruct an Observable to begin emitting items (or, to begin generating items that would be emitted) even before any Subscriber has subscribed to it.
 
 #### see also
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect()">`connect()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect()">`connect()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect(rx.functions.Action1)">`connect(connection)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#connectableobservableprototypeconnect">`connect`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211748.aspx">`Connect`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
@@ -95,11 +96,15 @@ You can also use the `connect( )` method to instruct an Observable to begin em
 
 ## Observable.publish( ) and Observable.multicast( )
 #### represents an Observable as a Connectable Observable
-To represent an Observable as a Connectable Observable, use the `publish( )` or `multicast()` method.
+To represent an Observable as a Connectable Observable, use the `publish( )` or `multicast( )` method.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#multicast(rx.subjects.Subject)">`multicast(subject)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#publish()">`publish()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#multicast(rx.functions.Func0)">`multicast(subjectFactory)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#multicast(rx.functions.Func0, rx.functions.Func1)">`multicast(subjectFactory, selector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish()">`publish()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(rx.functions.Func1)">`publish(selector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(rx.functions.Func1, T)">`publish(selector, initialValue)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(T)">`publish(initialValue)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemulticastsubject--subjectselector-selector">`multicast`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypepublishselector">`publish`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.multicast.aspx">`Multicast`</a> and <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish.aspx">`Publish`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
@@ -109,10 +114,11 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 
 ## Observable.publishLast( )
 #### represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/publishLast.png" width="640" height="310" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/publishLast.png" width="640" height="310" />
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#publishLast()">`publishLast()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publishLast()">`publishLast()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publishLast(rx.functions.Func1)">`publishLast(selector)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypepublishlatestselector">`publishLast`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publishlast.aspx">`PublishLast`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishLast">Introduction to Rx: PublishLast</a>
@@ -123,16 +129,23 @@ To represent an Observable as a Connectable Observable, use the `publish( )` o
 #### ensures that all Subscribers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting items
 There are varieties of `replay( )` that return a ConnectableObservable that you then must use the `publish( )` operator on so that Subscribers may connect to it:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/replay.png" width="640" height="515" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/replay.png" width="640" height="515" />
 
 And there are also varieties of `replay( )` that accept a selector argument and return a simple Observable:
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/replay.f.png" width="640" height="450" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/replay.f.png" width="640" height="450" />
 
 In each variety there are versions with which you can limit the number of replayable items either by quantity or by whether or not they were emitted within a particular timespan.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#replay()">`replay()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay()">`replay()`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.Scheduler)">`replay(scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1)">`replay(selector)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1, rx.Scheduler)">`replay(selector,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1, int)">`replay(selector,buffersize)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1, int, rx.Scheduler)">`replay(selector,buffersize,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1, int, long, java.util.concurrent.TimeUnit)">`replay(selector,buffersize,time,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1, int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`replay(selector,buffersize,time,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1, long, java.util.concurrent.TimeUnit)">`replay(selector,time,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`replay(selector,time,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(int)">`replay(buffersize)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(int, rx.Scheduler)">`replay(buffersize,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(int, long, java.util.concurrent.TimeUnit)">`replay(buffersize,time,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`replay(buffersize,time,unit,scheduler)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(long, java.util.concurrent.TimeUnit)">`replay(time,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`replay(time,unit,scheduler)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypereplayselector-buffersize-window-scheduler">`replay`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.replay.aspx">`Replay`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#Replay">Introduction to Rx: Replay</a>
@@ -141,14 +154,14 @@ In each variety there are versions with which you can limit the number of replay
 
 ## ConnectableObservable.refCount( )
 #### makes a Connectable Observable behave like an ordinary Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/publishRefCount.png" width="640" height="510" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/publishRefCount.png" width="640" height="510" />
 
 You can represent a Connectable Observable so that it behaves much like an ordinary Observable by using the `refCount( )` operator. This operator keeps track of how many Subscribers are subscribed to the resulting Observable and refrains from disconnecting from the source ConnectableObservable until all such Observables unsubscribe.
 
-> *Note:* The `share( )` operator is equivalent to `publish( ).refCount( )`
+> *Note:* The <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#share()">`share( )`</a> operator is equivalent to `publish( ).refCount( )`
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#refCount()">`refCount( )`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#refCount()">`refCount( )`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#connectableobservableprototyperefcount">`refCount`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211664.aspx">`RefCount`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#RefCount">Introduction to Rx: RefCount</a>
