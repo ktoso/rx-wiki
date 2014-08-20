@@ -28,7 +28,7 @@ This section explains operators that perform mathematical or other operations ov
 
 ## averageInteger( ), averageLong( ), averageFloat( ), and averageDouble( )
 #### calculates the average of numbers emitted by an Observable and emits this average
-<img src="/Netflix/RxJava/wiki/images/rx-operators/average.png" width="640" height="325" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/average.png" width="640" height="325" />
 
 The `averageInteger( )` method returns an Observable that calculates the average of the Integers emitted by a source Observable and then emits this average as an Integer, as shown in the following sample code:
 ```groovy
@@ -54,7 +54,7 @@ There are also specialized "average" methods for Longs, Floats, and Doubles (`av
 
 You can also average not the items themselves but the results of a function applied to each item.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/average.f.png" width="640" height="325" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/average.f.png" width="640" height="325" />
 
 Note that any of these methods will fail with an `IllegalArgumentException` if the source Observable does not emit any items.
 
@@ -68,7 +68,7 @@ Note that any of these methods will fail with an `IllegalArgumentException` if t
 
 ## concat( )
 #### concatenate two or more Observables sequentially
-<img src="/Netflix/RxJava/wiki/images/rx-operators/concat.png" width="640" height="380" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/concat.png" width="640" height="380" />
 
 You can concatenate the output of multiple Observables so that they act like a single Observable, with all of the items emitted by the first Observable being emitted before any of the items emitted by the second Observable, by using the `concat( )` method:
 
@@ -106,8 +106,9 @@ The instance version of `concat( )` is `concatWith( )`, so, for example, in 
 > **Note:** in the scala language adaptor for RxJava, you access this functionality with the `++` operator rather than the `concat( )` method.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable)">`concat(observableOfObservables)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable)">`concat(two observables)`</a> (and versions that accept <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable)">three</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable)">four</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">five</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">six</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">seven</a>, <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">eight</a>, and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">nine</a> observables)
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable)">`concat(observableOfObservables)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable)">`concat(two observables)`</a> (and versions that accept <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable)">three</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable)">four</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">five</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">six</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">seven</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">eight</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">nine</a> observables)
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concatWith(rx.Observable)">`concatWith(other)`</a>
 * <a href="http://rxmarbles.com/#concat">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeconcatargs">`concat`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.concat.aspx">`Concat`</a>
@@ -117,7 +118,7 @@ The instance version of `concat( )` is `concatWith( )`, so, for example, in 
 
 ## count( ) and longCount( )
 #### counts the number of items emitted by an Observable and emits this count
-<img src="/Netflix/RxJava/wiki/images/rx-operators/count.png" width="640" height="310" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/count.png" width="640" height="310" />
 
 The `count( )` method returns an Observable that emits a single item: an Integer that represents the total number of items emitted by the source Observable, as shown in the following sample code:
 ```groovy
@@ -144,8 +145,8 @@ Sequence complete
 > **Note:** in the scala language adaptor for RxJava, this method is called `length( )` or `size( )`.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#longCount()">`longCount()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#longCount()">`longCount()`</a>
 * <a href="http://rxmarbles.com/#count">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypecountpredicate">`count`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229470.aspx">`Count`</a>
@@ -155,7 +156,7 @@ Sequence complete
 
 ## max( )
 #### emits the maximum value emitted by a source Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/max.png" width="640" height="305" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/max.png" width="640" height="305" />
 
 The `max( )` operator waits until the source Observable completes, and then emits the item emitted by the source Observable that had the highest value, before itself completing. If more than one item has this maximum value, `max( )` emits the last such item. You may optionally pass in a comparator that `max( )` will use to determine the maximum of two emitted items.
 
@@ -169,7 +170,7 @@ The `max( )` operator waits until the source Observable completes, and then em
 
 ## maxBy( )
 #### emits the item emitted by the source Observable that has the maximum key value
-<img src="/Netflix/RxJava/wiki/images/rx-operators/maxBy.png" width="640" height="305" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/maxBy.png" width="640" height="305" />
 
 The `maxBy( )` operator is similar to `max( )` but instead of emitting the maximum item emitted by the source Observable, it emits the last item from the source Observable that has the maximum key, where that key is generated by a function applied to each item. You supply this function.
 
@@ -182,7 +183,7 @@ The `maxBy( )` operator is similar to `max( )` but instead of emitting the m
 
 ## min( )
 #### emits the minimum value emitted by a source Observable
-<img src="/Netflix/RxJava/wiki/images/rx-operators/min.png" width="640" height="310" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/min.png" width="640" height="310" />
 
 The `min( )` operator waits until the source Observable completes, and then emits the item emitted by the source Observable that had the lowest value, before itself completing.  If more than one item has this minimum value, `min( )` emits the last such item. You may optionally pass in a comparator that `min( )` will use to determine the minimum of two emitted items.
 
@@ -196,7 +197,7 @@ The `min( )` operator waits until the source Observable completes, and then em
 
 ##  minBy( )
 #### emits the item emitted by the source Observable that has the minimum key value
-<img src="/Netflix/RxJava/wiki/images/rx-operators/minBy.png" width="640" height="305" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/minBy.png" width="640" height="305" />
 
 The `minBy( )` operator is similar to `min( )` but instead of emitting the minimum item emitted by the source Observable, it emits the last item from the source Observable that has the minimum key, where that key is generated by a function applied to each item. You supply this function.
 
@@ -209,7 +210,7 @@ The `minBy( )` operator is similar to `min( )` but instead of emitting the m
 
 ## reduce( )
 #### Apply a function to each emitted item, sequentially, and emit only the final accumulated value
-<img src="/Netflix/RxJava/wiki/images/rx-operators/reduce.png" width="640" height="320" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/reduce.png" width="640" height="320" />
 
 The `reduce( )` method returns an Observable that applies a function of your choosing to the first item emitted by a source Observable, then feeds the result of that function along with the second item emitted by the source Observable into the same function, then feeds the result of _that_ function along with the third item into the same function, and so on until all items have been emitted by the source Observable. Then it emits the final result from the final call to your function as the sole output from the returned Observable.
 
@@ -260,8 +261,8 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(rx.functions.Func2)">`reduce(accumulator)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#reduce(R, rx.functions.Func2)">`reduce(initialValue, accumulator)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#reduce(rx.functions.Func2)">`reduce(accumulator)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#reduce(R, rx.functions.Func2)">`reduce(initialValue, accumulator)`</a>
 * <a href="http://rxmarbles.com/#aggregate">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeaggregateseed-accumulator">`aggregate`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.aggregate.aspx">`Aggregate`</a>
@@ -271,18 +272,18 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 
 ## collect( )
 #### Collect items emitted by the source Observable into a single mutable data structure and return an Observable that emits this structure
-<img src="/Netflix/RxJava/wiki/images/rx-operators/collect.png" width="640" height="330" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/collect.png" width="640" height="330" />
 
 This is a simplified version of reduce that does not need to return the state on each pass.
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#collect(R, rx.functions.Action2)">`collect(state, collector )`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect(R, rx.functions.Action2)">`collect(state, collector)`</a>
 
 ***
 
 ## sumInteger( ), sumLong( ), sumFloat( ), and sumDouble( )
 #### adds the numbers emitted by an Observable and emits this sum
-<img src="/Netflix/RxJava/wiki/images/rx-operators/sum.png" width="640" height="330" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/sum.png" width="640" height="330" />
 
 The `sumInteger( )` method returns an Observable that adds the Integers emitted by a source Observable and then emits this sum as an Integer, as shown in the following sample code:
 ```groovy
@@ -308,7 +309,7 @@ There are also specialized "sum" methods for Longs, Floats, and Doubles (`sumLon
 
 You can also sum not the items themselves but the results of a function applied to each item.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/sum.f.png" width="640" height="330" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/sum.f.png" width="640" height="330" />
 
 #### see also:
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypesumkeyselector-thisarg">`sum`</a>
@@ -319,7 +320,7 @@ You can also sum not the items themselves but the results of a function applied 
 
 ## toList( )
 #### collect all items from an Observable and emit them as a single List
-<img src="/Netflix/RxJava/wiki/images/rx-operators/toList.png" width="640" height="305" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/toList.png" width="640" height="305" />
 
 Normally, an Observable that emits multiple items will do so by invoking its Subscriber’s `onNext` method for each such item. You can change this behavior, instructing the Observable to compose a list of these multiple items and then to invoke the Subscriber’s `onNext` method _once_, passing it the entire list, by calling the Observable’s `toList( )` method prior to calling its `subscribe( )` method. For example:
 
@@ -348,7 +349,7 @@ If the source Observable invokes `onCompleted` before emitting any items, `toLis
 > **Note:** in the scala language adaptor for RxJava, this method is called `toSeq( )`.
 
 #### see also
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetoarray">`toArray`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh211848.aspx">`ToList`</a> and <a href="http://msdn.microsoft.com/en-us/library/hh229207.aspx">`ToArray`</a>
 
@@ -356,7 +357,7 @@ If the source Observable invokes `onCompleted` before emitting any items, `toLis
 
 ## toSortedList( )
 #### collect all items emitted by an Observable and emit them as a single sorted List
-<img src="/Netflix/RxJava/wiki/images/rx-operators/toSortedList.png" width="640" height="310" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/toSortedList.png" width="640" height="310" />
 
 The `toSortedList( )` method behaves much like `toList( )` except that it sorts the resulting list. By default it sorts the list naturally in ascending order by means of the `Comparable` interface. If any of the items emitted by the Observable does not support `Comparable` with respect to the type of every other item emitted by the Observable, `toSortedList( )` will throw an exception. However, you can change this default behavior by also passing in to `toSortedList( )` a function that takes as its parameters two items and returns a number; `toSortedList( )` will then use that function instead of `Comparable` to sort the items.
 
@@ -391,26 +392,26 @@ Sequence complete
 ```
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList()">`toSortedList()`</a> and <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toSortedList(rx.functions.Func2)">`toSortedList(sortingFunction)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toSortedList()">`toSortedList()`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toSortedList(rx.functions.Func2)">`toSortedList(sortingFunction)`</a>
 
 ***
 
 ## toMap( ) and toMultimap( )
 #### convert the sequence of items emitted by an Observable into a map keyed by a specified key function
-<img src="/Netflix/RxJava/wiki/images/rx-operators/toMap.png" width="640" height="305" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/toMap.png" width="640" height="305" />
 
 The `toMap( )` and `toMultimap( )` methods collect the items emitted by the source Observable into a map (by default, a `HashMap`, but you can supply a factory function that generates another `Map` variety) and then emit that map. You supply a function that generates the key for each emitted item. You may also optionally supply a function that converts an emitted item into the value to be stored in the map (by default, the item itself is this value).
 
 The `toMultimap( )` method differs from `toMap( )` in that the map it generates is also an `ArrayList`.
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/toMultiMap.png" width="640" height="305" />
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/toMultiMap.png" width="640" height="305" />
 
 #### see also:
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toMap(rx.functions.Func1)">`toMap(keySelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toMap(rx.functions.Func1, rx.functions.Func1)">`toMap(keySelector,valueSelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toMap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`toMap(keySelector,valueSelector,mapFactory)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1)">`toMultimap(keySelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1, rx.functions.Func1)">`toMultimap(keySelector,valueSelector)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`toMultimap(keySelector,valueSelector,mapFactory)`</a>
-* javadoc: <a href="http://netflix.github.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0, rx.functions.Func1)">`toMultimap(keySelector,valueSelector,mapFactory,collectionFactory)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMap(rx.functions.Func1)">`toMap(keySelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMap(rx.functions.Func1, rx.functions.Func1)">`toMap(keySelector,valueSelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`toMap(keySelector,valueSelector,mapFactory)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1)">`toMultimap(keySelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1, rx.functions.Func1)">`toMultimap(keySelector,valueSelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0)">`toMultimap(keySelector,valueSelector,mapFactory)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMultimap(rx.functions.Func1, rx.functions.Func1, rx.functions.Func0, rx.functions.Func1)">`toMultimap(keySelector,valueSelector,mapFactory,collectionFactory)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.tolookup.aspx">`ToLookup`</a> and <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.todictionary.aspx">`ToDictionary`</a>
