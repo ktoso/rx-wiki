@@ -3,7 +3,7 @@ In RxJava an object that implements the _Observer_ interface _subscribes_ to an 
 This page explains what the reactive pattern is and what Observables and observers are (and how observers subscribe to Observables). Subsequent child pages (as shown in sidebar) show how you use the variety of Observable operators to link Observables together and change their behaviors.
 
 > This documentation accompanies its explanations with "marble diagrams." Here is how marble diagrams represent Observables and transformations of Observables:
-<img src="/Netflix/RxJava/wiki/images/rx-operators/legend.png" width="640" height="301" />​
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/legend.png" width="640" height="301" />​
 
 #### see also
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Introduction">Rx Workshop: Introduction</a>
@@ -40,7 +40,7 @@ returnVal = someMethod(itsParameters);
 In the asynchronous model the flow goes more like this:
 
 1. Define a method that does something useful with the return value from the asynchronous call, this method is part of the _Subscriber_.  
-1. Define the asynchronous call itself as an object of the [Observable](http://netflix.github.com/RxJava/javadoc/rx/Observable.html) class.  
+1. Define the asynchronous call itself as an object of the [Observable](http://reactivex.io/RxJava/javadoc/rx/Observable.html) class.  
 1. Attach the Subscriber to that Observable by _subscribing_ it (this also initiates the method call).  
 1. Go on with your business; whenever the call returns, the Subscriber’s method will begin to operate on its return value or values — the _items_ emitted by the Observable.  
 
@@ -78,7 +78,7 @@ myObservable.subscribe(myOnNext, myError, myComplete);
 // go on about my business
 ```
 
-There is also an `onStart()` method in the `Subscriber` class in which you can put any code you want to be executed after the `Subscriber` and `Observable` have connected but before the `Observable` has yet emitted any items (or sent any notifications) to the `Subscriber`. This is a useful place to establish [_backpressure_, which is discussed at another page on this wiki](https://github.com/Netflix/RxJava/wiki/Backpressure/).
+There is also an `onStart()` method in the `Subscriber` class in which you can put any code you want to be executed after the `Subscriber` and `Observable` have connected but before the `Observable` has yet emitted any items (or sent any notifications) to the `Subscriber`. This is a useful place to establish [_backpressure_, which is discussed at another page on this wiki](Backpressure).
 
 #### see also:
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#IObserver">Introduction to Rx: IObserver</a>
