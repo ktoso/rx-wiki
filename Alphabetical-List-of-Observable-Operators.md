@@ -224,7 +224,7 @@
 * [**`timestamp( )`**](Observable-Utility-Operators#timestamp) — attach a timestamp to every item emitted by an Observable
 * [**`toAsync( )`**](Async-Operators#toasync-or-asyncaction-or-asyncfunc) — convert a function or Action into an Observable that executes the function and emits its return value (`rxjava-async`)
 * [**`toBlocking( )`**](Blocking-Observable-Operators) — transform an Observable into a BlockingObservable
-* **`toBlockingObservable( )`**] - _see [**`toBlocking( )`**](Blocking-Observable-Operators)_
+* **`toBlockingObservable( )`** - _see [**`toBlocking( )`**](Blocking-Observable-Operators)_
 * [**`toFuture( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-getiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-getiterator) — convert the sequence emitted by the Observable into an Iterable
 * **`toIterator( )`** — _see [**`getIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-getiterator)_
