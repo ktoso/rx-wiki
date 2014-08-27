@@ -16,7 +16,7 @@ You can use the operators described in [[Error Handling Operators]] to implement
 # RxJava-specific exceptions and what do do about them
 
 <dl>
- <dt><code>CompositeException</code></dt><dd>This indicates that more than one exception occurred. You can use the exception&#8217;s <code>getMessage()</code> method to retrieve a concatenation of the exceptions that make up the composite.</dd>
+ <dt><code>CompositeException</code></dt><dd>This indicates that more than one exception occurred. You can use the exception&#8217;s <code>getExceptions()</code> method to retrieve the individual exceptions that make up the composite.</dd>
  <dt><code>MissingBackpressureException</code></dt><dd>This indicates that a Subscriber or operator attempted to apply reactive pull backpressure to an Observable that does not implement it. See [[Backpressure]] for work-arounds for Observables that do not implement reactive pull backpressure.</dd>
  <dt><code>OnErrorFailedException</code></dt><dd>This indicates that an Observable tried to call its observer&#8217;s <code>onError()</code> method, but that method itself threw an exception.</dd>
  <dt><code>OnErrorNotImplementedException</code></dt><dd>This indicates that an Observable tried to call its observer&#8217;s <code>onError()</code> method, but that no such method existed. You can eliminate this by either fixing the Observable so that it no longer reaches an error condition, by implementing an <code>onError</code> handler in the observer, or by intercepting the <code>onError</code> notification before it reaches the observer by using one of the operators described elsewhere on this page.</dd>
