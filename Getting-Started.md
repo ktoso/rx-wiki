@@ -6,15 +6,15 @@ Example for Maven:
 
 ```xml
 <dependency>
-    <groupId>com.netflix.rxjava</groupId>
-    <artifactId>rxjava-core</artifactId>
-    <version>0.20.0</version>
+    <groupId>io.reactivex</groupId>
+    <artifactId>rxjava</artifactId>
+    <version>1.0.0-rc.1</version>
 </dependency>
 ```
 and for Ivy:
 
 ```xml
-<dependency org="com.netflix.rxjava" name="rxjava-core" rev="0.20.0" />
+<dependency org="io.reactivex" name="rxjava" rev="1.0.0-rc.1" />
 ```
 
 and for SBT:
@@ -25,7 +25,7 @@ libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.20.0"
 
 and for Gradle:
 ```groovy
-compile 'com.netflix.rxjava:rxjava-core:0.20.0'
+compile 'io.reactivex:rxjava:1.0.0-rc.1'
 ```
 
 If you need to download the jars instead of using a build system, create a Maven `pom` file like this with the desired version:
@@ -37,13 +37,13 @@ If you need to download the jars instead of using a build system, create a Maven
 	<groupId>com.netflix.rxjava.download</groupId>
 	<artifactId>rxjava-download</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>Simple POM to download rxjava-core and dependencies</name>
-	<url>http://github.com/Netflix/RxJava</url>
+	<name>Simple POM to download rxjava and dependencies</name>
+	<url>http://github.com/ReactiveX/RxJava</url>
 	<dependencies>
 		<dependency>
-			<groupId>com.netflix.rxjava</groupId>
-			<artifactId>rxjava-core</artifactId>
-			<version>0.20.0</version>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>1.0.0-rc.1</version>
 			<scope/>
 		</dependency>
 	</dependencies>
@@ -56,7 +56,7 @@ Then execute:
 $ mvn -f download-rxjava-pom.xml dependency:copy-dependencies
 ```
 
-That command downloads `rxjava-core-*.jar` and its dependencies into `./target/dependency/`.
+That command downloads `rxjava-*.jar` and its dependencies into `./target/dependency/`.
 
 You need Java 6 or later.
 
@@ -80,21 +80,21 @@ A build should look similar to this:
 
 ```
 $ ./gradlew build
-:rxjava-core:compileJava
-:rxjava-core:processResources UP-TO-DATE
-:rxjava-core:classes
-:rxjava-core:jar
-:rxjava-core:sourcesJar
-:rxjava-core:signArchives SKIPPED
-:rxjava-core:assemble
-:rxjava-core:licenseMain UP-TO-DATE
-:rxjava-core:licenseTest UP-TO-DATE
-:rxjava-core:compileTestJava
-:rxjava-core:processTestResources UP-TO-DATE
-:rxjava-core:testClasses
-:rxjava-core:test
-:rxjava-core:check
-:rxjava-core:build
+:rxjava:compileJava
+:rxjava:processResources UP-TO-DATE
+:rxjava:classes
+:rxjava:jar
+:rxjava:sourcesJar
+:rxjava:signArchives SKIPPED
+:rxjava:assemble
+:rxjava:licenseMain UP-TO-DATE
+:rxjava:licenseTest UP-TO-DATE
+:rxjava:compileTestJava
+:rxjava:processTestResources UP-TO-DATE
+:rxjava:testClasses
+:rxjava:test
+:rxjava:check
+:rxjava:build
 
 BUILD SUCCESSFUL
 
@@ -104,7 +104,7 @@ Total time: 30.758 secs
 On a clean build you will see the unit tests run. They will look something like this:
 
 ```
-> Building > :rxjava-core:test > 91 tests completed
+> Building > :rxjava:test > 91 tests completed
 ```
 
 #### Troubleshooting
