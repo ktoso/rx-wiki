@@ -3,7 +3,6 @@ This section explains operators you can use to combine multiple Observables.
 * [**`startWith( )`**](Combining-Observables#wiki-startwith) — emit a specified sequence of items before beginning to emit the items from the Observable
 * [**`merge( )`**](Combining-Observables#wiki-merge) — combine multiple Observables into one
 * [**`mergeDelayError( )`**](Combining-Observables#wiki-mergedelayerror) — combine multiple Observables into one, allowing error-free Observables to continue before propagating errors
-* [**`parallelMerge( )`**](Combining-Observables#wiki-parallelmerge) — combine multiple Observables into a smaller number of Observables, to facilitate parallelism
 * [**`zip( )`**](Combining-Observables#wiki-zip) — combine sets of items emitted by two or more Observables together via a specified function and emit items based on the results of this function
 * (`rxjava-joins`) [**`and( )`, `then( )`, and `when( )`**](Combining-Observables#wiki-and-then-and-when) — combine sets of items emitted by two or more Observables by means of `Pattern` and `Plan` intermediaries
 * [**`combineLatest( )`**](Combining-Observables#wiki-combinelatest) — when an item is emitted by either of two Observables, combine the latest item emitted by each Observable via a specified function and emit items based on the results of this function
@@ -120,17 +119,6 @@ Because it is possible that more than one of the merged Observables encountered 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable)">`mergeDelayError(observableThatEmitsObservables)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable)">`mergeDelayError(two observables)`</a> (or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable, rx.Observable)">three</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable, rx.Observable, rx.Observable)">four</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">five</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">six</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">seven</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">eight</a>, or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">nine</a> observables)
-
-***
-
-## parallelMerge( )
-#### combine multiple Observables into a smaller number of Observables, to facilitate parallelism
-<img src="/ReactiveX/RxJava/wiki/images/rx-operators/parallelMerge.png" width="640" height="535" />​
-
-Use the `parallelMerge( )` method to take an Observable that emits a large number of Observables and to reduce it to an Observable that emits a particular, smaller number of Observables that emit the same set of items as the original larger set of Observables: for instance a number of Observables that matches the number of parallel processes that you want to use when processing the emissions from the complete set of Observables.
-
-#### see also:
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#parallelMerge(rx.Observable, int)">`parallelMerge(source,number)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#parallelMerge(rx.Observable, int, rx.Scheduler)">`parallelMerge(source,number,scheduler)`</a>
 
 ***
 
