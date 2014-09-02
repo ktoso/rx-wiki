@@ -246,4 +246,4 @@
 * **`++`** (scala) — _see [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
 * **`+:`** (scala) — _see [**`startWith( )`**](Combining-Observables#startwith)_
 
-(⁇) — this proposed operator is not part of RxJava (or has been deprecated) as of 0.20
+(⁇) — this proposed operator is not part of RxJava 1.0
