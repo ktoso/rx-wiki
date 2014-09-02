@@ -1,4 +1,4 @@
-These operators have been proposed but are not part of the anticipated 1.0 release of RxJava.
+These operators have been proposed but are not part of the 1.0 release of RxJava.
 
 * [**`chunkify( )`**](Phantom-Operators#chunkify) — returns an iterable that periodically returns a list of items emitted by the source Observable since the last list
 * [**`fromFuture( )`**](Phantom-Operators#fromfuture) — convert a Future into an Observable, but do not attempt to get the Future's value until a Subscriber subscribes
