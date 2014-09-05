@@ -47,7 +47,6 @@ Some Observable operators in RxJava have alternate forms that allow you to set w
   <tr><td><code>delaySubscription(delay,&#8239;unit)</code></td><td><code>computation</code></td></tr>
   <tr><td><code>interval</code></td><td><code>computation</code></td></tr>
   <tr><td><code>parallel</code></td><td><code>computation</code></td></tr>
-  <tr><td><code>parallelMerge</code></td><td><code>immediate</code></td></tr>
   <tr><td><code>repeat</code></td><td><code>trampoline</code></td></tr>
   <tr><td><code>replay(time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
   <tr><td><code>replay(buffersize,&#8239;time,&#8239;unit)</code></td><td><code>computation</code></td></tr>
