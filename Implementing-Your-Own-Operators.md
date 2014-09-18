@@ -80,7 +80,7 @@ public class myTransformer<Integer,String> implements Transformer<Integer,String
      * in order to transform the "source" observable from one that emits
      * integers to one that emits string representations of those integers.
      */
-    return t1.map( new Func1<Integer,String>() {
+    return source.map( new Func1<Integer,String>() {
       @Override
       public String call(Integer t1) {
         return String.valueOf(t1);
