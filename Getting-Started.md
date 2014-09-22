@@ -20,7 +20,7 @@ and for Ivy:
 and for SBT:
 
 ```scala
-libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.20.0"
+libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "1.0.0-rc.3"
 ```
 
 and for Gradle:
