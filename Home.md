@@ -122,3 +122,4 @@ The following external libraries can work with RxJava:
 * [rxjava-http-tail](https://github.com/myfreeweb/rxjava-http-tail) allows you to follow logs over HTTP, like `tail -f`
 * [mod-rxjava - Extension for VertX](https://github.com/meez/mod-rxjava) that provides support for Reactive Extensions (RX) using the RxJava library
 * [rxjava-jdbc](https://github.com/davidmoten/rxjava-jdbc) - use RxJava with jdbc connections to stream ResultSets and do functional composition of statements
+* [rtree](https://github.com/davidmoten/rtree) - immutable in-memory R-tree and R*-tree with RxJava api including backpressure
