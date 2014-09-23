@@ -150,7 +150,7 @@
 * [**`onErrorReturn( )`**](Error-Handling-Operators#onerrorreturn) — instructs an Observable to emit a particular item when it encounters an error
 * [**`onExceptionResumeNext( )`**](Error-Handling-Operators#onexceptionresumenext) — instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
 * **`orElse( )`** (scala) — _see [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty)_
-* [**`parallel( )`**](Observable-Utility-Operators#parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
+* [**`parallel( )`**](Phantom-Operators#parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread (⁇)
 * [**`parallelMerge( )`**](Phantom-Operators#parallelmerge) — combine multiple Observables into smaller number of Observables (⁇)
 * [**`pivot( )`**](Phantom-Operators#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set (⁇)
 * [**`publish( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
