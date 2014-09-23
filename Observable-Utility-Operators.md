@@ -7,7 +7,6 @@ This section explains various utility operators for working with Observables.
 * [**`cache( )`**](Observable-Utility-Operators#cache) — remember the sequence of items emitted by the Observable and emit the same sequence to future Subscribers
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler a Subscriber should observe the Observable
 * [**`subscribeOn( )`**](Observable-Utility-Operators#subscribeon) — specify which Scheduler an Observable should use when its subscription is invoked
-* [**`parallel( )`**](Observable-Utility-Operators#parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 * [**`doOnEach( )`**](Observable-Utility-Operators#dooneach) — register an action to take whenever an Observable emits an item
 * [**`doOnCompleted( )`**](Observable-Utility-Operators#dooncompleted) — register an action to take when an Observable completes successfully
 * [**`doOnError( )`**](Observable-Utility-Operators#doonerror) — register an action to take when an Observable completes with an error
@@ -218,18 +217,6 @@ To specify that the work done by the Observable should be done on a particular S
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.subscribeon.aspx">`SubscribeOn`</a>
 * <a href="http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Schedulers">Rx Workshop: Schedulers</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/15_SchedulingAndThreading.html#SubscribeOnObserveOn">Introduction to Rx: SubscribeOn and ObserveOn</a>
-
-***
-
-## parallel( )
-#### split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
-<img src="/ReactiveX/RxJava/wiki/images/rx-operators/parallel.png" width="640" height="475" />​
-
-You can use the `parallel( )` method to split an Observable into as many Observables as there are available processors, and to do work in parallel on each of these Observables. `parallel( )` will then merge the results of these parallel computations back into a single, well-behaved Observable sequence.
-
-#### see also:
-* <a href="http://www.grahamlea.com/2014/07/rxjava-threading-examples/">RxJava Threading Examples</a> by Graham Lea
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1)">`parallel(function)`</a> and <a href=http://reactivex.io/RxJava/javadoc/rx/Observable.html#parallel(rx.functions.Func1, rx.Scheduler)">`parallel(function,scheduler)`</a>
 
 ***
 
