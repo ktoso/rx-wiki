@@ -98,7 +98,7 @@
 * [**`groupBy( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * **`group-by( )`** (clojure) — _see [**`groupBy( )`**](Transforming-Observables#groupby-and-groupbyuntil)_
 * [**`groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key, and opening a new set periodically
-* [**`groupJoin( )`**](Phantom-Operators#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable (⁇)
+* [**`groupJoin( )`**](Combining-Observables#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * **`head( )`** (scala) — _see [**`first( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
 * **`headOption( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
 * **`headOrElse( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
@@ -108,7 +108,7 @@
 * **`into( )`** (clojure) — _see [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce)_
 * [**`isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
 * **`items( )`** (scala) — _see [**`just( )`**](Creating-Observables#just)_
-* [**`join( )`**](Phantom-Operators#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable (⁇)
+* [**`join( )`**](Combining-Observables#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * [**`join( )`**](String-Observables#join) (`StringObservable`) — converts an Observable that emits a sequence of strings into an Observable that emits a single string that concatenates them all, separating them by a specified string
 * [**`just( )`**](Creating-Observables#just) — convert an object into an Observable that emits that object
 * [**`last( )`**](Blocking-Observable-Operators#last-and-lastordefault) (`BlockingObservable`) — block until the Observable completes, then return the last item emitted by the Observable
