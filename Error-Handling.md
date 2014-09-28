@@ -13,7 +13,7 @@ So rather than _catch_ exceptions, your observer or operator should more typical
 
 You can use the operators described in [[Error Handling Operators]] to implement these strategies.
 
-# RxJava-specific exceptions and what to do about them
+# RxJava-specific exceptions and what do do about them
 
 <dl>
  <dt><code>CompositeException</code></dt><dd>This indicates that more than one exception occurred. You can use the exception&#8217;s <code>getExceptions()</code> method to retrieve the individual exceptions that make up the composite.</dd>
