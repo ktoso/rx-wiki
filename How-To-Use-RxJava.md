@@ -4,9 +4,9 @@ The following sample implementations of “Hello World” in Java, Groovy, Cloju
 
 You can find additional code examples in the `/src/examples` folders of each [language adaptor](https://github.com/ReactiveX/):
 
-* [RxGroovy examples](https://github.com/ReactiveX/RxGroovy/tree/master/src/examples/groovy/rx/lang/groovy/examples)
-* [RxClojure examples](https://github.com/ReactiveX/RxClojure/tree/master/src/examples/clojure/rx/lang/clojure/examples)
-* [RxScala examples](https://github.com/ReactiveX/RxScala/tree/master/src/examples)
+* [RxGroovy examples](https://github.com/ReactiveX/RxGroovy/tree/0.x/src/examples/groovy/rx/lang/groovy/examples)
+* [RxClojure examples](https://github.com/ReactiveX/RxClojure/tree/0.x/src/examples/clojure/rx/lang/clojure/examples)
+* [RxScala examples](https://github.com/ReactiveX/RxScala/tree/0.x/src/examples)
 
 ### Java
 
