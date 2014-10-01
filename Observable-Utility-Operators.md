@@ -50,6 +50,10 @@ Completed
 Sequence complete
 ```
 
+#### scheduler
+
+`materialize( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#materialize()">`materialize()`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229453.aspx">`Materialize`</a>
@@ -77,6 +81,10 @@ numbers.materialize().dematerialize().subscribe(
 3
 Sequence complete
 ```
+
+#### scheduler
+
+`dematerialize( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#dematerialize()">`dematerialize()`</a>
@@ -110,6 +118,10 @@ Timestamped(timestampMillis = 1369252582864, value = 1000000)
 Sequence complete
 ```
 
+#### scheduler
+
+`timestamp( )` by default operates on the `immediate` scheduler but also has a variant with which you can choose the scheduler by passing it in as a parameter.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timestamp()">`timestamp()`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timestamp(rx.Scheduler)">`timestamp(scheduler)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.timestamp.aspx">`Timestamp`</a>
@@ -123,6 +135,10 @@ Sequence complete
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/synchronize.png" width="640" height="400" />​
 
 It is possible for an Observable to invoke its Subscribers' methods asynchronously, perhaps from different threads. This could make such an Observable poorly-behaved, in that it might try to invoke`onCompleted` or `onError` before one of its `onNext` invocations, or it might call `onNext` from two different threads concurrently. You can force such an Observable to be well-behaved and synchronous by applying the `serialize( )` method to it.
+
+#### scheduler
+
+`serialize( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#serialize()">`serialize()`</a>
@@ -183,6 +199,10 @@ Note that in the second example the timestamps are identical for both of the Sub
 
 The `cache( )` method will not itself trigger the execution of the source Observable; an initial Subscriber must subscribe to the Observable returned from `cache( )` before it will begin emitting items.
 
+#### scheduler
+
+`cache( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#cache()">`cache()`</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#cache(int)">`cache(bufferHint)`</a>
 
@@ -228,6 +248,10 @@ Use the `doOnEach( )` method to register an `Action` that RxJava will perform 
 
 There are also `doOnEach( )` variants that allow you to register actions to perform if the Observable completes or informs of a throwable.  The `doOnNext( )` method is equivalent to the version of `doOnEach( )` that registers an action to be performed only for each emitted item.
 
+#### scheduler
+
+`doOnEach( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnEach(rx.functions.Action1)">`doOnEach(action)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnEach(rx.Observer)">`doOnEach(observer)`</a>
@@ -242,6 +266,10 @@ There are also `doOnEach( )` variants that allow you to register actions to pe
 
 Use the `doOnCompleted( )` method to register an `Action` that RxJava will perform if the Observable completes normally (not by means of an error).
 
+#### scheduler
+
+`doOnCompleted( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnCompleted(rx.functions.Action0)">`doOnCompleted(action)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
@@ -255,6 +283,10 @@ Use the `doOnCompleted( )` method to register an `Action` that RxJava will per
 
 Use the `doOnError( )` method to register an `Action` that RxJava will perform if the Observable terminates with an error. This action takes the Throwable representing the error as a parameter.
 
+#### scheduler
+
+`doOnError( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnError(rx.functions.Action1)">`doOnError(action)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.do.aspx">`Do`</a>
@@ -267,6 +299,10 @@ Use the `doOnError( )` method to register an `Action` that RxJava will perform
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/doOnTerminate.png" width="640" height="305" />​
 
 Use the `doOnTerminate( )` method to register an `Action` that RxJava will perform just before the Observable calls `onComplete` or `onError`.
+
+#### scheduler
+
+`doOnTerminate( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * [`finallyDo`](Observable-Utility-Operators#finallydo) - a similar operator that performs the action _after_ calling `onCompleted` or `onError`
@@ -282,6 +318,10 @@ Use the `doOnTerminate( )` method to register an `Action` that RxJava will per
 
 Use the `doOnSubscribe( )` method to register an `Action` that RxJava will perform whenever an observer subscribes to this Observable.
 
+#### scheduler
+
+`doOnSubscribe( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnSubscribe(rx.functions.Action0)">`doOnSubscribe(action)`</a>
 
@@ -292,6 +332,10 @@ Use the `doOnSubscribe( )` method to register an `Action` that RxJava will per
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/doOnUnsubscribe.png" width="640" height="310" />​
 
 Use the `doOnUnsubscribe( )` method to register an `Action` that RxJava will perform whenever an observer that is subscribed to this Observable calls `unsubscribe( )` to unsubscribe from it.
+
+#### scheduler
+
+`doOnUnsubscribe( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnUnsubscribe(rx.functions.Action0)">`doOnUnsubscribe(action)`</a>
@@ -323,6 +367,10 @@ Sequence complete
 Finally
 ```
 
+#### scheduler
+
+`finallyDo( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * [`doOnTerminate`](Observable-Utility-Operators#doonterminate) - a similar operator that performs the action _before_ calling `onCompleted` or `onError`
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#finallyDo(rx.functions.Action0)">`finallyDo(action)`</a>
@@ -338,6 +386,10 @@ Finally
 The `delay( )` operator modifies its source Observable by pausing for a particular increment of time (that you specify) before emitting each of the source Observable's items. This has the effect of shifting the entire sequence of items emitted by the Observable forward in time by that specified increment.
 
 Note that `delay( )` will _not_ time-shift an `onError( )` call in this fashion but it will forward such a call immediately to its subscribers. It will however time shift an `onCompleted( )` call.
+
+#### scheduler
+
+The version of `delay( )` that uses a specified duration operates by default on the `computation` scheduler, but also has a variant that allows you to specify the scheduler by passing it in as a parameter. The other variants of `delay( )` that use a per-emission Observable to trigger the dalay do not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delay(rx.functions.Func0, rx.functions.Func1)">`delay(subscriptionDelay, itemDelay)`</a>
@@ -356,6 +408,10 @@ Note that `delay( )` will _not_ time-shift an `onError( )` call in this fash
 
 The `delaySubscription( )` operator shifts waits for a specified period of time after receiving a subscription request before subscribing to the source Observable.
 
+#### scheduler
+
+`delaySubscription( )` operates by default on the `computation` scheduler, but also has a variant that allows you to specify the scheduler by passing it in as a parameter.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delaySubscription(long, java.util.concurrent.TimeUnit)">`delaySubscription(delay,unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delaySubscription(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`delaySubscription(delay,unit,scheduler)`</a>
 
@@ -366,6 +422,10 @@ The `delaySubscription( )` operator shifts waits for a specified period of tim
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/timeInterval.png" width="640" height="310" />​
 
 The `timeInterval( )` operator converts a source Observable into an Observable that emits the amount of time lapsed between consecutive emissions of the source Observable. The first emission is the amount of time lapsed between the time the Subscriber subscribed to the Observable and the time the source Observable emitted its first item. There is no corresponding emission marking the amount of time lapsed between the last emission of the source Observable and the subsequent call to `onCompleted( )`.
+
+#### scheduler
+
+`timeInterval( )` operates by default on the `immediate` scheduler, but also has a variant that allows you to specify the scheduler by passing it in as a parameter.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeInterval()">`timeInterval()`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeInterval(rx.Scheduler)">`timeInterval(scheduler)`</a>
@@ -380,6 +440,10 @@ The `timeInterval( )` operator converts a source Observable into an Observable
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/using.png" width="640" height="400" />​
 
 Pass the `using( )` method two factory functions: the first creates a disposable resource, the second creates an Observable. When a Subscriber subscribes to the resulting Observable, `using( )` will use the Observable factory function to create the Observable the Subscriber will observe, while at the same time using the resource factory function to create a resource. When the Subscriber unsubscribes from the Observable, or when the Observable terminates (normally or with an error), `using( )` will dispose of the resource it created.
+
+#### scheduler
+
+`using( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#using(rx.functions.Func0, rx.functions.Func1, rx.functions.Action1)">`using(resourceFactory,observableFactory,disposeAction)`</a>
@@ -402,6 +466,10 @@ The `singleOrDefault( )` method is similar, except that while it will still no
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/singleOrDefault.png" width="640" height="315" />
 
 ​<img src="/ReactiveX/RxJava/wiki/images/rx-operators/singleOrDefault.p.png" width="640" height="315" />​
+
+#### scheduler
+
+`single( )` and `singleOrDefault( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
