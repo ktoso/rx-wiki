@@ -39,6 +39,10 @@ myObservable.startWith(-3, -2, -1, 0).subscribe(
 
 > **Note:** in the scala language adaptor for RxJava, you can access this functionality with the `+:` operator rather than with the `startWith( )` method when you want to start the resulting sequence with the sequence emitted by another Observable (as opposed to, say, the sequence found in an Iterable).
 
+#### scheduler
+
+`startWith( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#startWith(java.lang.Iterable)">`startWith(iterable)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#startWith(rx.Observable)">`startWith(observable)`</a>
@@ -93,6 +97,10 @@ The instance version of `merge( )` is `mergeWith( )`, so, for example, in th
 
 > **Note:** in the scala language adaptor for RxJava, the version of this method that merges a sequence of Observables emitted by a source Observable is called `flatten( )`.
 
+#### scheduler
+
+`merge( )` and `mergeWith( )` do not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(java.lang.Iterable)">`merge(iterableOfObservables)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(java.lang.Iterable, int)">`merge(iterableOfObservables, maxConcurrent)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable)">`merge(observableThatEmitsObservables)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable, int)">`merge(observableThatEmitsObservables, maxConcurrent)`</a>
@@ -115,6 +123,10 @@ The instance version of `merge( )` is `mergeWith( )`, so, for example, in th
 Because it is possible that more than one of the merged Observables encountered an error, `mergeDelayError( )` may pass information about multiple errors to the `onError` method (which it will never invoke more than once). For this reason, if you want to know the nature of these errors, you should write your `onError` method so that it accepts a parameter of the class `CompositeException`.
 
 > **Note:** in the scala language adaptor for RxJava, the version of this method that merges a sequence of Observables emitted by a source Observable is called `flattenDelayError( )`.
+
+#### scheduler
+
+`mergeDelayError( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable)">`mergeDelayError(observableThatEmitsObservables)`</a>
@@ -157,6 +169,10 @@ There are also versions of `zip( )` that accept three or more Observables, as 
 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/zip.o.png" width="640" height="370" />​
 
+#### scheduler
+
+`zip( )` and `zipWith( )` do not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#zip(java.lang.Iterable, rx.functions.FuncN)">`zip(iterableOfObservables, zipFunction)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#zipWith(java.lang.Iterable, rx.functions.Func2)">`zipWith(iterable, zipFunction`)</a>
@@ -190,6 +206,10 @@ The combination of `and( )`, `then( )`, and `when( )` methods operate much
 
 `combineLatest( )` behaves in a similar way to `zip( )`, but while `zip( )` emits items only when all of the zipped source Observables have emitted a previously unzipped item, `combineLatest( )` emits an item whenever _any_ of the source Observables emits an item (so long as each of the source Observables has emitted at least one item). When any of the source Observables emits an item, `combineLatest( )` combines the most recently emitted items from each of the other source Observables, using the function you provide, and emits the return value from that function.
 
+#### scheduler
+
+`combineLatest( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(java.util.List, rx.functions.FuncN)">`combineLatest(listOfObservables, combineFunction)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.functions.Func2)">`combineLatest(observable1, observable2, combineFunction)`</a> (and versions that take <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.Observable, rx.functions.Func3)">three</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.functions.Func4)">four</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.functions.Func5)">five</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.functions.Func6)">six</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.functions.Func7)">seven</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.functions.Func8)">eight</a>, or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.functions.Func9)">nine</a> observables)
@@ -210,6 +230,10 @@ The `join( )` method combines the items emitted by two Observables, and select
 
 The `groupJoin( )` method is similar, except that the function you define to combine items emitted by the two Observables pairs individual items emitted by the source Observable with an Observable that emits items from the second Observable that fall in the same window as that item.
 
+#### scheduler
+
+`join( )` and `groupJoin( )` do not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#join(rx.Observable, rx.functions.Func1, rx.functions.Func1, rx.functions.Func2)">`join( )`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupJoin(rx.Observable, rx.functions.Func1, rx.functions.Func1, rx.functions.Func2)">`groupJoin( )`</a>
@@ -229,6 +253,10 @@ The `groupJoin( )` method is similar, except that the function you define to c
 `switchOnNext( )` subscribes to an Observable that emits Observables. Each time it observes one of these emitted Observables, the Observable returned by `switchOnNext( )` unsubscribes from the previously-emitted Observable begins emitting items from the latest Observable. Note that it will unsubscribe from the previously-emitted Observable when a new Observable is *emitted* from the source Observable, not when the new Observable emits an item. This means that items emitted by the previous Observable between the time the subsequent Observable is emitted and the time that subsequent Observable itself begins emitting items will be dropped (as with the yellow circle in the diagram above).
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `switch( )`.
+
+#### scheduler
+
+`switchOnNext( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#switchOnNext(rx.Observable)">`switchOnNext(observableOfObservables)`</a>
