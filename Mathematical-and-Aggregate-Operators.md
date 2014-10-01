@@ -105,6 +105,10 @@ The instance version of `concat( )` is `concatWith( )`, so, for example, in 
 
 > **Note:** in the scala language adaptor for RxJava, you access this functionality with the `++` operator rather than the `concat( )` method.
 
+#### scheduler
+
+`concat( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable)">`concat(observableOfObservables)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable)">`concat(two observables)`</a> (and versions that accept <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable)">three</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable)">four</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">five</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">six</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">seven</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">eight</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concat(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">nine</a> observables)
@@ -143,6 +147,10 @@ Sequence complete
 `longCount( )` is essentially the same, but emits its item as a Long rather than an Integer.
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `length( )` or `size( )`.
+
+#### scheduler
+
+`count( )` and `longCount( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>
@@ -260,6 +268,10 @@ Which might result in something like this:
 Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Report' (Sept. 27), 'Salinger' (Sept.27), 'In a World' (Sept. 27)]
 ```
 
+#### scheduler
+
+`reduce( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#reduce(rx.functions.Func2)">`reduce(accumulator)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#reduce(R, rx.functions.Func2)">`reduce(initialValue, accumulator)`</a>
@@ -275,6 +287,10 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/collect.png" width="640" height="330" />
 
 This is a simplified version of reduce that does not need to return the state on each pass.
+
+#### scheduler
+
+`collect( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect(R, rx.functions.Action2)">`collect(state, collector)`</a>
@@ -348,6 +364,10 @@ If the source Observable invokes `onCompleted` before emitting any items, `toLis
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `toSeq( )`.
 
+#### scheduler
+
+`toList( )` does not by default operate on any particular scheduler.
+
 #### see also
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toList()">`toList()`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetoarray">`toArray`</a>
@@ -391,6 +411,10 @@ numbers.toSortedList({ n, m -> Math.abs(5-n) - Math.abs(5-m) }).subscribe(
 Sequence complete
 ```
 
+#### scheduler
+
+`toSortedList( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toSortedList()">`toSortedList()`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toSortedList(rx.functions.Func2)">`toSortedList(sortingFunction)`</a>
 
@@ -405,6 +429,10 @@ The `toMap( )` and `toMultimap( )` methods collect the items emitted by the 
 The `toMultimap( )` method differs from `toMap( )` in that the map it generates is also an `ArrayList`.
 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/toMultiMap.png" width="640" height="305" />
+
+#### scheduler
+
+`toMap( )` and `toMultimap( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toMap(rx.functions.Func1)">`toMap(keySelector)`</a>
