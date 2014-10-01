@@ -46,6 +46,10 @@ numbers.filter({ 0 == (it % 2) }).subscribe(
 Sequence complete
 ```
 
+#### scheduler
+
+`filter( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#filter(rx.functions.Func1)">`filter(predicate)`</a>
 * <a href="http://rxmarbles.com/#filter">RxMarbles interactive marble diagram</a>
@@ -77,6 +81,10 @@ Sequence complete
 
 There are also versions of `takeLast( )` that emit the items that were emitted by the source Observable during a specified window of time before the Observable completed, or that emit a maximum of _n_ items from such a window.
 
+#### scheduler
+
+The `takeLast( )` variants that use a time window by default operate on the `computation` scheduler, and have variants that allow you to specify a scheduler by passing in a parameter. The variant that takes only a count of items does not operate by default on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int)">`takeLast(count)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit)">`takeLast(count, time, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int, long, java.util.concurrent.TimeUnit, rx.Scheduler)">`takeLast(count, time, unit, scheduler)`</a>
@@ -96,6 +104,10 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `takeRight( )`.
 
+#### scheduler
+
+`last( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#last()">`last( )`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#last(rx.functions.Func1)">`last(predicate)`</a>
@@ -110,6 +122,10 @@ The `last( )` operator is equivalent to `takeLast(1)` except that it will thro
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/lastOrDefault.png" width="640" height="305" />​
 
 The `lastOrDefault( )` operator returns an Observable that emits the last item emitted by the source Observable, or a default item if the source Observable does not emit at least one item. Note that there is also [a `BlockingObservable` implementation of `lastOrDefault( )`](Blocking-Observable-Operators#wiki-last-and-lastordefault).
+
+#### scheduler
+
+`lastOrDefault( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
@@ -138,6 +154,10 @@ numbers.takeLastBuffer(3).subscribe(
 [6, 7, 8]
 Sequence complete
 ```
+
+#### scheduler
+
+The `takeLastBuffer( )` variants that use a time window by default operate on the `computation` scheduler, and have variants that allow you to specify a scheduler by passing in a parameter. The variant that takes only a count of items does not operate by default on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int)">`takeLastBuffer(count)`</a>
@@ -176,6 +196,10 @@ There are also versions of `skip()` that ignore the items emitted by an Observab
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `drop( )`.
 
+#### scheduler
+
+The `skip( )` variant that uses a time window by default operates on the `computation` scheduler, and has a variant that allows you to specify a scheduler by passing in a parameter. The variant that takes only a count of items does not operate by default on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(int)">`skip(num)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit)">`skip(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`skip(time, timeunit, scheduler)`</a>
@@ -195,6 +219,10 @@ You can ignore the last _n_ items emitted by an Observable and attend only to th
 There are also versions of `skipLast()` that ignore the items emitted by an Observable during a specified period of time before the Observable completes.
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `dropRight( )`.
+
+#### scheduler
+
+The `skipLast( )` variant that uses a time window by default operates on the `computation` scheduler, and has a variant that allows you to specify a scheduler by passing in a parameter. The variant that takes only a count of items does not operate by default on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipLast(int)">`skipLast(count)`</a>
@@ -229,6 +257,10 @@ Sequence complete
 
 If you call `take(n)` on an Observable, and that Observable emits _fewer_ than _n_ items before completing, the new, `take`-modified Observable will _not_ throw an exception or invoke `onError()`, but will merely emit this same fewer number of items before it completes.
 
+#### scheduler
+
+The `take( )` variant that uses a time window by default operates on the `computation` scheduler, and has a variant that allows you to specify a scheduler by passing in a parameter. The variant that takes only a count of items does not operate by default on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(int)">`take(num)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit)">`take(time, timeunit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`take(time, timeunit, scheduler)`</a>
@@ -253,6 +285,10 @@ You can also pass a function to this method that evaluates items as they are emi
 `takeFirst( )` behaves very similarly to `first( )` with the exception of how they behave when the source Observable emits no items (or no items that match the predicate). In such a case, `first( )` will throw an `NoSuchElementException` while `takeFirst( )` will return an empty Observable (one that calls `onCompleted( )` but never calls `onNext( )`).
 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/first.takeFirst.png" width="640" height="455" />​
+
+#### scheduler
+
+`first( )` and `takeFirst( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
@@ -279,6 +315,10 @@ You can also pass a function to this method that evaluates items as they are emi
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `firstOrElse( )` or `headOrElse( )`.
 
+#### scheduler
+
+`firstOrDefault( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * [Table of similar blocking and non-blocking operators](Blocking-Observable-Operators#wiki-appendix-similar-blocking-and-non-blocking-operators)
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T)">`firstOrDefault(default)`</a>
@@ -295,6 +335,10 @@ You can also pass a function to this method that evaluates items as they are emi
 
 Pass `elementAt( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAt( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, or if the source Observable emits fewer than _index value_ + 1 items, `elementAt( )` will throw an <code>IndexOutOfBoundsException</code>.
 
+#### scheduler
+
+`elementAt( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#elementAt(int)">`elementAt(index)`</a>
 * <a href="http://rxmarbles.com/#elementAt">RxMarbles interactive marble diagram</a>
@@ -309,6 +353,10 @@ Pass `elementAt( )` a zero-based index value and it will emit the solitary ite
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/elementAtOrDefault.png" width="640" height="310" />​
 
 Pass `elementAtOrDefault( )` a zero-based index value and it will emit the solitary item from the source Observable's sequence that matches that index value (for example, if you pass the index value 5, `elementAtOrDefault( )` will emit the sixth item emitted by the source Observable).  If you pass in a negative index value, `elementAtOrDefault( )` will throw an <code>IndexOutOfBoundsException</code>. If the source Observable emits fewer than _index value_ + 1 items, `elementAtOrDefault( )` will emit the default value you pass in (you must also pass in a type for this value that is appropriate to what type your Subscribers expect to observe).
+
+#### scheduler
+
+`elementAtOrDefault( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#elementAtOrDefault(int, T)">`elementAtOrDefault(index,default)`</a>
@@ -343,6 +391,10 @@ Sequence complete
 There is also a version of `sample` that samples the source Observable not at a regular, periodic interval, but upon each emission of an item (or notification) from a second Observable, called the _sampler_. The following marble diagram illustrates this use of `sample`:
 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/sample.o.png" width="640" height="305" />​
+
+#### scheduler
+
+The variants of `sample( )` and `throttleLast( )` that sample on a timer use the `computation` scheduler by default, and also have variants with which you can set the scheduler by passing it as a parameter. The variant of `sample( )` that uses an Observable sampler does not operate by default on a particular scheduler.
 
 #### see also:
 * [[Backpressure]]
@@ -392,6 +444,11 @@ o.onCompleted();
 7
 Sequence complete
 ```
+
+#### scheduler
+
+`throttleFirst( )` uses the `computation` scheduler by default, and also has a variant with which you can set the scheduler by passing it as a parameter.
+
 #### see also:
 * [[Backpressure]]
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long, java.util.concurrent.TimeUnit)">`throttleFirst(windowDuration,unit)`</a>
@@ -406,6 +463,10 @@ Sequence complete
 Use the `throttleWithTimeout( )` method to select only those items emitted by a source Observable that are not quickly superceded by other items.
 
 Note that the last item emitted by the source Observable will be emitted in turn by `throttleWithTimeout( )` even if the source Observable's `onCompleted` notification is issued within the time window you specify since that item's emission. That is to say: an `onCompleted` notification will not trigger a throttle.
+
+#### scheduler
+
+`throttleWithTimeout( )`, and those variants of `debounce( )` that operate using duration-based timeout values, use the `computation` scheduler by default, and also have variants with which you can set the scheduler by passing it as a parameter. The variant of `debounce( )` that uses a per-emission Observable to form the timeout period does not operate by default on any particular scheduler.
 
 #### see also:
 * [[Backpressure]]
@@ -429,6 +490,10 @@ Another version of `timeout( )` does not call `onError( )` but instead switc
 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/timeout.2.png" width="640" height="305" />​
 
+#### scheduler
+
+The variants of `timeout( )` that use a per-emission Observable to form the timeout period operate by default on the `immediate` scheduler. The variants that use a duration-based timeout operate by default on the `computation` scheduler and also have variants with which you can indicate which scheduler to use by passing it in as a parameter.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func0, rx.functions.Func1)">`timeout(firstTimeoutSelector, timeoutSelector)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func0, rx.functions.Func1, rx.Observable)">`timeout(firstTimeoutSelector, timeoutSelector, fallback)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func1)">`timeout(timeoutSelector)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func1, rx.Observable)">`timeout(timeoutSelector, fallback)`</a>
@@ -450,6 +515,10 @@ Use the `distinct( )` method to remove duplicate items from a source Observabl
 
 You can also pass a function or a comparator into `distinct( )` that customizes how it distinguishes between distinct and non-distinct items.
 
+#### scheduler
+
+`distinct( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinct()">`distinct()`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinct(rx.functions.Func1)">`distinct(keySelector)`</a>
@@ -470,6 +539,10 @@ Use the `distinctUntilChanged( )` method to remove duplicate consecutive items
 
 You can also pass a function or a comparator into `distinctUntilChanged( )` that customizes how it distinguishes between distinct and non-distinct items.
 
+#### scheduler
+
+`distinctUntilChanged( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged()">`distinctUntilChanged()`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged(rx.functions.Func1)">`distinctUntilChanged(keySelector)`</a>
@@ -486,6 +559,10 @@ You can also pass a function or a comparator into `distinctUntilChanged( )` th
 
 If you only want to be notified of the emission of items from an Observable when those items are of a particular class, you can apply the `ofType` operator to the Observable before subscribing to it.
 
+#### scheduler
+
+`ofType( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#ofType(java.lang.Class)">`ofType(class)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229380.aspx">`OfType`</a>
@@ -498,6 +575,10 @@ If you only want to be notified of the emission of items from an Observable when
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/ignoreElements.png" width="640" height="305" />​
 
 If you do not care about the items being emitted by an Observable, but do want to be notified when it completes or when it terminates with an error, you can apply the `ignoreElements` operator to the Observable, which will ensure that it will never call its observers' `onNext` handlers.
+
+#### scheduler
+
+`ignoreElements( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#ignoreElements()">`ignoreElements()`</a>
