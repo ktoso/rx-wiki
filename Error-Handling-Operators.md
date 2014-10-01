@@ -50,6 +50,10 @@ One
 Sequence complete
 ```
 
+#### scheduler
+
+`onErrorResumeNext( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.functions.Func1)">`onErrorResumeNext(throwable,function)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.Observable)">`onErrorResumeNext(sequence)`</a>
@@ -88,6 +92,10 @@ Blastoff!
 Sequence complete
 ```
 
+#### scheduler
+
+`onErrorReturn( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorReturn(rx.functions.Func1)">`onErrorReturn(func)`</a>
 
@@ -99,6 +107,10 @@ Sequence complete
 
 Much like `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Subscriber, `onExceptionResumeNext( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNext( )` will propagate it to its Subscriber's `onError( )` method and will not invoke its backup Observable.
 
+#### scheduler
+
+`onExceptionResumeNext( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onExceptionResumeNext(rx.Observable)">`onExceptionResumeNext(observable)`</a>
 
@@ -109,6 +121,10 @@ Much like `onErrorResumeNext( )` method, this returns an Observable that mirro
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/retry.png" width="640" height="315" />​
 
 The `retry( )` method responds to an `onError( )` call from the source Observable by not passing that call through to its Subscribers, but instead resubscribing to the source Observable and giving it another opportunity to complete its sequence without error. You can pass `retry( )` a maximum number of retry-attempts, or you can pass nothing, in which case it will never stop retrying to get an error-free sequence. It always passes `onNext( )` calls through to its Subscribers, even from sequences that terminate with an error, so this can cause duplicate emissions (as shown in the diagram above).
+
+#### scheduler
+
+`retry( )` by default operates on the `trampoline` scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry()">`retry()`</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry(long)">`retry(count)`</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry(rx.functions.Func2)">`retry(predicate)`</a>
@@ -123,6 +139,10 @@ The `retry( )` method responds to an `onError( )` call from the source Obser
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/retryWhen.f.png" width="640" height="430" />​
 
 The `retryWhen( )` operator is similar to `retry( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onError` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `retryWhen( )` resubscribes to the source and the process repeats; if that result is an `onError` notification, `retryWhen( )` also completes.
+
+#### scheduler
+
+`retryWhen( )` operates by default on the `trampoline` scheduler, and also has a variant with which you can pass it a particular scheduler to use as a parameter.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1)">`retryWhen(notificationHandler)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1, rx.Scheduler)">`retry(notificationHandler,scheduler)`</a>
