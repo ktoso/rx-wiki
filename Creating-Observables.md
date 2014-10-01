@@ -34,6 +34,10 @@ This has some similarities to the `from( )` method, but note that if you pass 
 
 Note that if you pass `null` to `just( )`, the resulting Observable will _not_ merely call `onCompleted( )` without calling `onNext( )`. It will instead call `onNext( null )` before calling `onCompleted( )`.
 
+#### scheduler
+
+`just( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T)">`just(item)`</a> (or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T)">two</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T)">three</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T)">four</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T)">five</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T)">six</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T)">seven</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T)">eight</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T)">nine</a>, or <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T, T, T, T, T, T, T, T, T, T)">ten</a> items)
 
@@ -64,6 +68,10 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 
 > **Note:** in the scala language adaptor for RxJava, the version of this method that works with sequences (arrays) is called `items( )`.
 
+#### scheduler
+
+`from( )` does not by default operate on any particular scheduler. The variant that converts a `Future` into an Observable has a version that accepts a scheduler as a parameter, which will be the scheduler that governs that `Future`.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future)">`from(future)`</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, long, java.util.concurrent.TimeUnit)">`from(future, timeout, unit)`</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future, rx.Scheduler)">`from(future, scheduler)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable)">`from(iterable)`</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable, rx.Scheduler)">`from(iterable, scheduler)`</a>
@@ -78,7 +86,11 @@ Note that when the `from( )` method transforms a `Future` into an Observable, 
 #### create an Observable that emits the sequence of items emitted by the source Observable repeatedly
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/repeat.o.png" width="640" height="309" />
 
-There are also versions of `repeat( )` that operate on a scheduler that you specify, and that repeat only a certain number of times before terminating.
+There are also versions of `repeat( )` that repeat only a certain number of times before terminating.
+
+#### scheduler
+
+`repeat( )` operates by default on the `trampoline` scheduler, and has variants that allow you to specify which scheduler to operate on by passing it in as a parameter.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeat()">`repeat( )`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeat(rx.Scheduler)">`repeat(scheduler)`</a>
@@ -93,6 +105,10 @@ There are also versions of `repeat( )` that operate on a scheduler that you sp
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/repeatWhen.f.png" width="640" height="430" />
 
 The `repeatWhen( )` operator is similar to `repeat( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onCompleted` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `repeatWhen( )` resubscribes to the source and the process repeats; if that result is an `onCompleted` notification, `repeatWhen( )` also completes.
+
+#### scheduler
+
+`repeatWhen( )` operates by default on the `trampoline` scheduler, and has a variant that allows you to specify which scheduler to operate on by passing it in as a parameter.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1)">`repeatWhen(notificationHandler)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#repeatWhen(rx.functions.Func1, rx.Scheduler)">`repeat(notificationHandler, scheduler)`</a>
@@ -129,6 +145,10 @@ def myObservable = Observable.create({ aSubscriber ->
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `apply( )`.
 
+#### scheduler
+
+`create( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#create(rx.Observable.OnSubscribe)">`create(OnSubscribe)`</a>
 * RxJS: [`create`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablecreatesubscribe)
@@ -141,6 +161,10 @@ def myObservable = Observable.create({ aSubscriber ->
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/defer.png" width="640" height="340" />
 
 Pass `defer( )` an Observable factory function (a function that generates Observables), and `defer( )` will return an Observable that will call this function to generate its Observable sequence afresh each time a new Subscriber subscribes.
+
+#### scheduler
+
+`defer( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#defer(rx.functions.Func0)">`defer(observableFactory)`</a>
@@ -161,6 +185,10 @@ def myObservable = Observable.range(5, 3);
 
 In calls to `range(n,m)`, a value of zero for _m_ will result in no numbers being emitted (values less than zero will cause an exception). _n_ may be any integer that can be represented as a `BigDecimal` — posititve, negative, or zero.
 
+#### scheduler
+
+`range( )` does not by default operate on any particular scheduler but has a variant with which you can instruct it to operate on a particular scheduler by passing one in as a parameter.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#range(int, int)">`range(start, count)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#range(int, int, rx.Scheduler)">`range(start, count, scheduler)`</a>
 * RxJS: [`range`](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservablerangestart-count-scheduler)
@@ -174,6 +202,10 @@ In calls to `range(n,m)`, a value of zero for _m_ will result in no numbers bein
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/interval.png" width="640" height="195" />
 
 To create an Observable that emits items spaced by a particular interval of time, pass the time interval and the units of time that interval is measured in (and, optionally, a scheduler) to the `interval( )` method.
+
+#### scheduler
+
+`interval( )` operates by default on the `computation` scheduler and also has a variant with which you can choose which scheduler it operates on by passing it in as a parameter.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long, java.util.concurrent.TimeUnit)">`interval(interval, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`interval(interval, unit, scheduler)`</a>
@@ -192,7 +224,9 @@ The `timer( )` method returns an Observable that, when subscribed to, waits fo
 There is also a version of `timer( )` that emits a single zero after a specified delay, and then emits incrementally increasing numbers periodically thereafter on a specified periodicity:
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/timer.p.png" width="640" height="200" />
 
-For both of these versions of `timer( )` you can optionally specify a Scheduler on which the timing will take place.
+#### scheduler
+
+`timer( )` operates by default on the `computation` scheduler and also has variants with which you can choose which scheduler it operates on by passing it in as a parameter.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long, java.util.concurrent.TimeUnit)">`timer(delay, unit)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long, java.util.concurrent.TimeUnit, rx.Scheduler)">`timer(delay, unit, scheduler)`</a>
@@ -247,6 +281,10 @@ error: error - badness
 *** never() ***
 *** END ***
 ```
+
+#### scheduler
+
+`empty( )`, `error( )`, and `never( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#empty()">`empty()`</a>
