@@ -35,6 +35,10 @@ numbers.map({it * it}).subscribe(
 Sequence complete
 ```
 
+#### scheduler
+
+`map( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#map(rx.functions.Func1)">`map(func)`</a>
 * <a href="http://rxmarbles.com/#map">RxMarbles interactive marble diagram</a>
@@ -90,6 +94,10 @@ Note that `flatMap( )` may interleave the items emitted by the Observables tha
 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/concatMap.png" width="640" height="305" />​
 
+#### scheduler
+
+`flatMap( )`, `concatMap( )`, and `flatMapIterable( )` do not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1)">`flatMap(func)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concatMap(rx.functions.Func1)">`concatMap(func)`</a>
@@ -107,6 +115,10 @@ Note that `flatMap( )` may interleave the items emitted by the Observables tha
 <img width="640" height="350" src="/ReactiveX/RxJava/wiki/images/rx-operators/switchMap.png" />
 
 The `switchMap( )` operator is similar to the `flatMap( )` and `concatMap( )` methods described above, however, rather than emitting _all_ of the items emitted by all of the Observables that the operator generates by transforming items from the source Observable, `switchMap( )` instead emits items from each such transformed Observable only until the next such Observable is emitted, then it ignores the previous one and begins emitting items emitted by the new one.
+
+#### scheduler
+
+`switchMap( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#switchMap(rx.functions.Func1)">`switchMap(func)`</a>
@@ -149,6 +161,10 @@ my_observable.scan(initial_seed, accumulator_closure)
 
 Note also that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your scan with `null`, and `scan( )` will emit `null` as its first item.
 
+#### scheduler
+
+`scan( )` does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#scan(rx.functions.Func2)">`scan(accumulator)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#scan(R, rx.functions.Func2)">`scan(initialValue, accumulator)`</a>
 * <a href="http://rxmarbles.com/#scan">RxMarbles interactive marble diagram</a>
@@ -188,6 +204,10 @@ There is also a `groupByUntil( )` operator. It adds another parameter: an Obse
 Another variety of `groupByUntil( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its Subscribers' `onCompleted` methods and then expires).
 
 Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits GroupedObservables, each of these GroupedObservables begins to buffer the items that it will emit upon subscription. For this reason, if you ignore any of these GroupedObservables (you neither subscribe to it or apply an operator to it that subscribes to it), this buffer will present a potential memory leak.  For this reason, rather than ignoring a GroupedObservable that you have no interest in observing, you should instead apply an operator like `take(0)` to it as a way of signalling to it that it may discard its buffer.
+
+#### scheduler
+
+`groupBy( )`, and `groupByUntil( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1)">`groupBy(keySelector)`</a>
@@ -277,6 +297,10 @@ Sequence complete
 <br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/buffer7.png" width="610" height="305" />​
 > This version of `buffer( )` creates a new bundle of items every *timeshift*, and fills this bundle with every item emitted by the source `Observable` from that time until *timespan* time has passed since the bundle's creation, before emitting the bundle as its own emission. If *timespan* is longer than *timeshift*, the emitted bundles will represent time periods that overlap and so they may contain duplicate items.
 
+#### scheduler
+
+Those variants of `buffer( )` that use timespans by default operate on the `computation` scheduler and also have variants that allow you to select which scheduler to use by passing it in as a parameter. The other variants of `buffer( )` do not operate by default on any particular scheduler.
+
 #### see also:
 * [[Backpressure]]
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(rx.functions.Func0)">`buffer(closingSelector)`</a>
@@ -329,6 +353,10 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 <br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/window7.png" width="610" height="319" />​
 > This version of `window( )` opens its first window immediately, and thereafter opens a new window every *timeshift* period of time (measured in *unit*, and optionally on a particular *scheduler*). It closes a currently open window after *timespan* period of time has passed since that window was opened. It will also close any currently open window if it receives an `onCompleted( )` or `onError( )` call from the *source* `Observable`. Depending on how you set *timespan* and *timeshift* the windows that result from this operation may overlap or have gaps.
 
+#### scheduler
+
+Those variants of `window( )` that use timespans by default operate on the `computation` scheduler and also have variants that allow you to select which scheduler to use by passing it in as a parameter. The other variants of `window( )` do not operate by default on any particular scheduler.
+
 #### see also:
 * [[Backpressure]]
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#window(rx.functions.Func0)">`window(closingSelector)`</a>
@@ -347,6 +375,10 @@ Like `buffer( )`, `window( )` has many varieties, each with its own way of s
 ## cast( )
 #### cast all items from the source Observable into a particular type before reemitting them
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/cast.png" width="640" height="305" />​
+
+#### scheduler
+
+`cast( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#cast(java.lang.Class)">`cast(class)`</a>
