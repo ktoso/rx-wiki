@@ -30,6 +30,10 @@ When you pass a number of source Observables to `amb( )`, it will pass through
 
 The instance version of `amb( )` is `ambWith( )`, so, for example, instead of writing `Observable.amb(o1,o2)` you could write `o1.ambWith(o2)`.
 
+#### scheduler
+
+`amb( )` and `ambWith( )` do not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(java.lang.Iterable)">`amb(iterableOfObservables)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable)">`amb(two observables)`</a> (and versions that take <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable)">three</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable)">four</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">five</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">six</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">seven</a>, <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">eight</a>, and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#amb(rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable, rx.Observable)">nine</a> observables)
@@ -43,6 +47,10 @@ The instance version of `amb( )` is `ambWith( )`, so, for example, instead o
 ## defaultIfEmpty( )
 #### emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/defaultIfEmpty.png" width="640" height="305" />​
+
+#### scheduler
+
+`defaultIfEmpty( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#defaultIfEmpty(T)">`defaultIfEmpty(default)`</a>
@@ -84,6 +92,10 @@ The `ifThen( )` operator evaluates a function and emits the source Observable'
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/skipUntil.png" width="640" height="375" />​
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `dropUntil( )`.
+
+#### scheduler
+
+`skipUntil( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipUntil(rx.Observable)">`skipUntil(other)`</a>
@@ -140,6 +152,10 @@ numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe
 Sequence complete
 ```
 
+#### scheduler
+
+`skipWhile( )` and `skipWhileWithIndex( )` do not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipWhile(rx.functions.Func1)">`skipWhile(predicate)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipWhileWithIndex(rx.functions.Func2)">`skipWhileWithIndex(predicate)`</a>
@@ -168,6 +184,10 @@ The `switchCase( )` operator evaluates a case and passes control to a particul
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/takeUntil.png" width="640" height="380" />​
 
 Note that the second Observable can cause `takeUntil` to quit emitting items either by emitting an item or by issuing an Error or Completed notification.
+
+#### scheduler
+
+`takeUntil( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.Observable)">`takeUntil(other)`</a>
@@ -223,6 +243,10 @@ numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe
 Sequence complete
 ```
 
+#### scheduler
+
+`takeWhile( )` and `takeWhileWithIndex( )` do not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.functions.Func1)">`takeWhile(predicate)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeWhileWithIndex(rx.functions.Func2)">`takeWhileWithIndex(predicate)`</a>
@@ -269,6 +293,10 @@ true
 
 > **Note:** in the scala language adaptor for RxJava, this operator is called `forall( )`.
 
+#### scheduler
+
+`all( )`does not by default operate on any particular scheduler.
+
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#all(rx.functions.Func1)">`all(predicate)`</a>
 * <a href="http://rxmarbles.com/#all">RxMarbles interactive marble diagram</a>
@@ -283,6 +311,10 @@ true
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/contains.png" width="640" height="320" />​
 
 Pass the `contains( )` operator a particular item, and it will emit `true` if that item is emitted by the source Observable, or `false` if the source Observable terminates without emitting that item.
+
+#### scheduler
+
+`contains( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#contains(java.lang.Object)">`contains(item)`</a>
@@ -302,6 +334,10 @@ When you apply the `exists( )` operator to a source Observable, the resulting 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/isEmpty.png" width="640" height="320" />​
 
 The inverse of this is the `isEmpty( )` operator. Apply it to a source Observable and the resulting Observable will emit `true` and complete if the source Observable completes without emitting any items, or it will emit `false` and complete if the source Observable emits any item before completing.
+
+#### scheduler
+
+`exists( )` and `isEmpty( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#exists(rx.functions.Func1)">`exists(predicate)`</a>
@@ -338,6 +374,10 @@ true
 firstfour == firstfourscrambled?
 false
 ```
+
+#### scheduler
+
+`sequenceEqual( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable)">`sequenceEqual(observable1, observable2)`</a> and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable, rx.Observable, rx.functions.Func2)">`sequenceEqual(observable1, observable2, equalityFunction)`</a>
