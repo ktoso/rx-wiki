@@ -14,7 +14,7 @@ To transform an `Observable` into a `BlockingObservable`, use the [`Observable.t
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#wiki-single-and-singleordefault) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`toFuture( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-getiterator) — convert the Observable into a Future
 * [**`toIterable( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-getiterator) — convert the sequence emitted by the Observable into an Iterable
-* [**`getIterator( )``**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-getiterator) — convert the sequence emitted by the Observable into an Iterator
+* [**`getIterator( )`**](Blocking-Observable-Operators#wiki-transformations-tofuture-toiterable-and-getiterator) — convert the sequence emitted by the Observable into an Iterator
 
 > This documentation accompanies its explanations with a modified form of "marble diagrams." Here is how these marble diagrams represent Blocking Observables:
 
