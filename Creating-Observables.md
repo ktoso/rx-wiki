@@ -104,7 +104,7 @@ There are also versions of `repeat( )` that repeat only a certain number of ti
 #### create an Observable that emits a particular item or sequence of items repeatedly, depending on the emissions of a second Observable
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/repeatWhen.f.png" width="640" height="430" />
 
-The `repeatWhen( )` operator is similar to `repeat( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onCompleted` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `repeatWhen( )` resubscribes to the source and the process repeats; if that result is an `onCompleted` notification, `repeatWhen( )` also completes.
+The `repeatWhen( )` operator is similar to `repeat( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by emitting a void item to a second Observable on completion of the source Observable, and observing the result. If that result is an emitted item, `repeatWhen( )` resubscribes to the source and the process repeats; if that result is an `onCompleted` notification, `repeatWhen( )` also completes.
 
 #### scheduler
 
