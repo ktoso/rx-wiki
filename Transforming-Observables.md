@@ -4,7 +4,7 @@ This section explains operators with which you can transform items that are emit
 * [**`flatMap( )`, `concatMap( )`, and `flatMapIterable( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable) — transform the items emitted by an Observable into Observables (or Iterables), then flatten this into a single Observable
 * [**`switchMap( )`**](Transforming-Observables#switchmap) — transform the items emitted by an Observable into Observables, and mirror those items emitted by the most-recently transformed Observable
 * [**`scan( )`**](Transforming-Observables#scan) — apply a function to each item emitted by an Observable, sequentially, and emit each successive value
-* [**`groupBy( )` and `groupByUntil( )`**](Transforming-Observables#groupby-and-groupbyuntil) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
+* [**`groupBy( )`**](Transforming-Observables#groupby) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * [**`buffer( )`**](Transforming-Observables#buffer) — periodically gather items from an Observable into bundles and emit these bundles rather than emitting the items one at a time 
 * [**`window( )`**](Transforming-Observables#window) — periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time 
 * [**`cast( )`**](Transforming-Observables#cast) — cast all items from the source Observable into a particular type before reemitting them
@@ -174,7 +174,7 @@ Note also that passing a `null` seed is not the same as not passing a seed. The 
 
 ***
 
-## groupBy( ) and groupByUntil( )
+## groupBy( )
 #### divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/groupBy.png" width="640" height="360" />​
 
@@ -197,23 +197,24 @@ numbers.groupBy(groupFunc).flatMap({ it.reduce([it.getKey()], {a, b -> a << b}) 
 Sequence complete
 ```
 
-There is also a `groupByUntil( )` operator. It adds another parameter: an Observable that emits duration markers. When a duration marker is emitted by this Observable, any grouped Observables that have been opened are closed, and `groupByUntil( )` will create new grouped Observables for any subsequent emissions by the source Observable.
+There is also a version of this operator that adds another parameter: an Observable that emits duration markers. When a duration marker is emitted by this Observable, any grouped Observables that have been opened are closed, and `groupBy( )` will create new grouped Observables for any subsequent emissions by the source Observable.
 
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/groupByUntil.png" width="640" height="375" />​
 
-Another variety of `groupByUntil( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its Subscribers' `onCompleted` methods and then expires).
+Another variety of `groupBy( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its Subscribers' `onCompleted` methods and then expires).
 
-Note that when `groupBy( )` or `groupByUntil( )` splits up the source Observable into an Observable that emits GroupedObservables, each of these GroupedObservables begins to buffer the items that it will emit upon subscription. For this reason, if you ignore any of these GroupedObservables (you neither subscribe to it or apply an operator to it that subscribes to it), this buffer will present a potential memory leak.  For this reason, rather than ignoring a GroupedObservable that you have no interest in observing, you should instead apply an operator like `take(0)` to it as a way of signalling to it that it may discard its buffer.
+Note that when `groupBy( )` splits up the source Observable into an Observable that emits GroupedObservables, each of these GroupedObservables begins to buffer the items that it will emit upon subscription. For this reason, if you ignore any of these GroupedObservables (you neither subscribe to it or apply an operator to it that subscribes to it), this buffer will present a potential memory leak.  For this reason, rather than ignoring a GroupedObservable that you have no interest in observing, you should instead apply an operator like `take(0)` to it as a way of signalling to it that it may discard its buffer.
+
+If you unsubscribe from one of the GroupedObservables, that GroupedObservable will be terminated. If the source Observable later emits an item whose key matches the GroupedObservable that was terminated in this way, `groupBy( )` will create and emit a new GroupedObservable to match the key.
 
 #### scheduler
 
-`groupBy( )`, and `groupByUntil( )` do not by default operate on any particular scheduler.
+`groupBy( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1)">`groupBy(keySelector)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1, rx.functions.Func1)">`groupBy(keySelector, elementSelector)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.functions.Func1, rx.functions.Func1)">`groupByUntil(keySelector, durationSelector)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.functions.Func1, rx.functions.Func1, rx.functions.Func1)">`groupByUntil(keySelector, valueSelector, durationSelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1, rx.functions.Func1)">`groupBy(keySelector, durationSelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.functions.Func1, rx.functions.Func1, rx.functions.Func1)">`groupBy(keySelector, valueSelector, durationSelector)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypegroupbykeyselector-elementselector-keyserializer">`groupBy`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypegroupbyuntilkeyselector-elementselector-durationselector-keyserializer">`groupByUntil`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">`GroupBy`</a>
