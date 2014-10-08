@@ -138,7 +138,7 @@ The `retry( )` method responds to an `onError( )` call from the source Obser
 #### if a source Observable emits an error, pass that error to another Observable to determine whether to resubscribe to the source
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/retryWhen.f.png" width="640" height="430" />​
 
-The `retryWhen( )` operator is similar to `retry( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the `onError` notification (converted into a `Notification` item) to a second Observable, and observing its result. If that result is an emitted item, `retryWhen( )` resubscribes to the source and the process repeats; if that result is an `onError` notification, `retryWhen( )` also completes.
+The `retryWhen( )` operator is similar to `retry( )` but decides whether or not to resubscribe to the source Observable and remirror its emissions by passing the throwable from the `onError` notification to a second Observable, and observing its result. If that result is an emitted item, `retryWhen( )` resubscribes to the source and the process repeats; if that result is an `onError` notification, `retryWhen( )` also completes.
 
 #### scheduler
 
