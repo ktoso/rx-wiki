@@ -121,7 +121,7 @@
 * [**`latest( )`**](Blocking-Observable-Operators#latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
 * **`length( )`** (scala) — _see [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong)_
 * **`limit( )`** — _see [**`take( )`**](Filtering-Observables#take)_
-* **`longCount( )`** — _see [**`countLong( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong)_
+* **`longCount( )`** (scala) — _see [**`countLong( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong)_
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
 * **`mapcat( )`** (clojure) — _see [**`concatMap( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable)_
 * **`mapMany( )`** — _see: [**`flatMap( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable)_
