@@ -1,28 +1,28 @@
 This section explains operators that perform mathematical or other operations over an entire sequence of items emitted by an Observable. Because these operations must wait for the source Observable to complete emitting items before they can construct their own emissions (and must usually buffer these items), these operators are dangerous to use on Observables that may have very long or infinite sequences.
 
 #### Operators in the `rxjava-math` module
-* [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Integers emitted by an Observable and emits this average
-* [**`averageLong( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Longs emitted by an Observable and emits this average
-* [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Floats emitted by an Observable and emits this average
-* [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#wiki-averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Doubles emitted by an Observable and emits this average
-* [**`max( )`**](Mathematical-and-Aggregate-Operators#wiki-max) — emits the maximum value emitted by a source Observable
-* [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#wiki-maxby) — emits the item emitted by the source Observable that has the maximum key value
-* [**`min( )`**](Mathematical-and-Aggregate-Operators#wiki-min) — emits the minimum value emitted by a source Observable
-* [**`minBy( )`**](Mathematical-and-Aggregate-Operators#wiki-minby) — emits the item emitted by the source Observable that has the minimum key value
-* [**`sumInteger( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Integers emitted by an Observable and emits this sum
-* [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Longs emitted by an Observable and emits this sum
-* [**`sumFloat( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Floats emitted by an Observable and emits this sum
-* [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#wiki-suminteger-sumlong-sumfloat-and-sumdouble) — adds the Doubles emitted by an Observable and emits this sum
+* [**`averageInteger( )`**](Mathematical-and-Aggregate-Operators#averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Integers emitted by an Observable and emits this average
+* [**`averageLong( )`**](Mathematical-and-Aggregate-Operators#averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Longs emitted by an Observable and emits this average
+* [**`averageFloat( )`**](Mathematical-and-Aggregate-Operators#averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Floats emitted by an Observable and emits this average
+* [**`averageDouble( )`**](Mathematical-and-Aggregate-Operators#averageinteger-averagelong-averagefloat-and-averagedouble) — calculates the average of Doubles emitted by an Observable and emits this average
+* [**`max( )`**](Mathematical-and-Aggregate-Operators#max) — emits the maximum value emitted by a source Observable
+* [**`maxBy( )`**](Mathematical-and-Aggregate-Operators#maxby) — emits the item emitted by the source Observable that has the maximum key value
+* [**`min( )`**](Mathematical-and-Aggregate-Operators#min) — emits the minimum value emitted by a source Observable
+* [**`minBy( )`**](Mathematical-and-Aggregate-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value
+* [**`sumInteger( )`**](Mathematical-and-Aggregate-Operators#suminteger-sumlong-sumfloat-and-sumdouble) — adds the Integers emitted by an Observable and emits this sum
+* [**`sumLong( )`**](Mathematical-and-Aggregate-Operators#suminteger-sumlong-sumfloat-and-sumdouble) — adds the Longs emitted by an Observable and emits this sum
+* [**`sumFloat( )`**](Mathematical-and-Aggregate-Operators#suminteger-sumlong-sumfloat-and-sumdouble) — adds the Floats emitted by an Observable and emits this sum
+* [**`sumDouble( )`**](Mathematical-and-Aggregate-Operators#suminteger-sumlong-sumfloat-and-sumdouble) — adds the Doubles emitted by an Observable and emits this sum
 
 #### Other Aggregate Operators
-* [**`concat( )`**](Mathematical-and-Aggregate-Operators#wiki-concat) — concatenate two or more Observables sequentially
-* [**`count( )` and `longCount( )`**](Mathematical-and-Aggregate-Operators#wiki-count-and-longcount) — counts the number of items emitted by an Observable and emits this count
-* [**`reduce( )`**](Mathematical-and-Aggregate-Operators#wiki-reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
+* [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat) — concatenate two or more Observables sequentially
+* [**`count( )` and `countLong( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong) — counts the number of items emitted by an Observable and emits this count
+* [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * [**`collect( )`**](Mathematical-and-Aggregate-Operators#collect) — collect items emitted by the source Observable into a single mutable data structure and return an Observable that emits this structure
-* [**`toList( )`**](Mathematical-and-Aggregate-Operators#wiki-tolist) — collect all items from an Observable and emit them as a single List
-* [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#wiki-tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
-* [**`toMap( )`**](Mathematical-and-Aggregate-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
-* [**`toMultiMap( )`**](Mathematical-and-Aggregate-Operators#wiki-tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
+* [**`toList( )`**](Mathematical-and-Aggregate-Operators#tolist) — collect all items from an Observable and emit them as a single List
+* [**`toSortedList( )`**](Mathematical-and-Aggregate-Operators#tosortedlist) — collect all items from an Observable and emit them as a single, sorted List
+* [**`toMap( )`**](Mathematical-and-Aggregate-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into a map keyed by a specified key function
+* [**`toMultiMap( )`**](Mathematical-and-Aggregate-Operators#tomap-and-tomultimap) — convert the sequence of items emitted by an Observable into an ArrayList that is also a map keyed by a specified key function
 
 ***
 
@@ -120,7 +120,7 @@ The instance version of `concat( )` is `concatWith( )`, so, for example, in 
 
 ***
 
-## count( ) and longCount( )
+## count( ) and countLong( )
 #### counts the number of items emitted by an Observable and emits this count
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/count.png" width="640" height="310" />
 
@@ -144,17 +144,17 @@ myObservable.count().subscribe(
 Sequence complete
 ```
 
-`longCount( )` is essentially the same, but emits its item as a Long rather than an Integer.
+`countLong( )` is essentially the same, but emits its item as a Long rather than an Integer.
 
-> **Note:** in the scala language adaptor for RxJava, this method is called `length( )` or `size( )`.
+> **Note:** in the scala language adaptor for RxJava, `count` is called `length` or `size` and `countLong` is called `longCount`
 
 #### scheduler
 
-`count( )` and `longCount( )` do not by default operate on any particular scheduler.
+`count( )` and `countLong( )` do not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#count()">`count()`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#longCount()">`longCount()`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#countLong()">`countLong()`</a>
 * <a href="http://rxmarbles.com/#count">RxMarbles interactive marble diagram</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypecountpredicate">`count`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/hh229470.aspx">`Count`</a>
