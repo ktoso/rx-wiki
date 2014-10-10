@@ -27,7 +27,8 @@
 * [**`connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * **`cons( )`** (clojure) — _see [**`concat( )`**](Mathematical-and-Aggregate-Operators#concat)_
 * [**`contains( )`**](Conditional-and-Boolean-Operators#contains) — determine whether an Observable emits a particular item or not
-* [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
+* [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong) — counts the number of items emitted by an Observable and emits this count
+* [**`countLong( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong) — counts the number of items emitted by an Observable and emits this count
 * [**`create( )`**](Creating-Observables#create) — create an Observable from scratch by means of a function
 * **`cycle( )`** (clojure) — _see [**`repeat( )`**](Creating-Observables#repeat)_
 * [**`debounce( )`**](Filtering-Observables#throttlewithtimeout-or-debounce) — only emit an item from the source Observable after a particular timespan has passed without the Observable emitting any other items
@@ -118,9 +119,9 @@
 * [**`lastOrDefault( )`**](Filtering-Observables#lastOrDefault) (`Observable`) — emit only the last item emitted by an Observable, or a default value if the source Observable is empty
 * **`lastOrElse( )`** (scala) — _see [**`lastOrDefault( )`**](Filtering-Observables#lastOrDefault) or [**`lastOrDefault( )`**](Blocking-Observable-Operators#last-and-lastordefault) (`BlockingObservable`)_
 * [**`latest( )`**](Blocking-Observable-Operators#latest) — returns an iterable that blocks until or unless the Observable emits an item that has not been returned by the iterable, then returns the latest such item
-* **`length( )`** (scala) — _see [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount)_
+* **`length( )`** (scala) — _see [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong)_
 * **`limit( )`** — _see [**`take( )`**](Filtering-Observables#take)_
-* [**`longCount( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount) — counts the number of items emitted by an Observable and emits this count
+* **`longCount( )`** — _see [**`countLong( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong)_
 * [**`map( )`**](Transforming-Observables#map) — transform the items emitted by an Observable by applying a function to each of them
 * **`mapcat( )`** (clojure) — _see [**`concatMap( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable)_
 * **`mapMany( )`** — _see: [**`flatMap( )`**](Transforming-Observables#flatmap-concatmap-and-flatmapiterable)_
@@ -180,7 +181,7 @@
 * [**`singleOrDefault( )`**](Blocking-Observable-Operators#single-and-singleordefault) (`BlockingObservable`) — if the source Observable completes after emitting a single item, return that item, otherwise return a default item
 * [**`singleOrDefault( )`**](Observable-Utility-Operators#single-and-singleordefault) (`Observable`) — if the source Observable completes after emitting a single item, emit that item, otherwise emit a default item
 * **`singleOrElse( )`** (scala) — _see [**`singleOrDefault( )`**](Observable-Utility-Operators#single-and-singleordefault)_
-* **`size( )`** (scala) — _see [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-longcount)_
+* **`size( )`** (scala) — _see [**`count( )`**](Mathematical-and-Aggregate-Operators#count-and-countlong)_
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
