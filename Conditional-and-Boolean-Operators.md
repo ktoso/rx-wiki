@@ -1,24 +1,24 @@
 This section explains operators with which you conditionally emit or transform Observables, or can do boolean evaluations of them:
 
 ### Conditional Operators
-* [**`amb( )`**](Conditional-and-Boolean-Operators#wiki-amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
-* [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#wiki-defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
-* (`rxjava-computation-expressions`) [**`doWhile( )`**](Conditional-and-Boolean-Operators#wiki-dowhile) — emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true
-* (`rxjava-computation-expressions`) [**`ifThen( )`**](Conditional-and-Boolean-Operators#wiki-ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
-* [**`skipUntil( )`**](Conditional-and-Boolean-Operators#wiki-skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
-* [**`skipWhile( )` and `skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
-* (`rxjava-computation-expressions`) [**`switchCase( )`**](Conditional-and-Boolean-Operators#wiki-switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
-* [**`takeUntil( )`**](Conditional-and-Boolean-Operators#wiki-takeuntil) — emits the items from the source Observable until a second Observable emits an item or issues a notification
-* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#wiki-takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-* (`rxjava-computation-expressions`) [**`whileDo( )`**](Conditional-and-Boolean-Operators#wiki-whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
+* [**`amb( )`**](Conditional-and-Boolean-Operators#amb) — given two or more source Observables, emits all of the items from the first of these Observables to emit an item
+* [**`defaultIfEmpty( )`**](Conditional-and-Boolean-Operators#defaultifempty) — emit items from the source Observable, or emit a default item if the source Observable completes after emitting no items
+* (`rxjava-computation-expressions`) [**`doWhile( )`**](Conditional-and-Boolean-Operators#dowhile) — emit the source Observable's sequence, and then repeat the sequence as long as a condition remains true
+* (`rxjava-computation-expressions`) [**`ifThen( )`**](Conditional-and-Boolean-Operators#ifthen) — only emit the source Observable's sequence if a condition is true, otherwise emit an empty or default sequence
+* [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
+* [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* (`rxjava-computation-expressions`) [**`switchCase( )`**](Conditional-and-Boolean-Operators#switchcase) — emit the sequence from a particular Observable based on the results of an evaluation
+* [**`takeUntil( )`**](Conditional-and-Boolean-Operators#takeuntil) — emits the items from the source Observable until a second Observable emits an item or issues a notification
+* [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* (`rxjava-computation-expressions`) [**`whileDo( )`**](Conditional-and-Boolean-Operators#whiledo) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true
 
 > (`rxjava-computation-expressions`) — indicates that this operator is currently part of the optional `rxjava-computation-expressions` package under `rxjava-contrib` and is not included with the standard RxJava set of operators
 
 ### Boolean Operators
-* [**`all( )`**](Conditional-and-Boolean-Operators#wiki-all) — determine whether all items emitted by an Observable meet some criteria
-* [**`contains( )`**](Conditional-and-Boolean-Operators#wiki-contains) — determine whether an Observable emits a particular item or not
-* [**`exists( )` and `isEmpty( )`**](Conditional-and-Boolean-Operators#wiki-exists-and-isempty) — determine whether an Observable emits any items or not
-* [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#wiki-sequenceequal) — test the equality of the sequences emitted by two Observables
+* [**`all( )`**](Conditional-and-Boolean-Operators#all) — determine whether all items emitted by an Observable meet some criteria
+* [**`contains( )`**](Conditional-and-Boolean-Operators#contains) — determine whether an Observable emits a particular item or not
+* [**`exists( )` and `isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty) — determine whether an Observable emits any items or not
+* [**`sequenceEqual( )`**](Conditional-and-Boolean-Operators#sequenceequal) — test the equality of the sequences emitted by two Observables
 
 ***
 
@@ -106,7 +106,7 @@ The `ifThen( )` operator evaluates a function and emits the source Observable'
 
 ***
 
-## skipWhile( ) and skipWhileWithIndex( )
+## skipWhile( )
 #### discard items emitted by an Observable until a specified condition is false, then emit the remainder
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/skipWhile.png" width="640" height="305" />​
 
@@ -132,33 +132,12 @@ Sequence complete
 
 > **Note:** in the scala language adaptor for RxJava, this method is called `dropWhile( )`.
 
-<img src="/ReactiveX/RxJava/wiki/images/rx-operators/skipWhileWithIndex.png" width="640" height="305" />​
-
-The `skipWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
-```groovy
-numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.skipWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-6
-7
-8
-9
-Sequence complete
-```
-
 #### scheduler
 
-`skipWhile( )` and `skipWhileWithIndex( )` do not by default operate on any particular scheduler.
+`skipWhile( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipWhile(rx.functions.Func1)">`skipWhile(predicate)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipWhileWithIndex(rx.functions.Func2)">`skipWhileWithIndex(predicate)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.skipwhile.aspx">`SkipWhile`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypeskipwhilepredicate-thisarg">`skipWhile`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
@@ -197,7 +176,7 @@ Note that the second Observable can cause `takeUntil` to quit emitting items eit
 
 ***
 
-## takeWhile( ) and takeWhileWithIndex( )
+## takeWhile( )
 #### emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/takeWhile.png" width="640" height="305" />​
 
@@ -222,34 +201,12 @@ numbers.takeWhile({ ((it < 6) || (0 == (it % 2))) }).subscribe(
 Sequence complete
 ```
 
-<img src="/ReactiveX/RxJava/wiki/images/rx-operators/takeWhileWithIndex.png" width="640" height="305" />​
-
-The `takeWhileWithIndex( )` method is similar, but your function takes an additional parameter: the (zero-based) index of the item being emitted by the source Observable.
-```groovy
-numbers = Observable.from( [1, 2, 3, 4, 5, 6, 7, 8, 9] );
-
-numbers.takeWhileWithIndex({ it, index -> ((it < 6) || (index < 5)) }).subscribe(
-  { println(it); },                          // onNext
-  { println("Error: " + it.getMessage()); }, // onError
-  { println("Sequence complete"); }          // onCompleted
-);
-```
-```
-1
-2
-3
-4
-5
-Sequence complete
-```
-
 #### scheduler
 
-`takeWhile( )` and `takeWhileWithIndex( )` do not by default operate on any particular scheduler.
+`takeWhile( )` does not by default operate on any particular scheduler.
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.functions.Func1)">`takeWhile(predicate)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeWhileWithIndex(rx.functions.Func2)">`takeWhileWithIndex(predicate)`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.takewhile.aspx">`TakeWhile`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypetakewhilepredicate-thisarg">`takeWhile`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/05_Filtering.html#SkipWhileTakeWhile">Introduction to Rx: SkipWhile and TakeWhile</a>
