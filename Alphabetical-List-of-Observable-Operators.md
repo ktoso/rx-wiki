@@ -137,7 +137,7 @@
 * [**`min( )`**](Mathematical-and-Aggregate-Operators#min) — emits the minimum value emitted by a source Observable (`rxjava-math`)
 * [**`minBy( )`**](Mathematical-and-Aggregate-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value (`rxjava-math`)
 * [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
-* [**`multicast( )`**](Phantom-Operators#observablemulticast) — represents an Observable as a Connectable Observable
+* [**`multicast( )`**](Phantom-Operators#multicast) — represents an Observable as a Connectable Observable
 * [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
 * [**`next( )`**](Blocking-Observable-Operators#next) — returns an iterable that blocks until the Observable emits another item, then returns that item
 * **`nonEmpty( )`** (scala) — _see [**`isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty)_
