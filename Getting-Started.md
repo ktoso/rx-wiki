@@ -65,7 +65,7 @@ You need Java 6 or later.
 To check out and build the RxJava source, issue the following commands:
 
 ```
-$ git clone git@github.com:Netflix/RxJava.git
+$ git clone git@github.com:ReactiveX/RxJava.git
 $ cd RxJava/
 $ ./gradlew build
 ```
