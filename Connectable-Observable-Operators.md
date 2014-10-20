@@ -1,10 +1,10 @@
 This section explains the [`ConnectableObservable`](http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html) subclass and its operators:
 
-* [**`ConnectableObservable.connect( )`**](Connectable-Observable-Operators#wiki-connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
-* [**`Observable.publish( )` and `Observable.multicast( )`**](Connectable-Observable-Operators#wiki-observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
-* [**`Observable.publishLast( )`**](Connectable-Observable-Operators#wiki-observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
-* [**`Observable.replay( )`**](Connectable-Observable-Operators#wiki-observablereplay) — ensures that all Subscribers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
-* [**`ConnectableObservable.refCount( )`**](Connectable-Observable-Operators#wiki-connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
+* [**`ConnectableObservable.connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
+* [**`Observable.publish( )`**](Connectable-Observable-Operators#observablepublish) — represents an Observable as a Connectable Observable
+* [**`Observable.publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
+* [**`Observable.replay( )`**](Connectable-Observable-Operators#observablereplay) — ensures that all Subscribers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
+* [**`ConnectableObservable.refCount( )`**](Connectable-Observable-Operators#connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
 
 A Connectable Observable resembles an ordinary Observable, except that it does not begin emitting items when it is subscribed to, but only when its `connect()` method is called. In this way you can wait for all intended Subscribers to subscribe to the Observable before the Observable begins emitting items.
 
@@ -94,21 +94,18 @@ You can also use the `connect( )` method to instruct an Observable to begin em
 
 ***
 
-## Observable.publish( ) and Observable.multicast( )
+## Observable.publish( )
 #### represents an Observable as a Connectable Observable
-To represent an Observable as a Connectable Observable, use the `publish( )` or `multicast( )` method.
+To represent an Observable as a Connectable Observable, use the `publish( )` method.
 
 #### see also:
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#multicast(rx.functions.Func0)">`multicast(subjectFactory)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#multicast(rx.functions.Func0, rx.functions.Func1)">`multicast(subjectFactory, selector)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish()">`publish()`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(rx.functions.Func1)">`publish(selector)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(rx.functions.Func1, T)">`publish(selector, initialValue)`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(T)">`publish(initialValue)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypemulticastsubject--subjectselector-selector">`multicast`</a> and <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypepublishselector">`publish`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.multicast.aspx">`Multicast`</a> and <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish.aspx">`Publish`</a>
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypepublishselector">`publish`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish.aspx">`Publish`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#Multicast">Introduction to Rx: Multicast</a>
 
 ***
 
