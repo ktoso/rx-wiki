@@ -53,8 +53,8 @@
 * **`drop( )`** (scala/clojure) — _see [**`skip( )`**](Filtering-Observables#skip)_
 * **`dropRight( )`** (scala) — _see [**`skipLast( )`**](Filtering-Observables#skiplast)_
 * **`dropUntil( )`** (scala) — _see [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil)_
-* **`dropWhile( )`** (scala) — _see [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex)_
-* **`drop-while( )`** (clojure) — _see [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex)_
+* **`dropWhile( )`** (scala) — _see [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile)_
+* **`drop-while( )`** (clojure) — _see [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile)_
 * [**`elementAt( )`**](Filtering-Observables#elementat) — emit item _n_ emitted by the source Observable
 * [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault) — emit item _n_ emitted by the source Observable, or a default item if the source Observable emits fewer than _n_ items
 * [**`empty( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing and then completes
@@ -137,7 +137,7 @@
 * [**`min( )`**](Mathematical-and-Aggregate-Operators#min) — emits the minimum value emitted by a source Observable (`rxjava-math`)
 * [**`minBy( )`**](Mathematical-and-Aggregate-Operators#minby) — emits the item emitted by the source Observable that has the minimum key value (`rxjava-math`)
 * [**`mostRecent( )`**](Blocking-Observable-Operators#mostrecent) — returns an iterable that always returns the item most recently emitted by the Observable
-* [**`multicast( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
+* [**`multicast( )`**](Phantom-Operators#observablemulticast) — represents an Observable as a Connectable Observable
 * [**`never( )`**](Creating-Observables#empty-error-and-never) — create an Observable that emits nothing at all
 * [**`next( )`**](Blocking-Observable-Operators#next) — returns an iterable that blocks until the Observable emits another item, then returns that item
 * **`nonEmpty( )`** (scala) — _see [**`isEmpty( )`**](Conditional-and-Boolean-Operators#exists-and-isempty)_
@@ -154,7 +154,7 @@
 * [**`parallel( )`**](Phantom-Operators#parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread (⁇)
 * [**`parallelMerge( )`**](Phantom-Operators#parallelmerge) — combine multiple Observables into smaller number of Observables (⁇)
 * [**`pivot( )`**](Phantom-Operators#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set (⁇)
-* [**`publish( )`**](Connectable-Observable-Operators#observablepublish-and-observablemulticast) — represents an Observable as a Connectable Observable
+* [**`publish( )`**](Connectable-Observable-Operators#observablepublish) — represents an Observable as a Connectable Observable
 * [**`publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
 * [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
@@ -185,8 +185,7 @@
 * [**`skip( )`**](Filtering-Observables#skip) — ignore the first _n_ items emitted by an Observable
 * [**`skipLast( )`**](Filtering-Observables#skiplast) — ignore the last _n_ items emitted by an Observable
 * [**`skipUntil( )`**](Conditional-and-Boolean-Operators#skipuntil) — discard items emitted by a source Observable until a second Observable emits an item, then emit the remainder of the source Observable's items
-* [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
-* [**`skipWhileWithIndex( )`**](Conditional-and-Boolean-Operators#skipwhile-and-skipwhilewithindex) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
+* [**`skipWhile( )`**](Conditional-and-Boolean-Operators#skipwhile) — discard items emitted by an Observable until a specified condition is false, then emit the remainder
 * **`sliding( )`** (scala) — _see [**`window( )`**](Transforming-Observables#window)_
 * **`slidingBuffer( )`** (scala) — _see [**`buffer( )`**](Transforming-Observables#buffer)_
 * [**`split( )`**](String-Observables#split) (`StringObservable`) — converts an Observable of Strings into an Observable of Strings that treats the source sequence as a stream and splits it on a specified regex boundary
@@ -211,9 +210,8 @@
 * [**`takeLastBuffer( )`**](Filtering-Observables#takelastbuffer) — emit the last _n_ items emitted by an Observable, as a single list item
 * **`takeRight( )`** (scala) — _see [**`last( )`**](Filtering-Observables#last) (`Observable`) or [**`takeLast( )`**](Filtering-Observables#takelast)_
 * [**`takeUntil( )`**](Conditional-and-Boolean-Operators#takeuntil) — emits the items from the source Observable until a second Observable emits an item
-* [**`takeWhile( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
-* **`take-while( )`** (clojure) — _see [**`takeWhile( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex)_
-* [**`takeWhileWithIndex( )`**](Conditional-and-Boolean-Operators#takewhile-and-takewhilewithindex) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* [**`takeWhile( )`**](Conditional-and-Boolean-Operators#takewhile) — emit items emitted by an Observable as long as a specified condition is true, then skip the remainder
+* **`take-while( )`** (clojure) — _see [**`takeWhile( )`**](Conditional-and-Boolean-Operators#takewhile)_
 * [**`then( )`**](Combining-Observables#and-then-and-when) — transform a series of `Pattern` objects via a `Plan` template (`rxjava-joins`)
 * [**`throttleFirst( )`**](Filtering-Observables#throttlefirst) — emit the first items emitted by an Observable within periodic time intervals
 * [**`throttleLast( )`**](Filtering-Observables#sample-or-throttlelast) — emit the most recent items emitted by an Observable within periodic time intervals
