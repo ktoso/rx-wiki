@@ -13,6 +13,7 @@
 * [Be Reactive](http://colintheshots.com/blog/?p=85) by ColinTheShots
 * StackOverflow: [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [The Reactive Manifesto](http://www.reactivemanifesto.org/)
+* Grokking RxJava, [Part 1: The Basics](http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/), [Part 2: Operator, Operator](http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/), [Part 3: Reactive with Benefits](http://blog.danlew.net/2014/09/30/grokking-rxjava-part-3/), [Part 4: Reactive Android](blog.danlew.net/2014/10/08/grokking-rxjava-part-4/) - published in Sep/Oct 2014 by Daniel Lew
 
 # How Netflix Is Using RxJava
 * LambdaJam Chicago 2013: [Functional Reactive Programming in the Netflix API](https://speakerdeck.com/benjchristensen/functional-reactive-programming-in-the-netflix-api-lambdajam-2013) by Ben Christensen
