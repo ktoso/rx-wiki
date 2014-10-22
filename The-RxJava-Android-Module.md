@@ -15,14 +15,14 @@ Here is an example for [Maven](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%2
 <dependency>
     <groupId>com.netflix.rxjava</groupId>
     <artifactId>rxjava-android</artifactId>
-    <version>0.10.1</version>
+    <version>0.22</version>
 </dependency>
 ```
 
 &hellip;and for Ivy:
 
 ```xml
-<dependency org="com.netflix.rxjava" name="rxjava-android" rev="0.10.1" />
+<dependency org="com.netflix.rxjava" name="rxjava-android" rev="0.22" />
 ```
 
 The currently supported `minSdkVersion` is `10` (Android 2.3/Gingerbread)
@@ -34,16 +34,16 @@ The currently supported `minSdkVersion` is `10` (Android 2.3/Gingerbread)
 You commonly deal with asynchronous tasks on Android by observing the task&#8217;s result or outcome on the main UI thread. Using vanilla Android, you would typically accomplish this with an `AsyncTask`. With RxJava you would instead declare your `Observable` to be observed on the main thread by using the `observeOn` operator:
 
 ```java
-    public class ReactiveFragment extends Fragment {
+public class ReactiveFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Observable.from("one", "two", "three", "four", "five")
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(/* an Observer */);
-    }
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    Observable.from("one", "two", "three", "four", "five")
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(/* an Observer */);
+}
 ```
  
 This executes the Observable on a new thread, which emits results through `onNext` on the main UI thread.
@@ -52,18 +52,18 @@ This executes the Observable on a new thread, which emits results through `onNex
 The previous example is a specialization of a more general concept: binding asynchronous communication to an Android message loop by using the `Handler` class. In order to observe an `Observable` on an arbitrary thread, create a `Handler` bound to that thread and use the `AndroidSchedulers.handlerThread` scheduler:
 
 ```java
-    new Thread(new Runnable() {
-        @Override
-        public void run() {
-            final Handler handler = new Handler(); // bound to this thread
-            Observable.from("one", "two", "three", "four", "five")
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.handlerThread(handler))
-                    .subscribe(/* an Observer */)
+new Thread(new Runnable() {
+    @Override
+    public void run() {
+        final Handler handler = new Handler(); // bound to this thread
+        Observable.from("one", "two", "three", "four", "five")
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.handlerThread(handler))
+                .subscribe(/* an Observer */)
                     
-            // perform work, ...
-        }
-    }, "custom-thread-1").start();
+        // perform work, ...
+    }
+}, "custom-thread-1").start();
 ```
 
 This executes the Observable on a new thread and emits results through `onNext` on `custom-thread-1`. (This example is contrived since you could as well call `observeOn(Schedulers.currentThread())` but it illustrates the idea.)
@@ -74,7 +74,7 @@ On Android it is tricky for asynchronous actions to access framework objects in 
 
 This is still a concern when using RxJava on Android, but you can deal with the problem in a more elegant way by using `Subscription`s and a number of Observable operators. In general, when you run an `Observable` inside an `Activity` that subscribes to the result (either directly or through an inner class), you must unsubscribe from the sequence in `onDestroy`, as shown in the following example:
 
-```
+```java
 // MyActivity
 private Subscription subscription;
 
