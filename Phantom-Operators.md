@@ -11,6 +11,8 @@ These operators have been proposed but are not part of the 1.0 release of RxJava
 * [**`parallel( )`**](Phantom-Operators#parallel) — split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 * [**`parallelMerge( )`**](Phantom-Operators#parallelmerge) — combine multiple Observables into a smaller number of Observables, to facilitate parallelism
 * [**`pivot( )`**](Phantom-Operators#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set
+* [**`publishLast( )`**](Phantom-Operators#publishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
+
 
 ***
 
@@ -132,3 +134,14 @@ An example may make this clearer. Imagine you use `groupBy( )` to group the em
 The result will be a grouped observable that emits two groups: the grouped observable resulting from transforming Observable1, and the grouped observable resulting from transforming Observable2. Each of those grouped observables emit observables that in turn emit the odds and evens from the source observables. You can use `pivot( )` to change this around: by applying `pivot( )` to this grouped observable it will transform into one that emits two different groups: the odds group and the evens group, with each of these groups emitting a separate observable corresponding to which source observable its set of integers came from. Here is an illustration:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/pivot.ex.png" width="640" height="1140" />​
+
+***
+
+## publishLast( )
+#### represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
+<img src="/ReactiveX/RxJava/wiki/images/rx-operators/publishLast.png" width="640" height="310" />
+
+#### see also:
+* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypepublishlatestselector">`publishLast`</a>
+* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publishlast.aspx">`PublishLast`</a>
+* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishLast">Introduction to Rx: PublishLast</a>
