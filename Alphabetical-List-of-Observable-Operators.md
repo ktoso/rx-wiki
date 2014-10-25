@@ -155,7 +155,7 @@
 * [**`parallelMerge( )`**](Phantom-Operators#parallelmerge) — combine multiple Observables into smaller number of Observables (⁇)
 * [**`pivot( )`**](Phantom-Operators#pivot) — combine multiple sets of grouped observables so that they are arranged primarily by group rather than by set (⁇)
 * [**`publish( )`**](Connectable-Observable-Operators#observablepublish) — represents an Observable as a Connectable Observable
-* [**`publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
+* [**`publishLast( )`**](Phantom-Operators#publishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable (⁇)
 * [**`range( )`**](Creating-Observables#range) — create an Observable that emits a range of sequential integers
 * [**`reduce( )`**](Mathematical-and-Aggregate-Operators#reduce) — apply a function to each emitted item, sequentially, and emit only the final accumulated value
 * **`reductions( )`** (clojure) — _see [**`scan( )`**](Transforming-Observables#scan)_
