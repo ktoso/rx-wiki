@@ -2,7 +2,6 @@ This section explains the [`ConnectableObservable`](http://reactivex.io/RxJava/j
 
 * [**`ConnectableObservable.connect( )`**](Connectable-Observable-Operators#connectableobservableconnect) — instructs a Connectable Observable to begin emitting items
 * [**`Observable.publish( )`**](Connectable-Observable-Operators#observablepublish) — represents an Observable as a Connectable Observable
-* [**`Observable.publishLast( )`**](Connectable-Observable-Operators#observablepublishlast) — represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
 * [**`Observable.replay( )`**](Connectable-Observable-Operators#observablereplay) — ensures that all Subscribers see the same sequence of emitted items, even if they subscribe after the Observable begins emitting the items
 * [**`ConnectableObservable.refCount( )`**](Connectable-Observable-Operators#connectableobservablerefcount) — makes a Connectable Observable behave like an ordinary Observable
 
@@ -101,24 +100,9 @@ To represent an Observable as a Connectable Observable, use the `publish( )` m
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish()">`publish()`</a>
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(rx.functions.Func1)">`publish(selector)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(rx.functions.Func1, T)">`publish(selector, initialValue)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(T)">`publish(initialValue)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypepublishselector">`publish`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publish.aspx">`Publish`</a>
 * <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishAndConnect">Introduction to Rx: Publish and Connect</a>
-
-***
-
-## Observable.publishLast( )
-#### represent an Observable as a Connectable Observable that emits only the last item emitted by the source Observable
-<img src="/ReactiveX/RxJava/wiki/images/rx-operators/publishLast.png" width="640" height="310" />
-
-#### see also:
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publishLast()">`publishLast()`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publishLast(rx.functions.Func1)">`publishLast(selector)`</a>
-* RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypepublishlatestselector">`publishLast`</a>
-* Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.publishlast.aspx">`PublishLast`</a>
-* <a href="http://www.introtorx.com/Content/v1.0.10621.0/14_HotAndColdObservables.html#PublishLast">Introduction to Rx: PublishLast</a>
 
 ***
 
