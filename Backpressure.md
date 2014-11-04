@@ -10,13 +10,13 @@ There are a variety of strategies with which you can exercise flow control and b
 
 ## Hot and cold Observables, and multicasted Observables
 
-A _cold_ Observable emits a particular sequence of items, but can begin emitting this sequence when its Observer finds it to be convenient, and at whatever rate the Observer desires, without disrupting the integrity of the sequence. For example if you convert a static Iterable into an Observable, that Observable will emit the same sequence of items no matter when it is later subscribed to or how frequently those items are observed.
+A _cold_ Observable emits a particular sequence of items, but can begin emitting this sequence when its Observer finds it to be convenient, and at whatever rate the Observer desires, without disrupting the integrity of the sequence. For example if you convert a static Iterable into an Observable, that Observable will emit the same sequence of items no matter when it is later subscribed to or how frequently those items are observed. Examples of items emitted by a cold Observable might include the results of a database query, file retrieval, or web request.
 
-A _hot_ Observable begins generating items to emit immediately when it is created. Subscribers typically begin observing the sequence of items emitted by a hot Observable from somewhere in the middle of the sequence, beginning with the first item emitted by the Observable subsequent to the establishment of the subscription. Such an Observable emits items at its own pace, and it is up to its observers to keep up.
+A _hot_ Observable begins generating items to emit immediately when it is created. Subscribers typically begin observing the sequence of items emitted by a hot Observable from somewhere in the middle of the sequence, beginning with the first item emitted by the Observable subsequent to the establishment of the subscription. Such an Observable emits items at its own pace, and it is up to its observers to keep up. Examples of items emitted by a hot Observable might include mouse & keyboard events, system events, or stock prices.
 
 When a cold Observable is _multicast_ (when it is converted into a `ConnectableObservable` and its `connect()` method is called), it effectively becomes _hot_ and for the purposes of backpressure and flow-control it should be treated as a hot Observable.
 
-Cold Observables are ideal subjects for the reactive pull model of backpressure described below. Hot observables are typically not designed to cope well with a reactive pull model, and are better candidates for some of the other strategies discussed on this page, such as the use of the `onBackpressureBuffer` or `onBackpressureDrop` operators, throttling, buffers, or windows.
+Cold Observables are ideal subjects for the reactive pull model of backpressure described below. Hot observables are typically not designed to cope well with a reactive pull model, and are better candidates for some of the other flow control strategies discussed on this page, such as the use of the `onBackpressureBuffer` or `onBackpressureDrop` operators, throttling, buffers, or windows.
 
 # Useful operators that avoid the need for backpressure
 
