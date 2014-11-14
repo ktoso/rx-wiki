@@ -163,7 +163,7 @@ def customObservableNonBlocking() {
                 };
             });
             t.start();
-        }
+        } as Observable.OnSubscribe
     );
 }
 
