@@ -286,14 +286,14 @@ Coming Soon: ['Botso' (Sept. 30), 'The Act of Killing' (Sept. 30), 'Europa Repor
 #### Collect items emitted by the source Observable into a single mutable data structure and return an Observable that emits this structure
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/collect.png" width="640" height="330" />
 
-This is a simplified version of reduce that does not need to return the state on each pass.
+This is a simplified version of `reduce` that does not need to return the state on each pass.
 
 #### scheduler
 
 `collect( )` does not by default operate on any particular scheduler.
 
 #### see also:
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect(R, rx.functions.Action2)">`collect(state, collector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect(rx.functions.Func0, rx.functions.Action2)">`collect(stateFactory, collector)`</a>
 
 ***
 
