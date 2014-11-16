@@ -252,6 +252,8 @@ Note that passing a `null` seed is not the same as not passing a seed. The behav
 
 > **Note:** in the scala language adaptor for RxJava, the `reduce(seed)` variant is called `foldLeft`.
 
+It is a bad idea to use `reduce` to collect emitted items into a mutable data structure. Instead, use [`collect`](Mathematical-and-Aggregate-Operators#collect) for that purpose.
+
 #### example:
 
 Imagine you have access to an Observable that emits a sequence of "Movie" objects that correspond to the "coming soon" movies from a theater. These objects include a number of items of information about the movie, including its title and opening day. You could use `reduce` to convert this sequence of Movie objects into a single list of titles, like this:
