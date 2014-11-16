@@ -161,6 +161,8 @@ my_observable.scan(initial_seed, accumulator_closure)
 
 Note also that passing a `null` seed is not the same as not passing a seed. The behavior will be different. If you pass a seed of `null`, you will be seeding your scan with `null`, and `scan( )` will emit `null` as its first item.
 
+It is a bad idea to use `scan` to collect emitted items into a mutable data structure. Instead, use [`collect`](Mathematical-and-Aggregate-Operators#collect) for that purpose.
+
 #### scheduler
 
 `scan( )` does not by default operate on any particular scheduler.
