@@ -108,7 +108,15 @@ Note that you should apply `onErrorFlatMap( )` directly to the pathological so
 #### split the work done on the emissions from an Observable into multiple Observables each operating on its own parallel thread
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/parallel.png" width="640" height="475" />​
 
-You can use the `parallel( )` method to split an Observable into as many Observables as there are available processors, and to do work in parallel on each of these Observables. `parallel( )` will then merge the results of these parallel computations back into a single, well-behaved Observable sequence.
+The `parallel( )` method splits an Observable into as many Observables as there are available processors, and does work in parallel on each of these Observables. `parallel( )` then merges the results of these parallel computations back into a single, well-behaved Observable sequence.
+
+For the simple &ldquo;run things in parallel&rdquo; use case, you can instead use something like this:
+```java
+streamOfItems.flatMap(item -> {
+   itemToObservable(item).subscribeOn(Schedulers.io());
+});
+```
+Kick off your work for each item inside [`flatMap`](Transforming-Observables#flatmap-concatmap-and-flatmapiterable) using [`subscribeOn`](Observable-Utility-Operators#subscribeon) to make it asynchronous, or by using a function that already makes asychronous calls.
 
 #### see also:
 * <a href="http://www.grahamlea.com/2014/07/rxjava-threading-examples/">RxJava Threading Examples</a> by Graham Lea
