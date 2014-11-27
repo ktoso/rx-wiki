@@ -110,21 +110,21 @@ You can implement asynchronous i/o, computational operations, or even “infinit
  * when subscribed to (does not spawn an extra thread).
  */
 def customObservableBlocking() {
-    return Observable.create({ aSubscriber ->
-        for (int i=0; i<50; i++) {
-            if (false == aSubscriber.isUnsubscribed()) {
-                aSubscriber.onNext("value_" + i);
-            };
+    return Observable.create { aSubscriber ->
+        (0..<50).each { i ->
+            if (!aSubscriber.unsubscribed) {
+                aSubscriber.onNext("value_${i}")
+            }
         }
         // after sending all values we complete the sequence
-        if (false == aSubscriber.isUnsubscribed()) {
-            aSubscriber.onCompleted();
+        if (!aSubscriber.unsubscribed) {
+            aSubscriber.onCompleted()
         }
-    });
+    }
 }
 
 // To see output:
-customObservableBlocking().subscribe({ it -> println(it); });
+customObservableBlocking().subscribe { println(it) }
 ```
 
 #### Asynchronous Observable Example
