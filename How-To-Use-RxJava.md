@@ -228,7 +228,7 @@ def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
 }
 
 fetchWikipediaArticleAsynchronously("Tiger", "Elephant")
-    .subscribe({ println "--- Article ---\n" + it.substring(0, 125); });
+    .subscribe { println "--- Article ---\n${it.substring(0, 125)}" }
 ```
 
 Results:
