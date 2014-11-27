@@ -33,8 +33,7 @@ Hello George!
 
 ```groovy
 def hello(String[] names) {
-    Observable.from(names)
-        .subscribe({ println "Hello " + it + "!" })
+    Observable.from(names).subscribe { println "Hello ${it}!" }
 }
 ```
 
