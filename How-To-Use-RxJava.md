@@ -139,35 +139,24 @@ It is written verbosely, with static typing and implementation of the `Func1` an
  * when subscribed to as it spawns a separate thread.
  */
 def customObservableNonBlocking() {
-    return Observable.create(
-        /*
-         * This 'call' method will be invoked with the Observable is subscribed to.
-         * 
-         * It spawns a thread to do it asynchronously.
-         */
-         { subscriber ->
-            // For simplicity this example uses a Thread instead of an ExecutorService/ThreadPool
-            final Thread t = new Thread(new Runnable() {
-                void run() {
-                    for (int i=0; i<75; i++) {
-                        if (true == subscriber.isUnsubscribed()) {
-                            return;
-                        }
-                        subscriber.onNext("value_" + i);
-                    }
-                    // after sending all values we complete the sequence
-                    if (false == subscriber.isUnsubscribed()) {
-                        subscriber.onCompleted();
-                    }
-                };
-            });
-            t.start();
-        } as Observable.OnSubscribe
-    );
+    return Observable.create({ subscriber ->
+        Thread.start {
+            for (i in 0..<75) {
+                if (subscriber.unsubscribed) {
+                    return
+                }
+                subscriber.onNext("value_${i}")
+            }
+            // after sending all values we complete the sequence
+            if (!subscriber.unsubscribed) {
+                subscriber.onCompleted()
+            }
+        }
+    } as Observable.OnSubscribe)
 }
 
 // To see output:
-customObservableNonBlocking().subscribe({ println(it) });
+customObservableNonBlocking().subscribe { println(it) }
 ```
 
 Here is the same code in Clojure that uses a Future (instead of raw thread) and is implemented more consisely:
