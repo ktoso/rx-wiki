@@ -211,20 +211,20 @@ Back to Groovy, the same Wikipedia functionality but using closures instead of a
  * Fetch a list of Wikipedia articles asynchronously.
  */
 def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
-    return Observable.create({ subscriber ->
-        Thread.start( {
+    return Observable.create { subscriber ->
+        Thread.start {
             for (articleName in wikipediaArticleNames) {
-                if (true == subscriber.isUnsubscribed()) {
-                    return;
+                if (subscriber.unsubscribed) {
+                    return
                 }
-                subscriber.onNext(new URL("http://en.wikipedia.org/wiki/"+articleName).getText());
+                subscriber.onNext(new URL("http://en.wikipedia.org/wiki/${articleName}").text)
             }
-            if (false == subscriber.isUnsubscribed()) {
-                subscriber.onCompleted();
+            if (!subscriber.unsubscribed) {
+                subscriber.onCompleted()
             }
-        } );
-        return( subscriber );
-    });
+        }
+        return subscriber
+    }
 }
 
 fetchWikipediaArticleAsynchronously("Tiger", "Elephant")
