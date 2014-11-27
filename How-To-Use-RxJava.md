@@ -83,7 +83,7 @@ To use RxJava you create Observables (which emit data items), transform those Ob
 
 To create an Observable, you can either implement the Observable's behavior manually by passing a function to [`create( )`](Creating-Observables#create) that exhibits Observable behavior, or you can convert an existing data structure into an Observable by using [some of the Observable operators that are designed for this purpose](Creating-Observables).
 
-### Creating an Observable from an Existing Data Structures
+### Creating an Observable from an Existing Data Structure
 
 You use the Observable [`just( )`](Creating-Observables#just) and [`from( )`](Creating-Observables#from) methods to convert objects, lists, or arrays of objects into Observables that emit those objects:
 
