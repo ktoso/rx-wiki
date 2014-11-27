@@ -111,7 +111,7 @@ You can implement asynchronous i/o, computational operations, or even “infinit
  */
 def customObservableBlocking() {
     return Observable.create { aSubscriber ->
-        (0..<50).each { i ->
+        50.times { i ->
             if (!aSubscriber.unsubscribed) {
                 aSubscriber.onNext("value_${i}")
             }
