@@ -158,10 +158,10 @@ For this to work, though, Observables _A_ and _B_ must respond correctly to the 
 
 <dl>
  <dt><tt>onBackpressureBuffer</tt></dt>
-  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the <tt>request</tt>s they generate<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.obp.buffer.png" width="640" height="300" />​</dd>
+  <dd>maintains a buffer of all emissions from the source Observable and emits them to downstream Subscribers according to the <tt>request</tt>s they generate<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.obp.buffer.png" width="640" height="300" /><br />an experimental version of this operator (not available in RxJava 1.0) allows you to set the capacity of the buffer; applying this operator will cause the resulting Observable to terminate with an error if this buffer is overrun​</dd>
  <dt><tt>onBackpressureDrop</tt></dt>
   <dd>drops emissions from the source Observable unless there is a pending <tt>request</tt> from a downstream Subscriber, in which case it will emit enough items to fulfill the request<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.obp.drop.png" width="640" height="245" />​</dd>
- <dt><tt>onBackpressureBlock</tt> <em style="color: #f00;">(experimental, not in 1.0)</em></dt>
+ <dt><tt>onBackpressureBlock</tt> <em style="color: #f00;">(experimental, not in RxJava 1.0)</em></dt>
   <dd>blocks the thread on which the source Observable is operating until such time as a Subscriber issues a <tt>request</tt> for items, and then unblocks the thread only so long as there are pending requests<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.obp.block.png" width="640" height="245" /></dd>
 </dl>
 
