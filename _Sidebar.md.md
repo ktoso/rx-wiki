@@ -1,5 +1,6 @@
 * [Introduction](https://github.com/ReactiveX/RxJava/wiki/Home)
 * [Getting Started](https://github.com/ReactiveX/RxJava/wiki/Getting-Started)
+* [JavaDoc](http://reactivex.io/RxJava/javadoc/rx/Observable.html)
 * [How to Use RxJava](https://github.com/ReactiveX/RxJava/wiki/How-To-Use-RxJava)
 * [Additional Reading](https://github.com/ReactiveX/RxJava/wiki/Additional-Reading)
 * [The Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
