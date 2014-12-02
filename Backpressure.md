@@ -165,7 +165,7 @@ For this to work, though, Observables _A_ and _B_ must respond correctly to the 
   <dd>blocks the thread on which the source Observable is operating until such time as a Subscriber issues a <tt>request</tt> for items, and then unblocks the thread only so long as there are pending requests<br /><img src="/ReactiveX/RxJava/wiki/images/rx-operators/bp.obp.block.png" width="640" height="245" /></dd>
 </dl>
 
-If you do not apply either of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply reactive pull backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
+If you do not apply any of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply reactive pull backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
 
 _**Work in progress...**_
 
