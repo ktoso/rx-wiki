@@ -16,7 +16,7 @@ A _hot_ Observable begins generating items to emit immediately when it is create
 
 When a cold Observable is _multicast_ (when it is converted into a `ConnectableObservable` and its `connect()` method is called), it effectively becomes _hot_ and for the purposes of backpressure and flow-control it should be treated as a hot Observable.
 
-Cold Observables are ideal subjects for the reactive pull model of backpressure described below. Hot observables are typically not designed to cope well with a reactive pull model, and are better candidates for some of the other flow control strategies discussed on this page, such as the use of the `onBackpressureBuffer` or `onBackpressureDrop` operators, throttling, buffers, or windows.
+Cold Observables are ideal for the reactive pull model of backpressure described below. Hot Observables typically do not cope well with a reactive pull model, and are better candidates for some of the other flow control strategies discussed on this page, such as the use of the `onBackpressureBuffer` or `onBackpressureDrop` operators, throttling, buffers, or windows.
 
 # Useful operators that avoid the need for backpressure
 
