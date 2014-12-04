@@ -67,7 +67,7 @@ myMergedObservable = Observable.merge(observable1, observable2, ... )
 For example, the following code merges the `odds` and `evens` Observables into a single Observable:
 
 ```groovy
-odds  = Observable.from([1, 3, 5, 7]);
+odds  = Observable.from([1, 3, 5, 7]).subscribeOn(someScheduler);
 evens = Observable.from([2, 4, 6]);
 
 Observable.merge(odds,evens).subscribe(
