@@ -105,7 +105,7 @@ Sequence complete
 #### instructs an Observable to continue emitting items after it encounters an exception (but not another variety of throwable)
 <img src="/ReactiveX/RxJava/wiki/images/rx-operators/onExceptionResumeNextViaObservable.png" width="640" height="310" />​
 
-Much like `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Subscriber, `onExceptionResumeNext( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNext( )` will propagate it to its Subscriber's `onError( )` method and will not invoke its backup Observable.
+Much like the `onErrorResumeNext( )` method, this returns an Observable that mirrors the behavior of the source Observable, _unless_ that Observable invokes `onError( )` in which case, if the `Throwable` passed to `onError( )` is an `Exception`, rather than propagating that `Exception` to the Subscriber, `onExceptionResumeNext( )` will instead begin mirroring a second, backup Observable. If the `Throwable` is not an `Exception`, the Observable returned by `onExceptionResumeNext( )` will propagate it to its Subscriber's `onError( )` method and will not invoke its backup Observable.
 
 #### scheduler
 
