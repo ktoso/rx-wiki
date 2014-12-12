@@ -138,6 +138,8 @@ someObservable.subscribe(new Subscriber<t>() {
 });
 ````
 
+You can pass a magic number to `request`, `request(Long.MAX_VALUE)`, to disable reactive pull backpressure and to ask the Observable to emit items at its own pace. `request(0)` is a legal call, but has no effect. Passing values less than zero to `request` will cause an exception to be thrown.
+
 ## Reactive pull backpressure isn’t magic
 
 Backpressure doesn’t make the problem of an overproducing Observable or an underconsuming Subscriber go away. It just moves the problem up the chain of operators to a point where it can be handled better.
