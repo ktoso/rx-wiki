@@ -46,6 +46,7 @@
 * [**`doOnEach( )`**](Observable-Utility-Operators#dooneach) — register an action to take whenever an Observable emits an item
 * [**`doOnError( )`**](Observable-Utility-Operators#doonerror) — register an action to take when an Observable completes with an error
 * **`doOnNext( )`** — _see [**`doOnEach( )`**](Observable-Utility-Operators#dooneach)_
+* **`doOnRequest( )`** — register an action to take when items are requested from an Observable via reactive-pull backpressure (⁇)
 * [**`doOnSubscribe( )`**](Observable-Utility-Operators#doonsubscribe) — register an action to take when an observer subscribes to an Observable
 * [**`doOnTerminate( )`**](Observable-Utility-Operators#doonterminate) — register an action to take when an Observable completes, either successfully or with an error
 * [**`doOnUnsubscribe( )`**](Observable-Utility-Operators#doonunsubscribe) — register an action to take when an observer unsubscribes from an Observable
@@ -144,6 +145,7 @@
 * **`nth( )`** (clojure) — _see [**`elementAt( )`**](Filtering-Observables#elementat) and [**`elementAtOrDefault( )`**](Filtering-Observables#elementatordefault)_
 * [**`observeOn( )`**](Observable-Utility-Operators#observeon) — specify on which Scheduler a Subscriber should observe the Observable
 * [**`ofType( )`**](Filtering-Observables#oftype) — emit only those items from the source Observable that are of a particular class
+* [**`onBackpressureBlock( )`**](Backpressure) — block the Observable's thread until the Observer is ready to accept more items from the Observable (⁇)
 * [**`onBackpressureBuffer( )`**](Backpressure) — maintain a buffer of all emissions from the source Observable and emit them to downstream Subscribers according to the requests they generate
 * [**`onBackpressureDrop( )`**](Backpressure) — drop emissions from the source Observable unless there is a pending request from a downstream Subscriber, in which case emit enough items to fulfill the request
 * [**`onErrorFlatMap( )`**](Phantom-Operators#onerrorflatmap) — instructs an Observable to emit a sequence of items whenever it encounters an error (⁇)
