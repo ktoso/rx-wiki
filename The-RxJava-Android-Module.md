@@ -7,22 +7,22 @@ The `rxjava-android` module contains Android-specific bindings for RxJava. It ad
 
 # Binaries
 
-You can find binaries and dependency information for Maven, Ivy, Gradle and others at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22rxjava-android%22).
+You can find binaries and dependency information for Maven, Ivy, Gradle and others at [http://search.maven.org](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22rxandroid%22).
 
-Here is an example for [Maven](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22rxjava-android%22):
+Here is an example for [Maven](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22rxandroid%22):
 
 ```xml
 <dependency>
-    <groupId>com.netflix.rxjava</groupId>
-    <artifactId>rxjava-android</artifactId>
-    <version>0.22</version>
+    <groupId>io.reactivex</groupId>
+    <artifactId>rxandroid</artifactId>
+    <version>0.23.0</version>
 </dependency>
 ```
 
 &hellip;and for Ivy:
 
 ```xml
-<dependency org="com.netflix.rxjava" name="rxjava-android" rev="0.22" />
+<dependency org="io.reactivex" name="rxandroid" rev="0.23.0" />
 ```
 
 The currently supported `minSdkVersion` is `10` (Android 2.3/Gingerbread)
