@@ -1,4 +1,3 @@
-Welcome to the RxJava wiki!
 CV.EKA MANDIRI JAYA MELAYANI SERVICE SOLAHART DI KELAPA GADING.SUNTER.CEMPAKA PUTIH DAN SEKITAR JAKUT.
 melayani service dan penjualan solar water heater semua merk dan model seperti: SOLAHART, HANDAL, WIKA SWH, EDWARD dll. dengan penanganan sesuai standar spesifikasi pabrikannya, menjamin pelayanan kami sesuai dengan yang diperlukan dan memberikan rekomendasi mengenai solusi yang paling ekonomis. Untuk memudahkan jangkauan kepada pelanggan, kami telah membuka cabang di berbagai daerah diantaranya : 
 - Jakarta Pusat 
