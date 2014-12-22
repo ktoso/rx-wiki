@@ -92,16 +92,17 @@ public class myTransformer<Integer,String> implements Transformer<Integer,String
 
 # Other Considerations
 
-* Your sequence operator should check [its Subscriber's `isUnsubscribed( )` status](Observable#unsubscribing) before it emits any item to (or sends any notification to) the Subscriber. Do not waste time generating items that no Subscriber is interested in seeing.
+* Your sequence operator may want to check [its Subscriber&#8217;s `isUnsubscribed( )` status](Observable#unsubscribing) before it emits any item to (or sends any notification to) the Subscriber. There&#8217;s no need to waste time generating items that no Subscriber is interested in seeing.
 * Take care that your sequence operator obeys the core tenets of the Observable contract:
-  * It may call a Subscriber's [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method any number of times, but these calls must be non-overlapping.
-  * It may call either a Subscriber's [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) or [`onError( )`](Observable#onnext-oncompleted-and-onerror) method, but not both, exactly once, and it may not subsequently call a Subscriber's [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method.
-  * If you are unable to guarantee that your operator conforms to the above two tenets, you can add the [`serialize( )`](Observable-Utility-Operators#serialize) operator to it to force the correct behavior.
+  * It may call a Subscriber&#8217;s [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method any number of times, but these calls must be non-overlapping.
+  * It may call either a Subscriber&#8217;s [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) or [`onError( )`](Observable#onnext-oncompleted-and-onerror) method, but not both, exactly once, and it may not subsequently call a Subscriber&#8217;s [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method.
+  * If you are unable to guarantee that your operator conforms to the above two tenets, you can add the [`serialize( )`](Observable-Utility-Operators#serialize) operator to it, which will force the correct behavior.
 * Do not block within your operator.
 * When possible, you should compose new operators by combining existing operators, rather than implementing them with new code. RxJava itself does this with some of its standard operators, for example:
   * [`first( )`](Filtering-Observables#wiki-first-and-takefirst) is defined as <tt>[take(1)](Filtering-Observables#wiki-take).[single( )](Observable-Utility-Operators#wiki-single-and-singleordefault)</tt>
   * [`ignoreElements( )`](Filtering-Observables#wiki-ignoreelements) is defined as <tt>[filter(alwaysFalse( ))](Filtering-Observables#wiki-filter)</tt>
   * [`reduce(a)`](Mathematical-and-Aggregate-Operators#wiki-reduce) is defined as <tt>[scan(a)](Transforming-Observables#wiki-scan).[last( )](Filtering-Observables#wiki-last)</tt>
 * If your operator uses functions or lambdas that are passed in as parameters (predicates, for instance), note that these may be sources of exceptions, and be prepared to catch these and notify subscribers via `onError( )` calls.
-  * Some exceptions are considered "fatal" and for them there's no point in trying to call `onError( )` because that will either be futile or will just compound the problem. You can use the `Exceptions.throwIfFatal(throwable)` method to filter out such fatal exceptions and rethrow them rather than try to notify about them.
+  * Some exceptions are considered &ldquo;fatal&rdquo; and for them there&#8217;s no point in trying to call `onError( )` because that will either be futile or will just compound the problem. You can use the `Exceptions.throwIfFatal(throwable)` method to filter out such fatal exceptions and rethrow them rather than try to notify about them.
 * In general, notify subscribers of error conditions immediately, rather than making an effort to emit more items first.
+* Keep an eye on [Issue #1962](https://github.com/ReactiveX/RxJava/issues/1962) &mdash; there are plans to create a test scaffold that you can use to write tests which verify that your new operator conforms to the RxJava operator behavior contract.
