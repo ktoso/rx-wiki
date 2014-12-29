@@ -99,7 +99,7 @@
 * [**`getIterator( )`**](Blocking-Observable-Operators#transformations-tofuture-toiterable-and-getiterator) — convert the sequence emitted by the Observable into an Iterator
 * [**`groupBy( )`**](Transforming-Observables#groupby) — divide an Observable into a set of Observables that emit groups of items from the original Observable, organized by key
 * **`group-by( )`** (clojure) — _see [**`groupBy( )`**](Transforming-Observables#groupby)_
-* **`groupByUntil( )`** — _see [**`groupBy( )`**](Transforming-Observables#groupby)
+* [**`groupByUntil( )`**](Phantom-Operators#groupbyuntil) — a variant of the [`groupBy( )`](Transforming-Observables#groupby) operator that closes any open GroupedObservable upon a signal from another Observable (⁇)
 * [**`groupJoin( )`**](Combining-Observables#join-and-groupjoin) — combine the items emitted by two Observables whenever one item from one Observable falls within a window of duration specified by an item emitted by the other Observable
 * **`head( )`** (scala) — _see [**`first( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
 * **`headOption( )`** (scala) — _see [**`firstOrDefault( )`**](Filtering-Observables#firstordefault) or [**`firstOrDefault( )`**](Blocking-Observable-Operators#first-and-firstordefault) (`BlockingObservable`)_
