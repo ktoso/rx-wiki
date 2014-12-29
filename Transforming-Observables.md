@@ -199,12 +199,6 @@ numbers.groupBy(groupFunc).flatMap({ it.reduce([it.getKey()], {a, b -> a << b}) 
 Sequence complete
 ```
 
-There is also a version of this operator that adds another parameter: an Observable that emits duration markers. When a duration marker is emitted by this Observable, any grouped Observables that have been opened are closed, and `groupBy( )` will create new grouped Observables for any subsequent emissions by the source Observable.
-
-<img src="/ReactiveX/RxJava/wiki/images/rx-operators/groupByUntil.png" width="640" height="375" />​
-
-Another variety of `groupBy( )` limits the number of groups that can be active at any particular time. If an item is emitted by the source Observable that would cause the number of groups to exceed this maximum, before the new group is emitted, one of the existing groups is closed (that is, the Observable it represents terminates by calling its Subscribers' `onCompleted` methods and then expires).
-
 Note that when `groupBy( )` splits up the source Observable into an Observable that emits GroupedObservables, each of these GroupedObservables begins to buffer the items that it will emit upon subscription. For this reason, if you ignore any of these GroupedObservables (you neither subscribe to it or apply an operator to it that subscribes to it), this buffer will present a potential memory leak.  For this reason, rather than ignoring a GroupedObservable that you have no interest in observing, you should instead apply an operator like `take(0)` to it as a way of signalling to it that it may discard its buffer.
 
 If you unsubscribe from one of the GroupedObservables, that GroupedObservable will be terminated. If the source Observable later emits an item whose key matches the GroupedObservable that was terminated in this way, `groupBy( )` will create and emit a new GroupedObservable to match the key.
@@ -215,8 +209,7 @@ If you unsubscribe from one of the GroupedObservables, that GroupedObservable wi
 
 #### see also:
 * javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1)">`groupBy(keySelector)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1, rx.functions.Func1)">`groupBy(keySelector, durationSelector)`</a>
-* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupByUntil(rx.functions.Func1, rx.functions.Func1, rx.functions.Func1)">`groupBy(keySelector, valueSelector, durationSelector)`</a>
+* javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1, rx.functions.Func1)">`groupBy(keySelector, elementSelector)`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypegroupbykeyselector-elementselector-keyserializer">`groupBy`</a>
 * RxJS: <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md#rxobservableprototypegroupbyuntilkeyselector-elementselector-durationselector-keyserializer">`groupByUntil`</a>
 * Linq: <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">`GroupBy`</a>
