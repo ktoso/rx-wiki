@@ -1,6 +1,6 @@
 You can implement your own Observable operators. This page shows you how.
 
-If your operator is designed to *originate* an Observable, rather than to transform or react to a source Observable, use the [`create( )`](Creating-Observables#wiki-create) method rather than trying to implement `Observable` manually.  Otherwise, you can create a custom operator by following the instructions on this page.
+If your operator is designed to *originate* an Observable, rather than to transform or react to a source Observable, use the [`create( )`](http://reactivex.io/documentations/operators/create.html) method rather than trying to implement `Observable` manually.  Otherwise, you can create a custom operator by following the instructions on this page.
 
 If your operator is designed to act on the individual items emitted by a source Observable, follow the instructions under [_Sequence Operators_](Implementing-Your-Own-Operators#sequence-operators) below. If your operator is designed to transform the source Observable as a whole (for instance, by applying a particular set of existing RxJava operators to it) follow the instructions under [_Transformational Operators_](Implementing-Your-Own-Operators#transformational-operators) below.
 
@@ -100,9 +100,9 @@ public class myTransformer<Integer,String> implements Transformer<Integer,String
 * Keep an eye on [Issue #1962](https://github.com/ReactiveX/RxJava/issues/1962) &mdash; there are plans to create a test scaffold that you can use to write tests which verify that your new operator conforms to the Observable contract.
 * Do not block within your operator.
 * When possible, you should compose new operators by combining existing operators, rather than implementing them with new code. RxJava itself does this with some of its standard operators, for example:
-  * [`first( )`](Filtering-Observables#wiki-first-and-takefirst) is defined as <tt>[take(1)](Filtering-Observables#wiki-take).[single( )](Observable-Utility-Operators#wiki-single-and-singleordefault)</tt>
-  * [`ignoreElements( )`](Filtering-Observables#wiki-ignoreelements) is defined as <tt>[filter(alwaysFalse( ))](Filtering-Observables#wiki-filter)</tt>
-  * [`reduce(a)`](Mathematical-and-Aggregate-Operators#wiki-reduce) is defined as <tt>[scan(a)](Transforming-Observables#wiki-scan).[last( )](Filtering-Observables#wiki-last)</tt>
+  * [`first( )`](http://reactivex.io/documentations/operators/first.html) is defined as <tt>[take(1)](http://reactivex.io/documentations/operators/take.html).[single( )](http://reactivex.io/documentations/operators/first.html)</tt>
+  * [`ignoreElements( )`](http://reactivex.io/documentations/operators/ignoreelements.html) is defined as <tt>[filter(alwaysFalse( ))](http://reactivex.io/documentations/operators/filter.html)</tt>
+  * [`reduce(a)`](http://reactivex.io/documentations/operators/reduce.html) is defined as <tt>[scan(a)](http://reactivex.io/documentations/operators/scan.html).[last( )](http://reactivex.io/documentations/operators/last.html)</tt>
 * If your operator uses functions or lambdas that are passed in as parameters (predicates, for instance), note that these may be sources of exceptions, and be prepared to catch these and notify subscribers via `onError( )` calls.
   * Some exceptions are considered &ldquo;fatal&rdquo; and for them there&#8217;s no point in trying to call `onError( )` because that will either be futile or will just compound the problem. You can use the `Exceptions.throwIfFatal(throwable)` method to filter out such fatal exceptions and rethrow them rather than try to notify about them.
 * In general, notify subscribers of error conditions immediately, rather than making an effort to emit more items first.
