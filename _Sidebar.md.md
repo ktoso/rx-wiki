@@ -4,7 +4,7 @@
 * [How to Use RxJava](https://github.com/ReactiveX/RxJava/wiki/How-To-Use-RxJava)
 * [Additional Reading](https://github.com/ReactiveX/RxJava/wiki/Additional-Reading)
 * [The Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
-* Operators [(Alphabetical List)](https://github.com/ReactiveX/RxJava/wiki/Alphabetical-List-of-Observable-Operators)
+* Operators [(Alphabetical List)](http://reactivex.io/documentation/operators.html#alphabetical)
  * [Async](https://github.com/ReactiveX/RxJava/wiki/Async-Operators)
  * [Blocking Observable](https://github.com/ReactiveX/RxJava/wiki/Blocking-Observable-Operators)
  * [Combining](https://github.com/ReactiveX/RxJava/wiki/Combining-Observables)
