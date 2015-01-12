@@ -81,11 +81,11 @@ To use RxJava you create Observables (which emit data items), transform those Ob
 
 ## Creating Observables
 
-To create an Observable, you can either implement the Observable's behavior manually by passing a function to [`create( )`](Creating-Observables#create) that exhibits Observable behavior, or you can convert an existing data structure into an Observable by using [some of the Observable operators that are designed for this purpose](Creating-Observables).
+To create an Observable, you can either implement the Observable's behavior manually by passing a function to [`create( )`](http://reactivex.io/documentations/operators/create.html) that exhibits Observable behavior, or you can convert an existing data structure into an Observable by using [some of the Observable operators that are designed for this purpose](Creating-Observables).
 
 ### Creating an Observable from an Existing Data Structure
 
-You use the Observable [`just( )`](Creating-Observables#just) and [`from( )`](Creating-Observables#from) methods to convert objects, lists, or arrays of objects into Observables that emit those objects:
+You use the Observable [`just( )`](http://reactivex.io/documentations/operators/just.html) and [`from( )`](http://reactivex.io/documentations/operators/from.html) methods to convert objects, lists, or arrays of objects into Observables that emit those objects:
 
 ```groovy
 Observable<String> o = Observable.from("a", "b", "c");
@@ -100,7 +100,7 @@ These converted Observables will synchronously invoke the [`onNext( )`](Observ
 
 ### Creating an Observable via the `create( )` method
 
-You can implement asynchronous i/o, computational operations, or even “infinite” streams of data by designing your own Observable and implementing it with the [`create( )`](Creating-Observables#create) method.
+You can implement asynchronous i/o, computational operations, or even “infinite” streams of data by designing your own Observable and implementing it with the [`create( )`](http://reactivex.io/documentations/operators/create.html) method.
 
 #### Synchronous Observable Example
 
@@ -254,7 +254,7 @@ More information can be found on the [[Observable]] and [[Creating Observables|C
 
 RxJava allows you to chain _operators_ together to transform and compose Observables.
 
-The following example, in Groovy, uses a previously defined, asynchronous Observable that emits 75 items, skips over the first 10 of these ([`skip(10)`](Filtering-Observables#wiki-skip)), then takes the next 5 ([`take(5)`](Filtering-Observables#wiki-take)), and transforms them ([`map(...)`](Transforming-Observables#wiki-map)) before subscribing and printing the items:
+The following example, in Groovy, uses a previously defined, asynchronous Observable that emits 75 items, skips over the first 10 of these ([`skip(10)`](http://reactivex.io/documentations/operators/skip.html)), then takes the next 5 ([`take(5)`](http://reactivex.io/documentations/operators/take.html)), and transforms them ([`map(...)`](http://reactivex.io/documentations/operators/map.html)) before subscribing and printing the items:
 
 ```groovy
 /**
@@ -282,7 +282,7 @@ Here is a marble diagram that illustrates this transformation:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.1.png" width="640" height="536" />
 
-This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item by combining the items emitted by each of the three Observables with the [`zip`](Combining-Observables#zip) operator and then transforming the result with [`map`](Transforming-Observables#wiki-map):
+This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item by combining the items emitted by each of the three Observables with the [`zip`](http://reactivex.io/documentations/operators/zip.html) operator and then transforming the result with [`map`](http://reactivex.io/documentations/operators/map.html):
 
 ```clojure
 (defn getVideoForUser [userId videoId]
@@ -330,7 +330,7 @@ And here is a marble diagram that illustrates how that code produces that respon
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.2.png" width="640" height="742" />
 
-The following example, in Groovy, comes from [Ben Christensen’s QCon presentation on the evolution of the Netflix API](https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013). It combines two Observables with the [`merge`](Combining-Observables#wiki-merge) operator, then uses the [`reduce`](Mathematical-and-Aggregate-Operators#wiki-reduce) operator to construct a single item out of the resulting sequence, then transforms that item with [`map`](Transforming-Observables#wiki-map) before emitting it:
+The following example, in Groovy, comes from [Ben Christensen’s QCon presentation on the evolution of the Netflix API](https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013). It combines two Observables with the [`merge`](http://reactivex.io/documentations/operators/merge.html) operator, then uses the [`reduce`](http://reactivex.io/documentations/operators/reduce.html) operator to construct a single item out of the resulting sequence, then transforms that item with [`map`](http://reactivex.io/documentations/operators/map.html) before emitting it:
 
 ```groovy
 public Observable getVideoSummary(APIVideo video) {
@@ -343,7 +343,7 @@ public Observable getVideoSummary(APIVideo video) {
 }
 ```
 
-And here is a marble diagram that illustrates how that code uses the [`reduce`](Mathematical-and-Aggregate-Operators#wiki-reduce) operator to bring the results from multiple Observables together in one structure:
+And here is a marble diagram that illustrates how that code uses the [`reduce`](http://reactivex.io/documentations/operators/reduce.html) operator to bring the results from multiple Observables together in one structure:
 
 <img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.3.png" width="640" height="640" />
 
@@ -379,7 +379,7 @@ def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArti
 }
 ```
 
-Notice how it now invokes [`onError(Throwable t)`](Observable#onnext-oncompleted-and-onerror) if an error occurs and note that the following code passes `subscribe()` a second method that handles `onError`:
+Notice how it now invokes [`onError(Throwable t)`](Observable#onnext-oncompleted-and-onerror) if an error occurs and note that the following code passes [`subscribe()`](http://reactivex.io/documentations/operators/subscribe.html) a second method that handles `onError`:
 
 ```groovy
 fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle", "Elephant")
@@ -388,9 +388,9 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
         { println "--- Error ---\n" + it.getMessage() })
 ```
 
-See the [Error-Handling-Operators](Error-Handling-Operators) page for more information on specialized error handling techniques in RxJava, including methods like [`onErrorResumeNext()`](Error-Handling-Operators#onerrorresumenext) and [`onErrorReturn()`](Error-Handling-Operators#onerrorreturn) that allow Observables to continue with fallbacks in the event that they encounter errors.
+See the [Error-Handling-Operators](Error-Handling-Operators) page for more information on specialized error handling techniques in RxJava, including methods like [`onErrorResumeNext()`](http://reactivex.io/documentations/operators/catch.html) and [`onErrorReturn()`](http://reactivex.io/documentations/operators/catch.html) that allow Observables to continue with fallbacks in the event that they encounter errors.
 
-Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables — `myObservable` — and you want to intercept any exceptions that would normally pass through to an Subscriber’s `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the [`onErrorResumeNext()`](Error-Handling-Operators#onerrorresumenext) method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called [`error()`](Creating-Observables#wiki-empty-error-and-never) will generate such an Observable for you):
+Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables — `myObservable` — and you want to intercept any exceptions that would normally pass through to an Subscriber’s `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the [`onErrorResumeNext()`](http://reactivex.io/documentations/operators/catch.html) method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called [`error()`](http://reactivex.io/documentations/operators/empty-never-throw.html) will generate such an Observable for you):
 
 ```groovy
 myModifiedObservable = myObservable.onErrorResumeNext({ t ->
