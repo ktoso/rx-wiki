@@ -90,6 +90,10 @@ public class myTransformer<Integer,String> implements Transformer<Integer,String
 }
 ````
 
+## See also
+
+* [&ldquo;Don&#8217;t break the chain: use RxJava&#8217;s compose() operator&rdquo;](http://blog.danlew.net/2015/03/02/dont-break-the-chain/) by Dan Lew
+
 # Other Considerations
 
 * Your sequence operator may want to check [its Subscriber&#8217;s `isUnsubscribed( )` status](Observable#unsubscribing) before it emits any item to (or sends any notification to) the Subscriber. There&#8217;s no need to waste time generating items that no Subscriber is interested in seeing.
