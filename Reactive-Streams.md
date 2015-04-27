@@ -55,7 +55,9 @@ The "core" may expose an API like this:
 ```java
 package com.database.driver.core;
 
-public org.reactivestreams.Publisher getValue(String key);
+public class Database {
+   public org.reactivestreams.Publisher getValue(String key);
+}
 ```
 
 The RxJava 1.x wrapper could then be a separate module that provides RxJava specific APIs like this:
@@ -63,7 +65,17 @@ The RxJava 1.x wrapper could then be a separate module that provides RxJava spec
 ```java
 package com.database.driver.rxjava1;
 
-public rx.Observable getValue(String key);
+public class Database {
+    public rx.Observable getValue(String key);
+}
+```
+
+The core `Publisher` API can be wrapped as simply as this:
+
+```java
+public rx.Observable getValue(String key) {
+   return RxReactiveStreams.toObservable(coreDatabase.getValue(key));
+}
 ```
 
 The RxJava 2.x wrapper would differ like this (once 2.x is available):
@@ -71,7 +83,9 @@ The RxJava 2.x wrapper would differ like this (once 2.x is available):
 ```java
 package com.database.driver.rxjava2;
 
-public io.reactivex.Observable getValue(String key);
+public class Database {
+    public io.reactivex.Observable getValue(String key);
+}
 ```
 
 The Akka Streams wrapper would differ like this:
@@ -79,7 +93,9 @@ The Akka Streams wrapper would differ like this:
 ```java
 package com.database.driver.akkastream;
 
-public akka.stream.javadsl.Source getValue(String key);
+public class Database {
+    public akka.stream.javadsl.Source getValue(String key);
+}
 ```
 
 A developer could then choose to depend directly on the `async-database-driver-core` APIs but most will use one of the wrappers that supports the composition library they have chosen. 
