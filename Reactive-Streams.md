@@ -4,7 +4,9 @@
 
 ## How does this relate to RxJava itself?
 
-Currently RxJava 1.x does not directly implement the Reactive Streams APIs. This is due to RxJava 1.x already existing and not being able to break public APIs. It does however comply semantically with the non-blocking "reactive pull" approach to backpressure and flow control and thus can use a bridge between types. The [RxJavaReactiveStreams module](https://github.com/ReactiveX/RxJavaReactiveStreams) bridges between the RxJava 1.x types and Reactive Streams types for interop between Reactive Streams implementations. 
+#### RxJava 1.x
+
+Currently RxJava 1.x does not directly implement the Reactive Streams APIs. This is due to RxJava 1.x already existing and not being able to break public APIs. It does however comply semantically with the non-blocking "reactive pull" approach to backpressure and flow control and thus can use a bridge between types. The [RxJavaReactiveStreams module](https://github.com/ReactiveX/RxJavaReactiveStreams) bridges between the RxJava 1.x types and Reactive Streams types for interop between Reactive Streams implementations and passes the Reactive Streams [TCK compliance tests](https://github.com/ReactiveX/RxJavaReactiveStreams/blob/0.x/rxjava-reactive-streams/build.gradle#L8).
 
 Its API looks like this:
 
@@ -21,6 +23,8 @@ public abstract class RxReactiveStreams {
 
 }
 ```
+
+#### RxJava 2.x
 
 [RxJava 2.x](https://github.com/ReactiveX/RxJava/issues/2450) will target Reactive Streams APIs directly for Java 8+. The plan is to also support Java 9 `j.u.c.Flow` types by leveraging new Java multi-versioned jars to support this when using RxJava 2.x in Java 9 while still working on Java 8. 
 
