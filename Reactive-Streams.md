@@ -1,12 +1,28 @@
 # Reactive Streams + RxJava
 
-Reactive Streams has been a collaborative effort to standardize the protocol for asynchronous streams on the JVM. The RxJava team was part of the effort from the beginning and supports the use of Reactive Streams APIs and eventually the Java 9 Flow APIs which are resulting from the success of the Reactive Stream effort.
+[Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm/) has been a collaborative effort to standardize the protocol for asynchronous streams on the JVM. The RxJava team was [part of the effort](https://github.com/reactive-streams/reactive-streams-jvm/graphs/contributors) from the beginning and supports the use of Reactive Streams APIs and eventually the [Java 9 Flow APIs](http://cs.oswego.edu/pipermail/concurrency-interest/2015-January/013641.html) which are resulting from the success of the Reactive Stream effort.
 
 ## How does this relate to RxJava itself?
 
-Currently RxJava 1.x does not directly implement the Reactive Streams APIs. This is due to RxJava 1.x already existing and not being able to break public APIs. It does however comply semantically with the non-blocking "reactive pull" approach to backpressure and flow control and thus can use a bridge between types. The RxJavaReactiveStreams module bridges between the RxJava 1.x types and Reactive Streams types for interop between Reactive Streams implementations. 
+Currently RxJava 1.x does not directly implement the Reactive Streams APIs. This is due to RxJava 1.x already existing and not being able to break public APIs. It does however comply semantically with the non-blocking "reactive pull" approach to backpressure and flow control and thus can use a bridge between types. The [RxJavaReactiveStreams module](https://github.com/ReactiveX/RxJavaReactiveStreams) bridges between the RxJava 1.x types and Reactive Streams types for interop between Reactive Streams implementations. 
 
-RxJava 2.x will target Reactive Streams APIs directly for Java 8+. The plan is to also support Java 9 `j.u.c.Flow` types by leveraging new Java multi-versioned jars to support this when using RxJava 2.x in Java 9 while still working on Java 8. 
+Its API looks like this:
+
+```java
+package rx;
+
+import org.reactivestreams.Publisher;
+
+public abstract class RxReactiveStreams {
+
+    public static <T> Publisher<T> toPublisher(Observable<T> observable) { … }
+
+    public static <T> Observable<T> toObservable(Publisher<T> publisher) { … }
+
+}
+```
+
+[RxJava 2.x](https://github.com/ReactiveX/RxJava/issues/2450) will target Reactive Streams APIs directly for Java 8+. The plan is to also support Java 9 `j.u.c.Flow` types by leveraging new Java multi-versioned jars to support this when using RxJava 2.x in Java 9 while still working on Java 8. 
 
 ## Pros of Exposing Reactive Stream APIs instead of RxJava
 
