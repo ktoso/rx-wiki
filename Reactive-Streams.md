@@ -88,7 +88,7 @@ public class Database {
 }
 ```
 
-The Akka Streams wrapper would differ like this:
+The Akka Streams wrapper would in turn look like this:
 
 ```java
 package com.database.driver.akkastream;
