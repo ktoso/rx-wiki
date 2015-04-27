@@ -28,6 +28,8 @@ public abstract class RxReactiveStreams {
 
 [RxJava 2.x](https://github.com/ReactiveX/RxJava/issues/2450) will target Reactive Streams APIs directly for Java 8+. The plan is to also support Java 9 `j.u.c.Flow` types by leveraging new Java multi-versioned jars to support this when using RxJava 2.x in Java 9 while still working on Java 8. 
 
+RxJava 2 will truly be "Reactive Extensions" now that there is an interface to extend. RxJava 1 didn't have a base interface or contract to extend so had to define it from scratch. RxJava 2 intend on being a high performing, battle-tested, lightweight (single dependency on Reactive Streams), non-opinionated implementation of Reactive Streams and `j.u.c.Flow` that provides a library of higher-order functions with parameterized concurrency. 
+
 ## Pros of Exposing Reactive Stream APIs instead of RxJava
 
 * Lightweight: Very lightweight dependency on interfaces without any concrete implementations. This keeps dependency graphs and bytesize small.
