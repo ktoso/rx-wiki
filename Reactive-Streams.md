@@ -43,7 +43,7 @@ A strong area of value for Reactive Streams is public APIs exposed in libraries.
 ### Cons of Exposing Reactive Stream APIs instead of RxJava
 
 * A Reactive Stream `Publisher` is not very useful by itself. Without higher-order functions like `flatMap` it is just a better callback. This means that consumption of a `Publisher` will almost always need to be converted or wrapped into a Reactive Stream implementation. This can be verbose and awkward to always be wrapping `Publisher` APIs into a concrete implementation. If the JVM supported extension methods this would be elegant, but since it doesn't it is explicit and verbose. 
-** Specifically the Reactive Streams and Flow `Publisher` interfaces do not provide any implementations of operators like `flatMap`, `merge`, `filter`, `take`, `zip` and the many others used to compose and transform async streams. A `Publisher` can only be subscribed to. A concrete implementation such as RxJava is needed to provide composition. 
+  ** Specifically the Reactive Streams and Flow `Publisher` interfaces do not provide any implementations of operators like `flatMap`, `merge`, `filter`, `take`, `zip` and the many others used to compose and transform async streams. A `Publisher` can only be subscribed to. A concrete implementation such as RxJava is needed to provide composition. 
 * The Reactive Streams specification and binary artifacts do not provide a concrete implementation of `Publisher`. Generally a library will need or want capabilities provides by RxJava, Akka Streams, etc for its internal use or just to produce a valid `Publisher` that supports backpressure semantics (which are non-trivial to implement correctly).
 
 ### Recommended Approach
