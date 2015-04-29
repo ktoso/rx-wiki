@@ -57,8 +57,10 @@ Note that if Java offered extension methods this approach wouldn't be needed, bu
 
 For example, a database driver may have modules such as this:
 
+
 // core library exposing Reactive Stream Publisher APIs
 * async-database-driver 
+
 // integration jars wrapped with concrete implementations
 * async-database-driver-rxjava1
 * async-database-driver-rxjava2
