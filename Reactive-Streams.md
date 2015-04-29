@@ -43,7 +43,8 @@ A strong area of value for Reactive Streams is public APIs exposed in libraries.
 ### Cons of Exposing Reactive Stream APIs instead of RxJava
 
 * A Reactive Stream `Publisher` is not very useful by itself. Without higher-order functions like `flatMap` it is just a better callback. This means that consumption of a `Publisher` will almost always need to be converted or wrapped into a Reactive Stream implementation. This can be verbose and awkward to always be wrapping `Publisher` APIs into a concrete implementation. If the JVM supported extension methods this would be elegant, but since it doesn't it is explicit and verbose. 
-* Reactive Streams provides no concrete implementation to build the library. Sometimes this may be okay but often a library will need or want capabilities provides by RxJava, Akka Streams, etc for its internal use or just to produce a valid `Publisher` that supports backpressure semantics (which can be non-trivial to implement correctly).
+** Specifically the Reactive Streams and Flow `Publisher` interfaces do not provide any implementations of operators like `flatMap`, `merge`, `filter`, `take`, `zip` and the many others used to compose and transform async streams. A `Publisher` can only be subscribed to. A concrete implementation such as RxJava is needed to provide composition. 
+* The Reactive Streams specification and binary artifacts do not provide a concrete implementation of `Publisher`. Generally a library will need or want capabilities provides by RxJava, Akka Streams, etc for its internal use or just to produce a valid `Publisher` that supports backpressure semantics (which are non-trivial to implement correctly).
 
 ### Recommended Approach
 
@@ -55,7 +56,9 @@ Note that if Java offered extension methods this approach wouldn't be needed, bu
 
 For example, a database driver may have modules such as this:
 
-* async-database-driver-core
+// core library exposing Reactive Stream Publisher APIs
+* async-database-driver 
+// integration jars wrapped with concrete implementations
 * async-database-driver-rxjava1
 * async-database-driver-rxjava2
 * async-database-driver-akka-stream
@@ -63,7 +66,7 @@ For example, a database driver may have modules such as this:
 The "core" may expose an API like this:
 
 ```java
-package com.database.driver.core;
+package com.database.driver;
 
 public class Database {
    public org.reactivestreams.Publisher getValue(String key);
@@ -108,7 +111,7 @@ public class Database {
 }
 ```
 
-A developer could then choose to depend directly on the `async-database-driver-core` APIs but most will use one of the wrappers that supports the composition library they have chosen. 
+A developer could then choose to depend directly on the `async-database-driver` APIs but most will use one of the wrappers that supports the composition library they have chosen. 
 
 ## Work in Progress
 
