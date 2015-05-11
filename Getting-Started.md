@@ -8,24 +8,24 @@ Example for Maven:
 <dependency>
     <groupId>io.reactivex</groupId>
     <artifactId>rxjava</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.10</version>
 </dependency>
 ```
 and for Ivy:
 
 ```xml
-<dependency org="io.reactivex" name="rxjava" rev="1.0.0" />
+<dependency org="io.reactivex" name="rxjava" rev="1.0.10" />
 ```
 
 and for SBT:
 
 ```scala
-libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "1.0.0"
+libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "1.0.10"
 ```
 
 and for Gradle:
 ```groovy
-compile 'io.reactivex:rxjava:1.0.0'
+compile 'io.reactivex:rxjava:1.0.10'
 ```
 
 If you need to download the jars instead of using a build system, create a Maven `pom` file like this with the desired version:
@@ -43,7 +43,7 @@ If you need to download the jars instead of using a build system, create a Maven
 		<dependency>
 			<groupId>io.reactivex</groupId>
 			<artifactId>rxjava</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.10</version>
 			<scope/>
 		</dependency>
 	</dependencies>
