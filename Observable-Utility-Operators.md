@@ -18,5 +18,5 @@ This page lists various utility operators for working with Observables.
 * [**`delaySubscription( )`**](http://reactivex.io/documentation/operators/delay.html) — hold an Subscriber's subscription request for a specified amount of time before passing it on to the source Observable
 * [**`timeInterval( )`**](http://reactivex.io/documentation/operators/timeinterval.html) — emit the time lapsed between consecutive emissions of a source Observable
 * [**`using( )`**](http://reactivex.io/documentation/operators/using.html) — create a disposable resource that has the same lifespan as an Observable
-* [**`single( )`**](http://reactivex.io/documentations/operators/first.html) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
-* [**`singleOrDefault( )`**](http://reactivex.io/documentations/operators/first.html) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
+* [**`single( )`**](http://reactivex.io/documentation/operators/first.html) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
+* [**`singleOrDefault( )`**](http://reactivex.io/documentation/operators/first.html) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
