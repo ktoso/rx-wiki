@@ -2,7 +2,7 @@
 
 In RxJava it is not difficult to get into a situation in which an Observable is emitting items more rapidly than an operator or subscriber can consume them. This presents the problem of what to do with such a growing backlog of unconsumed items. 
 
-For example, imagine using the [`zip`](http://reactivex.io/documentations/operators/zip.html) operator to zip together two infinite Observables, one of which emits items twice as frequently as the other. A naive implementation of the `zip` operator would have to maintain an ever-expanding buffer of items emitted by the faster Observable to eventually combine with items emitted by the slower one. This could cause RxJava to seize an unwieldy amount of system resources.
+For example, imagine using the [`zip`](http://reactivex.io/documentation/operators/zip.html) operator to zip together two infinite Observables, one of which emits items twice as frequently as the other. A naive implementation of the `zip` operator would have to maintain an ever-expanding buffer of items emitted by the faster Observable to eventually combine with items emitted by the slower one. This could cause RxJava to seize an unwieldy amount of system resources.
 
 There are a variety of strategies with which you can exercise flow control and backpressure in RxJava in order to alleviate the problems caused when a quickly-producing Observable meets a slow-consuming observer. This page explains some of these strategies, and also shows you how you can design your own Observables and Observable operators to respect requests for flow control.
 
@@ -12,9 +12,9 @@ A _cold_ Observable emits a particular sequence of items, but can begin emitting
 
 A _hot_ Observable begins generating items to emit immediately when it is created. Subscribers typically begin observing the sequence of items emitted by a hot Observable from somewhere in the middle of the sequence, beginning with the first item emitted by the Observable subsequent to the establishment of the subscription. Such an Observable emits items at its own pace, and it is up to its observers to keep up. Examples of items emitted by a hot Observable might include mouse & keyboard events, system events, or stock prices.
 
-When a cold Observable is _multicast_ (when it is converted into a `ConnectableObservable` and its [`connect()`](http://reactivex.io/documentations/operators/connect.html) method is called), it effectively becomes _hot_ and for the purposes of backpressure and flow-control it should be treated as a hot Observable.
+When a cold Observable is _multicast_ (when it is converted into a `ConnectableObservable` and its [`connect()`](http://reactivex.io/documentation/operators/connect.html) method is called), it effectively becomes _hot_ and for the purposes of backpressure and flow-control it should be treated as a hot Observable.
 
-Cold Observables are ideal for the reactive pull model of backpressure described below. Hot Observables typically do not cope well with a reactive pull model, and are better candidates for some of the other flow control strategies discussed on this page, such as the use of [the `onBackpressureBuffer` or `onBackpressureDrop` operators](http://reactivex.io/documentations/operators/backpressure.html), throttling, buffers, or windows.
+Cold Observables are ideal for the reactive pull model of backpressure described below. Hot Observables typically do not cope well with a reactive pull model, and are better candidates for some of the other flow control strategies discussed on this page, such as the use of [the `onBackpressureBuffer` or `onBackpressureDrop` operators](http://reactivex.io/documentation/operators/backpressure.html), throttling, buffers, or windows.
 
 # Useful operators that avoid the need for backpressure
 
@@ -26,7 +26,7 @@ By fine-tuning the parameters to these operators you can ensure that a slow-cons
 
 ## Throttling
 
-Operators like [`sample( )` or `throttleLast( )`](http://reactivex.io/documentations/operators/sample.html), [`throttleFirst( )`](http://reactivex.io/documentations/operators/sample.html), and [`throttleWithTimeout( )` or `debounce( )`](http://reactivex.io/documentations/operators/debounce.html) allow you to regulate the rate at which an Observable emits items.
+Operators like [`sample( )` or `throttleLast( )`](http://reactivex.io/documentation/operators/sample.html), [`throttleFirst( )`](http://reactivex.io/documentation/operators/sample.html), and [`throttleWithTimeout( )` or `debounce( )`](http://reactivex.io/documentation/operators/debounce.html) allow you to regulate the rate at which an Observable emits items.
 
 The following diagrams show how you could use each of these operators on the bursty Observable shown above.
 
@@ -56,7 +56,7 @@ Observable<Integer> burstyDebounced = bursty.debounce(10, TimeUnit.MILLISECONDS)
 
 ## Buffers and windows
 
-You can also use an operator like [`buffer( )`](http://reactivex.io/documentations/operators/buffer.html) or [`window( )`](http://reactivex.io/documentations/operators/window.html) to collect items from the over-producing Observable and then emit them, less-frequently, as collections (or Observables) of items. The slow consumer can then decide whether to process only one particular item from each collection, to process some combination of those items, or to schedule work to be done on each item in the collection, as appropriate.
+You can also use an operator like [`buffer( )`](http://reactivex.io/documentation/operators/buffer.html) or [`window( )`](http://reactivex.io/documentation/operators/window.html) to collect items from the over-producing Observable and then emit them, less-frequently, as collections (or Observables) of items. The slow consumer can then decide whether to process only one particular item from each collection, to process some combination of those items, or to schedule work to be done on each item in the collection, as appropriate.
 
 The following diagrams show how you could use each of these operators on the bursty Observable shown above.
 
@@ -142,7 +142,7 @@ You can pass a magic number to `request`, `request(Long.MAX_VALUE)`, to disable 
 
 Backpressure doesn’t make the problem of an overproducing Observable or an underconsuming Subscriber go away. It just moves the problem up the chain of operators to a point where it can be handled better.
 
-Let’s take a closer look at the problem of the uneven [`zip`](http://reactivex.io/documentations/operators/zip.html).
+Let’s take a closer look at the problem of the uneven [`zip`](http://reactivex.io/documentation/operators/zip.html).
 
 You have two Observables, _A_ and _B_, where _B_ is inclined to emit items more frequently than _A_. When you try to `zip` these two Observables together, the `zip` operator combines item _n_ from _A_ and item _n_ from _B_, but meanwhile _B_ has also emitted items _n_+1 to _n_+_m_. The `zip` operator has to hold on to these items so it can combine them with items _n_+1 to _n_+_m_ from _A_ as they are emitted, but meanwhile _m_ keeps growing and so the size of the buffer needed to hold on to these items keeps increasing.
 
