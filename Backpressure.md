@@ -175,6 +175,9 @@ Things that may need explaining:
   * `setProducer(p)`
 * how and when to support producers in custom observables & operators
   * point here from the "how to make a custom operator" page; maybe also from `create` operator doc
+* Meanwhile, for info on Producers, see:
+  * [Pull #2963](https://github.com/ReactiveX/RxJava/pull/2963)
+  * [Advanced RxJava](http://akarnokd.blogspot.hu/) a blog from Dávid Karnok
 
 _**Work in progress...**_
 
