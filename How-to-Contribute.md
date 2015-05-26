@@ -1,4 +1,4 @@
-RxJava is still a work in progress and has a long list of work documented in the [[Issues|https://github.com/Netflix/RxJava/issues]].
+RxJava is still a work in progress and has a long list of work documented in the [[Issues|https://github.com/ReactiveX/RxJava/issues]].
 
 
 If you wish to contribute we would ask that you:
@@ -7,7 +7,7 @@ If you wish to contribute we would ask that you:
 - include unit tests
 - stick to Rx contracts as defined by the Rx.Net implementation when porting operators (each issue attempts to reference the correct documentation from MSDN)
 
-Information about licensing can be found at: [[CONTRIBUTING|https://github.com/Netflix/RxJava/blob/master/CONTRIBUTING.md]].
+Information about licensing can be found at: [[CONTRIBUTING|https://github.com/ReactiveX/RxJava/blob/1.x/CONTRIBUTING.md]].
 
 ## How to import the project into Eclipse
 Two options below:
