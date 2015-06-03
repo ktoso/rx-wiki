@@ -1,6 +1,6 @@
 # Reactive Streams + RxJava
 
-[Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm/) has been a collaborative effort to standardize the protocol for asynchronous streams on the JVM. The RxJava team was [part of the effort](https://github.com/reactive-streams/reactive-streams-jvm/graphs/contributors) from the beginning and supports the use of Reactive Streams APIs and eventually the [Java 9 Flow APIs](http://cs.oswego.edu/pipermail/concurrency-interest/2015-January/013641.html) which are [resulting from the success of the Reactive Stream effort](https://github.com/reactive-streams/reactive-streams-jvm/issues/195).
+[Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm/) has been a [collaborative effort](https://medium.com/@viktorklang/reactive-streams-1-0-0-interview-faaca2c00bec to standardize the protocol for asynchronous streams on the JVM. The RxJava team was [part of the effort](https://github.com/reactive-streams/reactive-streams-jvm/graphs/contributors) from the beginning and supports the use of Reactive Streams APIs and eventually the [Java 9 Flow APIs](http://cs.oswego.edu/pipermail/concurrency-interest/2015-January/013641.html) which are [resulting from the success of the Reactive Stream effort](https://github.com/reactive-streams/reactive-streams-jvm/issues/195).
 
 ## How does this relate to RxJava itself?
 
@@ -116,6 +116,6 @@ public class Database {
 
 A developer could then choose to depend directly on the `async-database-driver` APIs but most will use one of the wrappers that supports the composition library they have chosen. 
 
-## Work in Progress
+----
 
-This page is still evolving. Please help improve it via discussion at https://github.com/ReactiveX/RxJava/issues/2917
+If something could be clarified further, please help improve this page via discussion at https://github.com/ReactiveX/RxJava/issues/2917
