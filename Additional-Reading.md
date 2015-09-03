@@ -1,3 +1,5 @@
+(A more complete and up-to-date list of resources can be found at the reactivex.io site: [[http://reactivex.io/tutorials.html]])
+
 # Introducing Reactive Programming
 * [Introduction to Rx](http://www.introtorx.com/): a free, on-line book by Lee Campbell
 * [The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754) by Andre Staltz
