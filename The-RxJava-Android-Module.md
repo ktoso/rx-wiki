@@ -1,3 +1,7 @@
+**Note:** This page is out-of-date. See [the RxAndroid wiki](https://github.com/ReactiveX/RxAndroid/wiki) for more up-to-date instructions.
+
+***
+
 The `rxjava-android` module contains Android-specific bindings for RxJava. It adds a number of classes to RxJava to assist in writing reactive components in Android applications.
 
 - It provides a `Scheduler` that schedules an `Observable` on a given Android `Handler` thread, particularly the main UI thread.
