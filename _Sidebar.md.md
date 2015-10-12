@@ -23,6 +23,6 @@
 * [Plugins](https://github.com/ReactiveX/RxJava/wiki/Plugins)
 * [Schedulers](https://github.com/ReactiveX/RxJava/wiki/Scheduler)
 * [Subjects](https://github.com/ReactiveX/RxJava/wiki/Subject)
-* [The RxJava Android Module](https://github.com/ReactiveX/RxJava/wiki/The-RxJava-Android-Module)
+* [The RxJava Android Module](https://github.com/ReactiveX/RxAndroid/wiki)
 * [Reactive Streams](https://github.com/ReactiveX/RxJava/wiki/Reactive-Streams)
 * [How to Contribute](https://github.com/ReactiveX/RxJava/wiki/How-to-Contribute)
