@@ -133,7 +133,8 @@ public abstract class Scheduler {
  
     public Disposable scheduleDirect(Runnable task, long delay, TimeUnit unit) { ... }
 
-    public Disposable scheduleDirectPeriodically(Runnable task, long initialDelay, long period, TimeUnit unit) { ... }
+    public Disposable scheduleDirectPeriodically(Runnable task, long initialDelay, 
+        long period, TimeUnit unit) { ... }
 
     public long now(TimeUnit unit) { ... }
 
