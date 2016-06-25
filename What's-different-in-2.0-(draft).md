@@ -30,7 +30,7 @@ Because both 1.x and 2.x is aimed at Java 6+, we can't use the Java 8 functional
 
 As the opportunity to reduce component count, 2.x doesn't define `Action3`-`Action9` and `ActionN` (these were unused within RxJava itself anyway). 
 
-The remaining action interfaces were named according to the Java 8 functional types. The no argument `Action0` is replaced by the `java.lang.Runnable` that allows more native interoperation with Java features. `Action1` has been renamed to `Consumer` and `Action2` is called `BiConsumer`. `ActionN` is replaced by the `Action1<Object[]>` type declaration.
+The remaining action interfaces were named according to the Java 8 functional types. The no argument `Action0` is replaced by the `java.lang.Runnable` that allows more native interoperation with Java features. `Action1` has been renamed to `Consumer` and `Action2` is called `BiConsumer`. `ActionN` is replaced by the `Consumer<Object[]>` type declaration.
 
 ## Functions
 
