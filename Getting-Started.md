@@ -8,24 +8,24 @@ Example for Maven:
 <dependency>
     <groupId>io.reactivex</groupId>
     <artifactId>rxjava</artifactId>
-    <version>1.0.10</version>
+    <version>1.1.6</version>
 </dependency>
 ```
 and for Ivy:
 
 ```xml
-<dependency org="io.reactivex" name="rxjava" rev="1.0.10" />
+<dependency org="io.reactivex" name="rxjava" rev="1.1.6" />
 ```
 
 and for SBT:
 
 ```scala
-libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "1.0.10"
+libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.26.2"
 ```
 
 and for Gradle:
 ```groovy
-compile 'io.reactivex:rxjava:1.0.10'
+compile 'io.reactivex:rxjava:1.1.6'
 ```
 
 If you need to download the jars instead of using a build system, create a Maven `pom` file like this with the desired version:
@@ -59,6 +59,20 @@ $ mvn -f download-rxjava-pom.xml dependency:copy-dependencies
 That command downloads `rxjava-*.jar` and its dependencies into `./target/dependency/`.
 
 You need Java 6 or later.
+
+### Snapshots
+
+Snapshots are available via [JFrog](https://oss.jfrog.org/webapp/search/artifact/?5&q=rxjava):
+
+```groovy
+repositories {
+    maven { url 'https://oss.jfrog.org/libs-snapshot' }
+}
+
+dependencies {
+    compile 'io.reactivex:rxjava:1.1.y-SNAPSHOT'
+}
+```
 
 ## Building
 
