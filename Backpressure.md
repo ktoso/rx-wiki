@@ -167,19 +167,9 @@ For this to work, though, Observables _A_ and _B_ must respond correctly to the 
 
 If you do not apply any of these operators to an Observable that does not support backpressure, _and_ if either you as the Subscriber or some operator between you and the Observable attempts to apply reactive pull backpressure, you will encounter a `MissingBackpressureException` which you will be notified of via your `onError()` callback.
 
-_**Work in progress...**_
+# Further reading
 
-Things that may need explaining:
-* the `Producer` interface (and its `request` method)
-* other new method in `Subscriber`:
-  * `setProducer(p)`
-* how and when to support producers in custom observables & operators
-  * point here from the "how to make a custom operator" page; maybe also from `create` operator doc
-* Meanwhile, for info on Producers, see:
-  * [Pull #2963](https://github.com/ReactiveX/RxJava/pull/2963)
-  * [Advanced RxJava](http://akarnokd.blogspot.hu/) a blog from Dávid Karnok
-
-_**Work in progress...**_
+If the standard operators are providing the expected behavior, [one can write custom operators in RxJava](https://github.com/ReactiveX/RxJava/wiki/Implementing-custom-operators-(draft)).
 
 # See also
 * [RxJava 0.20.0-RC1 release notes](https://github.com/ReactiveX/RxJava/releases/tag/0.20.0-RC1)
