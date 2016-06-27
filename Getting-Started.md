@@ -32,7 +32,9 @@ If you need to download the jars instead of using a build system, create a Maven
 
 ```xml
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.netflix.rxjava.download</groupId>
 	<artifactId>rxjava-download</artifactId>
@@ -43,7 +45,7 @@ If you need to download the jars instead of using a build system, create a Maven
 		<dependency>
 			<groupId>io.reactivex</groupId>
 			<artifactId>rxjava</artifactId>
-			<version>1.0.10</version>
+			<version>1.1.6</version>
 			<scope/>
 		</dependency>
 	</dependencies>
