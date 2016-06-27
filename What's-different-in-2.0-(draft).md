@@ -110,6 +110,12 @@ Because Reactive-Streams base interface, `org.reactivestreams.Publisher` defines
 
 The other overloads of `subscribe` now return `Disposable` in 2.x.
 
+The original `Subscription` container types have been renamed and updated
+
+  - `CompositeSubscription` to `CompositeDisposable`
+  - `SerialSubscription` and `MultipleAssignmentSubscription` have been merged into `SerialDisposable`. The `set()` method disposes the old value and `replace()` method does not.
+  - `RefCountSubscription` to `RefCountDisposable`
+
 # Backpressure
 
 The Reactive-Streams specification mandates operators supporting backpressure, specifically via the guarantee that they don't overflow their consumers when those don't request. Operators of the new `Flowable` base reactive type now consider downstream requrest amounts properly, however, this doesn't mean `MissingBackpressureException` is gone. The exception is still there but this time, the operator that can't signal more `onNext` will signal this exception instead (allowing better identification of who is not properly backpressured).
