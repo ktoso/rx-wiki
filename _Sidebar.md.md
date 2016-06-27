@@ -18,6 +18,7 @@
  * [Transformational](https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables)
  * [Utility Operators](https://github.com/ReactiveX/RxJava/wiki/Observable-Utility-Operators)
  * [Implementing Custom Operators](https://github.com/ReactiveX/RxJava/wiki/Implementing-Your-Own-Operators)
+  * [New draft](https://github.com/ReactiveX/RxJava/wiki/Implementing-custom-operators-(draft))
 * [Backpressure](https://github.com/ReactiveX/RxJava/wiki/Backpressure)
 * [Error Handling](https://github.com/ReactiveX/RxJava/wiki/Error-Handling)
 * [Plugins](https://github.com/ReactiveX/RxJava/wiki/Plugins)
