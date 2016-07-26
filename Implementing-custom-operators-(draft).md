@@ -467,6 +467,40 @@ Some operators may not emit the received value to the `child` subscriber (such a
 // ...
 ```
 
+When an operator maps an `onNext` emission to a terminal event then before calling the terminal event it should unsubscribe the subscriber to upstream (usually called the parent). In addition, because upstream may (legally) do something like this:
+
+```java
+child.onNext(blah);
+//  no check for unsubscribed here
+child.onCompleted();
+```
+
+we should ensure that the operator complies with the `Observable` contract and only emits one terminal event so we use a defensive done flag:
+
+```java
+boolean done; // = false;
+
+@Override 
+public void onError(Throwable e) {
+    if (done) {
+        return;
+   }
+   done = true;
+   ...
+}
+
+@Override 
+public void onCompleted(Throwable e) {
+    if (done) {
+        return;
+   }
+   done = true;
+   ...
+}
+```
+
+An example of this pattern is seen in `OnSubscribeMap`.
+
 # Further reading
 
 Writing operators that consume multiple source `Observable`s or produce to multiple `Subscriber`s are the most difficult one to implement.
