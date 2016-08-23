@@ -266,10 +266,42 @@ Most operators are still there in 2.x and practically all of them have the same 
 
 Generally, many operators gained overloads that now allow specifying the internal buffer size or prefetch amount they should run their upstream (or inner sources).
 
+Some operator overloads have been renamed with a postfix, such as `fromArray`, `fromIterable` etc. The reason for this is that when the library is compiled with Java 8, the javac often can't disambiguate between functional interface types.
+
 Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 
 ## 1.x Observable to 2.x Flowable
 
+Factory methods:
+
 | 1.x      | 2.x       |
 |----------|-----------|
-| `amb` | added `amb(ObservableSource...)` overload, 2-9 argument version doesn't exist |
+| `amb` | added `amb(ObservableSource...)` overload, 2-9 argument versions dropped |
+| RxRingBuffer.SIZE | `bufferSize()` |
+| `combineLatest` | added varargs overload, added overloads with `bufferSize` argument, `combineLatest(List)` dropped |
+| `concat` | added overload with `prefetch` argument |
+| N/A | added `concatArray` and `concatArrayDelayError` |
+| N/A | added `concatArrayEager` and `concatArrayEagerDelayError` | 
+| `concatDelayError` | added overloads with option to delay till the current ends or till the very end |
+| `concatEagerDelayError` | added overloads with option to delay till the current ends or till the very end |
+| `create(SyncOnSubscribe)` | replaced with `generate` + overloads (distinct interfaces, you can implement them all at once) |
+| `create(AsnycOnSubscribe)` | not present |
+| `create(OnSubscribe)` | repurposed with safe `create(FlowableOnSubscribe, BackpressureStrategy)`, raw support via `unsafeCreate()` |
+| `from` | disambiguated into `fromArray`, `fromIterable`, `fromFuture` |
+| N/A | added `fromPublisher` |
+| `fromAsync` | renamed to `create()` |
+| N/A | added `intervalRange()` |
+| `limit` | dropped, use `take` |
+| `merge` | added overloads with `prefetch` |
+| `mergeDelayError` | added overloads with `prefetch` |
+| `nest` | dropped, use manual `just` |
+| `sequenceEqual` | added overload with `bufferSize` |
+| `switchOnNext` | added overload with `prefetch` |
+| `switchOnNextDelayError` | added overload with `prefetch` |
+| `timer` | deprecated overloads dropped |
+| `zip` | added overloads with `bufferSize` and `delayErrors` capabilities, disambiguated to `zipArray` and `zipIterable` |
+
+Instance methods:
+
+| 1.x      | 2.x      |
+|----------|----------|
