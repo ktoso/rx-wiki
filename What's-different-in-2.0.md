@@ -272,7 +272,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 
 ## 1.x Observable to 2.x Flowable
 
-Factory methods:
+###Factory methods:
 
 | 1.x      | 2.x       |
 |----------|-----------|
@@ -301,11 +301,11 @@ Factory methods:
 | `timer` | deprecated overloads dropped |
 | `zip` | added overloads with `bufferSize` and `delayErrors` capabilities, disambiguated to `zipArray` and `zipIterable` |
 
-Instance methods:
+###Instance methods:
 
 | 1.x      | 2.x      |
 |----------|----------|
-| `toBlocking().y` | inlined as `blockingY()` operators |
+| `asObservable` | renamed to `hide()`, hides all identities now |
 | `buffer` | overloads with custom `Collection` supplier |
 | `cache(int)` | deprecated and dropped |
 | `collect(U, Action2<U, T>)` | disambiguated to `collectInto` |
@@ -327,6 +327,31 @@ Instance methods:
 | `flatMap` | added overloads with `prefetch` |
 | N/A | added `forEachWhile(Predicate<T>, [Consumer<Throwable>, [Action]])` for conditionally stopping consumption |
 | `groupBy` | added overload with `bufferSize` and `delayError` option |
+| `last(Func1)` | dropped, use `filter(predicate).last()` |
+| `lastOrDefault(T)` | renamed to `last(T)` |
+| `lastOrDefault(Func1, T)` | dropped, use filter(predicate).last(T)` |
+| `publish(Func1)` | added overload with `prefetch` |
+| N/A | added `reduceWith(Callable, BiFunction)` to reduce in a Subscriber-individual manner |
+| N/A | added `repeatUntil(BooleanSupplier)` |
+| `repeatWhen(Func1, Scheduler)` | dropped the overload, use `subscribeOn(Scheduler).repeatWhen(Function)` instead |
+| `retry` | added `retry(Predicate)`, `retry(int, Predicate)` |
+| N/A | added `retryUntil(BooleanSupplier)` |
+| `retryWhen(Func1, Scheduler)` | dropped the overload, use `subscribeOn(Scheduler).retryWhen(Function)` instead |
+| N/A | added `sampleWith(Callable, BiFunction)` to scan in a Subscriber-individual manner |
+| `single(Func1)` | dropped, use `filter(predicate).single()` |
+| `singleOrDefault(T)` | renamed to `single(T)` |
+| `singleOrDefault(Func1, T)` | dropped, use filter(predicate).single(T)` |
+| `skipLast` | added overloads with `bufferSize` and `delayError` options |
+| `startWith` | 2-9 argument version dropped, use `startWithArray` instead |
+| N/A | added `startWithArray` to disambiguate |
+| `switchMap` | added overload with `prefetch` argument |
+| `switchMapDelayError` | added overload with `prefetch` argument |
+| N/A | added `test()` (returns TestSubscriber subscribed to this) with overloads to fluently test |
+| `toBlocking().y` | inlined as `blockingY()` operators, except `toFuture` |
+| N/A | added `toFuture` |
+| N/A | added `toObservable` |
+| `zipWith` | added overloads with `prefetch` and `delayErrors` options |
+
 
 
 
