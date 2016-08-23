@@ -305,3 +305,31 @@ Instance methods:
 
 | 1.x      | 2.x      |
 |----------|----------|
+| `toBlocking().y` | inlined as `blockingY()` operators |
+| `buffer` | overloads with custom `Collection` supplier |
+| `cache(int)` | deprecated and dropped |
+| `collect(U, Action2<U, T>)` | disambiguated to `collectInto` |
+| `concatMap` | added overloads with `prefetch` |
+| `concatMapDelayError` | added overloads with `prefetch`, option to delay till the current ends or till the very end |
+| `concatMapEager` | added overloads with `prefetch` |
+| `concatMapEagerDelayError` | added overloads with `prefetch`, option to delay till the current ends or till the very end | `count` | returns `Flowable<Long>` now |
+| `countLong` | dropped, use `count` |
+| `distinct` | overload with custom `Collection` supplier. |
+| `doOnCompleted` | renamed to `doOnComplete`, note the missing `d`! |
+| `doOnUnsubscribe` | renamed to `doOnCancel` |
+| N/A | added `doOnLifecylce` to handle `onSubscribe`, `request` and `cancel` peeking |
+| `elementAt(Func1, int)` | dropped, use `filter(predicate).elementAt(int)` |
+| `elementAtOrDefault(int, T)` | renamed to `elementAt(int, T)` |
+| `elementAtOrDefault(Func1, int, T)` | dropped, use filter(predicate).elementAt(int, T)` |
+| `first(Func1)` | dropped, use `filter(predicate).first()` |
+| `firstOrDefault(T)` | renamed to `first(T)` |
+| `firstOrDefault(Func1, T)` | dropped, use filter(predicate).first(T)` |
+| `flatMap` | added overloads with `prefetch` |
+| N/A | added `forEachWhile(Predicate<T>, [Consumer<Throwable>, [Action]])` for conditionally stopping consumption |
+| `groupBy` | added overload with `bufferSize` and `delayError` option |
+
+
+
+
+
+
