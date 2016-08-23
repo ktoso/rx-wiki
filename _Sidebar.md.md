@@ -26,5 +26,5 @@
 * [The RxJava Android Module](https://github.com/ReactiveX/RxAndroid/wiki)
 * RxJava 2.0
   * [Reactive Streams](https://github.com/ReactiveX/RxJava/wiki/Reactive-Streams)
-  * [What's different (user perspective)](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0-(draft))
+  * [What's different (user perspective)](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0)
 * [How to Contribute](https://github.com/ReactiveX/RxJava/wiki/How-to-Contribute)
