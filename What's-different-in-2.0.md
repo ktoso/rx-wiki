@@ -190,7 +190,7 @@ The original `Subscription` container types have been renamed and updated
 
   - `CompositeSubscription` to `CompositeDisposable`
   - `SerialSubscription` and `MultipleAssignmentSubscription` have been merged into `SerialDisposable`. The `set()` method disposes the old value and `replace()` method does not.
-  - `RefCountSubscription` to `RefCountDisposable`
+  - `RefCountSubscription` has been removed.
 
 # Backpressure
 
