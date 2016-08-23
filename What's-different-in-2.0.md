@@ -50,6 +50,42 @@ interface CompletableObserver<T> {
 
 and still follows the protocol `onSubscribe (onComplete | onError)?`.
 
+# Base reactive interfaces
+
+Following the style of extending the Reactive-Streams `Publisher<T>` in `Flowable`, the other base reactive classes now extend similar base interfaces (in package `io.reactivex`):
+
+```java
+interface ObservableSource<T> {
+    void subscribe(Observer<? super T> observer);
+}
+
+interface SingleSource<T> {
+    void subscribe(SingleObserver<? super T> observer);
+}
+```
+
+Therefore, many operators that required some reactive base type from the user now accept `Publisher` and `XSource`:
+
+```java
+Flowable<R> flatMap(Function<? super T, ? extends Publisher<? extends R>> mapper);
+
+Observable<R> flatMap(Function<? super T, ? extends ObservableSource<? extends R>> mapper);
+```
+
+By having `Publisher` as input this way, you can compose with other Reactive-Streams compliant libraries without the need to wrap them or convert them into `Flowable` first.
+
+If an operator has to offer a reactive base type, however, the user will receive the full reactive class (as giving out an `XSource` is practically useless as it doesn't have operators on it):
+
+```java
+Flowable<Flowable<Integer>> windows = source.window(5);
+
+source.compose((Flowable<T> flowable) -> 
+    flowable
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread()));
+```
+
+
 # Functional interfaces
 
 Because both 1.x and 2.x is aimed at Java 6+, we can't use the Java 8 functional interfaces such as `java.util.function.Function`. Instead, we defined our own functional interfaces in 1.x and 2.x follows this tradition. 
@@ -227,3 +263,13 @@ List<Integer> list = Flowable.range(1, 100).toList().blockingFirst();
 # Operator differences
 
 Most operators are still there in 2.x and practically all of them have the same behavior as they had in 1.x. The following subsections list each base reactive type and the difference between 1.x and 2.x.
+
+Generally, many operators gained overloads that now allow specifying the internal buffer size or prefetch amount they should run their upstream (or inner sources).
+
+Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
+
+## 1.x Observable to 2.x Flowable
+
+| 1.x      | 2.x       |
+|----------|-----------|
+| `amb` | added `amb(ObservableSource...)` overload, 2-9 argument version doesn't exist |
