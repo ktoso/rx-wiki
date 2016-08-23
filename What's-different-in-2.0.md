@@ -320,16 +320,16 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | N/A | added `doOnLifecylce` to handle `onSubscribe`, `request` and `cancel` peeking |
 | `elementAt(Func1, int)` | dropped, use `filter(predicate).elementAt(int)` |
 | `elementAtOrDefault(int, T)` | renamed to `elementAt(int, T)` |
-| `elementAtOrDefault(Func1, int, T)` | dropped, use filter(predicate).elementAt(int, T)` |
+| `elementAtOrDefault(Func1, int, T)` | dropped, use `filter(predicate).elementAt(int, T)` |
 | `first(Func1)` | dropped, use `filter(predicate).first()` |
 | `firstOrDefault(T)` | renamed to `first(T)` |
-| `firstOrDefault(Func1, T)` | dropped, use filter(predicate).first(T)` |
+| `firstOrDefault(Func1, T)` | dropped, use `filter(predicate).first(T)` |
 | `flatMap` | added overloads with `prefetch` |
 | N/A | added `forEachWhile(Predicate<T>, [Consumer<Throwable>, [Action]])` for conditionally stopping consumption |
 | `groupBy` | added overload with `bufferSize` and `delayError` option |
 | `last(Func1)` | dropped, use `filter(predicate).last()` |
 | `lastOrDefault(T)` | renamed to `last(T)` |
-| `lastOrDefault(Func1, T)` | dropped, use filter(predicate).last(T)` |
+| `lastOrDefault(Func1, T)` | dropped, use `filter(predicate).last(T)` |
 | `publish(Func1)` | added overload with `prefetch` |
 | N/A | added `reduceWith(Callable, BiFunction)` to reduce in a Subscriber-individual manner |
 | N/A | added `repeatUntil(BooleanSupplier)` |
@@ -340,7 +340,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | N/A | added `sampleWith(Callable, BiFunction)` to scan in a Subscriber-individual manner |
 | `single(Func1)` | dropped, use `filter(predicate).single()` |
 | `singleOrDefault(T)` | renamed to `single(T)` |
-| `singleOrDefault(Func1, T)` | dropped, use filter(predicate).single(T)` |
+| `singleOrDefault(Func1, T)` | dropped, use `filter(predicate).single(T)` |
 | `skipLast` | added overloads with `bufferSize` and `delayError` options |
 | `startWith` | 2-9 argument version dropped, use `startWithArray` instead |
 | N/A | added `startWithArray` to disambiguate |
