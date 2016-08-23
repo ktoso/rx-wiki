@@ -6,7 +6,7 @@ Because Reactive-Streams has a different architecture, it mandates changes to so
 
 # Maven address and base package
 
-To allow having RxJava 1.x and RxJava 2.x side-by-side, RxJava 2.x is under the maven coordinates `io.reactivex.rxjava:rxjava:2.x.y` and classes are accessible below `io.reactivex`.
+To allow having RxJava 1.x and RxJava 2.x side-by-side, RxJava 2.x is under the maven coordinates `io.reactivex.rxjava2:rxjava:2.x.y` and classes are accessible below `io.reactivex`.
 
 Users switching from 1.x to 2.x have to re-organize their imports, but carefully.
 
@@ -22,7 +22,17 @@ The good news is that operator names remain (mostly) the same. Bad news is that 
 
 # Functional interfaces
 
-Because both 1.x and 2.x is aimed at Java 6+, we can't use the Java 8 functional interfaces such as `java.util.function.Function`. Instead, we defined our own functional interfaces in 1.x and 2.x follows this tradition.
+Because both 1.x and 2.x is aimed at Java 6+, we can't use the Java 8 functional interfaces such as `java.util.function.Function`. Instead, we defined our own functional interfaces in 1.x and 2.x follows this tradition. 
+
+One notable difference is that all our functional interfaces now define `throws Exception`. This is a large convenience for consumers and mappers that otherwise throw and would need `try-catch` to transform or suppress a checked exception.
+
+```java
+Flowable.just("file.txt")
+.map(name -> Files.readLines(name))
+.subscribe(lines -> System.out.println(lines.size()), Throwable::printStackTrace);
+```
+
+If the file doesn't exist or can't be read properly, the end consumer will print out `IOException` directly. Note also the `Files.readLines(name)` invoked without try-catch.
 
 (Remark: up for discussion.)
 
@@ -30,11 +40,11 @@ Because both 1.x and 2.x is aimed at Java 6+, we can't use the Java 8 functional
 
 As the opportunity to reduce component count, 2.x doesn't define `Action3`-`Action9` and `ActionN` (these were unused within RxJava itself anyway). 
 
-The remaining action interfaces were named according to the Java 8 functional types. The no argument `Action0` is replaced by the `java.lang.Runnable` that allows more native interoperation with Java features. `Action1` has been renamed to `Consumer` and `Action2` is called `BiConsumer`. `ActionN` is replaced by the `Consumer<Object[]>` type declaration.
+The remaining action interfaces were named according to the Java 8 functional types. The no argument `Action0` is replaced by the `io.reactivex.functions.Action` for the operators and `java.lang.Runnable` for the `Scheduler` methods. `Action1` has been renamed to `Consumer` and `Action2` is called `BiConsumer`. `ActionN` is replaced by the `Consumer<Object[]>` type declaration.
 
 ## Functions
 
-We followed the naming convention of Java 8 by defining `io.reactivex.functions.Function` and `io.reactivex.functions.BiFunction`, plus renaming `Func3` - `Func9` into `Function3` - `Function9` respectively. The `FuncN` is replaced by the `FuncN<Object[], R>` type declaration.
+We followed the naming convention of Java 8 by defining `io.reactivex.functions.Function` and `io.reactivex.functions.BiFunction`, plus renaming `Func3` - `Func9` into `Function3` - `Function9` respectively. The `FuncN` is replaced by the `Function<Object[], R>` type declaration.
 
 In addition, operators requiring a predicate no longer use `Func1<T, Boolean>` but have a separate, primitive-returning type of `Predicate<T>` (allows better inlining due to no autoboxing).
 
@@ -68,10 +78,10 @@ Flowable.range(1, 10).subscribe(new Subscriber<Integer>() {
 
 Due to the name conflict, replacing the package from `rx` to `org.reactivestreams` is not enough. In addition, `org.reactivestreams.Subscriber` has no notion for adding resources to it, cancelling it or requesting from the outside.
 
-To bridge the gap we defined abstract classes `AsyncSubscriber` and `AsyncObserver` for `Flowable` and `Observable` respectively that offers resource tracking support (of `Disposable`s) just like `rx.Subscriber` and can be cancelled/disposed externally via `dispose()`: 
+To bridge the gap we defined abstract classes `DefaultSubscriber`, `ResourceSubscriber` and `DisposableSubscriber` (plus their `XObserver` variants) for `Flowable` (and `Observable`) respectively that offers resource tracking support (of `Disposable`s) just like `rx.Subscriber` and can be cancelled/disposed externally via `dispose()`: 
 
 ```java
-AsyncSubscriber<Integer> subscriber = new AsyncSubscriber<Integer>() {
+ResourceSubscriber<Integer> subscriber = new ResourceSubscriber<Integer>() {
     @Override
     public void onStart() {
         request(Long.MAX_VALUE);
@@ -126,9 +136,15 @@ As an alternative, the 2.x `Observable` doesn't do backpressure at all and is av
 
 The 2.x redesigned the `RxJavaPlugins` class which now supports changing the hooks at runtime. Tests that want to override the schedulers and the lifecycle of the base reactive types can do it on a case-by-case basis through callback functions.
 
+The class-based `RxJavaObservableHook` and friends are now gone and `RxJavaHooks` functionality is incorporated into `RxJavaPlugins`.
+
 # Schedulers
 
-The 2.x API still supports the main default scheduler types: `computation`, `io`, `newThread`, `trampoline` and `test`, accessible through `io.reactivex.schedulers.Schedulers` utility class. Due to the blocking-sleep in `immediate` there is a plan to drop it entirely from 2.x.
+The 2.x API still supports the main default scheduler types: `computation`, `io`, `newThread` and `trampoline`, accessible through `io.reactivex.schedulers.Schedulers` utility class. 
+
+The `immediate` scheduler is not present in 2.x. It was frequently misused and didn't implement the `Scheduler` specification correctly anyway; it contained blocking sleep for delayed action and didn't support recursive scheduling at all.
+
+The `Schedulers.test()` has been removed as well to avoid the conceptional difference with the rest of the default schedulers. Those return a "global" scheduler instance whereas `test()` returned always a new instance of the `TestScheduler`. Test developers are now encouraged to simply `new TestScheduler()` in their code.
 
 The `io.reactivex.Scheduler` abstract base class now supports scheduling tasks directly without the need to create and then destroy a `Worker` (which is often forgotten):
 
