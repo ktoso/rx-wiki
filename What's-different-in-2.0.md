@@ -62,6 +62,11 @@ interface ObservableSource<T> {
 interface SingleSource<T> {
     void subscribe(SingleObserver<? super T> observer);
 }
+
+interface CompletableSource {
+    void subscribe(CompletableObserver observer);
+}
+
 ```
 
 Therefore, many operators that required some reactive base type from the user now accept `Publisher` and `XSource`:
@@ -259,6 +264,46 @@ List<Integer> list = Flowable.range(1, 100).toList().blockingFirst();
 ```
 
 (The reason for this is twofold: performance and ease of use of the library as a synchronous Java 8 Streams-like processor.)
+
+Another significant difference between `rx.Subscriber` (and co) and `org.reactivestreams.Subscriber` (and co) is that in 2.x, your `Subscriber`'s is not allowed to throw anything but fatal exceptions (see `Exceptions.throwIfFatal()`). (The Reactive-Streams specification allows throwing `NullPointerException` if the `onSubscribe`, `onNext` or `onError` receives a `null` value, but RxJava doesn't let `null`s in anyway.) This means the following code is no longer legal:
+
+```java
+Subscriber<Integer> subscriber = new Subscriber<Integer>() {
+    @Override
+    public void onSubscribe(Subscription s) {
+        s.request(Long.MAX_VALUE);
+    }
+
+    public void onNext(Integer t) {
+        if (t == 1) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void onError(Throwable e) {
+        if (e instanceof IllegalArgumentException) {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    public void onComplete() {
+        throw new NoSuchElementException();
+    }
+};
+
+Flowable.just(1).subscribe(subscriber);
+```
+
+The same applies to `Observer`, `SingleObserver` and `CompletableObserver`.
+
+Since many of the existing code targeting 1.x do such things, the method `safeSubscribe` has been introduced that does handle the such non-conformant consumers. 
+
+Alternatively, you can use the `subscribe(Consumer<T>, Consumer<Throwable>, Action)` (and similar) methods to provide a callback/lambda that can throw:
+
+```java
+Flowable.just(1).subscribe(subscriber::onNext, subscriber::onError, subscriber::onComplete);
+```
+
 
 # Operator differences
 
