@@ -20,6 +20,36 @@ The good news is that operator names remain (mostly) the same. Bad news is that 
 
 (Remark: up for discussion.)
 
+# Single
+
+The 2.x `Single` reactive base type, which can emit a single `onSuccess` or `onError` has been redesigned from scratch. It's architecture now derives from the Reactive-Streams design. Its consumer type (`rx.Single.SingleSubscriber<T>`) has been changed from being a class that accepts `rx.Subscription` resources to be an interface `io.reactivex.SingleObserver<T>` that has only 3 methods:
+
+```java
+interface SingleObserver<T> {
+    void onSubscribe(Disposable d);
+    void onSuccess(T value);
+    void onError(Throwable error);
+}
+```
+
+and follows the protocol `onSubscribe (onSuccess | onError)?`.
+
+# Completable
+
+The `Completable` type remains largely the same. It was already designed along the Reactive-Streams style for 1.x so no user-level changes there.
+
+Similar to the naming changes, `rx.Completable.CompletableSubscriber` has become `io.reactivex.CompletableObserver` with `onSubscribe(Disposable)`:
+
+```java
+interface CompletableObserver<T> {
+    void onSubscribe(Disposable d);
+    void onComplete();
+    void onError(Throwable error);
+}
+```
+
+and still follows the protocol `onSubscribe (onComplete | onError)?`.
+
 # Functional interfaces
 
 Because both 1.x and 2.x is aimed at Java 6+, we can't use the Java 8 functional interfaces such as `java.util.function.Function`. Instead, we defined our own functional interfaces in 1.x and 2.x follows this tradition. 
@@ -167,3 +197,33 @@ public abstract class Scheduler {
 The main purpose is to avoid the tracking overhead of the `Worker`s for typically one-shot tasks. The methods have a default implementation that reuses `createWorker` properly but can be overridden with more efficient implementations if necessary.
 
 The method that returns the scheduler's own notion of current time, `now()` has been changed to accept a `TimeUnit` to indicate the unit of measure.
+
+# Entering the reactive world
+
+One of the design flaws of RxJava 1.x was the exposure of the `rx.Observable.create()` method that while powerful, not the typical operator you want to use to enter the reactive world. Unfortunately, so many depend on it that we couldn't remove or rename it.
+
+Since 2.x is a fresh start, we won't make that mistake again. Each reactive base type `Flowable`, `Observable`, `Single` and `Completable` feature a safe `create` operator that does the right thing regarding backpressure (for `Flowable`) and cancellation (all):
+
+```java
+Flowable.create((FlowableEmitter<Integer> emitter) -> {
+    emitter.onNext(1);
+    emitter.onNext(2);
+    emitter.onComplete();
+}, BackpressureStrategy.BUFFER);
+```
+
+Practically, the 1.x `fromAsync` has been renamed to `Flowable.create`. The other base reactive types have similar `create` methods (minus the backpressure strategy).
+
+# Leaving the reactive world
+
+Apart from subscribing to the base types with their respective consumers (`Subscriber`, `Observer`, `SingleObserver` and `CompletableObserver`) and functional-interface based consumers (such as `subscribe(Consumer<T>, Consumer<Throwable>, Action)`), the formerly separate 1.x `BlockingObservable` (and similar classes for the others) has been integrated with the main reactive type. Now you can directly block for some results by invoking a `blockingX` operation directly:
+
+```java
+List<Integer> list = Flowable.range(1, 100).toList().blockingFirst();
+```
+
+(The reason for this is twofold: performance and ease of use of the library as a synchronous Java 8 Streams-like processor.)
+
+# Operator differences
+
+Most operators are still there in 2.x and practically all of them have the same behavior as they had in 1.x. The following subsections list each base reactive type and the difference between 1.x and 2.x.
