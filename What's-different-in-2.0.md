@@ -339,7 +339,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `amb` | added `amb(ObservableSource...)` overload, 2-9 argument versions dropped |
 | RxRingBuffer.SIZE | `bufferSize()` |
 | `combineLatest` | added varargs overload, added overloads with `bufferSize` argument, `combineLatest(List)` dropped |
-| `concat` | added overload with `prefetch` argument |
+| `concat` | added overload with `prefetch` argument, 5-9 source overloads dropped, use `concatArray` instead |
 | N/A | added `concatArray` and `concatArrayDelayError` |
 | N/A | added `concatArrayEager` and `concatArrayEagerDelayError` | 
 | `concatDelayError` | added overloads with option to delay till the current ends or till the very end |
@@ -406,10 +406,12 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | N/A | added `startWithArray` to disambiguate |
 | `switchMap` | added overload with `prefetch` argument |
 | `switchMapDelayError` | added overload with `prefetch` argument |
+| `takeLastBuffer` | dropped |
 | N/A | added `test()` (returns TestSubscriber subscribed to this) with overloads to fluently test |
 | `toBlocking().y` | inlined as `blockingY()` operators, except `toFuture` |
 | N/A | added `toFuture` |
 | N/A | added `toObservable` |
+| `withLatestFrom` | 5-9 source overloads dropped |
 | `zipWith` | added overloads with `prefetch` and `delayErrors` options |
 
 
