@@ -90,6 +90,19 @@ source.compose((Flowable<T> flowable) ->
     .observeOn(AndroidSchedulers.mainThread()));
 ```
 
+# Subjects and Processors
+
+In the Reactive-Streams specification, the `Subject`-like behavior, namely being a consumer and supplier of events at the same time, is done by the `org.reactivestreams.Processor` interface. As with the `Observable`/`Flowable` split, the backpressure-aware, Reactive-Streams compliant implementations are based on the `FlowProcessor<T>` class (which extends `Flowable` to give a rich set of instance operators). An important change regarding `Subject`s (and by extension, `FlowProcessor`) that they no longer support `T -> R` like conversion (that is, input is of type `T` and the output is of type `R`). (We never had an use for it in 1.x and the original `Subject<T, R>` came from .NET where there is a `Subject<T>` overload because .NET allows the same class name with different number of type arguments.)
+
+The `io.reactivex.subjects.AsyncSubject`, `io.reactivex.subjects.BehaviorSubject`, `io.reactivex.subjects.PublishSubject`, `io.reactivex.subjects.ReplaySubject` and `io.reactivex.subjects.UnicastSubject` in 2.x don't support backpressure (as part of the 2.x `Observable` family).
+
+The `io.reactivex.processors.AsyncProcessor`, `io.reactivex.processors.BehaviorProcessor`, `io.reactivex.processors.PublishProcessor`, `io.reactivex.processors.ReplayProcessor` and `io.reactivex.processors.UnicastProcessor` are backpressure-aware. The `BehaviorProcessor` and `ReplayProcessor` don't coordinate requests (use `Flowable.publish()` for that) of their downstream subscribers and will signal them `MissingBackpressureException` if the downstream can't keep up. The other `XProcessor` types honor backpressure of their downstream subscribers but otherwise, when subscribed to a source (optional), they consume it in an unbounded manner (requesting `Long.MAX_VALUE`). 
+
+# Other classes
+
+The `rx.observables.ConnectableObservable` is now `io.reactivex.observables.ConnectableObservable<T>` and `io.reactivex.flowables.ConnectableFlowable<T>`.
+
+The `rx.observables.GroupedObservable` is now `io.reactivex.observables.GroupedObservable<T>` and `io.reactivex.flowables.GroupedFlowable<T>`.
 
 # Functional interfaces
 
@@ -118,6 +131,8 @@ The remaining action interfaces were named according to the Java 8 functional ty
 We followed the naming convention of Java 8 by defining `io.reactivex.functions.Function` and `io.reactivex.functions.BiFunction`, plus renaming `Func3` - `Func9` into `Function3` - `Function9` respectively. The `FuncN` is replaced by the `Function<Object[], R>` type declaration.
 
 In addition, operators requiring a predicate no longer use `Func1<T, Boolean>` but have a separate, primitive-returning type of `Predicate<T>` (allows better inlining due to no autoboxing).
+
+The `io.reactivex.functions.Functions` utility class offers common function sources and conversions to `Function<Object[], R>`.
 
 # Subscriber
 
