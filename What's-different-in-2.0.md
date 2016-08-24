@@ -366,6 +366,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | 1.x      | 2.x      |
 |----------|----------|
 | `asObservable` | renamed to `hide()`, hides all identities now |
+| N/A | added `ambArray` with varargs sources |
 | `buffer` | overloads with custom `Collection` supplier |
 | `cache(int)` | deprecated and dropped |
 | `collect(U, Action2<U, T>)` | disambiguated to `collectInto` |
