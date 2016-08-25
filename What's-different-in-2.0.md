@@ -311,7 +311,7 @@ Flowable.just(1).subscribe(subscriber);
 
 The same applies to `Observer`, `SingleObserver` and `CompletableObserver`.
 
-Since many of the existing code targeting 1.x do such things, the method `safeSubscribe` has been introduced that does handle the such non-conformant consumers. 
+Since many of the existing code targeting 1.x do such things, the method `safeSubscribe` has been introduced that does handle these non-conforming consumers. 
 
 Alternatively, you can use the `subscribe(Consumer<T>, Consumer<Throwable>, Action)` (and similar) methods to provide a callback/lambda that can throw:
 
@@ -354,7 +354,6 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `limit` | dropped, use `take` |
 | `merge` | added overloads with `prefetch` |
 | `mergeDelayError` | added overloads with `prefetch` |
-| `nest` | dropped, use manual `just` |
 | `sequenceEqual` | added overload with `bufferSize` |
 | `switchOnNext` | added overload with `prefetch` |
 | `switchOnNextDelayError` | added overload with `prefetch` |
@@ -386,10 +385,11 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `firstOrDefault(Func1, T)` | dropped, use `filter(predicate).first(T)` |
 | `flatMap` | added overloads with `prefetch` |
 | N/A | added `forEachWhile(Predicate<T>, [Consumer<Throwable>, [Action]])` for conditionally stopping consumption |
-| `groupBy` | added overload with `bufferSize` and `delayError` option |
+| `groupBy` | added overload with `bufferSize` and `delayError` option, *the custom internal map version didn't make it into RC1* |
 | `last(Func1)` | dropped, use `filter(predicate).last()` |
 | `lastOrDefault(T)` | renamed to `last(T)` |
 | `lastOrDefault(Func1, T)` | dropped, use `filter(predicate).last(T)` |
+| `nest` | dropped, use manual `just` |
 | `publish(Func1)` | added overload with `prefetch` |
 | N/A | added `reduceWith(Callable, BiFunction)` to reduce in a Subscriber-individual manner |
 | N/A | added `repeatUntil(BooleanSupplier)` |
