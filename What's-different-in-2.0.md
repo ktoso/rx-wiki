@@ -102,7 +102,38 @@ The `io.reactivex.processors.AsyncProcessor`, `io.reactivex.processors.BehaviorP
 
 The `rx.observables.ConnectableObservable` is now `io.reactivex.observables.ConnectableObservable<T>` and `io.reactivex.flowables.ConnectableFlowable<T>`.
 
+## GroupedObservable
+
 The `rx.observables.GroupedObservable` is now `io.reactivex.observables.GroupedObservable<T>` and `io.reactivex.flowables.GroupedFlowable<T>`.
+
+In 1.x, you could create an instance with `GroupedObservable.from()` which was used internally by 1.x. In 2.x, all use cases now extend `GroupedObservable` directly thus the factory methods are no longer available; the whole class is now abstract.
+
+You can extend the class and add your own custom `subscribeActual` behavior to achieve something similar to the 1.x features:
+
+```java
+class MyGroup<K, V> extends GroupedObservable<K, V> {
+    final K key;
+
+    final Subject<V> subject;
+
+    public MyGroup(K key) {
+        this.key = key;
+        this.subject = PublishSubject.create();
+    }
+
+    @Override
+    public T getKey() {
+        return key;
+    }
+
+    @Override
+    protected void subscribeActual(Observer<? super T> observer) {
+        subject.subscribe(observer);
+    }
+}
+```
+
+(The same approach works with `GroupedFlowable` as well.)
 
 # Functional interfaces
 
