@@ -10,3 +10,22 @@ In this article, I'll describe the how-to's from the perspective of a developer 
 
 TBD
 
+# Backpressure and cancellation
+
+TBD
+
+# Operator fusion
+
+TBD
+
+# Example implementations
+
+TBD
+
+## `map` + `filter` hybrid
+
+TBD
+
+## Ordered `merge`
+
+TBD
