@@ -227,6 +227,22 @@ subscriber.dispose();
 
 Note also that due to Reactive-Streams compatibility, the method `onCompleted` has been renamed to `onComplete` without the trailing `d`.
 
+Since 1.x `Observable.subscribe(Subscriber)` returned `Subscription`, users often added the `Subscription` to a `CompositeSubscription` for example:
+
+```java
+CompositeSubscription composite = new CompositeSubscription();
+
+composite.add(Observable.range(1, 5).subscribe(new TestSubscriber<Integer>()));
+```
+
+Due to the Reactive-Streams specification, `Publisher.subscribe` returns void and the pattern by itself no longer works in 2.0. To remedy this, the method `subscribeWith(E subscriber)` have been added to the base reactive classes which return their input subscriber as is. With the two examples before, the 2.x code can now look like this since `ResourceSubscriber` implements `Disposable` directly:
+
+```java
+CompositeDisposable composite2 = new CompositeDisposable();
+
+composite2.add(Flowable.range(1, 5).subscribe(subscriber));
+```
+
 # Subscription
 
 In RxJava 1.x, the interface `rx.Subscription` was responsible for stream and resource lifecycle management, namely unsubscribing a sequence and releasing general resources such as scheduled tasks. The Reactive-Streams specification took this name for specifying an interaction point between a source and a consumer: `org.reactivestreams.Subscription` allows requesting a positive amount from the upstream and allows cancelling the sequence.
@@ -435,6 +451,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `skipLast` | added overloads with `bufferSize` and `delayError` options |
 | `startWith` | 2-9 argument version dropped, use `startWithArray` instead |
 | N/A | added `startWithArray` to disambiguate |
+| N/A | added `subscribeWith` that returns its input after subscription |
 | `switchMap` | added overload with `prefetch` argument |
 | `switchMapDelayError` | added overload with `prefetch` argument |
 | `takeLastBuffer` | dropped |
