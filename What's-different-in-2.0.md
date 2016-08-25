@@ -10,6 +10,10 @@ To allow having RxJava 1.x and RxJava 2.x side-by-side, RxJava 2.x is under the 
 
 Users switching from 1.x to 2.x have to re-organize their imports, but carefully.
 
+# Javadoc
+
+The official javadoc pages for 2.x is hosted at http://reactivex.io/RxJava/2.x/javadoc/
+
 # Observable and Flowable
 
 A small regret about introducing backpressure in RxJava 0.x is that instead of having a separate base reactive class, the `Observable` itself was retrofitted. The main issue with backpressure is that many hot sources, such as UI events, can't be reasonably backpressured and cause unexpected `MissingBackpressureException` (i.e., beginners don't expect them).
