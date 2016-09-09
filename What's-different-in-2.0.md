@@ -25,7 +25,8 @@ Single.just(null);
 
 Observable.fromCallable(() -> null);
 
-Observable.just(1).map(v -> null).subscribe(System.out::println, Throwable::printStackTrace);
+Observable.just(1).map(v -> null)
+    .subscribe(System.out::println, Throwable::printStackTrace);
 ```
 
 # Observable and Flowable
