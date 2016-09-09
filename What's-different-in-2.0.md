@@ -14,6 +14,20 @@ Users switching from 1.x to 2.x have to re-organize their imports, but carefully
 
 The official javadoc pages for 2.x is hosted at http://reactivex.io/RxJava/2.x/javadoc/
 
+# Nulls
+
+RxJava 2.x no longer accepts `null` values and the following will yield `NullPointerException` immediately or as a signal to downstream:
+
+```java
+Observable.just(null);
+
+Single.just(null);
+
+Observable.fromCallable(() -> null);
+
+Observable.just(1).map(v -> null).subscribe(System.out::println, Throwable::printStackTrace);
+```
+
 # Observable and Flowable
 
 A small regret about introducing backpressure in RxJava 0.x is that instead of having a separate base reactive class, the `Observable` itself was retrofitted. The main issue with backpressure is that many hot sources, such as UI events, can't be reasonably backpressured and cause unexpected `MissingBackpressureException` (i.e., beginners don't expect them).
