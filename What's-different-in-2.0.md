@@ -37,8 +37,6 @@ We try to remedy this situation in 2.x by having `io.reactivex.Observable` non-b
 
 The good news is that operator names remain (mostly) the same. Bad news is that one should be careful when performing 'organize imports' as it may select the non-backpressured `io.reactivex.Observable` unintended.
 
-(Remark: up for discussion.)
-
 # Single
 
 The 2.x `Single` reactive base type, which can emit a single `onSuccess` or `onError` has been redesigned from scratch. It's architecture now derives from the Reactive-Streams design. Its consumer type (`rx.Single.SingleSubscriber<T>`) has been changed from being a class that accepts `rx.Subscription` resources to be an interface `io.reactivex.SingleObserver<T>` that has only 3 methods:
@@ -167,8 +165,6 @@ Flowable.just("file.txt")
 ```
 
 If the file doesn't exist or can't be read properly, the end consumer will print out `IOException` directly. Note also the `Files.readLines(name)` invoked without try-catch.
-
-(Remark: up for discussion.)
 
 ## Actions
 
