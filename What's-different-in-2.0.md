@@ -104,6 +104,9 @@ interface CompletableSource {
     void subscribe(CompletableObserver observer);
 }
 
+interface MaybeSource<T> {
+    void subscribe(MaybeObserver<? super T> observer);
+}
 ```
 
 Therefore, many operators that required some reactive base type from the user now accept `Publisher` and `XSource`:
