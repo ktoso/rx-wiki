@@ -68,6 +68,25 @@ interface CompletableObserver<T> {
 
 and still follows the protocol `onSubscribe (onComplete | onError)?`.
 
+# Maybe
+
+RxJava 2.0.0-RC2 introduced a new base reactive type called `Maybe`. Conceptually, it is a union of `Single` and `Completable` providing the means to capture an emission pattern where there could be 0 or 1 item or an error signalled by some reactive source.
+
+The `Maybe` class is accompanied by `MaybeSource` as its base interface type, `MaybeObserver<T>` as its signal-receiving interface and follows the protocol `onSubscribe (onSuccess | onError | onComplete)?`. Because there could be at most 1 element emitted, the `Maybe` type has no notion of backpressure (because there is no buffer bloat possible as with unknown length `Flowable`s or `Observable`s.
+
+This means that an invocation of `onSubscribe(Disposable)` is potentially followed by one of the other `onXXX` methods. Unlike `Flowable`, if there is only a single value to be signalled, only `onSuccess` is called and `onComplete` is not.
+
+Working with this new base reactive type is practically the same as the others as it offers a modest subset of the `Flowable` operators that make sense with a 0 or 1 item sequence.
+
+```java
+Maybe.just(1)
+.map(v -> v + 1)
+.filter(v -> v == 1)
+.defaultIfEmpty(2)
+.test()
+.assertResult(2);
+```
+
 # Base reactive interfaces
 
 Following the style of extending the Reactive-Streams `Publisher<T>` in `Flowable`, the other base reactive classes now extend similar base interfaces (in package `io.reactivex`):
