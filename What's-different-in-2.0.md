@@ -23,7 +23,8 @@ Observable.just(null);
 
 Single.just(null);
 
-Observable.fromCallable(() -> null);
+Observable.fromCallable(() -> null)
+    .subscribe(System.out::println, Throwable::printStackTrace);
 
 Observable.just(1).map(v -> null)
     .subscribe(System.out::println, Throwable::printStackTrace);
@@ -471,6 +472,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `switchMapDelayError` | added overload with `prefetch` argument |
 | `takeLastBuffer` | dropped |
 | N/A | added `test()` (returns TestSubscriber subscribed to this) with overloads to fluently test |
+| `timeout(Func0<Observable>, ...)` | signature changed to `timeout(Publisher, ...)` and dropped the function, use `defer(Callable<Publisher>>)` if necessary |
 | `toBlocking().y` | inlined as `blockingY()` operators, except `toFuture` |
 | N/A | added `toFuture` |
 | N/A | added `toObservable` |
