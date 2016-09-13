@@ -256,7 +256,7 @@ Due to the Reactive-Streams specification, `Publisher.subscribe` returns void an
 ```java
 CompositeDisposable composite2 = new CompositeDisposable();
 
-composite2.add(Flowable.range(1, 5).subscribe(subscriber));
+composite2.add(Flowable.range(1, 5).subscribeWith(subscriber));
 ```
 
 # Subscription
