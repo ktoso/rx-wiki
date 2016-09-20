@@ -417,7 +417,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 
 ## 1.x Observable to 2.x Flowable
 
-###Factory methods:
+### Factory methods:
 
 | 1.x      | 2.x       |
 |----------|-----------|
@@ -445,7 +445,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `timer` | deprecated overloads dropped |
 | `zip` | added overloads with `bufferSize` and `delayErrors` capabilities, disambiguated to `zipArray` and `zipIterable` |
 
-###Instance methods:
+### Instance methods:
 
 | 1.x      | 2.x      |
 |----------|----------|
@@ -501,8 +501,17 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `withLatestFrom` | 5-9 source overloads dropped |
 | `zipWith` | added overloads with `prefetch` and `delayErrors` options |
 
+### Different return types
 
+Some operators that produced exactly one value or an error now return `Single` in 2.x (or `Maybe` if an empty source is allowed).
 
+*(Remark: this is "experimental" in RC2 and RC3 to see how it feels to program with such mixed-type sequences and whether or not there has to be to much `toObservable`/`toFlowable` back-conversion.)*
+
+| Operator | Old return type | New return type | Remark |
+|----------|-----------------|-----------------|--------|
+| `last()` | `Observable<T>` | `Single<T>` | Emits the very last element or `NoSuchElementException` |
+| `last(T)` | `Observable<T>` | `Single<T>` | Emits the very last element or the default item |
+| `reduce(BiFunction)` | `Observable<T>` | `Single<T>` | Emits the reduced value or `NoSuchElementException` |
 
 
 
