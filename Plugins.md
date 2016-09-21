@@ -14,28 +14,28 @@ You can now change these hooks at runtime and there is no need to prepare hooks 
 
 The `RxJavaHooks` has setters and getters of the various hook types:
 
-| Hook | Type | Description |
-|------|------|-------------|
-| onError | `Action1<Throwable>` | Sets the catch-all callback |
-| onObservableCreate | `Func1<Observable.OnSubscribe, Observable.OnSubscribe>` | Called when operators and sources are instantiated on `Observable` |
-| onObservableStart | `Func2<Observable, Observable.OnSubscribe, Observable.OnSubscribe>` | |
-| onObservableSubscribeError | `Func1<Throwable, Throwable>` | |
-| onObservableReturn | `Func1<Subscription, Subscription>` | |
-| onObservableLift | `Func1<Observable.Operator, Observable.Operator>` | |
-| onSingleCreate | `Func1<Single.OnSubscribe, Single.OnSubscribe>` | Called when operators and sources are instantiated on `Single` |
-| onSingleStart | `Func2<Single, Observable.OnSubscribe, Observable.OnSubscribe>` | |
-| onSingleSubscribeError | `Func1<Throwable, Throwable>` | |
-| onSingleReturn | `Func1<Subscription, Subscription>` | |
-| onSingleLift | `Func1<Observable.Operator, Observable.Operator>` | called when the operator `lift` is used (note: `Observable.Operator` is deliberate here) |
-| onCompletableCreate | `Func1<Completable.OnSubscribe, Completable.OnSubscribe>` | Called when operators and sources are instantiated on `Completable` |
-| onCompletableStart | `Func2<Completable, Completable.OnSubscribe, Completable.OnSubscribe>` | |
-| onCompletableSubscribeError | `Func1<Throwable, Throwable>` | |
-| onCompletableLift | `Func1<Completable.Operator, Completable.Operator>` | |
-| onComputationScheduler | `Func1<Scheduler, Scheduler>` | |
-| onIOScheduler | `Func1<Scheduler, Scheduler>` | |
-| onNewThreadScheduler | `Func1<Scheduler, Scheduler>` | |
-| onScheduleAction | `Func1<Action0, Action0>`  | Called when a task gets scheduled in any of the `Scheduler`s |
-| onGenericScheduledExecutorService | `Func0<ScheduledExecutorService>` | that should return single-threaded executors to support background timed tasks of RxJava itself |
+| Hook | Description |
+|------|-------------|
+| onError : `Action1<Throwable>` | Sets the catch-all callback |
+| onObservableCreate : `Func1<Observable.OnSubscribe, Observable.OnSubscribe>` | Called when operators and sources are instantiated on `Observable` |
+| onObservableStart : `Func2<Observable, Observable.OnSubscribe, Observable.OnSubscribe>` | Called before subscribing to an `Observable` actually happens |
+| onObservableSubscribeError : `Func1<Throwable, Throwable>` | Called when subscribing to an `Observable` fails |
+| onObservableReturn : `Func1<Subscription, Subscription>` | Called when the subscribing to an `Observable` succeeds and before returning the `Subscription` handler for it |
+| onObservableLift : `Func1<Observable.Operator, Observable.Operator>` | Called when the operator `lift` is used with `Observable` |
+| onSingleCreate : `Func1<Single.OnSubscribe, Single.OnSubscribe>` | Called when operators and sources are instantiated on `Single` |
+| onSingleStart : `Func2<Single, Observable.OnSubscribe, Observable.OnSubscribe>` | Called before subscribing to an `Single` actually happens |
+| onSingleSubscribeError : `Func1<Throwable, Throwable>` | Called when subscribing to a `Single` fails |
+| onSingleReturn : `Func1<Subscription, Subscription>` | Called when the subscribing to a `Single` succeeds and before returning the `Subscription` handler for it |
+| onSingleLift : `Func1<Observable.Operator, Observable.Operator>` | Called when the operator `lift` is used (note: `Observable.Operator` is deliberate here) |
+| onCompletableCreate : `Func1<Completable.OnSubscribe, Completable.OnSubscribe>` | Called when operators and sources are instantiated on `Completable` |
+| onCompletableStart : `Func2<Completable, Completable.OnSubscribe, Completable.OnSubscribe>` | Called before subscribing to a `Completable` actually happens |
+| onCompletableSubscribeError : `Func1<Throwable, Throwable>` | Called when subscribing to a `Completable` fails |
+| onCompletableLift : `Func1<Completable.Operator, Completable.Operator>` | Called when the operator `lift` is used with `Completable` |
+| onComputationScheduler : `Func1<Scheduler, Scheduler>` | Called when using `Schedulers.computation()` |
+| onIOScheduler : `Func1<Scheduler, Scheduler>` | Called when using `Schedulers.io()` |
+| onNewThreadScheduler : `Func1<Scheduler, Scheduler>` | Called when using `Schedulers.newThread()` |
+| onScheduleAction : `Func1<Action0, Action0>`  | Called when a task gets scheduled in any of the `Scheduler`s |
+| onGenericScheduledExecutorService : `Func0<ScheduledExecutorService>` | that should return single-threaded executors to support background timed tasks of RxJava itself |
 
 Reading and changing these hooks is thread-safe.
 
