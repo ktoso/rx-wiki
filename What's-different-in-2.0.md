@@ -35,7 +35,7 @@ This means that `Observable<Void>` can no longer emit any values but only termin
 ```java
 enum Irrelevant { INSTANCE; }
 
-Observable.create((ObservableEmitter<Object> emitter) -> {
+Observable<Object> source = Observable.create((ObservableEmitter<Object> emitter) -> {
    System.out.println("Side-effect 1");
    emitter.onNext(Irrelevant.INSTANCE);
 
@@ -45,6 +45,8 @@ Observable.create((ObservableEmitter<Object> emitter) -> {
    System.out.println("Side-effect 3");
    emitter.onNext(Irrelevant.INSTANCE);
 });
+
+source.subscribe(e -> { /* Ignored. */ }, Throwable::printStackTrace);
 ```
 
 # Observable and Flowable
