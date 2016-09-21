@@ -541,7 +541,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 
 Some operators that produced exactly one value or an error now return `Single` in 2.x (or `Maybe` if an empty source is allowed).
 
-*(Remark: this is "experimental" in RC2 and RC3 to see how it feels to program with such mixed-type sequences and whether or not there has to be to much `toObservable`/`toFlowable` back-conversion.)*
+*(Remark: this is "experimental" in RC2 and RC3 to see how it feels to program with such mixed-type sequences and whether or not there has to be too much `toObservable`/`toFlowable` back-conversion.)*
 
 | Operator | Old return type | New return type | Remark |
 |----------|-----------------|-----------------|--------|
