@@ -449,8 +449,8 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 
 | 1.x      | 2.x      |
 |----------|----------|
-| `all` | **RC3** returns `Single<Boolean> now |
-| `any` | **RC3** returns `Single<Boolean> now |
+| `all` | **RC3** returns `Single<Boolean>` now |
+| `any` | **RC3** returns `Single<Boolean>` now |
 | `asObservable` | renamed to `hide()`, hides all identities now |
 | `buffer` | overloads with custom `Collection` supplier |
 | `cache(int)` | deprecated and dropped |
