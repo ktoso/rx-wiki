@@ -449,40 +449,51 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 
 | 1.x      | 2.x      |
 |----------|----------|
+| `all` | **RC3** returns `Single<Boolean> now |
+| `any` | **RC3** returns `Single<Boolean> now |
 | `asObservable` | renamed to `hide()`, hides all identities now |
 | `buffer` | overloads with custom `Collection` supplier |
 | `cache(int)` | deprecated and dropped |
-| `collect(U, Action2<U, T>)` | disambiguated to `collectInto` |
+| `collect` | **RC3** returns `Single<U>` |
+| `collect(U, Action2<U, T>)` | disambiguated to `collectInto` and **RC3** returns `Single<U>` |
 | `concatMap` | added overloads with `prefetch` |
 | `concatMapDelayError` | added overloads with `prefetch`, option to delay till the current ends or till the very end |
 | `concatMapEager` | added overloads with `prefetch` |
-| `concatMapEagerDelayError` | added overloads with `prefetch`, option to delay till the current ends or till the very end | `count` | returns `Flowable<Long>` now |
+| `concatMapEagerDelayError` | added overloads with `prefetch`, option to delay till the current ends or till the very end | `contains` | **RC3** returns `Single<Boolean> now |
+| `count` | **RC3** returns `Single<Long>` now |
 | `countLong` | dropped, use `count` |
 | `distinct` | overload with custom `Collection` supplier. |
 | `doOnCompleted` | renamed to `doOnComplete`, note the missing `d`! |
 | `doOnUnsubscribe` | renamed to `doOnCancel` |
 | N/A | added `doOnLifecylce` to handle `onSubscribe`, `request` and `cancel` peeking |
+| `elementAt(int)` | **RC3** no longer signals NoSuchElementException if the source is shorter than the index |
 | `elementAt(Func1, int)` | dropped, use `filter(predicate).elementAt(int)` |
-| `elementAtOrDefault(int, T)` | renamed to `elementAt(int, T)` |
+| `elementAtOrDefault(int, T)` | renamed to `elementAt(int, T)` and **RC3** returns `Single<T>` |
 | `elementAtOrDefault(Func1, int, T)` | dropped, use `filter(predicate).elementAt(int, T)` |
+| `first()` | **RC3** renamed to `firstElement` and returns `Maybe<T>` |
 | `first(Func1)` | dropped, use `filter(predicate).first()` |
 | `firstOrDefault(T)` | renamed to `first(T)` |
 | `firstOrDefault(Func1, T)` | dropped, use `filter(predicate).first(T)` |
 | `flatMap` | added overloads with `prefetch` |
 | N/A | added `forEachWhile(Predicate<T>, [Consumer<Throwable>, [Action]])` for conditionally stopping consumption |
 | `groupBy` | added overload with `bufferSize` and `delayError` option, *the custom internal map version didn't make it into RC1* |
+| `ignoreElements` | **RC3** returns `Completable` |
+| `isEmpty` | **RC3* returns `Single<Boolean>` |
+| `last()` | **RC3** renamed to `lastElement` and returns `Maybe<T>` |
 | `last(Func1)` | dropped, use `filter(predicate).last()` |
 | `lastOrDefault(T)` | renamed to `last(T)` |
 | `lastOrDefault(Func1, T)` | dropped, use `filter(predicate).last(T)` |
 | `nest` | dropped, use manual `just` |
 | `publish(Func1)` | added overload with `prefetch` |
-| N/A | added `reduceWith(Callable, BiFunction)` to reduce in a Subscriber-individual manner |
+| `reduce(Func2)` | **RC3** returns `Maybe<T>` |
+| N/A | added `reduceWith(Callable, BiFunction)` to reduce in a Subscriber-individual manner, returns `Single<T>` |
 | N/A | added `repeatUntil(BooleanSupplier)` |
 | `repeatWhen(Func1, Scheduler)` | dropped the overload, use `subscribeOn(Scheduler).repeatWhen(Function)` instead |
 | `retry` | added `retry(Predicate)`, `retry(int, Predicate)` |
 | N/A | added `retryUntil(BooleanSupplier)` |
 | `retryWhen(Func1, Scheduler)` | dropped the overload, use `subscribeOn(Scheduler).retryWhen(Function)` instead |
 | N/A | added `sampleWith(Callable, BiFunction)` to scan in a Subscriber-individual manner |
+| `single()` | **RC3** renamed to `singleElement` and returns `Maybe<T>` |
 | `single(Func1)` | dropped, use `filter(predicate).single()` |
 | `singleOrDefault(T)` | renamed to `single(T)` |
 | `singleOrDefault(Func1, T)` | dropped, use `filter(predicate).single(T)` |
@@ -496,8 +507,14 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | N/A | added `test()` (returns TestSubscriber subscribed to this) with overloads to fluently test |
 | `timeout(Func0<Observable>, ...)` | signature changed to `timeout(Publisher, ...)` and dropped the function, use `defer(Callable<Publisher>>)` if necessary |
 | `toBlocking().y` | inlined as `blockingY()` operators, except `toFuture` |
+| `toList` | **RC3** returns `Single<List<T>>` |
+| `toSortedList` | **RC3** returns `Single<List<T>>` |
+| `toMap` | **RC3** returns `Single<Map<K, V>>` |
+| `toMultimap` | **RC3** returns `Single<Map<K, Collection<V>>>` |
+| `toCompletable` | **RC3** dropped, use `ignoreElements` |
 | N/A | added `toFuture` |
 | N/A | added `toObservable` |
+| `toSingle` | **RC3** dropped, use `single(T)` |
 | `withLatestFrom` | 5-9 source overloads dropped |
 | `zipWith` | added overloads with `prefetch` and `delayErrors` options |
 
@@ -509,10 +526,25 @@ Some operators that produced exactly one value or an error now return `Single` i
 
 | Operator | Old return type | New return type | Remark |
 |----------|-----------------|-----------------|--------|
-| `last()` | `Observable<T>` | `Single<T>` | Emits the very last element or `NoSuchElementException` |
+| `all(Predicate)` | `Observable<Boolean>` | `Single<Boolean>` | Emits true if all elements match the predicate |
+| `any(Predicate)` | `Observable<Boolean>` | `Single<Boolean>` | Emits true if any elements match the predicate |
+| `count()` | `Observable<Long>` | `Single<Long>` | Counts the number of elements in the sequence |
+| `elementAt(int)` | `Observable<T>` | `Maybe<T>` | Emits the element at the given index or completes |
+| `elementAt(int, T)` | `Observable<T>` | `Single<T>` | Emits the element at the given index or the default |
+| `first(T)` | `Observable<T>` | `Single<T>` | Emits the very first element or `NoSuchElementException` |
+| `firstElement()` | `Observable<T>` | `Maybe<T>` | Emits the very first element or completes |
+| `isEmpty()` | `Observable<Boolean>` | `Single<Boolean>` | Emits true if the source is empty |
 | `last(T)` | `Observable<T>` | `Single<T>` | Emits the very last element or the default item |
-| `reduce(BiFunction)` | `Observable<T>` | `Single<T>` | Emits the reduced value or `NoSuchElementException` |
-
+| `lastElement()` | `Observable<T>` | `Maybe<T>` | Emits the very last element or completes |
+| `reduce(BiFunction)` | `Observable<T>` | `Maybe<T>` | Emits the reduced value or completes |
+| `reduce(Callable, BiFunction)` | `Observable<U>` | `Single<U>` | Emits the reduced value (or the initial value) |
+| `reduceWith(U, BiFunction)` | `Observable<U>` | `Single<U>` | Emits the reduced value (or the initial value) |
+| `single(T)` | `Observable<T>` | `Single<T>` | Emits the only element or the default item |
+| `singleElement()` | `Observable<T>` | `Maybe<T>` | Emits the only element or completes |
+| `toList()` | `Observable<List<T>>` | `Single<List<T>>` | collects all elements into a `List` |
+| `toMap()` | `Observable<Map<K, V>>` | `Single<Map<K, V>>` | collects all elements into a `Map` |
+| `toMultimap()` | `Observable<Map<K, Collection<V>>>` | `Single<Map<K, Collection<V>>>` | collects all elements into a `Map` with collection |
+| `toSortedList()` | `Observable<List<T>>` | `Single<List<T>>` | collects all elements into a `List` and sorts it |
 
 
 
