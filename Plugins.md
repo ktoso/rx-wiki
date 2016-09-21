@@ -23,7 +23,7 @@ The `RxJavaHooks` has setters and getters of the various hook types:
 | onObservableReturn : `Func1<Subscription, Subscription>` | Called when the subscribing to an `Observable` succeeds and before returning the `Subscription` handler for it |
 | onObservableLift : `Func1<Observable.Operator, Observable.Operator>` | Called when the operator `lift` is used with `Observable` |
 | onSingleCreate : `Func1<Single.OnSubscribe, Single.OnSubscribe>` | Called when operators and sources are instantiated on `Single` |
-| onSingleStart : `Func2<Single, Observable.OnSubscribe, Observable.OnSubscribe>` | Called before subscribing to an `Single` actually happens |
+| onSingleStart : `Func2<Single, Observable.OnSubscribe, Observable.OnSubscribe>` | Called before subscribing to a `Single` actually happens |
 | onSingleSubscribeError : `Func1<Throwable, Throwable>` | Called when subscribing to a `Single` fails |
 | onSingleReturn : `Func1<Subscription, Subscription>` | Called when the subscribing to a `Single` succeeds and before returning the `Subscription` handler for it |
 | onSingleLift : `Func1<Observable.Operator, Observable.Operator>` | Called when the operator `lift` is used (note: `Observable.Operator` is deliberate here) |
@@ -44,7 +44,10 @@ You can also clear all hooks via `clear()` or reset to the default behavior (of 
 Example:
 
 ```java
-RxJavaHooks.setOnObservableCreate(o -> { System.out.println("Creating " + o.getClass()); return o; });
+RxJavaHooks.setOnObservableCreate(o -> { 
+    System.out.println("Creating " + o.getClass());
+    return o; 
+});
 try {
     Observable.range(1, 10)
     .map(v -> v * 2)
