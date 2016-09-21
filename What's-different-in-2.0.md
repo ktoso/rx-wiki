@@ -30,6 +30,23 @@ Observable.just(1).map(v -> null)
     .subscribe(System.out::println, Throwable::printStackTrace);
 ```
 
+This means that `Observable<Void>` can no longer emit any values but only terminate normally or with an exception. API designers may instead chose to define `Observable<Object>` with no guarantee on what `Object` will be (which should be irrelevant anyway). For example, if one needs a signaller-like source, a shared enum can be defined and its solo instance `onNext`'d:
+
+```java
+enum Irrelevant { INSTANCE; }
+
+Observable.create((ObservableEmitter<Object> emitter) -> {
+   System.out.println("Side-effect 1");
+   emitter.onNext(Irrelevant.INSTANCE);
+
+   System.out.println("Side-effect 2");
+   emitter.onNext(Irrelevant.INSTANCE);
+
+   System.out.println("Side-effect 3");
+   emitter.onNext(Irrelevant.INSTANCE);
+});
+```
+
 # Observable and Flowable
 
 A small regret about introducing backpressure in RxJava 0.x is that instead of having a separate base reactive class, the `Observable` itself was retrofitted. The main issue with backpressure is that many hot sources, such as UI events, can't be reasonably backpressured and cause unexpected `MissingBackpressureException` (i.e., beginners don't expect them).
