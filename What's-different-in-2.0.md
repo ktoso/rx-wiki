@@ -491,16 +491,16 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `elementAtOrDefault(Func1, int, T)` | dropped, use `filter(predicate).elementAt(int, T)` |
 | `first()` | **RC3** renamed to `firstElement` and returns `Maybe<T>` |
 | `first(Func1)` | dropped, use `filter(predicate).first()` |
-| `firstOrDefault(T)` | renamed to `first(T)` |
+| `firstOrDefault(T)` | renamed to `first(T)` and **RC3** returns `Single<T>` |
 | `firstOrDefault(Func1, T)` | dropped, use `filter(predicate).first(T)` |
 | `flatMap` | added overloads with `prefetch` |
 | N/A | added `forEachWhile(Predicate<T>, [Consumer<Throwable>, [Action]])` for conditionally stopping consumption |
 | `groupBy` | added overload with `bufferSize` and `delayError` option, *the custom internal map version didn't make it into RC1* |
 | `ignoreElements` | **RC3** returns `Completable` |
-| `isEmpty` | **RC3* returns `Single<Boolean>` |
+| `isEmpty` | **RC3** returns `Single<Boolean>` |
 | `last()` | **RC3** renamed to `lastElement` and returns `Maybe<T>` |
 | `last(Func1)` | dropped, use `filter(predicate).last()` |
-| `lastOrDefault(T)` | renamed to `last(T)` |
+| `lastOrDefault(T)` | renamed to `last(T)` and **RC3** returns `Single<T>` |
 | `lastOrDefault(Func1, T)` | dropped, use `filter(predicate).last(T)` |
 | `nest` | dropped, use manual `just` |
 | `publish(Func1)` | added overload with `prefetch` |
@@ -514,7 +514,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | N/A | added `sampleWith(Callable, BiFunction)` to scan in a Subscriber-individual manner |
 | `single()` | **RC3** renamed to `singleElement` and returns `Maybe<T>` |
 | `single(Func1)` | dropped, use `filter(predicate).single()` |
-| `singleOrDefault(T)` | renamed to `single(T)` |
+| `singleOrDefault(T)` | renamed to `single(T)` and **RC3** returns `Single<T>` |
 | `singleOrDefault(Func1, T)` | dropped, use `filter(predicate).single(T)` |
 | `skipLast` | added overloads with `bufferSize` and `delayError` options |
 | `startWith` | 2-9 argument version dropped, use `startWithArray` instead |
