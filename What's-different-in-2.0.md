@@ -566,5 +566,17 @@ Some operators that produced exactly one value or an error now return `Single` i
 | `toMultimap()` | `Observable<Map<K, Collection<V>>>` | `Single<Map<K, Collection<V>>>` | collects all elements into a `Map` with collection |
 | `toSortedList()` | `Observable<List<T>>` | `Single<List<T>>` | collects all elements into a `List` and sorts it |
 
+### Removals
+
+To make sure the final API of 2.0 is clean as possible, we remove methods and other components between release candidates without deprecating them.
+
+| Removed in version | Component | Remark |
+|---------|-----------|--------|
+| RC3     | `Flowable.toCompletable()` | use `Flowable.ignoreElements()` |
+| RC3     | `Flowable.toSingle()` | use `Flowable.single(T)` |
+| RC3     | `Flowable.toMaybe()` | use `Flowable.singleElement()` |
+| RC3     | `Observable.toCompletable()` | use `Observable.ignoreElements()` |
+| RC3     | `Observable.toSingle()` | use `Observable.single(T)` |
+| RC3     | `Observable.toMaybe()` | use `Observable.singleElement()` |
 
 
