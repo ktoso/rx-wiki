@@ -526,14 +526,14 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | N/A | added `test()` (returns TestSubscriber subscribed to this) with overloads to fluently test |
 | `timeout(Func0<Observable>, ...)` | signature changed to `timeout(Publisher, ...)` and dropped the function, use `defer(Callable<Publisher>>)` if necessary |
 | `toBlocking().y` | inlined as `blockingY()` operators, except `toFuture` |
+| `toCompletable` | **RC3** dropped, use `ignoreElements` |
 | `toList` | **RC3** returns `Single<List<T>>` |
-| `toSortedList` | **RC3** returns `Single<List<T>>` |
 | `toMap` | **RC3** returns `Single<Map<K, V>>` |
 | `toMultimap` | **RC3** returns `Single<Map<K, Collection<V>>>` |
-| `toCompletable` | **RC3** dropped, use `ignoreElements` |
 | N/A | added `toFuture` |
 | N/A | added `toObservable` |
 | `toSingle` | **RC3** dropped, use `single(T)` |
+| `toSortedList` | **RC3** returns `Single<List<T>>` |
 | `withLatestFrom` | 5-9 source overloads dropped |
 | `zipWith` | added overloads with `prefetch` and `delayErrors` options |
 
@@ -552,6 +552,7 @@ Some operators that produced exactly one value or an error now return `Single` i
 | `elementAt(int, T)` | `Observable<T>` | `Single<T>` | Emits the element at the given index or the default |
 | `first(T)` | `Observable<T>` | `Single<T>` | Emits the very first element or `NoSuchElementException` |
 | `firstElement()` | `Observable<T>` | `Maybe<T>` | Emits the very first element or completes |
+| `ignoreElements()` | `Observable<T>` | `Completable` | Ignore all but the terminal events |
 | `isEmpty()` | `Observable<Boolean>` | `Single<Boolean>` | Emits true if the source is empty |
 | `last(T)` | `Observable<T>` | `Single<T>` | Emits the very last element or the default item |
 | `lastElement()` | `Observable<T>` | `Maybe<T>` | Emits the very last element or completes |
