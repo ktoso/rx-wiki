@@ -415,7 +415,7 @@ Subscriber<Integer> subscriber = new Subscriber<Integer>() {
 Flowable.just(1).subscribe(subscriber);
 ```
 
-The same applies to `Observer`, `SingleObserver` and `CompletableObserver`.
+The same applies to `Observer`, `SingleObserver`, `MaybeObserver` and `CompletableObserver`.
 
 Since many of the existing code targeting 1.x do such things, the method `safeSubscribe` has been introduced that does handle these non-conforming consumers. 
 
@@ -423,7 +423,12 @@ Alternatively, you can use the `subscribe(Consumer<T>, Consumer<Throwable>, Acti
 
 ```java
 Flowable.just(1)
-.subscribe(subscriber::onNext, subscriber::onError, subscriber::onComplete, subscriber::onSubscribe);
+.subscribe(
+    subscriber::onNext, 
+    subscriber::onError, 
+    subscriber::onComplete, 
+    subscriber::onSubscribe
+);
 ```
 
 # Operator differences
