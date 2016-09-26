@@ -376,10 +376,12 @@ Practically, the 1.x `fromEmitter` (formerly `fromAsync`) has been renamed to `F
 
 # Leaving the reactive world
 
-Apart from subscribing to the base types with their respective consumers (`Subscriber`, `Observer`, `SingleObserver` and `CompletableObserver`) and functional-interface based consumers (such as `subscribe(Consumer<T>, Consumer<Throwable>, Action)`), the formerly separate 1.x `BlockingObservable` (and similar classes for the others) has been integrated with the main reactive type. Now you can directly block for some results by invoking a `blockingX` operation directly:
+Apart from subscribing to the base types with their respective consumers (`Subscriber`, `Observer`, `SingleObserver`, `MaybeObserver` and `CompletableObserver`) and functional-interface based consumers (such as `subscribe(Consumer<T>, Consumer<Throwable>, Action)`), the formerly separate 1.x `BlockingObservable` (and similar classes for the others) has been integrated with the main reactive type. Now you can directly block for some results by invoking a `blockingX` operation directly:
 
 ```java
-List<Integer> list = Flowable.range(1, 100).toList().blockingFirst();
+List<Integer> list = Flowable.range(1, 100).toList().blockingGet(); // toList() returns Single
+
+Integer i = Flowable.range(100, 100).blockingLast();
 ```
 
 (The reason for this is twofold: performance and ease of use of the library as a synchronous Java 8 Streams-like processor.)
