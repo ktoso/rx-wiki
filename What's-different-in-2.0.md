@@ -59,7 +59,7 @@ The good news is that operator names remain (mostly) the same. Bad news is that 
 
 # Single
 
-The 2.x `Single` reactive base type, which can emit a single `onSuccess` or `onError` has been redesigned from scratch. It's architecture now derives from the Reactive-Streams design. Its consumer type (`rx.Single.SingleSubscriber<T>`) has been changed from being a class that accepts `rx.Subscription` resources to be an interface `io.reactivex.SingleObserver<T>` that has only 3 methods:
+The 2.x `Single` reactive base type, which can emit a single `onSuccess` or `onError` has been redesigned from scratch. Its architecture now derives from the Reactive-Streams design. Its consumer type (`rx.Single.SingleSubscriber<T>`) has been changed from being a class that accepts `rx.Subscription` resources to be an interface `io.reactivex.SingleObserver<T>` that has only 3 methods:
 
 ```java
 interface SingleObserver<T> {
@@ -151,7 +151,7 @@ source.compose((Flowable<T> flowable) ->
 
 # Subjects and Processors
 
-In the Reactive-Streams specification, the `Subject`-like behavior, namely being a consumer and supplier of events at the same time, is done by the `org.reactivestreams.Processor` interface. As with the `Observable`/`Flowable` split, the backpressure-aware, Reactive-Streams compliant implementations are based on the `FlowableProcessor<T>` class (which extends `Flowable` to give a rich set of instance operators). An important change regarding `Subject`s (and by extension, `FlowableProcessor`) that they no longer support `T -> R` like conversion (that is, input is of type `T` and the output is of type `R`). (We never had an use for it in 1.x and the original `Subject<T, R>` came from .NET where there is a `Subject<T>` overload because .NET allows the same class name with different number of type arguments.)
+In the Reactive-Streams specification, the `Subject`-like behavior, namely being a consumer and supplier of events at the same time, is done by the `org.reactivestreams.Processor` interface. As with the `Observable`/`Flowable` split, the backpressure-aware, Reactive-Streams compliant implementations are based on the `FlowableProcessor<T>` class (which extends `Flowable` to give a rich set of instance operators). An important change regarding `Subject`s (and by extension, `FlowableProcessor`) that they no longer support `T -> R` like conversion (that is, input is of type `T` and the output is of type `R`). (We never had a use for it in 1.x and the original `Subject<T, R>` came from .NET where there is a `Subject<T>` overload because .NET allows the same class name with different number of type arguments.)
 
 The `io.reactivex.subjects.AsyncSubject`, `io.reactivex.subjects.BehaviorSubject`, `io.reactivex.subjects.PublishSubject`, `io.reactivex.subjects.ReplaySubject` and `io.reactivex.subjects.UnicastSubject` in 2.x don't support backpressure (as part of the 2.x `Observable` family).
 
