@@ -420,9 +420,9 @@ Since many of the existing code targeting 1.x do such things, the method `safeSu
 Alternatively, you can use the `subscribe(Consumer<T>, Consumer<Throwable>, Action)` (and similar) methods to provide a callback/lambda that can throw:
 
 ```java
-Flowable.just(1).subscribe(subscriber::onNext, subscriber::onError, subscriber::onComplete);
+Flowable.just(1)
+.subscribe(subscriber::onNext, subscriber::onError, subscriber::onComplete, subscriber::onSubscribe);
 ```
-
 
 # Operator differences
 
