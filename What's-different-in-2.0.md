@@ -431,6 +431,110 @@ Flowable.just(1)
 );
 ```
 
+# Testing
+
+Testing RxJava 2.x works the same way as it does in 1.x. `Flowable` can be tested with `io.reactivex.subscribers.TestSubscriber` whereas the non-backpressured `Observable`, `Single`, `Maybe` and `Completable` can be tested with `io.reactivex.observers.TestObserver`.
+
+## test() "operator"
+
+To support our internal testing, all base reactive types now feature `test()` methods (which is a huge convenience for us) returning `TestSubscriber` or `TestObserver`:
+
+```java
+TestSubscriber<Integer> ts = Flowable.range(1, 5).test();
+
+TestObserver<Integer> to = Observable.range(1, 5).test();
+
+TestObserver<Integer> tso = Single.just(1).test();
+
+TestObserver<Integer> tmo = Maybe.just(1).test();
+
+TestObserver<Integer> tco = Completable.complete().test();
+```
+
+The second convenince is that most `TestSubscriber`/`TestObserver` methods return the instance itself allowing chaining the various `assertX` methods. The third convenience is that you can now fluently test your sources without the need to create or introduce `TestSubscriber`/`TestObserver` instance in your code:
+
+```java
+Flowable.range(1, 5)
+.test()
+.assertResult(1, 2, 3, 4, 5)
+;
+```
+
+### Notable new assert methods
+
+  - `assertResult(T... items)`: asserts if subscribed, received exactly the given items in the given order followed by `onComplete` and no errors
+  - `assertFailure(Class<? extends Throwable> clazz, T... items)`: asserts if subscribed, received exactly the given items in the given order followed by a `Throwable` error of wich `clazz.isInstance()` returns true.
+  - `assertFailureAndMessage(Class<? extends Throwable> clazz, String message, T... items)`: same as `assertFailure` plus validates the `getMessage()` contains the specified message
+  - `awaitDone(long time, TimeUnit unit)` awaits a terminal event (blockingly) and cancels the sequence if the timeout elapsed.
+  - `assertOf(Consumer<TestSubscriber<T>> consumer)` compose some assertions into the fluent chain (used internally for fusion test as operator fusion is not part of the public API right now).
+
+One of the benefits is that changing `Flowable` to `Observable` here the test code part doesn't have to change at all due to the implicit type change of the `TestSubscriber` to `TestObserver`.
+
+## cancel and request upfront
+
+The `test()` method on `TestObserver` has a `test(boolean cancel)` overload which cancels/disposes the `TestSubscriber`/`TestObserver` before it even gets subscribed:
+
+```java
+PublishSubject<Integer> pp = PublishSubject.create();
+
+// nobody subscribed yet
+assertFalse(pp.hasSubscribers());
+
+pp.test(true);
+
+// nobody remained subscribed
+assertFalse(pp.hasSubscribers());
+```
+
+`TestSubscriber` has the `test(long initialRequest)` and `test(long initialRequest, boolean cancel)` overloads to specify the initial request amount and whether the `TestSubscriber` should be also immediately cancelled. If the `initialRequest` is given, the `TestSubscriber` instance usually has to be captured to gain access to its `request()` method:
+
+```java
+PublishProcessor<Integer> pp = PublishProcessor.create();
+
+TestSubscriber<Integer> ts = pp.test(0L);
+
+ts.request(1);
+
+pp.onNext(1);
+pp.onNext(2);
+
+ts.assertFailure(MissingBackpressureException.class, 1);
+```
+
+## Testing an async source
+
+Given an asynchronous source, fluent blocking for a terminal event is now possible:
+
+```java
+Flowable.just(1)
+.subscribeOn(Schedulers.single())
+.test()
+.awaitDone(5, TimeUnit.SECONDS)
+.assertResult(1);
+```
+
+## Mockito & TestSubscriber
+
+Those who are using Mockito and mocked `Observer` in 1.x has to mock the `Subscriber.onSubscribe` method to issue an initial request, otherwise the sequence will hang or fail with hot sources:
+
+```java
+@SuppressWarnings("unchecked")
+public static <T> Subscriber<T> mockSubscriber() {
+    Subscriber<T> w = mock(Subscriber.class);
+
+    Mockito.doAnswer(new Answer<Object>() {
+        @Override
+        public Object answer(InvocationOnMock a) throws Throwable {
+            Subscription s = a.getArgumentAt(0, Subscription.class);
+            s.request(Long.MAX_VALUE);
+            return null;
+        }
+    }).when(w).onSubscribe((Subscription)any());
+
+    return w;
+}
+```
+
 # Operator differences
 
 Most operators are still there in 2.x and practically all of them have the same behavior as they had in 1.x. The following subsections list each base reactive type and the difference between 1.x and 2.x.
