@@ -362,7 +362,7 @@ The method that returns the scheduler's own notion of current time, `now()` has 
 
 One of the design flaws of RxJava 1.x was the exposure of the `rx.Observable.create()` method that while powerful, not the typical operator you want to use to enter the reactive world. Unfortunately, so many depend on it that we couldn't remove or rename it.
 
-Since 2.x is a fresh start, we won't make that mistake again. Each reactive base type `Flowable`, `Observable`, `Single` and `Completable` feature a safe `create` operator that does the right thing regarding backpressure (for `Flowable`) and cancellation (all):
+Since 2.x is a fresh start, we won't make that mistake again. Each reactive base type `Flowable`, `Observable`, `Single`, `Maybe` and `Completable` feature a safe `create` operator that does the right thing regarding backpressure (for `Flowable`) and cancellation (all):
 
 ```java
 Flowable.create((FlowableEmitter<Integer> emitter) -> {
