@@ -386,7 +386,7 @@ Integer i = Flowable.range(100, 100).blockingLast();
 
 (The reason for this is twofold: performance and ease of use of the library as a synchronous Java 8 Streams-like processor.)
 
-Another significant difference between `rx.Subscriber` (and co) and `org.reactivestreams.Subscriber` (and co) is that in 2.x, your `Subscriber`'s is not allowed to throw anything but fatal exceptions (see `Exceptions.throwIfFatal()`). (The Reactive-Streams specification allows throwing `NullPointerException` if the `onSubscribe`, `onNext` or `onError` receives a `null` value, but RxJava doesn't let `null`s in anyway.) This means the following code is no longer legal:
+Another significant difference between `rx.Subscriber` (and co) and `org.reactivestreams.Subscriber` (and co) is that in 2.x, your `Subscriber`s and `Observer`s are not allowed to throw anything but fatal exceptions (see `Exceptions.throwIfFatal()`). (The Reactive-Streams specification allows throwing `NullPointerException` if the `onSubscribe`, `onNext` or `onError` receives a `null` value, but RxJava doesn't let `null`s in anyway.) This means the following code is no longer legal:
 
 ```java
 Subscriber<Integer> subscriber = new Subscriber<Integer>() {
