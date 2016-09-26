@@ -292,7 +292,7 @@ CompositeSubscription composite = new CompositeSubscription();
 composite.add(Observable.range(1, 5).subscribe(new TestSubscriber<Integer>()));
 ```
 
-Due to the Reactive-Streams specification, `Publisher.subscribe` returns void and the pattern by itself no longer works in 2.0. To remedy this, the method `subscribeWith(E subscriber)` have been added to the base reactive classes which return their input subscriber as is. With the two examples before, the 2.x code can now look like this since `ResourceSubscriber` implements `Disposable` directly:
+Due to the Reactive-Streams specification, `Publisher.subscribe` returns void and the pattern by itself no longer works in 2.0. To remedy this, the method `E subscribeWith(E subscriber)` has been added to each base reactive class which returns its input subscriber/observer as is. With the two examples before, the 2.x code can now look like this since `ResourceSubscriber` implements `Disposable` directly:
 
 ```java
 CompositeDisposable composite2 = new CompositeDisposable();
@@ -372,7 +372,7 @@ Flowable.create((FlowableEmitter<Integer> emitter) -> {
 }, BackpressureStrategy.BUFFER);
 ```
 
-Practically, the 1.x `fromAsync` has been renamed to `Flowable.create`. The other base reactive types have similar `create` methods (minus the backpressure strategy).
+Practically, the 1.x `fromEmitter` (formerly `fromAsync`) has been renamed to `Flowable.create`. The other base reactive types have similar `create` methods (minus the backpressure strategy).
 
 # Leaving the reactive world
 
