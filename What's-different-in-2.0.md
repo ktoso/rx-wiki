@@ -594,7 +594,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `countLong` | dropped, use `count` |
 | `distinct` | overload with custom `Collection` supplier. |
 | `doOnCompleted` | renamed to `doOnComplete`, note the missing `d`! |
-| `doOnUnsubscribe` | renamed to `doOnCancel` |
+| `doOnUnsubscribe` | renamed to `Flowable.doOnCancel` and `doOnDispose` for the others |
 | N/A | added `doOnLifecylce` to handle `onSubscribe`, `request` and `cancel` peeking |
 | `elementAt(int)` | **RC3** no longer signals NoSuchElementException if the source is shorter than the index |
 | `elementAt(Func1, int)` | dropped, use `filter(predicate).elementAt(int)` |
