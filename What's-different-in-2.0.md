@@ -690,4 +690,27 @@ To make sure the final API of 2.0 is clean as possible, we remove methods and ot
 | RC3     | `Observable.toSingle()` | use `Observable.single(T)` |
 | RC3     | `Observable.toMaybe()` | use `Observable.singleElement()` |
 
+# Miscellaneous changes
 
+## doOnCancel/doOnDispose
+
+In 1.x, the `doOnUnsubscribe` was always executed on a terminal event because 1.x' `SafeSubscriber` called `unsubscribe` on itself. This was practically unnecessary and the Reactive-Streams specification states that when a terminal event arrives at a `Subscriber`, the upstream `Subscription` should be considered cancelled and thus calling `cancel()` is a no-op.
+
+Therefore, the following sequence won't call `doOnCancel`:
+
+```java
+Flowable.just(1, 2, 3)
+.doOnCancel(() -> System.out.println("Cancelled!"))
+.subscribe(System.out::println);
+```
+
+However, the following will call since the `take` operator cancels after the set amount of `onNext` events have been delivered:
+
+```java
+Flowable.just(1, 2, 3)
+.doOnCancel(() -> System.out.println("Cancelled!"))
+.take(2)
+.subscribe(System.out::println);
+```
+
+If you need to perform cleanup on both regular termination or cancellation, consider the operator `using` instead.
