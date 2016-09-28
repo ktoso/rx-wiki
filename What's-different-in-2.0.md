@@ -692,9 +692,11 @@ To make sure the final API of 2.0 is clean as possible, we remove methods and ot
 
 # Miscellaneous changes
 
-## doOnCancel/doOnDispose
+## doOnCancel/doOnDispose/unsubscribeOn
 
 In 1.x, the `doOnUnsubscribe` was always executed on a terminal event because 1.x' `SafeSubscriber` called `unsubscribe` on itself. This was practically unnecessary and the Reactive-Streams specification states that when a terminal event arrives at a `Subscriber`, the upstream `Subscription` should be considered cancelled and thus calling `cancel()` is a no-op.
+
+For the same reason `unsubscribeOn` is not called on the regular termination path but only when there is an actual `cancel` (or `dispose`) call on the chain.
 
 Therefore, the following sequence won't call `doOnCancel`:
 
