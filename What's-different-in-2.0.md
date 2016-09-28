@@ -594,7 +594,7 @@ Operators marked as `@Beta` or `@Experimental` in 1.x are promoted to standard.
 | `countLong` | dropped, use `count` |
 | `distinct` | overload with custom `Collection` supplier. |
 | `doOnCompleted` | renamed to `doOnComplete`, note the missing `d`! |
-| `doOnUnsubscribe` | renamed to `Flowable.doOnCancel` and `doOnDispose` for the others |
+| `doOnUnsubscribe` | renamed to `Flowable.doOnCancel` and `doOnDispose` for the others, [additional info](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0#dooncanceldoondisposeunsubscribeon) |
 | N/A | added `doOnLifecylce` to handle `onSubscribe`, `request` and `cancel` peeking |
 | `elementAt(int)` | **RC3** no longer signals NoSuchElementException if the source is shorter than the index |
 | `elementAt(Func1, int)` | dropped, use `filter(predicate).elementAt(int)` |
