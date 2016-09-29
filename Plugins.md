@@ -109,7 +109,7 @@ When you do this, RxJava will begin to use the Schedulers returned by your metho
 
 **Deprecated**
 
-This plugin allows you to register a function that will handle errors that are passed to `Subscriber.onError(Throwable)`. To do this, extend the class `RxJavaErrorHandler` and override this method:
+This plugin allows you to register a function that will handle errors that are passed to `SafeSubscriber.onError(Throwable)`. (`SafeSubscriber` is used for wrapping the incoming `Subscriber` when one calls `subscribe()`). To do this, extend the class `RxJavaErrorHandler` and override this method:
 
 * `void handleError(Throwable e)`
 
@@ -119,7 +119,31 @@ Then follow these steps:
 1. Obtain the global `RxJavaPlugins` instance via `RxJavaPlugins.getInstance( )`.
 1. Pass your error handler object to the `registerErrorHandler( )` method of that instance.
 
-When you do this, RxJava will begin to use your error handler to field errors that are passed to `Subscriber.onError(Throwable)`.
+When you do this, RxJava will begin to use your error handler to field errors that are passed to `SafeSubscriber.onError(Throwable)`.
+
+For example, this will call the hook:
+
+```java
+RxJavaPlugins.getInstance().reset();
+
+RxJavaPlugins.getInstance().registerErrorHandler(new RxJavaErrorHandler() {
+    @Override
+    public void handleError(Throwable e) {
+        e.printStackTrace();
+    }
+});
+
+Observable.error(new IOException())
+.subscribe(System.out::println, e -> { });
+```
+
+however, this call and chained operators in general won't trigger it in each stage:
+
+```java
+Observable.error(new IOException())
+.map(v -> "" + v)
+.unsafeSubscribe(System.out::println, e -> { });
+```
 
 # RxJavaObservableExecutionHook
 
