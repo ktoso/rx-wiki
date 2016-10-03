@@ -20,3 +20,5 @@ This page lists various utility operators for working with Observables.
 * [**`using( )`**](http://reactivex.io/documentation/operators/using.html) — create a disposable resource that has the same lifespan as an Observable
 * [**`single( )`**](http://reactivex.io/documentation/operators/first.html) — if the Observable completes after emitting a single item, return that item, otherwise throw an exception
 * [**`singleOrDefault( )`**](http://reactivex.io/documentation/operators/first.html) — if the Observable completes after emitting a single item, return that item, otherwise return a default item
+* [**`repeat( )`**](http://reactivex.io/documentation/operators/repeat.html) — create an Observable that emits a particular item or sequence of items repeatedly
+* [**`repeatWhen( )`**](http://reactivex.io/documentation/operators/repeat.html) — create an Observable that emits a particular item or sequence of items repeatedly, depending on the emissions of a second Observable
