@@ -2,8 +2,6 @@ This page shows methods that create Observables.
 
 * [**`just( )`**](http://reactivex.io/documentation/operators/just.html) — convert an object or several objects into an Observable that emits that object or those objects
 * [**`from( )`**](http://reactivex.io/documentation/operators/from.html) — convert an Iterable, a Future, or an Array into an Observable
-* [**`repeat( )`**](http://reactivex.io/documentation/operators/repeat.html) — create an Observable that emits a particular item or sequence of items repeatedly
-* [**`repeatWhen( )`**](http://reactivex.io/documentation/operators/repeat.html) — create an Observable that emits a particular item or sequence of items repeatedly, depending on the emissions of a second Observable
 * [**`create( )`**](http://reactivex.io/documentation/operators/create.html) — **advanced use only!** create an Observable from scratch by means of a function, consider `fromEmitter` instead
 * [**`fromEmitter()`**](http://reactivex.io/RxJava/javadoc/rx/Observable.html#fromEmitter(rx.functions.Action1,%20rx.AsyncEmitter.BackpressureMode)) — create safe, backpressure-enabled, unsubscription-supporting Observable via a function and push events.
 * [**`defer( )`**](http://reactivex.io/documentation/operators/defer.html) — do not create the Observable until a Subscriber subscribes; create a fresh Observable on each subscription
