@@ -322,6 +322,20 @@ The Reactive-Streams specification mandates operators supporting backpressure, s
 
 As an alternative, the 2.x `Observable` doesn't do backpressure at all and is available as a choice to switch over.
 
+# Reactive-Streams compliance
+
+The Flowable-based sources and operators are Reactive-Streams version 1.0.0 specification compliant except one rule §3.9 and one interpretation of rule §1.3: 
+
+> §3.9: While the Subscription is not cancelled, Subscription.request(long n) MUST signal onError with a java.lang.IllegalArgumentException if the argument is <= 0. The cause message MUST include a reference to this rule and/or quote the full rule.
+
+Rule §3.9 requires excessive overhead to handle (half-serializer on **every** operator dealing with request()) for a bug-case. RxJava 2 (and Reactor 3 in fact) reports the `IllegalArgumentException` to `RxJavaPlugins.onError` and ignores it otherwise. RxJava 2 passes the Test Compatibility Kit (TCK) by applying a [custom operator](https://github.com/ReactiveX/RxJava/blob/2.x/src/test/java/io/reactivex/tck/FlowableTck.java) that routes the `IllegalArgumentException` into the `Subscriber.onError` in an async-safe manner. All major Reactive-Streams libraries are free of such zero requests; Reactor 3 ignores it as we do and Akka-Stream uses a converter (to interact with other RS sources and consumers) which has (probably) a similar routing behavior as our TCK operator. 
+
+> §1.3: onSubscribe, onNext, onError and onComplete signaled to a Subscriber MUST be signaled sequentially (no concurrent notifications).
+
+The TCK allows synchronous but limited reentrance between `onSubscribe` and `onNext`, that is, while being in `onSubscribe`, a call to `request(1)` may call `onNext` without the need for `onSubscribe` to return control. While almost all operators behave this way, the operator `observeOn` may call `onNext` asynchronously in response to the `request(1)` and thus `onSubscribe` runs concurrently with `onNext`. This is probabilistically detected by the TCK and we use [another operator](https://github.com/ReactiveX/RxJava/blob/2.x/src/test/java/io/reactivex/tck/FlowableAwaitOnSubscribeTck.java) that defers any downstream requesting until the `onSubscribe` returns. Again, this async behavior is not an issue in RxJava 2 and in Reactor 3 because operators perform actions in a thread-safe manner in their `onSubscribe` and Akka-Stream's converter is (likely) doing a similar deferred request management.
+
+Since these two affect inter-library behavior, we may consider adding a standard operator to `Flowable`  itself sometime after 2.0.0 that combines these two behavior alterations in a single fluent method call on a sequence.
+
 # Runtime hooks
 
 The 2.x redesigned the `RxJavaPlugins` class which now supports changing the hooks at runtime. Tests that want to override the schedulers and the lifecycle of the base reactive types can do it on a case-by-case basis through callback functions.
