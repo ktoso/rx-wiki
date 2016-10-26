@@ -436,6 +436,55 @@ void drain() {
 }
 ```
 
+## Half-serialization
+
+Sometimes having the queue-drain, `SerializedSubscriber` or `SerializedObserver` is a bit of an overkill. Such cases include when there is only one thread calling `onNext` but other threads may call `onError` or `onComplete` concurrently. Example operators include `takeUntil` where the other source may "interrupt" the main sequence and inject an `onComplete` into it before the main source itself would complete some time later. This is what I call **half-serialization**.
+
+The approach uses the concepts of the deferred actions and atomic error management discussed above and has 3 methods for the `onNext`, `onError` and `onComplete` management:
+
+```java
+public static <T> void onNext(Subscriber<? super T> subscriber, T value,
+        AtomicInteger wip, AtomicThrowable error) {
+    if (wip.get() == 0 && wip.compareAndSet(0, 1)) {
+        subscriber.onNext(value);
+        if (wip.decrementAndGet() != 0) {
+            Throwable ex = error.terminate();
+            if (ex != null) {
+                subscriber.onError(ex);
+            } else {
+                subscriber.onComplete();
+            }
+        }
+    }
+}
+
+public static void onError(Subscriber<?> subscriber, Throwable ex,
+        AtomicInteger wip, AtomicThrowable error) {
+    if (error.addThrowable(ex)) {
+        if (wip.getAndIncrement() == 0) {
+            subscriber.onError(error.terminate());
+        }
+    } else {
+        RxJavaPlugins.onError(ex);
+    }
+}
+
+public static void onComplete(Subscriber<?> subscriber, AtomicInteger wip, AtomicThrowable error) {
+    if (wip.getAndIncrement() == 0) {
+        Throwable ex = error.terminate();
+        if (ex != null) {
+            subscriber.onError(ex);
+        } else {
+            subscriber.onComplete();
+        }
+    }
+}
+```
+
+Here, the `wip` counter indicates there is an active emission happening and if found non-zero when trying to leave the `onNext`, it is taken as indication there was a concurrent `onError` or `onComplete()` call and the child must be notified. All subsequent calls to any of these methods are ignored. In this case, the `wip` is never decremented back to zero.
+
+RxJava 2.x, again, supports these with the (internal) utility class `HalfSerializer` and allows targeting `Subscriber`s and `Observer`s with it.
+
 # Backpressure and cancellation
 
 Backpressure (or flow control) in Reactive-Streams is the means to tell the upstream how many elements to produce or to tell it to stop producing elements altogether. Unlike the name suggest, there is no physical pressure preventing the upstream from calling `onNext` but the protocol to honor the request amount.
