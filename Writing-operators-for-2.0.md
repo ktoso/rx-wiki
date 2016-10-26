@@ -927,6 +927,7 @@ void drain() {
 
         if (e != r) {
             if (cancelled) {
+                queue.clear();    // <----------------------------
                 return;
             }
 
