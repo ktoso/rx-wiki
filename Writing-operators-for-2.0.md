@@ -1102,22 +1102,56 @@ public final class MyOperator implements FlowableOperator<Integer, Integer> {
 
     @Override
     public Subscriber<? super Integer> apply(Subscriber<? super Integer> child) {
+        return new Op(child);
     }
 
     static final class Op implements Subscriber<Integer>, Subscription {
         final Subscriber<? super Integer> child;
+
+        Subscription s;
 
         @Override
         public Op(Subscriber<? super Integer> child) {
             this.child = child;
         }
 
+        @Override
+        pubic void onSubscribe(Subscription s) {
+            this.s = s;
+            actual.onSubscribe(this);
+        }
 
+        @Override
+        public void onNext(Integer v) {
+            actual.onNext(v * v);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            actual.onError(e);
+        }
+
+        @Override
+        public void onComplete() {
+            actual.onComplete();
+        }
+
+        @Override
+        public void cancel() {
+            s.cancel();
+        }
+
+        @Override
+        public void request(long n) {
+            s.request(n);
+        }
     }
 }
 ```
 
 You may recognize that implementing operators via extension or lifting looks quite similar. In both cases, one usually implements a `Subscriber` (`Observer`, etc) that takes a downstream `Subscriber`, implements the business logic in the `onXXX` methods and somehow (manually or as part of `lift()`'s lifecycle) gets subscribed to an upstream source.
+
+The benefit of applying the Reactive-Streams design to all base reactive types is that each consumer type is now an interface and can be applied to operators that have to extend some class. This was a pain in 1.x because `Subscriber` and `SingleSubscriber` are classes themselves, plus `Subscriber.request()` is a protected-final method and an operator's `Subscriber` can't implement the `Producer` interface at the same time. In 2.x there is no such problem and one can have both `Subscriber`, `Subscription` or even `Observer` together in the same consumer type.
 
 # Operator fusion
 
@@ -1130,10 +1164,14 @@ Given this novel approach, a generation number can be assigned to various implem
 0. These are the classical libraries that either use `java.util.Observable` or are listener based (Java Swing's `ActionListener`). Their common property is that they don't support composition (of events and cancellation).
 1. This is the classical Rx.NET library that supports composition, but has no notion for backpressure and doesn't properly support synchronous cancellation.
 2. This is what RxJava 1.x is categorized, it supports composition, backpressure and synchronous cancellation along with the ability to lift an operator into a sequence.
-3. This is the level of the Reactive-Streams based libraries such as Reactor 2 and Akka-Stream. They are based upon a specification that evolved out of RxJava but left behind its drawbacks (such as the need to return anything from `subscribe()`).
-4. This level expands upon the Reactive-Streams interfaces with operator-fusion (in a compatible fashion)
+3. This is the level of the Reactive-Streams based libraries such as Reactor 2 and Akka-Stream. They are based upon a specification that evolved out of RxJava but left behind its drawbacks (such as the need to return anything from `subscribe()`). This is incompatible with RxJava 1.x and thus 2.x had to be rewritten from scratch.
+4. This level expands upon the Reactive-Streams interfaces with operator-fusion (in a compatible fashion, that is, op-fusion is optional between two stages and works without them). Reactor 3 and RxJava 2 are at this level. The material around Akka-Stream mentions operator-fusion as well, however, Akka-Stream is not a native Reactive-Streams implementation (requires a materializer to get a `Publisher` out) and as such it is only Gen 3.
+
+There are discussions among the 4th generation library providers to have the elements of operator-fusion standardized in Reactive-Streams 2.0 specification (or in a neighboring extension) and have RxJava 3 and Reactor 4 work together on that aspect as well.
 
 ## Components
+
+## Callable and ScalarCallable
 
 TBD
 
