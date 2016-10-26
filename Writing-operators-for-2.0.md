@@ -445,7 +445,8 @@ In the previous section, we saw primitives to deal with request accounting and d
 Such logic can get quite complicated in operators but one of the simplest manifestation can be the `rebatchRequest` operator that combines request management with serialization to ensure that upstream is requested with a predictable pattern no matter how the downstream requested (less, more or even unbounded):
 
 ```java
-final class RebatchRequests<T> extends AtomicInteger implements Subscriber<T>, Subscription {
+final class RebatchRequests<T> extends AtomicInteger
+implements Subscriber<T>, Subscription {
 
     final Subscriber<? super T> child;
 
@@ -461,6 +462,10 @@ final class RebatchRequests<T> extends AtomicInteger implements Subscriber<T>, S
 
     volatile boolean done;
     Throwable error;
+
+    volatile boolean cancelled;
+
+    long emitted;
 
     public RebatchRequests(Subscriber<? super T> child, int batchSize) {
         this.child = child;
@@ -504,6 +509,7 @@ final class RebatchRequests<T> extends AtomicInteger implements Subscriber<T>, S
 
     @Override
     public void cancel() {
+        cancelled = true;
         s.cancel();
     }
 
@@ -515,10 +521,100 @@ final class RebatchRequests<T> extends AtomicInteger implements Subscriber<T>, S
 
 Here we extend `AtomicInteger` since the work-in-progress counting happens more often and is worth avoiding the extra indirection. The class extends `Subscription` and it hands itself to the `child` `Subscriber` to capture its `request()`  (and `cancel()`) calls and route it to the main `drain` logic. Some operators need only this, some other operators (such as `observeOn` not only routes the downstream request but also does extra cancellations (cancels the asynchrony providing `Worker` as well) in its `cancel()` method.
 
+**Important**: when implementing operators for `Flowable` and `Observable` in RxJava 2.x, you are not allowed to pass along an upstream `Subscription` or `Disposable` to the child `Subscriber`/`Observer` when the operator logic itself doesn't require hooking the `request`/`cancel`/`dispose` calls. The reason for this is how operator-fusion is implemented on top of `Subscription` and `Disposable` passing through `onSubscribe` in RxJava 2.x (and in Reactor 3). See the next section about operator-fusion. There is no fusion in `Single`, `Completable` or `Maybe` (because there is no requesting or unbounded buffering with them) and their operators can pass the upstream `Disposable` along as is.
+
 Next comes the `drain` method whose pattern appears in many operators (with slight variations on how and what the emission does).
 
 ```java
+void drain() {
+    if (getAndIncrement() != 0) {
+        return;
+    }
+
+    int missed = 1;
+
+    for (;;) {
+        long r = requested.get();
+        long e = 0L;
+        long f = emitted;
+        
+        while (e != r) {
+            if (cancelled) {
+                return;
+            }
+            boolean d = done;
+
+            if (d) {
+                Throwable ex = error;
+                if (ex != null) {
+                    child.onError(ex);
+                    return;
+                }
+            }
+
+            T v = queue.poll();
+            boolean empty = v == null;
+
+            if (d && empty) {
+                child.onComplete();
+                return;
+            }
+
+            if (empty) {
+                break;
+            }
+
+            child.onNext(v);
+            
+            e++;
+            if (++f == limit) {
+               s.request(f);
+               f = 0L;
+            }
+        }
+
+        if (e != r) {
+            if (cancelled) {
+                return;
+            }
+
+            if (done) {
+                Throwable ex = error;
+                if (ex != null) {
+                    child.onError(ex);
+                    return;
+                }
+                if (queue.isEmpty()) {
+                    child.onComplete();
+                    return;
+                }
+            }
+        }
+
+        if (e != 0L) {
+            BackpressureHelper.produced(requested, e);
+        }
+
+        emitted = f;
+        missed = addAndGet(-missed);
+        if (missed == 0) {
+            break;
+        }
+    }
+}
+
 ```
+
+This particular pattern is called the **stable-request queue-drain**. Another variation doesn't care about request amount stability towards upstream and simply requests the amount it delivered to the child:
+
+
+
+The third variation allows delaying a potential error until the upstream has terminated and all normal elements have been delivered to the child:
+
+
+If the downstream cancels the operator, the `queue` may still hold elements which may get referenced longer than expected if the operator chain itself is referenced in some way. On the user level, applying `onTerminateDetach` will forget all references going upstream and downstream and can help with this situation. On the operator level, RxJava 2.x usually calls `clear()` on the `queue` when the sequence is cancelled or ends before the queue is drained naturally. This requires some slight change to the drain loop:
+
+
 
 # Operator fusion
 
