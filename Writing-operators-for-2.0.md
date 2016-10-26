@@ -988,7 +988,160 @@ boolean empty = queue.isEmpty();
 
 These must happen in the order specified. If they were swapped, it is possible when the drain runs asynchronously to an `onNext`/`onComplete()`, the queue may appear empty at first, then it gets elements followed by `done = true` and a late `done` check in the drain loop may complete the sequence thinking it delivered all values there was.
 
+## Single valued results
+
+Sometimes an operator only emits one single value at some point instead of emitting more or all of its sources. Such operators include `fromCallable`, `reduce`, `any`, `all`, `first`, etc.
+
+The classical queue-drain works here but is a bit of an overkill to allocate objects to store the work-in-progress counter, request accounting and the queue itself. These elements can be reduced to a single state-machine with one state counter object - often inlinded by extending AtomicInteger - and a plain field for storing the single value to be emitted.
+
+The state machine handing the possible concurrent downstream requests and normal completion path is a bit complicated to show here and is quite easy to get wrong.
+
+RxJava 2.x supports this kind of behavior through the (internal) `DeferredScalarSubscription` for operators without an upstream source (`fromCallable`) and the (internal) `DeferredScalarSubscriber` for reduce-like operators with an upstream source.
+
+Using the `DeferredScalarSubscription` is straightforward, one creates it, sends it to the downstream via `onSubscribe` and later on calls `complete(T)` to signal the end with a single value:
+
+```java
+DeferredScalarSubscription<Integer> dss = new DeferredScalarSubscription<>(child);
+child.onSubscribe(dss);
+
+dss.complete(1);
+```
+
+Using the `DeferredScalarSubscriber` requires more coding and extending the class itself:
+
+```java
+final class Counter extends DeferredScalarSubscriber<Object, Integer> {
+   public Counter(Subscriber<? super Integer> child) {
+       super(child);
+       value = 0;
+       hasValue = true;
+   }
+
+   @Override
+   public void onNext(Object t) {
+       value++;
+   }
+}
+```
+
+By default, the `DeferredScalarSubscriber.onSubscribe()` requests `Long.MAX_VALUE` from the upstream (but the method can be overridden in subclasses).
+
+## Single-element post-complete
+
+TBD
+
+## Multi-element post-complete
+
+TBD
+
+# Creating operator classes
+
+Creating operator implementations in 2.x is simpler than in 1.x and incurs less allocation as well. You have the choice to implement your operator as a `Subscriber`-transformer to be used via `lift` or as a fully-fledged base reactive class.
+
+## Operator by extending a base reactive class
+
+In 1.x, extending `Observable` was possible but convoluted because you had to implement the `OnSubscribe` interface separately and pass it to `Observable.create()` or to the `Observable(OnSubscribe)` protected constructor.
+
+In 2.x, all base reactive classes are abstract and you can extend them directly without any additional indirection:
+
+```java
+public final class FlowableMyOperator extends Flowable<Integer> {
+    final Publisher<Integer> source;
+ 
+    public FlowableMyOperator(Publisher<Integer> source) {
+        this.source = source;
+    }
+    
+    @Override
+    protected void subscribeActual(Subscriber<? super Integer> s) {
+        source.map(v -> v + 1).subscribe(s);
+    }
+}
+```
+
+When taking other reactive types as inputs in these operators, it is recommended one defines the base reactive interfaces instead of the abstract classes, allowing better interoperability between libraries (especially with `Flowable` operators and other Reactive-Streams `Publisher`s). To recap, these are the class-interface pairs:
+
+  - `Flowable` - `Publisher` - `Subscriber`
+  - `Observable` - `ObservableSource` - `Observer`
+  - `Single` - `SingleSource` - `SingleObserver`
+  - `Completable` - `CompletableSource` - `CompletableObserver`
+  - `Maybe` - `MaybeSource` - `MaybeObserver`
+
+RxJava 2.x locks down `Flowable.subscribe` (and the same methods in the other types) in order to provide runtime hooks into the various flows, therefore, implementors are given the `subscribeActual()` to be overridden. When it is invoked, all relevant hooks and wrappers have been applied. Implementors should avoid throwing unchecked exceptions as the library generally can't deliver it to the respective `Subscriber` due to lifecycle restrictions of the Reactive-Streams specification and sends it to the global error consumer via `RxJavaPlugins.onError`.
+
+Unlike in 1.x, In the example above, the incoming `Subscriber` is simply used directly for subscribing again (but still at most once) without any kind of wrapping. In 1.x, one needs to call `Subscribers.wrap` to avoid double calls to `onStart` and cause unexpected double initialization or double-requesting.
+
+Unless one contributes a new operator to RxJava, working with such classes may become tedious, especially if they are intermediate operators:
+
+```java
+new FlowableThenSome(
+    new FlowableOther(
+        new FlowableMyOperator(Flowable.range(1, 10).map(v -> v * v))
+    )
+)
+```
+
+This is an unfortunate effect of Java lacking extension method support. A possible ease on this burden is by using `compose` to have fluent inline application of the custom operator:
+
+```java
+Flowable.range(1, 10).map(v -> v * v)
+.compose(f -> new FlowableOperatorWithParameter(f, 10));
+
+Flowable.range(1, 10).map(v -> v * v)
+.compose(FlowableMyOperator::new);
+```
+
+## Operator targeting lift()
+
+The alternative to the fluent application problem is to have a `Subscription`-transformer implemented instead of extending the whole reactive base class and use the respective type's `lift()` operator to get it into the sequence.
+
+First one has to implement the respective `XOperator` interface:
+
+```java
+public final class MyOperator implements FlowableOperator<Integer, Integer> {
+
+    @Override
+    public Subscriber<? super Integer> apply(Subscriber<? super Integer> child) {
+    }
+
+    static final class Op implements Subscriber<Integer>, Subscription {
+        final Subscriber<? super Integer> child;
+
+        @Override
+        public Op(Subscriber<? super Integer> child) {
+            this.child = child;
+        }
+
+
+    }
+}
+```
+
+You may recognize that implementing operators via extension or lifting looks quite similar. In both cases, one usually implements a `Subscriber` (`Observer`, etc) that takes a downstream `Subscriber`, implements the business logic in the `onXXX` methods and somehow (manually or as part of `lift()`'s lifecycle) gets subscribed to an upstream source.
+
 # Operator fusion
+
+Operator fusion has the premise that certain operators can be combined into one single operator (macro-fusion) or their internal data structures shared between each other (micro-fusion) that allows fewer allocations, lower overhead and better performance.
+
+This advanced concept was invented, worked out and studied in the [Reactive-Streams-Commons](https://github.com/reactor/reactive-streams-commons) research project manned by the leads of RxJava and Project Reactor. Both libraries use the results in their implementation, which look the same but are incompatible due to different classes and packages involved. In addition, RxJava 2.x's approach is a more polished version of the invention due to delays between the two project's development.
+
+Given this novel approach, a generation number can be assigned to various implementation styles of reactive libraries:
+
+0. These are the classical libraries that either use `java.util.Observable` or are listener based (Java Swing's `ActionListener`). Their common property is that they don't support composition (of events and cancellation).
+1. This is the classical Rx.NET library that supports composition, but has no notion for backpressure and doesn't properly support synchronous cancellation.
+2. This is what RxJava 1.x is categorized, it supports composition, backpressure and synchronous cancellation along with the ability to lift an operator into a sequence.
+3. This is the level of the Reactive-Streams based libraries such as Reactor 2 and Akka-Stream. They are based upon a specification that evolved out of RxJava but left behind its drawbacks (such as the need to return anything from `subscribe()`).
+4. This level expands upon the Reactive-Streams interfaces with operator-fusion (in a compatible fashion)
+
+## Components
+
+TBD
+
+### QueueSubscription and QueueDisposable
+
+TBD
+
+### ConditionalSubscriber
 
 TBD
 
