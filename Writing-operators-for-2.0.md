@@ -1161,11 +1161,11 @@ This advanced concept was invented, worked out and studied in the [Reactive-Stre
 
 Given this novel approach, a generation number can be assigned to various implementation styles of reactive libraries:
 
-0. These are the classical libraries that either use `java.util.Observable` or are listener based (Java Swing's `ActionListener`). Their common property is that they don't support composition (of events and cancellation).
-1. This is the classical Rx.NET library that supports composition, but has no notion for backpressure and doesn't properly support synchronous cancellation.
-2. This is what RxJava 1.x is categorized, it supports composition, backpressure and synchronous cancellation along with the ability to lift an operator into a sequence.
-3. This is the level of the Reactive-Streams based libraries such as Reactor 2 and Akka-Stream. They are based upon a specification that evolved out of RxJava but left behind its drawbacks (such as the need to return anything from `subscribe()`). This is incompatible with RxJava 1.x and thus 2.x had to be rewritten from scratch.
-4. This level expands upon the Reactive-Streams interfaces with operator-fusion (in a compatible fashion, that is, op-fusion is optional between two stages and works without them). Reactor 3 and RxJava 2 are at this level. The material around Akka-Stream mentions operator-fusion as well, however, Akka-Stream is not a native Reactive-Streams implementation (requires a materializer to get a `Publisher` out) and as such it is only Gen 3.
+0) These are the classical libraries that either use `java.util.Observable` or are listener based (Java Swing's `ActionListener`). Their common property is that they don't support composition (of events and cancellation).
+1) This is the classical Rx.NET library that supports composition, but has no notion for backpressure and doesn't properly support synchronous cancellation.
+2) This is what RxJava 1.x is categorized, it supports composition, backpressure and synchronous cancellation along with the ability to lift an operator into a sequence.
+3) This is the level of the Reactive-Streams based libraries such as Reactor 2 and Akka-Stream. They are based upon a specification that evolved out of RxJava but left behind its drawbacks (such as the need to return anything from `subscribe()`). This is incompatible with RxJava 1.x and thus 2.x had to be rewritten from scratch.
+4) This level expands upon the Reactive-Streams interfaces with operator-fusion (in a compatible fashion, that is, op-fusion is optional between two stages and works without them). Reactor 3 and RxJava 2 are at this level. The material around Akka-Stream mentions operator-fusion as well, however, Akka-Stream is not a native Reactive-Streams implementation (requires a materializer to get a `Publisher` out) and as such it is only Gen 3.
 
 There are discussions among the 4th generation library providers to have the elements of operator-fusion standardized in Reactive-Streams 2.0 specification (or in a neighboring extension) and have RxJava 3 and Reactor 4 work together on that aspect as well.
 
