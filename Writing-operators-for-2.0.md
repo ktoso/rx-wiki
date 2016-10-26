@@ -195,13 +195,11 @@ The solution is **deferred cancellation** and **deferred requesting** in general
 
 (Note that some other reactive libraries, such as RxJS, mainly don't want to adopt the Reactive-Streams style of architecture because they don't seem to comprehend how to deal with this kind of "Subscription comes later but I need to cancel now" situation.)
 
-### Dealing with deferred cancellation
+### Deferred cancellation
 
 This approach affects all 5 reactive types and works the same way for everyone. First, have an `AtomicReference` that will hold the respective connection type (or any other type whose method call has to happen later). Two methods are needed handling the `AtomicReference` class, one that sets the actual instance and one that calls the `cancel`/`dispose` method on it.
 
 ```java
-final AtomicReference<Disposable> connection;
-
 static final Disposable DISPOSED;
 static {
     DISPOSED = Disposables.empty();
@@ -248,7 +246,136 @@ As with the request management, there are utility classes and methods for these 
    - `SerialDisposable` that has safe API with `set`, `replace` and `dispose` among other things
    - (internal) `DisposableHelper` that features the methods shown above and the global disposed sentinel used by RxJava. It may come handy when one uses `AtomicReference<Disposable>` as a base class.
 
-The same pattern applies to `Subscription` with its `cancel()` method and with helper (internal) class `SubscriptionHelper`.
+The same pattern applies to `Subscription` with its `cancel()` method and with helper (internal) class `SubscriptionHelper` (but no `SequentialSubscription` or `SerialSubscription`, see next subsection).
+
+### Deferred requesting
+
+With `Flowable`s (and Reactive-Streams `Publisher`s) the `request()` calls need to be deferred as well. In one form (the simpler one), the respective late `Subscription` will eventually arrive and we need to relay all previous and all subsequent request amount to its `request()` method.
+
+In 1.x, this behavior was implicitly provided by `rx.Subscriber` but at a high cost that had to be payed by all instances whether or not they needed this feature.
+
+The solution works by having the `AtomicReference` for the `Subscription` and an `AtomicLong` to store and accumulate the requests until the actual `Subscription` arrives, then atomically request all deferred value once.
+
+```java
+static boolean deferredSetOnce(AtomicReference<Subscription> subscription, 
+        AtomicLong requested, Subscription newSubscription) {
+    if (subscription.compareAndSet(null, newSubscription) {
+        long r = requested.getAndSet(0L);
+        if (r != 0) {
+            newSubscription.request(r);
+        }
+        return true;
+    }
+    newSubscription.cancel();
+    if (subscription.get() != SubscriptionHelper.CANCELLED) {
+        RxJavaPlugins.onError(new IllegalStateException("Subscription already set!"));
+    }
+    return false;
+}
+
+static void deferredRequest(AtomicReference<Subscription> subscription, 
+        AtomicLong requested, long n) {
+    Subscription current = subscription.get();
+    if (current != null) {
+        current.request(n);
+    } else {
+        BackpressureHelper.add(requested, n);
+        current = subscription.get();
+        if (current != null) {
+            long r = requested.getAndSet(0L);
+            if (r != 0L) {
+                current.request(r);
+            }
+        }
+    }
+}
+```
+
+In `deferredSetOnce`, if the CAS from null to the `newSubscription` succeeds, we atomically exchange the request amount to 0L and if the original value was nonzero, we request from `newSubscription`. In `deferredRequest`, if there is a `Subscription` we simply request from it directly. Otherwise, we accumulate the requests via the helper method then check again if the `Subscription` arrived or not. If it arrived in the meantime, we atomically exchange the accumulated request value and if nonzero, request it from the newly retrieved `Subscription`. This non-blocking logic makes sure that in case of concurrent invocations of the two methods, no accumulated request is left behind.
+
+This complex logic and methods, along with other safeguards are available in the (internal) `SubscriptionHelper` utility class and can be used like this:
+
+```java
+final class Operator<T> implements Subscriber<T>, Subscription {
+    final Subscriber<? super T> child;
+
+    final AtomicReference<Subscription> ref = new AtomicReference<>();
+    final AtomicLong requested = new AtomicLong();
+
+    public Operator(Subscriber<? super T> child) {
+        this.child = child;
+    }
+
+    @Override
+    public void onSubscribe(Subscription s) {
+        SubscriptionHelper.deferredSetOnce(ref, requested, s);
+    }
+
+    @Override
+    public void onNext(T t) { ... }
+
+    @Override
+    public void onError(Throwable t) { ... }
+
+    @Override
+    public void onComplete() { ... }
+
+    @Override
+    public void cancel() {
+        SubscriptionHelper.cancel(ref);
+    }
+
+    @Override
+    public void request(long n) {
+        SubscriptionHelper.deferredRequested(ref, requested, n);
+    }
+}
+
+Operator<T> parent = new Operator<T>(child);
+
+child.onSubscribe(parent);
+
+source.subscribe(parent);
+```
+
+The second form is when multiple `Subscription`s replace each other and we not only need to hold onto request amounts when there is none of them but make sure a newer `Subscription` is requested only that much the previous `Subscription`'s upstream didn't deliver. This is called **Subscription arbitration** and the relevant algorithms are quite verbose and will be omitted here. There is, however, an utility class that manages this: (internal) `SubscriptionArbiter`.
+
+You can extend it (to save on object headers) or have it as a field. Its main use is to send it to the downstream via `onSubscribe` and update its current `Subscription` in the current operator. Note that even though its methods are thread-safe, it is intended for swapping `Subscription`s when the current one finished emitting events. This makes sure that any newer `Subscription` is requested the right amount and not more due to production/switch race.
+
+```java
+final SubscriptionArbiter arbiter = ...
+
+// ...
+
+child.onSubscribe(arbiter);
+
+// ...
+
+long produced;
+
+@Override
+public void onSubscribe(Subscription s) {
+    arbiter.setSubscription(s);
+}
+
+@Override
+public void onNext(T value) {
+   produced++;
+   child.onNext(value);
+}
+
+@Override
+public void onComplete() {
+    long p = produced;
+    if (p != 0L) {
+        arbiter.produced(p);
+    }
+    subscribeNext();
+}
+```
+
+For better performance, most operators can count the produced element amount and issue a single `SubscriptionArbiter.produced()` call just before switching to the next `Subscription`.
+
 
 # Backpressure and cancellation
 
