@@ -6,6 +6,8 @@ Writing operators, source-like (`fromEmitter`) or intermediate-like (`flatMap`) 
 
 In this article, I'll describe the how-to's from the perspective of a developer who skipped the 1.x knowledge base and basically wants to write operators that conforms the Reactive-Streams specification as well as RxJava 2.x's own extensions and additional expectations/requirements.
 
+Since **Reactor 3** has the same architecture as **RxJava 2** (no accident, I architected and contributed 80% of **Reactor 3** as well) the same principles outlined in this page applies to writing operators for **Reactor 3**. Note however that they chose different naming and locations for their utility and support classes so you may have to look for the equivalent components.
+
 ## Warning on internal components
 
 RxJava has several hundred public classes implementing various operators and helper facilities. Since there is no way to hide these in Java 6-8, the general contract is that anything below `io.reactivex.internal` is considered private and subject to change without warnings. It is not recommended to reference these in your code (unless you contribute to RxJava itself) and must be prepared that even a patch change may shuffle/rename things around in them. That being said, they usually contain valuable tools for operator builders and as such are quite attractive to use them in your custom code.
@@ -16,7 +18,7 @@ As RxJava itself has building blocks for creating reactive dataflows, its compon
 
 ## Field updaters and Android
 
-If you looked at the source code of RxJava and then at Reactor 3, you might have noticed that RxJava doesn't use the
+If you looked at the source code of RxJava and then at **Reactor 3**, you might have noticed that RxJava doesn't use the
 `AtomicXFieldUpdater` classes. The reason for this is that on certain Android devices, the runtime "messes up" the field
 names and the reflection logic behind the field updaters fails to locate those fields in the operators. To avoid this we decided to only use the full `AtomicX` classes (as fields or extending them).
 
@@ -608,7 +610,7 @@ implements Subscriber<T>, Subscription {
 
 Here we extend `AtomicInteger` since the work-in-progress counting happens more often and is worth avoiding the extra indirection. The class extends `Subscription` and it hands itself to the `child` `Subscriber` to capture its `request()`  (and `cancel()`) calls and route it to the main `drain` logic. Some operators need only this, some other operators (such as `observeOn` not only routes the downstream request but also does extra cancellations (cancels the asynchrony providing `Worker` as well) in its `cancel()` method.
 
-**Important**: when implementing operators for `Flowable` and `Observable` in RxJava 2.x, you are not allowed to pass along an upstream `Subscription` or `Disposable` to the child `Subscriber`/`Observer` when the operator logic itself doesn't require hooking the `request`/`cancel`/`dispose` calls. The reason for this is how operator-fusion is implemented on top of `Subscription` and `Disposable` passing through `onSubscribe` in RxJava 2.x (and in Reactor 3). See the next section about operator-fusion. There is no fusion in `Single`, `Completable` or `Maybe` (because there is no requesting or unbounded buffering with them) and their operators can pass the upstream `Disposable` along as is.
+**Important**: when implementing operators for `Flowable` and `Observable` in RxJava 2.x, you are not allowed to pass along an upstream `Subscription` or `Disposable` to the child `Subscriber`/`Observer` when the operator logic itself doesn't require hooking the `request`/`cancel`/`dispose` calls. The reason for this is how operator-fusion is implemented on top of `Subscription` and `Disposable` passing through `onSubscribe` in RxJava 2.x (and in **Reactor 3**). See the next section about operator-fusion. There is no fusion in `Single`, `Completable` or `Maybe` (because there is no requesting or unbounded buffering with them) and their operators can pass the upstream `Disposable` along as is.
 
 Next comes the `drain` method whose pattern appears in many operators (with slight variations on how and what the emission does).
 
@@ -1162,21 +1164,21 @@ This advanced concept was invented, worked out and studied in the [Reactive-Stre
 Given this novel approach, a generation number can be assigned to various implementation styles of reactive libraries:
 
 #### Generation 0
-These are the classical libraries that either use `java.util.Observable` or are listener based (Java Swing's `ActionListener`). Their common property is that they don't support composition (of events and cancellation). See also Google Agera.
+These are the classical libraries that either use `java.util.Observable` or are listener based (Java Swing's `ActionListener`). Their common property is that they don't support composition (of events and cancellation). See also **Google Agera**.
 
 #### Generation 1
-This is the classical Rx.NET library that supports composition, but has no notion for backpressure and doesn't properly support synchronous cancellation. Javascript libraries such as RxJS 5 is still on this level. See also Google gRPC.
+This is the level of the **Rx.NET** library (even up to 3.x) that supports composition, but has no notion for backpressure and doesn't properly support synchronous cancellation. Many JavaScript libraries such as **RxJS 5** are still on this level. See also **Google gRPC**.
 
 #### Generation 2
-This is what RxJava 1.x is categorized, it supports composition, backpressure and synchronous cancellation along with the ability to lift an operator into a sequence.
+This is what **RxJava 1.x** is categorized, it supports composition, backpressure and synchronous cancellation along with the ability to lift an operator into a sequence.
 
 #### Generation 3
-This is the level of the Reactive-Streams based libraries such as Reactor 2 and Akka-Stream. They are based upon a specification that evolved out of RxJava but left behind its drawbacks (such as the need to return anything from `subscribe()`). This is incompatible with RxJava 1.x and thus 2.x had to be rewritten from scratch.
+This is the level of the Reactive-Streams based libraries such as **Reactor 2** and **Akka-Stream**. They are based upon a specification that evolved out of RxJava but left behind its drawbacks (such as the need to return anything from `subscribe()`). This is incompatible with RxJava 1.x and thus 2.x had to be rewritten from scratch.
 
 #### Generation 4
-This level expands upon the Reactive-Streams interfaces with operator-fusion (in a compatible fashion, that is, op-fusion is optional between two stages and works without them). Reactor 3 and RxJava 2 are at this level. The material around Akka-Stream mentions operator-fusion as well, however, Akka-Stream is not a native Reactive-Streams implementation (requires a materializer to get a `Publisher` out) and as such it is only Gen 3.
+This level expands upon the Reactive-Streams interfaces with operator-fusion (in a compatible fashion, that is, op-fusion is optional between two stages and works without them). **Reactor 3** and **RxJava 2** are at this level. The material around **Akka-Stream** mentions operator-fusion as well, however, **Akka-Stream** is not a native Reactive-Streams implementation (requires a materializer to get a `Publisher` out) and as such it is only Gen 3.
 
-There are discussions among the 4th generation library providers to have the elements of operator-fusion standardized in Reactive-Streams 2.0 specification (or in a neighboring extension) and have RxJava 3 and Reactor 4 work together on that aspect as well.
+There are discussions among the 4th generation library providers to have the elements of operator-fusion standardized in Reactive-Streams 2.0 specification (or in a neighboring extension) and have **RxJava 3** and **Reactor 4** work together on that aspect as well.
 
 ## Components
 
