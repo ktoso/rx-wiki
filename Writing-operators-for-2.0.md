@@ -377,9 +377,148 @@ public void onComplete() {
 For better performance, most operators can count the produced element amount and issue a single `SubscriptionArbiter.produced()` call just before switching to the next `Subscription`.
 
 
+## Atomic error management
+
+In some cases, multiple sources may signal a `Throwable` at the same time but the contract forbids calling `onError` multiple times. Once can, of course use the **once** approach with `AtomicReference<Throwable>` and throw out but the first one to set the `Throwable` on it.
+
+The alternative is to collect these `Throwable`s into a `CompositeException` as long as possible and at one point lock out the others. This works by doing a copy-on-write scheme or by linking `CompositeException`s atomically and having a terminal sentinel to indicate all further errors should be dropped.
+
+```java
+static final Throwable TERMINATED = new Throwable();
+
+static boolean addThrowable(AtomicReference<Throwable> ref, Throwable e) {
+    for (;;) {
+        Throwable current = ref.get();
+        if (current == TERMINATED) {
+            return false;
+        }
+        Throwable next;
+        if (current == null) {
+            next = e;
+        } else {
+            next = new CompositeException(current, e);
+        }
+        if (ref.compareAndSet(current, next)) {
+            return true;
+        }
+    }
+}
+
+static Throwable terminate(AtomicReference<Throwable> ref) {
+    return ref.getAndSet(TERMINATED);
+}
+```
+
+as with most common logic, this is supported by the (internal) `ExceptionHelper` utility class and the (internal) `AtomicThrowable` class.
+
+The usage pattern looks as follows:
+
+```java
+
+final AtomicThrowable errors = ...;
+
+@Override
+public void onError(Throwable e) {
+    if (errors.addThrowable(e)) {
+        drain();
+    } else {
+        RxJavaPlugins.onError(e);
+    }
+}
+
+void drain() {
+   // ...
+   if (errors.get() != null) {
+       child.onError(errors.terminate());
+       return;
+   }
+   // ...
+}
+```
+
 # Backpressure and cancellation
 
-TBD
+Backpressure (or flow control) in Reactive-Streams is the means to tell the upstream how many elements to produce or to tell it to stop producing elements altogether. Unlike the name suggest, there is no physical pressure preventing the upstream from calling `onNext` but the protocol to honor the request amount.
+
+In the previous section, we saw primitives to deal with request accounting and delayed `Subscriptions`, but often, operators have to react to request amount changes as well. This comes up when the operator has to decouple the downstream request amount from the amount it requests from upstream, such as `observeOn`.
+
+Such logic can get quite complicated in operators but one of the simplest manifestation can be the `rebatchRequest` operator that combines request management with serialization to ensure that upstream is requested with a predictable pattern no matter how the downstream requested (less, more or even unbounded):
+
+```java
+final class RebatchRequests<T> extends AtomicInteger implements Subscriber<T>, Subscription {
+
+    final Subscriber<? super T> child;
+
+    final AtomicLong requested;
+
+    final SpscArrayQueue<T> queue;
+
+    final int batchSize;
+
+    final int limit;
+
+    Subscription s;
+
+    volatile boolean done;
+    Throwable error;
+
+    public RebatchRequests(Subscriber<? super T> child, int batchSize) {
+        this.child = child;
+        this.batchSize = batchSize;
+        this.limit = batchSize - (batchSize >> 2); // 75% of batchSize
+        this.requested = new AtomicLong();
+        this.queue = new SpscArrayQueue<T>(batchSize);
+    }
+
+    @Override
+    public void onSubscribe(Subscription s) {
+        this.s = s;
+        child.onSubscribe(this);
+        s.request(batchSize);
+    }
+
+    @Override
+    public void onNext(T t) {
+        queue.offer(t);
+        drain();
+    }
+
+    @Override
+    public void onError(Throwable t) {
+        error = t;
+        done = true;
+        drain();
+    }
+
+    @Override
+    public void onComplete() {
+        done = true;
+        drain();
+    }
+
+    @Override
+    public void request(long n) {
+        BackpressureHelper.add(requested, n);
+        drain();
+    }
+
+    @Override
+    public void cancel() {
+        s.cancel();
+    }
+
+    void drain() {
+        // see next code example
+    }
+}
+```
+
+Here we extend `AtomicInteger` since the work-in-progress counting happens more often and is worth avoiding the extra indirection. The class extends `Subscription` and it hands itself to the `child` `Subscriber` to capture its `request()`  (and `cancel()`) calls and route it to the main `drain` logic. Some operators need only this, some other operators (such as `observeOn` not only routes the downstream request but also does extra cancellations (cancels the asynchrony providing `Worker` as well) in its `cancel()` method.
+
+Next comes the `drain` method whose pattern appears in many operators (with slight variations on how and what the emission does).
+
+```java
+```
 
 # Operator fusion
 
