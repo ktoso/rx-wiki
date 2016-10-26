@@ -142,6 +142,8 @@ void emit(T r) {
 }
 ```
 
+### Queues
+
 Using `ConcurrentLinkedQueue` is a reliable although mostly an overkill for such situations because it allocates on each call to `offer()` and is unbounded. It can be replaced with more optimized queues (see [JCTools](https://github.com/JCTools/JCTools/)) and RxJava itself also has some customized queues available (internal!):
 
   - `SpscArrayQueue` used when the queue is known to be fed by a single thread but the serialization has to look at other things (request, cancellation, termination) that can be read from other fields. Example: `observeOn` has a fixed request pattern which fits into this type of queue and extra fields for passing an error, completion or downstream requests into the drain logic.
@@ -182,6 +184,71 @@ public final class SpscArrayQueue<T> implements SimplePlainQueue<T> {
 ```
 
 This simplified queue API gets rid of the unused parts (iterator, collections API remnants) and adds a bi-offer method (only implemented atomically in `SpscLinkedArrayQueue` currently). The second interface, `SimplePlainQueue` is defined to suppress the `throws Exception` on poll on queue types that won't throw that exception and there is no need for try-catch around them.
+
+## Deferred actions
+
+The Reactive-Streams has a strict requirement that calling `onSubscribe()` must happen before any calls to the rest of the `onXXX` methods and by nature, any calls to `Subscription.request()` and `Subscription.cancel()`. The same logic applies to the design of `Observable`, `Single`, `Completable` and `Maybe` with their connection type of `Disposable`.
+
+Often though, such call to `onSubscribe` may happen later than the respective `cancel()` needs to happen. For example, the user may want to call `cancel()` before the respective `Subscription` actually becomes available in `subscribeOn`. Other operators may need to call `onSubscribe` before they connect to other sources but at that time, there is no direct way for relaying a `cancel` call to an unavailable upstream `Subscription`.
+
+The solution is **deferred cancellation** and **deferred requesting** in general.
+
+(Note that some other reactive libraries, such as RxJS, mainly don't want to adopt the Reactive-Streams style of architecture because they don't seem to comprehend how to deal with this kind of "Subscription comes later but I need to cancel now" situation.)
+
+### Dealing with deferred cancellation
+
+This approach affects all 5 reactive types and works the same way for everyone. First, have an `AtomicReference` that will hold the respective connection type (or any other type whose method call has to happen later). Two methods are needed handling the `AtomicReference` class, one that sets the actual instance and one that calls the `cancel`/`dispose` method on it.
+
+```java
+final AtomicReference<Disposable> connection;
+
+static final Disposable DISPOSED;
+static {
+    DISPOSED = Disposables.empty();
+    DISPOSED.dispose();
+}
+
+static boolean set(AtomicReference<Disposable> target, Disposable value) {
+    for (;;) {
+        Disposable current = target.get();
+        if (current == DISPOSED) {
+            if (value != null) {
+                value.dispose();
+            }
+            return false;
+        }
+        if (target.compareAndSet(current, value)) {
+            if (current != null) {
+                current.dispose();
+            }
+            return true;
+        }
+    }
+}
+
+static boolean dispose(AtomicReference<Disposable> target) {
+    Disposable current = target.getAndSet(DISPOSED);
+    if (current != DISPOSED) {
+        if (current != null) {
+            current.dispose();
+        }
+        return true;
+    }
+    return false;
+}
+```
+
+The approach uses an unique sentinel value `DISPOSED` - that should not appear elsewhere in your code - to indicate once a late actual `Disposable` arrives, it should be disposed immediately. Both methods return true if the operation succeeded or false if the target was already disposed.
+
+Sometimes, only one call to `set` is permitted (i.e., `setOnce`) and other times, the previous non-null value needs no call to `dispose` because it is known to be disposed already (i.e., `replace`).
+
+As with the request management, there are utility classes and methods for these operations:
+
+   - (internal) `SequentialDisposable` that uses `update`, `replace` and `dispose` but leaks the API of `AtomicReference`
+   - `SerialDisposable` that has safe API with `set`, `replace` and `dispose` among other things
+   - (internal) `DisposableHelper` that features the methods shown above and the global disposed sentinel used by RxJava. It may come handy when one uses `AtomicReference<Disposable>` as a base class.
+
+The same pattern applies to `Subscription` with its `cancel()` method and with helper (internal) class `SubscriptionHelper`.
 
 # Backpressure and cancellation
 
