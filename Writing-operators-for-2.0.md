@@ -602,19 +602,303 @@ void drain() {
         }
     }
 }
-
 ```
 
 This particular pattern is called the **stable-request queue-drain**. Another variation doesn't care about request amount stability towards upstream and simply requests the amount it delivered to the child:
 
+```java
+void drain() {
+    if (getAndIncrement() != 0) {
+        return;
+    }
 
+    int missed = 1;
+
+    for (;;) {
+        long r = requested.get();
+        long e = 0L;
+        
+        while (e != r) {
+            if (cancelled) {
+                return;
+            }
+            boolean d = done;
+
+            if (d) {
+                Throwable ex = error;
+                if (ex != null) {
+                    child.onError(ex);
+                    return;
+                }
+            }
+
+            T v = queue.poll();
+            boolean empty = v == null;
+
+            if (d && empty) {
+                child.onComplete();
+                return;
+            }
+
+            if (empty) {
+                break;
+            }
+
+            child.onNext(v);
+            
+            e++;
+        }
+
+        if (e != r) {
+            if (cancelled) {
+                return;
+            }
+
+            if (done) {
+                Throwable ex = error;
+                if (ex != null) {
+                    child.onError(ex);
+                    return;
+                }
+                if (queue.isEmpty()) {
+                    child.onComplete();
+                    return;
+                }
+            }
+        }
+
+        if (e != 0L) {
+            BackpressureHelper.produced(requested, e);
+            s.request(e);
+        }
+
+        missed = addAndGet(-missed);
+        if (missed == 0) {
+            break;
+        }
+    }
+}
+```
 
 The third variation allows delaying a potential error until the upstream has terminated and all normal elements have been delivered to the child:
 
+```java
+final boolean delayError;
+
+void drain() {
+    if (getAndIncrement() != 0) {
+        return;
+    }
+
+    int missed = 1;
+
+    for (;;) {
+        long r = requested.get();
+        long e = 0L;
+        
+        while (e != r) {
+            if (cancelled) {
+                return;
+            }
+            boolean d = done;
+
+            if (d && !delayError) {
+                Throwable ex = error;
+                if (ex != null) {
+                    child.onError(ex);
+                    return;
+                }
+            }
+
+            T v = queue.poll();
+            boolean empty = v == null;
+
+            if (d && empty) {
+                Throwable ex = error;
+                if (ex != null) {
+                    child.onError(ex);
+                } else {
+                    child.onComplete();
+                }
+                return;
+            }
+
+            if (empty) {
+                break;
+            }
+
+            child.onNext(v);
+            
+            e++;
+        }
+
+        if (e != r) {
+            if (cancelled) {
+                return;
+            }
+
+            if (done) {
+                if (delayError) {
+                    if (queue.isEmpty()) {
+                        Throwable ex = error;
+                        if (ex != null) {
+                            child.onError(ex);
+                        } else {
+                            child.onComplete();
+                        }
+                        return;
+                    }
+                } else {
+                    Throwable ex = error;
+                    if (ex != null) {
+                        child.onError(ex);
+                        return;
+                    }
+                    if (queue.isEmpty()) {
+                        child.onComplete();
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (e != 0L) {
+            BackpressureHelper.produced(requested, e);
+            s.request(e);
+        }
+
+        missed = addAndGet(-missed);
+        if (missed == 0) {
+            break;
+        }
+    }
+}
+```
 
 If the downstream cancels the operator, the `queue` may still hold elements which may get referenced longer than expected if the operator chain itself is referenced in some way. On the user level, applying `onTerminateDetach` will forget all references going upstream and downstream and can help with this situation. On the operator level, RxJava 2.x usually calls `clear()` on the `queue` when the sequence is cancelled or ends before the queue is drained naturally. This requires some slight change to the drain loop:
 
+```java
+final boolean delayError;
 
+@Override
+public void cancel() {
+    cancelled = true;
+    s.cancel();
+    if (getAndIncrement() == 0) {
+        queue.clear();    // <----------------------------
+    }
+}
+
+void drain() {
+    if (getAndIncrement() != 0) {
+        return;
+    }
+
+    int missed = 1;
+
+    for (;;) {
+        long r = requested.get();
+        long e = 0L;
+        
+        while (e != r) {
+            if (cancelled) {
+                queue.clear();    // <----------------------------
+                return;
+            }
+            boolean d = done;
+
+            if (d && !delayError) {
+                Throwable ex = error;
+                if (ex != null) {
+                    queue.clear();    // <----------------------------
+                    child.onError(ex);
+                    return;
+                }
+            }
+
+            T v = queue.poll();
+            boolean empty = v == null;
+
+            if (d && empty) {
+                Throwable ex = error;
+                if (ex != null) {
+                    child.onError(ex);
+                } else {
+                    child.onComplete();
+                }
+                return;
+            }
+
+            if (empty) {
+                break;
+            }
+
+            child.onNext(v);
+            
+            e++;
+        }
+
+        if (e != r) {
+            if (cancelled) {
+                return;
+            }
+
+            if (done) {
+                if (delayError) {
+                    if (queue.isEmpty()) {
+                        Throwable ex = error;
+                        if (ex != null) {
+                            child.onError(ex);
+                        } else {
+                            child.onComplete();
+                        }
+                        return;
+                    }
+                } else {
+                    Throwable ex = error;
+                    if (ex != null) {
+                        queue.clear();    // <----------------------------
+                        child.onError(ex);
+                        return;
+                    }
+                    if (queue.isEmpty()) {
+                        child.onComplete();
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (e != 0L) {
+            BackpressureHelper.produced(requested, e);
+            s.request(e);
+        }
+
+        missed = addAndGet(-missed);
+        if (missed == 0) {
+            break;
+        }
+    }
+}
+```
+
+Since the queue is single-producer-single-consumer, its `clear()` must be called from a single thread - which is provided by the serialization loop and is enabled by the `getAndIncrement() == 0` "half-loop" inside `cancel()`.
+
+An important note on the order of calls to `done` and the `queue`'s state:
+
+```java
+boolean d = done;
+T v = queue.poll();
+```
+
+and
+
+```java
+boolean d = done;
+boolean empty = queue.isEmpty();
+```
+
+These must happen in the order specified. If they were swapped, it is possible when the drain runs asynchronously to an `onNext`/`onComplete()`, the queue may appear empty at first, then it gets elements followed by `done = true` and a late `done` check in the drain loop may complete the sequence thinking it delivered all values there was.
 
 # Operator fusion
 
