@@ -1161,7 +1161,40 @@ Operator fusion has the premise that certain operators can be combined into one 
 
 This advanced concept was invented, worked out and studied in the [Reactive-Streams-Commons](https://github.com/reactor/reactive-streams-commons) research project manned by the leads of RxJava and Project Reactor. Both libraries use the results in their implementation, which look the same but are incompatible due to different classes and packages involved. In addition, RxJava 2.x's approach is a more polished version of the invention due to delays between the two project's development.
 
-Given this novel approach, a generation number can be assigned to various implementation styles of reactive libraries:
+Since operator-fusion is optional, you may chose to not bother making your operator fusion-enabled. The `DeferredScalarSubscription` is fusion-enabled and needs no additional development in this regard though.
+
+If you chose to ignore operator-fusion, you still have to follow the requirement of never forwarding a `Subscription`/`Disposable` coming through `onSubscribe` of `Subscriber`/`Observer` as this may break the fusion protocol and may skip your operator's business logic entirely:
+
+```java
+final class SomeOp implements Subscriber<T>, Subscription { 
+   
+    // ...
+    Subscription s;
+
+    public void onSubscribe(Subscription s) {
+        this.s = s;
+        child.onSubscribe(this);                // <---------------------------
+    }
+
+    @Override
+    public void cancel() {
+        s.cancel();
+    }
+
+    @Override
+    public void request(long n) {
+        s.request(n);
+    }
+
+    // ...
+}
+```
+
+Yes, this adds one more indirection between operators but it is still cheap (and would be necessary for the operator anyway) but enables huge performance gains with the right chain of operators.
+
+## Generations
+
+Given this novel approach, a generation number can be assigned to various implementation styles of reactive architectures:
 
 #### Generation 0
 These are the classical libraries that either use `java.util.Observable` or are listener based (Java Swing's `ActionListener`). Their common property is that they don't support composition (of events and cancellation). See also **Google Agera**.
