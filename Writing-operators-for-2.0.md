@@ -6,6 +6,10 @@ Writing operators, source-like (`fromAsync`) or intermediate-like (`flatMap`) **
 
 In this article, I'll describe the how-to's from the perspective of a developer who skipped the 1.x knowledge base and basically wants to write operators that conforms the Reactive-Streams specification as well as RxJava 2.x's own extensions and additional expectations/requirements.
 
+## Warning on internal components
+
+RxJava has several hundred public classes implementing various operators and helper facilities. Since there is no way to hide these in Java 6-8, the general contract is that anything below `io.reactivex.internal` is considered private and subject to change without warnings. It is not recommended to reference these in your code (unless you contribute to RxJava itself) and must be prepared that even a patch change may shuffle/rename things around in them. That being said, they usually contain valuable tools for operator builders and as such are quite attractive to use them in your custom code.
+
 # Atomics, serialization, deferred actions
 
 As RxJava itself has building blocks for creating reactive dataflows, its components have building blocks as well in the form of concurrency primitives and algorithms. Many refer to the book [Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601) for learning the fundamentals needed. Unfortunately, other than some explanation of the Java Memory Model, the book lacks the techniques required for developing operators for RxJava 1.x and 2.x.
@@ -29,7 +33,7 @@ The problem with this is that the Reactive-Streams specification declares `Long.
 Therefore, both addition and subtraction have to be capped at `Long.MAX_VALUE` and `0` respectively. Since there is no dedicated `AtomicLong` method for it, we have to use a Compare-And-Set loop. (Usually, requesting happens relatively rarely compared to emission amounts thus the lack of dedicated machine code instruction is not a performance bottleneck.)
 
 ```java
-public static long addCap(AtomicLong requested, long n) {
+public static long add(AtomicLong requested, long n) {
     for (;;) {
         long current = requested.get();
         if (current == Long.MAX_VALUE) {
@@ -64,7 +68,120 @@ for (;;) {
 
 In fact, these are so common in RxJava's operators that these algorithms are available as utility methods on the **internal** `BackpressureHelper` class under the same name.
 
-Sometimes, instead of having a separate `AtomicLong` field, your operator can extend `AtomicLong` saving on the indirection and class size. The practice in RxJava 2.x operators is that unless there is another atomic counter needed by the operator, (such as work-in-progress counter, see next subsection) and otherwise doesn't need a base class, they extend `AtomicLong` directly.
+Sometimes, instead of having a separate `AtomicLong` field, your operator can extend `AtomicLong` saving on the indirection and class size. The practice in RxJava 2.x operators is that unless there is another atomic counter needed by the operator, (such as work-in-progress counter, see the later subsection) and otherwise doesn't need a base class, they extend `AtomicLong` directly.
+
+The `BackpressureHelper` class features special versions of `add` and `produced` which treat `Long.MIN_VALUE` as a cancellation indication and won't change the `AtomicLong`s value if they see it.
+
+## Once
+
+RxJava 2 expanded the single-event reactive types to include `Maybe` (called as the reactive `Optional` by some). The common property of `Single`, `Completable` and `Maybe` is that they can only call one of the 3 kinds of methods on their consumers: `(onSuccess | onError | onComplete)`. Since they also participate in concurrent scenarios, an operator needs a way to ensure that only one of them is called even though the input sources may call multiple of them at once.
+
+To ensure this, operators may use the `AtomicBoolean.compareAndSet` to atomically chose the event to relay (and thus the other events to drop).
+
+```java
+final AtomicBoolean once = new AtomicBoolean();
+
+final MaybeObserver<? super T> child = ...; 
+
+void emitSuccess(T value) {
+   if (once.compareAndSet(false, true)) {
+       child.onSuccess(value);
+   }
+}
+
+void emitFailure(Throwable e) {
+    if (once.compareAndSet(false, true)) {
+        child.onError(e);
+    } else {
+        RxJavaPlugins.onError(e);
+    }
+}
+```
+
+Note that the same sequential requirement applies to these 0-1 reactive sources as to `Flowable`/`Observable`, therefore, if your operator doesn't have to deal with events from multiple sources (and pick one of them), you don't need this construct.
+
+## Serialization
+
+With more complicated sources, it may happen that multiple things happen that may trigger emission towards the downstream, such as upstream becoming available while the downstream requests for more data while the sequence gets cancelled by a timeout.
+
+Instead of working out the often very complicated state transitions via atomics, perhaps the easiest way is to serialize the events, actions or tasks and have one thread perform the necessary steps after that. This is what I call **queue-drain** approach (or trampolining by some). 
+
+(The other approach, **emitter-loop** is no longer recommended with 2.x due to its potential blocking `synchronized` constructs that looks performant in single-threaded case but destroys it in true concurrent case.)
+
+
+The concept is relatively simple: have a concurrent queue and a work-in-progress atomic counter, enqueue the item, increment the counter and if the counter transitioned from 0 to 1, keep draining the queue, work with the element and decrement the counter until it reaches zero again:
+
+```java
+final ConcurrentLinkedQueue<Runnable> queue = ...;
+final AtomicInteger wip = ...;
+
+void execute(Runnable r) {
+    queue.offer(r);
+    if (wip.getAndIncrement() == 0) {
+        do {
+            queue.poll().run();
+        } while (wip.decrementAndGet() != 0);
+    }
+}
+```
+
+The same pattern applies when one has to emit onNext values to a downstream consumer:
+
+```java
+final ConcurrentLinkedQueue<T> queue = ...;
+final AtomicInteger wip = ...;
+final Subscriber<? super T> child = ...;
+
+void emit(T r) {
+    queue.offer(r);
+    if (wip.getAndIncrement() == 0) {
+        do {
+            child.onNext(queue.poll());
+        } while (wip.decrementAndGet() != 0);
+    }
+}
+```
+
+Using `ConcurrentLinkedQueue` is a reliable although mostly an overkill for such situations because it allocates on each call to `offer()` and is unbounded. It can be replaced with more optimized queues (see [JCTools](https://github.com/JCTools/JCTools/)) and RxJava itself also has some customized queues available (internal!):
+
+  - `SpscArrayQueue` used when the queue is known to be fed by a single thread but the serialization has to look at other things (request, cancellation, termination) that can be read from other fields. Example: `observeOn` has a fixed request pattern which fits into this type of queue and extra fields for passing an error, completion or downstream requests into the drain logic.
+  - `SpscLinkedArrayQueue` used when the queue is known to be fed by a single thread but there is no bound on the element count. Example: `UnicastProcessor`, almost all buffering `Observable` operator. Some operators use it with multiple event sources by synchronizing on the `offer` side - a tradeoff between allocation and potential blocking:
+
+```java
+SpscLinkedArrayQueue<T> q = ...
+synchronized(q) {
+    q.offer(value);
+}
+```
+
+  - `MpscLinkedQueue` where there could be many feeders and unknown number of elements. Example: `buffer` with reactive boundary.
+
+The RxJava 2.x implementations of these types of queues have different class hierarchy than the JDK/JCTools versions. Our classes don't implement the `java.util.Queue` interface but rather a custom, simplified interface:
+
+```java
+interface SimpleQueue<T> {
+    boolean offer(T t);
+
+    boolean offer(T t1, T t2);
+
+    T poll() throws Exception;
+
+    boolean isEmpty();
+
+    void clear();
+}
+
+interface SimplePlainQueue<T> extends SimpleQueue<T> {
+    @Override
+    T poll();
+}
+
+public final class SpscArrayQueue<T> implements SimplePlainQueue<T> {
+    // ...
+}
+```
+
+This simplified queue API gets rid of the unused parts (iterator, collections API remnants) and adds a bi-offer method (only implemented atomically in `SpscLinkedArrayQueue` currently). The second interface, `SimplePlainQueue` is defined to suppress the `throws Exception` on poll on queue types that won't throw that exception and there is no need for try-catch around them.
 
 # Backpressure and cancellation
 
