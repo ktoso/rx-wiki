@@ -469,7 +469,8 @@ public static void onError(Subscriber<?> subscriber, Throwable ex,
     }
 }
 
-public static void onComplete(Subscriber<?> subscriber, AtomicInteger wip, AtomicThrowable error) {
+public static void onComplete(Subscriber<?> subscriber,
+        AtomicInteger wip, AtomicThrowable error) {
     if (wip.getAndIncrement() == 0) {
         Throwable ex = error.terminate();
         if (ex != null) {
@@ -484,6 +485,43 @@ public static void onComplete(Subscriber<?> subscriber, AtomicInteger wip, Atomi
 Here, the `wip` counter indicates there is an active emission happening and if found non-zero when trying to leave the `onNext`, it is taken as indication there was a concurrent `onError` or `onComplete()` call and the child must be notified. All subsequent calls to any of these methods are ignored. In this case, the `wip` is never decremented back to zero.
 
 RxJava 2.x, again, supports these with the (internal) utility class `HalfSerializer` and allows targeting `Subscriber`s and `Observer`s with it.
+
+## Fast-path queue-drain
+
+In some operators, it is unlikely concurrent threads try to enter into the drain loop at the same time and having to play the full enqueue-increment-dequeue adds unnecessary overhead.
+
+Luckily, such situations can be detected by a simple compare-and-set attempt on the work-in-progress counter, trying to change the amount from 0 to 1. If it fails, there is a concurrent drain in progress and we revert back to the classical queue-drain logic. If succeeds, we don't enqueue anything but emit the value / perform the action right there and we try to leave the serialized section.
+
+```java
+public void onNext(T v) {
+   if (wip.get() == 0 && wip.compareAndSet(0, 1)) {
+       child.onNext(v);
+       if (wip.decrementAndGet() == 0) {
+           break;
+       }
+   } else {
+       queue.offer(v);
+       if (wip.getAndIncrement() != 0) {
+           break;
+       }
+   }
+   drainLoop();
+}
+
+void drain() {
+   if (getAndIncrement() == 0) {
+       drainLoop();
+   }
+}
+
+void drainLoop() {
+   // the usual drain loop part after the classical getAndIncrement()
+}
+```
+
+In this pattern, the classical `drain` is spit into `drain` and `drainLoop`. The new `drain` does the increment-check and calls `drainLoop` and `drainLoop` contains the remaining logic with the loop, emission and wip management as usual.
+
+On the fast path, when we try to leave it, it is possible a concurrent call to `onNext` or `drain` incremented the `wip` counter further and the decrement didn't return it to zero. This is an indication for further work and we call `drainLoop` to process it.
 
 # Backpressure and cancellation
 
