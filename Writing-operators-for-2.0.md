@@ -1030,7 +1030,171 @@ By default, the `DeferredScalarSubscriber.onSubscribe()` requests `Long.MAX_VALU
 
 ## Single-element post-complete
 
-TBD
+Some operators have to modulate a sequence of elements in a 1:1 fashion but when the upstream terminates, they need to produce a final element followed by a terminal event (usually `onComplete`).
+
+```java
+final class OnCompleteEndWith implements Subscriber<T>, Subscription {
+    final Subscriber<? super T> child;
+
+    final T finalElement;
+
+    Subscription s;
+
+    public OnCompleteEndWith(Subscriber<? super T> child, T finalElement) {
+        this.child = child;
+        this.finalElement = finalElement;
+    }
+
+    @Override
+    public void onSubscribe(Subscription s) {
+        this.s = s;
+        child.onSubscribe(this);
+    }
+
+    @Override
+    public void onNext(T t) {
+        child.onNext(t);
+    }
+
+    @Overide
+    public void onError(Throwable t) {
+        child.onError(t);
+    }
+
+    @Override
+    public void onComplete() {
+        child.onNext(finalElement);
+        child.onComplete();
+    }
+
+    @Override
+    public void request(long n) {
+        s.request(n);
+    }
+
+    @Override
+    public void cancel() {
+        s.cancel();
+    }
+}
+```
+
+This works if the downstream request more than the upstream produces + 1, otherwise the call to `onComplete` may overflow the child `Subscriber`.
+
+Heavyweight solutions such as queue-drain or `SubscriptionArbiter` with `ScalarSubscriber` can be used here, however, there is a more elegant solution to the problem.
+
+The idea is that request amounts occupy only 63 bits of a 64 bit (atomic) long type. If we'd mask out the lower 63 bits when working with the amount, we can use the most significant bit to indicate the upstream sequence has finished and then on, any 0 to n request amount change can trigger the emission of the `finalElement`. Since a downstream `request()` can race with an upstream `onComplete`, marking the bit atomically via a compare-and-set ensures correct state transition.
+
+For this, the `OnCompleteEndWith` has to be changed by adding an `AtomicLong` for accounting requests, a long for counting the production, then updating `request()` and `onComplete()` methods:
+
+```java
+
+final class OnCompleteEndWith 
+extends AtomicLong
+implements Subscriber<T>, Subscription {
+    final Subscriber<? super T> child;
+
+    final T finalElement;
+
+    Subscription s;
+
+    long produced;
+
+    static final class long REQUEST_MASK = Long.MAX_VALUE;  // 0b01111...111L
+    static final class long COMPLETE_MASK = Long.MIN_VALUE; // 0b10000...000L
+
+    public OnCompleteEndWith(Subscriber<? super T> child, T finalElement) {
+        this.child = child;
+        this.finalElement = finalElement;
+    }
+
+    @Override
+    public void onSubscribe(Subscription s) { ... }
+
+    @Override
+    public void onNext(T t) {
+        produced++;                // <------------------------
+        child.onNext(t);
+    }
+
+    @Overide
+    public void onError(Throwable t) { ... }
+
+    @Override
+    public void onComplete() {
+        long p = produced;
+        if (p != 0L) {
+            produced = 0L;
+            BackpressureHelper.produced(this, p);
+        }
+
+        for (;;) {
+            long current = get();
+            if ((current & COMPLETE_MASK) != 0) {
+                break;
+            }
+            if ((current & REQUEST_MASK) != 0) {
+                lazySet(Long.MIN_VALUE + 1);
+                child.onNext(finalElement); 
+                child.onComplete();
+                return;
+            }
+            if (compareAndSet(current, COMPLETE_MASK)) {
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void request(long n) {
+        for (;;) {
+            long current = get();
+            if ((current & COMPLETE_MASK) != 0) {
+                if (compareAndSet(current, COMPLETE_MASK + 1)) {
+                    child.onNext(finalElement);
+                    child.onComplete();
+                }
+                break;
+            }
+            long u = BackpressureHelper.addCap(current, n);
+            if (compareAndSet(current, u)) {
+                s.request(n);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void cancel() { ... }
+}
+```
+
+RxJava 2 has a couple of operators, `materialize`, `mapNotification`, `onErrorReturn`, that require this type of behavior and for that, the (internal) `SinglePostCompleteSubscriber` class captures the algorithms above:
+
+```java
+final class OnCompleteEndWith<T> extends SinglePostCompleteSubscriber<T, T> {
+    final Subscriber<? super T> child;
+
+    public OnCompleteEndWith(Subscriber<? super T> child, T finalElement) {
+        this.child = child;
+        this.value = finalElement;
+    }
+
+    @Override
+    public void onNext(T t) {
+        produced++;                // <------------------------
+        child.onNext(t);
+    }
+    
+    @Overide
+    public void onError(Throwable t) { ... }
+
+    @Override
+    public void onComplete() {
+        complete(value);
+    }
+}
+```
 
 ## Multi-element post-complete
 
