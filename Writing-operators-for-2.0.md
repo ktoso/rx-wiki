@@ -1198,7 +1198,92 @@ final class OnCompleteEndWith<T> extends SinglePostCompleteSubscriber<T, T> {
 
 ## Multi-element post-complete
 
-TBD
+Certain operators may need to emit multiple elements after the main sequence completes, which may or may not relay elements from the live upstream before its termination. An example operator is `buffer(int, int)` when the skip < size yielding overlapping buffers. In this operator, it is possible when the upstream completes, several overlapping buffers are waiting to be emitted to the child but that has to happen only when the child actually requested more buffers.
+
+The state machine for this case is complicated but RxJava has two (internal) utility methods on `QueueDrainHelper` for dealing with the situation:
+
+```java
+<T> void postComplete(Subscriber<? super T> actual,
+                      Queue<T> queue,
+                      AtomicLong state,
+                      BooleanSupplier isCancelled);
+
+<T> boolean postCompleteRequest(long n,
+                                Subscriber<? super T> actual,
+                                Queue<T> queue,
+                                AtomicLong state,
+                                BooleanSupplier isCancelled);
+```
+
+They take the child `Subscriber`, the queue to drain from, the state holding the current request amount and a callback to see if the downstream cancelled the sequence.
+
+Usage of these methods is as follows:
+
+```java
+final class EmitTwice<T> extends AtomicLong implements Subscriber<T>, Subscription, BooleanSupplier {
+    final Subscriber<? super T> child;
+
+    final ArrayDeque<T> buffer;
+
+    volatile boolean cancelled;
+
+    Subscription s;
+
+    long produced;
+
+    public EmitTwice(Subscriber<? super T> child) {
+        this.child = child;
+        this.buffer = new ArrayDeque<>();
+    }
+
+    @Override
+    public void onSubscribe(Subscription s) {
+        this.s = s;
+        child.onSubscribe(this);
+    }
+
+    @Override
+    public void onNext(T t) {
+        produced++;
+        buffer.offer(t);
+        child.onNext(t);
+    }
+
+    @Override
+    public void onError(Throwable t) {
+        buffer.clear();
+        child.onError(t);
+    }
+
+    @Override
+    public void onComplete() {
+        long p = produced;
+        if (p != 0L) {
+            produced = 0L;
+            BackpressureHelper.produced(this, p);
+        }
+        QueueDrainHelper.postComplete(child, buffer, this, this);
+    }
+
+    @Override
+    public boolean getAsBoolean() {
+        return cancelled;
+    }
+
+    @Override
+    public void cancel() {
+        cancelled = true;
+        s.cancel();
+    }
+
+    @Override
+    public void request(long n) {
+        if (!QueueDrainHelper.postCompleteRequest(n, child, buffer, this, this)) {
+            s.request(n);
+        }
+    }
+}
+```
 
 # Creating operator classes
 
@@ -1330,7 +1415,7 @@ Since operator-fusion is optional, you may chose to not bother making your opera
 If you chose to ignore operator-fusion, you still have to follow the requirement of never forwarding a `Subscription`/`Disposable` coming through `onSubscribe` of `Subscriber`/`Observer` as this may break the fusion protocol and may skip your operator's business logic entirely:
 
 ```java
-final class SomeOp implements Subscriber<T>, Subscription { 
+final class SomeOp<T> implements Subscriber<T>, Subscription { 
    
     // ...
     Subscription s;
