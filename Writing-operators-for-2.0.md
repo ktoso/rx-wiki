@@ -1220,7 +1220,8 @@ They take the child `Subscriber`, the queue to drain from, the state holding the
 Usage of these methods is as follows:
 
 ```java
-final class EmitTwice<T> extends AtomicLong implements Subscriber<T>, Subscription, BooleanSupplier {
+final class EmitTwice<T> extends AtomicLong
+implements Subscriber<T>, Subscription, BooleanSupplier {
     final Subscriber<? super T> child;
 
     final ArrayDeque<T> buffer;
