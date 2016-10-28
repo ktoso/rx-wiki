@@ -12,7 +12,6 @@
 * Wikipedia: [Reactive Programming](http://en.wikipedia.org/wiki/Reactive_programming) and [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
 * [What is Reactive Programming?](http://blog.hackhands.com/overview-of-reactive-programming/) a video presentation by Jafar Husain.
 * [2 minute introduction to Rx](https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877) by André Staltz
-* [Be Reactive](http://colintheshots.com/blog/?p=85) by ColinTheShots
 * StackOverflow: [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [The Reactive Manifesto](http://www.reactivemanifesto.org/)
 * Grokking RxJava, [Part 1: The Basics](http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/), [Part 2: Operator, Operator](http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/), [Part 3: Reactive with Benefits](http://blog.danlew.net/2014/09/30/grokking-rxjava-part-3/), [Part 4: Reactive Android](http://blog.danlew.net/2014/10/08/grokking-rxjava-part-4/) - published in Sep/Oct 2014 by Daniel Lew
