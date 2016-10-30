@@ -300,6 +300,52 @@ CompositeDisposable composite2 = new CompositeDisposable();
 composite2.add(Flowable.range(1, 5).subscribeWith(subscriber));
 ```
 
+### Calling request from onSubscribe/onStart
+
+Note that due to how request management works, calling `request(n)` from `Subscriber.onSubscribe` or `ResourceSubscriber.onStart` may trigger calls to `onNext` immediately before the `request()` call itself returns to the `onSubscribe`/`onStart` method of yours:
+
+```java
+Flowable.range(1, 3).subscribe(new Subscriber<Integer>() {
+
+    @Override
+    public void onSubscribe(Subscription s) {
+        System.out.println("OnSubscribe start");
+        s.request(Long.MAX_VALUE);
+        System.out.println("OnSubscribe end");
+    }
+
+    @Override
+    public void onNext(Integer v) {
+        System.out.println(v);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        e.printStackTrace();
+    }
+
+    @Override
+    public void onComplete() {
+        System.out.println("Done");
+    }
+});
+```
+
+This will print:
+
+```
+OnSubscribe start
+1
+2
+3
+Done
+OnSubscribe end
+```
+
+The problem comes when one does some initialization in `onSubscribe`/`onStart` after calling `request` there and `onNext` may or may not see the effects of the initialization. To avoid this situation, make sure you call `request` **after** all initialization have been done in `onSubscribe`/`onStart`.
+
+This behavior differs from 1.x where a `request` call went through a deferred logic that accumulated requests until an upstream `Producer` arrived at some time (This nature adds overhead to all operators and consumers in 1.x.) In 2.x, there is always a `Subscription` coming down first and 90% of the time there is no need to defer requesting.
+
 # Subscription
 
 In RxJava 1.x, the interface `rx.Subscription` was responsible for stream and resource lifecycle management, namely unsubscribing a sequence and releasing general resources such as scheduled tasks. The Reactive-Streams specification took this name for specifying an interaction point between a source and a consumer: `org.reactivestreams.Subscription` allows requesting a positive amount from the upstream and allows cancelling the sequence.
