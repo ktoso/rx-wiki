@@ -157,6 +157,30 @@ The `io.reactivex.subjects.AsyncSubject`, `io.reactivex.subjects.BehaviorSubject
 
 The `io.reactivex.processors.AsyncProcessor`, `io.reactivex.processors.BehaviorProcessor`, `io.reactivex.processors.PublishProcessor`, `io.reactivex.processors.ReplayProcessor` and `io.reactivex.processors.UnicastProcessor` are backpressure-aware. The `BehaviorProcessor` and `PublishProcessor` don't coordinate requests (use `Flowable.publish()` for that) of their downstream subscribers and will signal them `MissingBackpressureException` if the downstream can't keep up. The other `XProcessor` types honor backpressure of their downstream subscribers but otherwise, when subscribed to a source (optional), they consume it in an unbounded manner (requesting `Long.MAX_VALUE`). 
 
+## TestSubject
+
+The 1.x `TestSubject` has been dropped. Its functionality can be achieved via `TestScheduler`, `PublishProcessor`/`PublishSubject` and `observeOn(testScheduler)`/scheduler parameter.
+
+```java
+TestScheduler scheduler = new TestScheduler();
+PublishSubject<Integer> ps = PublishSubject.create();
+
+TestObserver<Integer> ts = ps.delay(1000, TimeUnit.MILLISECONDS, scheduler)
+.test();
+
+ts.assertEmpty();
+
+ps.onNext(1);
+
+scheduler.advanceTimeBy(999, TimeUnit.MILLISECONDS);
+
+ts.assertEmpty();
+
+scheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS);
+
+ts.assertValue(1);
+```
+
 # Other classes
 
 The `rx.observables.ConnectableObservable` is now `io.reactivex.observables.ConnectableObservable<T>` and `io.reactivex.flowables.ConnectableFlowable<T>`.
