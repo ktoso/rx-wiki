@@ -2,7 +2,7 @@ RxJava 2.0 has been completely rewritten from scratch on top of the Reactive-Str
 
 Because Reactive-Streams has a different architecture, it mandates changes to some well known RxJava types. This wiki page attempts to summarize what has changed and describes how to rewrite 1.x code into 2.x code.
 
-**This page is aimed at library users, there is (going to be) a separate set of pages aimed at RxJava library developers and those who wish to develop custom operators for 2.x.**
+For technical details on how to write operators for 2.x, please visit the [Writing Operators](https://github.com/ReactiveX/RxJava/wiki/Writing-operators-for-2.0) wiki page.
 
 # Maven address and base package
 
@@ -56,6 +56,25 @@ A small regret about introducing backpressure in RxJava 0.x is that instead of h
 We try to remedy this situation in 2.x by having `io.reactivex.Observable` non-backpressured and the new `io.reactivex.Flowable` be the backpressure-enabled base reactive class.
 
 The good news is that operator names remain (mostly) the same. Bad news is that one should be careful when performing 'organize imports' as it may select the non-backpressured `io.reactivex.Observable` unintended.
+
+## Which type to use?
+
+When architecting dataflows (as an end-consumer of RxJava) or deciding upon what type your 2.x compatible library should take and return, you can consider a few factors that should help you avoid problems down the line such as `MissingBackpressureException` or `OutOfMemoryError`.
+
+### When to use Observable
+
+  - You have a flow of no more than 1000 elements at its longest: i.e., you have so few elements over time that there is practically no chance for OOME in your application.
+  - You deal with GUI events such as mouse moves or touch events: these can rarely be backpressured reasonably and aren't that frequent. You may be able to handle a element frequency of 1000 Hz or less with Observable but consider using sampling/debouncing anyway.
+  - Your flow is essentially synchronous but your platform doesn't support Java Streams or you miss features from it. Using `Observable` has lower overhead in general than `Flowable`. *(You could also consider IxJava which is optimized for Iterable flows supporting Java 6+)*.
+
+### When to use Flowable
+
+  - Dealing with 10k+ of elements that are generated in some fashion somewhere and thus the chain can tell the source to limit the amount it generates.
+  - Reading (parsing) files from disk is inherently blocking and pull-based which works well with backpressure as you control, for example, how many lines you read from this for a specified request amount).
+  - Reading from database through JDBC is also blocking and pull-based and is controlled by you by calling `ResultSet.next()` for likely each downstream request.
+  - Network (Streaming) IO where either the network helps or the protocol used supports requesting some logical amount.
+  - Many blocking and/or pull based data sources which may eventually get a non-blocking reactive API/driver in the future.
+
 
 # Single
 
