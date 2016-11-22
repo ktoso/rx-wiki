@@ -662,7 +662,7 @@ void drain() {
             }
         }
 
-        if (e != r) {
+        if (e == r) {
             if (cancelled) {
                 return;
             }
@@ -738,7 +738,7 @@ void drain() {
             e++;
         }
 
-        if (e != r) {
+        if (e == r) {
             if (cancelled) {
                 return;
             }
@@ -821,7 +821,7 @@ void drain() {
             e++;
         }
 
-        if (e != r) {
+        if (e == r) {
             if (cancelled) {
                 return;
             }
@@ -927,7 +927,7 @@ void drain() {
             e++;
         }
 
-        if (e != r) {
+        if (e == r) {
             if (cancelled) {
                 queue.clear();    // <----------------------------
                 return;
