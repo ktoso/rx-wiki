@@ -4,6 +4,33 @@ Because Reactive-Streams has a different architecture, it mandates changes to so
 
 For technical details on how to write operators for 2.x, please visit the [Writing Operators](https://github.com/ReactiveX/RxJava/wiki/Writing-operators-for-2.0) wiki page.
 
+# Contents
+
+  - [Maven address and base package](#maven-address-and-base-package)
+  - [Javadoc](#javadoc)
+  - [Nulls](#nulls)
+  - [Observable and Flowable](#observable-and-flowable)
+  - [Single](#single)
+  - [Completable](#completable)
+  - [Maybe](#maybe)
+  - [Base reactive interfaces](#base-reactive-interfaces)
+  - [Subjects and Processors](subjects-and-processors)
+  - [Other classes](other-classes)
+  - [Functional interfaces](#functional-interfaces)
+  - [Subscriber](#subscriber)
+  - [Subscription](#subscription)
+  - [Backpressure](#backpressure)
+  - [Reactive-Streams compliance](#reactive-streams-compliance)
+  - [Runtime hooks](#runtime-hooks)
+  - [Error handling](#error-handling)
+  - [Scheduler](#schedulers)
+  - [Entering the reactive world](#entering-the-reactive-world)
+  - [Leaving the reactive world](#leaving-the-reactive-world)
+  - [Testing](#testing)
+  - [Operator differences](#operator-differences)
+  - [Miscellaneous changes](#miscellaneous-changes)
+
+
 # Maven address and base package
 
 To allow having RxJava 1.x and RxJava 2.x side-by-side, RxJava 2.x is under the maven coordinates `io.reactivex.rxjava2:rxjava:2.x.y` and classes are accessible below `io.reactivex`.
@@ -423,13 +450,33 @@ Rule §3.9 requires excessive overhead to handle (half-serializer on **every** o
 
 The TCK allows synchronous but limited reentrance between `onSubscribe` and `onNext`, that is, while being in `onSubscribe`, a call to `request(1)` may call `onNext` without the need for `onSubscribe` to return control. While almost all operators behave this way, the operator `observeOn` may call `onNext` asynchronously in response to the `request(1)` and thus `onSubscribe` runs concurrently with `onNext`. This is probabilistically detected by the TCK and we use [another operator](https://github.com/ReactiveX/RxJava/blob/2.x/src/test/java/io/reactivex/tck/FlowableAwaitOnSubscribeTck.java) that defers any downstream requesting until the `onSubscribe` returns. Again, this async behavior is not an issue in RxJava 2 and in Reactor 3 because operators perform actions in a thread-safe manner in their `onSubscribe` and Akka-Stream's converter is (likely) doing a similar deferred request management.
 
-Since these two affect inter-library behavior, we may consider adding a standard operator to `Flowable`  itself sometime after 2.0.0 that combines these two behavior alterations in a single fluent method call on a sequence.
+Since these two affect inter-library behavior, version 2.0.5 introduces the `strict()` operator that ensures these rules and a couple of additional rules are followed to the letter, at the expense of some per-item overhead.
 
 # Runtime hooks
 
 The 2.x redesigned the `RxJavaPlugins` class which now supports changing the hooks at runtime. Tests that want to override the schedulers and the lifecycle of the base reactive types can do it on a case-by-case basis through callback functions.
 
 The class-based `RxJavaObservableHook` and friends are now gone and `RxJavaHooks` functionality is incorporated into `RxJavaPlugins`.
+
+# Error handling
+
+One important design requirement for 2.x is that no `Throwable` errors should be swallowed. This means errors that can't be emitted because the downstream's lifecycle already reached its terminal state or the downstream cancelled a sequence which was about to emit an error.
+
+Such errors are routed to the `RxJavaPlugins.onError` handler. This handler can be overridden with the method `RxJavaPlugins.setErrorHandler(Consumer<Throwable>)`. Without a specific handler, RxJava defaults to printing the `Throwable`'s stacktrace to the console and calls the current thread's uncaught exception handler.
+
+On desktop Java, this latter handler does nothing on a Executor-Service backed Scheduler and the application can keep running. However, Android is more strict and terminates the application in such uncaught exception cases. 
+
+If this behavior is desirable can be debated, but in any case, if you want to avoid such calls to the uncaught exception handler, the **final application** that uses RxJava 2 (directly or transitively) should set a no-op handler:
+
+```java
+// If Java 8 lambdas are supported
+RxJavaPlugins.setErrorHandler(e -> { });
+
+// If no Retrolambda or Jack 
+RxJavaPlugins.setErrorHandler(Functions.<Throwable>emptyConsumer());
+```
+
+It is not advised intermediate libraries change the error handler outside their own testing environment.
 
 # Schedulers
 

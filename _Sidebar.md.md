@@ -14,6 +14,7 @@
  * [Filtering](https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables)
  * [Mathematical and Aggregate](https://github.com/ReactiveX/RxJava/wiki/Mathematical-and-Aggregate-Operators)
  * [Observable Creation](https://github.com/ReactiveX/RxJava/wiki/Creating-Observables)
+ * [Parallel flows](https://github.com/ReactiveX/RxJava/wiki/Parallel-flows)
  * [String](https://github.com/ReactiveX/RxJava/wiki/String-Observables)
  * [Transformational](https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables)
  * [Utility Operators](https://github.com/ReactiveX/RxJava/wiki/Observable-Utility-Operators)
