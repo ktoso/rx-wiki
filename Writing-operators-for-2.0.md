@@ -1467,13 +1467,156 @@ There are discussions among the 4th generation library providers to have the ele
 
 ### Callable and ScalarCallable
 
+Certain `Flowable` sources, similar to `Single` or `Completable` are known to ever emit zero or one item and that single item is known to be constant or is computed synchronously. Well known examples of this are `just()`, `empty()` and `fromCallable`. Subscribing to these sources, like any other sources, adds the same infrastructure overhead which can often be avoided if the consumer could just pick or have the item calculated on the spot. 
+
+For example, `just` and `empty` appears as the mapping result of a `flatMap` operation:
+
+```java
+source.flatMap(v -> {
+    if (v % 2 == 0) {
+        return just(v);
+    }
+    return empty();
+})
+```
+
+Here, if we'd somehow recognize that `empty()` won't emit a value but only `onComplete` we could simply avoid subscribing to it inside `flatMap`, saving on the overhead. Similarly, recognizing that `just` emits exactly one item we can route it differently inside `flatMap` and again, avoiding creating a lot of objects to get to the same single item.
+
+In other times, knowing the emission property can simplify or chose a different operator instead of the applied one. For example, applying `flatMap` to an `empty()` source has no use since there won't be any item to be flattened into a sequence; the whole flattened sequence is going to be empty. Knowing that a source is `just` to `flatMap`, there is no need for the complicated inner mechanisms as there is going to be only one mapped inner source and one can subscribe the downstream's `Subscriber` to it directly.
+
+```java
+Flowable.just(1).flatMap(v -> Flowable.range(v, 5)).subscribe(...);
+
+// in some specialized operator:
+
+T value; // from just()
+
+@Override
+public void subscribeActual(Subscriber<? super T> s) {
+    mapper.apply(value).subscribe(s);
+}
+```
+
+There could be other sources with these properties, therefore, RxJava 2 uses the `io.reactivex.internal.fusion.ScalarCallable` and `java.util.Callable` interfaces to indicate a source is a constant or sequentially computable. When a source `Flowable` or `Observable` is marked with one of these interfaces, many fusion enabled operators will perform special actions to avoid the overhead of a normal and general source.
+
+We use Java's own and preexisting `java.util.Callable` interface to indicate a synchronously computable source. The `ScalarCallable` is an extension to this interface by which it suppresses the `throws Exception` of `Callable.call()`:
+
+```java
+interface Callable<T> {
+    T call() throws Exception;
+}
+
+interface ScalarCallable<T> extends Callable<T> {
+    @Override
+    T call();
+}
+```
+
+The reason for the two separate interfaces is that if a source is constant, like `just`, one can perform assembly-time optimizations with it knowing that each regular `subscribe` invocation would have resulted in the same single value.
+
+`Callable` denotes sources, such as `fromCallable` that indicates the single value has to be calculated at runtime of the flow. By this logic, you can see that `ScalarCallable` is a `Callable` on its own right because the constant can be "calculated" as late as the runtime phase of the flow.
+
+Since Reactive-Streams forbids using `null`s as emission values, we can use `null` in `(Scalar)Callable` marked sources to indicate there is no value to be emitted, thus one can't mistake an user's `null` with the empty indicator `null`. For example, this is how `empty()` is implemented:
+
+```java
+final class FlowableEmpty extends Flowable<Object> implements ScalarCallable<Object> {
+    @Override
+    public void subscribeActual(Subscriber<? super T> s) {
+        EmptySubscription.complete(s);
+    }
+
+    @Override
+    public Object call() {
+        return null; // interpreted as no value available
+    }
+}
+```
+
+Sources implementing `Callable` may throw checked exceptions from `call()` which is handled by the consumer operators as an indication to signal `onError` in an operator specific manner (such as delayed).
+
+```java
+final class FlowableIOException extends Flowable<Object> implements Callable<Object> {
+    @Override
+    public void subscribeActual(Subscriber<? super T> s) {
+        EmptySubscription.error(new IOException(), s);
+    }
+
+    @Override
+    public Object call() throws Exception {
+        throw new IOException();
+    }
+}
+```
+
+However, implementors of `ScalarCallable` should avoid throwing any exception and limit the code in `call()` be constant or simple computation that can be legally executed during assembly time.
+
+As the consumer of sources, one may want to deal with such kind of special `Flowable`s or `Observable`s. For example, if you create an operator that can leverage the knowledge of a single element source as its main input, you can check the types and extract the value of a `ScalarCallable` at assembly time right in the operator:
+
+```java
+// Flowable.java
+public final Flowable<Integer> plusOne() {
+    if (this instanceof ScalarCallable) {
+        Integer value = ((ScalarCallable<Integer>)this).call();
+        if (value == null) {
+            return empty();
+        }
+        return just(value + 1);
+    }
+    return cast(Integer.class).map(v -> v + 1);
+}
+```
+
+or as a `FlowableTransformer`:
+
+```java
+FlowableTransformer<Integer, Integer> plusOneTransformer = source -> {
+    if (source instanceof ScalarCallable) {
+        Integer value = ((ScalarCallable<Integer>)source).call();
+        if (value == null) {
+            return empty();
+        }
+        return just(value + 1);
+    }
+    return source.map(v -> v + 1);
+};
+```
+
+However, it is not mandatory to handle `ScalarCallable`s and `Callable`s separately. Since the former extends the latter, the type check can be deferred till subscription time and handled with the same code path:
+
+```java
+final class FlowablePlusOne extends Flowable<Integer> {
+    final Publisher<Integer> source;
+
+    FlowablePlusOne(Publisher<Integer> source) {
+        this.source = source;
+    }
+
+    @Override
+    public void subscribeActual(Subscriber<? super Integer> s) {
+        if (source instanceof Callable) {
+            Integer value;
+
+            try {
+                value = ((Callable<Integer>)source).call();
+            } catch (Throwable ex) {
+                Exceptions.throwIfFatal(ex);
+                EmptySubscription.error(ex, s);
+                return;
+            }
+
+            s.onSubscribe(new ScalarSubscription<Integer>(s, value + 1));
+        } else {
+            new FlowableMap<>(source, v -> v + 1).subscribe(s);
+        }
+    }
+}
+```
+
+### ConditionalSubscriber
+
 TBD
 
 ### QueueSubscription and QueueDisposable
-
-TBD
-
-### ConditionalSubscriber
 
 TBD
 
