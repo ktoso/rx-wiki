@@ -13,11 +13,23 @@
       - [Deferred requesting](#deferred-requesting)
     - [Atomic error management](#atomic-error-management)
     - [Half-serialization](#half-serialization)
+    - [Fast-path queue-drain](#fast-path-queue-drain)
   - [Backpressure and cancellation](#backpressure-and-cancellation)
+    - [Single-valued results](#single-valued-results)
+    - [Single-element post-complete](#single-element-post-complete)
+    - [Multi-element post-complete](#multi-element-post-complete)
   - [Creating operator classes](#creating-operator-classes)
+    - [Operator by extending a base reactive class](#operator-by-extending-a-base-reactive-class)
+    - [Operator targeting lift()](#operator-targeting-lift)
   - [Operator fusion](#operator-fusion)
+    - [Generations](#generations)
+    - [Components](#components)
+      - [Callable and ScalarCallable](#callable-and-scalarcallable)
+      - [ConditionalSubscriber](#conditionalsubscriber)
+      - [QueueSubscription and QueueDisposable](#queuesubscription-and-queuedisposable)
   - [Example implementations](#example-implementations)
-
+    - [Map-filter hybrid](https://github.com/ReactiveX/RxJava/wiki/Writing-operators-for-2.0#map--filter-hybrid)
+    - [Ordered merge](#ordered-merge)
 
 # Introduction
 
