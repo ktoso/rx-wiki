@@ -1,3 +1,24 @@
+##### Table of contents
+
+  - [Introduction](#introduction)
+    - [Warning on internal components](warning-on-internal-components)
+  - [Atomics, serialization, deferred actions](#atomics-serialization-deferred-actions)
+    - [Field updaters and Android](#field-updaters-and-android)
+    - [Request accounting](#request-accounting)
+    - [Once](#once)
+    - [Serialization](#serialization)
+    - [Queues](#queues)
+    - [Deferred actions](#deferred-actions)
+      - [Deferred cancellation](#deferred-cancellation)
+      - [Deferred requesting](#deferred-requesting)
+    - [Atomic error management](#atomic-error-management)
+    - [Half-serialization](#half-serialization)
+  - [Backpressure and cancellation](#backpressure-and-cancellation)
+  - [Creating operator classes](#creating-operator-classes)
+  - [Operator fusion](#operator-fusion)
+  - [Example implementations](#example-implementations)
+
+
 # Introduction
 
 Writing operators, source-like (`fromEmitter`) or intermediate-like (`flatMap`) **has always been a hard task to do in RxJava**. There are many rules to obey, many cases to consider but at the same time, many (legal) shortcuts to take to build a well performing code. Now writing an operator specifically for 2.x is 10 times harder than for 1.x. If you want to exploit all the advanced, 4th generation features, that's even 2-3 times harder on top (so 30 times harder in total).
