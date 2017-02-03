@@ -227,6 +227,10 @@ scheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS);
 ts.assertValue(1);
 ```
 
+## SerializedSubject
+
+The `SerializedSubject` is no longer a public class. You have to use `Subject.toSerialized()` and `FlowableProcessor.toSerialized()` instead.
+
 # Other classes
 
 The `rx.observables.ConnectableObservable` is now `io.reactivex.observables.ConnectableObservable<T>` and `io.reactivex.flowables.ConnectableFlowable<T>`.
