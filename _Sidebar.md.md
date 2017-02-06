@@ -1,6 +1,8 @@
 * [Introduction](https://github.com/ReactiveX/RxJava/wiki/Home)
 * [Getting Started](https://github.com/ReactiveX/RxJava/wiki/Getting-Started)
-* [JavaDoc](http://reactivex.io/RxJava/javadoc/rx/Observable.html)
+* [JavaDoc](http://reactivex.io/RxJava/javadoc)
+  * [1.x](http://reactivex.io/RxJava/1.x/javadoc/rx/Observable.html)
+  * [2.x](http://reactivex.io/RxJava/2.x/javadoc/io.reactivex/Flowable.html)
 * [How to Use RxJava](https://github.com/ReactiveX/RxJava/wiki/How-To-Use-RxJava)
 * [Additional Reading](https://github.com/ReactiveX/RxJava/wiki/Additional-Reading)
 * [The Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
@@ -27,6 +29,6 @@
 * [The RxJava Android Module](https://github.com/ReactiveX/RxAndroid/wiki)
 * RxJava 2.0
   * [Reactive Streams](https://github.com/ReactiveX/RxJava/wiki/Reactive-Streams)
-  * [What's different (user perspective)](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0)
+  * [What's different](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0)
   * [Writing operators](https://github.com/ReactiveX/RxJava/wiki/Writing-operators-for-2.0)
 * [How to Contribute](https://github.com/ReactiveX/RxJava/wiki/How-to-Contribute)
