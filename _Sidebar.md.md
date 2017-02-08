@@ -2,7 +2,7 @@
 * [Getting Started](https://github.com/ReactiveX/RxJava/wiki/Getting-Started)
 * [JavaDoc](http://reactivex.io/RxJava/javadoc)
   * [1.x](http://reactivex.io/RxJava/1.x/javadoc/rx/Observable.html)
-  * [2.x](http://reactivex.io/RxJava/2.x/javadoc/io.reactivex/Flowable.html)
+  * [2.x](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/Flowable.html)
 * [How to Use RxJava](https://github.com/ReactiveX/RxJava/wiki/How-To-Use-RxJava)
 * [Additional Reading](https://github.com/ReactiveX/RxJava/wiki/Additional-Reading)
 * [The Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
