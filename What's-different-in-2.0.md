@@ -815,17 +815,21 @@ Some operators that produced exactly one value or an error now return `Single` i
 | `count()` | `Observable<Long>` | `Single<Long>` | Counts the number of elements in the sequence |
 | `elementAt(int)` | `Observable<T>` | `Maybe<T>` | Emits the element at the given index or completes |
 | `elementAt(int, T)` | `Observable<T>` | `Single<T>` | Emits the element at the given index or the default |
+| `elementAtOrError(int)` | `Observable<T>` | `Single<T>` | Emits the indexth element or a `NoSuchElementException` |
 | `first(T)` | `Observable<T>` | `Single<T>` | Emits the very first element or `NoSuchElementException` |
 | `firstElement()` | `Observable<T>` | `Maybe<T>` | Emits the very first element or completes |
+| `firstOrError()` | `Observable<T>` | `Single<T>` | Emits the first element or a `NoSuchElementException` if the source is empty |
 | `ignoreElements()` | `Observable<T>` | `Completable` | Ignore all but the terminal events |
 | `isEmpty()` | `Observable<Boolean>` | `Single<Boolean>` | Emits true if the source is empty |
 | `last(T)` | `Observable<T>` | `Single<T>` | Emits the very last element or the default item |
 | `lastElement()` | `Observable<T>` | `Maybe<T>` | Emits the very last element or completes |
+| `lastOrError()` | `Observable<T>` | `Single<T>` | Emits the lastelement or a `NoSuchElementException` if the source is empty |
 | `reduce(BiFunction)` | `Observable<T>` | `Maybe<T>` | Emits the reduced value or completes |
 | `reduce(Callable, BiFunction)` | `Observable<U>` | `Single<U>` | Emits the reduced value (or the initial value) |
 | `reduceWith(U, BiFunction)` | `Observable<U>` | `Single<U>` | Emits the reduced value (or the initial value) |
 | `single(T)` | `Observable<T>` | `Single<T>` | Emits the only element or the default item |
 | `singleElement()` | `Observable<T>` | `Maybe<T>` | Emits the only element or completes |
+| `singleOrError()` | `Observable<T>` | `Single<T>` | Emits the one and only element, IndexOutOfBoundsException if the source is longer than 1 item or a `NoSuchElementException` if the source is empty |
 | `toList()` | `Observable<List<T>>` | `Single<List<T>>` | collects all elements into a `List` |
 | `toMap()` | `Observable<Map<K, V>>` | `Single<Map<K, V>>` | collects all elements into a `Map` |
 | `toMultimap()` | `Observable<Map<K, Collection<V>>>` | `Single<Map<K, Collection<V>>>` | collects all elements into a `Map` with collection |
