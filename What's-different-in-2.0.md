@@ -444,17 +444,26 @@ As an alternative, the 2.x `Observable` doesn't do backpressure at all and is av
 
 # Reactive-Streams compliance
 
-The Flowable-based sources and operators are Reactive-Streams version 1.0.0 specification compliant except one rule §3.9 and one interpretation of rule §1.3: 
+**updated in 2.0.7**
 
-> §3.9: While the Subscription is not cancelled, Subscription.request(long n) MUST signal onError with a java.lang.IllegalArgumentException if the argument is <= 0. The cause message MUST include a reference to this rule and/or quote the full rule.
+**The `Flowable`-based sources and operators are, as of 2.0.7, fully Reactive-Streams version 1.0.0 specification compliant.**
 
-Rule §3.9 requires excessive overhead to handle (half-serializer on **every** operator dealing with request()) for a bug-case. RxJava 2 (and Reactor 3 in fact) reports the `IllegalArgumentException` to `RxJavaPlugins.onError` and ignores it otherwise. RxJava 2 passes the Test Compatibility Kit (TCK) by applying a [custom operator](https://github.com/ReactiveX/RxJava/blob/2.x/src/test/java/io/reactivex/tck/FlowableTck.java) that routes the `IllegalArgumentException` into the `Subscriber.onError` in an async-safe manner. All major Reactive-Streams libraries are free of such zero requests; Reactor 3 ignores it as we do and Akka-Stream uses a converter (to interact with other RS sources and consumers) which has (probably) a similar routing behavior as our TCK operator. 
+Before 2.0.7, the operator `strict()` had to be applied in order to achieve the same level of compliance. In 2.0.7, the operator `strict()` returns `this`, is deprecated and will be removed completely in 2.1.0.
 
-> §1.3: onSubscribe, onNext, onError and onComplete signaled to a Subscriber MUST be signaled sequentially (no concurrent notifications).
+As one of the primary goals of RxJava 2, the design focuses on performance and in order enable it, RxJava 2.0.7 adds a custom `io.reactivex.FlowableSubscriber` interface (extends `org.reactivestreams.Subscriber`) but adds no new methods to it. The new interface is **constrained to RxJava 2** and represents a consumer to `Flowable` that is able to work in a mode that relaxes the Reactive-Streams version 1.0.0 specification in rules §1.3, §2.3, §2.12 and §3.9:
 
-The TCK allows synchronous but limited reentrance between `onSubscribe` and `onNext`, that is, while being in `onSubscribe`, a call to `request(1)` may call `onNext` without the need for `onSubscribe` to return control. While almost all operators behave this way, the operator `observeOn` may call `onNext` asynchronously in response to the `request(1)` and thus `onSubscribe` runs concurrently with `onNext`. This is probabilistically detected by the TCK and we use [another operator](https://github.com/ReactiveX/RxJava/blob/2.x/src/test/java/io/reactivex/tck/FlowableAwaitOnSubscribeTck.java) that defers any downstream requesting until the `onSubscribe` returns. Again, this async behavior is not an issue in RxJava 2 and in Reactor 3 because operators perform actions in a thread-safe manner in their `onSubscribe` and Akka-Stream's converter is (likely) doing a similar deferred request management.
+  - §1.3 relaxation: `onSubscribe` may run concurrently with `onNext` in case the `FlowableSubscriber` calls `request()` from inside `onSubscribe` and it is the resposibility of `FlowableSubscriber` to ensure thread-safety between the remaining instructions in `onSubscribe` and `onNext`.
+  - §2.3 relaxation: calling `Subscription.cancel` and `Subscription.request` from `FlowableSubscriber.onComplete()` or `FlowableSubscriber.onError()` is considered a no-operation.
+  - §2.12 relaxation: if the same `FlowableSubscriber` instance is subscribed to multiple sources, it must ensure its `onXXX` methods remain thread safe.
+  - §3.9 relaxation: issuing a non-positive `request()` will not stop the current stream but signal an error via `RxJavaPlugins.onError`.
 
-Since these two affect inter-library behavior, version 2.0.5 introduces the `strict()` operator that ensures these rules and a couple of additional rules are followed to the letter, at the expense of some per-item overhead.
+From an user's perspective, if one was using the the `subscribe` methods other than `Flowable.subscribe(Subscriber<? super T>)`, there is no need to do anything regarding this change and there is no extra penalty of it.
+
+If one was using `Flowable.subscribe(Subscriber<? super T>)` with the built-in RxJava `Subscriber` implementations such as `DisposableSubscriber`, `TestSubscriber` and `ResourceSubscriber`, there is a small runtime overhead (one `instanceof` check) associated when the code is not recompiled against 2.0.7.
+
+If a custom class implementing `Subscriber` was employed before, subscribing it to a `Flowable` adds an internal wrapper that ensures observing the Flowable is 100% compliant to the specification at the cost of some per-item overhead.
+
+In order to help lift these extra overheads, a new method `Flowable.subscribe(FlowableSubscriber<? super T>)` has been added which exposes the original behavior from before 2.0.7. It is recommended that new custom consumer implementations extend `FlowableSubscriber` instead of just `Subscriber`.
 
 # Runtime hooks
 
