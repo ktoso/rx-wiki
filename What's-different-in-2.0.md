@@ -39,7 +39,7 @@ Users switching from 1.x to 2.x have to re-organize their imports, but carefully
 
 # Javadoc
 
-The official javadoc pages for 2.x is hosted at http://reactivex.io/RxJava/2.x/javadoc/
+The official Javadoc pages for 2.x is hosted at http://reactivex.io/RxJava/2.x/javadoc/
 
 # Nulls
 
@@ -57,7 +57,7 @@ Observable.just(1).map(v -> null)
     .subscribe(System.out::println, Throwable::printStackTrace);
 ```
 
-This means that `Observable<Void>` can no longer emit any values but only terminate normally or with an exception. API designers may instead chose to define `Observable<Object>` with no guarantee on what `Object` will be (which should be irrelevant anyway). For example, if one needs a signaller-like source, a shared enum can be defined and its solo instance `onNext`'d:
+This means that `Observable<Void>` can no longer emit any values but only terminate normally or with an exception. API designers may instead choose to define `Observable<Object>` with no guarantee on what `Object` will be (which should be irrelevant anyway). For example, if one needs a signaller-like source, a shared enum can be defined and its solo instance `onNext`'d:
 
 ```java
 enum Irrelevant { INSTANCE; }
@@ -82,7 +82,7 @@ A small regret about introducing backpressure in RxJava 0.x is that instead of h
 
 We try to remedy this situation in 2.x by having `io.reactivex.Observable` non-backpressured and the new `io.reactivex.Flowable` be the backpressure-enabled base reactive class.
 
-The good news is that operator names remain (mostly) the same. Bad news is that one should be careful when performing 'organize imports' as it may select the non-backpressured `io.reactivex.Observable` unintended.
+The good news is that operator names remain (mostly) the same. The bad news is that one should be careful when performing 'organize imports' as it may select the non-backpressured `io.reactivex.Observable` unintended.
 
 ## Which type to use?
 
@@ -91,16 +91,16 @@ When architecting dataflows (as an end-consumer of RxJava) or deciding upon what
 ### When to use Observable
 
   - You have a flow of no more than 1000 elements at its longest: i.e., you have so few elements over time that there is practically no chance for OOME in your application.
-  - You deal with GUI events such as mouse moves or touch events: these can rarely be backpressured reasonably and aren't that frequent. You may be able to handle a element frequency of 1000 Hz or less with Observable but consider using sampling/debouncing anyway.
+  - You deal with GUI events such as mouse moves or touch events: these can rarely be backpressured reasonably and aren't that frequent. You may be able to handle an element frequency of 1000 Hz or less with Observable but consider using sampling/debouncing anyway.
   - Your flow is essentially synchronous but your platform doesn't support Java Streams or you miss features from it. Using `Observable` has lower overhead in general than `Flowable`. *(You could also consider IxJava which is optimized for Iterable flows supporting Java 6+)*.
 
 ### When to use Flowable
 
   - Dealing with 10k+ of elements that are generated in some fashion somewhere and thus the chain can tell the source to limit the amount it generates.
   - Reading (parsing) files from disk is inherently blocking and pull-based which works well with backpressure as you control, for example, how many lines you read from this for a specified request amount).
-  - Reading from database through JDBC is also blocking and pull-based and is controlled by you by calling `ResultSet.next()` for likely each downstream request.
+  - Reading from a database through JDBC is also blocking and pull-based and is controlled by you by calling `ResultSet.next()` for likely each downstream request.
   - Network (Streaming) IO where either the network helps or the protocol used supports requesting some logical amount.
-  - Many blocking and/or pull based data sources which may eventually get a non-blocking reactive API/driver in the future.
+  - Many blocking and/or pull-based data sources which may eventually get a non-blocking reactive API/driver in the future.
 
 
 # Single
@@ -197,7 +197,7 @@ source.compose((Flowable<T> flowable) ->
 
 # Subjects and Processors
 
-In the Reactive-Streams specification, the `Subject`-like behavior, namely being a consumer and supplier of events at the same time, is done by the `org.reactivestreams.Processor` interface. As with the `Observable`/`Flowable` split, the backpressure-aware, Reactive-Streams compliant implementations are based on the `FlowableProcessor<T>` class (which extends `Flowable` to give a rich set of instance operators). An important change regarding `Subject`s (and by extension, `FlowableProcessor`) that they no longer support `T -> R` like conversion (that is, input is of type `T` and the output is of type `R`). (We never had a use for it in 1.x and the original `Subject<T, R>` came from .NET where there is a `Subject<T>` overload because .NET allows the same class name with different number of type arguments.)
+In the Reactive-Streams specification, the `Subject`-like behavior, namely being a consumer and supplier of events at the same time, is done by the `org.reactivestreams.Processor` interface. As with the `Observable`/`Flowable` split, the backpressure-aware, Reactive-Streams compliant implementations are based on the `FlowableProcessor<T>` class (which extends `Flowable` to give a rich set of instance operators). An important change regarding `Subject`s (and by extension, `FlowableProcessor`) that they no longer support `T -> R` like conversion (that is, input is of type `T` and the output is of type `R`). (We never had a use for it in 1.x and the original `Subject<T, R>` came from .NET where there is a `Subject<T>` overload because .NET allows the same class name with a different number of type arguments.)
 
 The `io.reactivex.subjects.AsyncSubject`, `io.reactivex.subjects.BehaviorSubject`, `io.reactivex.subjects.PublishSubject`, `io.reactivex.subjects.ReplaySubject` and `io.reactivex.subjects.UnicastSubject` in 2.x don't support backpressure (as part of the 2.x `Observable` family).
 
@@ -324,7 +324,7 @@ Flowable.range(1, 10).subscribe(new Subscriber<Integer>() {
 });
 ```
 
-Due to the name conflict, replacing the package from `rx` to `org.reactivestreams` is not enough. In addition, `org.reactivestreams.Subscriber` has no notion for adding resources to it, cancelling it or requesting from the outside.
+Due to the name conflict, replacing the package from `rx` to `org.reactivestreams` is not enough. In addition, `org.reactivestreams.Subscriber` has no notion of adding resources to it, cancelling it or requesting from the outside.
 
 To bridge the gap we defined abstract classes `DefaultSubscriber`, `ResourceSubscriber` and `DisposableSubscriber` (plus their `XObserver` variants) for `Flowable` (and `Observable`) respectively that offers resource tracking support (of `Disposable`s) just like `rx.Subscriber` and can be cancelled/disposed externally via `dispose()`: 
 
@@ -438,7 +438,7 @@ The original `Subscription` container types have been renamed and updated
 
 # Backpressure
 
-The Reactive-Streams specification mandates operators supporting backpressure, specifically via the guarantee that they don't overflow their consumers when those don't request. Operators of the new `Flowable` base reactive type now consider downstream requrest amounts properly, however, this doesn't mean `MissingBackpressureException` is gone. The exception is still there but this time, the operator that can't signal more `onNext` will signal this exception instead (allowing better identification of who is not properly backpressured).
+The Reactive-Streams specification mandates operators supporting backpressure, specifically via the guarantee that they don't overflow their consumers when those don't request. Operators of the new `Flowable` base reactive type now consider downstream request amounts properly, however, this doesn't mean `MissingBackpressureException` is gone. The exception is still there but this time, the operator that can't signal more `onNext` will signal this exception instead (allowing better identification of who is not properly backpressured).
 
 As an alternative, the 2.x `Observable` doesn't do backpressure at all and is available as a choice to switch over.
 
@@ -457,11 +457,11 @@ As one of the primary goals of RxJava 2, the design focuses on performance and i
   - §2.12 relaxation: if the same `FlowableSubscriber` instance is subscribed to multiple sources, it must ensure its `onXXX` methods remain thread safe.
   - §3.9 relaxation: issuing a non-positive `request()` will not stop the current stream but signal an error via `RxJavaPlugins.onError`.
 
-From an user's perspective, if one was using the the `subscribe` methods other than `Flowable.subscribe(Subscriber<? super T>)`, there is no need to do anything regarding this change and there is no extra penalty of it.
+From a user's perspective, if one was using the the `subscribe` methods other than `Flowable.subscribe(Subscriber<? super T>)`, there is no need to do anything regarding this change and there is no extra penalty for it.
 
 If one was using `Flowable.subscribe(Subscriber<? super T>)` with the built-in RxJava `Subscriber` implementations such as `DisposableSubscriber`, `TestSubscriber` and `ResourceSubscriber`, there is a small runtime overhead (one `instanceof` check) associated when the code is not recompiled against 2.0.7.
 
-If a custom class implementing `Subscriber` was employed before, subscribing it to a `Flowable` adds an internal wrapper that ensures observing the Flowable is 100% compliant to the specification at the cost of some per-item overhead.
+If a custom class implementing `Subscriber` was employed before, subscribing it to a `Flowable` adds an internal wrapper that ensures observing the Flowable is 100% compliant with the specification at the cost of some per-item overhead.
 
 In order to help lift these extra overheads, a new method `Flowable.subscribe(FlowableSubscriber<? super T>)` has been added which exposes the original behavior from before 2.0.7. It is recommended that new custom consumer implementations extend `FlowableSubscriber` instead of just `Subscriber`.
 
@@ -477,7 +477,7 @@ One important design requirement for 2.x is that no `Throwable` errors should be
 
 Such errors are routed to the `RxJavaPlugins.onError` handler. This handler can be overridden with the method `RxJavaPlugins.setErrorHandler(Consumer<Throwable>)`. Without a specific handler, RxJava defaults to printing the `Throwable`'s stacktrace to the console and calls the current thread's uncaught exception handler.
 
-On desktop Java, this latter handler does nothing on a Executor-Service backed Scheduler and the application can keep running. However, Android is more strict and terminates the application in such uncaught exception cases. 
+On desktop Java, this latter handler does nothing on an ExecutorService backed Scheduler and the application can keep running. However, Android is more strict and terminates the application in such uncaught exception cases. 
 
 If this behavior is desirable can be debated, but in any case, if you want to avoid such calls to the uncaught exception handler, the **final application** that uses RxJava 2 (directly or transitively) should set a no-op handler:
 
@@ -549,7 +549,7 @@ Integer i = Flowable.range(100, 100).blockingLast();
 
 (The reason for this is twofold: performance and ease of use of the library as a synchronous Java 8 Streams-like processor.)
 
-Another significant difference between `rx.Subscriber` (and co) and `org.reactivestreams.Subscriber` (and co) is that in 2.x, your `Subscriber`s and `Observer`s are not allowed to throw anything but fatal exceptions (see `Exceptions.throwIfFatal()`). (The Reactive-Streams specification allows throwing `NullPointerException` if the `onSubscribe`, `onNext` or `onError` receives a `null` value, but RxJava doesn't let `null`s in anyway.) This means the following code is no longer legal:
+Another significant difference between `rx.Subscriber` (and co) and `org.reactivestreams.Subscriber` (and co) is that in 2.x, your `Subscriber`s and `Observer`s are not allowed to throw anything but fatal exceptions (see `Exceptions.throwIfFatal()`). (The Reactive-Streams specification allows throwing `NullPointerException` if the `onSubscribe`, `onNext` or `onError` receives a `null` value, but RxJava doesn't let `null`s in any way.) This means the following code is no longer legal:
 
 ```java
 Subscriber<Integer> subscriber = new Subscriber<Integer>() {
@@ -614,7 +614,7 @@ TestObserver<Integer> tmo = Maybe.just(1).test();
 TestObserver<Integer> tco = Completable.complete().test();
 ```
 
-The second convenince is that most `TestSubscriber`/`TestObserver` methods return the instance itself allowing chaining the various `assertX` methods. The third convenience is that you can now fluently test your sources without the need to create or introduce `TestSubscriber`/`TestObserver` instance in your code:
+The second convenience is that most `TestSubscriber`/`TestObserver` methods return the instance itself allowing chaining the various `assertX` methods. The third convenience is that you can now fluently test your sources without the need to create or introduce `TestSubscriber`/`TestObserver` instance in your code:
 
 ```java
 Flowable.range(1, 5)
@@ -678,7 +678,7 @@ Flowable.just(1)
 
 ## Mockito & TestSubscriber
 
-Those who are using Mockito and mocked `Observer` in 1.x has to mock the `Subscriber.onSubscribe` method to issue an initial request, otherwise the sequence will hang or fail with hot sources:
+Those who are using Mockito and mocked `Observer` in 1.x has to mock the `Subscriber.onSubscribe` method to issue an initial request, otherwise, the sequence will hang or fail with hot sources:
 
 ```java
 @SuppressWarnings("unchecked")
@@ -863,7 +863,7 @@ To make sure the final API of 2.0 is clean as possible, we remove methods and ot
 
 In 1.x, the `doOnUnsubscribe` was always executed on a terminal event because 1.x' `SafeSubscriber` called `unsubscribe` on itself. This was practically unnecessary and the Reactive-Streams specification states that when a terminal event arrives at a `Subscriber`, the upstream `Subscription` should be considered cancelled and thus calling `cancel()` is a no-op.
 
-For the same reason `unsubscribeOn` is not called on the regular termination path but only when there is an actual `cancel` (or `dispose`) call on the chain.
+For the same reason, `unsubscribeOn` is not called on the regular termination path but only when there is an actual `cancel` (or `dispose`) call on the chain.
 
 Therefore, the following sequence won't call `doOnCancel`:
 
