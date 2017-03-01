@@ -55,7 +55,7 @@ If you looked at the source code of RxJava and then at **Reactor 3**, you might 
 `AtomicXFieldUpdater` classes. The reason for this is that on certain Android devices, the runtime "messes up" the field
 names and the reflection logic behind the field updaters fails to locate those fields in the operators. To avoid this we decided to only use the full `AtomicX` classes (as fields or extending them).
 
-If you target the RxJava library with your custom operator (or Android), you are ancouraged to do the same. If you plan have operators running on desktop Java, feel free to use the field updaters instead.
+If you target the RxJava library with your custom operator (or Android), you are encouraged to do the same. If you plan have operators running on desktop Java, feel free to use the field updaters instead.
 
 ## Request accounting
 
