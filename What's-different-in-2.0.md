@@ -516,6 +516,37 @@ try {
 
 If the library/code already did this, the undeliverable `InterruptedException`s should stop now. If this pattern was not employed before, we encourage updating the code/library in question.
 
+If one decides to add a non-empty global error consumer, here is an example that manages the typical undeliverable exceptions based on whether they represent a likely bug or an ignorable application/network state:
+
+```java
+RxJavaPlugins.setErrorHandler(e -> {
+    if (e instanceof UndeliverableException) {
+        e = e.getCause();
+    }
+    if ((e instanceof IOException) || (e instanceof SocketException)) {
+        // fine, irrelevant network problem or API that throws on cancellation
+        return;
+    }
+    if (e instanceof InterruptedException) {
+        // fine, some blocking code was interrupted by a dispose call
+        return;
+    }
+    if ((e instanceof NullPointerException) || (e instanceof IllegalArgumentException) {
+        // that's likely a bug in the application
+        Thread.currentThread().getUncaughtExceptionHandler()
+            .handleException(Thread.currentThread(), e);
+        return;
+    }
+    if (e instanceof IllegalStateException) {
+        // that's a bug in RxJava or in a custom operator
+        Thread.currentThread().getUncaughtExceptionHandler()
+            .handleException(Thread.currentThread(), e);
+        return;
+    }
+    Log.warning("Undeliverable exception received, not sure what to do", e);
+});
+```
+
 # Schedulers
 
 The 2.x API still supports the main default scheduler types: `computation`, `io`, `newThread` and `trampoline`, accessible through `io.reactivex.schedulers.Schedulers` utility class. 
