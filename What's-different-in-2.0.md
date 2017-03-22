@@ -477,7 +477,7 @@ One important design requirement for 2.x is that no `Throwable` errors should be
 
 Such errors are routed to the `RxJavaPlugins.onError` handler. This handler can be overridden with the method `RxJavaPlugins.setErrorHandler(Consumer<Throwable>)`. Without a specific handler, RxJava defaults to printing the `Throwable`'s stacktrace to the console and calls the current thread's uncaught exception handler.
 
-On desktop Java, this latter handler does nothing on an ExecutorService backed Scheduler and the application can keep running. However, Android is more strict and terminates the application in such uncaught exception cases. 
+On desktop Java, this latter handler does nothing on an `ExecutorService` backed `Scheduler` and the application can keep running. However, Android is more strict and terminates the application in such uncaught exception cases. 
 
 If this behavior is desirable can be debated, but in any case, if you want to avoid such calls to the uncaught exception handler, the **final application** that uses RxJava 2 (directly or transitively) should set a no-op handler:
 
@@ -488,8 +488,33 @@ RxJavaPlugins.setErrorHandler(e -> { });
 // If no Retrolambda or Jack 
 RxJavaPlugins.setErrorHandler(Functions.<Throwable>emptyConsumer());
 ```
-
 It is not advised intermediate libraries change the error handler outside their own testing environment.
+
+Unfortunately, RxJava can't tell which of these out-of-lifecycle, undeliverable exceptions should or shouldn't crash your app. Identifying the source and reason for these exceptions can be tiresome, especially if they originate from a source and get routed to `RxJavaPlugins.onError` somewhere lower the chain.
+
+Therefore, 2.0.6 introduces specific exception wrappers to help distinguish and track down what was happening the time of the error:
+- `OnErrorNotImplementedException`: reintroduced to detect when the user forgot to add error handling to `subscribe()`.
+- `ProtocolViolationException`: indicates a bug in an operator
+- `UndeliverableException`: wraps the original exception that can't be delivered due to lifecycle restrictions on a `Subscriber`/`Observer`. It is automatically applied by `RxJavaPlugins.onError` with intact stacktrace that may help find which exact operator rerouted the original error.
+
+If an undeliverable exception is an instance/descendant of `NullPointerException`, `IllegalStateException` (`UndeliverableException` and `ProtocolViolationException` extend this), `IllegalArgumentException`, `CompositeException`, `MissingBackpressureException` or `OnErrorNotImplementedException`, the `UndeliverableException` wrapping doesn't happen.
+
+In addition, some 3rd party libraries/code throw when they get interrupted by a cancel/dispose call which leads to an undeliverable exception most of the time. Internal changes in 2.0.6 now consistently cancel or dispose a `Subscription`/`Disposable` before cancelling/disposing a task or worker (which causes the interrupt on the target thread).
+
+``` java
+// in some library
+try {
+   doSomethingBlockingly()
+} catch (InterruptedException ex) {
+   // check if the interrupt is due to cancellation
+   // if so, no need to signal the InterruptedException
+   if (!disposable.isDisposed()) {
+      observer.onError(ex);
+   }
+}
+```
+
+If the library/code already did this, the undeliverable `InterruptedException`s should stop now. If this pattern was not employed before, we encourage updating the code/library in question.
 
 # Schedulers
 
