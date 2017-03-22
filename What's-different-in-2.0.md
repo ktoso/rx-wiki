@@ -531,7 +531,7 @@ RxJavaPlugins.setErrorHandler(e -> {
         // fine, some blocking code was interrupted by a dispose call
         return;
     }
-    if ((e instanceof NullPointerException) || (e instanceof IllegalArgumentException) {
+    if ((e instanceof NullPointerException) || (e instanceof IllegalArgumentException)) {
         // that's likely a bug in the application
         Thread.currentThread().getUncaughtExceptionHandler()
             .handleException(Thread.currentThread(), e);
