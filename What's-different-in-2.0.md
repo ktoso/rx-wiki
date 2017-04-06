@@ -705,7 +705,21 @@ pp.test(true);
 assertFalse(pp.hasSubscribers());
 ```
 
-`TestSubscriber` has the `test(long initialRequest)` and `test(long initialRequest, boolean cancel)` overloads to specify the initial request amount and whether the `TestSubscriber` should be also immediately cancelled. If the `initialRequest` is given, the `TestSubscriber` instance usually has to be captured to gain access to its `request()` method:
+`TestSubscriber` has the `test(long initialRequest)` and `test(long initialRequest, boolean cancel)` overloads to specify the initial request amount and whether the `TestSubscriber` should be also immediately cancelled. If the `initialRequest` is given, the `TestSubscriber` offers the `requestMore(long)` method to keep requesting in a fluent manner:
+
+```java
+Flowable.range(1, 5)
+.test(0)
+.assertValues()
+.requestMore(1)
+.assertValues(1)
+.requestMore(2)
+.assertValues(1, 2, 3)
+.requestMore(2)
+.assertResult(1, 2, 3, 4, 5);
+```
+
+or alternatively the `TestSubscriber` instance has to be captured to gain access to its `request()` method:
 
 ```java
 PublishProcessor<Integer> pp = PublishProcessor.create();
