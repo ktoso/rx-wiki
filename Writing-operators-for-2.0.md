@@ -14,6 +14,7 @@
     - [Atomic error management](#atomic-error-management)
     - [Half-serialization](#half-serialization)
     - [Fast-path queue-drain](#fast-path-queue-drain)
+    - [FlowableSubscriber](#flowablesubscriber)
   - [Backpressure and cancellation](#backpressure-and-cancellation)
     - [Single-valued results](#single-valued-results)
     - [Single-element post-complete](#single-element-post-complete)
@@ -558,6 +559,33 @@ In this pattern, the classical `drain` is spit into `drain` and `drainLoop`. The
 
 On the fast path, when we try to leave it, it is possible a concurrent call to `onNext` or `drain` incremented the `wip` counter further and the decrement didn't return it to zero. This is an indication for further work and we call `drainLoop` to process it.
 
+## FlowableSubscriber
+
+Version 2.0.7 introduced a new interface, `FlowableSubscriber` that extends `Subscriber` from Reactive-Streams. It has the same methods with the same parameter types but different textual rules attached to it, a set of relaxations to the Reactive-Streams specification to enable better performing RxJava internals while still honoring the specification to the letter for non-RxJava consumers of `Flowable`s.
+
+The rule relaxations are as follows:
+
+- §1.3 relaxation: `onSubscribe` may run concurrently with onNext in case the `FlowableSubscriber` calls `request()` from inside `onSubscribe` and it is the resposibility of `FlowableSubscriber` to ensure thread-safety between the remaining instructions in `onSubscribe` and `onNext`.
+- §2.3 relaxation: calling `Subscription.cancel` and `Subscription.request` from `FlowableSubscriber.onComplete()` or `FlowableSubscriber.onError()` is considered a no-operation.
+- §2.12 relaxation: if the same `FlowableSubscriber` instance is subscribed to multiple sources, it must ensure its `onXXX` methods remain thread safe.
+- §3.9 relaxation: issuing a non-positive `request()` will not stop the current stream but signal an error via `RxJavaPlugins.onError`.
+
+When a `Flowable` gets subscribed by a `Subscriber`, an `instanceof` check will detect `FlowableSubscriber` and not apply the `StrictSubscriber` wrapper that makes sure the relaxations don't happen. In practice, ensuring rule §3.9 has the most overhead because a bad request may happen concurrently with an emission of any normal event and thus has to be serialized with one of the methods described in previous sections. 
+
+**In fact, 2.x was always implemented in this relaxed manner thus looking at existing code and style is the way to go.**
+
+Therefore, it is strongly recommended one implements custom intermediate and end operators via `FlowableSubscriber`.
+
+From a source operator's perspective, extending the `Flowable` class and implementing `subscribeActual` has no need for
+dispatching over the type of the `Subscriber`; the backing infrastructure already applies wrapping if necessary thus one can be sure in `subscribeActual(Subscriber<? super T> s)` the parameter `s` is a `FlowableSubscriber`. (The signature couldn't be changed for compatibility reasons.) Since the two interfaces on the Java level are the same, no real preferential treating is necessary within sources (i.e., don't cast `s` into `FlowableSubscriber`.
+
+The other base reactive consumers, `Observer`, `SingleObserver`, `MaybeObserver` and `CompletableObserver` don't need such relaxation, because
+
+- they are only defined and used in RxJava (i.e., no other library implemented with them),
+- they were conceptionally always derived from the relaxed `Subscriber` RxJava had,
+- they don't have backpressure thus no `request()` call that would introduce another concurrency to think about,
+- there is no way to trigger emission from upstream before `onSubscribe(Disposable)` returns in standard operators (again, no `request()` method).
+
 # Backpressure and cancellation
 
 Backpressure (or flow control) in Reactive-Streams is the means to tell the upstream how many elements to produce or to tell it to stop producing elements altogether. Unlike the name suggest, there is no physical pressure preventing the upstream from calling `onNext` but the protocol to honor the request amount.
@@ -568,7 +596,7 @@ Such logic can get quite complicated in operators but one of the simplest manife
 
 ```java
 final class RebatchRequests<T> extends AtomicInteger
-implements Subscriber<T>, Subscription {
+implements FlowableSubscriber<T>, Subscription {
 
     final Subscriber<? super T> child;
 
@@ -1124,7 +1152,7 @@ For this, the `OnCompleteEndWith` has to be changed by adding an `AtomicLong` fo
 
 final class OnCompleteEndWith 
 extends AtomicLong
-implements Subscriber<T>, Subscription {
+implements FlowableSubscriber<T>, Subscription {
     final Subscriber<? super T> child;
 
     final T finalElement;
@@ -1254,7 +1282,7 @@ Usage of these methods is as follows:
 
 ```java
 final class EmitTwice<T> extends AtomicLong
-implements Subscriber<T>, Subscription, BooleanSupplier {
+implements FlowableSubscriber<T>, Subscription, BooleanSupplier {
     final Subscriber<? super T> child;
 
     final ArrayDeque<T> buffer;
@@ -1346,7 +1374,7 @@ public final class FlowableMyOperator extends Flowable<Integer> {
 
 When taking other reactive types as inputs in these operators, it is recommended one defines the base reactive interfaces instead of the abstract classes, allowing better interoperability between libraries (especially with `Flowable` operators and other Reactive-Streams `Publisher`s). To recap, these are the class-interface pairs:
 
-  - `Flowable` - `Publisher` - `Subscriber`
+  - `Flowable` - `Publisher` - `FlowableSubscriber`/`Subscriber`
   - `Observable` - `ObservableSource` - `Observer`
   - `Single` - `SingleSource` - `SingleObserver`
   - `Completable` - `CompletableSource` - `CompletableObserver`
@@ -1390,7 +1418,7 @@ public final class MyOperator implements FlowableOperator<Integer, Integer> {
         return new Op(child);
     }
 
-    static final class Op implements Subscriber<Integer>, Subscription {
+    static final class Op implements FlowableSubscriber<Integer>, Subscription {
         final Subscriber<? super Integer> child;
 
         Subscription s;
@@ -1434,7 +1462,7 @@ public final class MyOperator implements FlowableOperator<Integer, Integer> {
 }
 ```
 
-You may recognize that implementing operators via extension or lifting looks quite similar. In both cases, one usually implements a `Subscriber` (`Observer`, etc) that takes a downstream `Subscriber`, implements the business logic in the `onXXX` methods and somehow (manually or as part of `lift()`'s lifecycle) gets subscribed to an upstream source.
+You may recognize that implementing operators via extension or lifting looks quite similar. In both cases, one usually implements a `FlowableSubscriber` (`Observer`, etc) that takes a downstream `Subscriber`, implements the business logic in the `onXXX` methods and somehow (manually or as part of `lift()`'s lifecycle) gets subscribed to an upstream source.
 
 The benefit of applying the Reactive-Streams design to all base reactive types is that each consumer type is now an interface and can be applied to operators that have to extend some class. This was a pain in 1.x because `Subscriber` and `SingleSubscriber` are classes themselves, plus `Subscriber.request()` is a protected-final method and an operator's `Subscriber` can't implement the `Producer` interface at the same time. In 2.x there is no such problem and one can have both `Subscriber`, `Subscription` or even `Observer` together in the same consumer type.
 
