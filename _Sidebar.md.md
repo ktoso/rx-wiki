@@ -12,7 +12,7 @@
  * [Combining](https://github.com/ReactiveX/RxJava/wiki/Combining-Observables)
  * [Conditional &amp; Boolean](https://github.com/ReactiveX/RxJava/wiki/Conditional-and-Boolean-Operators)
  * [Connectable Observable](https://github.com/ReactiveX/RxJava/wiki/Connectable-Observable-Operators)
- * [Error Handling](https://github.com/ReactiveX/RxJava/wiki/Error-Handling-Operators)
+ * [Error Handling Operators](https://github.com/ReactiveX/RxJava/wiki/Error-Handling-Operators)
  * [Filtering](https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables)
  * [Mathematical and Aggregate](https://github.com/ReactiveX/RxJava/wiki/Mathematical-and-Aggregate-Operators)
  * [Observable Creation](https://github.com/ReactiveX/RxJava/wiki/Creating-Observables)
