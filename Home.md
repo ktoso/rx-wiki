@@ -4,7 +4,7 @@ For more information about ReactiveX, see the [Introduction to ReactiveX](http:/
 
 ### RxJava is Lightweight
 
-RxJava tries to be very lightweight. It is implemented as a single JAR that is focused on just the Observable abstraction and related higher-order functions. You could implement a composable Future that is similarly unbiased, but <a href="http://doc.akka.io/docs/akka/2.2.0/java.html">Akka Futures</a> for example come tied in with an Actor library and a lot of other stuff.)
+RxJava tries to be very lightweight. It is implemented as a single JAR that is focused on just the Observable abstraction and related higher-order functions. 
 
 ### RxJava is a Polyglot Implementation
 
